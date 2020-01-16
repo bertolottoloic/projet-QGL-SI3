@@ -11,4 +11,12 @@ abstract class Action{
         this.sailorId = sailorId;
         this.type = type;
     }
+
+    public int getSailorId(){
+        return this.sailorId;
+    }
+
+    public String getType(){
+        return this.type;
+    }
 }
