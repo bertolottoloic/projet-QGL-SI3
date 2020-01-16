@@ -1,5 +1,9 @@
 package fr.unice.polytech.si3.qgl.teamid;
 
+/**
+ * @author joris Liebgott
+ */
+
 public class Marin {
     private int id;
     private int x;
