@@ -8,13 +8,13 @@ public class Marin {
     private int id;
     private int x;
     private int y;
-    private String nom;
+    private String name;
 
-    public Marin(int id, int x, int y, String nom) {
+    public Marin(int id, int x, int y, String name) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.nom = nom;
+        this.name = name;
     }
 
     public void ramer(){
