@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.teamid;
 
+import java.util.List;
+
 /**
  * @author Loic Bertolotto
  */
@@ -9,10 +11,10 @@ class Bateau {
     private Position position;
     private String name;
     private Deck deck;
-    private ArrayList<Entity> entities;
+    private List<Entite> entities;
     private Forme shape;
     
-    Bateau(String type, int life, Position position, String name, Deck deck,ArrayList<Entity> entities,Forme shape){
+    Bateau(String type, int life, Position position, String name, Deck deck,List<Entite> entities,Forme shape){
         this.type = type;
         this.life = life;
         this.position = position;

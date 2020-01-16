@@ -5,6 +5,12 @@ public abstract class Entite {
     private int x;
     private int y;
 
+    public Entite(String type, int x,int y){
+        this.type=type;
+        this.x=x;
+        this.y=y;
+    }
+
     public int getX() {
         return x;
     }
