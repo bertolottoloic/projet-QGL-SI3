@@ -1,7 +1,7 @@
 # pns-si3-qgl-regatta-1920-ze-commit
 pns-si3-qgl-regatta-1920-ze-commit created by GitHub Classroom
 
-![alt text](https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-ze-commit/blob/master/drapeau.png)
+![alt text](https://github.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-ze-commit/blob/master/flag.png)
 
 ## Plan
 - [Présentation](#Présentation)
