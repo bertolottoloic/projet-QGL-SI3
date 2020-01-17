@@ -8,10 +8,12 @@ package fr.unice.polytech.si3.qgl.teamid;
 public class Position {
     private final double x;
     private final double y;
+    private final double orientation;
 
     public Position(double x,double y){
         this.x=x;
         this.y=y;
+        this.orientation=0;
     }
 
     //------------------------------GETTER-------------------------//
@@ -24,10 +26,18 @@ public class Position {
     }
 
     /**
-     * ordonne
+     * ordonnée
      * @return y
      */
     public double getY() {
         return y;
+    }
+
+    /**
+     * orientation
+     * @return orientation
+     */
+    public double getOrientation(){
+        return orientation;
     }
 }

@@ -1,16 +1,17 @@
 package fr.unice.polytech.si3.qgl.teamid;
 
 /**
+ * Classe correspondant au marin
  * @author joris Liebgott
  */
 
-public class Marin {
+public class Sailor {
     private int id;
     private int x;
     private int y;
     private String name;
 
-    public Marin(int id, int x, int y, String name) {
+    public Sailor(int id, int x, int y, String name) {
         this.id = id;
         this.x = x;
         this.y = y;

@@ -1,5 +1,10 @@
 package fr.unice.polytech.si3.qgl.teamid;
 
+import fr.unice.polytech.si3.qgl.teamid.entite.Entite;
+import fr.unice.polytech.si3.qgl.teamid.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.teamid.shape.Circle;
+import fr.unice.polytech.si3.qgl.teamid.shape.Shape;
+
 import java.util.List;
 
 /**
@@ -12,10 +17,10 @@ class Bateau {
     private String name;
     private Deck deck;
     private List<Entite> entities;
-    private Forme shape;
+    private Shape shape;
     
-    Bateau(String type, int life, Position position, String name, Deck deck,List<Entite> entities,Forme shape){
-        this.type = type;
+    Bateau(int life, Position position, String name, Deck deck, List<Entite> entities, Shape shape){
+        this.type = "ship";
         this.life = life;
         this.position = position;
         this.name = name;

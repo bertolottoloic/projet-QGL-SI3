@@ -1,12 +1,18 @@
-package fr.unice.polytech.si3.qgl.teamid;
+package fr.unice.polytech.si3.qgl.teamid.shape;
 
-public class Rectangle extends Forme {
+import fr.unice.polytech.si3.qgl.teamid.Position;
+
+/**
+ * Forme definissant un rectangle
+ * @author  Clement P
+ */
+public class Rectangle extends Shape {
     private double width;
     private double length;
     private double orientation;
 
-    public Rectangle(String type, double width,double length,double orientation){
-        super(type);
+    public Rectangle(Position centre, double width,double length,double orientation){
+        super("rectangle", centre);
         this.width=width;
         this.length=length;
         this.orientation=orientation;
