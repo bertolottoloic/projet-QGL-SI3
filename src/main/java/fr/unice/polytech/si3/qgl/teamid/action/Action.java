@@ -3,7 +3,7 @@ package fr.unice.polytech.si3.qgl.teamid.action;
 /**
  * @author Loic Bertolotto
  */
-abstract class Action{
+public abstract class Action{
     int sailorId;
     String type;
 
