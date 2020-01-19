@@ -159,10 +159,9 @@ class ParserTest {
     }
 
 
-=======
     @Test
     void initGameTest() {
     }
 
->>>>>>> 9f5a6bc042e8b0a7378e4ae5cdafb319c5e6c74b
+
 }
