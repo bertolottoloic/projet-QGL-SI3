@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,7 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Circle;
 import fr.unice.polytech.si3.qgl.ZeCommiT.entite.*;
 import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -105,22 +107,25 @@ public class Parser {
         int lifeShip = objectMapper.readValue(lifeShipN.toString(), int.class);
         String nameShip = objectMapper.readValue(nameShipN.toString(), String.class);
         Deck deckShip = objectMapper.readValue(deckShipN.toString(), Deck.class);
+
         Ship ship;
 
-        switch (shapeShipN.asText()){
+
+        switch (shapeShipN.asText()) {
             case "rectangle":
                 Rectangle rectangleShip = objectMapper.readValue(shapeShipN.toString(), Rectangle.class);
                 ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShip);
                 break;
-                
+
             case "circle":
                 Circle circleShip = objectMapper.readValue(shapeShipN.toString(), Circle.class);
                 ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, circleShip);
                 break;
 
             default:
-                throw new IllegalStateException("Unexpected value: " + shapeShipN.asText());
-        }
+                Rectangle rectangleShipDefault = objectMapper.readValue(shapeShipN.toString(), Rectangle.class);
+                ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShipDefault);        }
+
         
         newInitGame.setShip(ship);
 

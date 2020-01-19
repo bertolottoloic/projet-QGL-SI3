@@ -17,35 +17,27 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
  * @author Clement P
  */
 public abstract class Shape {
-    @JsonProperty("type") private String type;
+    @JsonProperty("type")
+    private String type;
 
-    @JsonIgnore
-    private Position centre;
 
     @JsonCreator
-    public Shape(@JsonProperty("type")String type, @JsonProperty("position")Position centre){
+    public Shape(@JsonProperty("type")String type){
         this.type=type;
-        this.centre=centre;
     }
 
 
     //------------------------GETTER----------------------//
+    @JsonProperty("type")
     public String getType() {
         return type;
     }
 
-    public Position getCentre() {
-        return centre;
-    }
 
     //------------------------SETTER----------------------//
 
-
+    @JsonProperty("type")
     public void setType(String type) {
         this.type = type;
-    }
-
-    public void setCentre(Position centre) {
-        this.centre = centre;
     }
 }

@@ -12,8 +12,8 @@ public class Circle extends Shape {
     @JsonProperty("radius")private double radius;
 
     @JsonCreator
-    public Circle(@JsonProperty("position")Position centre, @JsonProperty("radius")double radius){
-        super("circle", centre);
+    public Circle(@JsonProperty("radius")double radius){
+        super("circle");
         this.radius=radius;
     }
 

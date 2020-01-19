@@ -13,43 +13,58 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
 public class Rectangle extends Shape {
     @JsonProperty("width")private double width;
     @JsonAlias({"length", "height"})
-    private double length;
+    private double height;
     @JsonProperty("orientation")private double orientation;
 
     @JsonCreator
-    public Rectangle(@JsonProperty("position")Position centre, @JsonProperty("width")double width, @JsonProperty("length")double length, @JsonProperty("orientation")double orientation){
-        super("rectangle", centre);
+    public Rectangle(@JsonProperty("width")double width, @JsonProperty("height")double height, @JsonProperty("orientation")double orientation){
+        super("rectangle");
         this.width=width;
-        this.length=length;
+        this.height=height;
         this.orientation=orientation;
     }
 
     //-------------------------GETTER-------------------------//
 
-
-    public double getLength() {
-        return length;
+    @JsonProperty("height")
+    public double getHeight() {
+        return height;
     }
 
-    public double getOrientation() {
-        return orientation;
+    @JsonProperty("length")
+    public double getlength() {
+        return height;
     }
 
+    @JsonProperty("width")
     public double getWidth() {
         return width;
+    }
+
+    @JsonProperty("orientation")
+    public double getOrientation() {
+        return orientation;
     }
 
     //-------------------------SETTER-------------------------//
 
 
+    @JsonProperty("width")
     public void setWidth(double width) {
         this.width = width;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    @JsonProperty("height")
+    public void setHeight(double height) {
+        this.height = height;
     }
 
+    @JsonProperty("length")
+    public void setlength(double height) {
+        this.height = height;
+    }
+
+    @JsonProperty("orientation")
     public void setOrientation(double orientation) {
         this.orientation = orientation;
     }

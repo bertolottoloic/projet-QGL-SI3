@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Entite;
@@ -23,7 +24,6 @@ class Ship {
     @JsonCreator
     Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entite> entities, @JsonProperty("shape")Shape shape){
         this.type = "ship";
-        this.type = type;
         this.life = life;
         this.position = position;
         this.name = name;
