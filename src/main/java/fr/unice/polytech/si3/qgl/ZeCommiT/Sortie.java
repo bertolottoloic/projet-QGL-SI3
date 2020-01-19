@@ -14,9 +14,11 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.action.*;
 
 class Sortie{
     ObjectMapper oM;
+    List<Action> actions;
 
-    Sortie(){ 
-        oM = new ObjectMapper(); 
+
+    Sortie(){
+        oM = new ObjectMapper();
     }
 
     String afficheRound(List<Action> actions){

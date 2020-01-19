@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import fr.unice.polytech.si3.qgl.ZeCommiT.action.Action;
+import fr.unice.polytech.si3.qgl.ZeCommiT.action.Oar;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
-import static fr.unice.polytech.si3.qgl.ZeCommiT.Parser.parserInitGame;
+import static fr.unice.polytech.si3.qgl.ZeCommiT.Parser.*;
 
 public class Cockpit implements ICockpit {
 
@@ -17,12 +19,21 @@ public class Cockpit implements ICockpit {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Init game input: " + game);
 	}
 
 	public String nextRound(String round) {
-		System.out.println("Next round input: " + round);
-		return "[]";
+		try {
+			NextRound nextRound = parserNextRound(round);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		Sortie sortie = new Sortie();
+		List<Action> actions = new ArrayList<>();
+		for(int i = 0; i < nbSailors; i++) {
+			actions.add(i, new Oar(i));
+		}
+
+		return sortie.afficheRound(actions);
 	}
 
 	@Override

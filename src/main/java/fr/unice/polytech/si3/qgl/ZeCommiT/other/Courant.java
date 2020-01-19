@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT.other;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
 import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
 
@@ -8,16 +9,20 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
  * Classe modélisant les courants marins
  * @author Nathan
  */
-public class Courant {
+public class Courant extends VisibleEntitie{
 
+    @JsonProperty("position")
     private Position position;
+
+    @JsonProperty("shape")
     private Shape shape;
+
+    @JsonProperty("strength")
     private double strength;
 
     @JsonCreator
-    public Courant(Position position, Shape shape, double strength) {
-        this.position = position;
-        this.shape = shape;
+    public Courant(@JsonProperty("position") Position position,@JsonProperty("shape") Shape shape,@JsonProperty("strength") double strength) {
+        super(position, shape);
         this.strength = strength;
     }
 

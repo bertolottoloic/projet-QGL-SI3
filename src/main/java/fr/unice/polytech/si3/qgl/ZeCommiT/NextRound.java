@@ -1,8 +1,10 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Entite;
 import fr.unice.polytech.si3.qgl.ZeCommiT.other.Vent;
+import fr.unice.polytech.si3.qgl.ZeCommiT.other.VisibleEntitie;
 
 import java.util.List;
 
@@ -12,16 +14,28 @@ import java.util.List;
  */
 
 public class NextRound {
-
+    @JsonProperty("ship")
     private Ship ship;
+    @JsonProperty("wind")
     private Vent wind;
-    private List<Entite> visibleEntities;
+    @JsonProperty("visibleEntities")
+    private List<VisibleEntitie> visibleEntities;
 
-    public NextRound(Ship ship, Vent wind, List<Entite> visibleEntities) {
+    public NextRound(@JsonProperty("ship") Ship ship,@JsonProperty("wind") Vent wind,@JsonProperty("visibleEntities") List<VisibleEntitie> visibleEntities) {
         this.ship = ship;
         this.wind = wind;
         this.visibleEntities = visibleEntities;
     }
+
+    public NextRound() {
+        this.ship = null;
+        this.wind = null;
+        this.visibleEntities = null;
+    }
+
+
+
+
 
     //------------------------------GETTER-------------------------//
     public Ship getShip() {
@@ -32,9 +46,10 @@ public class NextRound {
         return wind;
     }
 
-    public List<Entite> getVisibleEntities() {
+    public List<VisibleEntitie> getVisibleEntities() {
         return visibleEntities;
     }
+
 
     //------------------------------SETTER-------------------------//
 
@@ -46,7 +61,10 @@ public class NextRound {
         this.wind = wind;
     }
 
-    public void setVisibleEntities(List<Entite> visibleEntities) {
+    public void setVisibleEntities(List<VisibleEntitie> visibleEntities) {
         this.visibleEntities = visibleEntities;
     }
+
+
+
 }

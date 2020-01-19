@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT.other;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
 import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
 
@@ -8,14 +9,15 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
  * Classe correspondant aux récifs
  * @author Nathan
  */
-public class Recif {
+public class Recif extends VisibleEntitie {
+    @JsonProperty("position")
     private Position position;
+    @JsonProperty("shape")
     private Shape shape;
 
     @JsonCreator
-    public Recif(Position position, Shape shape) {
-        this.position = position;
-        this.shape = shape;
+    public Recif(@JsonProperty("position") Position position,@JsonProperty("shape") Shape shape) {
+        super(position, shape);
     }
 
     //------------------------------GETTER-------------------------//
