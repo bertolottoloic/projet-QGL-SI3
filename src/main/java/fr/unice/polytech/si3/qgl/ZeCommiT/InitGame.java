@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import fr.unice.polytech.si3.qgl.ZeCommiT.goal.Goal;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class InitGame {
     private List<Sailor> sailors;
     private int shipCount;
 
+    @JsonCreator
     public InitGame(Goal goal, Ship ship, List<Sailor> sailors, int shipCount) {
         this.goal = goal;
         this.ship = ship;

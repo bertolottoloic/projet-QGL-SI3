@@ -1,12 +1,7 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT.shape;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
-
-
-
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -22,12 +17,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * @author Clement P
  */
 public abstract class Shape {
-    private String type;
+    @JsonProperty("type") private String type;
 
     @JsonIgnore
     private Position centre;
 
-    public Shape(String type, Position centre){
+    @JsonCreator
+    public Shape(@JsonProperty("type")String type, @JsonProperty("position")Position centre){
         this.type=type;
         this.centre=centre;
     }

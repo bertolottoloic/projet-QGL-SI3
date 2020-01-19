@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT.goal;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -14,13 +16,27 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class Goal {
 
+    @JsonProperty("mode")
     private String mode;
 
-    protected Goal(String mode){
+    @JsonCreator
+    protected Goal(@JsonProperty("mode")String mode){
         this.mode = mode;
     }
 
+
+
+    //------------------------------GETTER-------------------------//
+
     public String getMode() {
         return mode;
+    }
+
+
+    //------------------------------SETTER-------------------------//
+
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }

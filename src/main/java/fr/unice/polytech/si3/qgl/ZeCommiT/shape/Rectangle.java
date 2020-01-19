@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT.shape;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
 
 /**
@@ -8,11 +11,13 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
  */
 
 public class Rectangle extends Shape {
-    private double width;
+    @JsonProperty("width")private double width;
+    @JsonAlias({"length", "height"})
     private double length;
-    private double orientation;
+    @JsonProperty("orientation")private double orientation;
 
-    public Rectangle(Position centre, double width,double length,double orientation){
+    @JsonCreator
+    public Rectangle(@JsonProperty("position")Position centre, @JsonProperty("width")double width, @JsonProperty("length")double length, @JsonProperty("orientation")double orientation){
         super("rectangle", centre);
         this.width=width;
         this.length=length;

@@ -21,7 +21,7 @@ class Sortie{
 
     String afficheRound(List<Action> actions){
         try{
-            oM.configure(SerializationFeature.INDENT_OUTPUT, true);
+            oM.configure(SerializationFeature.INDENT_OUTPUT, true);//Option pour ne pas afficher la sortie sur une seule ligne
             return oM.writeValueAsString(actions);
         } catch (IOException e){
             System.out.println(e.getMessage());

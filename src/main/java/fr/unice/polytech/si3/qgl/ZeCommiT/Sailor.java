@@ -1,17 +1,21 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Classe correspondant au marin
  * @author joris Liebgott
  */
 
 public class Sailor {
-    private int id;
-    private int x;
-    private int y;
-    private String name;
+    @JsonProperty("id")private int id;
+    @JsonProperty("x")private int x;
+    @JsonProperty("y")private int y;
+    @JsonProperty("name")private String name;
 
-    public Sailor(int id, int x, int y, String name) {
+    @JsonCreator
+    public Sailor(@JsonProperty("id")int id, @JsonProperty("x")int x, @JsonProperty("y")int y, @JsonProperty("name")String name) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -20,5 +24,44 @@ public class Sailor {
 
     public void ramer(){
 
+    }
+
+    //--------------------GETTER -------------------------//
+
+
+    public int getId() {
+        return id;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+
+    //------------------------------SETTER-------------------------//
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

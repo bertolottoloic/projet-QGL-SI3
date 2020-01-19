@@ -4,6 +4,8 @@ package fr.unice.polytech.si3.qgl.ZeCommiT.entite;
  * Classe mère décrivant les objets présents sur le bateau
  */
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -20,11 +22,15 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 
 public abstract class Entite {
+    @JsonProperty("type")
     private String type;
+    @JsonProperty("x")
     private int x;
+    @JsonProperty("y")
     private int y;
 
-    public Entite(String type, int x, int y) {
+    @JsonCreator
+    public Entite(@JsonProperty("type") String type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
         this.type = type;
         this.x = x;
         this.y = y;
@@ -41,6 +47,20 @@ public abstract class Entite {
 
     public int getY() {
         return y;
+    }
+
+    //------------------------------SETTER-------------------------//
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
 

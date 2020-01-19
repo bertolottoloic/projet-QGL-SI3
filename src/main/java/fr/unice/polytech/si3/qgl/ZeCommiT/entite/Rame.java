@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT.entite;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Entite definissant l'objet Rame sur le bateau
  * @author Clement P
@@ -7,7 +10,9 @@ package fr.unice.polytech.si3.qgl.ZeCommiT.entite;
  */
 
 public class Rame extends Entite {
-    public Rame(int x,int y){
+
+    @JsonCreator
+    public Rame(@JsonProperty("x")int x, @JsonProperty("y")int y){
         super("oar",x,y);
     }
 }

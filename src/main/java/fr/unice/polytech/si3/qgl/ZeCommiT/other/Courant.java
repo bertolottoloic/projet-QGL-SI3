@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT.other;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
 import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
 
@@ -13,6 +14,7 @@ public class Courant {
     private Shape shape;
     private double strength;
 
+    @JsonCreator
     public Courant(Position position, Shape shape, double strength) {
         this.position = position;
         this.shape = shape;
@@ -31,5 +33,21 @@ public class Courant {
 
     public double getStrength() {
         return strength;
+    }
+
+
+    //------------------------------SETTER-------------------------//
+
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
+    public void setStrength(double strength) {
+        this.strength = strength;
     }
 }

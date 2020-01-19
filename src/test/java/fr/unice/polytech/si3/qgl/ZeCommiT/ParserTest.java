@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ParserTest {
     private String jsonString;
     private String jsonString2;
+    private String jsonString3;
 
     @BeforeEach
     void setUp() {
@@ -77,67 +78,16 @@ class ParserTest {
                 "    }\n" +
                 "  ]\n" +
                 "}";
-
-        jsonString2 = "{\n" +
-                "  \"goal\": {\n" +
-                "    \"mode\": \"BATTLE\",\n" +
-                " },\n" +
-                "  \"shipCount\": 1,\n" +
-                "  \"ship\": {\n" +
-                "    \"type\": \"ship\",\n" +
-                "    \"life\": 100,\n" +
-                "    \"position\": {\n" +
-                "      \"x\": 0,\n" +
-                "      \"y\": 0,\n" +
-                "      \"orientation\": 0\n" +
-                "    },\n" +
-                "    \"name\": \"Les copaings d'abord!\",\n" +
-                "    \"deck\": {\n" +
-                "      \"width\": 2,\n" +
-                "      \"length\": 1\n" +
-                "    },\n" +
-                "    \"entities\": [\n" +
-                "      {\n" +
-                "        \"x\": 0,\n" +
-                "        \"y\": 0,\n" +
-                "        \"type\": \"oar\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"x\": 1,\n" +
-                "        \"y\": 0,\n" +
-                "        \"type\": \"oar\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"shape\": {\n" +
-                "      \"type\": \"rectangle\",\n" +
-                "      \"width\": 2,\n" +
-                "      \"length\": 3,\n" +
-                "      \"orientation\": 0\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"sailors\": [\n" +
-                "    {\n" +
-                "      \"x\": 0,\n" +
-                "      \"y\": 0,\n" +
-                "      \"id\": 0,\n" +
-                "      \"name\": \"Edward Teach\"\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"x\": 1,\n" +
-                "      \"y\": 0,\n" +
-                "      \"id\": 1,\n" +
-                "      \"name\": \"Tom Pouce\"\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}";
     }
+
     @Test
     void parserInitGameTest() throws JsonProcessingException {
         InitGame initGame = Parser.parserInitGame(jsonString);
-        InitGame initGame2 = Parser.parserInitGame(jsonString2);
 
         assertEquals("REGATTA", initGame.getGoal().getMode());
-        assertEquals("BATTLE", initGame2.getGoal().getMode());
+        assertEquals(2, initGame.getSailors().size());
+
 
     }
+
 }

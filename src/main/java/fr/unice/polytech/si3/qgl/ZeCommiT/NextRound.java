@@ -22,4 +22,31 @@ public class NextRound {
         this.wind = wind;
         this.visibleEntities = visibleEntities;
     }
+
+    //------------------------------GETTER-------------------------//
+    public Ship getShip() {
+        return ship;
+    }
+
+    public Vent getWind() {
+        return wind;
+    }
+
+    public List<Entite> getVisibleEntities() {
+        return visibleEntities;
+    }
+
+    //------------------------------SETTER-------------------------//
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
+
+    public void setWind(Vent wind) {
+        this.wind = wind;
+    }
+
+    public void setVisibleEntities(List<Entite> visibleEntities) {
+        this.visibleEntities = visibleEntities;
+    }
 }
