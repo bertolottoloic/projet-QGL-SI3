@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
  * Forme definissant un rectangle
  * @author  Clement P
  */
+
 public class Rectangle extends Shape {
     private double width;
     private double length;

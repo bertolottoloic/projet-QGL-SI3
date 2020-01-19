@@ -16,9 +16,10 @@ class Ship {
     private Deck deck;
     private List<Entite> entities;
     private Shape shape;
-    
+
     Ship(int life, Position position, String name, Deck deck, List<Entite> entities, Shape shape){
         this.type = "ship";
+        this.type = type;
         this.life = life;
         this.position = position;
         this.name = name;
