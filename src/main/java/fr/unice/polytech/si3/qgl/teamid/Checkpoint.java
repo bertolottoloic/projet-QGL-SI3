@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.teamid.goal;
+package fr.unice.polytech.si3.qgl.teamid;
 
 public class Checkpoint {
 }

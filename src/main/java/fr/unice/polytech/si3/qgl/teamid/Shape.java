@@ -4,10 +4,10 @@ package fr.unice.polytech.si3.qgl.teamid;
  * Model de Forme
  * @author Clement P
  */
-public abstract class Forme {
+public abstract class Shape {
     private String type;
 
-    public Forme(String type){
+    public Shape(String type){
         this.type=type;
     }
 

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.swing.text.Position;
 
-public class Parseur {
+public class Parser {
 
     public static InitGame parserInitGame(String jsonString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

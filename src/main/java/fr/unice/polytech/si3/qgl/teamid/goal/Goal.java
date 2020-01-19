@@ -1,12 +1,17 @@
-package fr.unice.polytech.si3.qgl.teamid;
+package fr.unice.polytech.si3.qgl.teamid.goal;
 
 
-public abstract class Goal {
+public class Goal {
 
     private String mode;
 
-    Goal(String mode){
+    public Goal(String mode){
         this.mode = mode;
     }
+
+    public String getMode() {
+        return this.mode;
+    }
+
 
 }

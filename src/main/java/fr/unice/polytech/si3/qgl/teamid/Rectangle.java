@@ -1,6 +1,6 @@
 package fr.unice.polytech.si3.qgl.teamid;
 
-public class Rectangle extends Forme {
+public class Rectangle extends Shape {
     private double width;
     private double length;
     private double orientation;
