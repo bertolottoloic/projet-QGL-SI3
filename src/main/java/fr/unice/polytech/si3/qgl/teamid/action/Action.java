@@ -1,9 +1,9 @@
-package fr.unice.polytech.si3.qgl.teamid;
+package fr.unice.polytech.si3.qgl.teamid.action;
 
 /**
  * @author Loic Bertolotto
  */
-abstract class Action{
+public abstract class Action{
     int sailorId;
     String type;
 
@@ -11,6 +11,8 @@ abstract class Action{
         this.sailorId = sailorId;
         this.type = type;
     }
+
+    //------------------------------GETTER-------------------------//
 
     public int getSailorId(){
         return this.sailorId;

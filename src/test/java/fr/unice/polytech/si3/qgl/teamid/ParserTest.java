@@ -1,6 +1,11 @@
 package fr.unice.polytech.si3.qgl.teamid;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+<<<<<<< HEAD
+=======
+import fr.unice.polytech.si3.qgl.teamid.InitGame;
+import fr.unice.polytech.si3.qgl.teamid.Parser;
+>>>>>>> 9f5a6bc042e8b0a7378e4ae5cdafb319c5e6c74b
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 
+<<<<<<< HEAD
     String jsonFile;
 
     @BeforeEach
@@ -153,4 +159,10 @@ class ParserTest {
     }
 
 
+=======
+    @Test
+    void initGameTest() {
+    }
+
+>>>>>>> 9f5a6bc042e8b0a7378e4ae5cdafb319c5e6c74b
 }

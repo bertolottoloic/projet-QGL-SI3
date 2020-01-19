@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.teamid;
 
 /**
+ * Classe correspondant au marin
  * @author joris Liebgott
  */
 
