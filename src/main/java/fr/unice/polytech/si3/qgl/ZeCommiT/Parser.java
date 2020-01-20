@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.ZeCommiT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import fr.unice.polytech.si3.qgl.ZeCommiT.goal.Battle;
 import fr.unice.polytech.si3.qgl.ZeCommiT.goal.Regatta;
 import fr.unice.polytech.si3.qgl.ZeCommiT.other.*;
@@ -164,11 +165,11 @@ public class Parser {
 
         Iterator<JsonNode> iteratorShip = nodeShip.path("entities").iterator();
         List<Entite> listEntitie = new ArrayList<>();
-        while(iteratorShip.hasNext()){
+        while (iteratorShip.hasNext()) {
             JsonNode current = iteratorShip.next();
             JsonNode type = current.path("type");
             String textType = type.asText();
-            switch (textType){
+            switch (textType) {
                 case "sail":
                     Voile voile = objectMapper.readValue(current.toString(), Voile.class);
                     listEntitie.add(voile);
@@ -195,19 +196,24 @@ public class Parser {
         Ship ship;
 
         JsonNode type = shapeShipN.path("type");
+        try{
+            switch (type.asText()) {
+                case "rectangle":
+                    Rectangle rectangleShip = objectMapper.readValue(shapeShipN.toString(), Rectangle.class);
+                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShip);
+                    break;
 
-        switch (type.asText()) {
-            case "rectangle":
-                Rectangle rectangleShip = objectMapper.readValue(shapeShipN.toString(), Rectangle.class);
-                ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShip);
-                break;
-
-            case "circle":
-                Circle circleShip = objectMapper.readValue(shapeShipN.toString(), Circle.class);
-                ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, circleShip);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + shapeShipN.asText());
+                case "circle":
+                    Circle circleShip = objectMapper.readValue(shapeShipN.toString(), Circle.class);
+                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, circleShip);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + shapeShipN.asText());
+            }
+        }
+        catch(IllegalStateException e){
+            ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
+            System.out.println("No shape : "+e.toString());
         }
 
         newNextRound.setShip(ship);
@@ -238,8 +244,16 @@ public class Parser {
 
         newNextRound.setVisibleEntities(visibleEntities);
 
-        JsonNode vent = rootNode.path("wind");
-        newNextRound.setWind(objectMapper.readValue(vent.toString(), Vent.class));
+        JsonNode ventN = rootNode.path("wind");
+        try {
+            Vent vent = objectMapper.readValue(ventN.toString(), Vent.class);
+            newNextRound.setWind(objectMapper.readValue(vent.toString(), Vent.class));
+
+        }
+        catch (InvalidDefinitionException e){
+            System.out.println("No vent : "+e.toString());
+        }
+
 
         return newNextRound;
 

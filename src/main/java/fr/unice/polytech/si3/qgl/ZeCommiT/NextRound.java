@@ -34,8 +34,14 @@ public class NextRound {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "NextRound{" +
+                "ship=" + ship +
+                ", wind=" + wind +
+                ", visibleEntities=" + visibleEntities +
+                '}';
+    }
 
     //------------------------------GETTER-------------------------//
     public Ship getShip() {

@@ -16,6 +16,6 @@ class CockpitTest {
 
     @Test
     void nextRoundTest() {
-        assertEquals("[]", this.cockpit.nextRound("{}"));
+        assertEquals("[ ]", this.cockpit.nextRound("{}"));
     }
 }

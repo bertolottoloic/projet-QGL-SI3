@@ -15,8 +15,6 @@ public class Cockpit implements ICockpit {
 	public void initGame(String game) {
 		try {
 			InitGame initGame=parserInitGame(game);
-
-			System.out.println(initGame.toString());
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -25,6 +23,7 @@ public class Cockpit implements ICockpit {
 	public String nextRound(String round) {
 		try {
 			NextRound nextRound = parserNextRound(round);
+			System.out.println(nextRound.toString());
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

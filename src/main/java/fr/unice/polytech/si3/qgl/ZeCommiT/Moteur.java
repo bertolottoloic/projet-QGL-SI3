@@ -71,8 +71,39 @@ public class Moteur {
                 "    }\n" +
                 "  ]\n" +
                 "}";
+
+        String json2="{\n" +
+                "  \"ship\": {\n" +
+                "    \"type\": \"ship\",\n" +
+                "    \"life\": 100,\n" +
+                "    \"position\": {\n" +
+                "      \"x\": 10.654,\n" +
+                "      \"y\": 3,\n" +
+                "      \"orientation\": 2.05\n" +
+                "    },\n" +
+                "    \"name\": \"Les copaings d'abord!\",\n" +
+                "    \"deck\": {\n" +
+                "      \"width\": 2,\n" +
+                "      \"length\": 1\n" +
+                "    },\n" +
+                "    \"entities\": [\n" +
+                "      {\n" +
+                "        \"x\": 0,\n" +
+                "        \"y\": 0,\n" +
+                "        \"type\": \"oar\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"x\": 1,\n" +
+                "        \"y\": 0,\n" +
+                "        \"type\": \"oar\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  \"visibleEntities\": []\n" +
+                "}";
         Cockpit cockpit= new Cockpit();
         cockpit.initGame(json);
+        cockpit.nextRound(json2);
 
     }
 }
