@@ -26,6 +26,15 @@ public class Sailor {
 
     }
 
+    @Override
+    public String toString(){
+        String chaine ="\n[id : "+this.id+
+                "\nx : "+this.x+
+                "\ny : "+this.y+
+                "\nname : "+this.name+"]";
+        return chaine;
+    }
+
     //--------------------GETTER -------------------------//
 
 

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
 import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
-import javafx.geometry.Pos;
 
 /**
  * Classe indiquant la position et forme d'un checkpoint

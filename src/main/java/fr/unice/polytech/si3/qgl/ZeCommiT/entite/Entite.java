@@ -35,6 +35,14 @@ public abstract class Entite {
         this.x = x;
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        String chaine = "[ type : " + this.type +
+                ", x : " + this.x +
+                ", y : " + this.y + " ]";
+        return chaine;
+    }
     //------------------------------GETTER-------------------------//
 
     public String getType() {

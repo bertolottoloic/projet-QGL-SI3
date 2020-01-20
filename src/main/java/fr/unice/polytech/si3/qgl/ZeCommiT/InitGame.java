@@ -30,6 +30,14 @@ public class InitGame {
         this.shipCount = 0;
     }
 
+    @Override
+    public String toString(){
+        String chaine = "goal : "+this.goal.toString()+
+                "\nship : "+this.ship.toString()+
+                "\nsailors : "+this.sailors.toString()+
+                "\nshipCount : "+this.shipCount;
+        return chaine;
+    }
 
     //--------------------GETTER -------------------------//
 
