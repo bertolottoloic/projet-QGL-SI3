@@ -24,6 +24,12 @@ public class Rectangle extends Shape {
         this.orientation=orientation;
     }
 
+    @Override
+    public String toString() {
+        String chaine = "type : "+super.getType()+
+                " [ width : "+this.width+" , height : "+this.height+" , orientation : "+this.orientation+" ] ";
+        return chaine;
+    }
     //-------------------------GETTER-------------------------//
 
     @JsonProperty("height")

@@ -24,6 +24,11 @@ public class Position {
         this.orientation=orientation;
     }
 
+    @Override
+    public String toString() {
+        String chaine = "{ " + this.x + " , " + this.y + " }";
+        return chaine;
+    }
     //------------------------------GETTER-------------------------//
 
     @JsonProperty("x")

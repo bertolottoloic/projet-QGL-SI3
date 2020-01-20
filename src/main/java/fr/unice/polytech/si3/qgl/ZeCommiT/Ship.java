@@ -30,6 +30,18 @@ public class Ship {
         this.shape = shape;
     }
 
+    @Override
+    public String toString() {
+        String chaine = "type : " + this.type +
+                "\nlife : " + this.life +
+                "\nposition : " + this.position +
+                "\nname : " + this.name +
+                "\ndeck : "+this.deck+
+                "\n entities : "+this.entities+
+                "\n shape : "+this.shape;
+        return chaine;
+    }
+
     //--------------------GETTER -------------------------//
 
     @JsonGetter("type")

@@ -12,10 +12,11 @@ import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import static fr.unice.polytech.si3.qgl.ZeCommiT.Parser.*;
 
 public class Cockpit implements ICockpit {
-
 	public void initGame(String game) {
 		try {
-			parserInitGame(game);
+			InitGame initGame=parserInitGame(game);
+
+			System.out.println(initGame.toString());
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
