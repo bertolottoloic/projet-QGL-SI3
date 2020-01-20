@@ -230,8 +230,8 @@ public class Parser {
                     visibleEntities.add(recif);
                     break;
                 case "ship":
-                    Ship shipVisible = objectMapper.readValue(current.toString(), Ship.class);
-                    visibleEntities.add(shipVisible);
+                    OtherShip otherShip = objectMapper.readValue(current.toString(), OtherShip.class);
+                    visibleEntities.add(otherShip);
                     break;
             }
         }

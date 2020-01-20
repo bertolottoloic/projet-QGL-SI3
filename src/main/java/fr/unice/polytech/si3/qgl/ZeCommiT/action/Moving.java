@@ -9,6 +9,7 @@ public class Moving extends Action{
         super(id, "MOVING");
         this.xdistance = xdistance;
         this.ydistance = ydistance;
+        //TODO ajouter condition de déplacement max : pas plus de 5 cases
     }
 
     public int getXDistance(){

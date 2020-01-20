@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * @author Loic Bertolotto
  */
-class Deck{
+public class Deck{
     @JsonProperty("width")private int width;
     @JsonProperty("length")private int length;
 
