@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.ZeCommiT;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
@@ -151,6 +152,8 @@ public class Parser {
 
     public static NextRound parserNextRound(String jsonString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
         JsonNode rootNode = objectMapper.readTree(jsonString);
 
         NextRound newNextRound = new NextRound();
@@ -213,36 +216,41 @@ public class Parser {
         }
         catch(IllegalStateException e){
             ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
-            System.out.println("No shape : "+e.toString());
+            //System.out.println("No shape : "+e.toString());
         }
 
         newNextRound.setShip(ship);
 
         // Création des visibleEntities
-
-        Iterator<JsonNode> iterator = nodeShip.path("visibleEntities").iterator();
-        List<VisibleEntitie> visibleEntities = null;
-        while(iterator.hasNext()){
-            JsonNode current = iterator.next();
-            JsonNode typeVisibleEntities = current.path("type");
-            String textType = typeVisibleEntities.asText();
-            switch (textType){
-                case "stream":
-                    Courant courant = objectMapper.readValue(current.toString(), Courant.class);
-                    visibleEntities.add(courant);
-                    break;
-                case "reef":
-                    Recif recif = objectMapper.readValue(current.toString(), Recif.class);
-                    visibleEntities.add(recif);
-                    break;
-                case "ship":
-                    OtherShip otherShip = objectMapper.readValue(current.toString(), OtherShip.class);
-                    visibleEntities.add(otherShip);
-                    break;
+        try {
+            Iterator<JsonNode> iterator = nodeShip.path("visibleEntities").iterator();
+            List<VisibleEntitie> visibleEntities = null;
+            while (iterator.hasNext()) {
+                JsonNode current = iterator.next();
+                JsonNode typeVisibleEntities = current.path("type");
+                String textType = typeVisibleEntities.asText();
+                switch (textType) {
+                    case "stream":
+                        Courant courant = objectMapper.readValue(current.toString(), Courant.class);
+                        visibleEntities.add(courant);
+                        break;
+                    case "reef":
+                        Recif recif = objectMapper.readValue(current.toString(), Recif.class);
+                        visibleEntities.add(recif);
+                        break;
+                    case "ship":
+                        OtherShip otherShip = objectMapper.readValue(current.toString(), OtherShip.class);
+                        visibleEntities.add(otherShip);
+                        break;
+                }
             }
+            newNextRound.setVisibleEntities(visibleEntities);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
 
-        newNextRound.setVisibleEntities(visibleEntities);
+
 
         JsonNode ventN = rootNode.path("wind");
         try {
@@ -251,7 +259,7 @@ public class Parser {
 
         }
         catch (InvalidDefinitionException e){
-            System.out.println("No vent : "+e.toString());
+            //System.out.println("No wind : "+e.toString());
         }
 
 

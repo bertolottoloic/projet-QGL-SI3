@@ -21,19 +21,24 @@ public class Cockpit implements ICockpit {
 	}
 
 	public String nextRound(String round) {
+		String res;
+		if(round.equals("{}"))
+			return "[ ]";
 		try {
 			NextRound nextRound = parserNextRound(round);
-			System.out.println(nextRound.toString());
+			Captain captain = new Captain(nextRound, nbSailors);
+			List<Action> actions = captain.actions();
+			Sortie sortie = new Sortie();
+			res = sortie.afficheRound(actions);
+
+			//System.out.println(nextRound.toString());
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
+			res = "[ ]";
 		}
-		Sortie sortie = new Sortie();
-		List<Action> actions = new ArrayList<>();
-		for(int i = 0; i < nbSailors; i++) {
-			actions.add(i, new Oar(i));
-		}
+		
+		return res; 
 
-		return sortie.afficheRound(actions);
 	}
 
 	@Override

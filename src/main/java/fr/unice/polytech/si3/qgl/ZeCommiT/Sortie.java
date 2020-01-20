@@ -27,7 +27,7 @@ class Sortie{
             return oM.writeValueAsString(actions);
         } catch (IOException e){
             System.out.println(e.getMessage());
-            return "";
+            return "[]";
         }
     }
 

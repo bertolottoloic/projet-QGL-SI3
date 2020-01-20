@@ -52,8 +52,8 @@ class ParserTest {
                 "        \"type\": \"oar\"\n" +
                 "      },\n" +
                 "      {\n" +
-                "        \"x\": 1,\n" +
-                "        \"y\": 0,\n" +
+                "        \"x\": 0,\n" +
+                "        \"y\": 1,\n" +
                 "        \"type\": \"oar\"\n" +
                 "      }\n" +
                 "    ],\n" +
@@ -106,6 +106,7 @@ class ParserTest {
                 "        \"y\": 0,\n" +
                 "        \"type\": \"oar\"\n" +
                 "      }\n" +
+                "    ]\n" +
                 "  },\n" +
                 "  \"visibleEntities\": []\n" +
                 "}";
