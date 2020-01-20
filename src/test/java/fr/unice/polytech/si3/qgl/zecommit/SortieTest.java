@@ -1,24 +1,26 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Action;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Lift_Sail;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Lower_Sail;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Moving;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Oar;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Turn;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Use_Watch;
+import fr.unice.polytech.si3.qgl.zecommit.action.Action;
+import fr.unice.polytech.si3.qgl.zecommit.action.Lift_Sail;
+import fr.unice.polytech.si3.qgl.zecommit.action.Lower_Sail;
+import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
+import fr.unice.polytech.si3.qgl.zecommit.action.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
+import fr.unice.polytech.si3.qgl.zecommit.action.Use_Watch;
 
 class SortieTest {
     Sortie s;
     ArrayList<Action> actions;
 
+    @Disabled
     @Test
     void afficheSortieTest(){
         String resultString = "[ {\n" +
@@ -51,6 +53,7 @@ class SortieTest {
         Action o5 = new Turn(5,3.5);
         Action o6 = new Use_Watch(6);
         List<Action> actions =List.of(o1,o2,o3,o4,o5,o6);
+        System.out.println(s.afficheRound(actions));
         assertEquals(resultString, s.afficheRound(actions));
 
     }

@@ -1,7 +1,6 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT.shape;
+package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.*;
-import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

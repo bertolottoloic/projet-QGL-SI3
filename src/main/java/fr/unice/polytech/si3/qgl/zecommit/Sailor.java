@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT.entite;
+package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 /**
  * Classe mère décrivant les objets présents sur le bateau

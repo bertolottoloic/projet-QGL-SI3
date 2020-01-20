@@ -1,9 +1,8 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.annotation.*;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Entite;
-import fr.unice.polytech.si3.qgl.ZeCommiT.other.VisibleEntitie;
-import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entite;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.List;
 

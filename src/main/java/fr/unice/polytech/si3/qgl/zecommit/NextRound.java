@@ -1,10 +1,9 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Entite;
-import fr.unice.polytech.si3.qgl.ZeCommiT.other.Vent;
-import fr.unice.polytech.si3.qgl.ZeCommiT.other.VisibleEntitie;
+import fr.unice.polytech.si3.qgl.zecommit.other.Vent;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 
 import java.util.List;
 

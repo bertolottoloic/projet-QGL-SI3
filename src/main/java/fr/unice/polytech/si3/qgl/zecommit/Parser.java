@@ -1,16 +1,16 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
-import fr.unice.polytech.si3.qgl.ZeCommiT.goal.Battle;
-import fr.unice.polytech.si3.qgl.ZeCommiT.goal.Regatta;
-import fr.unice.polytech.si3.qgl.ZeCommiT.other.*;
-import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Circle;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.*;
-import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Battle;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.other.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Iterator;

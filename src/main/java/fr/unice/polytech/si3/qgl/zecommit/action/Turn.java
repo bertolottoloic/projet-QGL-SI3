@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT.action;
+package fr.unice.polytech.si3.qgl.zecommit.action;
 
 public class Turn extends Action{
 

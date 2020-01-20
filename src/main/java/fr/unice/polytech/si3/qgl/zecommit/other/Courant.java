@@ -1,9 +1,9 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT.other;
+package fr.unice.polytech.si3.qgl.zecommit.other;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
-import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.Position;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 /**
  * Classe modélisant les courants marins

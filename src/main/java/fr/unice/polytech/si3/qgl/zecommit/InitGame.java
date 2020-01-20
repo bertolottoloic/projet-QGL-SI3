@@ -1,7 +1,7 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.unice.polytech.si3.qgl.ZeCommiT.goal.Goal;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT.other;
+package fr.unice.polytech.si3.qgl.zecommit.other;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.ZeCommiT.Deck;
-import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Entite;
-import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.Position;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entite;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.List;
 

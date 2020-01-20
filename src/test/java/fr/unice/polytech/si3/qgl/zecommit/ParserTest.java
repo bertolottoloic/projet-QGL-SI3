@@ -1,9 +1,8 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.objenesis.instantiator.basic.NewInstanceInstantiator;
 
 import static org.junit.jupiter.api.Assertions.*;
 

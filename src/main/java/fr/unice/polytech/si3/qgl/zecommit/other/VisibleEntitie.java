@@ -1,15 +1,14 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT.other;
+package fr.unice.polytech.si3.qgl.zecommit.other;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import fr.unice.polytech.si3.qgl.ZeCommiT.Position;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Gouvernail;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Rame;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Vigie;
-import fr.unice.polytech.si3.qgl.ZeCommiT.entite.Voile;
-import fr.unice.polytech.si3.qgl.ZeCommiT.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.Position;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Gouvernail;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rame;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Vigie;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

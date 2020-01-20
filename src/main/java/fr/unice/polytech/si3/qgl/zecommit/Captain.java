@@ -1,7 +1,7 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Action;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.action.Action;
+import fr.unice.polytech.si3.qgl.zecommit.action.Oar;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,15 +1,13 @@
-package fr.unice.polytech.si3.qgl.ZeCommiT;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Action;
-import fr.unice.polytech.si3.qgl.ZeCommiT.action.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
-import static fr.unice.polytech.si3.qgl.ZeCommiT.Parser.*;
+import static fr.unice.polytech.si3.qgl.zecommit.Parser.*;
 
 public class Cockpit implements ICockpit {
 	public void initGame(String game) {
