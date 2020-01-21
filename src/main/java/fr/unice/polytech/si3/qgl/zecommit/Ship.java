@@ -69,9 +69,9 @@ public class Ship {
     }
 
     // Calcule la distance entre deux positions données
-    public int calculDistance(Position position, Position position1) {
-        int distance = 0;
-        distance = (int)((Math.abs(position.getX()-position1.getX())) + Math.abs(position.getY()-position1.getY()));
+    public double calculDistance(Position position, Position position1) {
+        double distance = 0;
+        distance = ((Math.abs(position.getX()-position1.getX())) + Math.abs(position.getY()-position1.getY()));
         return distance;
     }
 
