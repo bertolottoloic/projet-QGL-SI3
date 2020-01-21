@@ -19,7 +19,7 @@ public class Captain {
 
     public List<Action> actions(List<Checkpoint> checkpoints ) {
         List<Action> actions = new ArrayList<Action>();
-        if(nextRound.getShip().estDedans(checkpoints.get(0))) {//TODO plusieurs checkpoints
+        if(!nextRound.getShip().estDedans(checkpoints.get(0))) {//TODO plusieurs checkpoints
             //TODO : cas nb marin impair
             for (int i = 0; i < nbSailors; i++) {
                 //TODO : vérifier le nombre de rames présentes

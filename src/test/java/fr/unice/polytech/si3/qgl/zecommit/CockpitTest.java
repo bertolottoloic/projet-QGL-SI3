@@ -18,4 +18,5 @@ class CockpitTest {
     void nextRoundTest() {
         assertEquals("[ ]", this.cockpit.nextRound("{}"));
     }
+
 }
