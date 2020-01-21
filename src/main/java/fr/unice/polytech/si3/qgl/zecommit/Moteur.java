@@ -101,10 +101,10 @@ public class Moteur {
                 "  },\n" +
                 "  \"visibleEntities\": []\n" +
                 "}";
-        Cockpit cockpit= new Cockpit();
+        /*Cockpit cockpit= new Cockpit();
         cockpit.initGame(json);
         //System.out.println(cockpit.initgame);
-        System.out.println(cockpit.nextRound(json2));
+        System.out.println(cockpit.nextRound(json2));*/
 
     }
 }
