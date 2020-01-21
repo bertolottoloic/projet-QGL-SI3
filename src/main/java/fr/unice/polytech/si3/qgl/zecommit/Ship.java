@@ -2,6 +2,8 @@ package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entite;
+import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.List;
@@ -28,6 +30,31 @@ public class Ship {
         this.entities = entities;
         this.shape = shape;
     }
+
+    /**
+     * Méthode permettant de savoir si un bateau est arrivé dans le checkpoint
+     * cette méthode considère un bateau dans la zone si son centre (et non le bateau entier) est à l'intérieur du checkpoint
+     * @param checkpoint
+     * @return boolean
+     */
+    public boolean estDedans(Checkpoint checkpoint){
+        //cas avec un cercle
+        if(checkpoint.getShape()instanceof Circle){
+            //Si la distance centre Checkpoint - bateau est inférieure au rayon du checkpoint
+            if(distance(position, checkpoint.getPosition())< ((Circle) checkpoint.getShape()).getRadius()){
+                return true;
+            }
+        }
+        //cas avec un rectangle
+        else if(checkpoint.getShape().getType().equals("rectangle")){
+        //TODO à coder, attention à l'orientation du rectangle
+        }
+
+
+
+        return false;
+    }
+
 
     @Override
     public String toString() {
