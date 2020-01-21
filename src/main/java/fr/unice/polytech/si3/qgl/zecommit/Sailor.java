@@ -2,6 +2,8 @@ package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.unice.polytech.si3.qgl.zecommit.action.Action;
+import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 
 /**
  * Classe correspondant au marin
@@ -33,6 +35,19 @@ public class Sailor {
                 "\ny : "+this.y+
                 "\nname : "+this.name+"]";
         return chaine;
+    }
+
+
+    /**
+     * Déplace le sailor de la distance demandé.
+     * Si la distance dépasse 5 l'action est annulée, ceci est prit en charge dans le constructeur de Moving
+     * @param xdistance
+     * @param ydistance
+     */
+    public void mouvSailor(int xdistance, int ydistance) {
+        Moving action = new Moving(this.getId(), xdistance, ydistance);
+        this.setX(this.x + action.getXDistance());
+        this.setY(this.y + action.getYDistance());
     }
 
     //--------------------GETTER -------------------------//

@@ -7,10 +7,18 @@ public class Moving extends Action{
 
     public Moving(int id, int xdistance, int ydistance){
         super(id, "MOVING");
-        this.xdistance = xdistance;
-        this.ydistance = ydistance;
+        if ((xdistance + ydistance) <= 5) {
+            this.xdistance = xdistance;
+            this.ydistance = ydistance;
+        }
+        else {
+            this.xdistance = 0;
+            this.ydistance = 0;
+        }
         //TODO ajouter condition de déplacement max : pas plus de 5 cases
+        //DONE
     }
+
 
     public int getXDistance(){
         return this.xdistance;
