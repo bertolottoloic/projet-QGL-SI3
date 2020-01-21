@@ -31,8 +31,8 @@ class SortieTest {
                 "}, {\n" +
                 "  \"sailorId\" : 2,\n" +
                 "  \"type\" : \"MOVING\",\n" +
-                "  \"xdistance\" : 3,\n" +
-                "  \"ydistance\" : 4\n" +
+                "  \"xdistance\" : 0,\n" +
+                "  \"ydistance\" : 0\n" +
                 "}, {\n" +
                 "  \"sailorId\" : 3,\n" +
                 "  \"type\" : \"LIFT_SAIL\"\n" +

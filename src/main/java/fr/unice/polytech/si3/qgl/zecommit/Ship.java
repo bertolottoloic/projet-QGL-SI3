@@ -68,6 +68,13 @@ public class Ship {
         return chaine;
     }
 
+    // Calcule la distance entre deux positions données
+    public int calculDistance(Position position, Position position1) {
+        int distance = 0;
+        distance = (int)((Math.abs(position.getX()-position1.getX())) + Math.abs(position.getY()-position1.getY()));
+        return distance;
+    }
+
     //--------------------GETTER -------------------------//
 
     @JsonGetter("type")
