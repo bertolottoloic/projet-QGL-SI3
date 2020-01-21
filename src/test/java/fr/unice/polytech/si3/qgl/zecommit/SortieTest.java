@@ -23,30 +23,14 @@ class SortieTest {
     ArrayList<Action> actions;
 
     @Test
-    @DisabledOnOs(OS.WINDOWS)
+    //@DisabledOnOs(OS.WINDOWS)
     void afficheSortieTest() {
-        String resultString = "[ {\n" +
-                "  \"sailorId\" : 1,\n" +
-                "  \"type\" : \"OAR\"\n" +
-                "}, {\n" +
-                "  \"sailorId\" : 2,\n" +
-                "  \"type\" : \"MOVING\",\n" +
-                "  \"xdistance\" : 0,\n" +
-                "  \"ydistance\" : 0\n" +
-                "}, {\n" +
-                "  \"sailorId\" : 3,\n" +
-                "  \"type\" : \"LIFT_SAIL\"\n" +
-                "}, {\n" +
-                "  \"sailorId\" : 4,\n" +
-                "  \"type\" : \"LOWER_SAIL\"\n" +
-                "}, {\n" +
-                "  \"sailorId\" : 5,\n" +
-                "  \"type\" : \"TURN\",\n" +
-                "  \"rotation\" : 3.5\n" +
-                "}, {\n" +
-                "  \"sailorId\" : 6,\n" +
-                "  \"type\" : \"USE_WATCH\"\n" +
-                "} ]";
+        String resultString = "[{\"sailorId\":1,\"type\":\"OAR\"},"+
+        "{\"sailorId\":2,\"type\":\"MOVING\",\"xdistance\":0,\"ydistance\":0},"+
+        "{\"sailorId\":3,\"type\":\"LIFT_SAIL\"},"+
+        "{\"sailorId\":4,\"type\":\"LOWER_SAIL\"},"+
+        "{\"sailorId\":5,\"type\":\"TURN\",\"rotation\":3.5},"+
+        "{\"sailorId\":6,\"type\":\"USE_WATCH\"}]";
         s = new Sortie();
         Action o1 = new Oar(1);
         Action o2 = new Moving(2, 3, 4);
