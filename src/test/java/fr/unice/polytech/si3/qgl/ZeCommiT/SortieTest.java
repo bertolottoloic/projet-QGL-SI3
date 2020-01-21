@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assume;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.si3.qgl.ZeCommiT.action.Action;
@@ -14,12 +15,15 @@ import fr.unice.polytech.si3.qgl.ZeCommiT.action.Moving;
 import fr.unice.polytech.si3.qgl.ZeCommiT.action.Oar;
 import fr.unice.polytech.si3.qgl.ZeCommiT.action.Turn;
 import fr.unice.polytech.si3.qgl.ZeCommiT.action.Use_Watch;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 class SortieTest {
     Sortie s;
     ArrayList<Action> actions;
 
     @Test
+    @DisabledOnOs(OS.WINDOWS)
     void afficheSortieTest(){
         String resultString = "[ {\n" +
                 "  \"sailorId\" : 1,\n" +
