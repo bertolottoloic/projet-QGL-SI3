@@ -131,7 +131,8 @@ class ParserTest {
 
     @Test
     void parserNextRound() throws JsonProcessingException {
-        NextRound nextRound = Parser.parserNextRound(jsonString2);
+        Parser parser = new Parser();
+        NextRound nextRound = parser.parserNextRound(jsonString2);
         assertEquals(nextRound.getShip().getPosition().getX(), 10.654);
     }
 

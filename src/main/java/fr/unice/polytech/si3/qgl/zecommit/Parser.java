@@ -148,9 +148,10 @@ public class Parser {
         newInitGame.setShipCount(objectMapper.readValue(shipCountNode.toString(), int.class));
         return newInitGame;
     }
+    
 
 
-    public static NextRound parserNextRound(String jsonString) throws JsonProcessingException {
+    public NextRound parserNextRound(String jsonString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 

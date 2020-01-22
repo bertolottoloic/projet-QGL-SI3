@@ -14,9 +14,9 @@ public class Cockpit implements ICockpit {
 	InitGame initgame;
 
 	public void initGame(String game) {
+		Parser parser = new Parser();
 		try {
-			Parser parse = new Parser();
-			this.initgame=parse.parserInitGame(game);
+			this.initgame=parser.parserInitGame(game);
 
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -25,10 +25,12 @@ public class Cockpit implements ICockpit {
 
 	public String nextRound(String round) {
 		String res;
+		Parser parser = new Parser();
+
 		if(round.equals("{}"))
 			return "[ ]";
 		try {
-			NextRound nextRound = parserNextRound(round);
+			NextRound nextRound = parser.parserNextRound(round);
 			Captain captain = new Captain(nextRound, initgame.getSailors().size());
 			List<Action> actions = new ArrayList<Action>();
 			if(initgame.getGoal().getMode().equals("Regatta")){
