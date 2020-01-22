@@ -119,7 +119,8 @@ class ParserTest {
 
     @Test
     void parserInitGameTest() throws JsonProcessingException {
-        InitGame initGame = Parser.parserInitGame(jsonString);
+        Parser parser= new Parser();
+        InitGame initGame = parser.parserInitGame(jsonString);
 
         assertEquals("REGATTA", initGame.getGoal().getMode());
         assertEquals(2, initGame.getSailors().size());

@@ -15,7 +15,8 @@ public class Cockpit implements ICockpit {
 
 	public void initGame(String game) {
 		try {
-			this.initgame=parserInitGame(game);
+			Parser parse = new Parser();
+			this.initgame=parse.parserInitGame(game);
 
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -30,8 +31,9 @@ public class Cockpit implements ICockpit {
 			NextRound nextRound = parserNextRound(round);
 			Captain captain = new Captain(nextRound, initgame.getSailors().size());
 			List<Action> actions = new ArrayList<Action>();
-			if(initgame.getGoal() instanceof Regatta)
+			if(initgame.getGoal().getMode().equals("Regatta")){
 				actions = captain.actions(((Regatta) initgame.getGoal()).getCheckpoints());
+			}
 			Sortie sortie = new Sortie();
 			res = sortie.afficheRound(actions);
 		} catch (JsonProcessingException e) {

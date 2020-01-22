@@ -21,8 +21,8 @@ import java.util.List;
  * @author Vincent et Nathan
  */
 public class Parser {
-    public static int nbSailors = 0;
-    public static InitGame parserInitGame(String jsonString) throws JsonProcessingException {
+    public int nbSailors = 0;
+    public InitGame parserInitGame(String jsonString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(jsonString);
 
