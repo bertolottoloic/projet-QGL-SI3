@@ -85,20 +85,20 @@ public class ParserInit {
             String textType = type.asText();
             switch (textType) {
                 case "sail":
-                    Voile voile = objectMapper.readValue(current.toString(), Voile.class);
-                    listEntitie.add(voile);
+                    Sail sail = objectMapper.readValue(current.toString(), Sail.class);
+                    listEntitie.add(sail);
                     break;
                 case "oar":
-                    Rame rame = objectMapper.readValue(current.toString(), Rame.class);
-                    listEntitie.add(rame);
+                    Oar oar = objectMapper.readValue(current.toString(), Oar.class);
+                    listEntitie.add(oar);
                     break;
                 case "rudder":
-                    Gouvernail gouvernail = objectMapper.readValue(current.toString(), Gouvernail.class);
-                    listEntitie.add(gouvernail);
+                    Rudder rudder = objectMapper.readValue(current.toString(), Rudder.class);
+                    listEntitie.add(rudder);
                     break;
                 case "watch":
-                    Vigie vigie = objectMapper.readValue(current.toString(), Vigie.class);
-                    listEntitie.add(vigie);
+                    Watch watch = objectMapper.readValue(current.toString(), Watch.class);
+                    listEntitie.add(watch);
                     break;
             }
         }

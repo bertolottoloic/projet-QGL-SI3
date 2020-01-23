@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Classe correspondant à la vigie du bateau
  * @author Nathan
  */
-public class Vigie extends Entities {
+public class Watch extends Entities {
 
     @JsonCreator
-    public Vigie(@JsonProperty("x")int x, @JsonProperty("y")int y){
+    public Watch(@JsonProperty("x")int x, @JsonProperty("y")int y){
         super("watch",x,y);
     }
 }

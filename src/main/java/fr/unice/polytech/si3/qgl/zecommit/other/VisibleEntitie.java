@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import fr.unice.polytech.si3.qgl.zecommit.Position;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Gouvernail;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rame;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Vigie;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Watch;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 @JsonTypeInfo(
@@ -15,9 +15,9 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Rame.class, name = "stream"),
-        @JsonSubTypes.Type(value = Gouvernail.class, name = "reef"),
-        @JsonSubTypes.Type(value = Vigie.class, name = "ship"),
+        @JsonSubTypes.Type(value = Oar.class, name = "stream"),
+        @JsonSubTypes.Type(value = Rudder.class, name = "reef"),
+        @JsonSubTypes.Type(value = Watch.class, name = "ship"),
 })
 
 /**

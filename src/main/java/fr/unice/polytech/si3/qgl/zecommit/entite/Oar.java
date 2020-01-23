@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 
-public class Rame extends Entities {
+public class Oar extends Entities {
 
     @JsonCreator
-    public Rame(@JsonProperty("x")int x, @JsonProperty("y")int y){
+    public Oar(@JsonProperty("x")int x, @JsonProperty("y")int y){
         super("oar",x,y);
     }
 }
