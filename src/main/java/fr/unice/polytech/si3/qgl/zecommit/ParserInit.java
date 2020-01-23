@@ -1,10 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Battle;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
@@ -80,7 +78,7 @@ public class ParserInit {
         JsonNode deckShipN = nodeShip.path("deck");
 
         Iterator<JsonNode> iteratorShip = nodeShip.path("entities").iterator();
-        List<Entite> listEntitie = new ArrayList<>();
+        List<Entities> listEntitie = new ArrayList<>();
         while (iteratorShip.hasNext()) {
             JsonNode current = iteratorShip.next();
             JsonNode type = current.path("type");

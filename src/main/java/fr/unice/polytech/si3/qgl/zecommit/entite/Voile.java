@@ -7,14 +7,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Classe correspondant à la voile du bateau
  * @author Nathan
  */
-public class Voile extends Entite {
+public class Voile extends Entities {
 
     private boolean openned;
 
     @JsonCreator
-    public Voile(@JsonProperty("x")int x, @JsonProperty("y")int y){
+    public Voile(@JsonProperty("x")int x, @JsonProperty("y")int y, Boolean openned){
         super("sail",x,y);
-        this.openned = false;//par défaut la voile est fermée
+        this.openned = openned;
     }
 
     //------------------------------GETTER-------------------------//

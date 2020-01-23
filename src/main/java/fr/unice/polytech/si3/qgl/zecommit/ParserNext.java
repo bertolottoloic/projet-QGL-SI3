@@ -32,7 +32,7 @@ public class ParserNext {
         JsonNode deckShipN = nodeShip.path("deck");
 
         Iterator<JsonNode> iteratorShip = nodeShip.path("entities").iterator();
-        List<Entite> listEntitie = new ArrayList<>();
+        List<Entities> listEntitie = new ArrayList<>();
         while (iteratorShip.hasNext()) {
             JsonNode current = iteratorShip.next();
             JsonNode type = current.path("type");

@@ -14,7 +14,7 @@ class SailorTest {
         sailor1 = new Sailor(1, 0, 0, "sailor1");
     }
 
-    
+
     @Test
     void mouvSailorCorrecteTest() {
         sailor1.mouvSailor(2,1);

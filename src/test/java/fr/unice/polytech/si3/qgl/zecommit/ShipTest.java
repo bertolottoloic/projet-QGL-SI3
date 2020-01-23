@@ -1,8 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entite;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rame;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entities;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +22,7 @@ class ShipTest {
         Position shipPosition = new Position(0,0,0);
         Deck deck = new Deck(5,5);
         Shape shape = new Rectangle(3,3,0);
-        List<Entite> list = null;
+        List<Entities> list = null;
         this.ship = new Ship(0, shipPosition,"zeBoat",deck, list, shape);
     }
 

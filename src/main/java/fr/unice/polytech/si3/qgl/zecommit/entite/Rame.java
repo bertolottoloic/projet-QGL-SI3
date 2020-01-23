@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 
-public class Rame extends Entite {
+public class Rame extends Entities {
 
     @JsonCreator
     public Rame(@JsonProperty("x")int x, @JsonProperty("y")int y){

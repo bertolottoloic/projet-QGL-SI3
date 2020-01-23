@@ -3,7 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.other;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.Position;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entite;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entities;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.List;
@@ -15,10 +15,10 @@ public class OtherShip extends VisibleEntitie {
     @JsonProperty("position")private Position position;
     @JsonProperty("name")private String name;
     @JsonProperty("deck")private Deck deck;
-    @JsonProperty("entities")private List<Entite> entities;
+    @JsonProperty("entities")private List<Entities> entities;
     @JsonProperty("shape")private Shape shape;
 
-    public OtherShip(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entite> entities, @JsonProperty("shape")Shape shape){
+    public OtherShip(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entities> entities, @JsonProperty("shape")Shape shape){
         super(position, shape);
         this.type = "ship";
         this.life = life;
@@ -51,7 +51,7 @@ public class OtherShip extends VisibleEntitie {
         return deck;
     }
 
-    public List<Entite> getEntities() {
+    public List<Entities> getEntities() {
         return entities;
     }
 
@@ -85,7 +85,7 @@ public class OtherShip extends VisibleEntitie {
         this.deck = deck;
     }
 
-    public void setEntities(List<Entite> entities) {
+    public void setEntities(List<Entities> entities) {
         this.entities = entities;
     }
 
