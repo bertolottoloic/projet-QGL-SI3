@@ -119,7 +119,8 @@ class ParserTest {
 
     @Test
     void parserInitGameTest() throws JsonProcessingException {
-        InitGame initGame = Parser.parserInitGame(jsonString);
+        Parser parser= new Parser();
+        InitGame initGame = parser.parserInitGame(jsonString);
 
         assertEquals("REGATTA", initGame.getGoal().getMode());
         assertEquals(2, initGame.getSailors().size());
@@ -130,7 +131,8 @@ class ParserTest {
 
     @Test
     void parserNextRound() throws JsonProcessingException {
-        NextRound nextRound = Parser.parserNextRound(jsonString2);
+        Parser parser = new Parser();
+        NextRound nextRound = parser.parserNextRound(jsonString2);
         assertEquals(nextRound.getShip().getPosition().getX(), 10.654);
     }
 
