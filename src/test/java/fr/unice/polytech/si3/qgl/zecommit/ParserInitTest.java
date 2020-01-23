@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParserTest {
+class ParserInitTest {
     private String jsonString;
     private String jsonString2;
     private String jsonString3;
 
 
-    ParserTest() throws JsonProcessingException {
+    ParserInitTest() throws JsonProcessingException {
     }
 
     @BeforeEach
@@ -119,8 +119,8 @@ class ParserTest {
 
     @Test
     void parserInitGameTest() throws JsonProcessingException {
-        Parser parser= new Parser();
-        InitGame initGame = parser.parserInitGame(jsonString);
+        ParserInit parserInit = new ParserInit();
+        InitGame initGame = parserInit.parserInitGame(jsonString);
 
         assertEquals("REGATTA", initGame.getGoal().getMode());
         assertEquals(2, initGame.getSailors().size());
@@ -131,8 +131,8 @@ class ParserTest {
 
     @Test
     void parserNextRound() throws JsonProcessingException {
-        Parser parser = new Parser();
-        NextRound nextRound = parser.parserNextRound(jsonString2);
+        ParserNext parserNext = new ParserNext();
+        NextRound nextRound = parserNext.parserNextRound(jsonString2);
         assertEquals(nextRound.getShip().getPosition().getX(), 10.654);
     }
 

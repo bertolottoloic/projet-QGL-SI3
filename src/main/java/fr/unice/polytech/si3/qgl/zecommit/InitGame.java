@@ -61,6 +61,10 @@ public class InitGame {
         return shipCount;
     }
 
+    public String getGoalMode(){
+        return goal.getMode();
+    }
+
     //--------------------SETTER -------------------------//
 
     public void setGoal(Goal goal) {

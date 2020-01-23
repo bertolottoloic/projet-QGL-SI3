@@ -8,15 +8,13 @@ import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 
-import static fr.unice.polytech.si3.qgl.zecommit.Parser.*;
-
 public class Cockpit implements ICockpit {
 	InitGame initgame;
 
 	public void initGame(String game) {
-		Parser parser = new Parser();
+		ParserInit parserInit = new ParserInit();
 		try {
-			this.initgame=parser.parserInitGame(game);
+			this.initgame = parserInit.parserInitGame(game);
 
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -25,15 +23,15 @@ public class Cockpit implements ICockpit {
 
 	public String nextRound(String round) {
 		String res;
-		Parser parser = new Parser();
+		ParserNext parserNext = new ParserNext();
 
 		if(round.equals("{}"))
 			return "[ ]";
 		try {
-			NextRound nextRound = parser.parserNextRound(round);
+			NextRound nextRound = parserNext.parserNextRound(round);
 			Captain captain = new Captain(nextRound, initgame.getSailors().size());
 			List<Action> actions = new ArrayList<Action>();
-			if(initgame.getGoal().getMode().equals("Regatta")){
+			if(initgame.getGoalMode().equals("REGATTA")){
 				actions = captain.actions(((Regatta) initgame.getGoal()).getCheckpoints());
 			}
 			Sortie sortie = new Sortie();
