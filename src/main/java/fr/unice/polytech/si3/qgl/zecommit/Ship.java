@@ -39,6 +39,7 @@ public class Ship {
      */
     public boolean estDedans(Checkpoint checkpoint){
         //cas avec un cercle
+
         if(checkpoint.getShape().getType().equals("circle")){
             //Si la distance centre Checkpoint - bateau est inférieure au rayon du checkpoint
             if(calculDistance(position, checkpoint.getPosition())< ((Circle) checkpoint.getShape()).getRadius()-3){

@@ -33,12 +33,12 @@ public class Cockpit implements ICockpit {
 			return "[ ]";
 		try {
 			NextRound nextRound = parserNext.parserNextRound(round);
-
+			captain.setNextRound(nextRound);
 			List<Action> actions = new ArrayList<Action>();
 			if(initgame.getGoal().getMode().equals("REGATTA")){
+				System.out.println(((Regatta)initgame.getGoal()).getCheckpoints());
 				captainMate.actions(((Regatta)initgame.getGoal()).getCheckpoints());
 				actions = captainMate.getActionList();
-				captain.setNextRound(nextRound);
 			}
 			Sortie sortie = new Sortie();
 			res = sortie.afficheRound(actions);
