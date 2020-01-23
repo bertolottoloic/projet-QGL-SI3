@@ -72,7 +72,7 @@ public class Moteur {
                 "  ]\n" +
                 "}";
 
-        String json2="{\n" +
+        String json2 = "{\n" +
                 "  \"ship\": {\n" +
                 "    \"type\": \"ship\",\n" +
                 "    \"life\": 100,\n" +
