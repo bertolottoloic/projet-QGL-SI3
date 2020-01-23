@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class CaptainMate {
             //TODO : cas nb marin impair
             for (int i = 0; i < captain.getSailorList().size(); i++) {
                 //TODO : vérifier le nombre de rames présentes
-                actionList.add(i, new Oar(i));
+                actionList.add(i, new ToOar(i));
             }
         }
     }

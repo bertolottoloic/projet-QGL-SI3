@@ -8,6 +8,8 @@ package fr.unice.polytech.si3.qgl.zecommit;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+
 public class Position {
     @JsonProperty("x")
     double x;
@@ -59,5 +61,19 @@ public class Position {
     @JsonProperty("orientation")
     public void setOrientation(double orientation) {
         this.orientation = orientation;
+    }
+
+    //-------------------------------------------------------------//
+
+    public double positiveOrientation(){
+        if(orientation<0) return 2*Math.PI+orientation;
+        return orientation;
+    }
+
+    public double orientationGap(Checkpoint cp){
+        if(orientation>0){
+            //if(x>cp.getPosition().x) return this.orientation+Math.acos(a)
+        }
+        return 0.0;
     }
 }

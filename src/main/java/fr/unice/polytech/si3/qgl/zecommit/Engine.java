@@ -3,7 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit;
  * Classe simulant l'appel du projet
  * @auteur Clement P
  */
-public class Moteur {
+public class Engine {
 
     public static void main(String [] args){
         String json="{\n" +

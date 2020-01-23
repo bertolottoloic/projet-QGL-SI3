@@ -40,8 +40,8 @@ public class Cockpit implements ICockpit {
 				captainMate.actions(((Regatta)initgame.getGoal()).getCheckpoints());
 				actions = captainMate.getActionList();
 			}
-			Sortie sortie = new Sortie();
-			res = sortie.afficheRound(actions);
+			Output output = new Output();
+			res = output.afficheRound(actions);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			res = "[ ]";

@@ -4,8 +4,8 @@ package fr.unice.polytech.si3.qgl.zecommit.action;
  * Classe représentant l'action : ramer
  * @author Loic Bertolotto
  */
-public class Oar extends Action{
-    public Oar(int sailorId){
+public class ToOar extends Action{
+    public ToOar(int sailorId){
         super(sailorId, "OAR");
     }
 }

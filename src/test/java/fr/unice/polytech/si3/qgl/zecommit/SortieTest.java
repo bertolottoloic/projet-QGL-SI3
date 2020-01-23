@@ -12,7 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Lift_Sail;
 import fr.unice.polytech.si3.qgl.zecommit.action.Lower_Sail;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
-import fr.unice.polytech.si3.qgl.zecommit.action.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
 import fr.unice.polytech.si3.qgl.zecommit.action.Use_Watch;
 import org.junit.jupiter.api.condition.DisabledOnOs;
@@ -32,7 +32,7 @@ class SortieTest {
         "{\"sailorId\":5,\"type\":\"TURN\",\"rotation\":3.5},"+
         "{\"sailorId\":6,\"type\":\"USE_WATCH\"}]";
         s = new Sortie();
-        Action o1 = new Oar(1);
+        Action o1 = new ToOar(1);
         Action o2 = new Moving(2, 3, 4);
         Action o3 = new Lift_Sail(3);
         Action o4 = new Lower_Sail(4);

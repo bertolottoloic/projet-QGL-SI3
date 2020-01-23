@@ -12,12 +12,12 @@ import fr.unice.polytech.si3.qgl.zecommit.action.*;
  * @author Loic Bertolotto
  */
 
-class Sortie{
+class Output{
     ObjectMapper oM;
     List<Action> actions;
 
 
-    Sortie(){
+    Output(){
         oM = new ObjectMapper();
     }
 
