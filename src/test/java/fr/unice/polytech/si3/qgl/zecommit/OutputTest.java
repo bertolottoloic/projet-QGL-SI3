@@ -28,7 +28,7 @@ class OutputTest {
         Action o3 = new LiftSail(3);
         Action o4 = new LowerSail(4);
         Action o5 = new Turn(5, 3.5);
-        Action o6 = new Use_Watch(6);
+        Action o6 = new UseWatch(6);
         List<Action> actions = List.of(o1, o2, o3, o4, o5, o6);
         assertEquals(resultString, s.afficheRound(actions));
 
