@@ -26,8 +26,7 @@ public abstract class Goal {
 
     @Override
     public String toString() {
-        String chaine =this.mode;
-        return chaine;
+        return this.mode;
     }
     //------------------------------GETTER-------------------------//
 

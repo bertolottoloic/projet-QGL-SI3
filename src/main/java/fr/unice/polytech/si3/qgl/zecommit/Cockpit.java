@@ -7,7 +7,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 public class Cockpit implements ICockpit {
 	InitGame initgame;
@@ -34,9 +33,8 @@ public class Cockpit implements ICockpit {
 		try {
 			NextRound nextRound = parserNext.parserNextRound(round);
 			captain.setNextRound(nextRound);
-			List<Action> actions = new ArrayList<Action>();
+			List<Action> actions = new ArrayList<>();
 			if(initgame.getGoal().getMode().equals("REGATTA")){
-				System.out.println(((Regatta)initgame.getGoal()).getCheckpoints());
 				captainMate.actions(((Regatta)initgame.getGoal()).getCheckpoints());
 				actions = captainMate.getActionList();
 			}

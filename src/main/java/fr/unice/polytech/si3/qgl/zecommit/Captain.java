@@ -20,7 +20,7 @@ public class Captain {
     public Captain(InitGame initGame){
         this.ship=initGame.getShip();
         this.regatta=(Regatta) initGame.getGoal();
-        this.sailorList=new ArrayList<Sailor>(initGame.getSailors());
+        this.sailorList=new ArrayList<>(initGame.getSailors());
     }
 
     //---------------------------GETTER-----------------------------------------

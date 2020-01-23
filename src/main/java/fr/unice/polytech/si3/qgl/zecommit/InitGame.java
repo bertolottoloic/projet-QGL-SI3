@@ -1,11 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,11 +32,10 @@ public class InitGame {
 
     @Override
     public String toString(){
-        String chaine = "goal : "+this.goal.toString()+
+        return  "goal : "+this.goal.toString()+
                 "\nship : "+this.ship.toString()+
                 "\nsailors : "+this.sailors.toString()+
                 "\nshipCount : "+this.shipCount;
-        return chaine;
     }
 
     //--------------------GETTER -------------------------//

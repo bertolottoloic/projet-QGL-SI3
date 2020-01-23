@@ -41,17 +41,16 @@ public class ParserInit {
                     JsonNode type = shape.path("type");
 
                     Position p = objectMapper.readValue(position.toString(), Position.class);
-                    switch (type.asText()) {
-                        case "circle":
-                            Circle c = objectMapper.readValue(shape.toString(), Circle.class);
-                            checkpoints.add(new Checkpoint(p, c));
-                            break;
-                        case "rectangle":
-                            Rectangle r = objectMapper.readValue(shape.toString(), Rectangle.class);
-                            checkpoints.add(new Checkpoint(p, r));
-                            break;
+                    if(type.asText().equals("circle")) {
+                        Circle c = objectMapper.readValue(shape.toString(), Circle.class);
+                        checkpoints.add(new Checkpoint(p, c));
+                    }
+                    else {
+                        Rectangle r = objectMapper.readValue(shape.toString(), Rectangle.class);
+                        checkpoints.add(new Checkpoint(p, r));
                     }
                 }
+
 
                 Regatta regatta = new Regatta(checkpoints);
                 newInitGame = new InitGame();

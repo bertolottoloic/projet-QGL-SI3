@@ -27,8 +27,7 @@ public class Position {
 
     @Override
     public String toString() {
-        String chaine = "{ " + this.x + " , " + this.y + " }";
-        return chaine;
+        return "{ " + this.x + " , " + this.y + " }";
     }
     //------------------------------GETTER-------------------------//
 
@@ -70,7 +69,7 @@ public class Position {
         return orientation;
     }
 
-    public double orientationGap(Checkpoint cp){
+    public double orientationGap(Position cp){
         if(orientation>0){
             //if(x>cp.getPosition().x) return this.orientation+Math.acos(a)
         }

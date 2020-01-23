@@ -38,10 +38,9 @@ public abstract class Entities {
 
     @Override
     public String toString() {
-        String chaine = "[ type : " + this.type +
+        return "[ type : " + this.type +
                 ", x : " + this.x +
                 ", y : " + this.y + " ]";
-        return chaine;
     }
     //------------------------------GETTER-------------------------//
 

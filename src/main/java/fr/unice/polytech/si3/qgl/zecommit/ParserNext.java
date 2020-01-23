@@ -89,7 +89,7 @@ public class ParserNext {
         // Création des visibleEntities
         try {
             Iterator<JsonNode> iterator = nodeShip.path("visibleEntities").iterator();
-            List<VisibleEntitie> visibleEntities = null;
+            List<VisibleEntitie> visibleEntities = new ArrayList<>();
             while (iterator.hasNext()) {
                 JsonNode current = iterator.next();
                 JsonNode typeVisibleEntities = current.path("type");

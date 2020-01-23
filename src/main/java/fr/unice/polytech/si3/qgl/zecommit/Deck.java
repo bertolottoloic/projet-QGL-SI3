@@ -19,9 +19,8 @@ public class Deck{
 
     @Override
     public String toString() {
-        String chaine = "width : "+this.width+
+        return  "width : "+this.width+
                 " | height : "+this.length;
-        return chaine;
     }
     //------------------------------GETTER-------------------------//
 

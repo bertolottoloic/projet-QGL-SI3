@@ -5,7 +5,6 @@ import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,7 +18,7 @@ public class CaptainMate {
 
     public CaptainMate(Captain captain){
         this.captain= captain;
-        this.actionList= new ArrayList<Action>();
+        this.actionList= new ArrayList<>();
     }
 
 
