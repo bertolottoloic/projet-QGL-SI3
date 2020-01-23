@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * Classe correspondant au vent
  * @author Nathan
  */
-public class Vent {
+public class Wind {
     private double orientation;
     private double strength;
 
     @JsonCreator
-    public Vent(double orientation, double strength) {
+    public Wind(double orientation, double strength) {
         this.orientation = orientation;
         this.strength = strength;
     }

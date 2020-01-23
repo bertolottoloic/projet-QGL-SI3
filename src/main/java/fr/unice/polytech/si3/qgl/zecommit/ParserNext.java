@@ -15,13 +15,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ParserNext {
-    public NextRound parserNextRound(String jsonString) throws JsonProcessingException {
+    public void parserNextRound(String jsonString, Game game)  throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         JsonNode rootNode = objectMapper.readTree(jsonString);
-
-        NextRound newNextRound = new NextRound();
 
         //Création du bateau
         JsonNode nodeShip = rootNode.path("ship");
@@ -84,7 +82,7 @@ public class ParserNext {
             //System.out.println("No shape : "+e.toString());
         }
 
-        newNextRound.setShip(ship);
+        game.setShip(ship);
 
         // Création des visibleEntities
         try {
@@ -96,12 +94,12 @@ public class ParserNext {
                 String textType = typeVisibleEntities.asText();
                 switch (textType) {
                     case "stream":
-                        Courant courant = objectMapper.readValue(current.toString(), Courant.class);
+                        Current courant = objectMapper.readValue(current.toString(), Current.class);
                         visibleEntities.add(courant);
                         break;
                     case "reef":
-                        Recif recif = objectMapper.readValue(current.toString(), Recif.class);
-                        visibleEntities.add(recif);
+                        Reef reef = objectMapper.readValue(current.toString(), Reef.class);
+                        visibleEntities.add(reef);
                         break;
                     case "ship":
                         OtherShip otherShip = objectMapper.readValue(current.toString(), OtherShip.class);
@@ -109,7 +107,7 @@ public class ParserNext {
                         break;
                 }
             }
-            newNextRound.setVisibleEntities(visibleEntities);
+            game.setVisibleEntities(visibleEntities);
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -119,16 +117,13 @@ public class ParserNext {
 
         JsonNode ventN = rootNode.path("wind");
         try {
-            Vent vent = objectMapper.readValue(ventN.toString(), Vent.class);
-            newNextRound.setWind(objectMapper.readValue(vent.toString(), Vent.class));
+            Wind wind = objectMapper.readValue(ventN.toString(), Wind.class);
+            game.setWind(objectMapper.readValue(wind.toString(), Wind.class));
 
         }
         catch (InvalidDefinitionException e){
             //System.out.println("No wind : "+e.toString());
         }
-
-
-        return newNextRound;
 
     }
 

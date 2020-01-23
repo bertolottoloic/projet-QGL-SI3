@@ -15,12 +15,12 @@ public class Captain {
     private Ship ship;
     private Regatta regatta;
     private List<Sailor> sailorList;
-    private NextRound nextRound;
+    private Game game;
 
-    public Captain(InitGame initGame){
-        this.ship=initGame.getShip();
-        this.regatta=(Regatta) initGame.getGoal();
-        this.sailorList=new ArrayList<>(initGame.getSailors());
+    public Captain(Game game){
+        this.ship=game.getShip();
+        this.regatta=(Regatta) game.getGoal();
+        this.sailorList=new ArrayList<>(game.getSailors());
     }
 
     //---------------------------GETTER-----------------------------------------
@@ -30,8 +30,8 @@ public class Captain {
         return sailorList;
     }
 
-    public NextRound getNextRound() {
-        return nextRound;
+    public Game getGame() {
+        return game;
     }
 
     public Regatta getRegatta() {
@@ -44,7 +44,7 @@ public class Captain {
     //-------------------------SETTER------------------------------
 
 
-    public void setNextRound(NextRound nextRound) {
-        this.nextRound = nextRound;
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

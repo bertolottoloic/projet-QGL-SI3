@@ -6,18 +6,24 @@ import fr.unice.polytech.si3.qgl.zecommit.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 /**
- * Classe correspondant aux récifs
+ * Classe modélisant les courants marins
  * @author Nathan
  */
-public class Recif extends VisibleEntitie {
+public class Current extends VisibleEntitie{
+
     @JsonProperty("position")
     private Position position;
+
     @JsonProperty("shape")
     private Shape shape;
 
+    @JsonProperty("strength")
+    private double strength;
+
     @JsonCreator
-    public Recif(@JsonProperty("position") Position position,@JsonProperty("shape") Shape shape) {
+    public Current(@JsonProperty("position") Position position, @JsonProperty("shape") Shape shape, @JsonProperty("strength") double strength) {
         super(position, shape);
+        this.strength = strength;
     }
 
     //------------------------------GETTER-------------------------//
@@ -28,6 +34,10 @@ public class Recif extends VisibleEntitie {
 
     public Shape getShape() {
         return shape;
+    }
+
+    public double getStrength() {
+        return strength;
     }
 
 
@@ -41,5 +51,8 @@ public class Recif extends VisibleEntitie {
     public void setShape(Shape shape) {
         this.shape = shape;
     }
-}
 
+    public void setStrength(double strength) {
+        this.strength = strength;
+    }
+}

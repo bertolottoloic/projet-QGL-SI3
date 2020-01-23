@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class ParserInitTest {
     private String jsonString;
@@ -120,20 +121,21 @@ class ParserInitTest {
     @Test
     void parserInitGameTest() throws JsonProcessingException {
         ParserInit parserInit = new ParserInit();
-        InitGame initGame = parserInit.parserInitGame(jsonString);
+        Game game = parserInit.parserInitGame(jsonString);
 
-        assertEquals("REGATTA", initGame.getGoal().getMode());
-        assertEquals(2, initGame.getSailors().size());
-        assertEquals(2,initGame.getShip().getEntities().size());
-        assertEquals(1, initGame.getShipCount());
-        assertEquals("Tom Pouce", initGame.getSailors().get(1).getName());
+        assertEquals("REGATTA", game.getGoal().getMode());
+        assertEquals(2, game.getSailors().size());
+        assertEquals(2,game.getShip().getEntities().size());
+        assertEquals(1, game.getShipCount());
+        assertEquals("Tom Pouce", game.getSailors().get(1).getName());
     }
 
     @Test
     void parserNextRound() throws JsonProcessingException {
+        Game gameMock=  mock(Game.class);
         ParserNext parserNext = new ParserNext();
-        NextRound nextRound = parserNext.parserNextRound(jsonString2);
-        assertEquals(nextRound.getShip().getPosition().getX(), 10.654);
+        parserNext.parserNextRound(jsonString2, gameMock);
+        assertEquals(gameMock.getShip().getPosition().getX(), 10.654);
     }
 
 }

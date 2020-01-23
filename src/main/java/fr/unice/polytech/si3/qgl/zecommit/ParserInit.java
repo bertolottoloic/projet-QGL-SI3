@@ -21,13 +21,13 @@ import java.util.List;
 public class ParserInit {
     public int nbSailors = 0;
 
-    public InitGame parserInitGame(String jsonString) throws JsonProcessingException {
+    public Game parserInitGame(String jsonString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(jsonString);
 
         JsonNode goalMode = rootNode.path("goal").path("mode");
         String mode = goalMode.asText();
-        InitGame newInitGame;
+        Game game;
 
         switch (mode) {
             case "REGATTA":
@@ -53,14 +53,14 @@ public class ParserInit {
 
 
                 Regatta regatta = new Regatta(checkpoints);
-                newInitGame = new InitGame();
-                newInitGame.setGoal(regatta);
+                game = new Game();
+                game.setGoal(regatta);
                 break;
 
             case "BATTLE":
                 Battle battle = new Battle();
-                newInitGame = new InitGame();
-                newInitGame.setGoal(battle);
+                game = new Game();
+                game.setGoal(battle);
                 break;
 
             default:
@@ -125,7 +125,7 @@ public class ParserInit {
         }
 
 
-        newInitGame.setShip(ship);
+        game.setShip(ship);
 
 
         //Création des marins
@@ -137,12 +137,12 @@ public class ParserInit {
             JsonNode current = sailorsIterator.next();
             sailorsList.add(objectMapper.readValue(current.toString(), Sailor.class));
         }
-        newInitGame.setSailors(sailorsList);
+        game.setSailors(sailorsList);
 
 
         JsonNode shipCountNode = rootNode.path("shipCount");
-        newInitGame.setShipCount(objectMapper.readValue(shipCountNode.toString(), int.class));
-        return newInitGame;
+        game.setShipCount(objectMapper.readValue(shipCountNode.toString(), int.class));
+        return game;
     }
 }
     
