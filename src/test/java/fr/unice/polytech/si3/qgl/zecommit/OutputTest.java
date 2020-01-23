@@ -10,7 +10,7 @@ import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import org.junit.jupiter.api.Test;
 
 
-class SortieTest {
+class OutputTest {
     Output s;
     ArrayList<Action> actions;
 
