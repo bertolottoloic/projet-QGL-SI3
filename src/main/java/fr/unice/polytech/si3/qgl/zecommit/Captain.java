@@ -1,32 +1,50 @@
 package fr.unice.polytech.si3.qgl.zecommit;
-
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Clement P
+ *
+ *Classe qui definit le capitaine
+ * Le capitaine se charge de la decision.
+ */
+
 public class Captain {
+    private Ship ship;
+    private Regatta regatta;
+    private List<Sailor> sailorList;
     private NextRound nextRound;
-    private int nbSailors;
 
-    public Captain(NextRound nextRound, int nbSailors){
+    public Captain(InitGame initGame){
+        this.ship=initGame.getShip();
+        this.regatta=(Regatta) initGame.getGoal();
+        this.sailorList=new ArrayList<Sailor>(initGame.getSailors());
+    }
+
+    //---------------------------GETTER-----------------------------------------
+
+
+    public List<Sailor> getSailorList() {
+        return sailorList;
+    }
+
+    public NextRound getNextRound() {
+        return nextRound;
+    }
+
+    public Regatta getRegatta() {
+        return regatta;
+    }
+
+    public Ship getShip() {
+        return ship;
+    }
+    //-------------------------SETTER------------------------------
+
+
+    public void setNextRound(NextRound nextRound) {
         this.nextRound = nextRound;
-        this.nbSailors = nbSailors;
-
     }
-
-    public List<Action> actions(List<Checkpoint> checkpoints ) {
-        List<Action> actions = new ArrayList<Action>();
-        if(!nextRound.getShip().estDedans(checkpoints.get(0))) {//TODO plusieurs checkpoints
-            //TODO : cas nb marin impair
-            for (int i = 0; i < nbSailors; i++) {
-                //TODO : vérifier le nombre de rames présentes
-                actions.add(i, new Oar(i));
-            }
-        }
-        return actions;
-    }
-
 }

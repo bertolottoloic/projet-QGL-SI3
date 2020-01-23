@@ -19,6 +19,14 @@ public class Checkpoint {
         this.shape = shape;
     }
 
+    @Override
+    public String toString() {
+        return "Checkpoint{" +
+                "position=" + position +
+                ", shape=" + shape +
+                '}';
+    }
+
     //------------------------------GETTER-------------------------//
 
     public Position getPosition() {
