@@ -42,6 +42,13 @@ public class Game {
         return wind;
     }
 
+
+    public boolean isRegatta(){
+        if(goal.getMode().equals("REGATTA"))
+            return true;
+        return false;
+    }
+
     //------------------------SETTER-----------------------------
 
     public void setGoal(Goal goal) {

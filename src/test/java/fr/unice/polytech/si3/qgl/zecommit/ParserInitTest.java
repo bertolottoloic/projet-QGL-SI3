@@ -132,10 +132,10 @@ class ParserInitTest {
 
     @Test
     void parserNextRound() throws JsonProcessingException {
-        Game gameMock=  mock(Game.class);
+        Game game =  new Game();
         ParserNext parserNext = new ParserNext();
-        parserNext.parserNextRound(jsonString2, gameMock);
-        assertEquals(gameMock.getShip().getPosition().getX(), 10.654);
+        parserNext.parserNextRound(jsonString2, game);
+        assertEquals(game.getShip().getPosition().getX(), 10.654);
     }
 
 }

@@ -12,8 +12,10 @@ public class Cockpit implements ICockpit {
 	Game game;
 	CaptainMate captainMate;
 	Captain captain;
+	ArrayList<String> logs;
 
 	public void initGame(String json) {
+		logs = new ArrayList<>();
 		ParserInit parserInit = new ParserInit();
 		try {
 			this.game=parserInit.parserInitGame(json);
@@ -34,7 +36,7 @@ public class Cockpit implements ICockpit {
 			parserNext.parserNextRound(round, game);
 			captain.setGame(game);
 			List<Action> actions = new ArrayList<>();
-			if(game.getGoal().getMode().equals("REGATTA")){
+			if(game.isRegatta()){
 				captainMate.actions(((Regatta)game.getGoal()).getCheckpoints());
 				actions = captainMate.getActionList();
 			}
@@ -51,6 +53,6 @@ public class Cockpit implements ICockpit {
 
 	@Override
 	public List<String> getLogs() {
-		return new ArrayList<>();
+		return logs;
 	}
 }
