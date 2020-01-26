@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
@@ -10,6 +11,7 @@ public class Game {
     private Goal goal;
     private Ship ship;
     private List<Sailor> sailors;
+    private List<Entity> entityList;
     private int shipCount;
     private Wind wind;
     private List<VisibleEntitie> visibleEntities;
@@ -34,6 +36,10 @@ public class Game {
         return sailors;
     }
 
+    public List<Entity> getEntityList() {
+        return entityList;
+    }
+
     public List<VisibleEntitie> getVisibleEntities() {
         return visibleEntities;
     }
@@ -50,6 +56,11 @@ public class Game {
     }
 
     //------------------------SETTER-----------------------------
+
+
+    public void setEntityList(List<Entity> entityList) {
+        this.entityList = entityList;
+    }
 
     public void setGoal(Goal goal) {
         this.goal = goal;

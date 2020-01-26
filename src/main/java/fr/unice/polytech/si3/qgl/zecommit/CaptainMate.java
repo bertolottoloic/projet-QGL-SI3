@@ -1,7 +1,10 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
+import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 import java.util.ArrayList;
@@ -14,30 +17,43 @@ import java.util.List;
  */
 public class CaptainMate {
     private List<Action> actionList;
-    private Captain captain;
 
-    public CaptainMate(Captain captain){
-        this.captain= captain;
+    public CaptainMate(){
         this.actionList= new ArrayList<>();
     }
 
 
-    public void actions(List<Checkpoint> checkpoints ) {
-        this.actionList.removeAll(actionList);
-        if(!captain.getGame().getShip().estDedans(checkpoints.get(0))) {//TODO plusieurs checkpoints
-            //TODO : cas nb marin impair
-            for (int i = 0; i < captain.getSailorList().size(); i++) {
-                //TODO : vérifier le nombre de rames présentes
-                actionList.add(i, new ToOar(i));
-            }
+
+    /**
+     * Déplace le sailor de la distance demandé.
+     * Si la distance dépasse 5 l'action est annulée, ceci est prit en charge dans le constructeur de Moving
+     * @param xdistance
+     * @param ydistance
+     */
+    public void moveSailor(Sailor sailor, int xdistance, int ydistance) {
+        Moving action = new Moving(sailor.getId(), xdistance, ydistance);
+        sailor.setX(sailor.getX() + action.getXDistance());
+        sailor.setY(sailor.getY() + action.getYDistance());
+        if(action.getXDistance()!=0 && action.getYDistance()!=0){
+            actionList.add(action);
+        }
+    }
+
+    /**
+     * Fait ramer le marin en utilisant l'entité rame.
+     * Si la position du marin est la meme que celle de la rame
+     * @param oar
+     * @param sailor
+     */
+    public void toOar(Sailor sailor,Oar oar){
+        if(oar.getX()==sailor.getX() && oar.getY()==sailor.getY() && (!oar.isUsed())){
+            ToOar action = new ToOar(sailor.getId());
+            oar.setUsed(true);
+            actionList.add(action);
         }
     }
 
     //--------------------------------GETTER-------------------------------
-
-    public Captain getCaptain() {
-        return captain;
-    }
 
     public List<Action> getActionList() {
         return actionList;

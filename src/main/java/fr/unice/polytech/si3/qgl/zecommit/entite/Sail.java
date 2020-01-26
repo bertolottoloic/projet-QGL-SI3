@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Classe correspondant à la voile du bateau
  * @author Nathan
  */
-public class Sail extends Entities {
+public class Sail extends Entity {
 
     private boolean openned;
 

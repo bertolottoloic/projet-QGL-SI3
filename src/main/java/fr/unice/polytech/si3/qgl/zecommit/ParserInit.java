@@ -77,7 +77,7 @@ public class ParserInit {
         JsonNode deckShipN = nodeShip.path("deck");
 
         Iterator<JsonNode> iteratorShip = nodeShip.path("entities").iterator();
-        List<Entities> listEntitie = new ArrayList<>();
+        List<Entity> listEntitie = new ArrayList<>();
         while (iteratorShip.hasNext()) {
             JsonNode current = iteratorShip.next();
             JsonNode type = current.path("type");
@@ -101,6 +101,7 @@ public class ParserInit {
                     break;
             }
         }
+        game.setEntityList(listEntitie);
         Position positionShip = objectMapper.readValue(positionShipN.toString(), Position.class);
         int lifeShip = objectMapper.readValue(lifeShipN.toString(), int.class);
         String nameShip = objectMapper.readValue(nameShipN.toString(), String.class);

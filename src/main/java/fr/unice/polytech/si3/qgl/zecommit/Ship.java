@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.annotation.*;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entities;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
@@ -17,11 +17,11 @@ public class Ship {
     @JsonProperty("position")private Position position;
     @JsonProperty("name")private String name;
     @JsonProperty("deck")private Deck deck;
-    @JsonProperty("entities")private List<Entities> entities;
+    @JsonProperty("entities")private List<Entity> entities;
     @JsonProperty("shape")private Shape shape;
 
     @JsonCreator
-    Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entities> entities, @JsonProperty("shape")Shape shape){
+    Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
         this.type = "ship";
         this.life = life;
         this.position = position;
@@ -99,7 +99,7 @@ public class Ship {
         return deck;
     }
     @JsonGetter("entities")
-    public List<Entities> getEntities() {
+    public List<Entity> getEntities() {
         return entities;
     }
     @JsonGetter("shape")
@@ -131,7 +131,7 @@ public class Ship {
     }
 
     @JsonSetter("entities")
-    public void setEntities(List<Entities> entities) {
+    public void setEntities(List<Entity> entities) {
         this.entities = entities;
     }
     @JsonSetter("shape")

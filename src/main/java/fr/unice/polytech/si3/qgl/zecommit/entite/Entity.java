@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 })
 
-public abstract class Entities {
+public abstract class Entity {
     @JsonProperty("type")
     private String type;
     @JsonProperty("x")
@@ -30,7 +30,7 @@ public abstract class Entities {
     private int y;
 
     @JsonCreator
-    public Entities(@JsonProperty("type") String type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
+    public Entity(@JsonProperty("type") String type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
         this.type = type;
         this.x = x;
         this.y = y;

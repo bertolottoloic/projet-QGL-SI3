@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Classe correspondant à la vigie du bateau
  * @author Nathan
  */
-public class Watch extends Entities {
+public class Watch extends Entity {
 
     @JsonCreator
     public Watch(@JsonProperty("x")int x, @JsonProperty("y")int y){

@@ -19,8 +19,8 @@ public class Cockpit implements ICockpit {
 		ParserInit parserInit = new ParserInit();
 		try {
 			this.game=parserInit.parserInitGame(json);
-			this.captain= new Captain(game);
-			this.captainMate= new CaptainMate(captain);
+			this.captainMate= new CaptainMate();
+			this.captain= new Captain(game,captainMate);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -37,7 +37,7 @@ public class Cockpit implements ICockpit {
 			captain.setGame(game);
 			List<Action> actions = new ArrayList<>();
 			if(game.isRegatta()){
-				captainMate.actions(((Regatta)game.getGoal()).getCheckpoints());
+				captain.actions();
 				actions = captainMate.getActionList();
 			}
 			Output output = new Output();

@@ -23,10 +23,7 @@ public class Sailor {
         this.y = y;
         this.name = name;
     }
-
-    public void ramer(){
-
-    }
+    
 
     @Override
     public String toString(){
@@ -37,17 +34,7 @@ public class Sailor {
     }
 
 
-    /**
-     * Déplace le sailor de la distance demandé.
-     * Si la distance dépasse 5 l'action est annulée, ceci est prit en charge dans le constructeur de Moving
-     * @param xdistance
-     * @param ydistance
-     */
-    public void mouvSailor(int xdistance, int ydistance) {
-        Moving action = new Moving(this.getId(), xdistance, ydistance);
-        this.setX(this.x + action.getXDistance());
-        this.setY(this.y + action.getYDistance());
-    }
+
 
     //--------------------GETTER -------------------------//
 

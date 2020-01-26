@@ -9,10 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 
-public class Oar extends Entities {
-
+public class Oar extends Entity {
+    private boolean used;
     @JsonCreator
     public Oar(@JsonProperty("x")int x, @JsonProperty("y")int y){
         super("oar",x,y);
+        this.used=false;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 }
