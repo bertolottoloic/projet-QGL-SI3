@@ -1,7 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
+import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

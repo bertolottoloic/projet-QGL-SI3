@@ -1,8 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.zecommit.Deck;
-import fr.unice.polytech.si3.qgl.zecommit.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 

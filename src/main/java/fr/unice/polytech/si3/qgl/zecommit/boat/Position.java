@@ -3,12 +3,10 @@
  * @auteur Clement P
  */
 
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 public class Position {
     @JsonProperty("x")

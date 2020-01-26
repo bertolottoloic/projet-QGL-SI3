@@ -1,12 +1,17 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import fr.unice.polytech.si3.qgl.zecommit.*;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
-import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
+import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
+import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
+import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
+import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
 
 public class Cockpit implements ICockpit {
 	Game game;
@@ -34,7 +39,7 @@ public class Cockpit implements ICockpit {
 			return "[ ]";
 		try {
 			parserNext.parserNextRound(round, game);
-			captain.setGame(game);
+			captain.refreshGame(game);
 			List<Action> actions = new ArrayList<>();
 			if(game.isRegatta()){
 				captain.actions();

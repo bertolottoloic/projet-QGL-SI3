@@ -1,4 +1,7 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.engine;
+
+import fr.unice.polytech.si3.qgl.zecommit.boat.Cockpit;
+
 /**
  * Classe simulant l'appel du projet
  * @auteur Clement P

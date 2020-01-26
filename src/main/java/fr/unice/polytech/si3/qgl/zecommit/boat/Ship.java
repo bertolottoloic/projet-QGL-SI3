@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
@@ -21,7 +21,7 @@ public class Ship {
     @JsonProperty("shape")private Shape shape;
 
     @JsonCreator
-    Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
+    public Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
         this.type = "ship";
         this.life = life;
         this.position = position;
@@ -37,7 +37,7 @@ public class Ship {
      * @param checkpoint
      * @return boolean
      */
-    public boolean estDedans(Checkpoint checkpoint){
+    public boolean isInCheckpoint(Checkpoint checkpoint){
         //cas avec un cercle
 
         if(checkpoint.getShape().getType().equals("circle")){

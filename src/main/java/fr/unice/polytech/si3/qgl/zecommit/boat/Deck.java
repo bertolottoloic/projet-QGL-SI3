@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +11,7 @@ public class Deck{
     @JsonProperty("length")private int length;
 
     @JsonCreator
-    Deck(@JsonProperty("width")int width,@JsonProperty("length") int length){
+    public Deck(@JsonProperty("width")int width,@JsonProperty("length") int length){
         this.width = width;
         this.length = length;
     }

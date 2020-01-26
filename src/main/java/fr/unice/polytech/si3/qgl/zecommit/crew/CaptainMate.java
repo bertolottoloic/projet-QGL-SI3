@@ -1,11 +1,9 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 import java.util.ArrayList;
 import java.util.List;

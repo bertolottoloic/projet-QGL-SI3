@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.parser;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,16 +12,16 @@ import fr.unice.polytech.si3.qgl.zecommit.action.*;
  * @author Loic Bertolotto
  */
 
-class Output{
+public class Output{
     ObjectMapper oM;
     List<Action> actions;
 
 
-    Output(){
+    public Output(){
         oM = new ObjectMapper();
     }
 
-    String afficheRound(List<Action> actions){
+    public String afficheRound(List<Action> actions){
         try{
             return oM.writeValueAsString(actions);
         } catch (IOException e){
