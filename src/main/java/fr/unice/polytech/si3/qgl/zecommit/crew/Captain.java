@@ -54,23 +54,7 @@ public class Captain {
             }
         }
     }
-
-    /**
-     * BROUILLON Clement
-     * @param checkpoint
-     */
-    public void direction(Checkpoint checkpoint){
-        String direction ="";
-        double differenceX=ship.getPosition().getX()-checkpoint.getPosition().getX();
-        double differenceY=ship.getPosition().getY()-checkpoint.getPosition().getY();
-
-        if(differenceX<((Circle)checkpoint.getShape()).getRadius()){
-            direction="";
-        }
-        else if(differenceY<((Circle)checkpoint.getShape()).getRadius()){
-            direction="";
-        }
-    }
+    
 
     /**
      * Tri les differentes entites donnees et les ajoute a la liste correspondante
