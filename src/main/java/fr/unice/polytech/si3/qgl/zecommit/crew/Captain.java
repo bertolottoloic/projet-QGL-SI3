@@ -43,7 +43,8 @@ public class Captain {
                 &&((Regatta)game.getGoal()).getCheckpoints().size()>1){
             ((Regatta)game.getGoal()).getCheckpoints().remove(0);
         }
-        if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {//TODO plusieurs checkpoints
+
+        if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {
             for(int i=0; i<sailorList.size(); i++){
                 for(int j=0;j<oarList.size();j++){
                     if(sailorList.get(i).getX()==oarList.get(j).getX()&&sailorList.get(i).getY()==oarList.get(j).getY()) {

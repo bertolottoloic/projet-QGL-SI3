@@ -12,11 +12,9 @@ public class Moving extends Action{
             this.ydistance = ydistance;
         }
         else {
-            this.xdistance = 0;
-            this.ydistance = 0;
+            this.xdistance = Math.max(xdistance, 5);
+            this.ydistance = Math.max(ydistance, 5);
         }
-        //TODO ajouter condition de déplacement max : pas plus de 5 cases
-        //DONE
     }
 
 

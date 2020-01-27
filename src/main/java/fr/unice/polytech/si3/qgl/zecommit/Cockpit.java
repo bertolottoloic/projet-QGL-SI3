@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.boat;
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import java.util.ArrayList;
 import java.util.List;
