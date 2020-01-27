@@ -18,7 +18,7 @@ class OutputTest {
     @Test
     void afficheSortieTest() {
         String resultString = "[{\"sailorId\":1,\"type\":\"OAR\"},"+
-        "{\"sailorId\":2,\"type\":\"MOVING\",\"xdistance\":0,\"ydistance\":0},"+
+        "{\"sailorId\":2,\"type\":\"MOVING\",\"xdistance\":3,\"ydistance\":2},"+
         "{\"sailorId\":3,\"type\":\"LIFT_SAIL\"},"+
         "{\"sailorId\":4,\"type\":\"LOWER_SAIL\"},"+
         "{\"sailorId\":5,\"type\":\"TURN\",\"rotation\":3.5},"+

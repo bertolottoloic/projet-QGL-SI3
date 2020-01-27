@@ -29,8 +29,8 @@ public class CaptainMateTest {
     @Test
     void moveSailorNotCorrecteTest() {
         captainMate.moveSailor(sailor1,3,3);
-        assertEquals(0, sailor1.getX());
-        assertEquals(0, sailor1.getY());
+        assertEquals(3, sailor1.getX());
+        assertEquals(2, sailor1.getY());
     }
 
     @Test

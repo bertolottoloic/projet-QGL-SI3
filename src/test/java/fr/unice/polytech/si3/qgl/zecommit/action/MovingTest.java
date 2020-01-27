@@ -34,7 +34,7 @@ class MovingTest {
     @Test
     void mouvAvecDistanceNonCorrecteTest() {
         Moving moving = new Moving(1, 5,3);
-        assertEquals(0, moving.getXDistance());
+        assertEquals(5, moving.getXDistance());
         assertEquals(0, moving.getYDistance());
     }
 

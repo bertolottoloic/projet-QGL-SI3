@@ -12,8 +12,16 @@ public class Moving extends Action{
             this.ydistance = ydistance;
         }
         else {
-            this.xdistance = Math.max(xdistance, 5);
-            this.ydistance = Math.max(ydistance, 5);
+            if (xdistance <= 5) {
+                this.xdistance = xdistance;
+                this.ydistance = Math.min(5 - this.xdistance, ydistance);
+            }
+            else {
+                this.xdistance = 5;
+                this.ydistance = 0;
+
+            }
+
         }
     }
 
