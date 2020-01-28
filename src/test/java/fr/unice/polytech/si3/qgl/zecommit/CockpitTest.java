@@ -35,8 +35,8 @@ class CockpitTest {
                 "        \"type\": \"oar\"\n "+ 
                 "      },\n "+ 
                 "      {\n "+ 
-                "        \"x\": 1,\n "+ 
-                "        \"y\": 0,\n "+ 
+                "        \"x\": 0,\n "+
+                "        \"y\": 1,\n "+
                 "        \"type\": \"oar\"\n "+ 
                 "      }\n "+ 
                 "    ]\n "+ 
@@ -101,8 +101,8 @@ class CockpitTest {
                 "      \"name\": \"Edward Teach\"\n" +
                 "    },\n" +
                 "    {\n" +
-                "      \"x\": 1,\n" +
-                "      \"y\": 0,\n" +
+                "      \"x\": 0,\n" +
+                "      \"y\": 1,\n" +
                 "      \"id\": 1,\n" +
                 "      \"name\": \"Tom Pouce\"\n" +
                 "    }\n" +
@@ -111,7 +111,6 @@ class CockpitTest {
         this.cockpit = new Cockpit();
         this.cockpit.initGame(jsonInit);
     }
-    @Disabled
     @Test
     void nextRoundTest() {
         assertEquals("[{\"sailorId\":0,\"type\":\"OAR\"},{\"sailorId\":1,\"type\":\"OAR\"}]", this.cockpit.nextRound(jsonNR));
