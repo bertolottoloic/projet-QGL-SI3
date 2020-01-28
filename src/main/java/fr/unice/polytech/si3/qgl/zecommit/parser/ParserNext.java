@@ -58,6 +58,7 @@ public class ParserNext {
                     break;
             }
         }
+        game.setEntityList(listEntitie);
         Position positionShip = objectMapper.readValue(positionShipN.toString(), Position.class);
         int lifeShip = objectMapper.readValue(lifeShipN.toString(), int.class);
         String nameShip = objectMapper.readValue(nameShipN.toString(), String.class);

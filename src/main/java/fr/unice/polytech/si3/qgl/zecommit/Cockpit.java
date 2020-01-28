@@ -35,8 +35,9 @@ public class Cockpit implements ICockpit {
 		String res;
 		ParserNext parserNext = new ParserNext();
 
-		if(round.equals("{}"))
+		if(round.equals("{}")) {
 			return "[ ]";
+		}
 		try {
 			parserNext.parserNextRound(round, game);
 			captain.refreshGame(game);

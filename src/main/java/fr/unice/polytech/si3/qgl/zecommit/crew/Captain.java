@@ -47,19 +47,26 @@ public class Captain {
 
         if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {
             Road road = new Road(ship.getPosition(),((Regatta)game.getGoal()).getCheckpoints().get(0).getPosition());
-            decisionOrientation(road.orientationToGoal(),road.DistanceToGoal());
+            decisionOrientation(road);
         }
     }
 
 
-    public void decisionOrientation(double orientationGoal,double distanceGoal){
-        if(orientationGoal==0){
-            //gotoutdroit
+    public void decisionOrientation(Road road){
+        //avance tout droit
+        if(road.getOrientation()==0||road.DistanceYToGoal()<((Circle)((Regatta)game.getGoal()).getCheckpoints().get(0).getShape()).getRadius()){
+            for(int i=0; i<sailorList.size(); i++){
+                for(int j=0;j<oarList.size();j++){
+                    if(sailorList.get(i).getX()==oarList.get(j).getX()&&sailorList.get(i).getY()==oarList.get(j).getY()) {
+                        captainMate.toOar(sailorList.get(i), oarList.get(j));
+                    }
+                }
+            }
         }
-        else if(orientationGoal<0){
+        else if(road.getOrientation()<0){
             //tourner jusqu'a -pi/2
         }
-        else if(orientationGoal>0){
+        else if(road.getOrientation()>0){
             //tourner jusqu'a pi/2
         }
 
@@ -82,6 +89,7 @@ public class Captain {
      * @param game
      */
     public void refreshGame(Game game){
+        this.oarList.removeAll(oarList);
         this.game=game;
         ship=game.getShip();
         sortEntities(game.getEntityList());

@@ -1,6 +1,14 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+
+import java.util.ArrayList;
 
 /**
  * Classe simulant l'appel du projet
@@ -8,7 +16,10 @@ import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
  */
 public class Engine {
 
-    public static void main(String [] args){
+    public static void main(String [] args) throws JsonProcessingException {
+
+
+
         String json="{\n" +
                 "  \"goal\": {\n" +
                 "    \"mode\": \"REGATTA\",\n" +
@@ -47,8 +58,8 @@ public class Engine {
                 "        \"type\": \"oar\"\n" +
                 "      },\n" +
                 "      {\n" +
-                "        \"x\": 1,\n" +
-                "        \"y\": 0,\n" +
+                "        \"x\": 0,\n" +
+                "        \"y\": 1,\n" +
                 "        \"type\": \"oar\"\n" +
                 "      }\n" +
                 "    ],\n" +
@@ -67,22 +78,29 @@ public class Engine {
                 "      \"name\": \"Edward Teach\"\n" +
                 "    },\n" +
                 "    {\n" +
-                "      \"x\": 1,\n" +
-                "      \"y\": 0,\n" +
+                "      \"x\": 0,\n" +
+                "      \"y\": 1,\n" +
                 "      \"id\": 1,\n" +
                 "      \"name\": \"Tom Pouce\"\n" +
                 "    }\n" +
                 "  ]\n" +
                 "}";
 
+        Cockpit cockpit = new Cockpit();
+        cockpit.initGame(json);
+
+        int step=0;
+        double x=0;
+        double y =0;
+        double orientation =0;
         String json2 = "{\n" +
                 "  \"ship\": {\n" +
                 "    \"type\": \"ship\",\n" +
                 "    \"life\": 100,\n" +
                 "    \"position\": {\n" +
-                "      \"x\": 10.654,\n" +
-                "      \"y\": 3,\n" +
-                "      \"orientation\": 2.05\n" +
+                "      \"x\": "+x+",\n" +
+                "      \"y\": "+y+",\n" +
+                "      \"orientation\": "+orientation+"\n" +
                 "    },\n" +
                 "    \"name\": \"Les copaings d'abord!\",\n" +
                 "    \"deck\": {\n" +
@@ -96,8 +114,8 @@ public class Engine {
                 "        \"type\": \"oar\"\n" +
                 "      },\n" +
                 "      {\n" +
-                "        \"x\": 1,\n" +
-                "        \"y\": 0,\n" +
+                "        \"x\": 0,\n" +
+                "        \"y\": 1,\n" +
                 "        \"type\": \"oar\"\n" +
                 "      }\n" +
                 "    ]\n" +
@@ -105,15 +123,63 @@ public class Engine {
                 "  \"visibleEntities\": []\n" +
                 "}";
 
-            Cockpit cockpit = new Cockpit();
-            cockpit.initGame(json);
-            //System.out.println(cockpit.initgame);
 
-            System.out.println(cockpit.nextRound(json2));
-            cockpit.nextRound(json2);
-            System.out.println(cockpit.getLogs());
+            while(!cockpit.nextRound(json2).equals("[]")) {
 
-        
+                ArrayList<Oar> oarArrayList= new ArrayList<>();
+                oarArrayList.add(new Oar(0,0));
+                oarArrayList.add(new Oar(0,1));
+                ArrayList<Sailor> sailorArrayList= new ArrayList<>();
+                sailorArrayList.add(new Sailor(0,0,0,"Edward Teach"));
+                sailorArrayList.add(new Sailor(1,0,1,"Tom Pouce"));
+                ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
+                checkpointArrayList.add(new Checkpoint(new Position(1000,0,0),new Circle(50)));
 
+                InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
+
+                //TODO Multicheckoints
+
+                String output = cockpit.nextRound(json2);
+                //System.out.println(cockpit.getLogs());
+
+                EngineNextRound engineNextRound = new EngineNextRound(output, x, y,orientation, infoEngine);
+                x = engineNextRound.getX();
+                y = engineNextRound.getY();
+                orientation = engineNextRound.getOrientation();
+                System.out.println("ROUND : "+step);
+                System.out.println(x+" , "+y);
+                step++;
+
+
+                json2 = "{\n" +
+                        "  \"ship\": {\n" +
+                        "    \"type\": \"ship\",\n" +
+                        "    \"life\": 100,\n" +
+                        "    \"position\": {\n" +
+                        "      \"x\": "+x+",\n" +
+                        "      \"y\": "+y+",\n" +
+                        "      \"orientation\": "+orientation+"\n" +
+                        "    },\n" +
+                        "    \"name\": \"Les copaings d'abord!\",\n" +
+                        "    \"deck\": {\n" +
+                        "      \"width\": 2,\n" +
+                        "      \"length\": 1\n" +
+                        "    },\n" +
+                        "    \"entities\": [\n" +
+                        "      {\n" +
+                        "        \"x\": 0,\n" +
+                        "        \"y\": 0,\n" +
+                        "        \"type\": \"oar\"\n" +
+                        "      },\n" +
+                        "      {\n" +
+                        "        \"x\": 1,\n" +
+                        "        \"y\": 0,\n" +
+                        "        \"type\": \"oar\"\n" +
+                        "      }\n" +
+                        "    ]\n" +
+                        "  },\n" +
+                        "  \"visibleEntities\": []\n" +
+                        "}";
+            }
     }
 }

@@ -41,7 +41,7 @@ public class Ship {
         //cas avec un cercle
 
         //Si la distance centre Checkpoint - bateau est inférieure au rayon du checkpoint
-        if (calculDistance(position, checkpoint.getPosition()) < ((Circle) checkpoint.getShape()).getRadius() - 3) {
+        if (calculDistance(position, checkpoint.getPosition()) < ((Circle) checkpoint.getShape()).getRadius() ) {
             return true;
         }
         return false;
