@@ -7,10 +7,10 @@ public class Road {
 
     private Position startPosition;
     private Position finishPosition;
-    private double orientation;
+    private double shipOrientation;
 
-    public Road(double orientation,Position start, Position finish){
-        this.orientation=orientation;
+    public Road(Position start, Position finish){
+        this.shipOrientation=start.getOrientation();
         this.startPosition=start;
         this.finishPosition=finish;
     }
@@ -27,13 +27,13 @@ public class Road {
     }
 
     public double orientationToGoal(){
-        return Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-orientation;
+        return Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation;
     }
 
 
     //------------------------GETTER----------------------------
     public double getOrientation() {
-        return orientation;
+        return shipOrientation;
     }
 
     public Position getFinishPosition() {

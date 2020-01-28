@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
+import fr.unice.polytech.si3.qgl.zecommit.Road;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
@@ -45,16 +46,24 @@ public class Captain {
         }
 
         if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {
-            for(int i=0; i<sailorList.size(); i++){
-                for(int j=0;j<oarList.size();j++){
-                    if(sailorList.get(i).getX()==oarList.get(j).getX()&&sailorList.get(i).getY()==oarList.get(j).getY()) {
-                        captainMate.toOar(sailorList.get(i), oarList.get(j));
-                    }
-                }
-            }
+            Road road = new Road(ship.getPosition(),((Regatta)game.getGoal()).getCheckpoints().get(0).getPosition());
+            decisionOrientation(road.orientationToGoal(),road.DistanceToGoal());
         }
     }
-    
+
+
+    public void decisionOrientation(double orientationGoal,double distanceGoal){
+        if(orientationGoal==0){
+            //gotoutdroit
+        }
+        else if(orientationGoal<0){
+            //tourner jusqu'a -pi/2
+        }
+        else if(orientationGoal>0){
+            //tourner jusqu'a pi/2
+        }
+
+    }
 
     /**
      * Tri les differentes entites donnees et les ajoute a la liste correspondante
