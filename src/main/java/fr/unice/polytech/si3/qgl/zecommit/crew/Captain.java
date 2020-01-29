@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.Road;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
@@ -25,14 +26,16 @@ public class Captain {
     private List<Oar> oarList;
     private CaptainMate captainMate;
     private Game game;
+    private Logs logs;
 
-    public Captain(Game game, CaptainMate CM){
+    public Captain(Game game, CaptainMate CM, Logs logs){
         this.ship=game.getShip();
         this.regatta=(Regatta) game.getGoal();
         this.sailorList=new ArrayList<>(game.getSailors());
         this.captainMate= CM;
         this.oarList= new ArrayList<>();
         sortEntities(game.getEntityList());
+        this.logs=logs;
     }
 
     /**
@@ -43,6 +46,8 @@ public class Captain {
         if(game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))
                 &&((Regatta)game.getGoal()).getCheckpoints().size()>1){
             ((Regatta)game.getGoal()).getCheckpoints().remove(0);
+            logs.add("Checkpoint done");
+
         }
 
         if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {

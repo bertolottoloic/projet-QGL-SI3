@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
@@ -146,8 +147,7 @@ public class Engine {
                 x = engineNextRound.getX();
                 y = engineNextRound.getY();
                 orientation = engineNextRound.getOrientation();
-                System.out.println("ROUND : "+step);
-                System.out.println(x+" , "+y);
+                cockpit.getLogs().add("\nROUND "+step + " :"+ "("+x+","+y+")");
                 step++;
 
 
@@ -181,5 +181,6 @@ public class Engine {
                         "  \"visibleEntities\": []\n" +
                         "}";
             }
+            System.out.println(cockpit.getLogs());
     }
 }

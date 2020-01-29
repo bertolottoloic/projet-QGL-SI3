@@ -16,8 +16,9 @@ public class CaptainMateTest {
 
     @BeforeEach
     void setUp() {
+        Logs logs = new Logs();
         sailor1 = new Sailor(1, 0, 0, "sailor1");
-        captainMate = new CaptainMate();
+        captainMate = new CaptainMate(logs);
     }
 
     @Test
