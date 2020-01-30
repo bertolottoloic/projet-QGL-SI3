@@ -55,8 +55,7 @@ public class CaptainMate {
             oar.setUsed(true);
             actionList.add(action);
             logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
-
-
+            
         }
     }
 
