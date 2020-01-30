@@ -61,7 +61,6 @@ public class Cockpit implements ICockpit {
 
 	@Override
 	public List<String> getLogs() {
-		System.out.println(logs.sortie().size());
 		return logs.sortie();
 	}
 }
