@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 /**
@@ -26,6 +27,13 @@ public class Checkpoint {
                 "position=" + position +
                 ", shape=" + shape +
                 '}';
+    }
+
+    public boolean isCircle() {
+        if (this.getShape().getType().equals("circle")) {
+            return true;
+        }
+        return false;
     }
 
     //------------------------------GETTER-------------------------//

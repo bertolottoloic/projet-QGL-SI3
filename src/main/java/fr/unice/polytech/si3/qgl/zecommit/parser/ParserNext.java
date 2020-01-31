@@ -72,7 +72,7 @@ public class ParserNext {
          */
         //JsonNode type = shapeShipN.path("type");
         String type = shapeShipN.path("type").asText();
-
+        /*
         if (type.equals("Shape")) {
             Shape shape = objectMapper.readValue(shapeShipN.toString(), Shape.class);
             ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, shape);
@@ -80,7 +80,9 @@ public class ParserNext {
             game.setShip(ship);
         }
 
-        /*
+         */
+
+
         try{
 
             switch (type) {
@@ -107,7 +109,7 @@ public class ParserNext {
             ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
             //System.out.println("No shape : "+e.toString());
         }
-        */
+
 
 
         // Création des visibleEntities

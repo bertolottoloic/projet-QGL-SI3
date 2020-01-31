@@ -39,19 +39,22 @@ public class Ship {
      */
     public boolean isInCheckpoint(Checkpoint checkpoint) {
         //cas avec un cercle
-
-        //Si la distance centre Checkpoint - bateau est inférieure au rayon du checkpoint
-        if (calculDistance(position, checkpoint.getPosition()) < ((Circle) checkpoint.getShape()).getRadius() ) {
-            return true;
+        if (checkpoint.isCircle()) {
+            //Si le centre du bateau est dans le CP
+            if (this.distanceTo(checkpoint.getPosition()) < ((Circle) checkpoint.getShape()).getRadius()) {
+                return true;
+            }
         }
         return false;
     }
 
-    // Calcule la distance entre deux positions données
-    public double calculDistance(Position position, Position position1) {
-        double distance = 0;
-        distance = ((Math.abs(position.getX()-position1.getX())) + Math.abs(position.getY()-position1.getY()));
-        return distance;
+    /**
+     * Methode qui calcul la distance d'une position par rapport au bateau
+     * @param position
+     * @return
+     */
+    public double distanceTo(Position position) {
+        return Math.abs(this.getXPosition() - position.getX()) + Math.abs(this.getYPosition() - position.getY());
     }
 
 
@@ -98,6 +101,22 @@ public class Ship {
     @JsonGetter("shape")
     public Shape getShape() {
         return shape;
+    }
+
+    /**
+     * Retourne la position x du bateau
+     * @return
+     */
+    public double getXPosition() {
+        return this.getPosition().getX();
+    }
+
+    /**
+     * Retourne la position y du bateau
+     * @return
+     */
+    public double getYPosition() {
+        return this.getPosition().getY();
     }
 
     //------------------------------SETTER-------------------------//

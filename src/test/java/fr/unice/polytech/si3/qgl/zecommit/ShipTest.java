@@ -9,6 +9,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,23 +26,27 @@ class ShipTest {
         Position shipPosition = new Position(0,0,0);
         Deck deck = new Deck(5,5);
         Shape shape = new Rectangle(3,3,0);
-        List<Entity> list = null;
+        List<Entity> list = new ArrayList<>();
         this.ship = new Ship(0, shipPosition,"zeBoat",deck, list, shape);
     }
 
+    /**
+     * calcul dans les negatifs bateau en (0,0)
+     */
     @Test
-    void calculDistance() {
-        Position position = new Position(3,5,0);
-        Position position1 = new Position(1,4,0);
+    void distanceToNegatifTest() {
+        Position position = new Position(-2,-5,0);
 
-        assertEquals(ship.calculDistance(position,position1), 3);
+        assertEquals(ship.distanceTo(position), 7);
     }
 
+    /**
+     * calcul dans les positifs bateau en (0,0)
+     */
     @Test
-    void calculDistance2() {
-        Position position = new Position(0,0,0);
-        Position position1 = new Position(8,4,0);
+    void distanceToPositifTest() {
+        Position position = new Position(2,5,0);
 
-        assertEquals(ship.calculDistance(position,position1), 12);
+        assertEquals(ship.distanceTo(position), 7);
     }
 }
