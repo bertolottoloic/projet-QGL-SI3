@@ -45,7 +45,7 @@ public class Captain {
         captainMate.getActionList().removeAll(captainMate.getActionList());
 
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
-            regatta.getCheckpoints().remove(0);
+            regatta.validateCommonCheckpoint();
             logs.add("Checkpoint done");
         }
 

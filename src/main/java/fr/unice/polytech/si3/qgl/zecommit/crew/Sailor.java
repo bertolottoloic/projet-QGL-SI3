@@ -34,7 +34,10 @@ public class Sailor {
     }
 
 
-
+    public void move(int xdistance, int ydistance){
+        this.x+=xdistance;
+        this.y+=ydistance;
+    }
 
     //--------------------GETTER -------------------------//
 
