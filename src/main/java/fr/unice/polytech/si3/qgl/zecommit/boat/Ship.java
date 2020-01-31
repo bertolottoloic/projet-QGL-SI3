@@ -49,7 +49,7 @@ public class Ship {
     }
 
     /**
-     * Methode qui calcul la distance d'une position par rapport au bateau
+     * Methode qui calcule la distance d'une position par rapport au bateau
      * @param position
      * @return
      */

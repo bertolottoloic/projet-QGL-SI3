@@ -24,6 +24,17 @@ public class Regatta extends Goal {
         return checkpoints;
     }
 
+    /**
+     * Donne le premier checkpoint de la list de cp, renvoie null si plus de cp
+     * @return
+     */
+    public Checkpoint getFirstCheckpoint() {
+        if (this.checkpoints.size() != 0) {
+            return this.checkpoints.get(0);
+        }
+        return null;
+    }
+
 
     //------------------------------SETTER-------------------------//
 

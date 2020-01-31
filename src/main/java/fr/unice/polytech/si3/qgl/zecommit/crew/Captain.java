@@ -56,6 +56,24 @@ public class Captain {
         }
     }
 
+    /**
+     * main du capitaine
+     */
+    public void actionsBis() {
+        captainMate.getActionList().removeAll(captainMate.getActionList());
+
+        if(ship.isInCheckpoint(regatta.getCheckpoints().get(0)) && regatta.getCheckpoints().size()>1){
+            regatta.getCheckpoints().remove(0);
+            logs.add("Checkpoint done");
+
+        }
+
+        if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {
+            Road road = new Road(ship.getPosition(),((Regatta)game.getGoal()).getCheckpoints().get(0).getPosition());
+            decisionOrientation(road);
+        }
+    }
+
 
     // TODO méthode à restructurer
     public void decisionOrientation(Road road){
