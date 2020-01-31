@@ -56,7 +56,7 @@ public class Captain {
     }
 
 
-    
+
     public void decisionOrientation(Road road){
 
         //TODO s'assurer qu'autant de marins gauche-droite rament
