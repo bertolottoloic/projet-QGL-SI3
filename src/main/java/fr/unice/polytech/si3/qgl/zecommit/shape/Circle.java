@@ -14,6 +14,7 @@ public class Circle extends Shape {
     public Circle(@JsonProperty("radius")double radius){
         super("circle");
         this.radius=radius;
+        this.whichShape=true;
     }
 
     //--------------------GETTER -------------------------//
