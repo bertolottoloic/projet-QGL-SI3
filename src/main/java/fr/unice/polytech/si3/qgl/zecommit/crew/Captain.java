@@ -56,57 +56,27 @@ public class Captain {
     }
 
 
-    // TODO méthode à restructurer
+    
     public void decisionOrientation(Road road){
-        //avance tout droit
-        //TODO s'assurer qu'autant de marins gauche-droite rament
-        boolean a = road.DistanceYToGoal()>(165-regatta.getFirstCheckpoint().getCircleRadius());
 
-        if(road.inCapIntervalle(0.2) && !a){ // TODO mettre un intervalle pour l'angle aller tout droit
-            for(int i=0; i<sailorList.size(); i++){
-                for(int j=0;j<oarList.size();j++){
-                    if(sailorList.get(i).getX()==oarList.get(j).getX() && sailorList.get(i).getY()==oarList.get(j).getY()) {
-                        captainMate.toOar(sailorList.get(i), oarList.get(j));
-                    }
-                }
-            }
+        //TODO s'assurer qu'autant de marins gauche-droite rament
+        boolean a = road.DistanceYToGoal() > (165-regatta.getFirstCheckpoint().getCircleRadius());
+
+        if (road.inCapIntervalle(0.2) && !a){
+            foward();
+
         }
         else if (road.inCapIntervalle(0.2) && a) {
-            //TODO idem
             //avancer lentement tout droit : on ne fait ramer que deux marins
-            int k = 0;
-            for(int i=0; i<sailorList.size(); i++){
-                for(int j=0;j<oarList.size();j++){
-                    if(sailorList.get(i).getX()==oarList.get(j).getX() && sailorList.get(i).getY()==oarList.get(j).getY() && k<2) {
-                        captainMate.toOar(sailorList.get(i), oarList.get(j));
-                        k++;
-                    }
-                }
-            }
+            slowlyFoward();
         }
-        else if(road.orientationToGoal()<0){
-            //tourner jusqu'a -pi/2
-            //TODO idem
-            for(int i=0; i<sailorList.size(); i++){
-                for(int j=0;j<oarList.size();j++){
-                    if(sailorList.get(i).getX()==oarList.get(j).getX() && sailorList.get(i).getY()==oarList.get(j).getY() && oarList.get(j).isLeft()) {
-                        captainMate.toOar(sailorList.get(i), oarList.get(j));
-                    }
-                }
-            }
-
+        else if (road.orientationToGoal() < 0) {
+            turnLeft();
 
         }
-        else if(road.orientationToGoal()>0){
-            //tourner jusqu'a pi/2 = tourner à gauche
-            //TODO idem
-            for(int i=0; i<sailorList.size(); i++){
-                for(int j=0;j<oarList.size();j++){
-                    if(sailorList.get(i).getX()==oarList.get(j).getX() && sailorList.get(i).getY()==oarList.get(j).getY() && !oarList.get(j).isLeft()) {
-                        captainMate.toOar(sailorList.get(i), oarList.get(j));
-                    }
-                }
-            }
+        else if (road.orientationToGoal() > 0) {
+            turnRight();
+
         }
 
     }
@@ -132,6 +102,64 @@ public class Captain {
         this.game=game;
         ship=game.getShip();
         sortEntities(game.getEntityList());
+    }
+
+    // ################################################ \\
+    // ######### Ordre de direction Du bateau ######### \\
+    // ################################################ \\
+
+    /**
+     * Tourner toute à gauche (-PI/2)
+     */
+    void turnLeft() {
+        for (int i=0; i < sailorList.size(); i++) {
+            for (int j=0; j < oarList.size(); j++) {
+                if (sailorList.get(i).getX() == oarList.get(j).getX() && sailorList.get(i).getY() == oarList.get(j).getY() && oarList.get(j).isLeft()) {
+                    captainMate.toOar(sailorList.get(i), oarList.get(j));
+                }
+            }
+        }
+    }
+
+    /**
+     * Tourner toute à droite (PI/2)
+     */
+    void turnRight() {
+        for (int i=0; i < sailorList.size(); i++) {
+            for (int j=0; j < oarList.size(); j++) {
+                if (sailorList.get(i).getX() == oarList.get(j).getX() && sailorList.get(i).getY() == oarList.get(j).getY() && !oarList.get(j).isLeft()) {
+                    captainMate.toOar(sailorList.get(i), oarList.get(j));
+                }
+            }
+        }
+    }
+
+    /**
+     * Avancer tout droit doucement (avec seulement deux sailors)
+     */
+    void slowlyFoward() {
+        int k = 0;
+        for (int i=0; i<sailorList.size(); i++) {
+            for (int j=0; j<oarList.size(); j++) {
+                if (sailorList.get(i).getX() == oarList.get(j).getX() && sailorList.get(i).getY() == oarList.get(j).getY() && k < 2) {
+                    captainMate.toOar(sailorList.get(i), oarList.get(j));
+                    k++;
+                }
+            }
+        }
+    }
+
+    /**
+     * Avancer tout droit normalement
+     */
+    void foward() {
+        for (int i=0; i<sailorList.size(); i++) {
+            for (int j=0; j<oarList.size(); j++) {
+                if (sailorList.get(i).getX() == oarList.get(j).getX() && sailorList.get(i).getY() == oarList.get(j).getY()) {
+                    captainMate.toOar(sailorList.get(i), oarList.get(j));
+                }
+            }
+        }
     }
 
     //---------------------------GETTER-----------------------------------------
