@@ -62,14 +62,14 @@ public class Captain {
     public void actionsBis() {
         captainMate.getActionList().removeAll(captainMate.getActionList());
 
-        if(ship.isInCheckpoint(regatta.getCheckpoints().get(0)) && regatta.getCheckpoints().size()>1){
+        if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1){
             regatta.getCheckpoints().remove(0);
             logs.add("Checkpoint done");
 
         }
 
-        if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {
-            Road road = new Road(ship.getPosition(),((Regatta)game.getGoal()).getCheckpoints().get(0).getPosition());
+        if(!game.getShip().isInCheckpoint(regatta.getFirstCheckpoint())) {
+            Road road = new Road(ship.getPosition(),regatta.getFirstCheckpoint().getPosition());
             decisionOrientation(road);
         }
     }
@@ -79,9 +79,9 @@ public class Captain {
     public void decisionOrientation(Road road){
         //avance tout droit
         //TODO s'assurer qu'autant de marins gauche-droite rament
-        boolean a = road.DistanceYToGoal()>(165-((Circle)((Regatta)game.getGoal()).getCheckpoints().get(0).getShape()).getRadius());
+        boolean a = road.DistanceYToGoal()>(165-regatta.getFirstCheckpoint().getCircleRadius());
 
-        if(road.orientationToGoal()==0 && !a){ // TODO mettre un intervalle pour l'angle aller tout droit
+        if(road.inCapIntervalle(0.2) && !a){ // TODO mettre un intervalle pour l'angle aller tout droit
             for(int i=0; i<sailorList.size(); i++){
                 for(int j=0;j<oarList.size();j++){
                     if(sailorList.get(i).getX()==oarList.get(j).getX() && sailorList.get(i).getY()==oarList.get(j).getY()) {
@@ -90,7 +90,7 @@ public class Captain {
                 }
             }
         }
-        else if (road.orientationToGoal()==0 && a) {
+        else if (road.inCapIntervalle(0.2) && a) {
             //TODO idem
             //avancer lentement tout droit : on ne fait ramer que deux marins
             int k = 0;
@@ -152,6 +152,7 @@ public class Captain {
         ship=game.getShip();
         sortEntities(game.getEntityList());
     }
+
     //---------------------------GETTER-----------------------------------------
 
 

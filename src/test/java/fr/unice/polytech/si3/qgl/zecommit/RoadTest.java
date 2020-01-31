@@ -4,7 +4,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RoadTest {
 
@@ -50,5 +50,30 @@ public class RoadTest {
 
         road= new Road(start, new Position(-1,-1,0));
         assertEquals(Math.PI/4,road.orientationToGoal());
+    }
+
+    /**
+     * Orientation selon axe des abscisses, Postion de fin dans l'intervalle du cap
+     */
+    @Test
+    void inCapIntervalle_IN_Test() {
+        Position start = new Position(0,0,0);
+        Position end = new Position(10,0,0);
+        Road road = new Road(start, end);
+
+        assertTrue(road.inCapIntervalle(0.2));
+    }
+
+    /**
+     * Orientation selon axe des abscisses, Postion de fin hors l'intervalle du cap
+     */
+    @Test
+    void inCapIntervalle_OUT_Test() {
+
+        Position start = new Position(0,0,0);
+        Position end = new Position(0,10,0);
+        Road road = new Road(start, end);
+
+        assertFalse(road.inCapIntervalle(0.2));
     }
 }
