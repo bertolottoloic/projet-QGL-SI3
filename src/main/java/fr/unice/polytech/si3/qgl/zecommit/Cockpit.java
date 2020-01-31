@@ -43,7 +43,7 @@ public class Cockpit implements ICockpit {
 			parserNext.parserNextRound(round, game);
 			captain.refreshGame(game);
 			List<Action> actions = new ArrayList<>();
-			if(game.isRegatta()){
+			if(game.getGoal().isRegatta()){
 				captain.actions();
 				actions = captainMate.getActionList();
 			}

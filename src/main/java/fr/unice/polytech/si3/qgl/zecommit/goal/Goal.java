@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BooleanDeserializer;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -18,6 +19,7 @@ public abstract class Goal {
 
     @JsonProperty("mode")
     private String mode;
+    protected boolean whichMode;
 
     @JsonCreator
     protected Goal(@JsonProperty("mode")String mode){
@@ -27,6 +29,14 @@ public abstract class Goal {
     @Override
     public String toString() {
         return this.mode;
+    }
+
+    public boolean isRegatta(){
+        return this.whichMode;
+    }
+
+    public boolean isBattle(){
+        return !this.whichMode;
     }
     //------------------------------GETTER-------------------------//
 
