@@ -1,12 +1,12 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 class OutputTest {
     Output s;
     ArrayList<Action> actions;
+    Sailor s2 = new Sailor(2, 0, 0, "Mousson");
 
     @Test
     void afficheSortieTest() {
@@ -25,7 +26,7 @@ class OutputTest {
         "{\"sailorId\":6,\"type\":\"USE_WATCH\"}]";
         s = new Output();
         Action o1 = new ToOar(1);
-        Action o2 = new Moving(2, 3, 4);
+        Action o2 = new Moving(s2, 3, 4);
         Action o3 = new LiftSail(3);
         Action o4 = new LowerSail(4);
         Action o5 = new Turn(5, 3.5);
