@@ -43,29 +43,10 @@ public class Captain {
      */
     public void actions() {
         captainMate.getActionList().removeAll(captainMate.getActionList());
-        if(game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))
-                &&((Regatta)game.getGoal()).getCheckpoints().size()>1){
-            ((Regatta)game.getGoal()).getCheckpoints().remove(0);
-            logs.add("Checkpoint done");
 
-        }
-
-        if(!game.getShip().isInCheckpoint(((Regatta)game.getGoal()).getCheckpoints().get(0))) {
-            Road road = new Road(ship.getPosition(),((Regatta)game.getGoal()).getCheckpoints().get(0).getPosition());
-            decisionOrientation(road);
-        }
-    }
-
-    /**
-     * main du capitaine
-     */
-    public void actionsBis() {
-        captainMate.getActionList().removeAll(captainMate.getActionList());
-
-        if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1){
+        if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
             regatta.getCheckpoints().remove(0);
             logs.add("Checkpoint done");
-
         }
 
         if(!game.getShip().isInCheckpoint(regatta.getFirstCheckpoint())) {
