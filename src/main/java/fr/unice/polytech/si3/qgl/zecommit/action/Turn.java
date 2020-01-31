@@ -5,7 +5,7 @@ public class Turn extends Action{
     private double rotation;
 
     public Turn(int id, double rotation){
-        super(id,"TURN");
+        super(id,ActionType.TURN);
         this.rotation = rotation;
     }
 

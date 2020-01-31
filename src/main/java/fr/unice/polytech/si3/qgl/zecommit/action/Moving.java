@@ -6,7 +6,7 @@ public class Moving extends Action{
     private int ydistance;
 
     public Moving(int id, int xdistance, int ydistance){
-        super(id, "MOVING");
+        super(id, ActionType.MOVING);
         if ((xdistance + ydistance) <= 5) {
             this.xdistance = xdistance;
             this.ydistance = ydistance;

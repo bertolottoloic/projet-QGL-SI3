@@ -5,9 +5,9 @@ package fr.unice.polytech.si3.qgl.zecommit.action;
  */
 public abstract class Action{
     int sailorId;
-    String type;
+    ActionType type;
 
-    Action(int sailorId, String type){
+    Action(int sailorId, ActionType type){
         this.sailorId = sailorId;
         this.type = type;
     }
@@ -18,7 +18,7 @@ public abstract class Action{
         return this.sailorId;
     }
 
-    public String getType(){
+    public ActionType getType(){
         return this.type;
     }
 
