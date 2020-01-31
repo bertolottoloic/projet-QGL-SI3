@@ -6,7 +6,7 @@ package fr.unice.polytech.si3.qgl.zecommit.action;
  */
 public class ToOar extends Action{
     public ToOar(int sailorId){
-        super(sailorId, "OAR");
+        super(sailorId,ActionType.OAR);
 
     }
 }
