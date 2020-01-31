@@ -30,6 +30,20 @@ public class Road {
         return Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation;
     }
 
+    /**
+     * Permet de savoir si le bateau se dirige dans un cap comprit dans l'intervalle renseigné
+     * @param road
+     * @param intervalle
+     * @return
+     */
+    public boolean inCapIntervalle(double intervalle) {
+        double cap = this.orientationToGoal();
+        if (cap < intervalle && cap > -intervalle) {
+            return true;
+        }
+        return false;
+    }
+
 
     //------------------------GETTER----------------------------
     public double getOrientation() {
