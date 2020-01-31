@@ -30,10 +30,7 @@ public class Checkpoint {
     }
 
     public boolean isCircle() {
-        if (this.getShape().getType().equals("circle")) {
-            return true;
-        }
-        return false;
+        return shape.isCircle();
     }
 
     public double getCircleRadius() {

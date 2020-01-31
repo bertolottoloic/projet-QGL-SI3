@@ -25,11 +25,19 @@ import java.awt.font.ShapeGraphicAttribute;
 public abstract class Shape {
     //@JsonProperty("type")
     private String Type;
-
+    protected boolean whichShape;
 
     //@JsonCreator
     public Shape(/*@JsonProperty("type")*/String type){
         Type=type;
+    }
+
+    public boolean isCircle(){
+        return this.whichShape;
+    }
+
+    public boolean isRectangle(){
+        return !this.whichShape;
     }
 
 
