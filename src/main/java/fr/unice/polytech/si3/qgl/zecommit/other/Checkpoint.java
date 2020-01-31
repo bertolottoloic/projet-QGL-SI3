@@ -36,6 +36,14 @@ public class Checkpoint {
         return false;
     }
 
+    public double getCircleRadius() {
+        if (this.isCircle()) {
+            Circle circle = (Circle) this.getShape();
+            return circle.getRadius();
+        }
+        return 0;
+    }
+
     //------------------------------GETTER-------------------------//
 
     public Position getPosition() {

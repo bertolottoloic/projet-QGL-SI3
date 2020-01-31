@@ -41,7 +41,7 @@ public class Ship {
         //cas avec un cercle
         if (checkpoint.isCircle()) {
             //Si le centre du bateau est dans le CP
-            if (this.distanceTo(checkpoint.getPosition()) < ((Circle) checkpoint.getShape()).getRadius()) {
+            if (this.distanceTo(checkpoint.getPosition()) < checkpoint.getCircleRadius()) {
                 return true;
             }
         }

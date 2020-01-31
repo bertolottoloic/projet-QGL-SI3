@@ -29,16 +29,25 @@ class CheckpointTest {
     }
 
     /**
-     * Renvoie true comme le cp est un cercle
+     * Renvoie true car le cp est un cercle
      */
     @Test
     void isCircleTrueTest() {
         assertTrue(cpCircle.isCircle());
     }
 
+
+    /**
+     * Renvoie false car le cp est un rectangle
+     */
     @Test
     void isCircleFalseTest() {
         assertFalse(cpRect.isCircle());
+    }
+
+    @Test
+    void getCircleRadiusTest() {
+        assertEquals(cpCircle.getCircleRadius(), 1);
     }
 
 
