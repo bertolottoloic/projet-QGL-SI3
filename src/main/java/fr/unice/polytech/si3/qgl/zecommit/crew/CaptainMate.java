@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
@@ -15,9 +16,11 @@ import java.util.List;
  */
 public class CaptainMate {
     private List<Action> actionList;
+    private Logs logs;
 
-    public CaptainMate(){
+    public CaptainMate(Logs logs){
         this.actionList= new ArrayList<>();
+        this.logs = logs;
     }
 
 
@@ -30,10 +33,13 @@ public class CaptainMate {
      */
     public void moveSailor(Sailor sailor, int xdistance, int ydistance) {
         Moving action = new Moving(sailor.getId(), xdistance, ydistance);
-        sailor.setX(sailor.getX() + action.getXDistance());
-        sailor.setY(sailor.getY() + action.getYDistance());
+        int x = sailor.getX() + action.getXDistance();
+        int y = sailor.getY() + action.getYDistance();
+        sailor.setX(x);
+        sailor.setY(y);
         if(action.getXDistance()!=0 && action.getYDistance()!=0){
             actionList.add(action);
+            logs.add("\nS" + sailor.getId() + " is moving to (" + x + "," + y +")");
         }
     }
 
@@ -48,6 +54,8 @@ public class CaptainMate {
             ToOar action = new ToOar(sailor.getId());
             oar.setUsed(true);
             actionList.add(action);
+            logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
+            
         }
     }
 

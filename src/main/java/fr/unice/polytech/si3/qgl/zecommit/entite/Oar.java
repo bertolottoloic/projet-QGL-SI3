@@ -21,6 +21,12 @@ public class Oar extends Entity {
         return used;
     }
 
+    public boolean isLeft(){
+        if (getY()==0)
+            return true;
+        return false;
+    }
+
     public void setUsed(boolean used) {
         this.used = used;
     }

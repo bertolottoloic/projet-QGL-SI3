@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 public class CaptainMateTest {
 
@@ -16,8 +15,9 @@ public class CaptainMateTest {
 
     @BeforeEach
     void setUp() {
+        Logs logs = new Logs();
         sailor1 = new Sailor(1, 0, 0, "sailor1");
-        captainMate = new CaptainMate();
+        captainMate = new CaptainMate(logs);
     }
 
     @Test

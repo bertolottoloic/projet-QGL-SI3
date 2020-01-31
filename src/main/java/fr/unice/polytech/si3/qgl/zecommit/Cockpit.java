@@ -17,16 +17,17 @@ public class Cockpit implements ICockpit {
 	Game game;
 	CaptainMate captainMate;
 	Captain captain;
-	ArrayList<String> logs;
+	Logs logs;
 
 	public void initGame(String json) {
-		logs = new ArrayList<>();
+		logs = new Logs();
 		ParserInit parserInit = new ParserInit();
 		try {
 			this.game=parserInit.parserInitGame(json);
-			this.captainMate= new CaptainMate();
-			this.captain= new Captain(game,captainMate);
+			this.captainMate= new CaptainMate(logs);
+			this.captain= new Captain(game,captainMate, logs);
 		} catch (JsonProcessingException e) {
+			logs.add("Erreur Parseur InitGame");
 			e.printStackTrace();
 		}
 	}
@@ -49,6 +50,7 @@ public class Cockpit implements ICockpit {
 			Output output = new Output();
 			res = output.afficheRound(actions);
 		} catch (JsonProcessingException e) {
+			logs.add("Erreur Parseur nextRound");
 			e.printStackTrace();
 			res = "[ ]";
 		}
@@ -59,6 +61,6 @@ public class Cockpit implements ICockpit {
 
 	@Override
 	public List<String> getLogs() {
-		return logs;
+		return logs.sortie();
 	}
 }
