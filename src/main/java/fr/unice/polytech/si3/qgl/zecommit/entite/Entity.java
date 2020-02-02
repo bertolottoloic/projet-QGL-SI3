@@ -23,14 +23,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public abstract class Entity {
     @JsonProperty("type")
-    private String type;
+    private EntityType type;
     @JsonProperty("x")
     private int x;
     @JsonProperty("y")
     private int y;
 
     @JsonCreator
-    public Entity(@JsonProperty("type") String type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
+    public Entity(@JsonProperty("type") EntityType type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
         this.type = type;
         this.x = x;
         this.y = y;
@@ -38,13 +38,13 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return "[ type : " + this.type +
+        return "{ type : " + this.type +
                 ", x : " + this.x +
-                ", y : " + this.y + " ]";
+                ", y : " + this.y + " }";
     }
     //------------------------------GETTER-------------------------//
 
-    public String getType() {
+    public EntityType getType() {
         return type;
     }
 
@@ -58,7 +58,7 @@ public abstract class Entity {
 
     //------------------------------SETTER-------------------------//
 
-    public void setType(String type) {
+    public void setType(EntityType type) {
         this.type = type;
     }
 

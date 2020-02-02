@@ -11,7 +11,7 @@ public class Watch extends Entity {
 
     @JsonCreator
     public Watch(@JsonProperty("x")int x, @JsonProperty("y")int y){
-        super("watch",x,y);
+        super(EntityType.watch,x,y);
     }
 }
 

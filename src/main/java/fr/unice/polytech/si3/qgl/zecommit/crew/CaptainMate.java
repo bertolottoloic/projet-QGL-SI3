@@ -39,6 +39,14 @@ public class CaptainMate {
         }
     }
 
+
+    /**
+     * Place tous les marins sur une rame lors du premier tour.
+     */
+    public void initMoveSailor(List<Sailor> sailors){
+
+    }
+
     /**
      * Fait ramer le marin en utilisant l'entité rame.
      * Si la position du marin est la meme que celle de la rame

@@ -13,7 +13,7 @@ public class Oar extends Entity {
     private boolean used;
     @JsonCreator
     public Oar(@JsonProperty("x")int x, @JsonProperty("y")int y){
-        super("oar",x,y);
+        super(EntityType.oar,x,y);
         this.used=false;
     }
 
