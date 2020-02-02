@@ -58,6 +58,21 @@ public class EngineNextRound {
                 }
 
             }
+            if(textType.equals("MOVING")) {
+                JsonNode xdistanceNode = current.path("xdistance");
+                JsonNode ydistanceNode = current.path("ydistance");
+                int xDistance = Integer.valueOf(xdistanceNode.asText());
+                int yDistance = Integer.valueOf(ydistanceNode.asText());
+
+
+                if(xDistance+yDistance<=5){
+                    for(Sailor sailor:infoEngine.sailorList){
+                        if(sailor.getId()==Integer.valueOf(id)){
+                            sailor.move(xDistance,yDistance);
+                        }
+                    }
+                }
+            }
 
 
 
