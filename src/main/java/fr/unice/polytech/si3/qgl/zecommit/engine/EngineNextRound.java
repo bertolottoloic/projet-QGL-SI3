@@ -55,7 +55,6 @@ public class EngineNextRound {
                 }
             }
         }
-
         double marge=Math.PI/(infoEngine.oarList.size()+1);
         double val=orientation;
         if(rameDroite>rameGauche){
