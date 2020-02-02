@@ -16,10 +16,16 @@ public class Moving extends Action{
         else {
             if (Math.abs(xdistance) <= 5) {
                 this.xdistance = xdistance;
-                this.ydistance = (this.ydistance/Math.abs(this.ydistance))*Math.min(5-Math.abs(this.xdistance), Math.abs(ydistance));
+                if(ydistance<0)
+                    this.ydistance = - Math.min(5-Math.abs(this.xdistance), Math.abs(ydistance));
+                else
+                    this.ydistance = Math.min(5-Math.abs(this.xdistance), Math.abs(ydistance));
             }
             else {
-                this.xdistance = 5*(this.xdistance/Math.abs(this.xdistance));
+                if(xdistance<0)
+                    this.xdistance = -5;
+                else
+                    this.xdistance = 5;
                 this.ydistance = 0;
 
             }
