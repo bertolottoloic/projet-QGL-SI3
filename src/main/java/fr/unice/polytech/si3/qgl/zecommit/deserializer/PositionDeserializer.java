@@ -10,6 +10,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 
 import java.io.IOException;
+import java.util.concurrent.atomic.DoubleAccumulator;
 
 public class PositionDeserializer extends JsonDeserializer {
 

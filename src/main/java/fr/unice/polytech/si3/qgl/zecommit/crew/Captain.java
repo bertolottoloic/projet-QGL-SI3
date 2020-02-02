@@ -65,7 +65,6 @@ public class Captain {
 
         if (road.inCapIntervalle(0.2) && !a){
             foward();
-
         }
         else if (road.inCapIntervalle(0.2) && a) {
             //avancer lentement tout droit : on ne fait ramer que deux marins

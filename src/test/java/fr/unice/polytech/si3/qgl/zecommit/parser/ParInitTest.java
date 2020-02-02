@@ -14,10 +14,10 @@ class ParInitTest {
     @BeforeEach
     void setUp() {
         json =  "{\n" +
-                "\t\"position\": {\n"+
-                "\t\t\"x\": 1000,\n" +
-                "\t\t\"y\": 0,\n" +
-                "\t\t\"orientation\": 0\n" +
+                "\t\"position\" : {\n"+
+                "\t\t\"x\" : 1000,\n" +
+                "\t\t\"y\" : 0,\n" +
+                "\t\t\"orientation\" : 0\n" +
                 "\t}\n" +
                 "}";
 
@@ -28,6 +28,5 @@ class ParInitTest {
         ParInit parse = new ParInit();
         Position positionParse = parse.parse(json);
 
-        positionParse.toString();
     }
 }
