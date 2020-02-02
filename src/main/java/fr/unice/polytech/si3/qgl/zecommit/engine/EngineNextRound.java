@@ -62,18 +62,17 @@ public class EngineNextRound {
 
 
         }
-        double marge=Math.PI/(infoEngine.oarList.size()+1);
-        double val=orientation;
+        double currentOrientation=orientation;
+        double gap=Math.PI/(infoEngine.getOarList().size()+1);
+        double difference= Math.abs(rameDroite-rameGauche);
         if(rameDroite>rameGauche){
-            val-=rameDroite*marge;
+            currentOrientation+=gap*difference;
         }
         else if(rameDroite<rameGauche){
-            val+=rameDroite*marge;
+            currentOrientation-=gap*difference;
         }
-        else {
-            val=0;
-        }
-        this.orientation=val;
+
+        this.orientation=currentOrientation%(Math.PI);
         double vitesse= 165*nbRameActive/infoEngine.getOarList().size();
         this.x +=vitesse*Math.cos(orientation);
         this.y +=vitesse*Math.sin(orientation);
