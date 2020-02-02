@@ -28,6 +28,7 @@ public class Captain {
     private CaptainMate captainMate;
     private Game game;
     private Logs logs;
+    boolean test=true;
 
     public Captain(Game game, CaptainMate CM, Logs logs){
         this.ship = game.getShip();
@@ -46,7 +47,9 @@ public class Captain {
      */
     public void actions() {
         captainMate.getActionList().removeAll(captainMate.getActionList());
-
+        if(test){
+        captainMate.initMoveSailor(sailorList,ship);
+        test=false;}
 
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
             regatta.validateCommonCheckpoint();
