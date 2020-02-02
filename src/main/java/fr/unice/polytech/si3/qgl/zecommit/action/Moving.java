@@ -16,7 +16,7 @@ public class Moving extends Action{
         else {
             if (xdistance <= 5) {
                 this.xdistance = xdistance;
-                this.ydistance = Math.min(5 - this.xdistance, ydistance);
+                this.ydistance = Math.min(5-this.xdistance, ydistance);
             }
             else {
                 this.xdistance = 5;
@@ -25,7 +25,7 @@ public class Moving extends Action{
             }
 
         }
-        sailor.move(xdistance, ydistance);
+        sailor.move(this.xdistance, this.ydistance);
     }
 
     //------------------------------GETTER-------------------------//

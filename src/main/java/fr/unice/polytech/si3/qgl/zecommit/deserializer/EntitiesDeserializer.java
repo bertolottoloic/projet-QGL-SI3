@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 
 import java.io.IOException;
+/*
 
 public class EntitiesDeserializer extends StdDeserializer<Entity> {
 
@@ -43,3 +44,5 @@ public class EntitiesDeserializer extends StdDeserializer<Entity> {
         }
     }
 }
+
+ */
