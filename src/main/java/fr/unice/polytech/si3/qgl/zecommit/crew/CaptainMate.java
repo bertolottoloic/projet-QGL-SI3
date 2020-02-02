@@ -49,8 +49,8 @@ public class CaptainMate {
         List<Sailor> sailorTmp = new ArrayList<>(sailors);
         for(Oar oar : ship.getOars()){
             sailorTmp.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
-            if(sailors.get(0).distanceToEntity(oar)<=5) {
-                moveSailor(sailors.get(0), oar.getX()-sailors.get(0).getX(), oar.getY()-sailors.get(0).getY());
+            if(sailorTmp.get(0).distanceToEntity(oar)<=5) {
+                moveSailor(sailorTmp.get(0), oar.getX()-sailorTmp.get(0).getX(), oar.getY()-sailorTmp.get(0).getY());
                 sailorTmp.remove(0);
             }
         }
