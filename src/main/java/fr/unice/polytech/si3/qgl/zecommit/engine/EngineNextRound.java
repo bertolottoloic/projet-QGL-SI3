@@ -5,7 +5,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -36,24 +39,28 @@ public class EngineNextRound {
             JsonNode type = current.path("type");
             String textType = type.asText();
             if(textType.equals("OAR")) {
-                for(int i=0; i<infoEngine.getOarList().size();i++){
-                    for(int j=0;j<infoEngine.getSailorList().size();j++){
-                        if(infoEngine.getSailorList().get(j).getX()==infoEngine.getOarList().get(i).getX()
-                            && infoEngine.getSailorList().get(j).getY()==infoEngine.getOarList().get(i).getY()
-                                &&!infoEngine.getOarList().get(i).isUsed()){
-                            nbRameActive++;
-                            infoEngine.getOarList().get(i).setUsed(true);
-                            if(infoEngine.getOarList().get(i).getY()==0){
-                                rameDroite++;
-                            }
-                            else
-                            {
-                                rameGauche++;
+                for (Sailor sailor: infoEngine.getSailorList()) {
+                    if(sailor.getId()==Integer.valueOf(id)){
+                        for(Oar oar: infoEngine.oarList){
+                            if(oar.getY()==sailor.getY()&&oar.getX()==sailor.getX()&&!oar.isUsed()){
+                                nbRameActive++;
+                                oar.setUsed(true);
+                                if(oar.isLeft()){
+                                    rameGauche++;
+                                }
+                                else
+                                {
+                                    rameDroite++;
+                                }
                             }
                         }
                     }
                 }
+
             }
+
+
+
         }
         double marge=Math.PI/(infoEngine.oarList.size()+1);
         double val=orientation;

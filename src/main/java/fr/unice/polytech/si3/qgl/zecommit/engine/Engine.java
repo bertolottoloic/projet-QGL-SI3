@@ -132,18 +132,20 @@ public class Engine {
         ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
         checkpointArrayList.add(new Checkpoint(new Position(1000,1000,0),new Circle(50)));
         InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
-        while(!cockpit.nextRound(json2).equals("[]")) {
+        while(!cockpit.nextRound(json2).equals("[]")&&step<100) {
 
                 //TODO Multicheckpoints
 
                 String output = cockpit.nextRound(json2);
-
+                System.out.println(output);
                 EngineNextRound engineNextRound = new EngineNextRound(output, x, y,orientation, infoEngine);
                 x = engineNextRound.getX();
                 y = engineNextRound.getY();
                 orientation = engineNextRound.getOrientation();
                 cockpit.getLogs().add("\nROUND "+step + " :"+ "("+x+","+y+")");
                 step++;
+            System.out.println(orientation);
+
 
                 for(int j=0;j<infoEngine.getOarList().size();j++){
                     infoEngine.getOarList().get(j).setUsed(false);
@@ -178,6 +180,6 @@ public class Engine {
                         "  \"visibleEntities\": []\n" +
                         "}";
             }
-            System.out.println(cockpit.getLogs());
+            //System.out.println(cockpit.getLogs());
     }
 }

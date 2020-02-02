@@ -62,10 +62,7 @@ public class Captain {
     public void decisionOrientation(Road road){
 
         boolean a = road.DistanceYToGoal() > (165-regatta.getFirstCheckpoint().getCircleRadius());
-        if(road.orientationToGoal()==0){
-            foward();
-            return;
-        }
+
         if (road.inCapIntervalle(0.2) && !a){
             foward();
         }

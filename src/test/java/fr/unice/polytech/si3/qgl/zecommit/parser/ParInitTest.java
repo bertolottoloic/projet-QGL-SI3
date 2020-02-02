@@ -1,11 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.parser;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class ParInitTest {
     String json;
@@ -46,12 +42,5 @@ class ParInitTest {
 
     }
 
-    /*
-    void parseinitPositionTest() throws JsonProcessingException {
-        ParInit parse = new ParInit();
-        Position positionParse = parse.parse(json);
 
-    }
-
-     */
 }
