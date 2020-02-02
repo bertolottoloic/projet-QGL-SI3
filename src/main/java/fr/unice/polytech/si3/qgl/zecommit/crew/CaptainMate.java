@@ -4,9 +4,11 @@ import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -43,8 +45,12 @@ public class CaptainMate {
     /**
      * Place tous les marins sur une rame lors du premier tour.
      */
-    public void initMoveSailor(List<Sailor> sailors){
-
+    public void initMoveSailor(List<Sailor> sailors, Ship ship){
+        for(Oar oar : ship.getOars()){
+            sailors.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
+            if(sailors.get(0).distanceToEntity(oar)<=5) 
+                moveSailor(sailors.get(0), oar.getX()-sailors.get(0).getX(), oar.getY()-sailors.get(0).getY());
+        }
     }
 
     /**
