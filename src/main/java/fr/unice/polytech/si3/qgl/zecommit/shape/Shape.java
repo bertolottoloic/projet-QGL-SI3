@@ -24,8 +24,8 @@ import java.awt.font.ShapeGraphicAttribute;
 @JsonDeserialize(using = ShapeDeserializer.class)
 public abstract class Shape {
     //@JsonProperty("type")
-    private String Type;
-    protected boolean whichShape;
+    private String Type; //TODO PAS de maj sur les noms de var
+    protected boolean whichShape; //TODO à renommer
 
     //@JsonCreator
     public Shape(/*@JsonProperty("type")*/String type){
@@ -38,7 +38,7 @@ public abstract class Shape {
 
     public boolean isRectangle(){
         return !this.whichShape;
-    }
+    }//TODO à supprimer
 
 
     //------------------------GETTER----------------------//

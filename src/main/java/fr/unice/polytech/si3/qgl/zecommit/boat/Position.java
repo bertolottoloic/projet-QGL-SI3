@@ -62,6 +62,7 @@ public class Position {
 
     //-------------------------------------------------------------//
 
+    /*
     public double positiveOrientation(){
         if(orientation<0) return 2*Math.PI+orientation;
         return orientation;
@@ -73,4 +74,6 @@ public class Position {
         }
         return 0.0;
     }
+
+     */
 }

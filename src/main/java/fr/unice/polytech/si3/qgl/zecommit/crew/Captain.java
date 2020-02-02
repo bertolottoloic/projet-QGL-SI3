@@ -59,7 +59,6 @@ public class Captain {
 
     public void decisionOrientation(Road road){
 
-        //TODO s'assurer qu'autant de marins gauche-droite rament
         boolean a = road.DistanceYToGoal() > (165-regatta.getFirstCheckpoint().getCircleRadius());
 
         if (road.inCapIntervalle(0.2) && !a){
@@ -137,7 +136,7 @@ public class Captain {
     /**
      * Avancer tout droit doucement (avec seulement deux sailors)
      */
-    void slowlyFoward() {
+    void slowlyFoward() {//TODO s'assurer qu'autant de marins gauche-droite rament
         int k = 0;
         for (int i=0; i<sailorList.size(); i++) {
             for (int j=0; j<oarList.size(); j++) {
@@ -152,7 +151,7 @@ public class Captain {
     /**
      * Avancer tout droit normalement
      */
-    void foward() {
+    void foward() {//TODO s'assurer qu'autant de marins gauche-droite rament
         for (int i=0; i<sailorList.size(); i++) {
             for (int j=0; j<oarList.size(); j++) {
                 if (sailorList.get(i).getX() == oarList.get(j).getX() && sailorList.get(i).getY() == oarList.get(j).getY()) {

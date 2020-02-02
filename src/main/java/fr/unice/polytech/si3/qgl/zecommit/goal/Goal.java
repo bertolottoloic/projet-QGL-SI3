@@ -19,7 +19,7 @@ public abstract class Goal {
 
     @JsonProperty("mode")
     private String mode;
-    protected boolean whichMode;
+    protected boolean whichMode; //TODO changer le nom
 
     @JsonCreator
     protected Goal(@JsonProperty("mode")String mode){
@@ -35,7 +35,7 @@ public abstract class Goal {
         return this.whichMode;
     }
 
-    public boolean isBattle(){
+    public boolean isBattle(){ //TODO à supprimer
         return !this.whichMode;
     }
     //------------------------------GETTER-------------------------//

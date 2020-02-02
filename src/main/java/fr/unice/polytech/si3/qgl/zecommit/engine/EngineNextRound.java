@@ -22,8 +22,8 @@ public class EngineNextRound {
         this.x=x;
         this.y=y;
         this.orientation=orientation;
-        int rameDroite=0;
-        int rameGauche =0;
+        int rameDroite = 0;
+        int rameGauche = 0;
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
