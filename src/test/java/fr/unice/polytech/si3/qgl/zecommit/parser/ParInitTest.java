@@ -16,28 +16,6 @@ class ParInitTest {
                 "\t\t\"y\" : 0,\n" +
                 "\t\t\"orientation\" : 0\n" +
                 "\t}\n" +
-                "\"position\": {\n"+
-                "\"x\": 1000,\n" +
-                "\"y\": 0,\n" +
-                "\"orientation\": 0\n" +
-                "}\n" +
-                "}";
-
-
-          jsonTwo = "{" +
-                  "\"position\": {\n" +
-                "      \"x\": 1000,\n" +
-                "      \"y\": 0,\n" +
-                "      \"orientation\": 0\n" +
-                "    },\n" +
-                "}";
-
-        jsonNR = "{\n "+
-                "    \"position\": {\n "+
-                "      \"x\": 0,\n "+
-                "      \"y\": 0,\n "+
-                "      \"orientation\": 0\n "+
-                "    },\n" +
                 "}";
 
     }

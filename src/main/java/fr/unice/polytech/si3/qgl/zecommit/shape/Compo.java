@@ -4,7 +4,7 @@ public class Compo {
     private int sailorsRight;
     private int sailorsLeft;
 
-    public Compo(int sailorsRight, int sailorsLeft) {
+    public Compo(int sailorsLeft, int sailorsRight) {
         this.sailorsRight = sailorsRight;
         this.sailorsLeft = sailorsLeft;
     }

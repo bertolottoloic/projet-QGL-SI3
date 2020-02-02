@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Vincent
+ */
+
 public class OrientationTable {
 
-    private ArrayList angleTable;
-    private ArrayList formationTable;
+    private ArrayList<Double> angleTable;
+    private ArrayList<ArrayList<Compo>> formationTable;
 
 
     public OrientationTable(int oars) {
@@ -24,8 +28,8 @@ public class OrientationTable {
      * @param oarsNb
      * @return
      */
-    ArrayList generateAngleTable(int oarsNb) {
-        ArrayList angleTable = new ArrayList();
+    ArrayList<Double> generateAngleTable(int oarsNb) {
+        ArrayList<Double> angleTable = new ArrayList();
 
         double borneSup =  Math.PI/2;
         double borneInf = -borneSup;
@@ -50,7 +54,7 @@ public class OrientationTable {
             angleTable.add(borneInf + i*pas);
         }
         // 0 au milieu de l'interval
-        angleTable.add(0);
+        angleTable.add(0.0);
 
         // On remplit les valeurs sup à 0
         for (int i = 1; i < (efficentOars/2) ; i++) {
@@ -63,7 +67,7 @@ public class OrientationTable {
         return angleTable;
     }
 
-    ArrayList generateFormation(int oarsNb) {
+    ArrayList<ArrayList<Compo>> generateFormation(int oarsNb) {
         ArrayList formationTable = new ArrayList();
 
         int oars;
@@ -85,7 +89,7 @@ public class OrientationTable {
         formationTable.add(compoSpeForZ(oars));
 
         //Compo pour Orientation positive
-        for (int i = (oars/2)-1; i > 0; i--) {
+        for (int i = (oars/2)-1; i >= 0; i--) {
             formationTable.add(compoSpeAfterZ(i, oars));
         }
 
@@ -98,11 +102,11 @@ public class OrientationTable {
      * @param oars
      * @return
      */
-    ArrayList compoSpeBeforeZ(int i, int oars) {
+    ArrayList<Compo> compoSpeBeforeZ(int i, int oars) {
         ArrayList tempoTable = new ArrayList();
         int ecart = (oars/2)-i;
 
-        for (int k = 0; k+ecart < (oars/2); k++) {
+        for (int k = 0; k+ecart <= (oars/2); k++) {
             tempoTable.add(new Compo(k+ecart, k));
         }
 
@@ -115,11 +119,11 @@ public class OrientationTable {
      * @param oars
      * @return
      */
-    ArrayList compoSpeAfterZ(int i, int oars) {
-        ArrayList tempoTable = new ArrayList();
+    ArrayList<Compo> compoSpeAfterZ(int i, int oars) {
+        ArrayList<Compo> tempoTable = new ArrayList();
         int ecart = (oars/2)-i;
 
-        for (int k = 0; k+ecart < (oars/2); k++) {
+        for (int k = 0; k+ecart <= (oars/2); k++) {
             tempoTable.add(new Compo(k, k+ecart));
         }
 
@@ -131,15 +135,24 @@ public class OrientationTable {
      * @param oars
      * @return
      */
-    ArrayList compoSpeForZ(int oars) {
+    ArrayList<Compo>  compoSpeForZ(int oars) {
         ArrayList tempoTable = new ArrayList();
-        for (int i = 0; i < (oars/2); i++) {
+        for (int i = 0; i <= (oars/2); i++) {
             tempoTable.add(new Compo(i,i));
         }
         return tempoTable;
     }
 
-    public ArrayList getAngleTable() {
+    public ArrayList<Double> getAngleTable() {
         return this.angleTable;
     }
+
+    public ArrayList<ArrayList<Compo>> getFormationTable() {
+        return formationTable;
+    }
+
+    public Compo getCompo(int indexAngle, int indexCompo) {
+        return formationTable.get(indexAngle).get(indexCompo);
+    }
+
 }
