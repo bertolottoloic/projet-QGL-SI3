@@ -24,16 +24,19 @@ public class Captain {
     private Regatta regatta;
     private List<Sailor> sailorList;
     private List<Oar> oarList;
+    private int oarsNb;
     private CaptainMate captainMate;
     private Game game;
     private Logs logs;
 
     public Captain(Game game, CaptainMate CM, Logs logs){
-        this.ship=game.getShip();
-        this.regatta=(Regatta) game.getGoal();
-        this.sailorList=new ArrayList<>(game.getSailors());
-        this.captainMate= CM;
-        this.oarList= ship.getOars();
+        this.ship = game.getShip();
+        this.regatta = (Regatta) game.getGoal();
+        this.sailorList = new ArrayList<>(game.getSailors());
+        this.captainMate = CM;
+        this.oarList = ship.getOars();
+        this.oarsNb = ship.getOarsNb();
+
         sortEntities(game.getEntityList());
         this.logs=logs;
     }
@@ -53,8 +56,25 @@ public class Captain {
 
         if(!game.getShip().isInCheckpoint(regatta.getFirstCheckpoint())) {
             Road road = new Road(ship.getPosition(),regatta.getFirstCheckpoint().getPosition());
+            int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
+
             decisionOrientation(road);
         }
+    }
+
+    public int findClosestPossibleAngle(double angleToReach){
+        double interval = Math.PI/(2*oarsNb);
+        int res = 0;
+        for (int k = 0; k<2*oarsNb; k ++){
+            if(k*interval <= angleToReach && angleToReach <= (k+1)*interval )
+                res = k;
+        }
+        if(res==0)
+            return 0;
+        if(res==2*oarsNb-1)
+            return oarsNb;
+        else
+            return (res+1)/2;
     }
 
 
@@ -62,6 +82,8 @@ public class Captain {
     public void decisionOrientation(Road road){
 
         boolean a = road.DistanceYToGoal() > (165-regatta.getFirstCheckpoint().getCircleRadius());
+
+        
 
         if (road.inCapIntervalle(0.2) && !a){
             foward();
@@ -182,6 +204,9 @@ public class Captain {
         return ship;
     }
 
+    public int getOarsNb() {
+        return oarsNb;
+    }
 
     //-------------------------SETTER------------------------------
 

@@ -136,6 +136,10 @@ public class Ship {
         return this.oars;
     }
 
+    public int getOarsNb() {
+        return oars.size();
+    }
+
     /**
      * 
      * @return la liste des rames à gauche du bateau.

@@ -143,8 +143,8 @@ public class Engine {
                 y = engineNextRound.getY();
                 orientation = engineNextRound.getOrientation();
                 cockpit.getLogs().add("\nROUND "+step + " :"+ "("+x+","+y+")");
-            System.out.println("ROUND "+step + " :"+ "("+x+","+y+")");
-            System.out.println(orientation);
+            //System.out.println("ROUND "+step + " :"+ "("+x+","+y+")");
+            //System.out.println(orientation);
                 step++;
 
 
@@ -182,6 +182,6 @@ public class Engine {
                         "  \"visibleEntities\": []\n" +
                         "}";
             }
-            //System.out.println(cockpit.getLogs());
+            System.out.println(cockpit.getLogs());
     }
 }

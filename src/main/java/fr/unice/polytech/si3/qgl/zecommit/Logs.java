@@ -22,6 +22,10 @@ public class Logs {
     }
 
     public List<String> sortie(){
-        return logs;//TODO verifier taille de sortie
-    }
+        if(logs.size()>200) {
+            logs.clear();
+            logs.add("too long logs");// TODO à améliorer
+        }
+            return logs ;
+        }
 }
