@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -14,7 +15,7 @@ public class Circle extends Shape {
     public Circle(@JsonProperty("radius")double radius){
         super("circle");
         this.radius=radius;
-        this.whichShape=true; //TODO a renommer
+        setCircle(true);
     }
 
     //--------------------GETTER -------------------------//

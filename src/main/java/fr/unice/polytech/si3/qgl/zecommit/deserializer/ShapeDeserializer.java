@@ -11,6 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
+/*
 
 public class ShapeDeserializer extends StdDeserializer<Shape> {
 
@@ -36,3 +37,5 @@ public class ShapeDeserializer extends StdDeserializer<Shape> {
 
     }
 }
+
+ */

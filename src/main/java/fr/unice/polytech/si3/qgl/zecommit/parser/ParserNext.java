@@ -13,7 +13,6 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -59,7 +58,6 @@ public class ParserNext {
                     break;
             }
         }
-        game.setEntityList(listEntitie);
         Position positionShip = objectMapper.readValue(positionShipN.toString(), Position.class);
         int lifeShip = objectMapper.readValue(lifeShipN.toString(), int.class);
         String nameShip = objectMapper.readValue(nameShipN.toString(), String.class);
@@ -67,25 +65,9 @@ public class ParserNext {
 
         Ship ship;
 
-        /**
-         * J'ai rajouté le as text ici !!!! s'il y a un bug venir voir ici en prio !
-         */
-        //JsonNode type = shapeShipN.path("type");
-        String type = shapeShipN.path("type").asText();
-        /*
-        if (type.equals("Shape")) {
-            Shape shape = objectMapper.readValue(shapeShipN.toString(), Shape.class);
-            ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, shape);
-
-            game.setShip(ship);
-        }
-
-         */
-
-
+        JsonNode type = shapeShipN.path("type");
         try{
-
-            switch (type) {
+            switch (type.asText()) {
                 case "rectangle":
                     Rectangle rectangleShip = objectMapper.readValue(shapeShipN.toString(), Rectangle.class);
                     ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShip);
@@ -95,22 +77,16 @@ public class ParserNext {
                     Circle circleShip = objectMapper.readValue(shapeShipN.toString(), Circle.class);
                     ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, circleShip);
                     break;
-
                 default:
                     throw new IllegalStateException("Unexpected value: " + shapeShipN.asText());
-
             }
-
-
-
-
         }
         catch(IllegalStateException e){
             ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
             //System.out.println("No shape : "+e.toString());
         }
 
-
+        game.setShip(ship);
 
         // Création des visibleEntities
         try {

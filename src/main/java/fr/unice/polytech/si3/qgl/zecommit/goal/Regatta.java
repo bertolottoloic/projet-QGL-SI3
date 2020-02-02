@@ -15,7 +15,7 @@ public class Regatta extends Goal {
     public Regatta(@JsonProperty("checkpoints")List<Checkpoint> checkpoints) {
         super("REGATTA");
         this.checkpoints = checkpoints;
-        this.whichMode = true;
+        setRegatta(true);
     }
 
     public void validateCommonCheckpoint(){

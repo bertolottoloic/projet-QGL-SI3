@@ -7,6 +7,6 @@ public class Battle extends Goal {
     @JsonCreator
     public Battle() {
         super("BATTLE");
-        this.whichMode = false;
+        setRegatta(false);
     }
 }

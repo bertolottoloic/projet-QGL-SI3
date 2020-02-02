@@ -62,7 +62,10 @@ public class Captain {
     public void decisionOrientation(Road road){
 
         boolean a = road.DistanceYToGoal() > (165-regatta.getFirstCheckpoint().getCircleRadius());
-
+        if(road.orientationToGoal()==0){
+            foward();
+            return;
+        }
         if (road.inCapIntervalle(0.2) && !a){
             foward();
         }
@@ -89,6 +92,7 @@ public class Captain {
             switch (entity.getType()){
                 case "oar":
                     this.oarList.add((Oar) entity);
+                    oarList.get(oarList.size()-1).setUsed(false);
             }
         }
     }

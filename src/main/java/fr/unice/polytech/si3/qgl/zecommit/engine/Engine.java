@@ -27,7 +27,7 @@ public class Engine {
                 "      {\n" +
                 "        \"position\": {\n" +
                 "          \"x\": 1000,\n" +
-                "          \"y\": 0,\n" +
+                "          \"y\": 1000,\n" +
                 "          \"orientation\": 0\n" +
                 "        },\n" +
                 "        \"shape\": {\n" +
@@ -123,24 +123,20 @@ public class Engine {
                 "  \"visibleEntities\": []\n" +
                 "}";
 
+        ArrayList<Oar> oarArrayList= new ArrayList<>();
+        oarArrayList.add(new Oar(0,0));
+        oarArrayList.add(new Oar(0,1));
+        ArrayList<Sailor> sailorArrayList= new ArrayList<>();
+        sailorArrayList.add(new Sailor(0,0,0,"Edward Teach"));
+        sailorArrayList.add(new Sailor(1,0,1,"Tom Pouce"));
+        ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
+        checkpointArrayList.add(new Checkpoint(new Position(1000,1000,0),new Circle(50)));
+        InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
+        while(!cockpit.nextRound(json2).equals("[]")) {
 
-            while(!cockpit.nextRound(json2).equals("[]")) {
-
-                ArrayList<Oar> oarArrayList= new ArrayList<>();
-                oarArrayList.add(new Oar(0,0));
-                oarArrayList.add(new Oar(0,1));
-                ArrayList<Sailor> sailorArrayList= new ArrayList<>();
-                sailorArrayList.add(new Sailor(0,0,0,"Edward Teach"));
-                sailorArrayList.add(new Sailor(1,0,1,"Tom Pouce"));
-                ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
-                checkpointArrayList.add(new Checkpoint(new Position(1000,0,0),new Circle(50)));
-
-                InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
-
-                //TODO Multicheckoints
+                //TODO Multicheckpoints
 
                 String output = cockpit.nextRound(json2);
-                //System.out.println(cockpit.getLogs());
 
                 EngineNextRound engineNextRound = new EngineNextRound(output, x, y,orientation, infoEngine);
                 x = engineNextRound.getX();
@@ -149,7 +145,9 @@ public class Engine {
                 cockpit.getLogs().add("\nROUND "+step + " :"+ "("+x+","+y+")");
                 step++;
 
-
+                for(int j=0;j<infoEngine.getOarList().size();j++){
+                    infoEngine.getOarList().get(j).setUsed(false);
+                }
                 json2 = "{\n" +
                         "  \"ship\": {\n" +
                         "    \"type\": \"ship\",\n" +
