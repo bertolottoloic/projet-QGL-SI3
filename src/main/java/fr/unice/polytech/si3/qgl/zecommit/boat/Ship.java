@@ -34,6 +34,7 @@ public class Ship {
         this.entities = entities;
         this.shape = shape;
         createOarlist();
+        sortOars();
     }
 
     private void createOarlist(){
@@ -42,6 +43,21 @@ public class Ship {
             if(entity.getType().equals(EntityType.oar))
             this.oars.add((Oar)entity);
         });
+    }
+
+    /**
+     * Tri la liste de rames de façon à alterner les rames de gauches et de droites.
+     */
+    private void sortOars(){
+        List<Oar> oarsLeft = getLeftOars();
+        List<Oar> oarsRight = getRightOars();
+        List<Oar> oarsSort = new ArrayList<>();
+        for(int i=0;i<Math.max(oarsLeft.size(),oarsRight.size());i++){
+            if(i<oarsLeft.size())
+                oarsSort.add(oarsLeft.get(i));
+            if(i<oarsRight.size())
+                oarsSort.add(oarsRight.get(i));
+        }
     }
 
     /**
