@@ -1,12 +1,14 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+
 public class Moving extends Action{
 
     private int xdistance;
     private int ydistance;
 
-    public Moving(int id, int xdistance, int ydistance){
-        super(id, ActionType.MOVING);
+    public Moving(Sailor sailor, int xdistance, int ydistance){
+        super(sailor.getId(), ActionType.MOVING);
         if ((xdistance + ydistance) <= 5) {
             this.xdistance = xdistance;
             this.ydistance = ydistance;
@@ -23,8 +25,10 @@ public class Moving extends Action{
             }
 
         }
+        sailor.move(xdistance, ydistance);
     }
 
+    //------------------------------GETTER-------------------------//
 
     public int getXDistance(){
         return this.xdistance;

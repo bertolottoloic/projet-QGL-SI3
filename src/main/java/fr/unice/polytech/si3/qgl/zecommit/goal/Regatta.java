@@ -18,6 +18,9 @@ public class Regatta extends Goal {
         this.whichMode = true;
     }
 
+    public void validateCommonCheckpoint(){
+        checkpoints.remove(0);
+    }
 
     //------------------------------GETTER-------------------------//
 
