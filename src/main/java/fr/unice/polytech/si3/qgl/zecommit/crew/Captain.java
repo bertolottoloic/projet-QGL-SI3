@@ -44,8 +44,10 @@ public class Captain {
     public void actions() {
         captainMate.getActionList().removeAll(captainMate.getActionList());
 
+
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
             regatta.validateCommonCheckpoint();
+
             logs.add("Checkpoint done");
         }
 
@@ -138,8 +140,8 @@ public class Captain {
      */
     void slowlyFoward() {//TODO s'assurer qu'autant de marins gauche-droite rament
         int k = 0;
-        for (int i=0; i<sailorList.size(); i++) {
-            for (int j=0; j<oarList.size(); j++) {
+        for (int i = 0; i < sailorList.size(); i++) {
+            for (int j = 0; j < oarList.size(); j++) {
                 if (sailorList.get(i).getX() == oarList.get(j).getX() && sailorList.get(i).getY() == oarList.get(j).getY() && k < 2) {
                     captainMate.toOar(sailorList.get(i), oarList.get(j));
                     k++;
