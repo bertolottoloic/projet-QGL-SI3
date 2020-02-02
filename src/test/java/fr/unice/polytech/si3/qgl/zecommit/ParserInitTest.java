@@ -138,7 +138,6 @@ class ParserInitTest {
         parserNext.parserNextRound(jsonString2, game);
         assertEquals(game.getShip().getPosition().getX(), 10.654);
     }
-
 }
 
 
