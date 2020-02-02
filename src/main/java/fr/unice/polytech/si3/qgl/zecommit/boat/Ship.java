@@ -58,6 +58,7 @@ public class Ship {
             if(i<oarsRight.size())
                 oarsSort.add(oarsRight.get(i));
         }
+        this.oars=oarsSort;
     }
 
     /**
