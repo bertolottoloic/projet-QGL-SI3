@@ -32,7 +32,6 @@ public class Road {
 
     /**
      * Permet de savoir si le bateau se dirige dans un cap comprit dans l'intervalle renseigné
-     * @param road
      * @param intervalle
      * @return
      */
