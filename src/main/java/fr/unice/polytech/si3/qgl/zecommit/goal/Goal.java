@@ -1,10 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.goal;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BooleanDeserializer;
 
 @JsonTypeInfo(
@@ -19,7 +16,8 @@ public abstract class Goal {
 
     @JsonProperty("mode")
     private String mode;
-    protected boolean whichMode; //TODO changer le nom
+    @JsonIgnore
+    private boolean isRegatta;
 
     @JsonCreator
     protected Goal(@JsonProperty("mode")String mode){
@@ -32,12 +30,9 @@ public abstract class Goal {
     }
 
     public boolean isRegatta(){
-        return this.whichMode;
+        return this.isRegatta;
     }
 
-    public boolean isBattle(){ //TODO à supprimer
-        return !this.whichMode;
-    }
     //------------------------------GETTER-------------------------//
 
     public String getMode() {
@@ -50,5 +45,9 @@ public abstract class Goal {
 
     public void setMode(String mode) {
         this.mode = mode;
+    }
+
+    public void setRegatta(boolean regatta) {
+        isRegatta = regatta;
     }
 }
