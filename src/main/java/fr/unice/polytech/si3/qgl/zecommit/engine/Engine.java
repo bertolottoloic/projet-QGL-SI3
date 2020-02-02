@@ -26,7 +26,7 @@ public class Engine {
                 "    \"checkpoints\": [\n" +
                 "      {\n" +
                 "        \"position\": {\n" +
-                "          \"x\": 1000,\n" +
+                "          \"x\": 100,\n" +
                 "          \"y\": 1000,\n" +
                 "          \"orientation\": 0\n" +
                 "        },\n" +
@@ -130,9 +130,9 @@ public class Engine {
         sailorArrayList.add(new Sailor(0,0,0,"Edward Teach"));
         sailorArrayList.add(new Sailor(1,0,1,"Tom Pouce"));
         ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
-        checkpointArrayList.add(new Checkpoint(new Position(1000,1000,0),new Circle(50)));
+        checkpointArrayList.add(new Checkpoint(new Position(100,1000,0),new Circle(50)));
         InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
-        while(!cockpit.nextRound(json2).equals("[]")&&step<100) {
+        while(!cockpit.nextRound(json2).equals("[]")) {
 
                 //TODO Multicheckpoints
 
@@ -143,8 +143,10 @@ public class Engine {
                 y = engineNextRound.getY();
                 orientation = engineNextRound.getOrientation();
                 cockpit.getLogs().add("\nROUND "+step + " :"+ "("+x+","+y+")");
-                step++;
+            System.out.println("ROUND "+step + " :"+ "("+x+","+y+")");
             System.out.println(orientation);
+                step++;
+
 
 
                 for(int j=0;j<infoEngine.getOarList().size();j++){
