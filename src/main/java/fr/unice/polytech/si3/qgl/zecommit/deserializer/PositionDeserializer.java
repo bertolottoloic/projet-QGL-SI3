@@ -11,6 +11,9 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import java.io.IOException;
 
+/*
+
+
 public class PositionDeserializer extends JsonDeserializer {
 
 
@@ -21,3 +24,5 @@ public class PositionDeserializer extends JsonDeserializer {
         return new Position(node.get("x").asDouble(), node.get("y").asDouble(), node.get("orientation").asDouble());
     }
 }
+
+ */

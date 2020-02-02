@@ -2,11 +2,10 @@ package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShapeDeserializer;
 
 import java.awt.font.ShapeGraphicAttribute;
 
-/*@JsonTypeInfo(
+@JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
@@ -15,49 +14,49 @@ import java.awt.font.ShapeGraphicAttribute;
         @JsonSubTypes.Type(value = Circle.class, name = "circle")
 })
 
- */
+
 
 /**
  * Model de Forme
  * @author Clement P
  */
-@JsonDeserialize(using = ShapeDeserializer.class)
 public abstract class Shape {
-    //@JsonProperty("type")
-    private String Type; //TODO PAS de maj sur les noms de var
-    protected boolean whichShape; //TODO à renommer
+    @JsonProperty("type")
+    private String type;
+    @JsonIgnore
+    private boolean isCircle;
 
-    //@JsonCreator
-    public Shape(/*@JsonProperty("type")*/String type){
-        Type=type;
+    @JsonCreator
+    public Shape(@JsonProperty("type")String type){
+        this.type=type;
+        this.isCircle=false;
     }
 
     public boolean isCircle(){
-        return this.whichShape;
+        return this.isCircle;
     }
 
-    public boolean isRectangle(){
-        return !this.whichShape;
-    }//TODO à supprimer
-
-
     //------------------------GETTER----------------------//
-    //@JsonProperty("type")
+    @JsonProperty("type")
     public String getType() {
-        return Type;
+        return type;
     }
 
 
     //------------------------SETTER----------------------//
 
-    //@JsonProperty("type")
+    @JsonProperty("type")
     public void setType(String type) {
-        Type = type;
+        type = type;
+    }
+
+    public void setCircle(boolean circle) {
+        isCircle = circle;
     }
 
     @Override
     public String toString() {
-        return "Shape{" + "Type=" + Type + "\'" + "}";
+        return "Shape{" + "Type=" + type + "\'" + "}";
     }
 
 }

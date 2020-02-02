@@ -21,7 +21,7 @@ public class Rectangle extends Shape {
         this.width=width;
         this.height=height;
         this.orientation=orientation;
-        this.whichShape=false; //TODO à renommer
+        setCircle(false);
     }
 
     @Override

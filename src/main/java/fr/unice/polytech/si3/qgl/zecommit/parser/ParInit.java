@@ -6,8 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.deserializer.PositionDeserializer;
-
+/*
 public class ParInit {
 
     public Position parse(String jsonString) throws JsonProcessingException {
@@ -22,3 +21,5 @@ public class ParInit {
         return readValue;
     }
 }
+
+ */
