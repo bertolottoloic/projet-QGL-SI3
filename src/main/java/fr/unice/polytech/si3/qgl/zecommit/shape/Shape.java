@@ -42,7 +42,6 @@ public abstract class Shape {
         return type;
     }
 
-
     //------------------------SETTER----------------------//
 
     @JsonProperty("type")

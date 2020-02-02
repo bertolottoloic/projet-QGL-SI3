@@ -137,7 +137,7 @@ public class OrientationTable {
      */
     ArrayList<Compo>  compoSpeForZ(int oars) {
         ArrayList tempoTable = new ArrayList();
-        for (int i = 0; i <= (oars/2); i++) {
+        for (int i = 1; i <= (oars/2); i++) {
             tempoTable.add(new Compo(i,i));
         }
         return tempoTable;
@@ -155,4 +155,15 @@ public class OrientationTable {
         return formationTable.get(indexAngle).get(indexCompo);
     }
 
+    public Compo getLastCompo(int indexAngle) {
+        return formationTable.get(indexAngle).get(formationTable.get(indexAngle).size()-1);
+    }
+
+    @Override
+    public String toString() {
+        return "OrientationTable{" +
+                "angleTable=" + angleTable +
+                ", formationTable=" + formationTable +
+                '}';
+    }
 }

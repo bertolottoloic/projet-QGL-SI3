@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
@@ -161,8 +162,8 @@ public class Ship {
      * 
      * @return la liste des rames à gauche du bateau.
      */
-    public List<Oar> getLeftOars(){
-        List<Oar> oars = new ArrayList<>();
+    public ArrayList<Oar> getLeftOars(){
+        ArrayList<Oar> oars = new ArrayList<>();
         this.oars.forEach((oar)->
         {
             if(oar.isLeft())
@@ -175,8 +176,8 @@ public class Ship {
      * 
      * @return la liste des rames à droite du bateau.
      */
-    public List<Oar> getRightOars(){
-        List<Oar> oars = new ArrayList<>();
+    public ArrayList<Oar> getRightOars(){
+        ArrayList<Oar> oars = new ArrayList<>();
         this.oars.forEach((oar)->
         {
             if(!oar.isLeft())
@@ -184,6 +185,7 @@ public class Ship {
         });
         return oars;
     }
+
 
     //------------------------------SETTER-------------------------//
 

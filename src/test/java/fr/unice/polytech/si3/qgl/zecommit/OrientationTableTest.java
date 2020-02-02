@@ -77,16 +77,14 @@ class OrientationTableTest {
     @Test
     void generateFormation0Angle(){
         //0 : compo 1
-        assertEquals(orientationTable.getCompo(2, 0).getSailorsLeft(), 0); // 0 marin à gauche
-        assertEquals(orientationTable.getCompo(2, 0).getSailorsRight(), 0); // 0 à droite
+        assertEquals(orientationTable.getCompo(2, 0).getSailorsLeft(), 1); // 1 marin à gauche
+        assertEquals(orientationTable.getCompo(2, 0).getSailorsRight(), 1); // 1 à droite
 
         //0 : compo 2
-        assertEquals(orientationTable.getCompo(2, 1).getSailorsLeft(), 1); // 1 marin à gauche
-        assertEquals(orientationTable.getCompo(2, 1).getSailorsRight(), 1); // 1 à droite
+        assertEquals(orientationTable.getCompo(2, 1).getSailorsLeft(), 2); // 2 marins à gauche
+        assertEquals(orientationTable.getCompo(2, 1).getSailorsRight(), 2); // 2 à droite
 
-        //0 : compo 3
-        assertEquals(orientationTable.getCompo(2, 1).getSailorsLeft(), 1); // 2 marins à gauche
-        assertEquals(orientationTable.getCompo(2, 1).getSailorsRight(), 1); // 2 à droite
+        assertEquals(orientationTable.getLastCompo(2).getSailorsRight(), 2);
 
     }
 

@@ -16,4 +16,12 @@ public class Compo {
     public int getSailorsLeft() {
         return sailorsLeft;
     }
+
+    @Override
+    public String toString() {
+        return "Compo{" +
+                "sailorsRight=" + sailorsRight +
+                ", sailorsLeft=" + sailorsLeft +
+                '}';
+    }
 }

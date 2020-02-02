@@ -138,13 +138,13 @@ public class Engine {
                 //TODO Multicheckpoints
 
 
-                System.out.println(output);
+                //System.out.println(output);
                 EngineNextRound engineNextRound = new EngineNextRound(output, x, y,orientation, infoEngine);
                 x = engineNextRound.getX();
                 y = engineNextRound.getY();
                 orientation = engineNextRound.getOrientation();
                 cockpit.getLogs().add("\nROUND "+step + " :"+ "("+x+","+y+")");
-            //System.out.println("ROUND "+step + " :"+ "("+x+","+y+")");
+            System.out.println("ROUND "+step + " :"+ "("+x+","+y+")");
             //System.out.println(orientation);
 
                 step++;
