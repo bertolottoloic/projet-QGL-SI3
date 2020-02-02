@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
 /**
  * Classe correspondant au marin
@@ -37,6 +38,10 @@ public class Sailor {
     public void move(int xdistance, int ydistance){
         this.x+=xdistance;
         this.y+=ydistance;
+    }
+
+    public int distanceToEntity(Entity e){
+        return Math.abs(x-e.getX()) + Math.abs(y-e.getY());
     }
 
     //--------------------GETTER -------------------------//

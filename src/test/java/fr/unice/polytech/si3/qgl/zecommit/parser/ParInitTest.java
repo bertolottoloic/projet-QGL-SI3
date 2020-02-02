@@ -29,10 +29,6 @@ class ParInitTest {
         ParInit parse = new ParInit();
         Position positionParse = parse.parse(json);
 
-<<<<<<< HEAD
-=======
-        assertEquals(positionParse.getY(), 1000);
->>>>>>> bf3c7d499185b132a8be6d7150c6e977960b551e
     }
 
      */

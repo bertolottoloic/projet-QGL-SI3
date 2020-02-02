@@ -2,10 +2,13 @@ package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ public class Ship {
     @JsonProperty("deck")private Deck deck;
     @JsonProperty("entities")private List<Entity> entities;
     @JsonProperty("shape")private Shape shape;
+    @JsonIgnore private List<Oar> oars = new ArrayList<>();
 
     @JsonCreator
     public Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
@@ -29,6 +33,15 @@ public class Ship {
         this.deck = deck;
         this.entities = entities;
         this.shape = shape;
+        createOarlist();
+    }
+
+    private void createOarlist(){
+        entities.forEach((entity)->
+        {
+            if(entity.getType().equals(EntityType.oar))
+            this.oars.add((Oar)entity);
+        });
     }
 
     /**
@@ -117,6 +130,38 @@ public class Ship {
      */
     public double getYPosition() {
         return this.getPosition().getY();
+    }
+
+    public List<Oar> getOars(){
+        return this.oars;
+    }
+
+    /**
+     * 
+     * @return la liste des rames à gauche du bateau.
+     */
+    public List<Oar> getLeftOars(){
+        List<Oar> oars = new ArrayList<>();
+        this.oars.forEach((oar)->
+        {
+            if(oar.isLeft())
+            oars.add(oar);
+        });
+        return oars;
+    }
+
+    /**
+     * 
+     * @return la liste des rames à droite du bateau.
+     */
+    public List<Oar> getRightOars(){
+        List<Oar> oars = new ArrayList<>();
+        this.oars.forEach((oar)->
+        {
+            if(!oar.isLeft())
+            oars.add(oar);
+        });
+        return oars;
     }
 
     //------------------------------SETTER-------------------------//

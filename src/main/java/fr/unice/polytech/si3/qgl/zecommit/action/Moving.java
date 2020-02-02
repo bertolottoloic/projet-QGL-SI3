@@ -9,17 +9,17 @@ public class Moving extends Action{
 
     public Moving(Sailor sailor, int xdistance, int ydistance){
         super(sailor.getId(), ActionType.MOVING);
-        if ((xdistance + ydistance) <= 5) {
+        if ((Math.abs(xdistance) + Math.abs(ydistance)) <= 5) {
             this.xdistance = xdistance;
             this.ydistance = ydistance;
         }
         else {
-            if (xdistance <= 5) {
+            if (Math.abs(xdistance) <= 5) {
                 this.xdistance = xdistance;
-                this.ydistance = Math.min(5-this.xdistance, ydistance);
+                this.ydistance = (this.ydistance/Math.abs(this.ydistance))*Math.min(5-Math.abs(this.xdistance), Math.abs(ydistance));
             }
             else {
-                this.xdistance = 5;
+                this.xdistance = 5*(this.xdistance/Math.abs(this.xdistance));
                 this.ydistance = 0;
 
             }

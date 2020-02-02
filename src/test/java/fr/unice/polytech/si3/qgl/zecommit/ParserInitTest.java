@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
 import org.junit.jupiter.api.BeforeEach;
@@ -123,10 +125,10 @@ class ParserInitTest {
     void parserInitGameTest() throws JsonProcessingException {
         ParserInit parserInit = new ParserInit();
         Game game = parserInit.parserInitGame(jsonString);
-
         assertEquals("REGATTA", game.getGoal().getMode());
         assertEquals(2, game.getSailors().size());
         assertEquals(2,game.getShip().getEntities().size());
+        assertEquals(EntityType.oar, game.getShip().getEntities().get(0).getType());
         assertEquals(1, game.getShipCount());
         assertEquals("Tom Pouce", game.getSailors().get(1).getName());
     }

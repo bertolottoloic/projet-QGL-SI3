@@ -33,7 +33,7 @@ public class Captain {
         this.regatta=(Regatta) game.getGoal();
         this.sailorList=new ArrayList<>(game.getSailors());
         this.captainMate= CM;
-        this.oarList= new ArrayList<>();
+        this.oarList= ship.getOars();
         sortEntities(game.getEntityList());
         this.logs=logs;
     }
@@ -90,7 +90,7 @@ public class Captain {
     public void sortEntities(List<Entity> entityList){
         for (Entity entity : entityList){
             switch (entity.getType()){
-                case "oar":
+                case oar:
                     this.oarList.add((Oar) entity);
                     oarList.get(oarList.size()-1).setUsed(false);
             }
