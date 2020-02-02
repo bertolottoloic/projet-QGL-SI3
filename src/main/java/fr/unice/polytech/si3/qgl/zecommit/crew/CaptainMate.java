@@ -46,10 +46,13 @@ public class CaptainMate {
      * Place tous les marins sur une rame lors du premier tour.
      */
     public void initMoveSailor(List<Sailor> sailors, Ship ship){
+        List<Sailor> sailorTmp = new ArrayList<>(sailors);
         for(Oar oar : ship.getOars()){
-            sailors.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
-            if(sailors.get(0).distanceToEntity(oar)<=5) 
+            sailorTmp.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
+            if(sailors.get(0).distanceToEntity(oar)<=5) {
                 moveSailor(sailors.get(0), oar.getX()-sailors.get(0).getX(), oar.getY()-sailors.get(0).getY());
+                sailorTmp.remove(0);
+            }
         }
     }
 
