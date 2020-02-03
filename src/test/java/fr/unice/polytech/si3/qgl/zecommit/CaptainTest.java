@@ -34,6 +34,7 @@ public class CaptainTest {
         game = mock(Game.class);
         blackPearl = mock(Ship.class);
         when(game.getShip()).thenReturn(blackPearl);
+        when(blackPearl.getPosition()).thenReturn(new Position(0,0,0));
         gibbs = mock(CaptainMate.class);
         logs = mock(Logs.class);
 
