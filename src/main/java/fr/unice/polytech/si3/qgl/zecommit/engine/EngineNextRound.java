@@ -77,7 +77,7 @@ public class EngineNextRound {
 
         }
         double currentOrientation=orientation;
-        double gap=Math.PI/(infoEngine.getOarList().size()+1);
+        double gap=Math.PI/(infoEngine.getOarList().size());
         double difference= Math.abs(rameDroite-rameGauche);
         if(rameDroite>rameGauche){
             currentOrientation+=gap*difference;
