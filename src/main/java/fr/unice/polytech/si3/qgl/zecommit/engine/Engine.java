@@ -130,7 +130,7 @@ public class Engine {
         sailorArrayList.add(new Sailor(0,0,0,"Edward Teach"));
         sailorArrayList.add(new Sailor(1,0,0,"Tom Pouce"));
         ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
-        checkpointArrayList.add(new Checkpoint(new Position(-500,300,0),new Circle(50)));
+        checkpointArrayList.add(new Checkpoint(new Position(-100,-100,0),new Circle(50)));
         InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
         String output = cockpit.nextRound(json2);
         while(!output.equals("[]")&& step<30) {
