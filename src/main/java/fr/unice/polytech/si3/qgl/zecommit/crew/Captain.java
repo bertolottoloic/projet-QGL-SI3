@@ -60,7 +60,6 @@ public class Captain {
 
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
             regatta.validateCommonCheckpoint();
-
             logs.add("Checkpoint done");
         }
 
@@ -82,13 +81,13 @@ public class Captain {
         int res = 0;
         double orientation = ship.getPosition().getOrientation();
         for (int k = 0; k<2*oarsNb; k ++){
-            if(k*interval-Math.PI/2 + orientation <= angleToReach && angleToReach <= (k+1)*interval-Math.PI/2 + orientation )
+            if(k*interval-Math.PI/2 <= angleToReach && angleToReach <= (k+1)*interval-Math.PI/2 )
                 res = k;
         }
         if(turnAroundLeft(angleToReach))
-            return oarsNb;
-        if(turnAroundRight(angleToReach))
             return 0;
+        if(turnAroundRight(angleToReach))
+            return oarsNb;
 
         if(res==0)
             return 0;
