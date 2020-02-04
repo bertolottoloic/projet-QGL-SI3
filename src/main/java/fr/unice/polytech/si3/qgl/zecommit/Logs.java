@@ -22,10 +22,13 @@ public class Logs {
     }
 
     public List<String> sortie(){
+        List<String> shortLogs = new ArrayList<>();
         if(logs.size()>200) {
-            logs.clear();
-            logs.add("too long logs");// TODO à améliorer
+            for(int i =0; i<200; i++)
+                shortLogs.add(logs.get(i));
+            return shortLogs;
         }
+        else
             return logs ;
         }
 }
