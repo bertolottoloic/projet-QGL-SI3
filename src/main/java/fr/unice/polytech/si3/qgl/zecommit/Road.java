@@ -46,6 +46,15 @@ public class Road {
         return angle;
     }
 
+    public boolean isGoodAngle(){
+        shipOrientation+=Math.PI/36;
+        double angle =  shortestAngle(Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation);
+        if(angle>0)
+            return true;
+        return false;
+
+    }
+
     /**
      * Permet de virer d'un angle le plus petit possible, évite de faire un virage trop grand
      * @param angle
@@ -61,18 +70,6 @@ public class Road {
 
     }
 
-    /**
-     * Permet de savoir si le bateau se dirige dans un cap comprit dans l'intervalle renseigné
-     * @param intervalle
-     * @return
-     */
-    public boolean inCapIntervalle(double intervalle) {
-        double cap = this.orientationToGoal();
-        if (cap < intervalle && cap > -intervalle) {
-            return true;
-        }
-        return false;
-    }
 
 
     //------------------------GETTER----------------------------

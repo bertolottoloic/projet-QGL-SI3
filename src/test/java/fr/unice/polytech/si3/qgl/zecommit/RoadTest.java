@@ -61,31 +61,6 @@ public class RoadTest {
     }
 
     /**
-     * Orientation selon axe des abscisses, Postion de fin dans l'intervalle du cap
-     */
-    @Test
-    void inCapIntervalle_IN_Test() {
-        Position start = new Position(0,0,0);
-        Position end = new Position(10,0,0);
-        Road road = new Road(start, end);
-
-        assertTrue(road.inCapIntervalle(0.2));
-    }
-
-    /**
-     * Orientation selon axe des abscisses, Postion de fin hors l'intervalle du cap
-     */
-    @Test
-    void inCapIntervalle_OUT_Test() {
-
-        Position start = new Position(0,0,0);
-        Position end = new Position(0,10,0);
-        Road road = new Road(start, end);
-
-        assertFalse(road.inCapIntervalle(0.2));
-    }
-
-    /**
      * Renvoie PI/4 à la place de 7*PI/4
      */
     @Test
