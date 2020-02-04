@@ -28,11 +28,22 @@ public class Road {
 
 
     /**
-     * Retourne l'angle entre l'oriantation du bateau et l'objectif
+     * Retourne l'angle entre l'oriantation du bateau et l'objectif.
+     * Si le bateau est parfaitement orienté avec l'objectif, on regarde s'il point vers l'objectif ou s'en éloigne
      * @return
      */
     public double orientationToGoal(){
-        return shortestAngle(Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation);
+
+        //TODO Faire le cas division par 0
+        double angle =  shortestAngle(Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation);
+
+        if (angle == 0) {
+            if (isGoodAngle()) {
+                return angle;
+            }
+            return Math.PI;
+        }
+        return angle;
     }
 
     /**

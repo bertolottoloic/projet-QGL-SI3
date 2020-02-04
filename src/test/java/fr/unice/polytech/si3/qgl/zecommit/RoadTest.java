@@ -118,7 +118,7 @@ public class RoadTest {
     @Test
     void shortestangle3Test() {
         Position start = new Position(0,0,Math.PI/4);
-        Position end = new Position(-4,4,0);
+        Position end = new Position(-4,-4,0);
 
         Road road = new Road(start, end);
 
