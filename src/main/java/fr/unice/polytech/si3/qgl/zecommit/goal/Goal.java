@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.zecommit.goal;
 
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.BooleanDeserializer;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

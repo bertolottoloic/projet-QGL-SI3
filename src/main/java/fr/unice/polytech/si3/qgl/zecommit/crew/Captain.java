@@ -1,5 +1,4 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.OrientationTable;
@@ -8,8 +7,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+
 import fr.unice.polytech.si3.qgl.zecommit.shape.Compo;
 
 import java.util.ArrayList;
@@ -70,6 +68,7 @@ public class Captain {
             refreshSailorsListPosition();
             Road road = new Road(ship.getPosition(),regatta.getFirstCheckpoint().getPosition());
             int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
+            logs.add(ship.getPosition().getOrientation() +" - " + chosenAngle + "");
             decisionOrientation(road, chosenAngle);
         }
     }
@@ -79,19 +78,45 @@ public class Captain {
      */
     public int findClosestPossibleAngle(double angleToReach){
         double interval = Math.PI/(2*oarsNb);
-        //System.out.println(ship.getPosition().getOrientation());n
-        angleToReach+= (Math.PI/2 + ship.getPosition().getOrientation());
+        //System.out.println(ship.getPosition().getOrientation());
         int res = 0;
+        double orientation = ship.getPosition().getOrientation();
         for (int k = 0; k<2*oarsNb; k ++){
-            if(k*interval <= angleToReach && angleToReach <= (k+1)*interval )
+            if(k*interval-Math.PI/2 + orientation <= angleToReach && angleToReach <= (k+1)*interval-Math.PI/2 + orientation )
                 res = k;
         }
+        if(turnAroundLeft(angleToReach))
+            return oarsNb;
+        if(turnAroundRight(angleToReach))
+            return 0;
+
         if(res==0)
             return 0;
         if(res==2*oarsNb-1)
             return oarsNb;
         else
             return (res+1)/2;
+    }
+
+    /**
+     * demi tour gauche ?
+     * @return
+     */
+    public boolean turnAroundLeft(Double angle){
+        if(angle > Math.PI/2 && angle <= Math.PI)
+            return true;
+        return false;
+    }
+
+
+    /**
+     * demi tour droite ?
+     * @return
+     */
+    public boolean turnAroundRight(Double angle){
+        if(angle < -Math.PI/2 && angle > -Math.PI)
+            return true;
+        return false;
     }
 
 

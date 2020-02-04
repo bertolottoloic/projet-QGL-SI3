@@ -5,8 +5,6 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;

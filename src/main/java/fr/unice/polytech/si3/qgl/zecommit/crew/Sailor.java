@@ -2,8 +2,6 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
 /**

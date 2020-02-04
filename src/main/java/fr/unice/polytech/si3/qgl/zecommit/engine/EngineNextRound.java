@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 /**

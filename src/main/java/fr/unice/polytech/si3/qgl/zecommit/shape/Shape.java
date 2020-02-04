@@ -1,9 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.awt.font.ShapeGraphicAttribute;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -46,7 +43,7 @@ public abstract class Shape {
 
     @JsonProperty("type")
     public void setType(String type) {
-        type = type;
+        this.type = type;
     }
 
     public void setCircle(boolean circle) {

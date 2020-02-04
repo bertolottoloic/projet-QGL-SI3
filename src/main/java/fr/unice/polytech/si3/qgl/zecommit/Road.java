@@ -27,7 +27,17 @@ public class Road {
     }
 
     public double orientationToGoal(){
-        return Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation;
+        return shortestAngle(Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation);
+    }
+
+    public double shortestAngle(double angle){
+        if(angle>=Math.PI)
+            angle-=2*Math.PI;
+        if(angle<=-Math.PI)
+            angle+=2*Math.PI;
+        return angle;
+
+
     }
 
     /**

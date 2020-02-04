@@ -4,8 +4,7 @@ package fr.unice.polytech.si3.qgl.zecommit;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Compo;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 
 /**
  * @author Vincent

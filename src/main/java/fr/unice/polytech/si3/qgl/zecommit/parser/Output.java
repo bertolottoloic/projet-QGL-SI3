@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 
 /**
