@@ -77,12 +77,12 @@ public class Captain {
      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
      */
     public int findClosestPossibleAngle(double angleToReach){
-        double interval = Math.PI/(2*oarsNb);
+        double step = Math.PI/(2*oarsNb);
         //System.out.println(ship.getPosition().getOrientation());
         int res = 0;
         double orientation = ship.getPosition().getOrientation();
         for (int k = 0; k<2*oarsNb; k ++){
-            if(k*interval-Math.PI/2 + orientation <= angleToReach && angleToReach <= (k+1)*interval-Math.PI/2 + orientation )
+            if(k*step-Math.PI/2 + orientation <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 + orientation )
                 res = k;
         }
         if(turnAroundLeft(angleToReach))
@@ -154,8 +154,6 @@ public class Captain {
             captainMate.toOar(rightSailorList.get(r), findOarAssociated(rightSailorList.get(r)));
             r++;
         }
-
-
 
     }
 
