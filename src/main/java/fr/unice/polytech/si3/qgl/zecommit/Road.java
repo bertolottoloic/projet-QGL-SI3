@@ -26,15 +26,25 @@ public class Road {
         return Math.sqrt(Math.pow(DistanceXToGoal(),2)+Math.pow(DistanceYToGoal(),2));
     }
 
+
+    /**
+     * Retourne l'angle entre l'oriantation du bateau et l'objectif
+     * @return
+     */
     public double orientationToGoal(){
         return shortestAngle(Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation);
     }
 
+    /**
+     * Permet de virer d'un angle le plus petit possible, évite de faire un virage trop grand
+     * @param angle
+     * @return
+     */
     public double shortestAngle(double angle){
         if(angle>=Math.PI)
-            angle-=2*Math.PI;
+            return angle - (2*Math.PI);
         if(angle<=-Math.PI)
-            angle+=2*Math.PI;
+            return angle + (2*Math.PI);
         return angle;
 
 
