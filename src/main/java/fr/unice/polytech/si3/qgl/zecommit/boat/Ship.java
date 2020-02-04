@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
+import fr.unice.polytech.si3.qgl.zecommit.Road;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
@@ -75,6 +76,22 @@ public class Ship {
             }
         }
         return false;
+    }
+
+    public boolean isInFrontOfCheckpoint(Checkpoint checkpoint){
+        Position cpPosition=checkpoint.getPosition();
+        double angle = (Math.acos((cpPosition.getX()-position.getX())/Math.sqrt(Math.pow(cpPosition.getX()-position.getX(),2)+Math.pow(cpPosition.getY()-position.getY(),2))));
+        if(position.getOrientation()<0){
+            angle+=(position.getOrientation());
+        }
+        else{
+            angle-=(position.getOrientation());
+        }
+        System.out.println((angle));
+        if(Math.abs(angle)>Math.PI/2){
+            return false;
+        }
+        return true;
     }
 
     /**
