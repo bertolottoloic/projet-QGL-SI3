@@ -43,21 +43,21 @@ public class OrientationTable {
         }
 
         // Pas entre chaque angle
-        double pas = Math.PI/efficentOars;
+        double step = Math.PI/efficentOars;
 
         // borne inf de l'interval
         angleTable.add(borneInf);
 
         // On remplit les valeurs inf à 0
         for (int i = 1; i < (efficentOars/2) ; i++) {
-            angleTable.add(borneInf + i*pas);
+            angleTable.add(borneInf + i*step);
         }
         // 0 au milieu de l'interval
         angleTable.add(0.0);
 
         // On remplit les valeurs sup à 0
         for (int i = 1; i < (efficentOars/2) ; i++) {
-            angleTable.add(i*pas);
+            angleTable.add(i*step);
         }
 
         // borne supp de l'interval

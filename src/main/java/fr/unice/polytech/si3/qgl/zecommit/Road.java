@@ -46,6 +46,11 @@ public class Road {
         return angle;
     }
 
+    /**
+     * true si bateau orienté vers object
+     * false si bateau orienté dans le sens opposé
+     * @return
+     */
     public boolean isGoodAngle(){
         shipOrientation+=Math.PI/36;
         double angle =  shortestAngle(Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation);
