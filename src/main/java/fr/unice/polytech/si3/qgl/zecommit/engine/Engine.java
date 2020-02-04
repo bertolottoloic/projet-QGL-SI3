@@ -26,8 +26,8 @@ public class Engine {
                 "    \"checkpoints\": [\n" +
                 "      {\n" +
                 "        \"position\": {\n" +
-                "          \"x\": -500,\n" +
-                "          \"y\": 300,\n" +
+                "          \"x\": 100,\n" +
+                "          \"y\": 1000,\n" +
                 "          \"orientation\": 0\n" +
                 "        },\n" +
                 "        \"shape\": {\n" +
@@ -130,7 +130,7 @@ public class Engine {
         sailorArrayList.add(new Sailor(0,0,0,"Edward Teach"));
         sailorArrayList.add(new Sailor(1,0,0,"Tom Pouce"));
         ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
-        checkpointArrayList.add(new Checkpoint(new Position(-500,300,0),new Circle(50)));
+        checkpointArrayList.add(new Checkpoint(new Position(100,1000,0),new Circle(50)));
         InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
         String output = cockpit.nextRound(json2);
         while(!output.equals("[]")&& step<30) {

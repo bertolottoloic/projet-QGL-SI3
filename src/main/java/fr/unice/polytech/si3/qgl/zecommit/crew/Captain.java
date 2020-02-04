@@ -54,9 +54,9 @@ public class Captain {
      */
     public void actions() {
         captainMate.getActionList().removeAll(captainMate.getActionList());
-        if(test){
-        captainMate.initMoveSailor(sailorList,ship);
-        test=false;}
+        if(!captainMate.allOarsHasSailor(ship)){
+            captainMate.initMoveSailor(sailorList,ship);
+        }
 
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
             regatta.validateCommonCheckpoint();

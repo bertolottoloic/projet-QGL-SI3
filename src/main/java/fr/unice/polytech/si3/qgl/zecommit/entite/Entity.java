@@ -5,6 +5,7 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
  */
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -28,12 +29,22 @@ public abstract class Entity {
     private int x;
     @JsonProperty("y")
     private int y;
+    @JsonIgnore private boolean sailorOn;
 
     @JsonCreator
     public Entity(@JsonProperty("type") EntityType type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
         this.type = type;
         this.x = x;
         this.y = y;
+        this.sailorOn = false;
+    }
+
+    public boolean hasSailorOn(){
+        return this.sailorOn;
+    }
+
+    public void setSailorOn(boolean c){
+        this.sailorOn = c;
     }
 
     @Override
@@ -69,6 +80,8 @@ public abstract class Entity {
     public void setY(int y) {
         this.y = y;
     }
+
+
 }
 
 

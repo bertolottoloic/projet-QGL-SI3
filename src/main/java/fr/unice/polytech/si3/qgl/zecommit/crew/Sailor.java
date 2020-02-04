@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
@@ -14,6 +15,7 @@ public class Sailor {
     @JsonProperty("x")private int x;
     @JsonProperty("y")private int y;
     @JsonProperty("name")private String name;
+    @JsonIgnore private Entity entity;
 
     @JsonCreator
     public Sailor(@JsonProperty("id")int id, @JsonProperty("x")int x, @JsonProperty("y")int y, @JsonProperty("name")String name) {
@@ -21,6 +23,7 @@ public class Sailor {
         this.x = x;
         this.y = y;
         this.name = name;
+        this.entity = null;
     }
     
 
@@ -42,6 +45,9 @@ public class Sailor {
         return Math.abs(x-e.getX()) + Math.abs(y-e.getY());
     }
 
+    public boolean isOnEntity(){
+        return !(this.entity==null);
+    }
     //--------------------GETTER -------------------------//
 
 
@@ -79,5 +85,12 @@ public class Sailor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setOnEntity(Entity e){
+        if(!(this.entity == null))
+            this.entity.setSailorOn(false);
+        this.entity = e;
+        this.entity.setSailorOn(true);     
     }
 }

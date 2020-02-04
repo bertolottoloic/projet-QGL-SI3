@@ -49,11 +49,25 @@ public class CaptainMate {
         List<Sailor> sailorTmp = new ArrayList<>(sailors);
         for(Oar oar : ship.getOars()){
             sailorTmp.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
-            if(sailorTmp.get(0).distanceToEntity(oar)<=5) {
+            if(!oar.hasSailorOn() && sailorTmp.get(0).distanceToEntity(oar)<=5 && !sailorTmp.get(0).isOnEntity()) {
                 moveSailor(sailorTmp.get(0), oar.getX()-sailorTmp.get(0).getX(), oar.getY()-sailorTmp.get(0).getY());
-                sailorTmp.remove(0);
+                sailorTmp.remove(0).setOnEntity(oar);              
             }
         }
+        for(Oar oar:ship.getOars()){
+            sailorTmp.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
+            if(!oar.hasSailorOn() && !sailorTmp.get(0).isOnEntity()){
+                moveSailor(sailorTmp.get(0), oar.getX()-sailorTmp.get(0).getX(), oar.getY()-sailorTmp.get(0).getY());
+            }
+        }
+    }
+
+    public boolean allOarsHasSailor(Ship ship){
+        for(Oar oar : ship.getOars()){
+            if (!oar.hasSailorOn())
+                return false;
+        }
+        return true;
     }
 
     /**
