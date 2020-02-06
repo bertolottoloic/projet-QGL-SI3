@@ -46,6 +46,7 @@ class ShipTest {
      */
     @Test
     void distanceToNegatifTest() {
+        
         Position position = new Position(-2,-5,0);
 
         assertEquals(ship.distanceTo(position), 7);
