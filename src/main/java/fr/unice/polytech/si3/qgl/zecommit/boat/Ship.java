@@ -94,7 +94,7 @@ public class Ship {
      * @return
      */
     public double distanceTo(Position position) {
-        return Math.abs(this.getXPosition() - position.getX()) + Math.abs(this.getYPosition() - position.getY());
+        return Math.sqrt(Math.pow(this.getXPosition() - position.getX(),2) + Math.pow(this.getYPosition() - position.getY(),2));
     }
 
 
