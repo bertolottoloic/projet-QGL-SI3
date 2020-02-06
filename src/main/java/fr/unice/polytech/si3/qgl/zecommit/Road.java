@@ -35,7 +35,10 @@ public class Road {
     public double orientationToGoal(){
 
         //TODO Faire le cas division par 0
-        double angle =  shortestAngle(Math.atan((finishPosition.getY()-startPosition.getY())/(finishPosition.getX()-startPosition.getX()))-shipOrientation);
+        double x = (finishPosition.getX()-startPosition.getX());
+        double y = (finishPosition.getY()-startPosition.getY());
+
+        double angle =  shortestAngle(Math.atan(y/x)-shipOrientation);
 
         if (angle == 0) {
             if (!isGoodAngle()) {
@@ -66,9 +69,9 @@ public class Road {
      * @return
      */
     public double shortestAngle(double angle){
-        if(angle>=Math.PI)
+        if(angle>Math.PI)
             return angle - (2*Math.PI);
-        if(angle<=-Math.PI)
+        if(angle< -Math.PI)
             return angle + (2*Math.PI);
         return angle;
 

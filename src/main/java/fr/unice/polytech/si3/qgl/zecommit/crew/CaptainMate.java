@@ -58,11 +58,12 @@ public class CaptainMate {
             sailorTmp.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
             if(!oar.hasSailorOn() && !sailorTmp.get(0).isOnEntity()){
                 moveSailor(sailorTmp.get(0), oar.getX()-sailorTmp.get(0).getX(), oar.getY()-sailorTmp.get(0).getY());
+                //TODO répartition paire marins gauche-droite
             }
         }
     }
 
-    public boolean allOarsHasSailor(Ship ship){
+    public boolean allOarsHasSailor(Ship ship){ //TODO à changer
         for(Oar oar : ship.getOars()){
             if (!oar.hasSailorOn())
                 return false;

@@ -58,7 +58,31 @@ public class RoadTest {
         assertEquals(Math.PI/4,road.orientationToGoal());
 
         road= new Road(start, new Position(-1,-1,0));
-        assertEquals(Math.PI/4,road.orientationToGoal());
+        assertEquals(-3*Math.PI/4,road.orientationToGoal());
+
+    }
+    @Test
+    void orientationToGoalPositivePositionTest() {
+        //Position positive, position checkpoint positive
+        Road road = new Road(new Position(2,3,Math.PI/4), new Position(2, 8, 0));
+        assertEquals(road.orientationToGoal(), Math.PI/4);
+
+        //Position positive, position checkpoint négative
+        road = new Road(new Position(2,3,Math.PI/4), new Position(-2, 7, 0));
+        assertEquals(road.orientationToGoal(), Math.PI/2);
+
+    }
+
+    @Test
+    void orientationToGoalNegativePositionTest() {
+        //Position négative, position checkpoint positive
+        Road road = new Road(new Position(-2, -3, Math.PI / 4), new Position(2, 7, 0));
+        assertEquals(road.orientationToGoal(), 0.4);
+
+        //Position positive, position checkpoint négative
+        road = new Road(new Position(-2, -3, Math.PI / 4), new Position(-2, -5, 0));
+        assertEquals(road.orientationToGoal(), -3*Math.PI /4);
+
     }
 
     /**
