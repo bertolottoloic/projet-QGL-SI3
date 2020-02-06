@@ -191,9 +191,7 @@ public class Engine {
 
 
 
-                for(int j=0;j<infoEngine.getOarList().size();j++){
-                    infoEngine.getOarList().get(j).setUsed(false);
-                }
+
                 json2 = "{\n" +
                         "  \"ship\": {\n" +
                         "    \"type\": \"ship\",\n" +

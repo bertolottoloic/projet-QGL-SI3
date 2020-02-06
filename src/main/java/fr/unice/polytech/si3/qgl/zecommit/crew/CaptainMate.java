@@ -90,7 +90,6 @@ public class CaptainMate {
     public void toOar(Sailor sailor,Oar oar){
         if(sailor.isOnEntity() && sailor.getEntity()==oar){
             ToOar action = new ToOar(sailor.getId());
-            oar.setUsed(true);
             actionList.add(action);
             Logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
             

@@ -43,7 +43,6 @@ public class EngineNextRound {
                         for(Oar oar: infoEngine.oarList){
                             if(oar.getY()==sailor.getY()&&oar.getX()==sailor.getX()){
                                 nbRameActive++;
-                                oar.setUsed(true);
                                 if(oar.getY()<=3){
                                     rameGauche++;
                                 }

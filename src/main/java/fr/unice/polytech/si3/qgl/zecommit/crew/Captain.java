@@ -178,7 +178,6 @@ public class Captain {
         for (Entity entity : entityList){
             if (entity.getType().equals(EntityType.OAR)) {
                 this.oarList.add((Oar) entity);
-                oarList.get(oarList.size() - 1).setUsed(false);
             }
         }
     }
