@@ -88,7 +88,7 @@ public class CaptainMate {
      * @param sailor
      */
     public void toOar(Sailor sailor,Oar oar){
-        if(sailor.isOnEntity() && sailor.getEntity()==oar && (!oar.isUsed())){
+        if(sailor.isOnEntity() && sailor.getEntity()==oar){
             ToOar action = new ToOar(sailor.getId());
             oar.setUsed(true);
             actionList.add(action);

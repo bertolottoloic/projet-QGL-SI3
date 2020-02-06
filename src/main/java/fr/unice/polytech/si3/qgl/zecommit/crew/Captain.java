@@ -128,7 +128,6 @@ public class Captain {
 
     public void decisionOrientation(Road road, int chosenAngle){
         OrientationTable orientationTable = new OrientationTable(oarsNb);
-
         boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
 
         if(!isNear){//si le bateau est loin

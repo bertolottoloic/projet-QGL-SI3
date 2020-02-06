@@ -50,7 +50,6 @@ public class CaptainMateTest {
         sailor1.setOnEntity(oar1);
         captainMate.toOar(sailor1, oar1);
         assertFalse(captainMate.getActionList().isEmpty());
-        assertTrue(oar1.isUsed());
     }
 
     @Test
@@ -58,7 +57,6 @@ public class CaptainMateTest {
         Oar oar2 = new Oar(sailor1.getX() + 1, sailor1.getY());
         captainMate.toOar(sailor1, oar2);
         assertTrue(captainMate.getActionList().isEmpty());
-        assertFalse(oar2.isUsed());
     }
 
     @Test

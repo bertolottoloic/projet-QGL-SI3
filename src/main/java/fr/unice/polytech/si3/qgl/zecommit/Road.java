@@ -33,7 +33,7 @@ public class Road {
      * @return
      */
     public double orientationToGoal() {
-        double angle = 0;
+        double angle = shipOrientation;
         double x = (finishPosition.getX() - startPosition.getX());
         double y = (finishPosition.getY() - startPosition.getY());
         if (x == 0 && y == 0) {
@@ -48,7 +48,6 @@ public class Road {
         } else {
             angle = shortestAngle(Math.atan(y / x));
         }
-
         return adjustAngle(angle);
     }
 

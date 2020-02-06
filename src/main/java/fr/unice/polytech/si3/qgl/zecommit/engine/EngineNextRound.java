@@ -41,7 +41,7 @@ public class EngineNextRound {
                 for (Sailor sailor: infoEngine.getSailorList()) {
                     if(sailor.getId()==Integer.valueOf(id)){
                         for(Oar oar: infoEngine.oarList){
-                            if(oar.getY()==sailor.getY()&&oar.getX()==sailor.getX()&&!oar.isUsed()){
+                            if(oar.getY()==sailor.getY()&&oar.getX()==sailor.getX()){
                                 nbRameActive++;
                                 oar.setUsed(true);
                                 if(oar.getY()<=3){
