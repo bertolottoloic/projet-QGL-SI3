@@ -66,6 +66,7 @@ public class CaptainMate {
             }
         }
         for(Sailor tmp : sailorTmp){
+            ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
             for(Oar oar:ship.getOars()){
                 if(!oar.hasSailorOn() && !tmp.hasEntity()){
                     tmp.setOnEntity(oar); 
