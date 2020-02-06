@@ -47,6 +47,7 @@ public class CaptainMateTest {
     @Test
     void toOarCorrecteTest() {
         Oar oar1 = new Oar(sailor1.getX(), sailor1.getY());
+        sailor1.setOnEntity(oar1);
         captainMate.toOar(sailor1, oar1);
         assertFalse(captainMate.getActionList().isEmpty());
         assertTrue(oar1.isUsed());

@@ -80,18 +80,14 @@ public class Ship {
 
     public boolean isInFrontOfCheckpoint(Checkpoint checkpoint){
         Position cpPosition=checkpoint.getPosition();
-        double angle = (Math.acos((cpPosition.getX()-position.getX())/Math.sqrt(Math.pow(cpPosition.getX()-position.getX(),2)+Math.pow(cpPosition.getY()-position.getY(),2))));
-        if(position.getOrientation()<0){
-            angle+=(position.getOrientation());
-        }
-        else{
-            angle-=(position.getOrientation());
-        }
-        System.out.println((angle));
+        Road road = new Road(this.position,cpPosition);
+        double angle = road.orientationToGoal();
         if(Math.abs(angle)>Math.PI/2){
             return false;
         }
-        return true;
+        else{
+            return true;
+        }
     }
 
     /**
