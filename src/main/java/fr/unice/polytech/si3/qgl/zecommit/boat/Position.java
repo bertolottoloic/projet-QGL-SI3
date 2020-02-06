@@ -63,18 +63,4 @@ public class Position {
 
     //-------------------------------------------------------------//
 
-    /*
-    public double positiveOrientation() {
-        if (orientation < 0) return 2*Math.PI+orientation;
-        return orientation;
-    }
-
-    public double orientationGap(Position cp) {
-        if (orientation > 0) {
-            //if(x>cp.getPosition().x) return this.orientation+Math.acos(a)
-        }
-        return 0.0;
-    }
-
-     */
 }

@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.goal;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 import java.util.List;
@@ -33,10 +34,13 @@ public class Regatta extends Goal {
      * @return
      */
     public Checkpoint getFirstCheckpoint() {
-        if (this.checkpoints.size() != 0) {
+        if (!this.checkpoints.isEmpty()) {
             return this.checkpoints.get(0);
         }
-        return null;
+        else {
+            Logs.add("PBCH");
+            return null;
+        }
     }
 
 

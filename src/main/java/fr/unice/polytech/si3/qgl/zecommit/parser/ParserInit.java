@@ -25,7 +25,7 @@ import java.util.List;
  * @author Vincent et Nathan
  */
 public class ParserInit {
-    public int nbSailors = 0;
+    int nbSailors = 0;
 
     public Game parserInitGame(String jsonString) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

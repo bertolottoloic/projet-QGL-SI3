@@ -27,8 +27,8 @@ public class CaptainMate {
 
 
     /**
-     * Déplace le sailor de la distance demandé.
-     * Si la distance dépasse 5 l'action est annulée, ceci est prit en charge dans le constructeur de Moving
+     * Déplace le sailor de la distance demandée.
+     * Si la distance dépasse 5 l'action est annulée, ceci est pris en charge dans le constructeur de Moving
      * @param xdistance
      * @param ydistance
      */

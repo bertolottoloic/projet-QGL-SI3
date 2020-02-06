@@ -1,9 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 
-import fr.unice.polytech.si3.qgl.zecommit.shape.Compo;
-
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,7 +27,7 @@ public class OrientationTable {
      * @return
      */
     ArrayList<Double> generateAngleTable(int oarsNb) {
-        ArrayList<Double> angleTable = new ArrayList();
+        ArrayList<Double> myAngleTable = new ArrayList();
 
         double borneSup =  Math.PI/2;
         double borneInf = -borneSup;
@@ -46,28 +45,28 @@ public class OrientationTable {
         double step = Math.PI/efficentOars;
 
         // borne inf de l'interval
-        angleTable.add(borneInf);
+        myAngleTable.add(borneInf);
 
         // On remplit les valeurs inf à 0
         for (int i = 1; i < (efficentOars/2) ; i++) {
-            angleTable.add(borneInf + i*step);
+            myAngleTable.add(borneInf + i*step);
         }
         // 0 au milieu de l'interval
-        angleTable.add(0.0);
+        myAngleTable.add(0.0);
 
         // On remplit les valeurs sup à 0
         for (int i = 1; i < (efficentOars/2) ; i++) {
-            angleTable.add(i*step);
+            myAngleTable.add(i*step);
         }
 
         // borne supp de l'interval
-        angleTable.add(borneSup);
+        myAngleTable.add(borneSup);
 
-        return angleTable;
+        return myAngleTable;
     }
 
     ArrayList<ArrayList<Compo>> generateFormation(int oarsNb) {
-        ArrayList formationTable = new ArrayList();
+        ArrayList myFormationTable = new ArrayList();
 
         int oars;
 
@@ -81,18 +80,18 @@ public class OrientationTable {
 
         // Compo pour Orientation negative
         for (int i = 0; i < (oars/2); i++) {
-            formationTable.add(compoSpeBeforeZ(i, oars));
+            myFormationTable.add(compoSpeBeforeZ(i, oars));
         }
 
         // Compo pour avancer tout droit
-        formationTable.add(compoSpeForZ(oars));
+        myFormationTable.add(compoSpeForZ(oars));
 
         //Compo pour Orientation positive
         for (int i = (oars/2)-1; i >= 0; i--) {
-            formationTable.add(compoSpeAfterZ(i, oars));
+            myFormationTable.add(compoSpeAfterZ(i, oars));
         }
 
-        return formationTable;
+        return myFormationTable;
     }
 
     /**
@@ -142,11 +141,11 @@ public class OrientationTable {
         return tempoTable;
     }
 
-    public ArrayList<Double> getAngleTable() {
+    public List<Double> getAngleTable() {
         return this.angleTable;
     }
 
-    public ArrayList<ArrayList<Compo>> getFormationTable() {
+    public List<ArrayList<Compo>> getFormationTable() {
         return formationTable;
     }
 

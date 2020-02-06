@@ -42,7 +42,7 @@ public abstract class Entity {
     }
 
     public boolean hasSailorOn(){
-        return !(this.sailorOn==null);
+        return this.sailorOn!=null;
     }
 
     public void putSailorOn(Sailor sailor){

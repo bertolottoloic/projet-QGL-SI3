@@ -30,21 +30,21 @@ public class RoadTest {
 
     @Test
     void distanceXToGoalTest(){
-        assertEquals(6,roadTest.DistanceXToGoal());
-        assertEquals(6,roadTest2.DistanceXToGoal());
+        assertEquals(6,roadTest.xDistanceToGoal());
+        assertEquals(6,roadTest2.xDistanceToGoal());
 
     }
 
     @Test
     void distanceYToGoalTest(){
-        assertEquals(3,roadTest.DistanceYToGoal());
-        assertEquals(3,roadTest2.DistanceYToGoal());
+        assertEquals(3,roadTest.yDistanceToGoal());
+        assertEquals(3,roadTest2.yDistanceToGoal());
     }
 
     @Test
     void distanceToGoalTest(){
-        assertEquals(Math.sqrt(3*3+6*6),roadTest.DistanceToGoal());
-        assertEquals(Math.sqrt(3*3+6*6),roadTest2.DistanceToGoal());
+        assertEquals(Math.sqrt(3*3+6*6),roadTest.distanceToGoal());
+        assertEquals(Math.sqrt(3*3+6*6),roadTest2.distanceToGoal());
     }
 
     @Test

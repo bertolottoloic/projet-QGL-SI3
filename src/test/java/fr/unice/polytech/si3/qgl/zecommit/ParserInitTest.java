@@ -128,7 +128,7 @@ class ParserInitTest {
         assertEquals("REGATTA", game.getGoal().getMode());
         assertEquals(2, game.getSailors().size());
         assertEquals(2,game.getShip().getEntities().size());
-        assertEquals(EntityType.oar, game.getShip().getEntities().get(0).getType());
+        assertEquals(EntityType.OAR, game.getShip().getEntities().get(0).getType());
         assertEquals(1, game.getShipCount());
         assertEquals("Tom Pouce", game.getSailors().get(1).getName());
     }

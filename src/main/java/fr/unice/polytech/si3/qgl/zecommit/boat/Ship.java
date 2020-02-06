@@ -38,10 +38,10 @@ public class Ship {
     }
 
     private void createOarlist(){
-        entities.forEach((entity)->
+        entities.forEach(entity->
         {
-            if(entity.getType().equals(EntityType.oar))
-            this.oars.add((Oar)entity);
+            if(entity.getType().equals(EntityType.OAR))
+                this.oars.add((Oar)entity);
         });
     }
 
@@ -67,13 +67,11 @@ public class Ship {
      * @param checkpoint
      * @return boolean
      */
-    public boolean isInCheckpoint(Checkpoint checkpoint) {
+    public boolean isInCheckpoint(Checkpoint checkpoint) { //TODO à corriger
         //cas avec un cercle
-        if (checkpoint.isCircle()) {
+        if (checkpoint.isCircle() && this.distanceTo(checkpoint.getPosition()) < checkpoint.getCircleRadius()) {
             //Si le centre du bateau est dans le CP
-            if (this.distanceTo(checkpoint.getPosition()) < checkpoint.getCircleRadius()) {
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -102,14 +100,13 @@ public class Ship {
 
     @Override
     public String toString() {
-        String chaine = "type : " + this.type +
+        return "type : " + this.type +
                 "\nlife : " + this.life +
                 "\nposition : " + this.position +
                 "\nname : " + this.name +
                 "\ndeck : "+this.deck+
                 "\n entities : "+this.entities+
                 "\n shape : "+this.shape;
-        return chaine;
     }
 
 
@@ -173,28 +170,28 @@ public class Ship {
      * 
      * @return la liste des rames à gauche du bateau.
      */
-    public ArrayList<Oar> getLeftOars(){
-        ArrayList<Oar> oars = new ArrayList<>();
-        this.oars.forEach((oar)->
+    public List<Oar> getLeftOars(){
+        ArrayList<Oar> oarsList = new ArrayList<>();
+        this.oars.forEach(oar->
         {
             if(oar.isLeft())
-            oars.add(oar);
+                oarsList.add(oar);
         });
-        return oars;
+        return oarsList;
     }
 
     /**
      * 
      * @return la liste des rames à droite du bateau.
      */
-    public ArrayList<Oar> getRightOars(){
-        ArrayList<Oar> oars = new ArrayList<>();
-        this.oars.forEach((oar)->
+    public List<Oar> getRightOars(){
+        ArrayList<Oar> oarsList = new ArrayList<>();
+        this.oars.forEach(oar->
         {
             if(!oar.isLeft())
-            oars.add(oar);
+                oarsList.add(oar);
         });
-        return oars;
+        return oarsList;
     }
 
 

@@ -106,7 +106,7 @@ public class Sailor {
     }
 
     public void setOnEntity(Entity e){
-        if(!(this.entity == null))
+        if(this.entity != null)
             this.entity.putSailorOn(null);
         this.entity = e;
         this.entity.putSailorOn(this);     

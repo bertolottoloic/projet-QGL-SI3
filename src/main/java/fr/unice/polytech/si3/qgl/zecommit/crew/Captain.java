@@ -5,10 +5,11 @@ import fr.unice.polytech.si3.qgl.zecommit.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.Road;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 
-import fr.unice.polytech.si3.qgl.zecommit.shape.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.Compo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +29,17 @@ public class Captain {
     private int oarsNb;
     private CaptainMate captainMate;
     private Game game;
-    private Logs logs;
     boolean initGame=true;
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
 
 
 
-    public Captain(Game game, CaptainMate CM){
+    public Captain(Game game, CaptainMate cM){
         this.ship = game.getShip();
         this.regatta = (Regatta) game.getGoal();
         this.sailorList = new ArrayList<>(game.getSailors());
-        this.captainMate = CM;
+        this.captainMate = cM;
         this.oarList = ship.getOars();
         this.oarsNb = ship.getOarsNb();
         Logs.add("oarsNb:"+oarsNb);
@@ -129,12 +129,9 @@ public class Captain {
     public void decisionOrientation(Road road, int chosenAngle){
         OrientationTable orientationTable = new OrientationTable(oarsNb);
 
-        boolean isNear = road.DistanceYToGoal() > (165-regatta.getFirstCheckpoint().getCircleRadius());
+        boolean isNear = road.yDistanceToGoal() > (165-regatta.getFirstCheckpoint().getCircleRadius());
 
         if(!isNear){//si le bateau est loin
-            //System.out.println(chosenAngle);
-            //System.out.println(orientationTable);
-            //System.out.println(orientationTable.getLastCompo(chosenAngle));
             activateSailors(orientationTable.getLastCompo(chosenAngle));//on choisit la compo permettant d'aller le plus vite
         }
         else
@@ -150,7 +147,7 @@ public class Captain {
         // Activation des marins de gauche
         int l = 0;
         while (l<compo.getSailorsLeft()) {
-            captainMate.toOar(leftSailorList.get(l), (Oar) leftSailorList.get(l).getEntity());
+            captainMate.toOar(leftSailorList.get(l), (Oar) leftSailorList.get(l).getEntity()); //TODO à vérifier
             l++;
         }
 
@@ -180,10 +177,9 @@ public class Captain {
      */
     public void sortEntities(List<Entity> entityList){
         for (Entity entity : entityList){
-            switch (entity.getType()){
-                case oar:
-                    this.oarList.add((Oar) entity);
-                    oarList.get(oarList.size()-1).setUsed(false);
+            if (entity.getType().equals(EntityType.OAR)) {
+                this.oarList.add((Oar) entity);
+                oarList.get(oarList.size() - 1).setUsed(false);
             }
         }
     }
@@ -232,7 +228,7 @@ public class Captain {
      *
      * @return la liste des marins à gauche du bateau.
      */
-    public ArrayList<Sailor> getLeftSailors(){
+    public List<Sailor> getLeftSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
             if(sailor.getY()==0)
@@ -245,7 +241,7 @@ public class Captain {
      *
      * @return la liste des marins à droite du bateau.
      */
-    public ArrayList<Sailor> getRightSailors(){
+    public List<Sailor> getRightSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
             if(sailor.getY()!=0)

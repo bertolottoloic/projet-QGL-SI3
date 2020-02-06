@@ -10,24 +10,20 @@ import java.util.List;
  */
 public class Logs {
 
-    public static List<String> logs = new ArrayList<>();
-
-    public Logs() {
-    }
-
+    protected static final List<String> myLogs = new ArrayList<>();
 
     public static void add(String s){
-        logs.add(s);
+        myLogs.add(s);
     }
 
     public static List<String> sortie(){
         List<String> shortLogs = new ArrayList<>();
-        if(logs.size()>=200) {
+        if(myLogs.size()>=200) {
             for(int i = 0; i<200; i++)
-                shortLogs.add(logs.get(i));
+                shortLogs.add(myLogs.get(i));
             return shortLogs;
         }
         else
-            return logs ;
+            return myLogs ;
         }
 }

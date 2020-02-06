@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 
 /**
@@ -24,7 +25,7 @@ public class Output{
         try{
             return oM.writeValueAsString(actions);
         } catch (IOException e){
-            System.out.println(e.getMessage());
+            Logs.add(e.getMessage());
             return "[]";
         }
     }

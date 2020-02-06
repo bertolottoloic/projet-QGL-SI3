@@ -15,15 +15,15 @@ public class Road {
         this.finishPosition=finish;
     }
 
-    public double DistanceXToGoal(){
+    public double xDistanceToGoal(){
         return Math.abs(startPosition.getX()-finishPosition.getX());
     }
-    public double DistanceYToGoal(){
+    public double yDistanceToGoal(){
         return Math.abs(startPosition.getY()-finishPosition.getY());
     }
 
-    public double DistanceToGoal(){
-        return Math.sqrt(Math.pow(DistanceXToGoal(),2)+Math.pow(DistanceYToGoal(),2));
+    public double distanceToGoal(){
+        return Math.sqrt(Math.pow(xDistanceToGoal(),2)+Math.pow(yDistanceToGoal(),2));
     }
 
 
@@ -32,32 +32,41 @@ public class Road {
      * Si le bateau est parfaitement orienté avec l'objectif, on regarde s'il point vers l'objectif ou s'en éloigne
      * @return
      */
-    public double orientationToGoal(){
-
-        //TODO Faire le cas division par 0
-        double x = (finishPosition.getX()-startPosition.getX());
-        double y = (finishPosition.getY()-startPosition.getY());
-        if(x==0&&y==0){
+    public double orientationToGoal() {
+        double angle = 0;
+        double x = (finishPosition.getX() - startPosition.getX());
+        double y = (finishPosition.getY() - startPosition.getY());
+        if (x == 0 && y == 0) {
             return 0;
-        }
-        double angle =  shortestAngle(Math.atan(y/x));
 
-        System.out.println(angle);
-        if(finishPosition.getX()<startPosition.getX()&&finishPosition.getY()<=startPosition.getY()){
-            angle-=Math.PI;
-            angle-=shipOrientation;
         }
-        if(finishPosition.getX()<startPosition.getX()&&finishPosition.getY()>startPosition.getY()){
-            angle+=Math.PI-shipOrientation;
+        if (x == 0) {
+            if (y > 0)
+                angle = Math.PI / 2;
+            if (y < 0)
+                angle = -Math.PI / 2;
+        } else {
+            angle = shortestAngle(Math.atan(y / x));
         }
-        if(finishPosition.getX()>=startPosition.getX()&&finishPosition.getY()<startPosition.getY()){
-            angle-=shipOrientation;
-        }
-        if(finishPosition.getX()>=startPosition.getX()&&finishPosition.getY()>=startPosition.getY()){
-            angle-=shipOrientation;
-        }
-        System.out.println(angle);
 
+        return adjustAngle(angle);
+    }
+
+
+    public double adjustAngle(double angle) {
+        if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() <= startPosition.getY()) {
+            angle -= Math.PI;
+            angle -= shipOrientation;
+        }
+        if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() > startPosition.getY()) {
+            angle += Math.PI - shipOrientation;
+        }
+        if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() < startPosition.getY()) {
+            angle -= shipOrientation;
+        }
+        if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() >= startPosition.getY()) {
+            angle -= shipOrientation;
+        }
         return angle;
     }
 

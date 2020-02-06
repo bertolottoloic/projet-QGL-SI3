@@ -25,7 +25,6 @@ public class Cockpit implements ICockpit {
 			this.captain= new Captain(game,captainMate);
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
-			e.printStackTrace();
 		}
 	}
 
@@ -48,7 +47,6 @@ public class Cockpit implements ICockpit {
 			res = output.afficheRound(actions);
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur nextRound");
-			e.printStackTrace();
 			res = "[ ]";
 		}
 		

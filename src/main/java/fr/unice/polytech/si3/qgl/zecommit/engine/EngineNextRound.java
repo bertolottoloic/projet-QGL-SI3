@@ -87,7 +87,7 @@ public class EngineNextRound {
         }
 
         this.orientation=currentOrientation%(Math.PI);
-        double vitesse= 165*nbRameActive/infoEngine.getOarList().size();
+        double vitesse= (double)165*nbRameActive/infoEngine.getOarList().size();
         this.x +=vitesse*Math.cos(orientation);
         this.y +=vitesse*Math.sin(orientation);
 

@@ -13,7 +13,7 @@ public class Sail extends Entity {
 
     @JsonCreator
     public Sail(@JsonProperty("x")int x, @JsonProperty("y")int y, Boolean openned){
-        super(EntityType.sail,x,y);
+        super(EntityType.SAIL,x,y);
         this.openned = openned;
     }
 
