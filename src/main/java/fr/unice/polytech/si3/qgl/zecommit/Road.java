@@ -37,15 +37,27 @@ public class Road {
         //TODO Faire le cas division par 0
         double x = (finishPosition.getX()-startPosition.getX());
         double y = (finishPosition.getY()-startPosition.getY());
-
-        double angle =  shortestAngle(Math.atan(y/x)-shipOrientation);
-
-        if (angle == 0) {
-            if (!isGoodAngle()) {
-                return angle;
-            }
-            return Math.PI;
+        if(x==0&&y==0){
+            return 0;
         }
+        double angle =  shortestAngle(Math.atan(y/x));
+
+        System.out.println(angle);
+        if(finishPosition.getX()<startPosition.getX()&&finishPosition.getY()<=startPosition.getY()){
+            angle-=Math.PI;
+            angle-=shipOrientation;
+        }
+        if(finishPosition.getX()<startPosition.getX()&&finishPosition.getY()>startPosition.getY()){
+            angle+=Math.PI-shipOrientation;
+        }
+        if(finishPosition.getX()>=startPosition.getX()&&finishPosition.getY()<startPosition.getY()){
+            angle-=shipOrientation;
+        }
+        if(finishPosition.getX()>=startPosition.getX()&&finishPosition.getY()>=startPosition.getY()){
+            angle-=shipOrientation;
+        }
+        System.out.println(angle);
+
         return angle;
     }
 

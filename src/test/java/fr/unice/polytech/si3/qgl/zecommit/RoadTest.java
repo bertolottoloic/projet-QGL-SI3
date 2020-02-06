@@ -60,16 +60,19 @@ public class RoadTest {
         road= new Road(start, new Position(-1,-1,0));
         assertEquals(-3*Math.PI/4,road.orientationToGoal());
 
+        road= new Road(start, new Position(-100,0,0));
+        assertEquals(-Math.PI,road.orientationToGoal());
+
     }
     @Test
     void orientationToGoalPositivePositionTest() {
         //Position positive, position checkpoint positive
         Road road = new Road(new Position(2,3,Math.PI/4), new Position(2, 8, 0));
-        assertEquals(road.orientationToGoal(), Math.PI/4);
+        assertEquals(Math.PI/4,road.orientationToGoal());
 
         //Position positive, position checkpoint négative
-        road = new Road(new Position(2,3,Math.PI/4), new Position(-2, 7, 0));
-        assertEquals(road.orientationToGoal(), Math.PI/2);
+        road = new Road(new Position(3,2,Math.PI/4), new Position(-2, 7, 0));
+        assertEquals(Math.PI/2, road.orientationToGoal());
 
     }
 
@@ -81,7 +84,17 @@ public class RoadTest {
 
         //Position positive, position checkpoint négative
         road = new Road(new Position(-2, -3, Math.PI / 4), new Position(-2, -5, 0));
-        assertEquals(road.orientationToGoal(), -3*Math.PI /4);
+        assertEquals(-3*Math.PI /4,road.orientationToGoal());
+
+        road = new Road(new Position(-2, -3, Math.PI / 4), new Position(2, 7, 0));
+        assertTrue(road.orientationToGoal()>0.4 && road.orientationToGoal()<0.41 );
+
+        //Position positive, position checkpoint négative
+        road = new Road(new Position(-2, -3, Math.PI / 4), new Position(-2, -5, 0));
+        assertEquals(-3*Math.PI /4,road.orientationToGoal());
+
+        road = new Road(new Position(0, 0, Math.PI / 4), new Position(-5, -5, 0));
+        assertEquals(-Math.PI,road.orientationToGoal());
 
     }
 
@@ -102,6 +115,10 @@ public class RoadTest {
         road = new Road(new Position(-7, 3, Math.PI / 4), new Position(-7, 3, 0));
         assertEquals( 0, road.orientationToGoal());
 
+
+        road = new Road(new Position(-7, 3, 3*Math.PI / 4), new Position(-5, 1, 0));
+        assertEquals( -Math.PI, road.orientationToGoal());
+        
     }
 
     /**

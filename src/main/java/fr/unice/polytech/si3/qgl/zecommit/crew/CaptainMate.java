@@ -5,6 +5,7 @@ import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 
 import java.util.ArrayList;
@@ -43,27 +44,38 @@ public class CaptainMate {
     /**
      * Place tous les marins sur une rame lors du premier tour.
      */
-    public void initMoveSailor(List<Sailor> sailors, Ship ship){
+    public void initMoveSailor(List<Sailor> sailors){
+        for(Sailor sailor : sailors){
+            if(sailor.hasEntity() && !sailor.isOnEntity())
+                moveSailor(sailor, sailor.getEntity().getX()-sailor.getX(), sailor.getEntity().getY()-sailor.getY());
+        }
+    }
+
+    public void initAttibuteOarToSailors(List<Sailor> sailors, Ship ship){
         List<Sailor> sailorTmp = new ArrayList<>(sailors);
-        for(Oar oar : ship.getOars()){
-            sailorTmp.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
-            if(!oar.hasSailorOn() && sailorTmp.get(0).distanceToEntity(oar)<=5 && !sailorTmp.get(0).isOnEntity()) {
-                moveSailor(sailorTmp.get(0), oar.getX()-sailorTmp.get(0).getX(), oar.getY()-sailorTmp.get(0).getY());
-                sailorTmp.remove(0).setOnEntity(oar);              
+        List<Entity> oars = new ArrayList<>();
+        oars.addAll(ship.getOars());
+        sailorTmp.sort(Comparator.comparingInt(a->a.distanceToNearestEntity(oars)));
+        for(Sailor tmp : sailorTmp){   
+            ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
+            Oar closestOar = ship.getOars().get(0);
+            if(!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar)<=5 && !tmp.hasEntity()) {
+                tmp.setOnEntity(closestOar);             
             }
         }
-        for(Oar oar:ship.getOars()){
-            sailorTmp.sort(Comparator.comparingInt( a -> a.distanceToEntity(oar)));
-            if(!oar.hasSailorOn() && !sailorTmp.get(0).isOnEntity()){
-                moveSailor(sailorTmp.get(0), oar.getX()-sailorTmp.get(0).getX(), oar.getY()-sailorTmp.get(0).getY());
-                //TODO répartition paire marins gauche-droite
+        for(Sailor tmp : sailorTmp){
+            ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
+            for(Oar oar:ship.getOars()){
+                if(!oar.hasSailorOn() && !tmp.hasEntity()){
+                    tmp.setOnEntity(oar); 
+                }
             }
         }
     }
 
-    public boolean allOarsHasSailor(Ship ship){ //TODO à changer
-        for(Oar oar : ship.getOars()){
-            if (!oar.hasSailorOn())
+    public boolean sailorsAreOnTheirEntity(List<Sailor> sailors){
+        for(Sailor sailor : sailors){
+            if (!sailor.isOnEntity() && sailor.hasEntity())
                 return false;
         }
         return true;
@@ -76,7 +88,7 @@ public class CaptainMate {
      * @param sailor
      */
     public void toOar(Sailor sailor,Oar oar){
-        if(oar.getX()==sailor.getX() && oar.getY()==sailor.getY() && (!oar.isUsed())){
+        if(sailor.isOnEntity() && sailor.getEntity()==oar && (!oar.isUsed())){
             ToOar action = new ToOar(sailor.getId());
             oar.setUsed(true);
             actionList.add(action);

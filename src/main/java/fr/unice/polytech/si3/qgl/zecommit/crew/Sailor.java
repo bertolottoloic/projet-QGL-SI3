@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import java.util.Comparator;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,10 +49,23 @@ public class Sailor {
     }
 
     public boolean isOnEntity(){
+        return hasEntity() && this.x==this.entity.getX() && this.y==this.entity.getY();
+    }
+
+    public boolean hasEntity(){
         return !(this.entity==null);
     }
+
+    public int distanceToNearestEntity(List<Entity> e){
+        e.sort(Comparator.comparingInt(a -> distanceToEntity(a)));
+        return distanceToEntity(e.get(0));
+    }
+
     //--------------------GETTER -------------------------//
 
+    public Entity getEntity(){
+        return this.entity;
+    }
 
     public int getId() {
         return id;
@@ -89,8 +105,8 @@ public class Sailor {
 
     public void setOnEntity(Entity e){
         if(!(this.entity == null))
-            this.entity.setSailorOn(false);
+            this.entity.putSailorOn(null);
         this.entity = e;
-        this.entity.setSailorOn(true);     
+        this.entity.putSailorOn(this);     
     }
 }
