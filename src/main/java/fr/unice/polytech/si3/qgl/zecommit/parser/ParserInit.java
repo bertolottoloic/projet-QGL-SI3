@@ -70,6 +70,7 @@ public class ParserInit {
                 break;
 
             default:
+                Logs.add("PB1-Parseur");
                 throw new IllegalStateException("Unexpected value: " + mode);
         }
 

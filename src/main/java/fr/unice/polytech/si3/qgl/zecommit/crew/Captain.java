@@ -35,7 +35,7 @@ public class Captain {
 
 
 
-    public Captain(Game game, CaptainMate CM, Logs logs){
+    public Captain(Game game, CaptainMate CM){
         this.ship = game.getShip();
         this.regatta = (Regatta) game.getGoal();
         this.sailorList = new ArrayList<>(game.getSailors());
@@ -44,7 +44,6 @@ public class Captain {
         this.oarsNb = ship.getOarsNb();
 
         sortEntities(game.getEntityList());
-        this.logs=logs;
         this.rightSailorList = getRightSailors();
         this.leftSailorList = getLeftSailors();
     }
@@ -60,14 +59,14 @@ public class Captain {
 
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
             regatta.validateCommonCheckpoint();
-            logs.add("Checkpoint done");
+            Logs.add("Checkpoint done");
         }
 
         if(!game.getShip().isInCheckpoint(regatta.getFirstCheckpoint())) {
             refreshSailorsListPosition();
             Road road = new Road(ship.getPosition(),regatta.getFirstCheckpoint().getPosition());
             int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
-            logs.add(ship.getPosition().getOrientation() +" - " + chosenAngle + "");
+            Logs.add(ship.getPosition().getOrientation() +" - " + chosenAngle + "");
             decisionOrientation(road, chosenAngle);
         }
     }

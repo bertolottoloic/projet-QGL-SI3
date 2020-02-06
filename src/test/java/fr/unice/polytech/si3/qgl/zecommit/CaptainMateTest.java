@@ -27,7 +27,7 @@ public class CaptainMateTest {
     void setUp() {
         Logs logs = new Logs();
         sailor1 = new Sailor(1, 0, 0, "sailor1");
-        captainMate = new CaptainMate(logs);
+        captainMate = new CaptainMate();
     }
 
     @Test

@@ -32,6 +32,8 @@ public abstract class Goal {
         return this.isRegatta;
     }
 
+
+
     //------------------------------GETTER-------------------------//
 
     public String getMode() {

@@ -101,7 +101,7 @@ public class RoadTest {
         // Bateau et Checkpoint confondu
         road = new Road(new Position(-7, 3, Math.PI / 4), new Position(-7, 3, 0));
         assertEquals( 0, road.orientationToGoal());
-        
+
     }
 
     /**

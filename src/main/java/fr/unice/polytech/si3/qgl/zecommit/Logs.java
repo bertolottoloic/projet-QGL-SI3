@@ -10,21 +10,20 @@ import java.util.List;
  */
 public class Logs {
 
-    public List<String> logs;
+    public static List<String> logs = new ArrayList<>();
 
     public Logs() {
-        this.logs = new ArrayList<>();
     }
 
 
-    public void add(String s){
+    public static void add(String s){
         logs.add(s);
     }
 
-    public List<String> sortie(){
+    public static List<String> sortie(){
         List<String> shortLogs = new ArrayList<>();
-        if(logs.size()>200) {
-            for(int i =0; i<200; i++)
+        if(logs.size()>=200) {
+            for(int i = 0; i<200; i++)
                 shortLogs.add(logs.get(i));
             return shortLogs;
         }

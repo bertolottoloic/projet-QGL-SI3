@@ -18,11 +18,9 @@ import java.util.List;
  */
 public class CaptainMate {
     private List<Action> actionList;
-    private Logs logs;
 
-    public CaptainMate(Logs logs){
+    public CaptainMate(){
         this.actionList= new ArrayList<>();
-        this.logs = logs;
     }
 
 
@@ -37,7 +35,7 @@ public class CaptainMate {
         Moving action = new Moving(sailor, xdistance, ydistance);
         if(action.getXDistance()!=0 || action.getYDistance()!=0){
             actionList.add(action);
-            logs.add("\nS" + sailor.getId() + " is moving to (" + sailor.getX() + "," + sailor.getY() +")");
+            Logs.add("\nS" + sailor.getId() + " is moving to (" + sailor.getX() + "," + sailor.getY() +")");
         }
     }
 
@@ -82,7 +80,7 @@ public class CaptainMate {
             ToOar action = new ToOar(sailor.getId());
             oar.setUsed(true);
             actionList.add(action);
-            logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
+            Logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
             
         }
     }
