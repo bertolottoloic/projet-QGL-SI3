@@ -76,7 +76,7 @@ class ShipTest {
         ship.setPosition(shipPosition);
         when(mockCheckpoint.getPosition()).thenReturn(new Position(10,10,0));
         assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,0,0));
+        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,10,0));
         assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
 
         shipPosition=new Position(0,0,-Math.PI/2);
@@ -86,17 +86,17 @@ class ShipTest {
         when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,0,0));
         assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
 
-        shipPosition=new Position(0,0,Math.PI);
+        shipPosition=new Position(0,0,-Math.PI);
         ship.setPosition(shipPosition);
         when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,-10,0));
         assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
         when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,0,0));
         assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,10,0));
+        when(mockCheckpoint.getPosition()).thenReturn(new Position(0,-10,0));
         assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
     }
 
-    @Ignore
+    @Test
     void isInFrontOfCheckpointTestFalse(){
         Checkpoint mockCheckpoint= mock(Checkpoint.class);
         when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,10,0));
@@ -111,21 +111,8 @@ class ShipTest {
         when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,0,0));
         assertFalse(ship.isInFrontOfCheckpoint(mockCheckpoint));
 
-        shipPosition=new Position(0,0,-Math.PI/2);
-        ship.setPosition(shipPosition);
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,-10,0));
-        assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,0,0));
-        assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
+       
 
-        shipPosition=new Position(0,0,Math.PI);
-        ship.setPosition(shipPosition);
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,-10,0));
-        assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,0,0));
-        assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,10,0));
-        assertTrue(ship.isInFrontOfCheckpoint(mockCheckpoint));
     }
 
     /**
