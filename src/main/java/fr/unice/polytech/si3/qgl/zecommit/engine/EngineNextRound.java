@@ -44,7 +44,7 @@ public class EngineNextRound {
                             if(oar.getY()==sailor.getY()&&oar.getX()==sailor.getX()&&!oar.isUsed()){
                                 nbRameActive++;
                                 oar.setUsed(true);
-                                if(oar.isLeft()){
+                                if(oar.getY()<=3){
                                     rameGauche++;
                                 }
                                 else

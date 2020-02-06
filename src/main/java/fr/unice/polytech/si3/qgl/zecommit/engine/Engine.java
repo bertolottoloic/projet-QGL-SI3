@@ -26,7 +26,7 @@ public class Engine {
                 "    \"checkpoints\": [\n" +
                 "      {\n" +
                 "        \"position\": {\n" +
-                "          \"x\": 100,\n" +
+                "          \"x\": 1000,\n" +
                 "          \"y\": 1000,\n" +
                 "          \"orientation\": 0\n" +
                 "        },\n" +
@@ -48,20 +48,32 @@ public class Engine {
                 "    },\n" +
                 "    \"name\": \"Les copaings d'abord!\",\n" +
                 "    \"deck\": {\n" +
-                "      \"width\": 2,\n" +
-                "      \"length\": 1\n" +
+                "      \"width\": 4,\n" +
+                "      \"length\": 10\n" +
                 "    },\n" +
                 "    \"entities\": [\n" +
                 "      {\n" +
-                "        \"x\": 1,\n" +
+                "        \"x\": 2,\n" +
                 "        \"y\": 0,\n" +
                 "        \"type\": \"oar\"\n" +
                 "      },\n" +
                 "      {\n" +
-                "        \"x\": 0,\n" +
-                "        \"y\": 1,\n" +
+                "        \"x\": 2,\n" +
+                "        \"y\": 3,\n" +
                 "        \"type\": \"oar\"\n" +
-                "      }\n" +
+                "      },\n" +
+                "       {\n" +
+                "        \"x\": 7,\n" +
+                "        \"y\": 0,\n" +
+                "        \"type\": \"oar\"\n" +
+                "      },\n"
+                +
+                "       {\n" +
+                "        \"x\": 7,\n" +
+                "        \"y\": 3,\n" +
+                "        \"type\": \"oar\"\n" +
+                "      }\n"
+                +
                 "    ],\n" +
                 "    \"shape\": {\n" +
                 "      \"type\": \"rectangle\",\n" +
@@ -72,17 +84,29 @@ public class Engine {
                 "  },\n" +
                 "  \"sailors\": [\n" +
                 "    {\n" +
-                "      \"x\": 0,\n" +
-                "      \"y\": 0,\n" +
+                "      \"x\": 4,\n" +
+                "      \"y\": 1,\n" +
                 "      \"id\": 0,\n" +
                 "      \"name\": \"Edward Teach\"\n" +
                 "    },\n" +
                 "    {\n" +
-                "      \"x\": 0,\n" +
-                "      \"y\": 0,\n" +
+                "      \"x\": 4,\n" +
+                "      \"y\": 2,\n" +
                 "      \"id\": 1,\n" +
                 "      \"name\": \"Tom Pouce\"\n" +
-                "    }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"x\": 5,\n" +
+                "      \"y\": 2,\n" +
+                "      \"id\": 2,\n" +
+                "      \"name\": \"Tom Pouce\"\n" +
+                "    },\n"+
+                "    {\n" +
+                "      \"x\": 5,\n" +
+                "      \"y\": 1,\n" +
+                "      \"id\": 3,\n" +
+                "      \"name\": \"Tom Pouce\"\n" +
+                "    }\n"+
                 "  ]\n" +
                 "}";
 
@@ -104,33 +128,52 @@ public class Engine {
                 "    },\n" +
                 "    \"name\": \"Les copaings d'abord!\",\n" +
                 "    \"deck\": {\n" +
-                "      \"width\": 2,\n" +
-                "      \"length\": 1\n" +
+                "      \"width\": 4,\n" +
+                "      \"length\": 10\n" +
                 "    },\n" +
                 "    \"entities\": [\n" +
-                "      {\n" +
-                "        \"x\": 1,\n" +
+                "   {\n" +
+                "        \"x\": 2,\n" +
                 "        \"y\": 0,\n" +
                 "        \"type\": \"oar\"\n" +
                 "      },\n" +
                 "      {\n" +
-                "        \"x\": 0,\n" +
-                "        \"y\": 1,\n" +
+                "        \"x\": 2,\n" +
+                "        \"y\": 3,\n" +
                 "        \"type\": \"oar\"\n" +
-                "      }\n" +
+                "      },\n" +
+                "       {\n" +
+                "        \"x\": 7,\n" +
+                "        \"y\": 0,\n" +
+                "        \"type\": \"oar\"\n" +
+                "      },\n"
+                +
+                "       {\n" +
+                "        \"x\": 7,\n" +
+                "        \"y\": 3,\n" +
+                "        \"type\": \"oar\"\n" +
+                "      }\n"+
                 "    ]\n" +
                 "  },\n" +
                 "  \"visibleEntities\": []\n" +
                 "}";
 
         ArrayList<Oar> oarArrayList= new ArrayList<>();
-        oarArrayList.add(new Oar(1,0));
-        oarArrayList.add(new Oar(0,1));
+        oarArrayList.add(new Oar(2,0));
+        oarArrayList.add(new Oar(2,3));
+        oarArrayList.add(new Oar(7,0));
+        oarArrayList.add(new Oar(7,3));
+
         ArrayList<Sailor> sailorArrayList= new ArrayList<>();
-        sailorArrayList.add(new Sailor(0,0,0,"Edward Teach"));
-        sailorArrayList.add(new Sailor(1,0,0,"Tom Pouce"));
+        sailorArrayList.add(new Sailor(0,4,1,"Edward Teach"));
+        sailorArrayList.add(new Sailor(1,4,2,"Tom Pouce"));
+        sailorArrayList.add(new Sailor(2,5,2,"Tom Pouce"));
+        sailorArrayList.add(new Sailor(3,5,1,"Tom Pouce"));
+
+
+
         ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
-        checkpointArrayList.add(new Checkpoint(new Position(-100,-100,0),new Circle(50)));
+        checkpointArrayList.add(new Checkpoint(new Position(1000,1000,0),new Circle(50)));
         InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);
         String output = cockpit.nextRound(json2);
         while(!output.equals("[]")&& step<30) {

@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 
 /**
  * Entite definissant l'objet Rame sur le bateau
@@ -19,12 +20,6 @@ public class Oar extends Entity {
 
     public boolean isUsed() {
         return used;
-    }
-
-    public boolean isLeft(){
-        if (getY()==0)
-            return true;
-        return false;
     }
 
     public void setUsed(boolean used) {

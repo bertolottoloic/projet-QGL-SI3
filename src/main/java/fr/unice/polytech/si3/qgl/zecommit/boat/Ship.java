@@ -174,7 +174,7 @@ public class Ship {
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
         {
-            if(oar.isLeft())
+            if(deck.isLeft(oar))
                 oarsList.add(oar);
         });
         return oarsList;
@@ -188,7 +188,7 @@ public class Ship {
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
         {
-            if(!oar.isLeft())
+            if(!deck.isLeft(oar))
                 oarsList.add(oar);
         });
         return oarsList;
