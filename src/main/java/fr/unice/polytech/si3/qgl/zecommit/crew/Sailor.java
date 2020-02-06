@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -57,8 +58,9 @@ public class Sailor {
     }
 
     public int distanceToNearestEntity(List<Entity> e){
-        e.sort(Comparator.comparingInt(a -> distanceToEntity(a)));
-        return distanceToEntity(e.get(0));
+        Stream<Entity> en = e.stream();
+        Entity min = en.min(Comparator.comparingInt(a->distanceToEntity(a))).get();
+        return distanceToEntity(min);
     }
 
     //--------------------GETTER -------------------------//
