@@ -158,6 +158,6 @@ public class RoadTest {
 
         Road road = new Road(start, end);
 
-        assertEquals(road.orientationToGoal(), Math.PI);
+        assertEquals(road.orientationToGoal(), -Math.PI);
     }
 }

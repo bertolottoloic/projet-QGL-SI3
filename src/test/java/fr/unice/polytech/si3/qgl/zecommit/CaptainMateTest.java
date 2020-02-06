@@ -90,6 +90,7 @@ public class CaptainMateTest {
         assertTrue(s3.hasEntity());
         assertFalse(s3.isOnEntity());
         assertTrue(o4.hasSailorOn());
+        captainMate.initMoveSailor(sailors);
         assertTrue(s3.isOnEntity());
         assertTrue(o4.hasSailorOn());
         assertEquals(o4, s3.getEntity());
