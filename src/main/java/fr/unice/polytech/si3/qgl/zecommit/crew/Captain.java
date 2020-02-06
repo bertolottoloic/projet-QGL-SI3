@@ -157,7 +157,7 @@ public class Captain {
         // Activation des marins de droite
         int r = 0;
         while(r<compo.getSailorsRight()) {
-            captainMate.toOar(rightSailorList.get(r), (Oar) leftSailorList.get(l).getEntity());
+            captainMate.toOar(rightSailorList.get(r), (Oar) leftSailorList.get(r).getEntity());
             r++;
         }
 
