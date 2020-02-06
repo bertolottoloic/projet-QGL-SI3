@@ -29,7 +29,7 @@ public class Captain {
     private CaptainMate captainMate;
     private Game game;
     private Logs logs;
-    boolean test=true;
+    boolean initGame=true;
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
 
@@ -53,9 +53,15 @@ public class Captain {
      * main du capitaine
      */
     public void actions() {
+        if(initGame){
+            captainMate.initAttibuteOarToSailors(sailorList, ship);
+            initGame=false;
+        }
+
         captainMate.getActionList().removeAll(captainMate.getActionList());
-        if(!captainMate.allOarsHasSailor(ship)){
-            captainMate.initMoveSailor(sailorList,ship);
+    
+        if(!captainMate.sailorsAreOnTheirEntity(sailorList)){
+            captainMate.initMoveSailor(sailorList);
         }
 
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {

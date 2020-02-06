@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -29,22 +31,22 @@ public abstract class Entity {
     private int x;
     @JsonProperty("y")
     private int y;
-    @JsonIgnore private boolean sailorOn;
+    @JsonIgnore private Sailor sailorOn;
 
     @JsonCreator
     public Entity(@JsonProperty("type") EntityType type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
         this.type = type;
         this.x = x;
         this.y = y;
-        this.sailorOn = false;
+        this.sailorOn = null;
     }
 
     public boolean hasSailorOn(){
-        return this.sailorOn;
+        return !(this.sailorOn==null);
     }
 
-    public void setSailorOn(boolean c){
-        this.sailorOn = c;
+    public void putSailorOn(Sailor sailor){
+        this.sailorOn = sailor;
     }
 
     @Override
