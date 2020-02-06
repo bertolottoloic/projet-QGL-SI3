@@ -93,6 +93,9 @@ public class RoadTest {
         road = new Road(new Position(-2, -3, Math.PI / 4), new Position(-2, -5, 0));
         assertEquals(-3*Math.PI /4,road.orientationToGoal());
 
+        road = new Road(new Position(0, 0, Math.PI / 4), new Position(-5, -5, 0));
+        assertEquals(-Math.PI,road.orientationToGoal());
+
     }
 
     /**
@@ -111,6 +114,9 @@ public class RoadTest {
         // Bateau et Checkpoint confondu
         road = new Road(new Position(-7, 3, Math.PI / 4), new Position(-7, 3, 0));
         assertEquals( 0, road.orientationToGoal());
+
+        road = new Road(new Position(-7, 3, 3*Math.PI / 4), new Position(-5, 1, 0));
+        assertEquals( -Math.PI, road.orientationToGoal());
         
     }
 
