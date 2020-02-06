@@ -77,7 +77,7 @@ public class RoadTest {
     void orientationToGoalNegativePositionTest() {
         //Position négative, position checkpoint positive
         Road road = new Road(new Position(-2, -3, Math.PI / 4), new Position(2, 7, 0));
-        assertEquals(road.orientationToGoal(), 0.4);
+        assertTrue(road.orientationToGoal()>0.4 && road.orientationToGoal()<0.41 );
 
         //Position positive, position checkpoint négative
         road = new Road(new Position(-2, -3, Math.PI / 4), new Position(-2, -5, 0));
