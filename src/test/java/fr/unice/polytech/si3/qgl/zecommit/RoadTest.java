@@ -77,12 +77,31 @@ public class RoadTest {
     void orientationToGoalNegativePositionTest() {
         //Position négative, position checkpoint positive
         Road road = new Road(new Position(-2, -3, Math.PI / 4), new Position(2, 7, 0));
-        assertTrue(road.orientationToGoal()>0.4 && road.orientationToGoal()<0.41 );
+        assertTrue(road.orientationToGoal()>0.4 && road.orientationToGoal()<0.41);
 
         //Position positive, position checkpoint négative
         road = new Road(new Position(-2, -3, Math.PI / 4), new Position(-2, -5, 0));
         assertEquals(road.orientationToGoal(), -3*Math.PI /4);
 
+    }
+
+    /**
+     * Cas limites
+     */
+    @Test
+    void orientationToGoalTest2() {
+        // Bateau et Checkpoint sur le meme axe vertical
+        Road road = new Road(new Position(3, 2, Math.PI / 3), new Position(3, 5, 0));
+        assertTrue(0.52<road.orientationToGoal() && 0.524>road.orientationToGoal() );
+
+        // Bateau et Checkpoint sur le meme axe horizontal
+        road = new Road(new Position(1, -3, Math.PI / 4), new Position(7, -3, 0));
+        assertEquals( -Math.PI /4, road.orientationToGoal());
+
+        // Bateau et Checkpoint confondu
+        road = new Road(new Position(-7, 3, Math.PI / 4), new Position(-7, 3, 0));
+        assertEquals( 0, road.orientationToGoal());
+        
     }
 
     /**
