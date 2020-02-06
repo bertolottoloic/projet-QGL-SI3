@@ -42,6 +42,7 @@ public class Captain {
         this.captainMate = CM;
         this.oarList = ship.getOars();
         this.oarsNb = ship.getOarsNb();
+        Logs.add("oarsNb:"+oarsNb);
 
         sortEntities(game.getEntityList());
         this.rightSailorList = getRightSailors();
@@ -54,13 +55,13 @@ public class Captain {
     public void actions() {
         if(initGame){
             captainMate.initAttibuteOarToSailors(sailorList, ship);
-            initGame=false;
+            initGame=false; //TODO : à changer
         }
 
         captainMate.getActionList().removeAll(captainMate.getActionList());
     
         if(!captainMate.sailorsAreOnTheirEntity(sailorList)){
-            captainMate.initMoveSailor(sailorList);
+            captainMate.initMoveSailor(sailorList); //TODO à revoir
         }
 
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
@@ -82,7 +83,6 @@ public class Captain {
      */
     public int findClosestPossibleAngle(double angleToReach){
         double step = Math.PI/(2*oarsNb);
-        //System.out.println(ship.getPosition().getOrientation());
         int res = 0;
         double orientation = ship.getPosition().getOrientation();
         for (int k = 0; k<2*oarsNb; k ++){

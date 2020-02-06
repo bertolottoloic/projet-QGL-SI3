@@ -152,7 +152,6 @@ public class RoadTest {
      *
      */
     @Test
-    @Disabled
     void shortestangle3Test() {
         Position start = new Position(0,0,Math.PI/4);
         Position end = new Position(-4,-4,0);
