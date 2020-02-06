@@ -90,9 +90,9 @@ public class CaptainMate {
      * @param sailor
      */
     public void toOar(Sailor sailor,Oar oar){
-        if(oar.getX()==sailor.getX() && oar.getY()==sailor.getY() && (!oar.hasSailorOn())){
+        if(oar.getX()==sailor.getX() && oar.getY()==sailor.getY() && (!oar.isUsed())){
             ToOar action = new ToOar(sailor.getId());
-            oar.putSailorOn(sailor);
+            oar.setUsed(true);
             actionList.add(action);
             logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
             
