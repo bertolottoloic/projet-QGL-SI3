@@ -40,7 +40,7 @@ public class ShipDeserializer extends JsonDeserializer {
             JsonNode type = current.path("type");
             String textType = type.asText();
             EntityDeserializer entityDeserializer = new EntityDeserializer();
-            Entity entity = entityDeserializer.deserialize();
+            Entity entity = entityDeserializer.deserialize(jsonParser, deserializationContext);
             listEntitie.add(entity);
         }
 
@@ -48,8 +48,7 @@ public class ShipDeserializer extends JsonDeserializer {
         Shape shape = shapeDeserializer.deserialize(jsonParser, deserializationContext);
 
 
-        return new Ship(node.get("life").asInt(), position, node.get("name").asText(), deck, listEntitie, );
+        return new Ship(node.get("life").asInt(), position, node.get("name").asText(), deck, listEntitie, shape );
     }
 }
-
 
