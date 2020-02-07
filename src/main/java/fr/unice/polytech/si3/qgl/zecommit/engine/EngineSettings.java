@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
@@ -15,6 +17,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.jar.JarException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,31 +37,27 @@ public class EngineSettings {
 
     EngineSettings(){
         //Liste de checkpoints
-        this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(100,100,0), new Circle(50)));
+        setCheckpoints();
         //GameMode
-        this.goal= new Regatta(checkpoints);
+        setGoal();
         //Entitees
-        this.entities= new ArrayList<>();
-        this.entities.add(new Oar(2,0));
-        this.entities.add(new Oar(2,3));
-        this.entities.add(new Oar(7,0));
-        this.entities.add(new Oar(7,3));
+        setEntities();
         //Marins
-        this.sailors= new ArrayList<>();
-        this.sailors.add(new Sailor(0,0,0,"jean"));
-        this.sailors.add(new Sailor(1,0,0,"paul"));
-        this.sailors.add(new Sailor(2,0,0,"jacques"));
+        setSailors();
         //Deck
-        this.deck=new Deck(4,10);
+        setDeck();
         //Forme
-        this.shape=new Rectangle(4,10,0);
+        setShape();
         //Bateau
-        this.ship= new Ship(100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
-
+        setShip();
         //Entitees visibles
-        this.visibleEntities=new ArrayList<>();
+        setVisibleEntities();
         this.oM = new ObjectMapper();
+    }
+
+    public static void main( String[]args){
+        EngineSettings engineSettings= new EngineSettings();
+        System.out.println(engineSettings.thisToJson());
     }
 
     public String thisToJson(){
@@ -69,6 +68,48 @@ public class EngineSettings {
             System.err.println(e);
             return "{}";
         }
+    }
+
+    //--------------------SETTINGS-------------------//
+
+    public void setShip() {
+        this.ship= new Ship(100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
+    }
+
+    public void setVisibleEntities() {
+        this.visibleEntities=new ArrayList<>();
+    }
+
+    public void setSailors() {
+        this.sailors= new ArrayList<>();
+        this.sailors.add(new Sailor(0,0,0,"jean"));
+        this.sailors.add(new Sailor(1,0,0,"paul"));
+        this.sailors.add(new Sailor(2,0,0,"jacques"));
+    }
+
+    public void setGoal() {
+        this.goal= new Regatta(checkpoints);
+    }
+
+    public void setCheckpoints() {
+        this.checkpoints= new ArrayList<>();
+        this.checkpoints.add(new Checkpoint(new Position(100,100,0), new Circle(50)));
+    }
+
+    public void setDeck() {
+        this.deck=new Deck(4,10);
+    }
+
+    public void setEntities() {
+        this.entities= new ArrayList<>();
+        this.entities.add(new Oar(2,0));
+        this.entities.add(new Oar(2,3));
+        this.entities.add(new Oar(7,0));
+        this.entities.add(new Oar(7,3));
+    }
+
+    public void setShape() {
+        this.shape=new Rectangle(4,10,0);
     }
 
     //---------------------Getter----------------------//
