@@ -142,6 +142,7 @@ public class Ship {
         return shape;
     }
 
+    @JsonIgnore
     /**
      * Retourne la position x du bateau
      * @return
@@ -150,6 +151,7 @@ public class Ship {
         return this.getPosition().getX();
     }
 
+    @JsonIgnore
     /**
      * Retourne la position y du bateau
      * @return
@@ -158,14 +160,17 @@ public class Ship {
         return this.getPosition().getY();
     }
 
+    @JsonIgnore
     public List<Oar> getOars(){
         return this.oars;
     }
 
+    @JsonIgnore
     public int getOarsNb() {
         return oars.size();
     }
 
+    @JsonIgnore
     /**
      * 
      * @return la liste des rames à gauche du bateau.
@@ -180,6 +185,7 @@ public class Ship {
         return oarsList;
     }
 
+    @JsonIgnore
     /**
      * 
      * @return la liste des rames à droite du bateau.

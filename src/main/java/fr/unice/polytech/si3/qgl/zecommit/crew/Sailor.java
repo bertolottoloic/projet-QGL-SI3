@@ -49,6 +49,7 @@ public class Sailor {
         return Math.abs(x-e.getX()) + Math.abs(y-e.getY());
     }
 
+    @JsonIgnore
     public boolean isOnEntity(){
         return hasEntity() && this.x==this.entity.getX() && this.y==this.entity.getY();
     }
@@ -65,6 +66,7 @@ public class Sailor {
 
     //--------------------GETTER -------------------------//
 
+    @JsonIgnore
     public Entity getEntity(){
         return this.entity;
     }

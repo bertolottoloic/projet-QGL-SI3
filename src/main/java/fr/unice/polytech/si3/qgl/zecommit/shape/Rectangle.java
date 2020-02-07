@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -38,6 +39,7 @@ public class Rectangle extends Shape {
     }
 
     @JsonProperty("length")
+    @JsonIgnore
     public double getlength() {
         return height;
     }

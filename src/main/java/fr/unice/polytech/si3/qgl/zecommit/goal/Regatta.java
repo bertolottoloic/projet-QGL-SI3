@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.goal;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
@@ -29,6 +30,7 @@ public class Regatta extends Goal {
         return checkpoints;
     }
 
+    @JsonIgnore
     /**
      * Donne le premier checkpoint de la list de cp, renvoie null si plus de cp
      * @return

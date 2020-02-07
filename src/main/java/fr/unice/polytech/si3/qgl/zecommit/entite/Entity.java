@@ -26,6 +26,7 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 
 public abstract class Entity {
     @JsonProperty("type")
+    @JsonIgnore
     private EntityType type;
     @JsonProperty("x")
     private int x;
@@ -57,6 +58,7 @@ public abstract class Entity {
     }
     //------------------------------GETTER-------------------------//
 
+    @JsonIgnore
     public EntityType getType() {
         return type;
     }

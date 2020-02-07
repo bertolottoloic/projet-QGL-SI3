@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.*;
 public abstract class Goal {
 
     @JsonProperty("mode")
+    @JsonIgnore
     private String mode;
     @JsonIgnore
     private boolean isRegatta;
@@ -28,6 +29,7 @@ public abstract class Goal {
         return this.mode;
     }
 
+    @JsonIgnore
     public boolean isRegatta(){
         return this.isRegatta;
     }
@@ -36,6 +38,7 @@ public abstract class Goal {
 
     //------------------------------GETTER-------------------------//
 
+    @JsonIgnore
     public String getMode() {
         return mode;
     }

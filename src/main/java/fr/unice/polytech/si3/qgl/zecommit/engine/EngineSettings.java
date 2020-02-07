@@ -13,10 +13,15 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 public class EngineSettings {
-    Goal mode;
+    Goal goal;
     ArrayList<Checkpoint> checkpoints;
     Ship ship;
     Deck deck;
@@ -24,13 +29,15 @@ public class EngineSettings {
     Shape shape;
     ArrayList<Sailor> sailors;
     ArrayList<Entity> visibleEntities;
+    @JsonIgnore
+    private ObjectMapper oM;
 
     EngineSettings(){
         //Liste de checkpoints
         this.checkpoints= new ArrayList<>();
         this.checkpoints.add(new Checkpoint(new Position(100,100,0), new Circle(50)));
         //GameMode
-        this.mode= new Regatta(checkpoints);
+        this.goal= new Regatta(checkpoints);
         //Entitees
         this.entities= new ArrayList<>();
         this.entities.add(new Oar(2,0));
@@ -51,6 +58,77 @@ public class EngineSettings {
 
         //Entitees visibles
         this.visibleEntities=new ArrayList<>();
+        this.oM = new ObjectMapper();
+    }
+
+    public String thisToJson(){
+        try{
+            oM.configure(SerializationFeature.INDENT_OUTPUT, true);
+            return oM.writeValueAsString(this);
+        } catch(IOException e ) { 
+            System.err.println(e);
+            return "{}";
+        }
+    }
+
+    //---------------------Getter----------------------//
+
+    public Goal getGoal(){
+        return this.goal;
+    }
+
+    @JsonIgnore
+    /**
+     * @return the checkpoints
+     */
+    public ArrayList<Checkpoint> getCheckpoints() {
+        return checkpoints;
+    }
+
+    /**
+     * @return the ship
+     */
+    public Ship getShip() {
+        return ship;
+    }
+
+    @JsonIgnore
+    /**
+     * @return the deck
+     */
+    public Deck getDeck() {
+        return deck;
+    }
+
+    @JsonIgnore
+    /**
+     * @return the entities
+     */
+    public ArrayList<Entity> getEntities() {
+        return entities;
+    }
+
+    @JsonIgnore
+    /**
+     * @return the shape
+     */
+    public Shape getShape() {
+        return shape;
+    }
+
+    /**
+     * @return the sailors
+     */
+    public ArrayList<Sailor> getSailors() {
+        return sailors;
+    }
+
+    @JsonIgnore
+    /**
+     * @return the visibleEntities
+     */
+    public ArrayList<Entity> getVisibleEntities() {
+        return visibleEntities;
     }
 
 }
