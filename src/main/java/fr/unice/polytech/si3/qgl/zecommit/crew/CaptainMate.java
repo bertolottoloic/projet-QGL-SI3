@@ -33,7 +33,8 @@ public class CaptainMate {
      * @param ydistance
      */
     public void moveSailor(Sailor sailor, int xdistance, int ydistance) {
-        Moving action = new Moving(sailor, xdistance, ydistance);
+        Moving action = new Moving(sailor.getId(), xdistance, ydistance);
+        sailor.move(action.getXDistance(),action.getYDistance());
         if(action.getXDistance()!=0 || action.getYDistance()!=0){
             actionList.add(action);
             Logs.add("\nS" + sailor.getId() + " is moving to (" + sailor.getX() + "," + sailor.getY() +")");

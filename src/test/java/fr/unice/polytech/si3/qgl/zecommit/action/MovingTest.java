@@ -14,7 +14,7 @@ class MovingTest {
      */
     @Test
     void mouvAvecDistanceCorrecteTest() {
-        Moving moving = new Moving(s, 2,1);
+        Moving moving = new Moving(s.getId(), 2,1);
         assertEquals(2, moving.getXDistance());
         assertEquals(1, moving.getYDistance());
     }
@@ -25,7 +25,7 @@ class MovingTest {
      */
     @Test
     void mouvAvecDistanceCorrecteCdtLmtTest() {
-        Moving moving = new Moving(s, 3,2);
+        Moving moving = new Moving(s.getId(), 3,2);
         assertEquals(3, moving.getXDistance());
         assertEquals(2, moving.getYDistance());
     }
@@ -36,7 +36,7 @@ class MovingTest {
      */
     @Test
     void mouvAvecDistanceNonCorrecteTest() {
-        Moving moving = new Moving(s, 5,3);
+        Moving moving = new Moving(s.getId(), 5,3);
         assertEquals(5, moving.getXDistance());
         assertEquals(0, moving.getYDistance());
     }

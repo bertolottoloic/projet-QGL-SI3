@@ -1,7 +1,10 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.unice.polytech.si3.qgl.zecommit.action.Action;
+import fr.unice.polytech.si3.qgl.zecommit.action.ActionType;
+import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
+import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
@@ -17,10 +20,9 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.jar.JarException;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class EngineSettings {
@@ -34,6 +36,14 @@ public class EngineSettings {
     ArrayList<Entity> visibleEntities;
     @JsonIgnore
     private ObjectMapper oM;
+    ///////////////////////////:
+    @JsonIgnore
+    ArrayList<Sailor> leftSailors;
+    @JsonIgnore
+    ArrayList<Sailor> rightSailors;
+    @JsonIgnore
+    int n=100;
+
 
     EngineSettings(){
         //Liste de checkpoints
@@ -55,11 +65,6 @@ public class EngineSettings {
         this.oM = new ObjectMapper();
     }
 
-    public static void main( String[]args){
-        EngineSettings engineSettings= new EngineSettings();
-        System.out.println(engineSettings.thisToJson());
-    }
-
     public String thisToJson(){
         try{
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
@@ -68,6 +73,74 @@ public class EngineSettings {
             System.err.println(e);
             return "{}";
         }
+    }
+
+    public String thisToJson2(){
+        try{
+            oM.configure(SerializationFeature.INDENT_OUTPUT, true);
+            return oM.writeValueAsString(new EngineSettingsNextRound(ship,visibleEntities));
+        } catch(IOException e ) {
+            System.err.println(e);
+            return "{}";
+        }
+    }
+
+    public void updateEngine(ArrayList<Action> actions){
+        rightSailors=new ArrayList<>();
+        leftSailors=new ArrayList<>();
+        for (Action action: actions) {
+            if(action.getType()== ActionType.OAR){
+                engineOar((ToOar) action);
+            }
+            if(action.getType()== ActionType.MOVING){
+                engineMoving((Moving) action);
+            }
+        }
+
+        calcul();
+    }
+
+    public void engineOar(ToOar toOar){
+        for (Sailor sailor: sailors) {
+            if(toOar.getSailorId()==sailor.getId()){
+                for (Oar oar: ship.getOars()) {
+                    if(sailor.getX()==oar.getX()&&sailor.getY()==sailor.getY()){
+                        if(deck.isLeft(oar)){
+                            leftSailors.add(sailor);
+                        }
+                        else{
+                            rightSailors.add(sailor);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void engineMoving(Moving toMove){
+        if(!(toMove.getYDistance()==0&&toMove.getXDistance()==0)&&toMove.getXDistance()+toMove.getYDistance()<=5){
+            for (Sailor sailor: sailors) {
+                if(sailor.getId()==toMove.getSailorId()) {
+                    sailor.setX(sailor.getX() + toMove.getXDistance());
+                    sailor.setY(sailor.getY() + toMove.getYDistance());
+                }
+            }
+        }
+    }
+
+    public void calcul(){
+        double vitesse= (double)((165/n)*(leftSailors.size()+rightSailors.size()))/ship.getOars().size();
+        double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
+        double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
+
+
+        double currentOrientation=ship.getPosition().getOrientation();
+
+        double gap=Math.PI/(ship.getOars().size());
+        int balanced= rightSailors.size()-leftSailors.size();
+        currentOrientation+=balanced*gap;
+        ship.setPosition(new Position(x,y,currentOrientation));
+
     }
 
     //--------------------SETTINGS-------------------//
@@ -116,6 +189,10 @@ public class EngineSettings {
 
     public Goal getGoal(){
         return this.goal;
+    }
+
+    public int getN() {
+        return n;
     }
 
     @JsonIgnore
@@ -170,6 +247,24 @@ public class EngineSettings {
      */
     public ArrayList<Entity> getVisibleEntities() {
         return visibleEntities;
+    }
+
+    private class EngineSettingsNextRound{
+        private Ship ship;
+        private List<Entity> visibleEntities;
+
+        EngineSettingsNextRound(Ship s,List<Entity> vE){
+            this.ship = s;
+            this.visibleEntities = vE;
+        }
+
+        public Ship getShip() {
+            return ship;
+        }
+
+        public List<Entity> getVisibleEntities() {
+            return visibleEntities;
+        }
     }
 
 }
