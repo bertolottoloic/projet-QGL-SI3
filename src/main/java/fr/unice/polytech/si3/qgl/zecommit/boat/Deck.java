@@ -25,7 +25,7 @@ public class Deck{
     }
 
     public boolean isLeft(Oar oar){
-        if (oar.getY()<width)
+        if (oar.getY()<width/2)
             return true;
         return false;
     }
