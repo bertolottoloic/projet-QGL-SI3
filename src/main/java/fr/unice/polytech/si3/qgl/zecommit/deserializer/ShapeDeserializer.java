@@ -17,6 +17,12 @@ import java.io.IOException;
 
 public class ShapeDeserializer extends JsonDeserializer {
 
+    public ShapeDeserializer(Class<?> vc) {super();}
+    public ShapeDeserializer(){
+        this(null);
+    }
+
+
     @Override
     public Shape deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
 
