@@ -89,22 +89,24 @@ public class EngineSettings {
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
         for (Action action: actions) {
-            if(action.getType()== ActionType.OAR){
-                engineOar((ToOar) action);
-            }
             if(action.getType()== ActionType.MOVING){
                 engineMoving((Moving) action);
             }
+            if(action.getType()== ActionType.OAR){
+                engineOar((ToOar) action);
+            }
         }
-
-        calcul();
+        for(int i=0; i<n;i++) {
+            calcul();
+            //System.out.println("    STEP :"+i+"\n   "+ship.getPosition());
+        }
     }
 
     public void engineOar(ToOar toOar){
         for (Sailor sailor: sailors) {
             if(toOar.getSailorId()==sailor.getId()){
                 for (Oar oar: ship.getOars()) {
-                    if(sailor.getX()==oar.getX()&&sailor.getY()==sailor.getY()){
+                    if(sailor.getX()==oar.getX()&&sailor.getY()==oar.getY()){
                         if(deck.isLeft(oar)){
                             leftSailors.add(sailor);
                         }
@@ -129,16 +131,17 @@ public class EngineSettings {
     }
 
     public void calcul(){
-        double vitesse= (double)((165/n)*(leftSailors.size()+rightSailors.size()))/ship.getOars().size();
+
+        double vitesse=(double)((double) 165/n)*(leftSailors.size()+rightSailors.size())/ship.getOars().size();
         double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
 
 
         double currentOrientation=ship.getPosition().getOrientation();
-
-        double gap=Math.PI/(ship.getOars().size());
+        double gap= Math.PI/(n*(ship.getOars().size()));
         int balanced= rightSailors.size()-leftSailors.size();
-        currentOrientation+=balanced*gap;
+        currentOrientation+=(balanced*gap);
+        currentOrientation%=Math.PI;
         ship.setPosition(new Position(x,y,currentOrientation));
 
     }
