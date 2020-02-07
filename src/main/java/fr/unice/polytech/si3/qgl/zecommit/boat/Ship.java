@@ -37,6 +37,8 @@ public class Ship {
         sortOars();
     }
 
+
+
     private void createOarlist(){
         entities.forEach(entity->
         {
