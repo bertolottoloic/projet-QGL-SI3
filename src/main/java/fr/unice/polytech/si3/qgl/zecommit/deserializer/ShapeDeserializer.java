@@ -16,6 +16,9 @@ import java.io.IOException;
 public class ShapeDeserializer extends StdDeserializer<Shape> {
 
     public ShapeDeserializer(Class<?> vc) {super(vc);}
+    public ShapeDeserializer(){
+        this(null);
+    }
 
 
     @Override
