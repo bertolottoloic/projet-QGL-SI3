@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Clement P
  *
- *Classe qui definit le capitaine
+ * Classe qui definit le capitaine
  * Le capitaine se charge de la decision.
  */
 
