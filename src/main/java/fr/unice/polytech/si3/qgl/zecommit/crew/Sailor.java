@@ -4,9 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
 /**
@@ -15,14 +13,13 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
  */
 
 public class Sailor {
-    @JsonProperty("id")private int id;
-    @JsonProperty("x")private int x;
-    @JsonProperty("y")private int y;
-    @JsonProperty("name")private String name;
-    @JsonIgnore private Entity entity;
+    private int id;
+    private int x;
+    private int y;
+    private String name;
+    private Entity entity;
 
-    @JsonCreator
-    public Sailor(@JsonProperty("id")int id, @JsonProperty("x")int x, @JsonProperty("y")int y, @JsonProperty("name")String name) {
+    public Sailor(int id,int x, int y, String name) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -49,7 +46,6 @@ public class Sailor {
         return Math.abs(x-e.getX()) + Math.abs(y-e.getY());
     }
 
-    @JsonIgnore
     public boolean isOnEntity(){
         return hasEntity() && this.x==this.entity.getX() && this.y==this.entity.getY();
     }
@@ -66,7 +62,6 @@ public class Sailor {
 
     //--------------------GETTER -------------------------//
 
-    @JsonIgnore
     public Entity getEntity(){
         return this.entity;
     }
