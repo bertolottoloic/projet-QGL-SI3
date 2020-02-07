@@ -15,7 +15,13 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import java.io.IOException;
 
 
-public class ShapeDeserializer extends JsonDeserializer {
+public class ShapeDeserializer extends StdDeserializer<Shape> {
+
+    public ShapeDeserializer(Class<?> vc) {super(vc);}
+    public ShapeDeserializer(){
+        this(null);
+    }
+
 
     @Override
     public Shape deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
