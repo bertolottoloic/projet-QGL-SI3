@@ -49,7 +49,7 @@ class ShipTest {
         
         Position position = new Position(-2,-5,0);
 
-        assertEquals(ship.distanceTo(position), 7);
+        assertEquals(ship.distanceTo(position), Math.sqrt(29));
     }
 
     /**
@@ -59,7 +59,7 @@ class ShipTest {
     void distanceToPositifTest() {
         Position position = new Position(2,5,0);
 
-        assertEquals(ship.distanceTo(position), 7);
+        assertEquals(ship.distanceTo(position), Math.sqrt(29));
     }
 
     /**
