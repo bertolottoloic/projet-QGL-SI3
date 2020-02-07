@@ -171,7 +171,6 @@ public class Engine {
         sailorArrayList.add(new Sailor(3,5,1,"Tom Pouce"));
 
 
-
         ArrayList<Checkpoint> checkpointArrayList= new ArrayList<>();
         checkpointArrayList.add(new Checkpoint(new Position(1000,1000,0),new Circle(50)));
         InfoEngine infoEngine = new InfoEngine(oarArrayList,sailorArrayList,checkpointArrayList);

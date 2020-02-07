@@ -84,7 +84,7 @@ public class ParserNext {
         }
         catch(IllegalStateException e){
             ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
-            Logs.add("PB3");
+            Logs.add("PB Shape");
             //System.out.println("No shape : "+e.toString());
         }
 
@@ -116,7 +116,7 @@ public class ParserNext {
             game.setVisibleEntities(visibleEntities);
 
         } catch (JsonProcessingException e) {
-            Logs.add("PB4");
+            Logs.add("PB VisibleEntities");
         }
 
 
@@ -128,7 +128,7 @@ public class ParserNext {
 
         }
         catch (InvalidDefinitionException e){
-            Logs.add("PB5");
+            Logs.add("PB Wind");
             //System.out.println("No wind : "+e.toString());
         }
 
