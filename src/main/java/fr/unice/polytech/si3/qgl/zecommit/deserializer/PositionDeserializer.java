@@ -6,17 +6,26 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 
 import java.io.IOException;
 import java.util.concurrent.atomic.DoubleAccumulator;
 
-/*
 
 
-public class PositionDeserializer extends JsonDeserializer {
 
+public class PositionDeserializer extends StdDeserializer<Position> {
+
+
+    protected PositionDeserializer(Class<?> vc) {
+        super(vc);
+    }
+
+    public PositionDeserializer(){
+        this(null);
+    }
 
     @Override
     public Position deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
@@ -26,4 +35,4 @@ public class PositionDeserializer extends JsonDeserializer {
     }
 }
 
- */
+
