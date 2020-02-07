@@ -1,8 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
@@ -12,11 +10,10 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
  * @author Nathan
  */
 public class Checkpoint {
-    @JsonProperty("position")Position position;
-    @JsonProperty("shape")Shape shape;
+    Position position;
+    Shape shape;
 
-    @JsonCreator
-    public Checkpoint(@JsonProperty("position")Position position, @JsonProperty("shape")Shape shape){
+    public Checkpoint(Position position,Shape shape){
         this.position = position;
         this.shape = shape;
     }
@@ -29,12 +26,10 @@ public class Checkpoint {
                 '}';
     }
 
-    @JsonIgnore
     public boolean isCircle() {
         return shape.isCircle();
     }
 
-    @JsonIgnore
     public double getCircleRadius() {
         if (this.isCircle()) {
             Circle circle = (Circle) this.getShape();

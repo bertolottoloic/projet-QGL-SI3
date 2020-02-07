@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  * Classe correspondant au vent
@@ -10,7 +9,6 @@ public class Wind {
     private double orientation;
     private double strength;
 
-    @JsonCreator
     public Wind(double orientation, double strength) {
         this.orientation = orientation;
         this.strength = strength;

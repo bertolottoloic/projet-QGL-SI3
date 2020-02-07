@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
@@ -11,17 +10,11 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
  */
 public class Current extends VisibleEntitie{
 
-    @JsonProperty("position")
     private Position position;
-
-    @JsonProperty("shape")
     private Shape shape;
-
-    @JsonProperty("strength")
     private double strength;
 
-    @JsonCreator
-    public Current(@JsonProperty("position") Position position, @JsonProperty("shape") Shape shape, @JsonProperty("strength") double strength) {
+    public Current(Position position,  Shape shape,  double strength) {
         super(position, shape);
         this.strength = strength;
     }
