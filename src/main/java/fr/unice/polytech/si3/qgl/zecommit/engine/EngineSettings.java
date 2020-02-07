@@ -69,7 +69,7 @@ public class EngineSettings {
         try{
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
             return oM.writeValueAsString(this);
-        } catch(IOException e ) { 
+        } catch(IOException e ) {
             System.err.println(e);
             return "{}";
         }
