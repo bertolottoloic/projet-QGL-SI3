@@ -16,17 +16,12 @@ public class ParInit {
 
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
-        
+
         module.addDeserializer(Position.class, new PositionDeserializer());
 
         mapper.registerModule(module);
-
-
-
-
-
-
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
         return mapper.readValue(jsonString, Position.class);
     }
 }
