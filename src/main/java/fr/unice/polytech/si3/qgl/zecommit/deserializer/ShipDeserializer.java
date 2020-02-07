@@ -6,18 +6,17 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-
 
 import java.io.IOException;
 
-
-public class PositionDeserializer extends JsonDeserializer {
-
+public class ShipDeserializer extends JsonDeserializer {
     @Override
-    public Position deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Object deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         ObjectCodec oc = jsonParser.getCodec();
         JsonNode node = oc.readTree(jsonParser);
-        return new Position(node.get("x").asDouble(), node.get("y").asDouble(), node.get("orientation").asDouble());
+
+        
+
+        return null;
     }
 }
