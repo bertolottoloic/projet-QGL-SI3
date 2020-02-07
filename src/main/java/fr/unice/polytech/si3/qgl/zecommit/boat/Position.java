@@ -5,22 +5,13 @@
 
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.unice.polytech.si3.qgl.zecommit.deserializer.PositionDeserializer;
-
-@JsonDeserialize(using = PositionDeserializer.class)
 public class Position {
-    //@JsonProperty("x")
+
     double x;
-    //@JsonProperty("y")
     double y;
-    //@JsonProperty("orientation")
     double orientation;
 
-    //@JsonCreator
-    public Position(/*@JsonProperty("x")*/ double x, /*@JsonProperty("y")*/double y, /*@JsonProperty("orientation")*/double orientation){
+    public Position(double x, double y, double orientation){
         this.x=x;
         this.y=y;
         this.orientation=orientation;
@@ -32,15 +23,14 @@ public class Position {
     }
     //------------------------------GETTER-------------------------//
 
-    //@JsonProperty("x")
     public double getX() {
         return x;
     }
-    //@JsonProperty("y")
+
     public double getY() {
         return y;
     }
-    //@JsonProperty("orientation")
+
     public double getOrientation() {
         return orientation;
     }
@@ -48,17 +38,14 @@ public class Position {
 
     //------------------------------SETTER-------------------------//
 
-    //@JsonProperty("x")
     public void setX(double x) {
         this.x = x;
     }
 
-    //@JsonProperty("y")
     public void setY(double y) {
         this.y = y;
     }
 
-    //@JsonProperty("orientation")
     public void setOrientation(double orientation) {
         this.orientation = orientation;
     }
