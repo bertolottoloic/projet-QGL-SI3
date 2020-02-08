@@ -10,8 +10,8 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParNext;
-import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
-import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
+import fr.unice.polytech.si3.qgl.zecommit.parser.ParInit;
+
 
 public class Cockpit implements ICockpit {
 	Game game;
@@ -19,9 +19,9 @@ public class Cockpit implements ICockpit {
 	Captain captain;
 
 	public void initGame(String json) {
-		ParserInit parserInit = new ParserInit();
+		ParInit parserInit = new ParInit();
 		try {
-			this.game=parserInit.parserInitGame(json);
+			this.game=parserInit.parse(json);
 			this.captainMate= new CaptainMate();
 			this.captain= new Captain(game,captainMate);
 		} catch (JsonProcessingException e) {

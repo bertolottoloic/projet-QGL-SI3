@@ -117,6 +117,7 @@ class ParInitTest {
 
     }
 
+
     @Test
     void parInitGameTest() throws JsonProcessingException {
         ParInit parInit = new ParInit();
@@ -128,6 +129,8 @@ class ParInitTest {
         assertEquals(1, game.getShipCount());
         assertEquals("Tom Pouce", game.getSailors().get(1).getName());
     }
+
+
 
     @Test
     void parNextRound() throws JsonProcessingException {

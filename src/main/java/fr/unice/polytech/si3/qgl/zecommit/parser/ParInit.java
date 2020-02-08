@@ -29,10 +29,6 @@ public class ParInit {
         module.addDeserializer(Entity.class, new EntityDeserializer());
         module.addDeserializer(Sailor.class, new SailorDeserializer());
         module.addDeserializer(Deck.class, new DeckDeserializer());
-        module.addDeserializer(Deck.class, new DeckDeserializer());
-        module.addDeserializer(Shape.class, new ShapeDeserializer());
-        module.addDeserializer(Entity.class, new EntityDeserializer());
-        module.addDeserializer(Sailor.class, new SailorDeserializer());
 
         mapper.registerModule(module);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
