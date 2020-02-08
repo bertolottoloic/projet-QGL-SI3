@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 
 /**
  * Entite definissant l'objet Rame sur le bateau

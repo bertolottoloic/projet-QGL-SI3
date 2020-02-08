@@ -1,7 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
-import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-
 public class Moving extends Action{
 
     private int xdistance;

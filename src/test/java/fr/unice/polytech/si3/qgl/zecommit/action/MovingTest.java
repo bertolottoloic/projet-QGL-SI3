@@ -1,10 +1,9 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import org.junit.jupiter.api.Test;
 
-import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovingTest {
 

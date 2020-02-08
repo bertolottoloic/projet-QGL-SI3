@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.ActionType;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
@@ -21,9 +23,6 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class EngineSettings {
     Goal goal;
@@ -46,21 +45,13 @@ public class EngineSettings {
 
 
     EngineSettings(){
-        //Liste de checkpoints
         setCheckpoints();
-        //GameMode
         setGoal();
-        //Entitees
         setEntities();
-        //Marins
         setSailors();
-        //Deck
         setDeck();
-        //Forme
         setShape();
-        //Bateau
         setShip();
-        //Entitees visibles
         setVisibleEntities();
         this.oM = new ObjectMapper();
     }
@@ -98,7 +89,6 @@ public class EngineSettings {
         }
         for(int i=0; i<n;i++) {
             calcul();
-            //System.out.println("    STEP :"+i+"\n   "+ship.getPosition());
         }
     }
 
@@ -202,7 +192,7 @@ public class EngineSettings {
     /**
      * @return the checkpoints
      */
-    public ArrayList<Checkpoint> getCheckpoints() {
+    public List<Checkpoint> getCheckpoints() {
         return checkpoints;
     }
 
@@ -225,7 +215,7 @@ public class EngineSettings {
     /**
      * @return the entities
      */
-    public ArrayList<Entity> getEntities() {
+    public List<Entity> getEntities() {
         return entities;
     }
 
@@ -240,7 +230,7 @@ public class EngineSettings {
     /**
      * @return the sailors
      */
-    public ArrayList<Sailor> getSailors() {
+    public List<Sailor> getSailors() {
         return sailors;
     }
 
@@ -248,7 +238,7 @@ public class EngineSettings {
     /**
      * @return the visibleEntities
      */
-    public ArrayList<Entity> getVisibleEntities() {
+    public List<Entity> getVisibleEntities() {
         return visibleEntities;
     }
 

@@ -9,7 +9,6 @@ import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 

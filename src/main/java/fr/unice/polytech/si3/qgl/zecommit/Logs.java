@@ -9,6 +9,8 @@ import java.util.List;
  * @author Nathan
  */
 public class Logs {
+    Logs() {
+    }
 
     protected static final List<String> myLogs = new ArrayList<>();
 
