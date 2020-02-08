@@ -41,8 +41,6 @@ public class Captain {
         this.oarList = ship.getOars();
         this.oarsNb = ship.getOarsNb();
         Logs.add("oarsNb:"+oarsNb);
-
-        sortEntities(game.getEntityList());
     }
 
     /**
