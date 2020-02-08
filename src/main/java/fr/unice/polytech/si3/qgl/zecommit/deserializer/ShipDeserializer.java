@@ -36,10 +36,6 @@ public class ShipDeserializer extends JsonDeserializer {
         Iterator<JsonNode> iteratorShip = node.path("entities").iterator();
         List<Entity> listEntitie = new ArrayList<>();
         while (iteratorShip.hasNext()) {
-            JsonNode current = iteratorShip.next();
-            JsonNode type = current.path("type");
-            String textType = type.asText();
-
             EntityDeserializer entityDeserializer = new EntityDeserializer();
             Entity entity = entityDeserializer.deserialize(jsonParser, deserializationContext);
             listEntitie.add(entity);

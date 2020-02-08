@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
@@ -28,7 +29,7 @@ public class ParInit {
         module.addDeserializer(Sailor.class, new SailorDeserializer());
         module.addDeserializer(Deck.class, new DeckDeserializer());
         module.addDeserializer(Goal.class, new GoalDeserializer());
-        module.addDeserializer(OtherShip.class, new OtherShipDeserializer());
+        module.addDeserializer(Ship.class, new ShipDeserializer());
 
         mapper.registerModule(module);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
