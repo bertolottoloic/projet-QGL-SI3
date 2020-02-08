@@ -41,8 +41,6 @@ public class Captain {
         this.oarList = ship.getOars();
         this.oarsNb = ship.getOarsNb();
         Logs.add("oarsNb:"+oarsNb);
-
-        sortEntities(game.getEntityList());
     }
 
     /**
@@ -56,10 +54,10 @@ public class Captain {
             Logs.add("Checkpoint done");
         }
 
-        if(initGame){
-            captainMate.initAttibuteOarToSailors(sailorList, ship);
-            initGame=false;
-        }
+        
+        captainMate.initAttibuteOarToSailors(sailorList, ship);
+        initGame=false;
+        
 
         if(!captainMate.sailorsAreOnTheirEntity(sailorList)) {
             captainMate.initMoveSailor(sailorList);
@@ -170,10 +168,9 @@ public class Captain {
      * @param game
      */
     public void refreshGame(Game game){
-        this.oarList.removeAll(oarList);
         this.game=game;
         ship=game.getShip();
-        sortEntities(game.getEntityList());
+        this.oarList = ship.getOars();
     }
 
     public void refreshSailorsListPosition(){

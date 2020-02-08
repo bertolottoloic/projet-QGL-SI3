@@ -64,6 +64,7 @@ public class CaptainMate {
     }
 
     public void initAttibuteOarToSailors(List<Sailor> sailors, Ship ship){
+        sailors.forEach(s->s.reinitializeEntity());
         List<Sailor> sailorTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>();
         oars.addAll(ship.getOars());
