@@ -26,7 +26,7 @@ class OutputTest {
         "{\"sailorId\":6,\"type\":\"USE_WATCH\"}]";
         s = new Output();
         Action o1 = new ToOar(1);
-        Action o2 = new Moving(s2, 3, 4);
+        Action o2 = new Moving(s2.getId(), 3, 4);
         Action o3 = new LiftSail(3);
         Action o4 = new LowerSail(4);
         Action o5 = new Turn(5, 3.5);

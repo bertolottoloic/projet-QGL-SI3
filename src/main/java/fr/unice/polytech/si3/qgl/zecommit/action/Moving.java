@@ -7,8 +7,9 @@ public class Moving extends Action{
     private int xdistance;
     private int ydistance;
 
-    public Moving(Sailor sailor, int xdistance, int ydistance){
-        super(sailor.getId(), ActionType.MOVING);
+    public Moving(int sailorId, int xdistance, int ydistance){
+
+        super(sailorId, ActionType.MOVING);
         if ((Math.abs(xdistance) + Math.abs(ydistance)) <= 5) {
             this.xdistance = xdistance;
             this.ydistance = ydistance;
@@ -31,7 +32,6 @@ public class Moving extends Action{
             }
 
         }
-        sailor.move(this.xdistance, this.ydistance);
     }
 
     //------------------------------GETTER-------------------------//

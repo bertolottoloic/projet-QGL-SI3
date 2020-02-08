@@ -5,10 +5,14 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.deserializer.*;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.EntityDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.DeckDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.PositionDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.SailorDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShapeDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
@@ -20,10 +24,11 @@ public class ParInit {
         SimpleModule module = new SimpleModule();
 
         module.addDeserializer(Position.class, new PositionDeserializer());
-        module.addDeserializer(Deck.class, new DeckDeserializer());
         module.addDeserializer(Shape.class, new ShapeDeserializer());
         module.addDeserializer(Entity.class, new EntityDeserializer());
         module.addDeserializer(Sailor.class, new SailorDeserializer());
+        module.addDeserializer(Deck.class, new DeckDeserializer());
+
 
         mapper.registerModule(module);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

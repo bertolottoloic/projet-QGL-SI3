@@ -36,6 +36,12 @@ public class ShipDeserializer extends JsonDeserializer {
         Iterator<JsonNode> iteratorShip = node.path("entities").iterator();
         List<Entity> listEntitie = new ArrayList<>();
         while (iteratorShip.hasNext()) {
+<<<<<<< HEAD
+            JsonNode current = iteratorShip.next();
+            JsonNode type = current.path("type");
+            String textType = type.asText();
+=======
+>>>>>>> 0c04a343eebd557f1eec5f7252f441e235f3cfb1
             EntityDeserializer entityDeserializer = new EntityDeserializer();
             Entity entity = entityDeserializer.deserialize(jsonParser, deserializationContext);
             listEntitie.add(entity);
@@ -45,7 +51,15 @@ public class ShipDeserializer extends JsonDeserializer {
         Shape shape = shapeDeserializer.deserialize(jsonParser, deserializationContext);
 
 
+<<<<<<< HEAD
+        return new Ship(node.get("life").asInt(), position, node.get("name").asText(), deck, listEntitie, shape);
+    }
+}
+
+
+=======
         return new Ship(node.get("life").asInt(), position, node.get("name").asText(), deck, listEntitie, shape );
     }
 }
 
+>>>>>>> 0c04a343eebd557f1eec5f7252f441e235f3cfb1

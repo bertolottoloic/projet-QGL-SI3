@@ -16,5 +16,6 @@ class EngineSettingsTest{
     @Test
     void thisToJsonTest(){
         System.out.println(es.thisToJson());
+        System.out.println(es.thisToJson2());
     }
 }
