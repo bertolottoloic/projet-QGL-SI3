@@ -12,13 +12,13 @@ import java.util.List;
 public class OrientationTable {
 
     private ArrayList<Double> angleTable;
-    private ArrayList<ArrayList<Compo>> formationTable;
+    private ArrayList<ArrayList<Compo>> compoTable;
     private int min;
 
 
     public OrientationTable(int oars, int sailors) {
         this.angleTable = generateAngleTable(oars, sailors);
-        this.formationTable = generateCompo(min);
+        this.compoTable = generateCompo(min);
     }
 
 
@@ -158,22 +158,22 @@ public class OrientationTable {
     }
 
     public List<ArrayList<Compo>> getFormationTable() {
-        return formationTable;
+        return compoTable;
     }
 
     public Compo getCompo(int indexAngle, int indexCompo) {
-        return formationTable.get(indexAngle).get(indexCompo);
+        return compoTable.get(indexAngle).get(indexCompo);
     }
 
     public Compo getLastCompo(int indexAngle) {
-        return formationTable.get(indexAngle).get(formationTable.get(indexAngle).size()-1);
+        return compoTable.get(indexAngle).get(compoTable.get(indexAngle).size()-1);
     }
 
     @Override
     public String toString() {
-        return "OrientationTable{" +
-                "angleTable=" + angleTable +
-                ", formationTable=" + formationTable +
+        return "OT{" +
+                "aT=" + angleTable +
+                ", cT=" + compoTable +
                 '}';
     }
 }

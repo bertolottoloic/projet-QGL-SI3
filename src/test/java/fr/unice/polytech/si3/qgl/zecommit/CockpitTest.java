@@ -113,7 +113,7 @@ class CockpitTest {
     }
     @Test
     void nextRoundTest() {
-        assertEquals("[{\"sailorId\":1,\"type\":\"OAR\"},{\"sailorId\":0,\"type\":\"OAR\"}]", this.cockpit.nextRound(jsonNR));
+        assertEquals("[{\"sailorId\":0,\"type\":\"OAR\"},{\"sailorId\":1,\"type\":\"OAR\"}]", this.cockpit.nextRound(jsonNR));
     }
 
 }

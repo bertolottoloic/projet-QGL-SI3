@@ -17,6 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class CaptainMateTest {
 
     Sailor sailor1;
@@ -24,12 +28,14 @@ public class CaptainMateTest {
     Ship ship;
     List<Entity> oars;
     List<Sailor> sailors;
+    Game game;
 
     @BeforeEach
     void setUp() {
         Logs logs = new Logs();
+        Game game = mock(Game.class);
         sailor1 = new Sailor(1, 0, 0, "sailor1");
-        captainMate = new CaptainMate();
+        captainMate = new CaptainMate(game);
         Oar o1 = new Oar(2,0);
         Oar o2 = new Oar(2,3);
 

@@ -19,9 +19,9 @@ public class Compo {
 
     @Override
     public String toString() {
-        return "Compo{" +
-                "sailorsRight=" + sailorsRight +
-                ", sailorsLeft=" + sailorsLeft +
+        return "C{" +
+                "R=" + sailorsRight +
+                ", L=" + sailorsLeft +
                 '}';
     }
 }

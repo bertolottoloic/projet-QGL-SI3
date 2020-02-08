@@ -21,7 +21,7 @@ public class Cockpit implements ICockpit {
 		ParserInit parserInit = new ParserInit();
 		try {
 			this.game=parserInit.parserInitGame(json);
-			this.captainMate= new CaptainMate();
+			this.captainMate= new CaptainMate(game);
 			this.captain= new Captain(game,captainMate);
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");

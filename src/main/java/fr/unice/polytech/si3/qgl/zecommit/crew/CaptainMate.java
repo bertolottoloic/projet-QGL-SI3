@@ -30,6 +30,8 @@ public class CaptainMate {
         this.actionList= new ArrayList<>();
         this.sailorList = new ArrayList<>(game.getSailors());
         this.ship = game.getShip();
+        this.leftSailorList = getLeftSailors();
+        this.rightSailorList = getRightSailors();
     }
 
 
@@ -46,6 +48,7 @@ public class CaptainMate {
         if(action.getXDistance()!=0 || action.getYDistance()!=0){
             actionList.add(action);
             Logs.add("\nS" + sailor.getId() + " is moving to (" + sailor.getX() + "," + sailor.getY() +")");
+            refreshSailorsListPosition();
         }
     }
 
@@ -125,6 +128,38 @@ public class CaptainMate {
             r++;
         }
 
+    }
+
+
+    /**
+     *
+     * @return la liste des marins à gauche du bateau.
+     */
+    public List<Sailor> getLeftSailors(){
+        ArrayList<Sailor> sailors = new ArrayList<>();
+        for(Sailor sailor : sailorList){
+            if(sailor.getY()<=ship.getDeck().getWidth()/2)
+                sailors.add(sailor);
+        }
+        return sailors;
+    }
+
+    /**
+     *
+     * @return la liste des marins à droite du bateau.
+     */
+    public List<Sailor> getRightSailors(){
+        ArrayList<Sailor> sailors = new ArrayList<>();
+        for(Sailor sailor : sailorList){
+            if(sailor.getY()>=ship.getDeck().getWidth()/2)
+                sailors.add(sailor);
+        }
+        return sailors;
+    }
+
+    public void refreshSailorsListPosition(){
+        this.rightSailorList = getRightSailors();
+        this.leftSailorList = getLeftSailors();
     }
 
 
