@@ -73,7 +73,7 @@ public class CaptainMateTest {
 
         List<Entity> oars = Arrays.asList(new Entity[]{o1,o2,o3,o4});
         List<Sailor> sailors = Arrays.asList(new Sailor[]{s1,s2,s3,s4});
-        ship = new Ship(100,new Position(0, 0, 0),"boat",new Deck(4, 10),oars,new Rectangle(4, 10, 0));
+        ship = new Ship("ship",100,new Position(0, 0, 0),"boat",new Deck(4, 10),oars,new Rectangle(4, 10, 0));
         captainMate.initAttibuteOarToSailors(sailors, ship);
         captainMate.initMoveSailor(sailors);
         assertTrue(s2.isOnEntity());

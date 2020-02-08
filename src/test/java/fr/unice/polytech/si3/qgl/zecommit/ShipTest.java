@@ -35,7 +35,7 @@ class ShipTest {
         Shape shape = new Rectangle(3,3,0);
         List<Entity> list = new ArrayList<>();
 
-        ship = new Ship(0, shipPosition,"zeBoat",deck, list, shape);
+        ship = new Ship("ship",0, shipPosition,"zeBoat",deck, list, shape);
 
         circle10 = new Circle(10);
 

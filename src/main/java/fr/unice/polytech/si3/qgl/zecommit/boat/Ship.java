@@ -23,8 +23,8 @@ public class Ship {
     private Shape shape;
     private List<Oar> oars = new ArrayList<>();
 
-    public Ship(int life,Position position,String name, Deck deck, List<Entity> entities,Shape shape){
-        this.type = "ship";
+    public Ship(String type, int life,Position position,String name, Deck deck, List<Entity> entities,Shape shape){
+        this.type = type;
         this.life = life;
         this.position = position;
         this.name = name;
