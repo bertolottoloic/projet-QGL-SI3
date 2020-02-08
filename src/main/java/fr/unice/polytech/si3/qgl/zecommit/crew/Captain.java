@@ -70,6 +70,7 @@ public class Captain {
                 Road road = new Road(ship.getPosition(), regatta.getFirstCheckpoint().getPosition());
                 int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
                 Logs.add(ship.getPosition().getOrientation() + " - " + chosenAngle + "");
+                Logs.add(ship.getPosition().toString());
                 decisionOrientation(road, chosenAngle);
             }
         }
@@ -79,11 +80,10 @@ public class Captain {
      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
      */
     public int findClosestPossibleAngle(double angleToReach){
-        int min = Math.min(oarsNb,sailorsNb);
-        double step = Math.PI/(2*min);
+        double step = Math.PI/(2*oarsNb);
         int res = 0;
         double orientation = ship.getPosition().getOrientation();
-        for (int k = 0; k<2*min; k ++){
+        for (int k = 0; k<2*oarsNb; k ++){
 
             if(k*step-Math.PI/2 + orientation <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 + orientation )
 
@@ -92,12 +92,12 @@ public class Captain {
         if(turnAroundLeft(angleToReach))
             return 0;
         if(turnAroundRight(angleToReach))
-            return min;
+            return oarsNb;
 
         if(res==0)
             return 0;
-        if(res==2*min-1)
-            return min;
+        if(res==2*oarsNb-1)
+            return oarsNb;
         else
             return (res+1)/2;
     }
@@ -125,16 +125,20 @@ public class Captain {
 
 
     public void decisionOrientation(Road road, int chosenAngle){
-        OrientationTable orientationTable = new OrientationTable(oarsNb, sailorsNb);
+        OrientationTable orientationTable = new OrientationTable(oarsNb);
         Logs.add(orientationTable.toString());
         Logs.add(chosenAngle +"");
+
         boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
+        int nbSailorsRight = rightSailorList.size();
+        int nbSailorsLeft = leftSailorList.size();
+
 
         if(!isNear){//si le bateau est loin
-            activateSailors(orientationTable.getLastCompo(chosenAngle));//on choisit la compo permettant d'aller le plus vite
+            activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus vite
         }
         else
-            activateSailors(orientationTable.getCompo(chosenAngle, 0));//on choisit la compo permettant d'aller le plus lentement
+            activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus lentement
     }
 
     /**

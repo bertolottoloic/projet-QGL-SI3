@@ -28,7 +28,6 @@ public class Engine {
             System.out.println(output);
             engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
             System.out.println(engineSettings.getShip().getPosition()+"\nFIN DU ROUND");
-
         }
 
         System.out.println(cockpit.getLogs());

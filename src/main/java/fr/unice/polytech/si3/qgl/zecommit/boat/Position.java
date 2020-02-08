@@ -26,7 +26,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return "{ " + this.x + " , " + this.y + " }";
+        return "P{ " + this.x + " , " + this.y + " }";
     }
     //------------------------------GETTER-------------------------//
 
