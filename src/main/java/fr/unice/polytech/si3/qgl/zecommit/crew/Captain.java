@@ -137,27 +137,7 @@ public class Captain {
             activateSailors(orientationTable.getCompo(chosenAngle, 0));//on choisit la compo permettant d'aller le plus lentement
     }
 
-    /**
-     * Transmet l'ordre d'activation des marins au second
-     * @param compo
-     */
-    public void activateSailors(Compo compo){
 
-        // Activation des marins de gauche
-        int l = 0;
-        while (l<compo.getSailorsLeft()) {
-            captainMate.toOar(leftSailorList.get(l), (Oar) leftSailorList.get(l).getEntity()); //TODO à vérifier
-            l++;
-        }
-
-        // Activation des marins de droite
-        int r = 0;
-        while(r<compo.getSailorsRight()) {
-            captainMate.toOar(rightSailorList.get(r), (Oar) rightSailorList.get(r).getEntity());
-            r++;
-        }
-
-    }
 
 
     public Oar findOarAssociated(Sailor sailor) {

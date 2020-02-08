@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import fr.unice.polytech.si3.qgl.zecommit.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
@@ -95,6 +96,28 @@ public class CaptainMate {
             Logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
             
         }
+    }
+
+    /**
+     * Transmet l'ordre d'activation des marins au second
+     * @param compo
+     */
+    public void activateSailors(Compo compo){
+
+        // Activation des marins de gauche
+        int l = 0;
+        while (l<compo.getSailorsLeft()) {
+            toOar(leftSailorList.get(l), (Oar) leftSailorList.get(l).getEntity()); //TODO à vérifier
+            l++;
+        }
+
+        // Activation des marins de droite
+        int r = 0;
+        while(r<compo.getSailorsRight()) {
+            toOar(rightSailorList.get(r), (Oar) rightSailorList.get(r).getEntity());
+            r++;
+        }
+
     }
 
     //--------------------------------GETTER-------------------------------
