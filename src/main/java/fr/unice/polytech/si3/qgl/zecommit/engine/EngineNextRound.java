@@ -46,12 +46,8 @@ public class EngineNextRound {
                 actionArrayList.add(moving);
             }
         }
-<<<<<<< HEAD
-        
-=======
 
 
->>>>>>> 0c04a343eebd557f1eec5f7252f441e235f3cfb1
         return actionArrayList;
     }
 
