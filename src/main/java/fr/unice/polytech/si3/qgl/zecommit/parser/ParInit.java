@@ -12,6 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
+import fr.unice.polytech.si3.qgl.zecommit.other.OtherShip;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 public class ParInit {
@@ -27,6 +28,7 @@ public class ParInit {
         module.addDeserializer(Sailor.class, new SailorDeserializer());
         module.addDeserializer(Deck.class, new DeckDeserializer());
         module.addDeserializer(Goal.class, new GoalDeserializer());
+        module.addDeserializer(OtherShip.class, new OtherShipDeserializer());
 
         mapper.registerModule(module);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
