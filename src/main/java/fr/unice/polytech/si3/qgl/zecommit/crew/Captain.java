@@ -88,9 +88,9 @@ public class Captain {
                 res = k;
         }
         if(turnAroundLeft(angleToReach))
-            return 0;
-        if(turnAroundRight(angleToReach))
             return oarsNb;
+        if(turnAroundRight(angleToReach))
+            return 0;
 
         if(res==0)
             return 0;

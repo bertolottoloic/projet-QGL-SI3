@@ -48,6 +48,7 @@ public class Road {
         } else {
             angle = shortestAngle(Math.atan(y / x));
         }
+        System.out.println(adjustAngle(angle));
         return adjustAngle(angle);
     }
 

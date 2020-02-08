@@ -128,10 +128,10 @@ public class EngineSettings {
 
 
         double currentOrientation=ship.getPosition().getOrientation();
-        double gap= Math.PI/(n*(ship.getOars().size()));
+        double gap= Math.PI/(ship.getOars().size());
         int balanced= rightSailors.size()-leftSailors.size();
-        currentOrientation+=(balanced*gap);
-        currentOrientation%=Math.PI;
+        currentOrientation+=(balanced*gap/n);
+
         ship.setPosition(new Position(x,y,currentOrientation));
 
     }
@@ -149,8 +149,10 @@ public class EngineSettings {
     public void setSailors() {
         this.sailors= new ArrayList<>();
         this.sailors.add(new Sailor(0,0,0,"jean"));
-        this.sailors.add(new Sailor(1,0,0,"paul"));
-        this.sailors.add(new Sailor(2,0,0,"jacques"));
+        this.sailors.add(new Sailor(1,0,1,"paul"));
+        this.sailors.add(new Sailor(2,1,0,"jacques"));
+        this.sailors.add(new Sailor(3,1,1,"pierre"));
+
     }
 
     public void setGoal() {
@@ -159,25 +161,28 @@ public class EngineSettings {
 
     public void setCheckpoints() {
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(100,100,0), new Circle(50)));
-        //this.checkpoints.add(new Checkpoint(new Position(0,0,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1000,0,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(500,1100,0), new Circle(50)));
 
     }
 
     public void setDeck() {
-        this.deck=new Deck(4,10);
+        this.deck=new Deck(2,4);
     }
 
     public void setEntities() {
         this.entities= new ArrayList<>();
+        this.entities.add(new Oar(1,0));
+        this.entities.add(new Oar(1,1));
         this.entities.add(new Oar(2,0));
-        this.entities.add(new Oar(2,3));
-        this.entities.add(new Oar(7,0));
-        this.entities.add(new Oar(7,3));
+        this.entities.add(new Oar(2,1));
+        this.entities.add(new Oar(3,0));
+        this.entities.add(new Oar(3,1));
+
     }
 
     public void setShape() {
-        this.shape=new Rectangle(4,10,0);
+        this.shape=new Rectangle(2,4,0);
     }
 
     //---------------------Getter----------------------//
