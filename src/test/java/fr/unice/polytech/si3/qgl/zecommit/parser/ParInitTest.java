@@ -22,12 +22,15 @@ class ParInitTest {
 
     }
 
+    /*
     @Test
     void positionTest() throws JsonProcessingException {
         ParInit parseInit = new ParInit();
         double x =  parseInit.parse(json).getX();
         assertEquals(1000, x);
     }
+    */
+
 
 
 }
