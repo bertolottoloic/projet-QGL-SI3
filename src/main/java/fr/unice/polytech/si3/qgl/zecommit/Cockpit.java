@@ -9,6 +9,7 @@ import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
+import fr.unice.polytech.si3.qgl.zecommit.parser.ParNext;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
 
@@ -30,13 +31,13 @@ public class Cockpit implements ICockpit {
 
 	public String nextRound(String round) {
 		String res;
-		ParserNext parserNext = new ParserNext();
+		ParNext parNext = new ParNext();
 
 		if(round.equals("{}")) {
 			return "[ ]";
 		}
 		try {
-			parserNext.parserNextRound(round, game);
+			parNext.parse(round);
 			captain.refreshGame(game);
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){

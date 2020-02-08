@@ -13,11 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ParserInitTest {
     private String jsonString;
     private String jsonString2;
-    private String jsonString3;
 
-
-    ParserInitTest() throws JsonProcessingException {
-    }
 
     @BeforeEach
     void setUp() {
