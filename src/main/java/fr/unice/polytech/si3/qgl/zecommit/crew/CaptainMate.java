@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import fr.unice.polytech.si3.qgl.zecommit.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
@@ -20,9 +21,15 @@ import java.util.List;
  */
 public class CaptainMate {
     private List<Action> actionList;
+    private List<Sailor> rightSailorList;
+    private List<Sailor> leftSailorList;
+    private List<Sailor> sailorList;
+    private Ship ship;
 
-    public CaptainMate(){
+    public CaptainMate(Game game){
         this.actionList= new ArrayList<>();
+        this.sailorList = new ArrayList<>(game.getSailors());
+        this.ship = game.getShip();
     }
 
 
@@ -120,9 +127,13 @@ public class CaptainMate {
 
     }
 
+
     //--------------------------------GETTER-------------------------------
 
     public List<Action> getActionList() {
         return actionList;
     }
+
+
+
 }

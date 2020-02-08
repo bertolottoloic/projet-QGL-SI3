@@ -45,8 +45,6 @@ public class Captain {
         Logs.add("oarsNb:"+oarsNb);
 
         sortEntities(game.getEntityList());
-        this.rightSailorList = getRightSailors();
-        this.leftSailorList = getLeftSailors();
     }
 
     /**
@@ -196,30 +194,6 @@ public class Captain {
         this.leftSailorList = getLeftSailors();
     }
 
-
-    //---------------------------GETTER-----------------------------------------
-
-
-    public List<Sailor> getSailorList() {
-        return sailorList;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public Regatta getRegatta() {
-        return regatta;
-    }
-
-    public Ship getShip() {
-        return ship;
-    }
-
-    public int getOarsNb() {
-        return oarsNb;
-    }
-
     /**
      *
      * @return la liste des marins à gauche du bateau.
@@ -244,6 +218,28 @@ public class Captain {
                 sailors.add(sailor);
         }
         return sailors;
+    }
+    //---------------------------GETTER-----------------------------------------
+
+
+    public List<Sailor> getSailorList() {
+        return sailorList;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public Regatta getRegatta() {
+        return regatta;
+    }
+
+    public Ship getShip() {
+        return ship;
+    }
+
+    public int getOarsNb() {
+        return oarsNb;
     }
 
     //-------------------------SETTER------------------------------
