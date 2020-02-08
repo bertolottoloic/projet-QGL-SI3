@@ -56,6 +56,19 @@ public abstract class Entity {
                 ", x : " + this.x +
                 ", y : " + this.y + " }";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==this) return true;
+        if(obj instanceof Entity){
+            Entity e = (Entity)obj;
+            if(this.type==e.type && this.x==e.x && this.y==e.y){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
     //------------------------------GETTER-------------------------//
 
     @JsonIgnore
