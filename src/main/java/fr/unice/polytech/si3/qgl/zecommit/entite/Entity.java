@@ -4,12 +4,7 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
  * Classe mère décrivant les objets présents sur le bateau
  */
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
+import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 
 @JsonTypeInfo(

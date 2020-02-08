@@ -1,12 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.parser;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
+import fr.unice.polytech.si3.qgl.zecommit.action.Action;
+
 import java.io.IOException;
 import java.util.List;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import fr.unice.polytech.si3.qgl.zecommit.Logs;
-import fr.unice.polytech.si3.qgl.zecommit.action.*;
 
 /**
  * @author Loic Bertolotto

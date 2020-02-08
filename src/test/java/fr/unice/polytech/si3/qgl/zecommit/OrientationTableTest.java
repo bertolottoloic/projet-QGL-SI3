@@ -2,12 +2,8 @@ package fr.unice.polytech.si3.qgl.zecommit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Or;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrientationTableTest {
 
@@ -29,10 +25,10 @@ class OrientationTableTest {
     @Test
     void generateAngleTablePairTest() {
 
-        assertEquals(orientationTable.getAngleTable().size(), 5);
-        assertEquals(orientationTable.getAngleTable().get(0), -Math.PI/2);
-        assertEquals(orientationTable.getAngleTable().get(4), Math.PI/2);
-        assertEquals(orientationTable.getAngleTable().get(2), 0);
+        assertEquals(5, orientationTable.getAngleTable().size());
+        assertEquals(-Math.PI/2, orientationTable.getAngleTable().get(0));
+        assertEquals(Math.PI/2, orientationTable.getAngleTable().get(4));
+        assertEquals(0, orientationTable.getAngleTable().get(2));
 
     }
 
@@ -44,16 +40,16 @@ class OrientationTableTest {
     void generateAngleTableImpairTest() {
         OrientationTable orientationTable = new OrientationTable(5, 7);
 
-        assertEquals(orientationTable.getAngleTable().size(), 5);
-        assertEquals(orientationTable.getAngleTable().get(0), -Math.PI/2);
-        assertEquals(orientationTable.getAngleTable().get(4), Math.PI/2);
-        assertEquals(orientationTable.getAngleTable().get(2), 0);
+        assertEquals(5, orientationTable.getAngleTable().size());
+        assertEquals(-Math.PI/2, orientationTable.getAngleTable().get(0));
+        assertEquals(Math.PI/2, orientationTable.getAngleTable().get(4));
+        assertEquals(0, orientationTable.getAngleTable().get(2));
 
     }
 
     @Test
     void generateFormationTest() {
-        assertEquals(orientationTable.getFormationTable().size(), 5);
+        assertEquals(5, orientationTable.getFormationTable().size());
     }
 
 
@@ -61,30 +57,30 @@ class OrientationTableTest {
     void generateFormationNegativeAngle() {
 
         //-PI/2
-        assertEquals(orientationTable.getCompo(0, 0).getSailorsLeft(), 2); // 2 marins à gauche
-        assertEquals(orientationTable.getCompo(0, 0).getSailorsRight(), 0); // 0 à droite
+        assertEquals(2, orientationTable.getCompo(0, 0).getSailorsLeft()); // 2 marins à gauche
+        assertEquals(0, orientationTable.getCompo(0, 0).getSailorsRight()); // 0 à droite
 
         //-PI/4 : compo 1
-        assertEquals(orientationTable.getCompo(1, 0).getSailorsLeft(), 1); // 1 marin à gauche
-        assertEquals(orientationTable.getCompo(1, 0).getSailorsRight(), 0); // 0 à droite
+        assertEquals(1, orientationTable.getCompo(1, 0).getSailorsLeft()); // 1 marin à gauche
+        assertEquals(0, orientationTable.getCompo(1, 0).getSailorsRight()); // 0 à droite
 
         //-PI/4 : compo 2
-        assertEquals(orientationTable.getCompo(1, 1).getSailorsLeft(), 2); // 0 marin à gauche
-        assertEquals(orientationTable.getCompo(1, 1).getSailorsRight(), 1); // 1 à droite
+        assertEquals(2, orientationTable.getCompo(1, 1).getSailorsLeft()); // 0 marin à gauche
+        assertEquals(1, orientationTable.getCompo(1, 1).getSailorsRight()); // 1 à droite
 
     }
 
     @Test
     void generateFormation0Angle(){
         //0 : compo 1
-        assertEquals(orientationTable.getCompo(2, 0).getSailorsLeft(), 1); // 1 marin à gauche
-        assertEquals(orientationTable.getCompo(2, 0).getSailorsRight(), 1); // 1 à droite
+        assertEquals(1, orientationTable.getCompo(2, 0).getSailorsLeft()); // 1 marin à gauche
+        assertEquals(1, orientationTable.getCompo(2, 0).getSailorsRight()); // 1 à droite
 
         //0 : compo 2
-        assertEquals(orientationTable.getCompo(2, 1).getSailorsLeft(), 2); // 2 marins à gauche
-        assertEquals(orientationTable.getCompo(2, 1).getSailorsRight(), 2); // 2 à droite
+        assertEquals(2, orientationTable.getCompo(2, 1).getSailorsLeft()); // 2 marins à gauche
+        assertEquals(2, orientationTable.getCompo(2, 1).getSailorsRight()); // 2 à droite
 
-        assertEquals(orientationTable.getLastCompo(2).getSailorsRight(), 2);
+        assertEquals(2, orientationTable.getLastCompo(2).getSailorsRight());
 
     }
 
@@ -92,16 +88,16 @@ class OrientationTableTest {
     void generateFormationPositiveAngle(){
 
         //PI/4 : compo 1
-        assertEquals(orientationTable.getCompo(3, 0).getSailorsLeft(), 0); // 0 marin à gauche
-        assertEquals(orientationTable.getCompo(3, 0).getSailorsRight(), 1); // 1 à droite
+        assertEquals(0, orientationTable.getCompo(3, 0).getSailorsLeft()); // 0 marin à gauche
+        assertEquals(1, orientationTable.getCompo(3, 0).getSailorsRight()); // 1 à droite
 
         //PI/4 : compo 2
-        assertEquals(orientationTable.getCompo(3, 1).getSailorsLeft(), 1); // 1 marin à gauche
-        assertEquals(orientationTable.getCompo(3, 1).getSailorsRight(), 2); // 2 à droite
+        assertEquals(1, orientationTable.getCompo(3, 1).getSailorsLeft()); // 1 marin à gauche
+        assertEquals(2, orientationTable.getCompo(3, 1).getSailorsRight()); // 2 à droite
 
         //PI/2
-        assertEquals(orientationTable.getCompo(4, 0).getSailorsLeft(), 0); // 0 marin à gauche
-        assertEquals(orientationTable.getCompo(4, 0).getSailorsRight(), 2); // 2 à droite
+        assertEquals(0, orientationTable.getCompo(4, 0).getSailorsLeft()); // 0 marin à gauche
+        assertEquals(2, orientationTable.getCompo(4, 0).getSailorsRight()); // 2 à droite
 
     }
 }

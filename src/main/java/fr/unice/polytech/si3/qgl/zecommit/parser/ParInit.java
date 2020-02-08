@@ -1,11 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.parser;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import fr.unice.polytech.si3.qgl.zecommit.Game;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 /*
 public class ParInit {
 

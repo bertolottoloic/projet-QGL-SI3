@@ -1,15 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
-import fr.unice.polytech.si3.qgl.zecommit.Game;
-import fr.unice.polytech.si3.qgl.zecommit.Logs;
-import fr.unice.polytech.si3.qgl.zecommit.OrientationTable;
-import fr.unice.polytech.si3.qgl.zecommit.Road;
+
+import fr.unice.polytech.si3.qgl.zecommit.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-
-import fr.unice.polytech.si3.qgl.zecommit.Compo;
 
 import java.util.ArrayList;
 import java.util.List;

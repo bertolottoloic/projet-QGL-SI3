@@ -1,16 +1,16 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
+import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cockpit implements ICockpit {
 	Game game;
