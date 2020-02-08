@@ -71,19 +71,19 @@ public class ParserNext {
             switch (type.asText()) {
                 case "rectangle":
                     Rectangle rectangleShip = objectMapper.readValue(shapeShipN.toString(), Rectangle.class);
-                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShip);
+                    ship = new Ship("ship",lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShip);
                     break;
 
                 case "circle":
                     Circle circleShip = objectMapper.readValue(shapeShipN.toString(), Circle.class);
-                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, circleShip);
+                    ship = new Ship("ship",lifeShip, positionShip, nameShip, deckShip, listEntitie, circleShip);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + shapeShipN.asText());
             }
         }
         catch(IllegalStateException e){
-            ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
+            ship=new Ship("ship",lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
             Logs.add("PB Shape");
             //System.out.println("No shape : "+e.toString());
         }

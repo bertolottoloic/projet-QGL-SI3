@@ -143,7 +143,7 @@ public class EngineSettings {
     //--------------------SETTINGS-------------------//
 
     public void setShip() {
-        this.ship= new Ship(100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
+        this.ship= new Ship("ship", 100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
     }
 
     public void setVisibleEntities() {
