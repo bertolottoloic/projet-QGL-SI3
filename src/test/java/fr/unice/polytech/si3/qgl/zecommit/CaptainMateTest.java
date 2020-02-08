@@ -22,12 +22,23 @@ public class CaptainMateTest {
     Sailor sailor1;
     CaptainMate captainMate;
     Ship ship;
+    List<Entity> oars;
+    List<Sailor> sailors;
 
     @BeforeEach
     void setUp() {
         Logs logs = new Logs();
         sailor1 = new Sailor(1, 0, 0, "sailor1");
         captainMate = new CaptainMate();
+        Oar o1 = new Oar(2,0);
+        Oar o2 = new Oar(2,3);
+
+        Sailor s1 = new Sailor(0, 0, 3, "Pouce");
+        Sailor s2 = new Sailor(1, 1, 0, "Teach");
+
+        oars = Arrays.asList(new Entity[]{o1,o2});
+        sailors = Arrays.asList(new Sailor[]{s1,s2});
+        ship = new Ship(100,new Position(0, 0, 0),"boat",new Deck(4, 10),oars,new Rectangle(4, 10, 0));
     }
 
     @Test
@@ -60,31 +71,31 @@ public class CaptainMateTest {
     }
 
     @Test
-    void initMoveSailorTest(){ //TODO à refactorer
-        Oar o1 = new Oar(2,0);
-        Oar o2 = new Oar(2,3);
-        Oar o3 = new Oar(7,0);
+    void initAttributeOarToSailorsTest(){
+        captainMate.initAttibuteOarToSailors(sailors, ship);
+        assertTrue(oars.get(0).hasSailorOn());
+        assertEquals(oars.get(0),sailors.get(1).getEntity());
+        assertTrue(oars.get(1).hasSailorOn());
+        assertEquals(oars.get(1),sailors.get(0).getEntity()); 
+    }
+
+    @Test
+    void initMoveSailorFirstStepTest(){ 
+        captainMate.initAttibuteOarToSailors(sailors, ship);
+        captainMate.initMoveSailor(sailors);
+        assertTrue(sailors.get(1).isOnEntity());
+        assertTrue(sailors.get(0).isOnEntity());    
+    }
+
+    @Test
+    void initMoveSailorSecondStepTest(){   
         Oar o4 = new Oar(9,3);
-
-        Sailor s1 = new Sailor(0, 0, 3, "Pouce");
-        Sailor s2 = new Sailor(1, 1, 0, "Teach");
         Sailor s3 = new Sailor(2,4,2,"barbe");
-        Sailor s4 = new Sailor(3,6,0,"barbe");
-
-        List<Entity> oars = Arrays.asList(new Entity[]{o1,o2,o3,o4});
-        List<Sailor> sailors = Arrays.asList(new Sailor[]{s1,s2,s3,s4});
+        List<Entity> oars = Arrays.asList(new Entity[]{o4});
+        List<Sailor> sailors = Arrays.asList(new Sailor[]{s3});
         ship = new Ship(100,new Position(0, 0, 0),"boat",new Deck(4, 10),oars,new Rectangle(4, 10, 0));
         captainMate.initAttibuteOarToSailors(sailors, ship);
         captainMate.initMoveSailor(sailors);
-        assertTrue(s2.isOnEntity());
-        assertTrue(o1.hasSailorOn());
-        assertEquals(o1,s2.getEntity());
-        assertTrue(s1.isOnEntity());
-        assertTrue(o2.hasSailorOn());
-        assertEquals(o2,s1.getEntity());
-        assertTrue(s4.isOnEntity());
-        assertTrue(o3.hasSailorOn());
-        assertEquals(o3,s4.getEntity());
         assertTrue(s3.hasEntity());
         assertFalse(s3.isOnEntity());
         assertTrue(o4.hasSailorOn());

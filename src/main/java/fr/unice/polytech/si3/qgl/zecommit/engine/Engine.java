@@ -14,11 +14,11 @@ public class Engine {
 
 
         EngineSettings engineSettings= new EngineSettings();
-        String json= engineSettings.thisToJson();
+        String json = engineSettings.thisToJson();
         EngineNextRound engineNextRound= new EngineNextRound();
         Cockpit cockpit = new Cockpit();
         cockpit.initGame(json);
-        int currentStep=0;
+        int currentStep = 0;
         String output="";
         while(!output.equals("[]")) {
             System.out.println("ROUND :"+currentStep);

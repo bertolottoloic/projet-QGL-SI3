@@ -64,9 +64,7 @@ public class Sailor {
         Optional<Entity> min = en.min(Comparator.comparingInt(a->distanceToEntity(a)));
         if(min.isPresent())
             return distanceToEntity(min.get());
-        else{
-            return this.id;
-        }
+        return 0;
     }
 
     //--------------------GETTER -------------------------//

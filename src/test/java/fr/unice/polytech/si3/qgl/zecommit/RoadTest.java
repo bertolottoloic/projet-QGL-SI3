@@ -125,7 +125,7 @@ public class RoadTest {
      * Renvoie PI/4 à la place de 7*PI/4
      */
     @Test
-    void shortestangle1Test() {
+    void shortestAngle1Test() {
         Position start = new Position(0,0,Math.PI/4);
         Position end = new Position(0,4,0);
 
@@ -139,7 +139,7 @@ public class RoadTest {
      * Renvoie -(3*PI)/4 à la place de (5*PI)/4
      */
     @Test
-    void shortestangle2Test() {
+    void shortestAngle2Test() {
         Position start = new Position(0,0,Math.PI/4);
         Position end = new Position(0,-4,0);
 
@@ -152,7 +152,7 @@ public class RoadTest {
      *
      */
     @Test
-    void shortestangle3Test() {
+    void shortestAngle3Test() {
         Position start = new Position(0,0,Math.PI/4);
         Position end = new Position(-4,-4,0);
 

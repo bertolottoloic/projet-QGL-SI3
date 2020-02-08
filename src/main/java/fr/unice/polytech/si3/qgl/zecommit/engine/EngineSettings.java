@@ -132,7 +132,7 @@ public class EngineSettings {
 
     public void calcul(){
 
-        double vitesse=(double)((double) 165/n)*(leftSailors.size()+rightSailors.size())/ship.getOars().size();
+        double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/ship.getOars().size();
         double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
 
