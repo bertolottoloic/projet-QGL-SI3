@@ -8,7 +8,6 @@ public class Moving extends Action{
     private int ydistance;
 
     public Moving(int sailorId, int xdistance, int ydistance){
-
         super(sailorId, ActionType.MOVING);
         if ((Math.abs(xdistance) + Math.abs(ydistance)) <= 5) {
             this.xdistance = xdistance;
@@ -32,6 +31,7 @@ public class Moving extends Action{
             }
 
         }
+       
     }
 
     //------------------------------GETTER-------------------------//
