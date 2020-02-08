@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
@@ -20,16 +21,17 @@ import java.util.List;
 public class OtherShipDeserializer extends JsonDeserializer {
     @Override
     public OtherShip deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
         ObjectCodec oc = jsonParser.getCodec();
         JsonNode node = oc.readTree(jsonParser);
 
-        PositionDeserializer positionDeserializer = new PositionDeserializer();
-        Position position = positionDeserializer.deserialize(jsonParser, deserializationContext);
 
-        DeckDeserializer deckDeserializer = new DeckDeserializer();
-        Deck deck = deckDeserializer.deserialize(jsonParser, deserializationContext);
+        Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
 
+        Deck deck = objectMapper.readValue(node.get("deck").toPrettyString(), Deck.class);
 
+//TODO
         Iterator<JsonNode> iteratorShip = node.path("entities").iterator();
         List<Entity> listEntitie = new ArrayList<>();
         while (iteratorShip.hasNext()) {
@@ -38,10 +40,8 @@ public class OtherShipDeserializer extends JsonDeserializer {
             listEntitie.add(entity);
         }
 
-        ShapeDeserializer shapeDeserializer = new ShapeDeserializer();
-        Shape shape = shapeDeserializer.deserialize(jsonParser, deserializationContext);
-
-
+        Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
+        
         return new OtherShip(node.get("life").asInt(), position, node.get("name").asText(), deck, listEntitie, shape);
     }
 }

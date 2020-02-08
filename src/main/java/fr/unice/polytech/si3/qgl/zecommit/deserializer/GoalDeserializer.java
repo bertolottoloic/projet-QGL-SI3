@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
@@ -28,12 +29,16 @@ public class GoalDeserializer extends JsonDeserializer {
 
         Goal goal;
 
+        ObjectMapper objectMapper = new ObjectMapper();
+
         ObjectCodec codec = jsonParser.getCodec();
         JsonNode node = codec.readTree(jsonParser);
 
         String type = node.get("mode").asText();
 
         if (type.equals("REGATTA")) {
+
+            //TODO ici important
 
             Iterator<JsonNode> iteratorShip = node.path("entities").iterator();
             List<Checkpoint> listCheckPoint = new ArrayList<>();
