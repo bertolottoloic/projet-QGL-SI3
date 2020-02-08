@@ -13,19 +13,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
-<<<<<<< HEAD
-=======
-
->>>>>>> 0c04a343eebd557f1eec5f7252f441e235f3cfb1
 
 
-<<<<<<< HEAD
+
 public class ShapeDeserializer extends JsonDeserializer {
 
     public ShapeDeserializer(Class<?> vc) {super();}
-=======
-    public ShapeDeserializer(Class<?> vc) {super(vc);}
->>>>>>> 0c04a343eebd557f1eec5f7252f441e235f3cfb1
     public ShapeDeserializer(){
         this(null);
     }
