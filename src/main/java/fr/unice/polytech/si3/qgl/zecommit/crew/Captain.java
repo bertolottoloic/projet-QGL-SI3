@@ -83,7 +83,7 @@ public class Captain {
         double orientation = ship.getPosition().getOrientation();
         for (int k = 0; k<2*oarsNb; k ++){
 
-            if(k*step-Math.PI/2 + orientation <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 + orientation )
+            if(k*step-Math.PI/2 <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 )
 
                 res = k;
         }
@@ -124,7 +124,6 @@ public class Captain {
 
     public void decisionOrientation(Road road, int chosenAngle){
         OrientationTable orientationTable = new OrientationTable(oarsNb);
-        Logs.add(orientationTable.toString());
         Logs.add(chosenAngle +"");
 
         boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());

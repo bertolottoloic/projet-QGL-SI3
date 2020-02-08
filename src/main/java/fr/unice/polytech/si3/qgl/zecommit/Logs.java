@@ -21,8 +21,9 @@ public class Logs {
     public static List<String> sortie(){
         List<String> shortLogs = new ArrayList<>();
         if(myLogs.size()>=200) {
-            for(int i = 0; i<200; i++)
+            for(int i = 0; i<198; i++)
                 shortLogs.add(myLogs.get(i));
+            shortLogs.add("... Short Logs ...");
             return shortLogs;
         }
         else

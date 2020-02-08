@@ -20,7 +20,7 @@ public class Engine {
         cockpit.initGame(json);
         int currentStep = 0;
         String output="";
-        while(!output.equals("[]")) {
+        while(!output.equals("[]")&&currentStep<300) {
             System.out.println("ROUND :"+currentStep);
             currentStep++;
             String json2 = engineSettings.thisToJson2();

@@ -80,7 +80,7 @@ public class CaptainMate {
             ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
             for(Oar oar:ship.getOars()){
                 if(!oar.hasSailorOn() && !tmp.hasEntity()){
-                    tmp.setOnEntity(oar); 
+                    tmp.setOnEntity(oar);
                 }
             }
         }
@@ -101,6 +101,7 @@ public class CaptainMate {
      * @param sailor
      */
     public void toOar(Sailor sailor,Oar oar){
+
         if(sailor.isOnEntity() && sailor.getEntity()==oar){
             ToOar action = new ToOar(sailor.getId());
             actionList.add(action);
@@ -118,7 +119,7 @@ public class CaptainMate {
         // Activation des marins de gauche
         int l = 0;
         while (l<compo.getSailorsLeft()) {
-            toOar(leftSailorList.get(l), (Oar) leftSailorList.get(l).getEntity()); //TODO à vérifier
+            toOar(leftSailorList.get(l), (Oar) leftSailorList.get(l).getEntity());
             l++;
         }
 

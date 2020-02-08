@@ -35,7 +35,7 @@ public class OrientationTable {
 
         // On prend un nombre pair de rame
         if (oarsNb % 2 != 0) {
-            efficentOars = oarsNb-1;
+            efficentOars = oarsNb-1; //TODO à corriger
         }
         else {
             efficentOars = oarsNb;
