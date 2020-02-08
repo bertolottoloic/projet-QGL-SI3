@@ -133,7 +133,7 @@ class ParserInitTest {
     }
 
     @Test
-    @Disabled
+
     void parserInitGame2Test() throws JsonProcessingException {
         ParInit parInit = new ParInit();
         Game game = parInit.parse(jsonString);

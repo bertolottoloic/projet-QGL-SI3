@@ -14,6 +14,8 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.OtherShip;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 public class ParInit {
@@ -23,19 +25,17 @@ public class ParInit {
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
 
-        module.addDeserializer(Position.class, new PositionDeserializer());
-        module.addDeserializer(Shape.class, new ShapeDeserializer());
-        module.addDeserializer(Entity.class, new EntityDeserializer());
-        module.addDeserializer(Sailor.class, new SailorDeserializer());
-        module.addDeserializer(Deck.class, new DeckDeserializer());
-        module.addDeserializer(Goal.class, new GoalDeserializer());
-        module.addDeserializer(Ship.class, new ShipDeserializer());
-<<<<<<< HEAD
-=======
         module.addDeserializer(Checkpoint.class, new CheckPointDeserializer());
+        module.addDeserializer(Deck.class, new DeckDeserializer());
+        module.addDeserializer(Entity.class, new EntityDeserializer());
+        module.addDeserializer(Goal.class, new GoalDeserializer());
+        module.addDeserializer(OtherShip.class, new OtherShipDeserializer());
+        module.addDeserializer(Position.class, new PositionDeserializer());
+        module.addDeserializer(Sailor.class, new SailorDeserializer());
+        module.addDeserializer(Shape.class, new ShapeDeserializer());
+        module.addDeserializer(Ship.class, new ShipDeserializer());
+        module.addDeserializer(Wind.class, new WindDeserializer());
 
-
->>>>>>> 6d32498bdf91633054686ad3dcbe660583028f2a
 
         mapper.registerModule(module);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

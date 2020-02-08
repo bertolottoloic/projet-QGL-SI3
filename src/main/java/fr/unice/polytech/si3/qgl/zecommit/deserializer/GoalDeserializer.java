@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -38,17 +39,7 @@ public class GoalDeserializer extends JsonDeserializer {
 
         if (type.equals("REGATTA")) {
 
-            //TODO ici important
-
-            Iterator<JsonNode> iteratorShip = node.path("entities").iterator();
-            List<Checkpoint> listCheckPoint = new ArrayList<>();
-            while (iteratorShip.hasNext()) {
-                CheckPointDeserializer checkPointDeserializer = new CheckPointDeserializer();
-                Checkpoint checkpoint = checkPointDeserializer.deserialize(jsonParser, deserializationContext);
-                listCheckPoint.add(checkpoint);
-            }
-
-            return new Regatta(listCheckPoint);
+            return new Regatta(objectMapper.readValue(node.get("checkpoints").toPrettyString(), new TypeReference<List<Checkpoint>>() {}));
         }
 
         else {
