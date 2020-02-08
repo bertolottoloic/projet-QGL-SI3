@@ -135,6 +135,13 @@ class ParserInitTest {
     }
 
     @Test
+    void parserInitGame2Test() throws JsonProcessingException {
+        ParInit parInit = new ParInit();
+        Game game = parInit.parse(jsonString);
+
+    }
+
+    @Test
     void parserNextRound() throws JsonProcessingException {
         Game game =  new Game();
         ParserNext parserNext = new ParserNext();
