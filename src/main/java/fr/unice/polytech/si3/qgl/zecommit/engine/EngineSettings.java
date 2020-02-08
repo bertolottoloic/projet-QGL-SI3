@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class EngineSettings {
@@ -34,14 +33,9 @@ public class EngineSettings {
     Shape shape;
     ArrayList<Sailor> sailors;
     ArrayList<Entity> visibleEntities;
-    @JsonIgnore
     private ObjectMapper oM;
-    ///////////////////////////:
-    @JsonIgnore
     ArrayList<Sailor> leftSailors;
-    @JsonIgnore
     ArrayList<Sailor> rightSailors;
-    @JsonIgnore
     int n=100;
 
 
@@ -198,7 +192,6 @@ public class EngineSettings {
         return n;
     }
 
-    @JsonIgnore
     /**
      * @return the checkpoints
      */
@@ -213,7 +206,6 @@ public class EngineSettings {
         return ship;
     }
 
-    @JsonIgnore
     /**
      * @return the deck
      */
@@ -221,7 +213,6 @@ public class EngineSettings {
         return deck;
     }
 
-    @JsonIgnore
     /**
      * @return the entities
      */
@@ -229,7 +220,6 @@ public class EngineSettings {
         return entities;
     }
 
-    @JsonIgnore
     /**
      * @return the shape
      */
@@ -244,7 +234,6 @@ public class EngineSettings {
         return sailors;
     }
 
-    @JsonIgnore
     /**
      * @return the visibleEntities
      */

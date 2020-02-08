@@ -27,6 +27,7 @@ public class CheckPointDeserializer extends JsonDeserializer {
         ShapeDeserializer shapeDeserializer = new ShapeDeserializer();
         Shape shape = shapeDeserializer.deserialize(jsonParser, deserializationContext);
 
+
         return new Checkpoint(position, shape);
     }
 }

@@ -18,7 +18,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 public class ParNext {
 
-    public Position parse(String jsonString) throws JsonProcessingException {
+    public void parse(String jsonString) throws JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
@@ -35,8 +35,6 @@ public class ParNext {
 
         mapper.registerModule(module);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        return mapper.readValue(jsonString, Position.class);
     }
 }
 
