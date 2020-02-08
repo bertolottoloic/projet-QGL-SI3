@@ -140,7 +140,7 @@ public class CaptainMate {
     public List<Sailor> getLeftSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
-            if(sailor.getY()<=ship.getDeck().getWidth()/2)
+            if(sailor.getY()<ship.getDeck().getWidth()/2)
                 sailors.add(sailor);
         }
         return sailors;
@@ -153,7 +153,7 @@ public class CaptainMate {
     public List<Sailor> getRightSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
-            if(sailor.getY()>=ship.getDeck().getWidth()/2)
+            if(sailor.getY()>=((ship.getDeck().getWidth()/2)+(ship.getDeck().getWidth()%2)))
                 sailors.add(sailor);
         }
         return sailors;

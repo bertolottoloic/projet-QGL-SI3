@@ -161,8 +161,8 @@ public class EngineSettings {
 
     public void setCheckpoints() {
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(-1000,1000,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(0,0,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(-200,1000,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(500,1100,0), new Circle(50)));
 
     }
 
