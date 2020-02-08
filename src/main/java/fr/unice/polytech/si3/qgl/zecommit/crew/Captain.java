@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Clement P
  *
- *Classe qui definit le capitaine
+ * Classe qui definit le capitaine
  * Le capitaine se charge de la decision.
  */
 
@@ -35,7 +35,7 @@ public class Captain {
 
 
 
-    public Captain(Game game, CaptainMate cM){
+    public Captain(Game game, CaptainMate cM){//TODO à embellir
         this.ship = game.getShip();
         this.regatta = (Regatta) game.getGoal();
         this.sailorList = new ArrayList<>(game.getSailors());
@@ -55,26 +55,30 @@ public class Captain {
     public void actions() {
         captainMate.getActionList().removeAll(captainMate.getActionList());
 
-        if(initGame){
-            captainMate.initAttibuteOarToSailors(sailorList, ship);
-            initGame=false; //TODO : à changer
-        }
-
-        if(!captainMate.sailorsAreOnTheirEntity(sailorList)){
-            captainMate.initMoveSailor(sailorList); //TODO à revoir
-        }
-
         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
             regatta.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
         }
 
-        if(!game.getShip().isInCheckpoint(regatta.getFirstCheckpoint())) {
-            refreshSailorsListPosition();
-            Road road = new Road(ship.getPosition(),regatta.getFirstCheckpoint().getPosition());
-            int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
-            Logs.add(ship.getPosition().getOrientation() +" - " + chosenAngle + "");
-            decisionOrientation(road, chosenAngle);
+        if(initGame){
+            captainMate.initAttibuteOarToSailors(sailorList, ship);
+            initGame=false;
+        }
+
+        if(!captainMate.sailorsAreOnTheirEntity(sailorList)) {
+            captainMate.initMoveSailor(sailorList);
+        }
+        else {
+            System.out.println(sailorList.toString());
+            Logs.add(sailorList.toString());
+
+            if (!game.getShip().isInCheckpoint(regatta.getFirstCheckpoint())) {
+                refreshSailorsListPosition();
+                Road road = new Road(ship.getPosition(), regatta.getFirstCheckpoint().getPosition());
+                int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
+                Logs.add(ship.getPosition().getOrientation() + " - " + chosenAngle + "");
+                decisionOrientation(road, chosenAngle);
+            }
         }
     }
 
@@ -127,7 +131,7 @@ public class Captain {
 
 
     public void decisionOrientation(Road road, int chosenAngle){
-        OrientationTable orientationTable = new OrientationTable(oarsNb);
+        OrientationTable orientationTable = new OrientationTable(oarsNb, sailorList.size());
         boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
 
         if(!isNear){//si le bateau est loin
@@ -142,6 +146,7 @@ public class Captain {
      * @param compo
      */
     public void activateSailors(Compo compo){
+        Logs.add(compo.toString());
 
         // Activation des marins de gauche
         int l = 0;
@@ -152,6 +157,7 @@ public class Captain {
 
         // Activation des marins de droite
         int r = 0;
+        System.out.println(compo);
         while(r<compo.getSailorsRight()) {
             captainMate.toOar(rightSailorList.get(r), (Oar) rightSailorList.get(r).getEntity());
             r++;
@@ -159,15 +165,6 @@ public class Captain {
 
     }
 
-
-    public Oar findOarAssociated(Sailor sailor) {
-        for (int j = 0; j < oarList.size(); j++) {
-            if (sailor.getX() == oarList.get(j).getX() && sailor.getY() == oarList.get(j).getY()) {
-                return oarList.get(j);
-            }
-        }
-        return null;
-    }
 
 
 
@@ -229,7 +226,7 @@ public class Captain {
     public List<Sailor> getLeftSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
-            if(sailor.getY()>=ship.getDeck().getWidth()/2)
+            if(sailor.getY()<=ship.getDeck().getWidth()/2)
                 sailors.add(sailor);
         }
         return sailors;
@@ -242,7 +239,7 @@ public class Captain {
     public List<Sailor> getRightSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
-            if(sailor.getY()<=ship.getDeck().getWidth()/2)
+            if(sailor.getY()>=ship.getDeck().getWidth()/2)
                 sailors.add(sailor);
         }
         return sailors;

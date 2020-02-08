@@ -16,7 +16,7 @@ class OrientationTableTest {
 
     @BeforeEach
     void setUp() {
-        orientationTable = new OrientationTable(4);
+        orientationTable = new OrientationTable(4, 4);
 
 
 
@@ -42,7 +42,7 @@ class OrientationTableTest {
      */
     @Test
     void generateAngleTableImpairTest() {
-        OrientationTable orientationTable = new OrientationTable(5);
+        OrientationTable orientationTable = new OrientationTable(5, 7);
 
         assertEquals(orientationTable.getAngleTable().size(), 5);
         assertEquals(orientationTable.getAngleTable().get(0), -Math.PI/2);

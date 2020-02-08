@@ -56,7 +56,7 @@ public class Sailor {
     }
 
     public boolean hasEntity(){
-        return !(this.entity==null);
+        return this.entity!=null;
     }
 
     public int distanceToNearestEntity(List<Entity> e){
@@ -116,6 +116,6 @@ public class Sailor {
         if(this.entity != null)
             this.entity.putSailorOn(null);
         this.entity = e;
-        this.entity.putSailorOn(this);     
+        this.entity.putSailorOn(this);
     }
 }

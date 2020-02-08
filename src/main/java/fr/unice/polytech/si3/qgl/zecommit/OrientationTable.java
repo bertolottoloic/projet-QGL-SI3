@@ -13,11 +13,12 @@ public class OrientationTable {
 
     private ArrayList<Double> angleTable;
     private ArrayList<ArrayList<Compo>> formationTable;
+    private int min;
 
 
-    public OrientationTable(int oars) {
-        this.angleTable = generateAngleTable(oars);
-        this.formationTable = generateFormation(oars);
+    public OrientationTable(int oars, int sailors) {
+        this.angleTable = generateAngleTable(oars, sailors);
+        this.formationTable = generateCompo(min);
     }
 
 
@@ -26,12 +27,13 @@ public class OrientationTable {
      * @param oarsNb
      * @return
      */
-    ArrayList<Double> generateAngleTable(int oarsNb) {
+    ArrayList<Double> generateAngleTable(int oarsNb, int sailorsNb) {
         ArrayList<Double> myAngleTable = new ArrayList();
 
         double borneSup =  Math.PI/2;
         double borneInf = -borneSup;
         int efficentOars;
+        int efficientSailors;
 
         // On prend un nombre pair de rame
         if (oarsNb % 2 != 0) {
@@ -41,21 +43,31 @@ public class OrientationTable {
             efficentOars = oarsNb;
         }
 
+        // On prend un nombre pair de marin
+        if (oarsNb % 2 != 0) {
+            efficientSailors = sailorsNb-1;
+        }
+        else {
+            efficientSailors = sailorsNb;
+        }
+
+        this.min = Math.min(efficentOars, efficientSailors);
+
         // Pas entre chaque angle
-        double step = Math.PI/efficentOars;
+        double step = Math.PI/min;
 
         // borne inf de l'interval
         myAngleTable.add(borneInf);
 
         // On remplit les valeurs inf à 0
-        for (int i = 1; i < (efficentOars/2) ; i++) {
+        for (int i = 1; i < (min/2) ; i++) {
             myAngleTable.add(borneInf + i*step);
         }
         // 0 au milieu de l'interval
         myAngleTable.add(0.0);
 
         // On remplit les valeurs sup à 0
-        for (int i = 1; i < (efficentOars/2) ; i++) {
+        for (int i = 1; i < (min/2) ; i++) {
             myAngleTable.add(i*step);
         }
 
@@ -65,33 +77,33 @@ public class OrientationTable {
         return myAngleTable;
     }
 
-    ArrayList<ArrayList<Compo>> generateFormation(int oarsNb) {
-        ArrayList myFormationTable = new ArrayList();
+    ArrayList<ArrayList<Compo>> generateCompo(int min) {
+        ArrayList myCompoTable = new ArrayList();
 
         int oars;
 
         // On prend un nombre pair de rame
-        if (oarsNb % 2 != 0) {
-            oars = oarsNb-1;
+        if (min % 2 != 0) {
+            oars = min-1;
         }
         else {
-            oars = oarsNb;
+            oars = min;
         }
 
         // Compo pour Orientation negative
         for (int i = 0; i < (oars/2); i++) {
-            myFormationTable.add(compoSpeBeforeZ(i, oars));
+            myCompoTable.add(compoSpeBeforeZ(i, oars));
         }
 
         // Compo pour avancer tout droit
-        myFormationTable.add(compoSpeForZ(oars));
+        myCompoTable.add(compoSpeForZ(oars));
 
         //Compo pour Orientation positive
         for (int i = (oars/2)-1; i >= 0; i--) {
-            myFormationTable.add(compoSpeAfterZ(i, oars));
+            myCompoTable.add(compoSpeAfterZ(i, oars));
         }
 
-        return myFormationTable;
+        return myCompoTable;
     }
 
     /**
