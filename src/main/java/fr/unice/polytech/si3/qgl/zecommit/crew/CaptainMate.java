@@ -1,6 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import fr.unice.polytech.si3.qgl.zecommit.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;

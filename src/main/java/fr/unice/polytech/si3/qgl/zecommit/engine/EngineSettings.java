@@ -3,16 +3,15 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.ActionType;
-import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
-import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
@@ -41,7 +40,9 @@ public class EngineSettings {
     @JsonIgnore
     ArrayList<Sailor> rightSailors;
     @JsonIgnore
-    int n=100;
+    final int n=100;
+    @JsonIgnore
+    double rotation=0;
 
 
     EngineSettings(){
@@ -79,6 +80,7 @@ public class EngineSettings {
     public void updateEngine(ArrayList<Action> actions){
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
+        rotation=0;
         for (Action action: actions) {
             if(action.getType()== ActionType.MOVING){
                 engineMoving((Moving) action);
@@ -86,9 +88,22 @@ public class EngineSettings {
             if(action.getType()== ActionType.OAR){
                 engineOar((ToOar) action);
             }
+            if(action.getType()==ActionType.TURN){
+                engineTurn((Turn) action);
+            }
         }
         for(int i=0; i<n;i++) {
             calcul();
+        }
+    }
+
+    public void engineTurn(Turn turn){
+        for(Sailor sailor :sailors){
+            if(turn.getSailorId()==sailor.getId()&&
+                    ship.getRudder().getX()==sailor.getX()&&
+                    ship.getRudder().getY()==sailor.getY()){
+                rotation=turn.getRotation();
+            }
         }
     }
 
@@ -131,6 +146,7 @@ public class EngineSettings {
         double gap= Math.PI/(ship.getOars().size());
         int balanced= rightSailors.size()-leftSailors.size();
         currentOrientation+=(balanced*gap/n);
+        currentOrientation+=rotation/n;
 
         ship.setPosition(new Position(x,y,currentOrientation));
 
@@ -175,7 +191,7 @@ public class EngineSettings {
         this.entities.add(new Oar(1,0));
         this.entities.add(new Oar(1,1));
         this.entities.add(new Oar(2,0));
-        this.entities.add(new Oar(2,1));
+        this.entities.add(new Rudder(2,1));
         this.entities.add(new Oar(3,0));
         this.entities.add(new Oar(3,1));
 

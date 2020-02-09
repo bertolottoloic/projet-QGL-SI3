@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.strategy;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 

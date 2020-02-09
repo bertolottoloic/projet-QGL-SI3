@@ -6,6 +6,9 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
 import java.util.ArrayList;
 import java.util.List;

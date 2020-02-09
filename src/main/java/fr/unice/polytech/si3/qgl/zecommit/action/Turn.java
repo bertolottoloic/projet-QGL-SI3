@@ -6,7 +6,12 @@ public class Turn extends Action{
 
     public Turn(int id, double rotation){
         super(id,ActionType.TURN);
-        this.rotation = rotation;
+        if(rotation<=Math.PI/4&&rotation>=-Math.PI/4){
+            this.rotation = rotation;
+        }
+        else{
+            this.rotation=0;
+        }
     }
 
     public double getRotation(){

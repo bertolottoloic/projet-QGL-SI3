@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
+import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,6 +44,12 @@ public class EngineNextRound {
                 int yDistance = Integer.valueOf(ydistanceNode.asText());
                 Moving moving= new Moving(Integer.valueOf(id),xDistance,yDistance);
                 actionArrayList.add(moving);
+            }
+            if(textType.equals("TURN")) {
+                JsonNode rotationNode = current.path("rotation");
+                double rotation= Double.valueOf(rotationNode.asText());
+                Turn turn = new Turn(Integer.valueOf(id),rotation);
+                actionArrayList.add(turn);
             }
         }
 
