@@ -83,7 +83,6 @@ public class Captain {
     public int findClosestPossibleAngle(double angleToReach){
         double step = Math.PI/(2*oarsNb);
         int res = 0;
-        double orientation = ship.getPosition().getOrientation();
         for (int k = 0; k<2*oarsNb; k ++){
 
             if(k*step-Math.PI/2 <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 )
