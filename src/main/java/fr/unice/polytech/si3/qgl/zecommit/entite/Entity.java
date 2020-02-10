@@ -7,6 +7,8 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 
+import java.util.Objects;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -64,6 +66,12 @@ public abstract class Entity {
         }
         return false;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, x, y, sailorOn);
+    }
+
     //------------------------------GETTER-------------------------//
 
     @JsonIgnore
