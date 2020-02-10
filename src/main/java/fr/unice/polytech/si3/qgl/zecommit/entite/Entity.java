@@ -87,6 +87,13 @@ public abstract class Entity {
         return y;
     }
 
+    /**
+     * @return the sailorOn
+     */
+    public Sailor getSailorOn() {
+        return sailorOn;
+    }
+
     //------------------------------SETTER-------------------------//
 
     public void setType(EntityType type) {

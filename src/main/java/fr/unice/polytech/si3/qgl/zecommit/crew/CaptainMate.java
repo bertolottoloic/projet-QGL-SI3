@@ -67,11 +67,17 @@ public class CaptainMate {
     }
 
     public void initAttibuteOarToSailors(List<Sailor> sailors, Ship ship){
+        refreshGame(ship);
         sailors.forEach(s->s.reinitializeEntity());
         List<Sailor> sailorTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>();
         oars.addAll(ship.getOars());
         sailorTmp.sort(Comparator.comparingInt(a->a.distanceToNearestEntity(oars)));
+        Sailor sailor;
+        if(sailorTmp.size()%2!=0 && ship.getRudder()!=null){
+            sailor = sailorTmp.remove(sailorTmp.size()-1);
+            sailor.setOnEntity(ship.getRudder());
+        }
         for(Sailor tmp : sailorTmp){   
             ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
             Oar closestOar = ship.getOars().get(0);
@@ -86,6 +92,14 @@ public class CaptainMate {
                     tmp.setOnEntity(oar);
                 }
             }
+        }
+
+    }
+
+    public void moveSailorToRudder(Sailor sailor){
+        if(ship.getRudder()!=null){
+            moveSailor(sailor, ship.getRudder().getX() , ship.getRudder().getY());
+            sailor.setOnEntity(ship.getRudder());
         }
     }
 
@@ -145,8 +159,8 @@ public class CaptainMate {
         }
 
         //Activation du gouvernail
-        if(ship.getRudder().isPresent())
-            toTurn(ship.getRudder().get().getSailorOn(), ship.getRudder(), angle);
+        if(ship.getRudder()!=null)
+            toTurn(ship.getRudder().getSailorOn(), ship.getRudder(), angle);
 
     }
 
@@ -175,6 +189,10 @@ public class CaptainMate {
                 sailors.add(sailor);
         }
         return sailors;
+    }
+
+    public void refreshGame(Ship ship){
+        this.ship=ship;
     }
 
     public void refreshSailorsListPosition(){

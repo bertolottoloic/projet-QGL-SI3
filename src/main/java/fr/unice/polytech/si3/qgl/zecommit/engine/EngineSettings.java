@@ -99,10 +99,12 @@ public class EngineSettings {
 
     public void engineTurn(Turn turn){
         for(Sailor sailor :sailors){
-            if(turn.getSailorId()==sailor.getId()&&
-                    ship.getRudder().getX()==sailor.getX()&&
-                    ship.getRudder().getY()==sailor.getY()){
-                rotation=turn.getRotation();
+            if(ship.getRudder()!=null){
+                if(turn.getSailorId()==sailor.getId()&&
+                        ship.getRudder().getX()==sailor.getX()&&
+                        ship.getRudder().getY()==sailor.getY()){
+                    rotation=turn.getRotation();
+                }
             }
         }
     }
@@ -149,7 +151,14 @@ public class EngineSettings {
         currentOrientation+=rotation/n;
 
         ship.setPosition(new Position(x,y,currentOrientation));
+        checkCheckpoints();
+    }
 
+    public void checkCheckpoints(){
+        if(ship.isInCheckpoint(checkpoints.get(0))&&checkpoints.size()>1){
+            System.out.println("Checkpoint valides :"+checkpoints.get(0).getPosition());
+            checkpoints.remove(0);
+        }
     }
 
     //--------------------SETTINGS-------------------//

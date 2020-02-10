@@ -11,6 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Loic Bertolotto
@@ -45,7 +46,7 @@ public class Ship {
         entities.forEach(entity ->
         {
             if(entity.getType().equals(EntityType.RUDDER)){
-                rudder=new Rudder(entity.getX(),entity.getY());
+                rudder=(Rudder)entity;
             }
         });
     }
