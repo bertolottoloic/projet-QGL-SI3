@@ -177,7 +177,7 @@ public class EngineSettings {
         this.sailors.add(new Sailor(1,0,1,"paul"));
         this.sailors.add(new Sailor(2,1,0,"jacques"));
         this.sailors.add(new Sailor(3,1,1,"pierre"));
-        this.sailors.add(new Sailor(4,0,0,"Vincent"));
+        //this.sailors.add(new Sailor(4,0,0,"Vincent"));
 
 
     }
