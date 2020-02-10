@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
+import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
@@ -106,7 +109,18 @@ public class CaptainMate {
             ToOar action = new ToOar(sailor.getId());
             actionList.add(action);
             Logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
-            
+
+        }
+    }
+
+
+    public void toTurn(Sailor sailor, Rudder rudder, double angle){
+
+        if(sailor.isOnEntity() && sailor.getEntity()==rudder){
+            Turn action = new Turn(sailor.getId(), angle);
+            actionList.add(action);
+            Logs.add("\nS" +sailor.getId() + " turn from " + "("+rudder.getX() +","+ rudder.getY() +")");
+
         }
     }
 
@@ -114,7 +128,7 @@ public class CaptainMate {
      * Transmet l'ordre d'activation des marins au second
      * @param compo
      */
-    public void activateSailors(Compo compo){
+    public void activateSailors(Compo compo, double angle){
 
         // Activation des marins de gauche
         int l = 0;
@@ -129,6 +143,10 @@ public class CaptainMate {
             toOar(rightSailorList.get(r), (Oar) rightSailorList.get(r).getEntity());
             r++;
         }
+
+        //Activation du gouvernail
+        if(ship.getRudder().isPresent())
+            toTurn(ship.getRudder().get().getSailorOn(), ship.getRudder(), angle);
 
     }
 

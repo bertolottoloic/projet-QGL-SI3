@@ -132,21 +132,25 @@ public class Captain {
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
 
+        if(road.orientationToGoal()>-Math.PI/4 && road.orientationToGoal()<Math.PI/4){
+            chosenAngle = findClosestPossibleAngle(0);
+        }
+
 
         if(!isNear){//si le bateau est loin
-            activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus vite
+            activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
         }
         else
-            activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus lentement
+            activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
     }
 
     /**
      * Transmet l'ordre d'activation des marins au second
      * @param compo
      */
-    public void activateSailors(Compo compo){
+    public void activateSailors(Compo compo, double angle){
         Logs.add(compo.toString());
-        captainMate.activateSailors(compo);
+        captainMate.activateSailors(compo, angle);
     }
 
 

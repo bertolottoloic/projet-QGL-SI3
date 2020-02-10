@@ -175,6 +175,8 @@ public class EngineSettings {
         this.sailors.add(new Sailor(1,0,1,"paul"));
         this.sailors.add(new Sailor(2,1,0,"jacques"));
         this.sailors.add(new Sailor(3,1,1,"pierre"));
+        this.sailors.add(new Sailor(4,0,0,"Vincent"));
+
 
     }
 
@@ -199,7 +201,6 @@ public class EngineSettings {
         this.entities.add(new Oar(1,1));
         this.entities.add(new Oar(2,0));
         this.entities.add(new Rudder(2,1));
-        this.entities.add(new Oar(3,0));
         this.entities.add(new Oar(3,1));
 
     }

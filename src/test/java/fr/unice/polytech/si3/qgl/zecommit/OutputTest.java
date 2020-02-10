@@ -22,7 +22,7 @@ class OutputTest {
         "{\"sailorId\":2,\"type\":\"MOVING\",\"xdistance\":3,\"ydistance\":2},"+
         "{\"sailorId\":3,\"type\":\"LIFT_SAIL\"},"+
         "{\"sailorId\":4,\"type\":\"LOWER_SAIL\"},"+
-        "{\"sailorId\":5,\"type\":\"TURN\",\"rotation\":3.5},"+
+        "{\"sailorId\":5,\"type\":\"TURN\",\"rotation\":0.0},"+
         "{\"sailorId\":6,\"type\":\"USE_WATCH\"}]";
         s = new Output();
         Action o1 = new ToOar(1);
