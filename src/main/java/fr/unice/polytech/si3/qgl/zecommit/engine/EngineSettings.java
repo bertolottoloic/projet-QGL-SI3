@@ -99,10 +99,12 @@ public class EngineSettings {
 
     public void engineTurn(Turn turn){
         for(Sailor sailor :sailors){
-            if(turn.getSailorId()==sailor.getId()&&
-                    ship.getRudder().getX()==sailor.getX()&&
-                    ship.getRudder().getY()==sailor.getY()){
-                rotation=turn.getRotation();
+            if(ship.getRudder()!=null){
+                if(turn.getSailorId()==sailor.getId()&&
+                        ship.getRudder().getX()==sailor.getX()&&
+                        ship.getRudder().getY()==sailor.getY()){
+                    rotation=turn.getRotation();
+                }
             }
         }
     }
