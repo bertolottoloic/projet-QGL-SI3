@@ -7,6 +7,8 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 
+import java.util.Objects;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -51,6 +53,25 @@ public abstract class Entity {
                 ", x : " + this.x +
                 ", y : " + this.y + " }";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==this) return true;
+        if(obj instanceof Entity){
+            Entity e = (Entity)obj;
+            if(this.type==e.type && this.x==e.x && this.y==e.y){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, x, y, sailorOn);
+    }
+
     //------------------------------GETTER-------------------------//
 
     @JsonIgnore
@@ -64,6 +85,13 @@ public abstract class Entity {
 
     public int getY() {
         return y;
+    }
+
+    /**
+     * @return the sailorOn
+     */
+    public Sailor getSailorOn() {
+        return sailorOn;
     }
 
     //------------------------------SETTER-------------------------//

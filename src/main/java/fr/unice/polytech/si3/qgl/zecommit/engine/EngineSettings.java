@@ -3,16 +3,15 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.ActionType;
-import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
-import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
@@ -41,7 +40,9 @@ public class EngineSettings {
     @JsonIgnore
     ArrayList<Sailor> rightSailors;
     @JsonIgnore
-    int n=100;
+    final int n=100;
+    @JsonIgnore
+    double rotation=0;
 
 
     EngineSettings(){
@@ -79,6 +80,7 @@ public class EngineSettings {
     public void updateEngine(ArrayList<Action> actions){
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
+        rotation=0;
         for (Action action: actions) {
             if(action.getType()== ActionType.MOVING){
                 engineMoving((Moving) action);
@@ -86,9 +88,24 @@ public class EngineSettings {
             if(action.getType()== ActionType.OAR){
                 engineOar((ToOar) action);
             }
+            if(action.getType()==ActionType.TURN){
+                engineTurn((Turn) action);
+            }
         }
         for(int i=0; i<n;i++) {
             calcul();
+        }
+    }
+
+    public void engineTurn(Turn turn){
+        for(Sailor sailor :sailors){
+            if(ship.getRudder()!=null){
+                if(turn.getSailorId()==sailor.getId()&&
+                        ship.getRudder().getX()==sailor.getX()&&
+                        ship.getRudder().getY()==sailor.getY()){
+                    rotation=turn.getRotation();
+                }
+            }
         }
     }
 
@@ -128,12 +145,20 @@ public class EngineSettings {
 
 
         double currentOrientation=ship.getPosition().getOrientation();
-        double gap= Math.PI/(n*(ship.getOars().size()));
+        double gap= Math.PI/(ship.getOars().size());
         int balanced= rightSailors.size()-leftSailors.size();
-        currentOrientation+=(balanced*gap);
-        currentOrientation%=Math.PI;
-        ship.setPosition(new Position(x,y,currentOrientation));
+        currentOrientation+=(balanced*gap/n);
+        currentOrientation+=rotation/n;
 
+        ship.setPosition(new Position(x,y,currentOrientation));
+        checkCheckpoints();
+    }
+
+    public void checkCheckpoints(){
+        if(ship.isInCheckpoint(checkpoints.get(0))&&checkpoints.size()>1){
+            System.out.println("Checkpoint valides :"+checkpoints.get(0).getPosition());
+            checkpoints.remove(0);
+        }
     }
 
     //--------------------SETTINGS-------------------//
@@ -149,8 +174,12 @@ public class EngineSettings {
     public void setSailors() {
         this.sailors= new ArrayList<>();
         this.sailors.add(new Sailor(0,0,0,"jean"));
-        this.sailors.add(new Sailor(1,0,0,"paul"));
-        this.sailors.add(new Sailor(2,0,0,"jacques"));
+        this.sailors.add(new Sailor(1,0,1,"paul"));
+        this.sailors.add(new Sailor(2,1,0,"jacques"));
+        this.sailors.add(new Sailor(3,1,1,"pierre"));
+        //this.sailors.add(new Sailor(4,0,0,"Vincent"));
+
+
     }
 
     public void setGoal() {
@@ -159,24 +188,32 @@ public class EngineSettings {
 
     public void setCheckpoints() {
         this.checkpoints= new ArrayList<>();
+<<<<<<< HEAD
         this.checkpoints.add(new Checkpoint(new Position(100,100,0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(0,0,0), new Circle(50)));
+=======
+        this.checkpoints.add(new Checkpoint(new Position(-200,1000,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(500,1100,0), new Circle(50)));
+
+>>>>>>> d5ac013b9bab03e9d203dbc029404749dede7a3e
     }
 
     public void setDeck() {
-        this.deck=new Deck(4,10);
+        this.deck=new Deck(2,4);
     }
 
     public void setEntities() {
         this.entities= new ArrayList<>();
+        this.entities.add(new Oar(1,0));
+        this.entities.add(new Oar(1,1));
         this.entities.add(new Oar(2,0));
-        this.entities.add(new Oar(2,3));
-        this.entities.add(new Oar(7,0));
-        this.entities.add(new Oar(7,3));
+        this.entities.add(new Rudder(2,1));
+        this.entities.add(new Oar(3,1));
+
     }
 
     public void setShape() {
-        this.shape=new Rectangle(4,10,0);
+        this.shape=new Rectangle(2,4,0);
     }
 
     //---------------------Getter----------------------//

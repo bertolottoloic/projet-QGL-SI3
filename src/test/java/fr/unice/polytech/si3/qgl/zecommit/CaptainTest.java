@@ -56,6 +56,17 @@ public class CaptainTest {
     }
 
     @Test
+    public void findClosestPossibleAngleTest3(){
+        when(game.getShip().getOarsNb()).thenReturn(6);
+        jackSparrow = new Captain(game,gibbs);
+
+        when(blackPearl.getPosition()).thenReturn(new Position(-20,-20,1.047));
+
+        assertEquals(jackSparrow.findClosestPossibleAngle(0.77), 4);
+
+    }
+
+    @Test
     public void findClosestPossibleAngleTest2(){
         when(game.getShip().getOarsNb()).thenReturn(3);
         jackSparrow = new Captain(game,gibbs);

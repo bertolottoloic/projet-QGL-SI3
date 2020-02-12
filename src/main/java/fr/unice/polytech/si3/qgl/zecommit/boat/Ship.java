@@ -1,15 +1,17 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
-import fr.unice.polytech.si3.qgl.zecommit.Road;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Loic Bertolotto
@@ -23,6 +25,8 @@ public class Ship {
     @JsonProperty("entities")private List<Entity> entities;
     @JsonProperty("shape")private Shape shape;
     @JsonIgnore private List<Oar> oars = new ArrayList<>();
+    @JsonIgnore private Rudder rudder;
+
 
     @JsonCreator
     public Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
@@ -35,6 +39,16 @@ public class Ship {
         this.shape = shape;
         createOarlist();
         sortOars();
+        createRudder();
+    }
+
+    private void createRudder(){
+        entities.forEach(entity ->
+        {
+            if(entity.getType().equals(EntityType.RUDDER)){
+                rudder=(Rudder)entity;
+            }
+        });
     }
 
     private void createOarlist(){
@@ -168,6 +182,11 @@ public class Ship {
     @JsonIgnore
     public int getOarsNb() {
         return oars.size();
+    }
+
+    @JsonIgnore
+    public Rudder getRudder() {
+        return rudder;
     }
 
     @JsonIgnore

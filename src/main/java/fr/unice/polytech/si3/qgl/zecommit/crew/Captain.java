@@ -6,6 +6,9 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +44,6 @@ public class Captain {
         this.oarList = ship.getOars();
         this.oarsNb = ship.getOarsNb();
         Logs.add("oarsNb:"+oarsNb);
-
-        sortEntities(game.getEntityList());
     }
 
     /**
@@ -56,10 +57,10 @@ public class Captain {
             Logs.add("Checkpoint done");
         }
 
-        if(initGame){
-            captainMate.initAttibuteOarToSailors(sailorList, ship);
-            initGame=false;
-        }
+        
+        captainMate.initAttibuteOarToSailors(sailorList, ship);
+        initGame=false;
+        
 
         if(!captainMate.sailorsAreOnTheirEntity(sailorList)) {
             captainMate.initMoveSailor(sailorList);
@@ -70,6 +71,7 @@ public class Captain {
                 Road road = new Road(ship.getPosition(), regatta.getFirstCheckpoint().getPosition());
                 int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
                 Logs.add(ship.getPosition().getOrientation() + " - " + chosenAngle + "");
+                Logs.add(ship.getPosition().toString());
                 decisionOrientation(road, chosenAngle);
             }
         }
@@ -79,25 +81,23 @@ public class Captain {
      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
      */
     public int findClosestPossibleAngle(double angleToReach){
-        int min = Math.min(oarsNb,sailorsNb);
-        double step = Math.PI/(2*min);
+        double step = Math.PI/(2*oarsNb);
         int res = 0;
-        double orientation = ship.getPosition().getOrientation();
-        for (int k = 0; k<2*min; k ++){
+        for (int k = 0; k<2*oarsNb; k ++){
 
-            if(k*step-Math.PI/2 + orientation <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 + orientation )
+            if(k*step-Math.PI/2 <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 )
 
                 res = k;
         }
         if(turnAroundLeft(angleToReach))
-            return 0;
+            return oarsNb;
         if(turnAroundRight(angleToReach))
-            return min;
+            return 0;
 
         if(res==0)
             return 0;
-        if(res==2*min-1)
-            return min;
+        if(res==2*oarsNb-1)
+            return oarsNb;
         else
             return (res+1)/2;
     }
@@ -125,25 +125,32 @@ public class Captain {
 
 
     public void decisionOrientation(Road road, int chosenAngle){
-        OrientationTable orientationTable = new OrientationTable(oarsNb, sailorsNb);
-        Logs.add(orientationTable.toString());
+        OrientationTable orientationTable = new OrientationTable(oarsNb);
         Logs.add(chosenAngle +"");
+
         boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
+        int nbSailorsRight = rightSailorList.size();
+        int nbSailorsLeft = leftSailorList.size();
+
+        if(road.orientationToGoal()>-Math.PI/4 && road.orientationToGoal()<Math.PI/4){
+            chosenAngle = findClosestPossibleAngle(0);
+        }
+
 
         if(!isNear){//si le bateau est loin
-            activateSailors(orientationTable.getLastCompo(chosenAngle));//on choisit la compo permettant d'aller le plus vite
+            activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
         }
         else
-            activateSailors(orientationTable.getCompo(chosenAngle, 0));//on choisit la compo permettant d'aller le plus lentement
+            activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
     }
 
     /**
      * Transmet l'ordre d'activation des marins au second
      * @param compo
      */
-    public void activateSailors(Compo compo){
+    public void activateSailors(Compo compo, double angle){
         Logs.add(compo.toString());
-        captainMate.activateSailors(compo);
+        captainMate.activateSailors(compo, angle);
     }
 
 
@@ -166,10 +173,9 @@ public class Captain {
      * @param game
      */
     public void refreshGame(Game game){
-        this.oarList.removeAll(oarList);
         this.game=game;
         ship=game.getShip();
-        sortEntities(game.getEntityList());
+        this.oarList = ship.getOars();
     }
 
     public void refreshSailorsListPosition(){

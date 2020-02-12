@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
+import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,21 +34,39 @@ public class EngineNextRound {
             JsonNode type = current.path("type");
             String textType = type.asText();
             if(textType.equals("OAR")) {
-                ToOar toOar= new ToOar(Integer.valueOf(id));
-                actionArrayList.add(toOar);
+                oarParser(id);
             }
             if(textType.equals("MOVING")) {
-                JsonNode xdistanceNode = current.path("xdistance");
-                JsonNode ydistanceNode = current.path("ydistance");
-                int xDistance = Integer.valueOf(xdistanceNode.asText());
-                int yDistance = Integer.valueOf(ydistanceNode.asText());
-                Moving moving= new Moving(Integer.valueOf(id),xDistance,yDistance);
-                actionArrayList.add(moving);
+                movingParser(id,current);
+            }
+            if(textType.equals("TURN")) {
+                turnParser(id,current);
             }
         }
 
 
     return actionArrayList;
+    }
+
+    public void oarParser(String id){
+        ToOar toOar= new ToOar(Integer.parseInt(id));
+        actionArrayList.add(toOar);
+    }
+
+    public void movingParser(String id,JsonNode current){
+        JsonNode xdistanceNode = current.path("xdistance");
+        JsonNode ydistanceNode = current.path("ydistance");
+        int xDistance = Integer.parseInt(xdistanceNode.asText());
+        int yDistance = Integer.parseInt(ydistanceNode.asText());
+        Moving moving= new Moving(Integer.parseInt(id),xDistance,yDistance);
+        actionArrayList.add(moving);
+    }
+
+    public void turnParser(String id, JsonNode current){
+        JsonNode rotationNode = current.path("rotation");
+        double rotation= Double.parseDouble(rotationNode.asText());
+        Turn turn = new Turn(Integer.parseInt(id),rotation);
+        actionArrayList.add(turn);
     }
 
 

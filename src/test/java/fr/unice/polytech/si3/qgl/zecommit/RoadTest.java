@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
