@@ -1,17 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
-import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
-import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -125,6 +119,17 @@ public class CaptainMate {
             Logs.add("\nS" +sailor.getId() + " is oaring from " + "("+oar.getX() +","+ oar.getY() +")");
 
         }
+    }
+
+    /**
+     * Fait lever la voile par le marin sur la case
+     * @param sailor
+     * @param sail
+     */
+    public void toSail(Sailor sailor, Sail sail) {
+        LiftSail action = new LiftSail(sailor.getId());
+        actionList.add(action);
+        Logs.add("\nS" +sailor.getId() + " is lifting the sail from " + "("+sail.getX() +","+ sail.getY() +")");
     }
 
 
