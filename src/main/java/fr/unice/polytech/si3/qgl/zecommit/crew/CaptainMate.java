@@ -188,20 +188,20 @@ public class CaptainMate implements CaptainMateInterface {
     /**
      * Effectue l'ordre d'activation du marin à la voile
      */
-    public void activateLiftSail() {
-        for (Sailor sailor : deck.getSailors()) {
-            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && deck.getSail() != null
-                    && deck.getSail().hasSailorOn()) {
-                toLiftSail(deck.getSail().getSailorOn(), deck.getSail());
+    public void activateLiftSail(Sail sail){
+        for(Sailor sailor : deck.getSailors()) {
+            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL)
+                    && sail.hasSailorOn()) {
+                toLiftSail(sail.getSailorOn(), sail);
             }
         }
     }
 
-    public void activateLowerSail() {
-        for (Sailor sailor : sailorList) {
-            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && ship.getSail() != null
-                    && ship.getSail().hasSailorOn()) {
-                toLowerSail(ship.getSail().getSailorOn(), ship.getSail());
+    public void activateLowerSail(Sail sail) {
+        for (Sailor sailor : deck.getSailors()) {
+            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL)
+                    && sail.hasSailorOn()) {
+                toLowerSail(sail.getSailorOn(), sail);
             }
         }
     }
