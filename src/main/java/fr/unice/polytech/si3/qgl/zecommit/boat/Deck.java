@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,31 @@ public class Deck{
                 this.sails.add((Sail) entity);
             }
         }
+    }
+
+    public boolean sailorsAreOnTheirEntity() {
+        for (Sailor sailor : sailors) {
+            if (!sailor.isOnEntity() && sailor.hasEntity())
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Déplace le sailor de la distance demandée. Si la distance dépasse 5 l'action
+     * est annulée, ceci est pris en charge dans le constructeur de Moving
+     * 
+     * @param xdistance
+     * @param ydistance
+     */
+    public Moving moveSailor(Sailor sailor, int xdistance, int ydistance) {
+        Moving action = new Moving(sailor.getId(), xdistance, ydistance);
+        sailor.move(action.getXDistance(), action.getYDistance());
+        if (action.getXDistance() != 0 || action.getYDistance() != 0) {
+            Logs.add("\nS" + sailor.getId() + " is moving to (" + sailor.getX() + "," + sailor.getY() + ")");
+            return action;
+        }
+        return null;
     }
 
     @JsonIgnore

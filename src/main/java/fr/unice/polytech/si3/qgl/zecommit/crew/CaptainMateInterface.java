@@ -2,12 +2,12 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import java.util.List;
 
-public interface CaptainMateInterface{
+public interface CaptainMateInterface {
     public void moveSailorsToTheirEntity(List<Sailor> sailors);
 
     public void activateOars(List<Sailor> sailors);
 
-    public void doTurn(Sailor sailor);
+    public void doTurn(Sailor sailor, double angle);
 
     public void doLiftSail(List<Sailor> sailors);
 

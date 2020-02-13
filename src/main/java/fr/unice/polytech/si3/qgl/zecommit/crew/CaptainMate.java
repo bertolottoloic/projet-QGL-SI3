@@ -260,7 +260,7 @@ public class CaptainMate implements CaptainMateInterface {
     }
 
     @Override
-    public void doTurn(Sailor sailor) {
+    public void doTurn(Sailor sailor, double angle) {
         // TODO Auto-generated method stub
 
     }
