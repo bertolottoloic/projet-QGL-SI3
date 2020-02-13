@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
@@ -62,7 +63,7 @@ public class Captain {
         }
 
         
-        captainMate.initAttibuteOarToSailors(sailorList, ship);
+        captainMate.initAttibuteEntityToSailors(sailorList, ship);
         initGame=false;
         
 
@@ -141,7 +142,7 @@ public class Captain {
             chosenAngle = findClosestPossibleAngle(0); //on donne l'ordre aller tout droit, le gouvernail gère les virages
         }
 
-        activateSail(upSail, isNear);//Activation de la voile
+        //activateSail(upSail, isNear);//Activation de la voile
 
         if(!isNear){//si le bateau est loin
             activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
@@ -161,12 +162,12 @@ public class Captain {
     /**
      * Transmet l'ordre d'activation de la voile au second
      */
-    public void activateSail(boolean upSail, boolean isNear){
-        if(!isNear && upSail) {
-            captainMate.activateLiftSail();
-        }
+
+    public void activateSail(boolean upSail, boolean isNear, Sail sail){
+        if(!isNear && upSail)
+            captainMate.activateLiftSail(sail);
         else {
-            captainMate.activateLowerSail();
+            captainMate.activateLowerSail(sail);
         }
     }
 
