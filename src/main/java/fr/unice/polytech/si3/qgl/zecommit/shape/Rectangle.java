@@ -5,24 +5,36 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.lang.reflect.Array;
+
 /**
  * Forme definissant un rectangle
  * @author  Clement P
  */
 
-public class Rectangle extends Shape {
-    @JsonProperty("width")private double width;
+public class Rectangle extends Polygone {
+    @JsonProperty("width")
+    private double width;
     @JsonAlias({"length", "height"})
     private double height;
-    @JsonProperty("orientation")private double orientation;
+
 
     @JsonCreator
     public Rectangle(@JsonProperty("width")double width, @JsonProperty("height")double height, @JsonProperty("orientation")double orientation){
-        super("rectangle");
+        super(orientation,null);
         this.width=width;
         this.height=height;
         this.orientation=orientation;
-        setCircle(false);
+        super.vertexes=vertexes();
+    }
+
+    private Point[] vertexes(){
+        Point[] points= new Point[4];
+        points[0]= new Point(width/2,height/2);
+        points[1]= new Point(-width/2,height/2);
+        points[2]= new Point(-width/2,-height/2);
+        points[3]= new Point(width/2,-height/2);
+        return points;
     }
 
     @Override

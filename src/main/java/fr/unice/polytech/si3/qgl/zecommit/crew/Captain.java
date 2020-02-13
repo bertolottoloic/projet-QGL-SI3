@@ -129,13 +129,15 @@ public class Captain {
         Logs.add(chosenAngle +"");
 
         boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
+        boolean upSail = upSail();
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
 
         if(road.orientationToGoal()>-Math.PI/4 && road.orientationToGoal()<Math.PI/4){
-            chosenAngle = findClosestPossibleAngle(0);
+            chosenAngle = findClosestPossibleAngle(0); //on donne l'ordre aller tout droit, le gouvernail gère les virages
         }
 
+        activateSail(upSail, isNear);//Activation de la voile
 
         if(!isNear){//si le bateau est loin
             activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
@@ -151,6 +153,26 @@ public class Captain {
     public void activateSailors(Compo compo, double angle){
         Logs.add(compo.toString());
         captainMate.activateSailors(compo, angle);
+    }
+    /**
+     * Transmet l'ordre d'activation de la voile au second
+     */
+    public void activateSail(boolean upSail, boolean isNear){
+        if(!isNear && upSail)
+            captainMate.activateLiftSail();
+        else {
+            captainMate.activateLowerSail();
+        }
+    }
+
+
+    /**
+     * Méthode indiquant quand activer la voile
+     * @return
+     */
+    public boolean upSail(){
+        //TODO condition permettant de lever la voile
+        return false;
     }
 
 

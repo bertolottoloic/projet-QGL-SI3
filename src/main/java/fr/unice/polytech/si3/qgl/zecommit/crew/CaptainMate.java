@@ -131,24 +131,21 @@ public class CaptainMate {
      * @param sail
      */
     public void toLiftSail(Sailor sailor, Sail sail) {
-        if (sailor.isOnEntity() && sailor.getEntity()==sail) {
-            LiftSail action = new LiftSail(sailor.getId());
-            actionList.add(action);
-            Logs.add("\nS" + sailor.getId() + " is lifting the sail from " + "(" + sail.getX() + "," + sail.getY() + ")");
-        }
-    }
 
+        LiftSail action = new LiftSail(sailor.getId());
+        actionList.add(action);
+        Logs.add("\nS" +sailor.getId() + " is lifting the sail from " + "("+sail.getX() +","+ sail.getY() +")");
+
+    }
     /**
      * Fait baisser la voile par le marin sur la case
      * @param sailor
      * @param sail
      */
     public void toLowerSail(Sailor sailor, Sail sail) {
-        if (sailor.isOnEntity() && sailor.getEntity()==sail) {
-            LowerSail action = new LowerSail(sailor.getId());
-            actionList.add(action);
-            Logs.add("\nS" + sailor.getId() + " is lowering the sail from " + "(" + sail.getX() + "," + sail.getY() + ")");
-        }
+        LowerSail action = new LowerSail(sailor.getId());
+        actionList.add(action);
+        Logs.add("\nS" +sailor.getId() + " is lowering the sail from " + "("+sail.getX() +","+ sail.getY() +")");
     }
 
 
@@ -163,7 +160,7 @@ public class CaptainMate {
     }
 
     /**
-     * Transmet l'ordre d'activation des marins au second
+     * Effectue l'ordre d'activation des marins aux rames et au gouvernail
      * @param compo
      */
     public void activateSailors(Compo compo, double angle){
@@ -185,7 +182,25 @@ public class CaptainMate {
         //Activation du gouvernail
         if(ship.getRudder()!=null && ship.getRudder().hasSailorOn())
             toTurn(ship.getRudder().getSailorOn(), ship.getRudder(), angle);
+    }
 
+    /**
+     * Effectue l'ordre d'activation du marin à la voile
+     */
+    public void activateLiftSail(){
+        for(Sailor sailor : sailorList) {
+            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && ship.getSail() != null && ship.getSail().hasSailorOn()) {
+                toLiftSail(ship.getSail().getSailorOn(), ship.getSail());
+            }
+        }
+    }
+
+    public void activateLowerSail(){
+        for(Sailor sailor : sailorList) {
+            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && ship.getSail() != null && ship.getSail().hasSailorOn()) {
+                toLowerSail(ship.getSail().getSailorOn(), ship.getSail());
+            }
+        }
     }
 
     public void useSail() {

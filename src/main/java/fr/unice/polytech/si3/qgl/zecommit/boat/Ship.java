@@ -1,11 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
-import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
@@ -26,6 +23,8 @@ public class Ship {
     @JsonProperty("shape")private Shape shape;
     @JsonIgnore private List<Oar> oars = new ArrayList<>();
     @JsonIgnore private Rudder rudder;
+    @JsonIgnore private Sail sail;
+
 
 
     @JsonCreator
@@ -40,6 +39,7 @@ public class Ship {
         createOarlist();
         sortOars();
         createRudder();
+        createSail();
     }
 
     private void createRudder(){
@@ -47,6 +47,14 @@ public class Ship {
         {
             if(entity.getType().equals(EntityType.RUDDER)){
                 rudder=(Rudder)entity;
+            }
+        });
+    }
+    private void createSail(){
+        entities.forEach(entity ->
+        {
+            if(entity.getType().equals(EntityType.SAIL)){
+                sail=(Sail)entity;
             }
         });
     }
@@ -190,7 +198,7 @@ public class Ship {
     }
 
     @JsonIgnore
-    public Rudder getSail() {
+    public Sail getSail() {
         return sail;
     }
 
@@ -222,6 +230,10 @@ public class Ship {
                 oarsList.add(oar);
         });
         return oarsList;
+    }
+
+    public Sail getSail(){
+        return sail;
     }
 
 
