@@ -90,6 +90,10 @@ public class CaptainMate {
 
     }
 
+    /**
+     * Déplace un marin au gouvernail
+     * @param sailor
+     */
     public void moveSailorToRudder(Sailor sailor){
         if(ship.getRudder()!=null){
             moveSailor(sailor, ship.getRudder().getX() , ship.getRudder().getY());
@@ -126,10 +130,25 @@ public class CaptainMate {
      * @param sailor
      * @param sail
      */
-    public void toSail(Sailor sailor, Sail sail) {
-        LiftSail action = new LiftSail(sailor.getId());
-        actionList.add(action);
-        Logs.add("\nS" +sailor.getId() + " is lifting the sail from " + "("+sail.getX() +","+ sail.getY() +")");
+    public void toLiftSail(Sailor sailor, Sail sail) {
+        if (sailor.isOnEntity() && sailor.getEntity()==sail) {
+            LiftSail action = new LiftSail(sailor.getId());
+            actionList.add(action);
+            Logs.add("\nS" + sailor.getId() + " is lifting the sail from " + "(" + sail.getX() + "," + sail.getY() + ")");
+        }
+    }
+
+    /**
+     * Fait baisser la voile par le marin sur la case
+     * @param sailor
+     * @param sail
+     */
+    public void toLowerSail(Sailor sailor, Sail sail) {
+        if (sailor.isOnEntity() && sailor.getEntity()==sail) {
+            LowerSail action = new LowerSail(sailor.getId());
+            actionList.add(action);
+            Logs.add("\nS" + sailor.getId() + " is lowering the sail from " + "(" + sail.getX() + "," + sail.getY() + ")");
+        }
     }
 
 
@@ -166,6 +185,10 @@ public class CaptainMate {
         //Activation du gouvernail
         if(ship.getRudder()!=null && ship.getRudder().hasSailorOn())
             toTurn(ship.getRudder().getSailorOn(), ship.getRudder(), angle);
+
+    }
+
+    public void useSail() {
 
     }
 

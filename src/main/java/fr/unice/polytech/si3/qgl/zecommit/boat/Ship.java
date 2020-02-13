@@ -190,6 +190,11 @@ public class Ship {
     }
 
     @JsonIgnore
+    public Rudder getSail() {
+        return sail;
+    }
+
+    @JsonIgnore
     /**
      * 
      * @return la liste des rames à gauche du bateau.

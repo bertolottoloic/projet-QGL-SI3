@@ -7,6 +7,7 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -105,6 +106,12 @@ public class CaptainMateTest {
         assertTrue(s3.isOnEntity());
         assertTrue(o4.hasSailorOn());
         assertEquals(o4, s3.getEntity());
+    }
+
+    @Test
+    void toLiftSailTest() {
+        Sail sail = new Sail(1,1, false);
+
     }
 
 }
