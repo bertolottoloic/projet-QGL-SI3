@@ -21,9 +21,7 @@ public class Ship {
     @JsonProperty("deck")private Deck deck;
     @JsonProperty("entities")private List<Entity> entities;
     @JsonProperty("shape")private Shape shape;
-    @JsonIgnore private List<Oar> oars = new ArrayList<>();
-    @JsonIgnore private Rudder rudder;
-    @JsonIgnore private Sail sail;
+
 
 
 
@@ -34,54 +32,11 @@ public class Ship {
         this.position = position;
         this.name = name;
         this.deck = deck;
+        this.deck.initDeck(entities);
         this.entities = entities;
         this.shape = shape;
-        createOarlist();
-        sortOars();
-        createRudder();
-        createSail();
     }
 
-    private void createRudder(){
-        entities.forEach(entity ->
-        {
-            if(entity.getType().equals(EntityType.RUDDER)){
-                rudder=(Rudder)entity;
-            }
-        });
-    }
-    private void createSail(){
-        entities.forEach(entity ->
-        {
-            if(entity.getType().equals(EntityType.SAIL)){
-                sail=(Sail)entity;
-            }
-        });
-    }
-
-    private void createOarlist(){
-        entities.forEach(entity->
-        {
-            if(entity.getType().equals(EntityType.OAR))
-                this.oars.add((Oar)entity);
-        });
-    }
-
-    /**
-     * Tri la liste de rames de façon à alterner les rames de gauches et de droites.
-     */
-    private void sortOars(){
-        List<Oar> oarsLeft = getLeftOars();
-        List<Oar> oarsRight = getRightOars();
-        List<Oar> oarsSort = new ArrayList<>();
-        for(int i=0;i<Math.max(oarsLeft.size(),oarsRight.size());i++){
-            if(i<oarsLeft.size())
-                oarsSort.add(oarsLeft.get(i));
-            if(i<oarsRight.size())
-                oarsSort.add(oarsRight.get(i));
-        }
-        this.oars=oarsSort;
-    }
 
     /**
      * Méthode permettant de savoir si un bateau est arrivé dans le checkpoint
@@ -180,55 +135,6 @@ public class Ship {
      */
     public double getYPosition() {
         return this.getPosition().getY();
-    }
-
-    @JsonIgnore
-    public List<Oar> getOars(){
-        return this.oars;
-    }
-
-    @JsonIgnore
-    public int getOarsNb() {
-        return oars.size();
-    }
-
-    @JsonIgnore
-    public Rudder getRudder() {
-        return rudder;
-    }
-
-    @JsonIgnore
-    /**
-     * 
-     * @return la liste des rames à gauche du bateau.
-     */
-    public List<Oar> getLeftOars(){
-        ArrayList<Oar> oarsList = new ArrayList<>();
-        this.oars.forEach(oar->
-        {
-            if(deck.isLeft(oar))
-                oarsList.add(oar);
-        });
-        return oarsList;
-    }
-
-    @JsonIgnore
-    /**
-     * 
-     * @return la liste des rames à droite du bateau.
-     */
-    public List<Oar> getRightOars(){
-        ArrayList<Oar> oarsList = new ArrayList<>();
-        this.oars.forEach(oar->
-        {
-            if(!deck.isLeft(oar))
-                oarsList.add(oar);
-        });
-        return oarsList;
-    }
-
-    public Sail getSail(){
-        return sail;
     }
 
 
