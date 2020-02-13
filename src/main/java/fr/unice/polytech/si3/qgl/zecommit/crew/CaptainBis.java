@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
@@ -14,7 +15,7 @@ public class CaptainBis implements CaptainInterface {
     private Game game;
     private Deck deck;
 
-    public CaptainBis(Game game){
+    public CaptainBis(Game game) {
         this.game = game;
         this.deck = game.getShip().getDeck();
     }
@@ -51,33 +52,29 @@ public class CaptainBis implements CaptainInterface {
 
     @Override
     public List<Sailor> doMoveSailors() {
-        if(!deck.sailorsAreOnTheirEntity())
+        if (!deck.sailorsAreOnTheirEntity())
             return deck.getSailors();
         return new ArrayList<Sailor>();
     }
 
     @Override
     public List<Sailor> doActivateOars() {
-        // TODO Auto-generated method stub
+        return new ArrayList<Sailor>();
+    }
+
+    @Override
+    public SimpleEntry<Sailor, Double> doTurn() {
         return null;
     }
 
     @Override
-    public Sailor doTurn() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Sailor> doLiftSail() {
+        return new ArrayList<Sailor>();
     }
 
     @Override
-    public Sailor doLiftSail() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Sailor doLowerSail() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Sailor> doLowerSail() {
+        return new ArrayList<Sailor>();
     }
 
     public Deck getDeck(){

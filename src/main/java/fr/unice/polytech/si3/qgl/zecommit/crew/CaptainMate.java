@@ -12,6 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 
 /**
  * @author Clement P Classe qui realise les actions du Capitaine
@@ -260,13 +261,13 @@ public class CaptainMate implements CaptainMateInterface {
     }
 
     @Override
-    public void doTurn(Sailor sailor, double angle) {
+    public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void doLiftSail(List<Sailor> sailors) {
+    public void toLiftSail(List<Sailor> sailors) {
         // TODO Auto-generated method stub
 
     }

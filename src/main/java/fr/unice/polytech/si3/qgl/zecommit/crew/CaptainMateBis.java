@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.action.LiftSail;
@@ -39,14 +40,14 @@ public class CaptainMateBis implements CaptainMateInterface {
     }
 
     @Override
-    public void doTurn(Sailor sailor, double angle) {
-        if(sailor!=null)
-            actions.add(new Turn(sailor.getId(), angle));
+    public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
+        if(sailorAndAngle.getValue()!=0)
+            actions.add(new Turn(sailorAndAngle.getKey().getId(), sailorAndAngle.getValue()));
 
     }
 
     @Override
-    public void doLiftSail(List<Sailor> sailors) {
+    public void toLiftSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
                 actions.add(new LiftSail(sailor.getId()));
@@ -66,6 +67,15 @@ public class CaptainMateBis implements CaptainMateInterface {
             });
         }
 
+    }
+
+    public void actions(){
+        captain.attributeEntitiesToSailors();
+        moveSailorsToTheirEntity(captain.doMoveSailors());
+        activateOars(captain.doActivateOars());
+        toTurn(captain.doTurn());
+        toLiftSail(captain.doLiftSail());
+        toLowerSail(captain.doLowerSail());
     }
 
 }

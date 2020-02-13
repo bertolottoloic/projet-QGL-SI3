@@ -249,19 +249,19 @@ public class Captain implements CaptainInterface{
     }
 
     @Override
-    public Sailor doTurn() {
+    public SimpleEntry<Sailor, Double> doTurn() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Sailor doLiftSail() {
+    public List<Sailor> doLiftSail() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Sailor doLowerSail() {
+    public List<Sailor> doLowerSail() {
         // TODO Auto-generated method stub
         return null;
     }

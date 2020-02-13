@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 
 public interface CaptainInterface{
     void attributeEntitiesToSailors();
@@ -9,10 +10,10 @@ public interface CaptainInterface{
 
     public List<Sailor> doActivateOars();
 
-    public Sailor doTurn();
+    public SimpleEntry<Sailor,Double> doTurn();
 
-    public Sailor doLiftSail();
+    public List<Sailor> doLiftSail();
 
-    public Sailor doLowerSail();
+    public List<Sailor> doLowerSail();
 
 }
