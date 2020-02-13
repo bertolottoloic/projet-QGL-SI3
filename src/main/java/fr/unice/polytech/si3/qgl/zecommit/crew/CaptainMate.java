@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
@@ -21,15 +22,18 @@ public class CaptainMate {
     private List<Action> actionList;
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
-    private List<Sailor> sailorList;
+    //private List<Sailor> sailorList;
     private Ship ship;
 
+    private Deck deck;
+
     public CaptainMate(Game game){
+        this.deck=game.getShip().getDeck();
         this.actionList= new ArrayList<>();
-        this.sailorList = new ArrayList<>(game.getSailors());
-        this.ship = game.getShip();
-        this.leftSailorList = getLeftSailors();
-        this.rightSailorList = getRightSailors();
+        //this.sailorList = new ArrayList<>(game.getSailors());
+        //this.ship = game.getShip();
+        //this.leftSailorList = getLeftSailors();
+        //this.rightSailorList = getRightSailors();
     }
 
 
@@ -66,23 +70,23 @@ public class CaptainMate {
         sailors.forEach(s->s.reinitializeEntity());
         List<Sailor> sailorTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>();
-        oars.addAll(ship.getOars());
+        oars.addAll(deck.getOars());
         sailorTmp.sort(Comparator.comparingInt(a->a.distanceToNearestEntity(oars)));
         Sailor sailor;
-        if(sailorTmp.size()%2!=0 && ship.getRudder()!=null){
+        if(sailorTmp.size()%2!=0 && deck.getRudder()!=null){
             sailor = sailorTmp.remove(sailorTmp.size()-1);
-            sailor.setOnEntity(ship.getRudder());
+            sailor.setOnEntity(deck.getRudder());
         }
         for(Sailor tmp : sailorTmp){   
-            ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
-            Oar closestOar = ship.getOars().get(0);
+            deck.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
+            Oar closestOar = deck.getOars().get(0);
             if(!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar)<=5 && !tmp.hasEntity()) {
                 tmp.setOnEntity(closestOar);             
             }
         }
         for(Sailor tmp : sailorTmp){
-            ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
-            for(Oar oar:ship.getOars()){
+            deck.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
+            for(Oar oar:deck.getOars()){
                 if(!oar.hasSailorOn() && !tmp.hasEntity()){
                     tmp.setOnEntity(oar);
                 }
@@ -92,9 +96,9 @@ public class CaptainMate {
     }
 
     public void moveSailorToRudder(Sailor sailor){
-        if(ship.getRudder()!=null){
-            moveSailor(sailor,ship.getRudder().getX() , ship.getRudder().getY());
-            sailor.setOnEntity(ship.getRudder());
+        if(deck.getRudder()!=null){
+            moveSailor(sailor,deck.getRudder().getX() , deck.getRudder().getY());
+            sailor.setOnEntity(deck.getRudder());
         }
     }
 
@@ -175,17 +179,17 @@ public class CaptainMate {
         }
 
         //Activation du gouvernail
-        if(ship.getRudder()!=null && ship.getRudder().hasSailorOn())
-            toTurn(ship.getRudder().getSailorOn(), ship.getRudder(), angle);
+        if(deck.getRudder()!=null && deck.getRudder().hasSailorOn())
+            toTurn(deck.getRudder().getSailorOn(), deck.getRudder(), angle);
     }
 
     /**
      * Effectue l'ordre d'activation du marin à la voile
      */
     public void activateLiftSail(){
-        for(Sailor sailor : sailorList) {
-            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && ship.getSail() != null && ship.getSail().hasSailorOn()) {
-                toLiftSail(ship.getSail().getSailorOn(), ship.getSail());
+        for(Sailor sailor : deck.getSailors()) {
+            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && deck.getSail() != null && deck.getSail().hasSailorOn()) {
+                toLiftSail(deck.getSail().getSailorOn(), deck.getSail());
             }
         }
     }
@@ -205,7 +209,7 @@ public class CaptainMate {
      */
     public List<Sailor> getLeftSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
-        for(Sailor sailor : sailorList){
+        for(Sailor sailor : deck.getSailors()){
             if(sailor.getY()<ship.getDeck().getWidth()/2)
                 sailors.add(sailor);
         }
@@ -218,7 +222,7 @@ public class CaptainMate {
      */
     public List<Sailor> getRightSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
-        for(Sailor sailor : sailorList){
+        for(Sailor sailor : deck.getSailors()){
             if(sailor.getY()>=((ship.getDeck().getWidth()/2)+(ship.getDeck().getWidth()%2)))
                 sailors.add(sailor);
         }

@@ -100,6 +100,21 @@ public class Deck{
         return length;
     }
 
+    public Rudder getRudder() {
+        return rudder;
+    }
+
+    public List<Sailor> getSailors() {
+        return sailors;
+    }
+
+    public List<Oar> getOars() {
+        return oars;
+    }
+
+    public List<Sail> getSails() {
+        return sails;
+    }
 
     //------------------------------SETTER-------------------------//
 
@@ -111,4 +126,6 @@ public class Deck{
     public void setLength(int length) {
         this.length = length;
     }
+
+
 }
