@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Point {
     @JsonProperty("x")
-    double x;
+    private double x;
     @JsonProperty("y")
-    double y;
+    private double y;
 
-    Point(@JsonProperty("x")double x,@JsonProperty("y")double y){
+    public Point(@JsonProperty("x") double x, @JsonProperty("y") double y){
         this.x=x;
         this.y=y;
     }
@@ -31,4 +31,17 @@ public class Point {
                 ", y=" + y +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Point)) {
+            return false;
+        }
+        Point point = (Point) obj;
+        return(point.x == this.x && point.y == this.y);
+    }
+
 }

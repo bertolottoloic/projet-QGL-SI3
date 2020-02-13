@@ -20,12 +20,12 @@ import com.fasterxml.jackson.annotation.*;
 public abstract class Shape {
     @JsonProperty("type")
     @JsonIgnore
-    private String type;
+    private ShapeType type;
     @JsonIgnore
     private boolean isCircle;
 
     @JsonCreator
-    public Shape(@JsonProperty("type")String type){
+    public Shape(@JsonProperty("type")ShapeType type){
         this.type=type;
         this.isCircle=false;
     }
@@ -38,14 +38,14 @@ public abstract class Shape {
     //------------------------GETTER----------------------//
     @JsonProperty("type")
     @JsonIgnore
-    public String getType() {
+    public ShapeType getType() {
         return type;
     }
 
     //------------------------SETTER----------------------//
 
     @JsonProperty("type")
-    public void setType(String type) {
+    public void setType(ShapeType type) {
         this.type = type;
     }
 

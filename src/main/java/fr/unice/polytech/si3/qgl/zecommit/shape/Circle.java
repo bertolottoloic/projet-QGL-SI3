@@ -12,7 +12,7 @@ public class Circle extends Shape {
 
     @JsonCreator
     public Circle(@JsonProperty("radius")double radius){
-        super("circle");
+        super(ShapeType.CIRCLE);
         this.radius=radius;
         setCircle(true);
     }

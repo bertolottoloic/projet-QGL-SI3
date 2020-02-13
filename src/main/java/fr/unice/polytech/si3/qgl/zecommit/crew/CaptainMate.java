@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
@@ -96,7 +97,7 @@ public class CaptainMate {
      */
     public void moveSailorToRudder(Sailor sailor){
         if(ship.getRudder()!=null){
-            moveSailor(sailor, ship.getRudder().getX() , ship.getRudder().getY());
+            moveSailor(sailor,ship.getRudder().getX() , ship.getRudder().getY());
             sailor.setOnEntity(ship.getRudder());
         }
     }

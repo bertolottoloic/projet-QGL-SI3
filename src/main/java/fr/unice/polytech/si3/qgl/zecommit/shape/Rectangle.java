@@ -14,28 +14,20 @@ import java.lang.reflect.Array;
 
 public class Rectangle extends Polygone {
     @JsonProperty("width")
-    private double width;
+    protected double width;
     @JsonAlias({"length", "height"})
-    private double height;
+    protected double height;
 
 
     @JsonCreator
     public Rectangle(@JsonProperty("width")double width, @JsonProperty("height")double height, @JsonProperty("orientation")double orientation){
-        super(orientation,null);
+        super(ShapeType.RECTANGLE, orientation,width,height);
         this.width=width;
         this.height=height;
         this.orientation=orientation;
-        super.vertexes=vertexes();
     }
 
-    private Point[] vertexes(){
-        Point[] points= new Point[4];
-        points[0]= new Point(width/2,height/2);
-        points[1]= new Point(-width/2,height/2);
-        points[2]= new Point(-width/2,-height/2);
-        points[3]= new Point(width/2,-height/2);
-        return points;
-    }
+
 
     @Override
     public String toString() {
@@ -43,6 +35,8 @@ public class Rectangle extends Polygone {
                 " [ width : "+this.width+" , height : "+this.height+" , orientation : "+this.orientation+" ] ";
         return chaine;
     }
+
+
     //-------------------------GETTER-------------------------//
 
     @JsonProperty("height")
