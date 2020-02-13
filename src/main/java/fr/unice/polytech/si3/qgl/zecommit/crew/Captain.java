@@ -20,7 +20,7 @@ import java.util.List;
  * Le capitaine se charge de la decision.
  */
 
-public class Captain {
+public class Captain implements CaptainInterface{
     private Ship ship;
     private Regatta regatta;
     private List<Sailor> sailorList;
@@ -233,5 +233,41 @@ public class Captain {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    @Override
+    public List<Sailor> doMoveSailors() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Sailor> doActivateOars() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Sailor doTurn() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Sailor doLiftSail() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Sailor doLowerSail() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void attributeEntitiesToSailors() {
+        // TODO Auto-generated method stub
+
     }
 }
