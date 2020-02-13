@@ -1,12 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import fr.unice.polytech.si3.qgl.zecommit.action.*;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -73,22 +72,13 @@ public class CaptainMate {
             sailor = sailorTmp.remove(sailorTmp.size()-1);
             sailor.setOnEntity(ship.getRudder());
         }
-        for(Sailor tmp : sailorTmp){   
+        for(Sailor tmp : sailorTmp){
             ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
             Oar closestOar = ship.getOars().get(0);
             if(!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar)<=5 && !tmp.hasEntity()) {
-                tmp.setOnEntity(closestOar);             
+                tmp.setOnEntity(closestOar);
             }
         }
-        for(Sailor tmp : sailorTmp){
-            ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
-            for(Oar oar:ship.getOars()){
-                if(!oar.hasSailorOn() && !tmp.hasEntity()){
-                    tmp.setOnEntity(oar);
-                }
-            }
-        }
-
     }
 
     public void moveSailorToRudder(Sailor sailor){
@@ -130,6 +120,7 @@ public class CaptainMate {
     public void toLiftSail(Sailor sailor, Sail sail) {
         LiftSail action = new LiftSail(sailor.getId());
         actionList.add(action);
+        sail.setOpenned(true);
         Logs.add("\nS" +sailor.getId() + " is lifting the sail from " + "("+sail.getX() +","+ sail.getY() +")");
     }
     /**
@@ -140,6 +131,7 @@ public class CaptainMate {
     public void toLowerSail(Sailor sailor, Sail sail) {
         LowerSail action = new LowerSail(sailor.getId());
         actionList.add(action);
+        sail.setOpenned(false);
         Logs.add("\nS" +sailor.getId() + " is lowering the sail from " + "("+sail.getX() +","+ sail.getY() +")");
     }
 

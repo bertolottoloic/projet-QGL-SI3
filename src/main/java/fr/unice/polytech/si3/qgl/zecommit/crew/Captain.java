@@ -1,11 +1,13 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import fr.unice.polytech.si3.qgl.zecommit.*;
+import fr.unice.polytech.si3.qgl.zecommit.Game;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
@@ -32,6 +34,7 @@ public class Captain {
     boolean initGame=true;
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
+    private Wind wind;
 
 
 
@@ -43,6 +46,7 @@ public class Captain {
         this.captainMate = cM;
         this.oarList = ship.getOars();
         this.oarsNb = ship.getOarsNb();
+        this.wind = game.getWind();
         Logs.add("oarsNb:"+oarsNb);
     }
 
@@ -128,7 +132,7 @@ public class Captain {
         OrientationTable orientationTable = new OrientationTable(oarsNb);
         Logs.add(chosenAngle +"");
 
-        boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
+        boolean isNear = road.distanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
         boolean upSail = upSail();
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
@@ -158,8 +162,9 @@ public class Captain {
      * Transmet l'ordre d'activation de la voile au second
      */
     public void activateSail(boolean upSail, boolean isNear){
-        if(!isNear && upSail)
+        if(!isNear && upSail) {
             captainMate.activateLiftSail();
+        }
         else {
             captainMate.activateLowerSail();
         }
