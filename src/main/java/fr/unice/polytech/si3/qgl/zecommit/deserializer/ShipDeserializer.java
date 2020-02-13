@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
@@ -18,7 +19,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import java.io.IOException;
 import java.util.List;
 
-
+@JsonDeserialize(using = ShipDeserializer.class)
 public class ShipDeserializer extends JsonDeserializer {
 
     @Override

@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  * @author Loic Bertolotto
  */

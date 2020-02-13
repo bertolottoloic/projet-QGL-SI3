@@ -1,13 +1,16 @@
 package fr.unice.polytech.si3.qgl.zecommit.goal;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.GoalDeserializer;
 
+@JsonDeserialize(using = GoalDeserializer.class)
 public abstract class Goal {
 
     private String mode;
     private boolean isRegatta;
 
-    protected Goal(String mode){
+    public Goal(String mode){
         this.mode = mode;
     }
 

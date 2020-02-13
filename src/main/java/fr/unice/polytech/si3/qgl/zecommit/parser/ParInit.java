@@ -25,7 +25,7 @@ public class ParInit {
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
 
-        module.addDeserializer(Checkpoint.class, new CheckPointDeserializer());
+        //module.addDeserializer(Checkpoint.class, new CheckPointDeserializer());
         module.addDeserializer(Deck.class, new DeckDeserializer());
         module.addDeserializer(Entity.class, new EntityDeserializer());
         module.addDeserializer(Goal.class, new GoalDeserializer());

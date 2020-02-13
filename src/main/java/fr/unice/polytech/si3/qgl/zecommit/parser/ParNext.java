@@ -23,6 +23,7 @@ public class ParNext {
     public void parse(String jsonString) throws JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();
+        /*
         SimpleModule module = new SimpleModule();
 
         module.addDeserializer(Checkpoint.class, new CheckPointDeserializer());
@@ -36,7 +37,10 @@ public class ParNext {
         module.addDeserializer(Ship.class, new ShipDeserializer());
         module.addDeserializer(Wind.class, new WindDeserializer());
 
+
+
         mapper.registerModule(module);
+        */
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.readValue(jsonString, Game.class);
     }

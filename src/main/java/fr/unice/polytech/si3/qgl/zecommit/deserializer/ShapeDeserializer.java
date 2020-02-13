@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
@@ -13,7 +14,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import java.io.IOException;
 
 
-
+@JsonDeserialize(using = ShapeDeserializer.class)
 public class ShapeDeserializer extends JsonDeserializer {
 
     public ShapeDeserializer(Class<?> vc) {super();}

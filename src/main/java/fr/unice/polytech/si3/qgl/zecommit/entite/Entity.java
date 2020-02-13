@@ -6,9 +6,11 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.EntityDeserializer;
 
-
+@JsonDeserialize(using = EntityDeserializer.class)
 public abstract class Entity {
     private EntityType type;
     private int x;

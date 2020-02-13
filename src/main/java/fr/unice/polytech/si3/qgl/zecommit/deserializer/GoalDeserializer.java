@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
@@ -18,15 +19,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GoalDeserializer extends JsonDeserializer {
+public class GoalDeserializer extends StdDeserializer<Goal> {
 
-    public GoalDeserializer(Class<?> vc) {super();}
-    public GoalDeserializer(){
+
+    public GoalDeserializer(Class<?> vc) {
+        super(vc);
+    }
+    public GoalDeserializer() {
         this(null);
     }
 
     @Override
-    public Object deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Goal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
 
         Goal goal;
 
@@ -36,10 +40,12 @@ public class GoalDeserializer extends JsonDeserializer {
         JsonNode node = codec.readTree(jsonParser);
 
         String type = node.get("mode").asText();
+        System.out.println(node.toPrettyString());
 
         if (type.equals("REGATTA")) {
 
-            return new Regatta(objectMapper.readValue(node.get("checkpoints").toPrettyString(), new TypeReference<List<Checkpoint>>() {}));
+            goal = new Regatta(objectMapper.readValue(node.get("checkpoints").toPrettyString(), new TypeReference<>() {}));
+            return goal;
         }
 
         else {
