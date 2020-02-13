@@ -171,7 +171,7 @@ public class CaptainMate {
      * @param compo
      */
     public void activateSailors(Compo compo, double angle){
-
+        refreshSailorsListPosition();
         // Activation des marins de gauche
         int l = 0;
         while (l<compo.getSailorsLeft()) {
