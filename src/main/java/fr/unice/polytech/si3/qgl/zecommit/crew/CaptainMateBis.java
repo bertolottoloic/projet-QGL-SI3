@@ -26,11 +26,10 @@ public class CaptainMateBis implements CaptainMateInterface {
         if (!captain.doMoveSailors().isEmpty()) {
             for (Sailor sailor : sailors) {
                 if (sailor.hasEntity() && !sailor.isOnEntity())
-                    captain.getDeck().moveSailor(sailor, sailor.getEntity().getX() - sailor.getX(),
-                            sailor.getEntity().getY() - sailor.getY());
+                    actions.add(captain.getDeck().moveSailor(sailor, sailor.getEntity().getX() - sailor.getX(),
+                            sailor.getEntity().getY() - sailor.getY()));
             }
         }
-
     }
 
     @Override
@@ -43,7 +42,6 @@ public class CaptainMateBis implements CaptainMateInterface {
     public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
         if(sailorAndAngle.getValue()!=0)
             actions.add(new Turn(sailorAndAngle.getKey().getId(), sailorAndAngle.getValue()));
-
     }
 
     @Override
@@ -66,16 +64,16 @@ public class CaptainMateBis implements CaptainMateInterface {
                 sail.setOpenned(false);
             });
         }
-
     }
 
-    public void actions(){
+    public List<Action> actions(){
         captain.attributeEntitiesToSailors();
         moveSailorsToTheirEntity(captain.doMoveSailors());
         activateOars(captain.doActivateOars());
         toTurn(captain.doTurn());
         toLiftSail(captain.doLiftSail());
         toLowerSail(captain.doLowerSail());
+        return this.actions;
     }
 
 }
