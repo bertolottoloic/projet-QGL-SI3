@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
+import fr.unice.polytech.si3.qgl.zecommit.shape.ShapeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -130,6 +131,7 @@ class ParserInitTest {
         assertEquals(EntityType.OAR, game.getShip().getEntities().get(0).getType());
         assertEquals(1, game.getShipCount());
         assertEquals("Tom Pouce", game.getSailors().get(1).getName());
+        assertEquals(ShapeType.RECTANGLE,game.getShip().getShape().getType());
     }
 
     @Test
