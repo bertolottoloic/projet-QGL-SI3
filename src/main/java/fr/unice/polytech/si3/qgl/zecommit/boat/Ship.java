@@ -8,7 +8,6 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Loic Bertolotto
@@ -21,9 +20,9 @@ public class Ship {
     @JsonProperty("deck")private Deck deck;
     @JsonProperty("entities")private List<Entity> entities;
     @JsonProperty("shape")private Shape shape;
-    @JsonIgnore private List<Oar> oars = new ArrayList<>();
+    @JsonIgnore private List<Oar> oars;
     @JsonIgnore private Rudder rudder;
-    @JsonIgnore private Sail sail;
+    @JsonIgnore private List<Sail> sails;
 
 
 
@@ -51,15 +50,17 @@ public class Ship {
         });
     }
     private void createSail(){
+        this.sails = new ArrayList<>();
         entities.forEach(entity ->
         {
             if(entity.getType().equals(EntityType.SAIL)){
-                sail=(Sail)entity;
+                this.sails.add((Sail)entity);
             }
         });
     }
 
     private void createOarlist(){
+        this.oars = new ArrayList<>();
         entities.forEach(entity->
         {
             if(entity.getType().equals(EntityType.OAR))
@@ -227,8 +228,8 @@ public class Ship {
         return oarsList;
     }
 
-    public Sail getSail(){
-        return sail;
+    public List<Sail> getSails(){
+        return sails;
     }
 
 
