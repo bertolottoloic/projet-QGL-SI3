@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
@@ -95,6 +96,9 @@ public class Ship {
             //Si le centre du bateau est dans le CP
             return true;
         }
+        else {
+
+        }
         return false;
     }
 
@@ -129,6 +133,38 @@ public class Ship {
                 "\ndeck : "+this.deck+
                 "\n entities : "+this.entities+
                 "\n shape : "+this.shape;
+    }
+
+    /**
+     * Determine si le point M est dans le triangle ABC
+     * @param A
+     * @param B
+     * @param C
+     * @param M
+     * @return
+     */
+    public boolean IsInTriangle(Point A, Point B, Point C, Point M) {
+        double t, tp;
+
+        double D = B.getX() - A.getX();
+        double E = C.getX() - A.getX();
+        double F = M.getX() - A.getX();
+        double G = B.getY() - A.getY();
+        double H = C.getY() - A.getY();
+        double I = M.getY() - A.getY();
+
+        if ((E*G) - (H*D) == 0) {
+            return false;
+        }
+        tp = ((F*G) - (D*I)) / ((E*G) - (H*D));
+        t = (F - (tp*E))/D;
+
+        double res = 1-t-tp;
+
+        if (0 <= res && res <= 1) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -197,10 +233,6 @@ public class Ship {
         return rudder;
     }
 
-    @JsonIgnore
-    public Sail getSail() {
-        return sail;
-    }
 
     @JsonIgnore
     /**
