@@ -8,6 +8,8 @@
   * [Créer une pull Request](#Créer-une-pull-request)
 
 ## Introduction
+Ce document indique comment participer à ce projet, comment soumettre ses contributions et effectuer des modifications.
+
 ## Gestion des Branches
   ### Organisation des branches
   Nos branches sont organisées de la façon suivante : 
@@ -16,6 +18,17 @@
   * une branche `newfeaturename` pour developper de nouvelles fonctionnalités
   
   ### Ajouter une branche
+  Utiliser la commande suivante pour créer une nouvelle branche : 
   
+  ```
+  git checkout -b mynewbranchname
+  ```
+  
+  Pour basculer sur une autre branche : 
+  
+  ```
+  git checkout otherbranch
+  ```
+ 
   
   ### Créer une pull request
