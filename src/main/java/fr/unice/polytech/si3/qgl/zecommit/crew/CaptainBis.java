@@ -82,6 +82,10 @@ public class CaptainBis implements CaptainInterface {
 
     @Override
     public SimpleEntry<Sailor, Double> doTurn() {
+        // Activation du gouvernail
+        Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+        if (deck.getRudder() != null && deck.getRudder().hasSailorOn())
+            return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),road.orientationToGoal());
         return null;
     }
 
