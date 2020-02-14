@@ -40,10 +40,9 @@ public class GoalDeserializer extends StdDeserializer<Goal> {
         JsonNode node = codec.readTree(jsonParser);
 
         String type = node.get("mode").asText();
-        System.out.println(node.toPrettyString());
+
 
         if (type.equals("REGATTA")) {
-
             goal = new Regatta(objectMapper.readValue(node.get("checkpoints").toPrettyString(), new TypeReference<>() {}));
             return goal;
         }

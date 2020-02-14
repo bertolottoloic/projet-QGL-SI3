@@ -3,9 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
-import fr.unice.polytech.si3.qgl.zecommit.parser.ParInit;
-import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
-import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
+import fr.unice.polytech.si3.qgl.zecommit.parser.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -135,8 +133,7 @@ class ParserInitTest {
     @Test
 
     void parserInitGame2Test() throws JsonProcessingException {
-        ParInit parInit = new ParInit();
-        Game game = parInit.parse(jsonString);
+        InitGame initGame = Parser.parseInitGame(jsonString);
 
     }
 

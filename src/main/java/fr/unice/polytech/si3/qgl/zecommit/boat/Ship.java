@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.Road;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShipDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
@@ -13,6 +15,7 @@ import java.util.List;
 /**
  * @author Loic Bertolotto
  */
+@JsonDeserialize(using = ShipDeserializer.class)
 public class Ship {
     private String type;
     private int life;

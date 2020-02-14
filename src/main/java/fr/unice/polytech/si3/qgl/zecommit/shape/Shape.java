@@ -1,13 +1,15 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.*;
-
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShapeDeserializer;
 
 
 /**
  * Model de Forme
  * @author Clement P
  */
+@JsonDeserialize(using = ShapeDeserializer.class)
 public abstract class Shape {
     private String type;
     private boolean isCircle;

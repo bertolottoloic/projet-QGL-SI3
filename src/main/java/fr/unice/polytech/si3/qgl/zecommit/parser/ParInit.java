@@ -23,21 +23,6 @@ public class ParInit {
     public Game parse(String jsonString) throws JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-
-        //module.addDeserializer(Checkpoint.class, new CheckPointDeserializer());
-        module.addDeserializer(Deck.class, new DeckDeserializer());
-        module.addDeserializer(Entity.class, new EntityDeserializer());
-        module.addDeserializer(Goal.class, new GoalDeserializer());
-        module.addDeserializer(OtherShip.class, new OtherShipDeserializer());
-        module.addDeserializer(Position.class, new PositionDeserializer());
-        module.addDeserializer(Sailor.class, new SailorDeserializer());
-        module.addDeserializer(Shape.class, new ShapeDeserializer());
-        module.addDeserializer(Ship.class, new ShipDeserializer());
-        module.addDeserializer(Wind.class, new WindDeserializer());
-
-
-        mapper.registerModule(module);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         return mapper.readValue(jsonString, Game.class);

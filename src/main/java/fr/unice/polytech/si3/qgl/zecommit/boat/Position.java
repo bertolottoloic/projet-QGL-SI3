@@ -5,6 +5,10 @@
 
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.PositionDeserializer;
+
+@JsonDeserialize(using = PositionDeserializer.class)
 public class Position {
 
     double x;

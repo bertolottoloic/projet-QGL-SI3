@@ -18,7 +18,7 @@ public class DeckDeserializer extends JsonDeserializer {
     public Deck deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         ObjectCodec oc = jsonParser.getCodec();
         JsonNode node = oc.readTree(jsonParser);
-        return new Deck(node.get("width").asInt(), node.get("height").asInt());
+        return new Deck(node.get("width").asInt(), node.get("length").asInt());
     }
 }
 

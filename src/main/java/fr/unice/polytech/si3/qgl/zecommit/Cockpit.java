@@ -8,9 +8,7 @@ import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
-import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
-import fr.unice.polytech.si3.qgl.zecommit.parser.ParNext;
-import fr.unice.polytech.si3.qgl.zecommit.parser.ParInit;
+import fr.unice.polytech.si3.qgl.zecommit.parser.*;
 
 
 public class Cockpit implements ICockpit {
@@ -24,6 +22,15 @@ public class Cockpit implements ICockpit {
 			this.game=parserInit.parse(json);
 			this.captainMate= new CaptainMate();
 			this.captain= new Captain(game,captainMate);
+		} catch (JsonProcessingException e) {
+			Logs.add("Erreur Parseur InitGame");
+		}
+	}
+
+	public void initGameBis(String json) {
+		try {
+			setGameInfo(Parser.parseInitGame(json));
+			setCaptain();
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
 		}
@@ -58,5 +65,23 @@ public class Cockpit implements ICockpit {
 	@Override
 	public List<String> getLogs() {
 		return Logs.sortie();
+	}
+
+
+	/**
+	 * Création et initialisation de l'objet Game
+	 * @param initGame
+	 */
+	public void setGameInfo(InitGame initGame) {
+		this.game = new Game();
+		game.setGoal(initGame.getGoal());
+		game.setShip(initGame.getShip());
+		game.setSailors(initGame.getSailors());
+		game.setShipCount(initGame.getShipCount());
+	}
+
+	public void setCaptain() {
+		this.captainMate= new CaptainMate();
+		this.captain= new Captain(game,captainMate);
 	}
 }
