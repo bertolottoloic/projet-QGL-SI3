@@ -46,12 +46,12 @@ public class CaptainTest {
         when(game.getShip().getOarsNb()).thenReturn(4);
         jackSparrow = new Captain(game,gibbs);
 
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI/8-Math.PI/2), 1);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI/4-Math.PI/2), 1);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI/8+Math.PI/36-Math.PI/2), 1);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI/2+Math.PI/36-Math.PI/2), 2);
-        assertEquals(jackSparrow.findClosestPossibleAngle(7*Math.PI/8-Math.PI/2), 4);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI-Math.PI/36-Math.PI/2), 4);
+        assertEquals(1, jackSparrow.findClosestPossibleAngle(Math.PI/8-Math.PI/2));
+        assertEquals(1, jackSparrow.findClosestPossibleAngle(Math.PI/4-Math.PI/2));
+        assertEquals(1, jackSparrow.findClosestPossibleAngle(Math.PI/8+Math.PI/36-Math.PI/2));
+        assertEquals(2, jackSparrow.findClosestPossibleAngle(Math.PI/2+Math.PI/36-Math.PI/2));
+        assertEquals(4, jackSparrow.findClosestPossibleAngle(7*Math.PI/8-Math.PI/2));
+        assertEquals(4, jackSparrow.findClosestPossibleAngle(Math.PI-Math.PI/36-Math.PI/2));
 
     }
 
@@ -62,7 +62,7 @@ public class CaptainTest {
 
         when(blackPearl.getPosition()).thenReturn(new Position(-20,-20,1.047));
 
-        assertEquals(jackSparrow.findClosestPossibleAngle(0.77), 4);
+        assertEquals(4, jackSparrow.findClosestPossibleAngle(0.77));
 
     }
 
@@ -71,13 +71,13 @@ public class CaptainTest {
         when(game.getShip().getOarsNb()).thenReturn(3);
         jackSparrow = new Captain(game,gibbs);
 
-        assertEquals(jackSparrow.findClosestPossibleAngle(0-Math.PI/2), 0);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI/3-Math.PI/2), 1);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI/3+Math.PI/36-Math.PI/2), 1);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI/2+Math.PI/36-Math.PI/2), 2);
-        assertEquals(jackSparrow.findClosestPossibleAngle(2*Math.PI/3-Math.PI/2), 2);
-        assertEquals(jackSparrow.findClosestPossibleAngle(5*Math.PI/6-Math.PI/2), 3);
-        assertEquals(jackSparrow.findClosestPossibleAngle(Math.PI-Math.PI/2), 3);
+        assertEquals(0, jackSparrow.findClosestPossibleAngle(0-Math.PI/2));
+        assertEquals(1, jackSparrow.findClosestPossibleAngle(Math.PI/3-Math.PI/2));
+        assertEquals(1, jackSparrow.findClosestPossibleAngle(Math.PI/3+Math.PI/36-Math.PI/2));
+        assertEquals(2, jackSparrow.findClosestPossibleAngle(Math.PI/2+Math.PI/36-Math.PI/2));
+        assertEquals(2, jackSparrow.findClosestPossibleAngle(2*Math.PI/3-Math.PI/2));
+        assertEquals(3, jackSparrow.findClosestPossibleAngle(5*Math.PI/6-Math.PI/2));
+        assertEquals(3, jackSparrow.findClosestPossibleAngle(Math.PI-Math.PI/2));
 
     }
 

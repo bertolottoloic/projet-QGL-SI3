@@ -85,7 +85,6 @@ public class ParserNext {
         catch(IllegalStateException e){
             ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
             Logs.add("PB3");
-            //System.out.println("No shape : "+e.toString());
         }
 
         game.setShip(ship);
@@ -129,7 +128,6 @@ public class ParserNext {
         }
         catch (InvalidDefinitionException e){
             Logs.add("PB5");
-            //System.out.println("No wind : "+e.toString());
         }
 
     }
