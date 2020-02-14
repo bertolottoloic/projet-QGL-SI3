@@ -154,5 +154,19 @@ public class Deck{
         this.length = length;
     }
 
+    public void setSailors(List<Sailor> sailors) {
+        this.sailors = sailors;
+    }
 
+    public void setOars(List<Oar> oars) {
+        this.oars = oars;
+    }
+
+    public void setRudder(Rudder rudder) {
+        this.rudder = rudder;
+    }
+
+    public void setSails(List<Sail> sails) {
+        this.sails = sails;
+    }
 }

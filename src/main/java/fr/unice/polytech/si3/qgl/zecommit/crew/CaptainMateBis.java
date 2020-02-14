@@ -11,7 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
 import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 
-public class CaptainMateBis implements CaptainMateInterface {
+public class CaptainMateBis {
 
     CaptainBis captain;
     List<Action> actions;
@@ -21,30 +21,28 @@ public class CaptainMateBis implements CaptainMateInterface {
         this.actions = new ArrayList<>();
     }
 
-    @Override
+
     public void moveSailorsToTheirEntity(List<Sailor> sailors) {
         if (!captain.doMoveSailors().isEmpty()) {
             for (Sailor sailor : sailors) {
-                if (sailor.hasEntity() && !sailor.isOnEntity())
+                if (sailor.hasEntity() && !sailor.isOnEntity()) {
                     actions.add(captain.getDeck().moveSailor(sailor, sailor.getEntity().getX() - sailor.getX(),
                             sailor.getEntity().getY() - sailor.getY()));
+                }
             }
         }
     }
 
-    @Override
     public void activateOars(List<Sailor> sailors) {
         if(!sailors.isEmpty())
             sailors.forEach(sailor -> actions.add(new ToOar(sailor.getId())));
     }
 
-    @Override
     public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
         if(sailorAndAngle.getValue()!=0)
             actions.add(new Turn(sailorAndAngle.getKey().getId(), sailorAndAngle.getValue()));
     }
 
-    @Override
     public void toLiftSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
@@ -55,7 +53,6 @@ public class CaptainMateBis implements CaptainMateInterface {
         }
     }
 
-    @Override
     public void toLowerSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {

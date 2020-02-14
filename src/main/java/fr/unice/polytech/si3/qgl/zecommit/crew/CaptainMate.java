@@ -20,8 +20,7 @@ import java.util.AbstractMap.SimpleEntry;
  */
 public class CaptainMate implements CaptainMateInterface {
     private List<Action> actionList;
-    private List<Sailor> rightSailorList;
-    private List<Sailor> leftSailorList;
+
     // private List<Sailor> sailorList;
     private Ship ship;
 

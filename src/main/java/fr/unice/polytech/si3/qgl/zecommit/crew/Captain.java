@@ -7,11 +7,13 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.AbstractMap.SimpleEntry;
 
@@ -30,23 +32,23 @@ public class Captain implements CaptainInterface{
     private List<Oar> oarList;
     private int oarsNb;
     private CaptainMate captainMate;
-    private Game game;
     boolean initGame=true;
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
 
 
 
-    public Captain(Game game, CaptainMate cM){//TODO à embellir
+    public Captain(Game game, CaptainMate cM) {//TODO à embellir
         this.ship = game.getShip();
         this.regatta = (Regatta) game.getGoal();
         this.sailorList = new ArrayList<>(game.getSailors());
         this.sailorsNb = sailorList.size();
         this.captainMate = cM;
-        this.oarList = ship.getOars();
-        this.oarsNb = ship.getOarsNb();
+        this.oarList = ship.getDeck().getOars();
+        this.oarsNb = ship.getDeck().getOars().size();
         Logs.add("oarsNb:"+oarsNb);
     }
+
 
     /**
      * main du capitaine
@@ -68,7 +70,7 @@ public class Captain implements CaptainInterface{
             captainMate.initMoveSailor(sailorList);
         }
         else {
-            if (!game.getShip().isInCheckpoint(regatta.getFirstCheckpoint())) {
+            if (!ship.isInCheckpoint(regatta.getFirstCheckpoint())) {
                 refreshSailorsListPosition();
                 Road road = new Road(ship.getPosition(), regatta.getFirstCheckpoint().getPosition());
                 int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
@@ -197,9 +199,8 @@ public class Captain implements CaptainInterface{
      * @param game
      */
     public void refreshGame(Game game){
-        this.game=game;
         ship=game.getShip();
-        this.oarList = ship.getOars();
+        this.oarList = ship.getDeck().getOars();
     }
 
     public void refreshSailorsListPosition(){
@@ -214,9 +215,6 @@ public class Captain implements CaptainInterface{
         return sailorList;
     }
 
-    public Game getGame() {
-        return game;
-    }
 
     public Regatta getRegatta() {
         return regatta;
@@ -233,13 +231,10 @@ public class Captain implements CaptainInterface{
     //-------------------------SETTER------------------------------
 
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
 
     @Override
     public List<Sailor> doMoveSailors() {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
