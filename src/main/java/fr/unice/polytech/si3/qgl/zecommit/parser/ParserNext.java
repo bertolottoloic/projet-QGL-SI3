@@ -124,7 +124,7 @@ public class ParserNext {
         JsonNode ventN = rootNode.path("wind");
         try {
             Wind wind = objectMapper.readValue(ventN.toString(), Wind.class);
-            game.setWind(objectMapper.readValue(wind.toString(), Wind.class));
+            game.setWind(wind);
 
         }
         catch (InvalidDefinitionException e){
