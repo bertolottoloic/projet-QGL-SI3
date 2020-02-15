@@ -109,7 +109,7 @@ public class CaptainBis implements CaptainInterface {
     @Override
     public boolean pursueGame() {
         boolean z = !ship.isInCheckpoint(goal.getFirstCheckpoint());
-        return !ship.isInCheckpoint(goal.getFirstCheckpoint());
+        return !ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size()-1));
     }
 
 
