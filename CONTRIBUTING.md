@@ -32,3 +32,10 @@ Ce document indique comment participer à ce projet, comment soumettre ses contr
  
   
   ### Créer une pull request
+  Aller sur Git et cliquer sur `Compare & pull request`.
+  
+  Ajouter un titre et une desciption à la pull request.
+  
+  Le code soumis doit être clair, commenté et testé pour que la pull request soit acceptée.
+  
+  Utiliser ensuite la commande `merge` pour fusionner les branches.
