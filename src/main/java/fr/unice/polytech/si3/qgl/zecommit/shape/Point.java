@@ -2,6 +2,8 @@ package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Point {
     @JsonProperty("x")
     private double x;
@@ -44,4 +46,8 @@ public class Point {
         return(point.x == this.x && point.y == this.y);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
 }

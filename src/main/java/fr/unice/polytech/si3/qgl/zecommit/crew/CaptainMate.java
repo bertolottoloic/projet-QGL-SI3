@@ -92,6 +92,10 @@ public class CaptainMate {
         }
     }
 
+    /**
+     * Déplace un marin au gouvernail
+     * @param sailor
+     */
     public void moveSailorToRudder(Sailor sailor){
         if(ship.getRudder()!=null){
             moveSailor(sailor,ship.getRudder().getX() , ship.getRudder().getY());
@@ -138,10 +142,12 @@ public class CaptainMate {
      * @param sail
      */
     public void toLiftSail(Sailor sailor, Sail sail) {
+
         LiftSail action = new LiftSail(sailor.getId());
         actionList.add(action);
         sail.setOpenned(true);
         Logs.add("\nS" +sailor.getId() + " is lifting the sail from " + "("+sail.getX() +","+ sail.getY() +")");
+
     }
     /**
      * Fait baisser la voile par le marin sur la case
@@ -210,6 +216,10 @@ public class CaptainMate {
                 toLowerSail(sail.getSailorOn(), sail);
             }
         }
+    }
+
+    public void useSail() {
+
     }
 
 

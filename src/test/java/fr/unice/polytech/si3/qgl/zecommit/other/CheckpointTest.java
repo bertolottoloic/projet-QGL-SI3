@@ -47,7 +47,7 @@ class CheckpointTest {
 
     @Test
     void getCircleRadiusTest() {
-        assertEquals(cpCircle.getCircleRadius(), 1);
+        assertEquals(1, cpCircle.getCircleRadius());
     }
 
 

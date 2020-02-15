@@ -27,7 +27,6 @@ public class Captain {
     private Ship ship;
     private Regatta regatta;
     private List<Sailor> sailorList;
-    private int sailorsNb;
     private List<Oar> oarList;
     private int oarsNb;
     private CaptainMate captainMate;
@@ -43,7 +42,6 @@ public class Captain {
         this.ship = game.getShip();
         this.regatta = (Regatta) game.getGoal();
         this.sailorList = new ArrayList<>(game.getSailors());
-        this.sailorsNb = sailorList.size();
         this.captainMate = cM;
         this.oarList = ship.getOars();
         this.oarsNb = ship.getOarsNb();
@@ -138,6 +136,7 @@ public class Captain {
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
 
+        //TODO à corriger si marin <= 4
         if(road.orientationToGoal()>-Math.PI/4 && road.orientationToGoal()<Math.PI/4){
             chosenAngle = findClosestPossibleAngle(0); //on donne l'ordre aller tout droit, le gouvernail gère les virages
         }

@@ -38,7 +38,7 @@ public class EngineSettings {
     @JsonIgnore
     ArrayList<Sailor> rightSailors;
     @JsonIgnore
-    final int n=100;
+    static final int n = 100;
     @JsonIgnore
     double rotation=0;
     @JsonIgnore
@@ -65,8 +65,9 @@ public class EngineSettings {
         setShape();
         setShip();
         setVisibleEntities();
-        setWind();
         sortEntities();
+        setWind();
+
     }
 
     //--------------------SETTINGS-------------------//
@@ -147,7 +148,7 @@ public class EngineSettings {
         }
     }
 
-    public void updateEngine(ArrayList<Action> actions){
+    public void updateEngine(List<Action> actions){
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
         rotation=0;
@@ -175,12 +176,9 @@ public class EngineSettings {
 
     public void engineTurn(Turn turn){
         for(Sailor sailor :sailors){
-            if(rudder!=null){
-                if(turn.getSailorId()==sailor.getId()&&
-                        rudder.getX()==sailor.getX()&&
-                        rudder.getY()==sailor.getY()){
-                    rotation=turn.getRotation();
-                }
+            if(rudder!=null &&
+                turn.getSailorId()==sailor.getId() && rudder.getX()==sailor.getX()&& rudder.getY()==sailor.getY()) {
+                rotation = turn.getRotation();
             }
         }
     }
@@ -188,15 +186,19 @@ public class EngineSettings {
     public void engineOar(ToOar toOar){
         for (Sailor sailor: sailors) {
             if(toOar.getSailorId()==sailor.getId()){
-                for (Oar oar: oarArrayList) {
-                    if(sailor.getX()==oar.getX()&&sailor.getY()==oar.getY()){
-                        if(deck.isLeft(oar)){
-                            leftSailors.add(sailor);
-                        }
-                        else{
-                            rightSailors.add(sailor);
-                        }
-                    }
+                engineOarLeftRight(sailor);
+            }
+        }
+    }
+
+    public void engineOarLeftRight(Sailor sailor) {
+        for (Oar oar: oarArrayList) {
+            if(sailor.getX()==oar.getX()&&sailor.getY()==oar.getY()){
+                if(deck.isLeft(oar)){
+                    leftSailors.add(sailor);
+                }
+                else{
+                    rightSailors.add(sailor);
                 }
             }
         }
@@ -216,39 +218,44 @@ public class EngineSettings {
     public void engineLiftSail(LiftSail liftSail){
         for (Sailor sailor: sailors) {
             if(liftSail.getSailorId()==sailor.getId()){
-                for (Sail sail: sailArrayList) {
-                    if(sail.getX()==sailor.getX()&&sail.getY()==sailor.getY()) {
-                        if (!sail.isOpenned()){
-                            sail.setOpenned(true);
-                            nbSailUsed++;
-                        }
-                    }
-                }
+                engineLiftSailAction(sailor);
             }
         }
     }
+
+    public void engineLiftSailAction(Sailor sailor) {
+        for (Sail sail: sailArrayList) {
+            if(sail.getX()==sailor.getX()&&sail.getY()==sailor.getY() && !sail.isOpenned()) {
+                sail.setOpenned(true);
+                nbSailUsed++;
+            }
+        }
+    }
+
     public void engineLowerSail(LowerSail lowerSail){
         for (Sailor sailor: sailors) {
             if(lowerSail.getSailorId()==sailor.getId()){
-                for (Sail sail: sailArrayList) {
-                    if(sail.getX()==sailor.getX()&&sail.getY()==sailor.getY()){
-                        if (sail.isOpenned()) {
-                            sail.setOpenned(false);
-                            nbSailUsed--;
-                        }
-                    }
-                }
+                engineLowerSailAction(sailor);
+            }
+        }
+    }
+
+    public void engineLowerSailAction(Sailor sailor) {
+        for (Sail sail: sailArrayList) {
+            if(sail.getX()==sailor.getX()&&sail.getY()==sailor.getY() && sail.isOpenned()) {
+                sail.setOpenned(false);
+                nbSailUsed--;
             }
         }
     }
 
     public double calculWind(){
         double value=0;
-        if(sailArrayList.size()>0) {
+        if(!sailArrayList.isEmpty()) {
             value = ((double) nbSailUsed / sailArrayList.size()) * wind.getStrength() *
                     Math.cos(Math.abs(wind.getOrientation()) - Math.abs(ship.getPosition().getOrientation()));
         }
-        return (double)value/n;
+        return value/n;
     }
 
     public void calcul(){
@@ -271,7 +278,7 @@ public class EngineSettings {
 
     public void checkCheckpoints(){
         if(ship.isInCheckpoint(checkpoints.get(0))&&checkpoints.size()>1){
-            System.out.println("Checkpoint valides :"+checkpoints.get(0).getPosition());
+            System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
             checkpoints.remove(0);
         }
     }
