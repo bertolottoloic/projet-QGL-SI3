@@ -12,7 +12,6 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
@@ -108,7 +107,6 @@ public class CaptainBis implements CaptainInterface {
 
     @Override
     public boolean pursueGame() {
-        boolean z = !ship.isInCheckpoint(goal.getFirstCheckpoint());
         return !ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size()-1));
     }
 
@@ -135,7 +133,6 @@ public class CaptainBis implements CaptainInterface {
         int l = 0;
         while (l < compo.getSailorsLeft()) {
             usedSailors.add(leftSailorList.get(l));
-            //toOar(leftSailorList.get(l), (Oar) leftSailorList.get(l).getEntity());
             l++;
         }
 
@@ -143,15 +140,9 @@ public class CaptainBis implements CaptainInterface {
         int r = 0;
         while (r < compo.getSailorsRight()) {
             usedSailors.add(rightSailorList.get(r));
-
-            //toOar(rightSailorList.get(r), (Oar) rightSailorList.get(r).getEntity());
             r++;
         }
         return usedSailors;
-
-        // Activation du gouvernail
-        //if (deck.getRudder() != null && deck.getRudder().hasSailorOn())
-           // toTurn(deck.getRudder().getSailorOn(), deck.getRudder(), angle);
     }
 
     private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){

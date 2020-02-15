@@ -1,16 +1,18 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-import com.fasterxml.jackson.annotation.*;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
 /**
  * @author Loic Bertolotto
