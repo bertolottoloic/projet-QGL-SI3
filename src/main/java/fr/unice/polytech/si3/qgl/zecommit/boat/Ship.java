@@ -1,12 +1,15 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
+import fr.unice.polytech.si3.qgl.zecommit.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
+import javax.swing.text.MutableAttributeSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,17 +94,12 @@ public class Ship {
      * @param checkpoint
      * @return boolean
      */
-    public boolean isInCheckpoint(Checkpoint checkpoint) { //TODO à corriger
-        //cas avec un cercle
-        if (checkpoint.isCircle() && this.distanceTo(checkpoint.getPosition()) < checkpoint.getCircleRadius()) {
-            //Si le centre du bateau est dans le CP
-            return true;
-        }
-        else {
-
-        }
-        return false;
+    public boolean isInCheckpoint(Checkpoint checkpoint) {
+        Collision collision = new Collision(checkpoint.getShape(), checkpoint.getPosition(), position);
+        return collision.collide();
     }
+
+
 
     public boolean isInFrontOfCheckpoint(Checkpoint checkpoint){
         Position cpPosition=checkpoint.getPosition();
@@ -135,39 +133,6 @@ public class Ship {
                 "\n entities : "+this.entities+
                 "\n shape : "+this.shape;
     }
-
-    /**
-     * Determine si le point M est dans le triangle ABC
-     * @param A
-     * @param B
-     * @param C
-     * @param M
-     * @return
-     */
-    public boolean IsInTriangle(Point A, Point B, Point C, Point M) {
-        double t, tp;
-
-        double D = B.getX() - A.getX();
-        double E = C.getX() - A.getX();
-        double F = M.getX() - A.getX();
-        double G = B.getY() - A.getY();
-        double H = C.getY() - A.getY();
-        double I = M.getY() - A.getY();
-
-        if ((E*G) - (H*D) == 0) {
-            return false;
-        }
-        tp = ((F*G) - (D*I)) / ((E*G) - (H*D));
-        t = (F - (tp*E))/D;
-
-        double res = 1-t-tp;
-
-        if (0 <= res && res <= 1) {
-            return true;
-        }
-        return false;
-    }
-
 
 
     //--------------------GETTER -------------------------//
