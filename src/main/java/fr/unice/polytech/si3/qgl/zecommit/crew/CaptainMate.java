@@ -1,12 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import fr.unice.polytech.si3.qgl.zecommit.action.*;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -61,26 +60,29 @@ public class CaptainMate {
         }
     }
 
-    public void initAttibuteOarToSailors(List<Sailor> sailors, Ship ship){
+    public void initAttibuteEntityToSailors(List<Sailor> sailors, Ship ship){
         refreshGame(ship);
         sailors.forEach(s->s.reinitializeEntity());
-        List<Sailor> sailorTmp = new ArrayList<>(sailors);
+        List<Sailor> sailorsTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>();
         oars.addAll(ship.getOars());
-        sailorTmp.sort(Comparator.comparingInt(a->a.distanceToNearestEntity(oars)));
+        sailorsTmp.sort(Comparator.comparingInt(a->a.distanceToNearestEntity(oars)));
         Sailor sailor;
-        if(sailorTmp.size()%2!=0 && ship.getRudder()!=null){
-            sailor = sailorTmp.remove(sailorTmp.size()-1);
-            sailor.setOnEntity(ship.getRudder());
+        if(sailorsTmp.size()>4){
+            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getRudder());
+            if(sailorsTmp.size()%2>0 && !ship.getSails().isEmpty()){
+                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getSails().get(0));;      
+            }
         }
-        for(Sailor tmp : sailorTmp){   
+
+        for(Sailor tmp : sailorsTmp){   
             ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
             Oar closestOar = ship.getOars().get(0);
             if(!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar)<=5 && !tmp.hasEntity()) {
                 tmp.setOnEntity(closestOar);             
             }
         }
-        for(Sailor tmp : sailorTmp){
+        for(Sailor tmp : sailorsTmp){
             ship.getOars().sort(Comparator.comparingInt( a -> tmp.distanceToEntity(a)));
             for(Oar oar:ship.getOars()){
                 if(!oar.hasSailorOn() && !tmp.hasEntity()){
@@ -88,7 +90,6 @@ public class CaptainMate {
                 }
             }
         }
-
     }
 
     /**
@@ -106,6 +107,15 @@ public class CaptainMate {
         for(Sailor sailor : sailors){
             if (!sailor.isOnEntity() && sailor.hasEntity())
                 return false;
+        }
+        return true;
+    }
+
+    public boolean oarsSailorAreOn(List<Sailor> sailors){
+        for (Sailor sailor : sailors) {
+            if(!sailor.isOnEntity() && sailor.hasEntity() && sailor.getEntity().getType()==EntityType.OAR){
+                return false;
+            }
         }
         return true;
     }
@@ -135,6 +145,7 @@ public class CaptainMate {
 
         LiftSail action = new LiftSail(sailor.getId());
         actionList.add(action);
+        sail.setOpenned(true);
         Logs.add("\nS" +sailor.getId() + " is lifting the sail from " + "("+sail.getX() +","+ sail.getY() +")");
 
     }
@@ -146,6 +157,7 @@ public class CaptainMate {
     public void toLowerSail(Sailor sailor, Sail sail) {
         LowerSail action = new LowerSail(sailor.getId());
         actionList.add(action);
+        sail.setOpenned(false);
         Logs.add("\nS" +sailor.getId() + " is lowering the sail from " + "("+sail.getX() +","+ sail.getY() +")");
     }
 
@@ -165,7 +177,7 @@ public class CaptainMate {
      * @param compo
      */
     public void activateSailors(Compo compo, double angle){
-
+        refreshSailorsListPosition();
         // Activation des marins de gauche
         int l = 0;
         while (l<compo.getSailorsLeft()) {
@@ -188,18 +200,20 @@ public class CaptainMate {
     /**
      * Effectue l'ordre d'activation du marin à la voile
      */
-    public void activateLiftSail(){
+    public void activateLiftSail(Sail sail){
         for(Sailor sailor : sailorList) {
-            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && ship.getSail() != null && ship.getSail().hasSailorOn()) {
-                toLiftSail(ship.getSail().getSailorOn(), ship.getSail());
+            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL)
+                && sail.hasSailorOn()) {
+                toLiftSail(sail.getSailorOn(), sail);
             }
         }
     }
 
-    public void activateLowerSail(){
-        for(Sailor sailor : sailorList) {
-            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL) && ship.getSail() != null && ship.getSail().hasSailorOn()) {
-                toLowerSail(ship.getSail().getSailorOn(), ship.getSail());
+    public void activateLowerSail(Sail sail) {
+        for (Sailor sailor : sailorList) {
+            if (sailor.hasEntity() && sailor.getEntity().getType().equals(EntityType.SAIL)
+                && sail.hasSailorOn()) {
+                toLowerSail(sail.getSailorOn(), sail);
             }
         }
     }
@@ -216,7 +230,7 @@ public class CaptainMate {
     public List<Sailor> getLeftSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
-            if(sailor.getY()<ship.getDeck().getWidth()/2)
+            if(sailor.getY()<ship.getDeck().getWidth()/2 && sailor.isOnEntity() && sailor.getEntity().getType()==EntityType.OAR)
                 sailors.add(sailor);
         }
         return sailors;
@@ -229,7 +243,7 @@ public class CaptainMate {
     public List<Sailor> getRightSailors(){
         ArrayList<Sailor> sailors = new ArrayList<>();
         for(Sailor sailor : sailorList){
-            if(sailor.getY()>=((ship.getDeck().getWidth()/2)+(ship.getDeck().getWidth()%2)))
+            if(sailor.getY()>=((ship.getDeck().getWidth()/2)+(ship.getDeck().getWidth()%2)) && sailor.isOnEntity() && sailor.getEntity().getType()==EntityType.OAR)
                 sailors.add(sailor);
         }
         return sailors;
