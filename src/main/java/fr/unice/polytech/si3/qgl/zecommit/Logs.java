@@ -9,7 +9,7 @@ import java.util.List;
  * @author Nathan
  */
 public class Logs {
-    Logs() {
+    public Logs() {
     }
 
     protected static final List<String> myLogs = new ArrayList<>();

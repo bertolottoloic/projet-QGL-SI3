@@ -1,23 +1,21 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.parser;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
-
-import fr.unice.polytech.si3.qgl.zecommit.parser.*;
-
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ParserInitTest {
-    private String jsonString;
-    private String jsonString2;
+import static org.junit.jupiter.api.Assertions.*;
 
+class ParserTest {
+    String jsonInitGame;
+    InitGame initGame;
 
     @BeforeEach
-    void setUp() {
-        jsonString = "{\n" +
+    void setUp() throws JsonProcessingException {
+        jsonInitGame = "{\n" +
                 "  \"goal\": {\n" +
                 "    \"mode\": \"REGATTA\",\n" +
                 "    \"checkpoints\": [\n" +
@@ -84,49 +82,24 @@ class ParserInitTest {
                 "}";
 
 
-        jsonString2 = "{\n" +
-                "  \"ship\": {\n" +
-                "    \"type\": \"ship\",\n" +
-                "    \"life\": 100,\n" +
-                "    \"position\": {\n" +
-                "      \"x\": 10.654,\n" +
-                "      \"y\": 3,\n" +
-                "      \"orientation\": 2.05\n" +
-                "    },\n" +
-                "    \"name\": \"Les copaings d'abord!\",\n" +
-                "    \"deck\": {\n" +
-                "      \"width\": 2,\n" +
-                "      \"length\": 1\n" +
-                "    },\n" +
-                "    \"entities\": [\n" +
-                "      {\n" +
-                "        \"x\": 0,\n" +
-                "        \"y\": 0,\n" +
-                "        \"type\": \"oar\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"x\": 1,\n" +
-                "        \"y\": 0,\n" +
-                "        \"type\": \"oar\"\n" +
-                "      }\n" +
-                "    ]\n" +
-                "  },\n" +
-                "  \"visibleEntities\": []\n" +
-                "}";
 
-
-
+        initGame = Parser.parseInitGame(jsonInitGame);
 
     }
-
 
     @Test
-    void parserInitGame2Test() throws JsonProcessingException {
-        InitGame initGame = Parser.parseInitGame(jsonString);
-
+    void parserInitGameTestGoal() {
+        assertEquals(initGame.getGoal().toString(), "REGATTA");
     }
+
+    @Test
+    void parserInitGameTestShip() {
+        Ship ship = initGame.getShip();
+        assertEquals("ship", ship.getType());
+        assertEquals(new Position(0,0,0),ship.getPosition());
+        assertEquals(100, ship.getLife());
+        assertEquals("Les copaings d'abord!",ship.getName());
+    }
+
+
 }
-
-
-
-

@@ -1,26 +1,16 @@
 package fr.unice.polytech.si3.qgl.zecommit.goal;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.GoalDeserializer;
 
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "mode")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Battle.class, name = "BATTLE"),
-        @JsonSubTypes.Type(value = Regatta.class, name = "REGATTA")
-})
+@JsonDeserialize(using = GoalDeserializer.class)
 public abstract class Goal {
 
-    @JsonProperty("mode")
-    @JsonIgnore
     private String mode;
-    @JsonIgnore
     private boolean isRegatta;
 
-    @JsonCreator
-    protected Goal(@JsonProperty("mode")String mode){
+    public Goal(String mode){
         this.mode = mode;
     }
 
@@ -29,7 +19,6 @@ public abstract class Goal {
         return this.mode;
     }
 
-    @JsonIgnore
     public boolean isRegatta(){
         return this.isRegatta;
     }
@@ -38,7 +27,6 @@ public abstract class Goal {
 
     //------------------------------GETTER-------------------------//
 
-    @JsonIgnore
     public String getMode() {
         return mode;
     }

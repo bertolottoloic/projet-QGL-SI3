@@ -188,7 +188,7 @@ public class CaptainMate {
 
         //Activation du gouvernail
         if(ship.getRudder()!=null && ship.getRudder().hasSailorOn())
-            toTurn(ship.getRudder().getSailorOn(), ship.getRudder(), angle);
+            toTurn(ship.getRudder().getSailorOn(), (Rudder) ship.getRudder(), angle);
     }
 
     /**

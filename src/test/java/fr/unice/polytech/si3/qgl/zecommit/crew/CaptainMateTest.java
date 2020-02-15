@@ -1,5 +1,7 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import fr.unice.polytech.si3.qgl.zecommit.Game;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
@@ -43,7 +45,7 @@ public class CaptainMateTest {
 
         entities = Arrays.asList(new Entity[]{o1,o2});
         sailors = Arrays.asList(new Sailor[]{s1,s2});
-        ship = new Ship(100,new Position(0, 0, 0),"boat",new Deck(4, 10),entities,new Rectangle(4, 10, 0));
+        ship = new Ship("ship",100,new Position(0, 0, 0),"boat",new Deck(4, 10),entities,new Rectangle(4, 10, 0));
     }
 
     @Test
@@ -98,7 +100,7 @@ public class CaptainMateTest {
         entities.add(new Sail(4, 2,false));
         this.entities = new ArrayList<>(entities);
         this.sailors = new ArrayList<>(sailors);
-        ship = new Ship(100, new Position(0, 0, 0), "boat", new Deck(4, 10), this.entities, new Rectangle(4, 10, 0));
+        ship = new Ship("ship", 100, new Position(0, 0, 0), "boat", new Deck(4, 10), this.entities, new Rectangle(4, 10, 0));
         captainMate.initAttibuteEntityToSailors(this.sailors, ship);
         assertTrue(entities.get(0).hasSailorOn());
         assertEquals(entities.get(0), sailors.get(1).getEntity());
@@ -114,6 +116,7 @@ public class CaptainMateTest {
         assertEquals(entities.get(5), sailors.get(3).getEntity());
     }
 
+
     @Test
     void initMoveSailorFirstStepTest() {
         captainMate.initAttibuteEntityToSailors(sailors, ship);
@@ -128,7 +131,7 @@ public class CaptainMateTest {
         Sailor s3 = new Sailor(2, 4, 2, "barbe");
         List<Entity> oars = Arrays.asList(new Entity[] { o4 });
         List<Sailor> sailors = Arrays.asList(new Sailor[] { s3 });
-        ship = new Ship(100, new Position(0, 0, 0), "boat", new Deck(4, 10), oars, new Rectangle(4, 10, 0));
+        ship = new Ship("ship",100, new Position(0, 0, 0), "boat", new Deck(4, 10), oars, new Rectangle(4, 10, 0));
         captainMate.initAttibuteEntityToSailors(sailors, ship);
         captainMate.initMoveSailor(sailors);
         assertTrue(s3.hasEntity());

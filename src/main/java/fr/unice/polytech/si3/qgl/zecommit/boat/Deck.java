@@ -1,18 +1,19 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.DeckDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.PositionDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 
 /**
  * @author Loic Bertolotto
  */
+@JsonDeserialize(using = DeckDeserializer.class)
 public class Deck{
-    @JsonProperty("width")private int width;
-    @JsonProperty("length")private int length;
+    private int width;
+    private int length;
 
-    @JsonCreator
-    public Deck(@JsonProperty("width")int width,@JsonProperty("length") int length){
+    public Deck(int width,int length){
         this.width = width;
         this.length = length;
     }

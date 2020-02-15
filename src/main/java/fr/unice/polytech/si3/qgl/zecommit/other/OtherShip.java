@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
@@ -10,15 +9,15 @@ import java.util.List;
 
 public class OtherShip extends VisibleEntitie {
 
-    @JsonProperty("type")private String type;
-    @JsonProperty("life")private int life;
-    @JsonProperty("position")private Position position;
-    @JsonProperty("name")private String name;
-    @JsonProperty("deck")private Deck deck;
-    @JsonProperty("entities")private List<Entity> entities;
-    @JsonProperty("shape")private Shape shape;
+    private String type;
+    private int life;
+    private Position position;
+    private String name;
+    private Deck deck;
+    private List<Entity> entities;
+    private Shape shape;
 
-    public OtherShip(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
+    public OtherShip(int life, Position position, String name,Deck deck, List<Entity> entities,Shape shape){
         super(position, shape);
         this.type = "ship";
         this.life = life;
