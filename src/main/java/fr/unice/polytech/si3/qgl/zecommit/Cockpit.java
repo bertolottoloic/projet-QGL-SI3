@@ -22,10 +22,8 @@ public class Cockpit implements ICockpit {
 	 */
 	public void initGame(String jsonInitGame) {
 		try {
-
 			setGameInfo(Parser.parseInitGame(jsonInitGame));
 			initCaptain();
-
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
 		}
@@ -35,7 +33,6 @@ public class Cockpit implements ICockpit {
 		String res;
 		try {
 			updateGame(Parser.parseNextRound(jsonNextRound));
-			updateCaptain();
 
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
@@ -90,12 +87,7 @@ public class Cockpit implements ICockpit {
 		game.setShip(nextRound.getShip());
 		game.setVisibleEntities(nextRound.getVisibleEntities());
 		game.setWind(nextRound.getWind());
-	}
-
-	/**
-	 * Met à jour l'objet Game du Captain
-	 */
-	public void updateCaptain() {
 		captain.setGame(game);
 	}
+
 }

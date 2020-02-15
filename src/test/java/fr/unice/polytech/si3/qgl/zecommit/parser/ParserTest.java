@@ -3,9 +3,13 @@ package fr.unice.polytech.si3.qgl.zecommit.parser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -99,6 +103,17 @@ class ParserTest {
         assertEquals(new Position(0,0,0),ship.getPosition());
         assertEquals(100, ship.getLife());
         assertEquals("Les copaings d'abord!",ship.getName());
+    }
+
+    @Test
+    void parserInitGameTestSailors() {
+        List<Sailor> sailors = initGame.getSailors();
+        //Sailor s1 = sailors.get(0);
+        //Sailor s2 = sailors.get(1);
+
+        //assertEquals("Edward Teach",s1.getName());
+        //assertEquals("Tom Pouce", s2.getName());
+        System.out.println(sailors);
     }
 
 

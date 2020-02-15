@@ -15,7 +15,7 @@ public class InitGame  {
     private List<Sailor> sailors;
     private int shipCount;
 
-    public InitGame(Goal goal, Ship ship, List sailors, int shipCount) {
+    public InitGame(Goal goal, Ship ship, List<Sailor> sailors, int shipCount) {
         this.goal = goal;
         this.ship = ship;
         this.sailors = sailors;
