@@ -2,14 +2,10 @@ package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
-<<<<<<< HEAD
 import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
-=======
->>>>>>> c22a28556e96154585b0e01df3ae8a71adfb4418
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
 import java.util.ArrayList;
 import java.util.List;
