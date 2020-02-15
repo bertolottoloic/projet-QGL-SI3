@@ -89,7 +89,7 @@ public class EngineSettings {
         this.sailors.add(new Sailor(1,0,1,"paul"));
         this.sailors.add(new Sailor(2,1,0,"jacques"));
         this.sailors.add(new Sailor(3,1,1,"pierre"));
-        //this.sailors.add(new Sailor(4,0,0,"Vincent"));
+        this.sailors.add(new Sailor(4,0,0,"Vincent"));
 
 
     }
@@ -100,8 +100,8 @@ public class EngineSettings {
 
     public void setCheckpoints() {
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(-200,1000,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(500,1100,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1000,0,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1000,1000,0), new Circle(50)));
 
     }
 

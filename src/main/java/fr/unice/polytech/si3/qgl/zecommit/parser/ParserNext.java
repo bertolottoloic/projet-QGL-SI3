@@ -88,6 +88,7 @@ public class ParserNext {
             //System.out.println("No shape : "+e.toString());
         }
 
+        ship.putSailorOnDeck(game.getSailors());
         game.setShip(ship);
 
         // Création des visibleEntities

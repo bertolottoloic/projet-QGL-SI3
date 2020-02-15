@@ -10,6 +10,7 @@ import fr.unice.polytech.si3.qgl.zecommit.action.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Loic Bertolotto
@@ -106,6 +107,11 @@ public class Deck{
         return oarsList;
     }
 
+    @JsonIgnore
+    public List<Oar> getUsedOars(){
+        return oars.stream().filter(oar -> oar.hasSailorOn() && oar.getSailorOn().isOnEntity()).collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         return  "width : "+this.width+
@@ -113,9 +119,15 @@ public class Deck{
     }
 
     public boolean isLeft(Oar oar){
-        if (oar.getY()<width/2)
-            return true;
-        return false;
+        return (oar.getY()<width/2);
+    }
+
+    public boolean isLeft(Sailor sailor){
+        return (sailor.getY()<width/2);
+    }
+
+    public boolean isRight(Sailor sailor){
+        return (sailor.getY() >= ((width / 2) + (width % 2)));
     }
     //------------------------------GETTER-------------------------//
 

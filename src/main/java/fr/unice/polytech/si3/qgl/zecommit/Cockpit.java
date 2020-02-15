@@ -3,8 +3,10 @@ package fr.unice.polytech.si3.qgl.zecommit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
-import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
+// import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
+import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainBis;
+// import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
+import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMateBis;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
@@ -14,15 +16,14 @@ import java.util.List;
 
 public class Cockpit implements ICockpit {
 	Game game;
-	CaptainMate captainMate;
-	Captain captain;
+	CaptainMateBis captainMate;
+	CaptainBis captain;
 
 	public void initGame(String json) {
 		ParserInit parserInit = new ParserInit();
 		try {
 			this.game=parserInit.parserInitGame(json);
-			this.captainMate= new CaptainMate(game);
-			this.captain= new Captain(game,captainMate);
+			this.captainMate= new CaptainMateBis(game);
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
 		}
@@ -37,11 +38,9 @@ public class Cockpit implements ICockpit {
 		}
 		try {
 			parserNext.parserNextRound(round, game);
-			captain.refreshGame(game);
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
-				captain.actions();
-				actions = captainMate.getActionList();
+				actions = captainMate.actions(game);
 			}
 			Output output = new Output();
 			res = output.afficheRound(actions);

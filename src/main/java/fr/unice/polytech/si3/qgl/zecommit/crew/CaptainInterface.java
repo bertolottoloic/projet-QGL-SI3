@@ -16,4 +16,6 @@ public interface CaptainInterface{
 
     public List<Sailor> doLowerSail();
 
+    public boolean pursueGame();
+
 }

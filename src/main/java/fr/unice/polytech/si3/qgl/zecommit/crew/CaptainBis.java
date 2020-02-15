@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.stream.Collectors;
 
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
@@ -23,6 +24,7 @@ public class CaptainBis implements CaptainInterface {
     private Ship ship;
     private Deck deck;
     private Regatta goal;
+    OrientationTable orientationTable;
 
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
@@ -31,6 +33,7 @@ public class CaptainBis implements CaptainInterface {
         this.ship = game.getShip();
         this.deck = ship.getDeck();
         this.goal= (Regatta) game.getGoal();
+        this.orientationTable = new OrientationTable(deck.getOars().size());
 
         this.leftSailorList=new ArrayList<>();
         this.rightSailorList=new ArrayList<>();
@@ -75,17 +78,21 @@ public class CaptainBis implements CaptainInterface {
 
     @Override
     public List<Sailor> doActivateOars() {
+        if(ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size()>1) {
+            goal.validateCommonCheckpoint();
+            Logs.add("Checkpoint done");
+        }
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        int chosenAngle = findClosestPossibleAngle(road.orientationToGoal(),deck.getOars().size());
+        int chosenAngle = road.findClosestPossibleAngle(deck.getOars().size());
         return decisionOrientation(road,chosenAngle);
     }
 
     @Override
     public SimpleEntry<Sailor, Double> doTurn() {
-        // Activation du gouvernail
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+        double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(deck.getOars().size()));
         if (deck.getRudder() != null && deck.getRudder().hasSailorOn())
-            return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),road.orientationToGoal());
+            return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),angle);
         return null;
     }
 
@@ -97,6 +104,12 @@ public class CaptainBis implements CaptainInterface {
     @Override
     public List<Sailor> doLowerSail() {
         return new ArrayList<Sailor>();
+    }
+
+    @Override
+    public boolean pursueGame() {
+        boolean z = !ship.isInCheckpoint(goal.getFirstCheckpoint());
+        return !ship.isInCheckpoint(goal.getFirstCheckpoint());
     }
 
 
@@ -129,7 +142,7 @@ public class CaptainBis implements CaptainInterface {
         // Activation des marins de droite
         int r = 0;
         while (r < compo.getSailorsRight()) {
-            usedSailors.add(rightSailorList.get(l));
+            usedSailors.add(rightSailorList.get(r));
 
             //toOar(rightSailorList.get(r), (Oar) rightSailorList.get(r).getEntity());
             r++;
@@ -141,26 +154,21 @@ public class CaptainBis implements CaptainInterface {
            // toTurn(deck.getRudder().getSailorOn(), deck.getRudder(), angle);
     }
 
-    public ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
-        OrientationTable orientationTable = new OrientationTable(deck.getOars().size());
+    private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
         Logs.add(chosenAngle +"");
-
         boolean isNear = road.yDistanceToGoal() < (165-((Regatta)goal).getFirstCheckpoint().getCircleRadius());
         boolean upSail = upSail();
+        rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
-
-        if(road.orientationToGoal()>-Math.PI/4 && road.orientationToGoal()<Math.PI/4){
-            chosenAngle = findClosestPossibleAngle(0,deck.getOars().size()); //on donne l'ordre aller tout droit, le gouvernail gère les virages
-        }
-
-        //activateSail(upSail, isNear);//Activation de la voile
 
         if(!isNear){//si le bateau est loin
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
         }
         else
            return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
+        
     }
 
     /**
@@ -172,58 +180,29 @@ public class CaptainBis implements CaptainInterface {
         return false;
     }
 
-//////////////////////////////////CALCUL/////////////////////////
-    /**
-     * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
-     */
-    public int findClosestPossibleAngle(double angleToReach,int oarsNb){
-        double step = Math.PI/(2*oarsNb);
-        int res = 0;
-        for (int k = 0; k<2*oarsNb; k ++){
-
-            if(k*step-Math.PI/2 <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 )
-
-                res = k;
-        }
-        if(turnAroundLeft(angleToReach))
-            return oarsNb;
-        if(turnAroundRight(angleToReach))
-            return 0;
-
-        if(res==0)
-            return 0;
-        if(res==2*oarsNb-1)
-            return oarsNb;
-        else
-            return (res+1)/2;
+    public void refreshData(Game game){
+        this.ship = game.getShip();
+        this.deck = ship.getDeck();
     }
 
-    /**
-     * demi tour gauche ?
-     * @return
-     */
-    public boolean turnAroundLeft(Double angle){
-        if(angle > Math.PI/2 && angle <= Math.PI)
-            return true;
-        return false;
-    }
-
-
-    /**
-     * demi tour droite ?
-     * @return
-     */
-    public boolean turnAroundRight(Double angle){
-        if(angle < -Math.PI/2 && angle > -Math.PI)
-            return true;
-        return false;
-    }
-////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////// GETTER ////////////////////////////////////////////
 
     public Deck getDeck(){
         return this.deck;
     }
+
+    public Goal getGoal(){
+        return this.goal;
+    }
+
+    /**
+     * @return the ship
+     */
+    public Ship getShip() {
+        return ship;
+    }
+
+
 
 }

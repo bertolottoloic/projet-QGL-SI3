@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.*;
+
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
@@ -72,6 +74,10 @@ public class Ship {
      */
     public double distanceTo(Position position) {
         return Math.sqrt(Math.pow(this.getXPosition() - position.getX(),2) + Math.pow(this.getYPosition() - position.getY(),2));
+    }
+
+    public void putSailorOnDeck(List<Sailor> sailors){
+        deck.setSailors(sailors);
     }
 
 
