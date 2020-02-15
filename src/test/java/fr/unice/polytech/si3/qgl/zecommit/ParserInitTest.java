@@ -84,7 +84,7 @@ class ParserInitTest {
                 "}";
 
 
-        jsonString2= "{\n" +
+        jsonString2 = "{\n" +
                 "  \"ship\": {\n" +
                 "    \"type\": \"ship\",\n" +
                 "    \"life\": 100,\n" +
@@ -114,37 +114,17 @@ class ParserInitTest {
                 "  \"visibleEntities\": []\n" +
                 "}";
 
-        
+
     }
 
-    @Test
-    @Disabled
-    void parserInitGameTest() throws JsonProcessingException {
-        ParserInit parserInit = new ParserInit();
-        Game game = parserInit.parserInitGame(jsonString);
-        assertEquals("REGATTA", game.getGoal().getMode());
-        assertEquals(2, game.getSailors().size());
-        assertEquals(2,game.getShip().getEntities().size());
-        assertEquals(EntityType.OAR, game.getShip().getEntities().get(0).getType());
-        assertEquals(1, game.getShipCount());
-        assertEquals("Tom Pouce", game.getSailors().get(1).getName());
-    }
 
     @Test
-
     void parserInitGame2Test() throws JsonProcessingException {
         InitGame initGame = Parser.parseInitGame(jsonString);
 
     }
-
-    @Test
-    @Disabled
-    void parserNextRound() throws JsonProcessingException {
-        Game game =  new Game();
-        ParserNext parserNext = new ParserNext();
-        parserNext.parserNextRound(jsonString2, game);
-        assertEquals(game.getShip().getPosition().getX(), 10.654);
-    }
 }
+
+
 
 

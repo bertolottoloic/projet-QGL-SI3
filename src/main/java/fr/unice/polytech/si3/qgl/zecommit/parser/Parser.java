@@ -13,12 +13,13 @@ public class Parser {
         return mapper.readValue(JsonString, InitGame.class);
     }
 
-    /*
-    public static NextRoundGame parseInitGame(String JsonString) {
+
+    public static NextRound parseNextRound(String JsonString) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapper.readValue(jsonString, NextRoundGame.class);
+
+        return mapper.readValue(JsonString, NextRound.class);
     }
 
-     */
+
 }

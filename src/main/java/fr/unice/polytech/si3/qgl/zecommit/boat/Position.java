@@ -8,6 +8,8 @@ package fr.unice.polytech.si3.qgl.zecommit.boat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.PositionDeserializer;
 
+import java.util.Objects;
+
 @JsonDeserialize(using = PositionDeserializer.class)
 public class Position {
 
@@ -56,4 +58,19 @@ public class Position {
 
     //-------------------------------------------------------------//
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Double.compare(position.x, x) == 0 &&
+                Double.compare(position.y, y) == 0 &&
+                Double.compare(position.orientation, orientation) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, orientation);
+    }
 }

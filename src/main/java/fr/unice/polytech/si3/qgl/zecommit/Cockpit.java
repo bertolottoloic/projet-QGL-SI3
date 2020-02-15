@@ -16,51 +16,43 @@ public class Cockpit implements ICockpit {
 	CaptainMate captainMate;
 	Captain captain;
 
-	public void initGame(String json) {
-		ParInit parserInit = new ParInit();
+	/**
+	 * Construit Game Captain et CaptainMate
+	 * @param jsonInitGame
+	 */
+	public void initGame(String jsonInitGame) {
 		try {
-			this.game=parserInit.parse(json);
-			this.captainMate= new CaptainMate();
-			this.captain= new Captain(game,captainMate);
+			setGameInfo(Parser.parseInitGame(jsonInitGame));
+			initCaptain();
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
 		}
 	}
 
-	public void initGameBis(String json) {
-		try {
-			setGameInfo(Parser.parseInitGame(json));
-			setCaptain();
-		} catch (JsonProcessingException e) {
-			Logs.add("Erreur Parseur InitGame");
-		}
-	}
-
-	public String nextRound(String round) {
+	public String nextRound(String jsonNextRound) {
 		String res;
-		ParNext parNext = new ParNext();
-
-		if(round.equals("{}")) {
-			return "[ ]";
-		}
 		try {
-			parNext.parse(round);
-			captain.refreshGame(game);
+			updateGame(Parser.parseNextRound(jsonNextRound));
+			updateCaptain();
+
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
 				captain.actions();
 				actions = captainMate.getActionList();
 			}
+
 			Output output = new Output();
 			res = output.afficheRound(actions);
+
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur nextRound");
 			res = "[ ]";
 		}
-		
-		return res; 
 
+		res = "";
+		return res;
 	}
+
 
 	@Override
 	public List<String> getLogs() {
@@ -73,15 +65,35 @@ public class Cockpit implements ICockpit {
 	 * @param initGame
 	 */
 	public void setGameInfo(InitGame initGame) {
-		this.game = new Game();
+		game = new Game();
 		game.setGoal(initGame.getGoal());
 		game.setShip(initGame.getShip());
 		game.setSailors(initGame.getSailors());
 		game.setShipCount(initGame.getShipCount());
 	}
 
-	public void setCaptain() {
+	/**
+	 * Création du CaptainMate et du Captain
+	 */
+	public void initCaptain() {
 		this.captainMate= new CaptainMate();
 		this.captain= new Captain(game,captainMate);
+	}
+
+	/**
+	 * Met à jour l'objet Game
+	 * @param nextRound
+	 */
+	public void updateGame(NextRound nextRound) {
+		game.setShip(nextRound.getShip());
+		game.setVisibleEntities(nextRound.getVisibleEntities());
+		game.setWind(nextRound.getWind());
+	}
+
+	/**
+	 * Met à jour l'objet Game du Captain
+	 */
+	public void updateCaptain() {
+		captain.setGame(game);
 	}
 }

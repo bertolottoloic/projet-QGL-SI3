@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+/*
 public class OtherShipDeserializer extends JsonDeserializer {
     @Override
     public OtherShip deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
@@ -41,4 +41,7 @@ public class OtherShipDeserializer extends JsonDeserializer {
         
         return new OtherShip(node.get("life").asInt(), position, node.get("name").asText(), deck, listEntitie, shape);
     }
+
+
 }
+*/
