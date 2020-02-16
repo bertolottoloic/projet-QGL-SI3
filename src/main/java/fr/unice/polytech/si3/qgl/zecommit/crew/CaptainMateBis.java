@@ -40,7 +40,7 @@ public class CaptainMateBis {
     }
 
     public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
-        if(sailorAndAngle!=null){
+        if(sailorAndAngle!=null && sailorAndAngle.getValue()!=0.0){
             double angle = sailorAndAngle.getValue();
             if(angle>0) 
                 angle = Math.min(Math.PI/4, angle);

@@ -42,22 +42,24 @@ public class CaptainBis implements CaptainInterface {
     public void attributeEntitiesToSailors() {
         List<Sailor> sailors = deck.getSailors();
         sailors.forEach(s -> s.reinitializeEntity());
-        List<Sailor> sailorTmp = new ArrayList<>(sailors);
+        List<Sailor> sailorsTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>(deck.getOars());
-        sailorTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
+        sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
         Sailor sailor;
-        if (sailorTmp.size() % 2 != 0 && deck.getRudder() != null) {
-            sailor = sailorTmp.remove(sailorTmp.size() - 1);
-            sailor.setOnEntity(deck.getRudder());
+        if(sailorsTmp.size()>4){
+            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(deck.getRudder());
+            if(sailorsTmp.size()%2>0 && !deck.getSails().isEmpty()){
+                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(deck.getSails().get(0));
+            }
         }
-        for (Sailor tmp : sailorTmp) {
+        for (Sailor tmp : sailorsTmp) {
             deck.getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
             Oar closestOar = deck.getOars().get(0);
             if (!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar) <= 5 && !tmp.hasEntity()) {
                 tmp.setOnEntity(closestOar);
             }
         }
-        for (Sailor tmp : sailorTmp) {
+        for (Sailor tmp : sailorsTmp) {
             deck.getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
             for (Oar oar : deck.getOars()) {
                 if (!oar.hasSailorOn() && !tmp.hasEntity()) {
@@ -147,7 +149,7 @@ public class CaptainBis implements CaptainInterface {
 
     private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
         Logs.add(chosenAngle +"");
-        boolean isNear = road.yDistanceToGoal() < (165-((Regatta)goal).getFirstCheckpoint().getCircleRadius());
+        boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
         boolean upSail = upSail();
         rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
