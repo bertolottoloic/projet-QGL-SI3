@@ -102,10 +102,13 @@ public class EngineSettings {
 
     public void setCheckpoints() {
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(1000,0,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(1000,1000,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(500,2000,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(0,0,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(-200,1000,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(500,1100,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(50,-1100,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(-1000,75,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(300,300,0), new Circle(50)));
+
+
 
     }
 
@@ -273,7 +276,12 @@ public class EngineSettings {
         int balanced= rightSailors.size()-leftSailors.size();
         currentOrientation+=(balanced*gap/n);
         currentOrientation+=rotation/n;
-
+        if(currentOrientation<-Math.PI){
+            currentOrientation=2*Math.PI+currentOrientation;
+        }
+        if(currentOrientation>Math.PI){
+            currentOrientation=-2*Math.PI+currentOrientation;
+        }
         ship.setPosition(new Position(x,y,currentOrientation));
         checkCheckpoints();
     }
