@@ -110,9 +110,7 @@ public class Captain {
      * @return
      */
     public boolean turnAroundLeft(Double angle){
-        if(angle > Math.PI/2 && angle <= Math.PI)
-            return true;
-        return false;
+            return (angle > Math.PI/2 && angle <= Math.PI);
     }
 
 
@@ -121,9 +119,7 @@ public class Captain {
      * @return
      */
     public boolean turnAroundRight(Double angle){
-        if(angle < -Math.PI/2 && angle > -Math.PI)
-            return true;
-        return false;
+        return (angle < -Math.PI/2 && angle > -Math.PI);
     }
 
 

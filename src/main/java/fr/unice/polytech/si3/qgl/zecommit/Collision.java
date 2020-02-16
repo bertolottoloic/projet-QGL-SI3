@@ -120,7 +120,8 @@ public class Collision {
      * @return
      */
     public boolean isInTriangle(Point a, Point b, Point c, Point m) {
-        double t, tp;
+        double t;
+        double tp;
 
         double d = b.getX() - a.getX();
         double e = c.getX() - a.getX();

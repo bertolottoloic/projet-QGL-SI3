@@ -67,11 +67,10 @@ public class CaptainMate {
         List<Entity> oars = new ArrayList<>();
         oars.addAll(ship.getOars());
         sailorsTmp.sort(Comparator.comparingInt(a->a.distanceToNearestEntity(oars)));
-        Sailor sailor;
         if(sailorsTmp.size()>4){
             sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getRudder());
             if(sailorsTmp.size()%2>0 && !ship.getSails().isEmpty()){
-                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getSails().get(0));;      
+                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getSails().get(0));
             }
         }
 

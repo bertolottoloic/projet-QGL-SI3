@@ -18,15 +18,7 @@ public class Logs {
         myLogs.add(s);
     }
 
-    public static List<String> sortie(){
-        List<String> shortLogs = new ArrayList<>();
-        if(myLogs.size()>=200) {
-            for(int i = 0; i<198; i++)
-                shortLogs.add(myLogs.get(i));
-            shortLogs.add("... Short Logs ...");
-            return shortLogs;
-        }
-        else
-            return myLogs ;
-        }
+    public static List<String> sortie() {
+        return myLogs;
+    }
 }

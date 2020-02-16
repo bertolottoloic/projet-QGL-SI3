@@ -3,13 +3,10 @@ package fr.unice.polytech.si3.qgl.zecommit.boat;
 import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
-import javax.swing.text.MutableAttributeSet;
 import java.util.ArrayList;
 import java.util.List;
 
