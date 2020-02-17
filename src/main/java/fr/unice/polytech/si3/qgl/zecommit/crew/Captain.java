@@ -1,270 +1,201 @@
-// package fr.unice.polytech.si3.qgl.zecommit.crew;
+package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-// import fr.unice.polytech.si3.qgl.zecommit.*;
-// import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
-// import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
-// import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
-// import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-// import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
-// import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-// import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
-// import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
-// import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
-// import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.stream.Collectors;
 
-// import java.util.ArrayList;
-// import java.util.HashMap;
-// import java.util.List;
-// import java.util.AbstractMap.SimpleEntry;
+import fr.unice.polytech.si3.qgl.zecommit.Game;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
-// /**
-//  * @author Clement P
-//  *
-//  * Classe qui definit le capitaine
-//  * Le capitaine se charge de la decision.
-//  */
+public class Captain implements CaptainInterface {
 
-// public class Captain implements CaptainInterface{
-//     private Ship ship;
-//     private Regatta regatta;
-//     private List<Sailor> sailorList;
-//     private int sailorsNb;
-//     private List<Oar> oarList;
-//     private int oarsNb;
-//     private CaptainMate captainMate;
-//     boolean initGame=true;
-//     private List<Sailor> rightSailorList;
-//     private List<Sailor> leftSailorList;
+    private Ship ship;
+    private Deck deck;
+    private Regatta goal;
+    OrientationTable orientationTable;
+
+    private List<Sailor> rightSailorList;
+    private List<Sailor> leftSailorList;
+
+    public Captain(Game game) {
+        this.ship = game.getShip();
+        this.deck = ship.getDeck();
+        this.goal= (Regatta) game.getGoal();
+        this.orientationTable = new OrientationTable(deck.getOars().size());
+
+        this.leftSailorList=new ArrayList<>();
+        this.rightSailorList=new ArrayList<>();
+    }
+
+    @Override
+    public void attributeEntitiesToSailors() {
+        List<Sailor> sailors = deck.getSailors();
+        sailors.forEach(s -> s.reinitializeEntity());
+        List<Sailor> sailorsTmp = new ArrayList<>(sailors);
+        List<Entity> oars = new ArrayList<>(deck.getOars());
+        sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
+        Sailor sailor;
+        if(sailorsTmp.size()>4){
+            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(deck.getRudder());
+            if(sailorsTmp.size()%2>0 && !deck.getSails().isEmpty()){
+                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(deck.getSails().get(0));
+            }
+        }
+        for (Sailor tmp : sailorsTmp) {
+            deck.getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
+            Oar closestOar = deck.getOars().get(0);
+            if (!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar) <= 5 && !tmp.hasEntity()) {
+                tmp.setOnEntity(closestOar);
+            }
+        }
+        for (Sailor tmp : sailorsTmp) {
+            deck.getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
+            for (Oar oar : deck.getOars()) {
+                if (!oar.hasSailorOn() && !tmp.hasEntity()) {
+                    tmp.setOnEntity(oar);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public List<Sailor> doMoveSailors() {
+        if (!deck.sailorsAreOnTheirEntity())
+            return deck.getSailors();
+        return new ArrayList<Sailor>();
+    }
+
+    @Override
+    public List<Sailor> doActivateOars() {
+        if(ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size()>1) {
+            goal.validateCommonCheckpoint();
+            Logs.add("Checkpoint done");
+        }
+        Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+        int chosenAngle = road.findClosestPossibleAngle(deck.getOars().size());
+        return decisionOrientation(road,chosenAngle);
+    }
+
+    @Override
+    public SimpleEntry<Sailor, Double> doTurn() {
+        Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+        double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(deck.getOars().size()));
+        if (deck.getRudder() != null && deck.getRudder().hasSailorOn())
+            return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),angle);
+        return null;
+    }
+
+    @Override
+    public List<Sailor> doLiftSail() {
+        return new ArrayList<Sailor>();
+    }
+
+    @Override
+    public List<Sailor> doLowerSail() {
+        return new ArrayList<Sailor>();
+    }
+
+    @Override
+    public boolean pursueGame() {
+        return !(ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size()-1)) && goal.getCheckpoints().size()==1);
+    }
 
 
 
-//     public Captain(Game game, CaptainMate cM) {//TODO à embellir
-//         this.ship = game.getShip();
-//         this.regatta = (Regatta) game.getGoal();
-//         this.sailorList = new ArrayList<>(game.getSailors());
-//         this.sailorsNb = sailorList.size();
-//         this.captainMate = cM;
-//         this.oarList = ship.getDeck().getOars();
-//         this.oarsNb = ship.getDeck().getOars().size();
-//         Logs.add("oarsNb:"+oarsNb);
-//     }
+    /**
+     * Met a jour les informations du capitaine récupérées par le parseurNext
+     * @param game
+     */
+    public void refreshGame(Game game){
+        ship=game.getShip();
+        this.deck.setOars( ship.getDeck().getOars());
+    }
 
 
-//     /**
-//      * main du capitaine
-//      */
-//     public void actions() {
-//         captainMate.getActionList().removeAll(captainMate.getActionList());
+    /**
+     * Effectue l'ordre d'activation des marins aux rames et au gouvernail
+     *
+     * @param compo
+     */
+    public ArrayList<Sailor> activateSailors(Compo compo, double angle) {
+        ArrayList<Sailor> usedSailors= new ArrayList<>();
+        // Activation des marins de gauche
+        int l = 0;
+        while (l < compo.getSailorsLeft()) {
+            usedSailors.add(leftSailorList.get(l));
+            l++;
+        }
 
-//         if(ship.isInCheckpoint(regatta.getFirstCheckpoint()) && regatta.getCheckpoints().size()>1) {
-//             regatta.validateCommonCheckpoint();
-//             Logs.add("Checkpoint done");
-//         }
+        // Activation des marins de droite
+        int r = 0;
+        while (r < compo.getSailorsRight()) {
+            usedSailors.add(rightSailorList.get(r));
+            r++;
+        }
+        return usedSailors;
+    }
 
+    private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
+        Logs.add(chosenAngle +"");
+        boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
+        boolean upSail = upSail();
+        rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        int nbSailorsRight = rightSailorList.size();
+        int nbSailorsLeft = leftSailorList.size();
+
+        if(!isNear){//si le bateau est loin
+            return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
+        }
+        else
+           return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
         
-//         captainMate.initAttibuteOarToSailors(sailorList, ship);
-//         initGame=false;
-        
+    }
 
-//         if(!captainMate.sailorsAreOnTheirEntity(sailorList)) {
-//             captainMate.initMoveSailor(sailorList);
-//         }
-//         else {
-//             if (!ship.isInCheckpoint(regatta.getFirstCheckpoint())) {
-//                 refreshSailorsListPosition();
-//                 Road road = new Road(ship.getPosition(), regatta.getFirstCheckpoint().getPosition());
-//                 int chosenAngle = findClosestPossibleAngle(road.orientationToGoal());
-//                 Logs.add(ship.getPosition().getOrientation() + " - " + chosenAngle + "");
-//                 Logs.add(ship.getPosition().toString());
-//                 decisionOrientation(road, chosenAngle);
-//             }
-//         }
-//     }
+    /**
+     * Méthode indiquant quand activer la voile
+     * @return
+     */
+    public boolean upSail(){
+        //TODO condition permettant de lever la voile
+        return false;
+    }
 
-//     /**
-//      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
-//      */
-//     public int findClosestPossibleAngle(double angleToReach){
-//         double step = Math.PI/(2*oarsNb);
-//         int res = 0;
-//         for (int k = 0; k<2*oarsNb; k ++){
-
-//             if(k*step-Math.PI/2 <= angleToReach && angleToReach <= (k+1)*step-Math.PI/2 )
-
-//                 res = k;
-//         }
-//         if(turnAroundLeft(angleToReach))
-//             return oarsNb;
-//         if(turnAroundRight(angleToReach))
-//             return 0;
-
-//         if(res==0)
-//             return 0;
-//         if(res==2*oarsNb-1)
-//             return oarsNb;
-//         else
-//             return (res+1)/2;
-//     }
-
-//     /**
-//      * demi tour gauche ?
-//      * @return
-//      */
-//     public boolean turnAroundLeft(Double angle){
-//         if(angle > Math.PI/2 && angle <= Math.PI)
-//             return true;
-//         return false;
-//     }
+    public void refreshData(Game game){
+        this.ship = game.getShip();
+        this.deck = ship.getDeck();
+    }
 
 
-//     /**
-//      * demi tour droite ?
-//      * @return
-//      */
-//     public boolean turnAroundRight(Double angle){
-//         if(angle < -Math.PI/2 && angle > -Math.PI)
-//             return true;
-//         return false;
-//     }
+    ////////////////////// GETTER ////////////////////////////////////////////
 
+    public Deck getDeck(){
+        return this.deck;
+    }
 
-//     public void decisionOrientation(Road road, int chosenAngle){
-//         OrientationTable orientationTable = new OrientationTable(oarsNb);
-//         Logs.add(chosenAngle +"");
+    public Goal getGoal(){
+        return this.goal;
+    }
 
-//         boolean isNear = road.yDistanceToGoal() < (165-regatta.getFirstCheckpoint().getCircleRadius());
-//         boolean upSail = upSail();
-//         int nbSailorsRight = rightSailorList.size();
-//         int nbSailorsLeft = leftSailorList.size();
-
-//         if(road.orientationToGoal()>-Math.PI/4 && road.orientationToGoal()<Math.PI/4){
-//             chosenAngle = findClosestPossibleAngle(0); //on donne l'ordre aller tout droit, le gouvernail gère les virages
-//         }
-
-//         //activateSail(upSail, isNear);//Activation de la voile
-
-//         if(!isNear){//si le bateau est loin
-//             activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
-//         }
-//         else
-//             activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
-//     }
-
-//     /**
-//      * Transmet l'ordre d'activation des marins au second
-//      * @param compo
-//      */
-//     public void activateSailors(Compo compo, double angle){
-//         Logs.add(compo.toString());
-//         captainMate.activateSailors(compo, angle);
-//     }
-//     /**
-//      * Transmet l'ordre d'activation de la voile au second
-//      */
-//     public void activateSail(boolean upSail, boolean isNear, Sail sail){
-//         if(!isNear && upSail)
-//             captainMate.activateLiftSail(sail);
-//         else {
-//             captainMate.activateLowerSail(sail);
-//         }
-//     }
-
-
-//     /**
-//      * Méthode indiquant quand activer la voile
-//      * @return
-//      */
-//     public boolean upSail(){
-//         //TODO condition permettant de lever la voile
-//         return false;
-//     }
+    /**
+     * @return the ship
+     */
+    public Ship getShip() {
+        return ship;
+    }
 
 
 
-
-
-//     /**
-//      * Tri les differentes entites donnees et les ajoute a la liste correspondante
-//      */
-//     public void sortEntities(List<Entity> entityList){
-//         for (Entity entity : entityList){
-//             if (entity.getType().equals(EntityType.OAR)) {
-//                 this.oarList.add((Oar) entity);
-//             }
-//         }
-//     }
-
-//     /**
-//      * Met a jour les informations du capitaine récupérées par le parseurNext
-//      * @param game
-//      */
-//     public void refreshGame(Game game){
-//         ship=game.getShip();
-//         this.oarList = ship.getDeck().getOars();
-//     }
-
-//     public void refreshSailorsListPosition(){
-//         this.rightSailorList = captainMate.getRightSailors();
-//         this.leftSailorList = captainMate.getLeftSailors();
-//     }
-
-//     //---------------------------GETTER-----------------------------------------
-
-
-//     public List<Sailor> getSailorList() {
-//         return sailorList;
-//     }
-
-
-//     public Regatta getRegatta() {
-//         return regatta;
-//     }
-
-//     public Ship getShip() {
-//         return ship;
-//     }
-
-//     public int getOarsNb() {
-//         return oarsNb;
-//     }
-
-//     //-------------------------SETTER------------------------------
-
-
-
-//     @Override
-//     public List<Sailor> doMoveSailors() {
-
-//         return null;
-//     }
-
-//     @Override
-//     public List<Sailor> doActivateOars() {
-//         // TODO Auto-generated method stub
-//         return null;
-//     }
-
-//     @Override
-//     public SimpleEntry<Sailor, Double> doTurn() {
-//         // TODO Auto-generated method stub
-//         return null;
-//     }
-
-//     @Override
-//     public List<Sailor> doLiftSail() {
-//         // TODO Auto-generated method stub
-//         return null;
-//     }
-
-//     @Override
-//     public List<Sailor> doLowerSail() {
-//         // TODO Auto-generated method stub
-//         return null;
-//     }
-
-//     @Override
-//     public void attributeEntitiesToSailors() {
-//         // TODO Auto-generated method stub
-
-//     }
-// }
+}
