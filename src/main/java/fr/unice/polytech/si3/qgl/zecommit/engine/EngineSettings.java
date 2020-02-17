@@ -81,7 +81,7 @@ public class EngineSettings {
     }
 
     public void setWind(){
-        this.wind=new Wind(Math.PI,100);
+        this.wind=new Wind(0,50);
     }
 
     public void setSailors() {
@@ -102,23 +102,39 @@ public class EngineSettings {
 
     public void setCheckpoints() {
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(-200,1000,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(500,1100,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1600,350,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(345,1550,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(0,0,0), new Circle(70)));
 
     }
 
     public void setDeck() {
-        this.deck=new Deck(2,4);
+        this.deck=new Deck(5,11);
     }
 
     public void setEntities() {
         this.entities= new ArrayList<>();
         this.entities.add(new Oar(1,0));
-        this.entities.add(new Oar(1,1));
         this.entities.add(new Oar(2,0));
-        this.entities.add(new Rudder(2,1));
-        this.entities.add(new Oar(3,1));
-        this.entities.add(new Sail(3,2,false));
+        this.entities.add(new Oar(3,0));
+        this.entities.add(new Oar(4,0));
+        this.entities.add(new Oar(5,0));
+        this.entities.add(new Oar(6,0));
+        this.entities.add(new Oar(7,0));
+        this.entities.add(new Oar(8,0));
+        this.entities.add(new Oar(9,0));
+        this.entities.add(new Oar(1,4));
+        this.entities.add(new Oar(2,4));
+        this.entities.add(new Oar(3,4));
+        this.entities.add(new Oar(4,4));
+        this.entities.add(new Oar(5,4));
+        this.entities.add(new Oar(6,4));
+        this.entities.add(new Oar(7,4));
+        this.entities.add(new Oar(8,4));
+        this.entities.add(new Oar(9,4));
+        this.entities.add(new Rudder(10,4));
+        
+        this.entities.add(new Sail(5,2,false));
     }
 
     public void setShape() {
