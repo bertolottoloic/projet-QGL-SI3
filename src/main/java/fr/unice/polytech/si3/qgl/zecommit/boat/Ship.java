@@ -110,6 +110,10 @@ public class Ship {
         }
     }
 
+    public boolean hasSail(){
+        return !sails.isEmpty();
+    }
+
     /**
      * Methode qui calcule la distance d'une position par rapport au bateau
      * @param position
