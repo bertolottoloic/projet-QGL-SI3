@@ -44,7 +44,7 @@ public class Rectangle extends Polygone {
 
     @JsonProperty("length")
     @JsonIgnore
-    public double getlength() {
+    public double getLength() {
         return height;
     }
 

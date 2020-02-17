@@ -42,6 +42,13 @@ public abstract class Shape {
         return type;
     }
 
+    @JsonIgnore
+    public double getRadius() {
+        if(isCircle)
+            return this.getRadius();
+        return ((Rectangle)this).getHeight()/2;
+    }
+
     //------------------------SETTER----------------------//
 
     @JsonProperty("type")

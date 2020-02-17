@@ -7,9 +7,7 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
-
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
