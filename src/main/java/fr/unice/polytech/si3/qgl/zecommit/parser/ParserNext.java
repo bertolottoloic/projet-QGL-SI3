@@ -127,6 +127,8 @@ public class ParserNext {
 
         }
         catch (InvalidDefinitionException e){
+            Wind wind = new Wind(0, 0);
+            game.setWind(wind);
             Logs.add("PB5");
         }
 

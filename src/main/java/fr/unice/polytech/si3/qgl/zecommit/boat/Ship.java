@@ -111,7 +111,7 @@ public class Ship {
     }
 
     public boolean hasSail(){
-        return sails.isEmpty();
+        return !sails.isEmpty();
     }
 
     /**
