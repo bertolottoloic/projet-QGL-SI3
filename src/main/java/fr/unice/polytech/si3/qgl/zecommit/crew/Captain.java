@@ -173,9 +173,7 @@ public class Captain {
      * @return
      */
     public boolean upSail(){
-        if(wind != null && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())>0 && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())<Math.PI/2)
-            return true;
-        return false;
+        return (wind != null && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())>0 && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())<Math.PI/2);
     }
 
 
