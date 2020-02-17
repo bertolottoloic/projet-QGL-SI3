@@ -137,7 +137,8 @@ public class Captain {
             chosenAngle = findClosestPossibleAngle(0); //on donne l'ordre aller tout droit, le gouvernail gère les virages
         }
 
-        //activateSail(upSail, isNear);//Activation de la voile
+        if(ship.hasSail())
+            activateSail(upSail, isNear, ship.getSails());//Activation de la voile
 
         if(!isNear){//si le bateau est loin
             activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
@@ -158,11 +159,11 @@ public class Captain {
      * Transmet l'ordre d'activation de la voile au second
      */
 
-    public void activateSail(boolean upSail, boolean isNear, Sail sail){
+    public void activateSail(boolean upSail, boolean isNear, List<Sail> sails){
         if(!isNear && upSail)
-            captainMate.activateLiftSail(sail);
+            captainMate.activateLiftSail(sails.get(0));
         else {
-            captainMate.activateLowerSail(sail);
+            captainMate.activateLowerSail(sails.get(0));
         }
     }
 
@@ -172,7 +173,8 @@ public class Captain {
      * @return
      */
     public boolean upSail(){
-        //TODO condition permettant de lever la voile
+        if(Math.abs(ship.getPosition().getOrientation()-wind.getStrength())>0 && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())<Math.PI/2)
+            return true;
         return false;
     }
 
