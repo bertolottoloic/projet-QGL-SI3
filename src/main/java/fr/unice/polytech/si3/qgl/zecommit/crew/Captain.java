@@ -160,10 +160,11 @@ public class Captain {
      */
 
     public void activateSail(boolean upSail, boolean isNear, List<Sail> sails){
-        if(!isNear && upSail)
+        if(!isNear && upSail && !sails.get(0).isOpenned())
             captainMate.activateLiftSail(sails.get(0));
         else {
-            captainMate.activateLowerSail(sails.get(0));
+            if(sails.get(0).isOpenned())
+                captainMate.activateLowerSail(sails.get(0));
         }
     }
 
