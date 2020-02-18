@@ -132,7 +132,7 @@ public class ParserInit {
                 throw new IllegalStateException("Unexpected value: " + shapeShipN.asText());
         }
 
-
+        ship.putSailorOnDeck(game.getSailors());
         game.setShip(ship);
 
 

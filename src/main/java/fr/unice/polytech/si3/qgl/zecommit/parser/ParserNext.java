@@ -18,6 +18,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ParserNext {
     public void parserNextRound(String jsonString, Game game)  throws JsonProcessingException {
@@ -65,7 +66,13 @@ public class ParserNext {
         Deck deckShip = objectMapper.readValue(deckShipN.toString(), Deck.class);
 
         Ship ship;
-
+        listEntitie = listEntitie.stream().filter(ent -> ent.getType()==EntityType.SAIL).collect(Collectors.toList());
+        List<Sail> sails = game.getShip().getDeck().getSails();
+        for (Sail sail : sails) {
+            Sail sailTmp = (Sail) listEntitie.get(listEntitie.indexOf(sail));
+            sail.setOpenned(sailTmp.isOpenned());
+        }
+            
         JsonNode type = shapeShipN.path("type");
         try{
             switch (type.asText()) {
@@ -87,6 +94,7 @@ public class ParserNext {
             Logs.add("PB3");
         }
 
+        ship.putSailorOnDeck(game.getSailors());
         game.setShip(ship);
 
         // Création des visibleEntities

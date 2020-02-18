@@ -152,7 +152,7 @@ public class EngineSettings {
     }
 
     public void setShape() {
-        this.shape=new Rectangle(2,4,0);
+        this.shape=new Rectangle(5,11,0);
     }
 
 
@@ -301,7 +301,12 @@ public class EngineSettings {
         int balanced= rightSailors.size()-leftSailors.size();
         currentOrientation+=(balanced*gap/n);
         currentOrientation+=rotation/n;
-
+        if(currentOrientation<-Math.PI){
+            currentOrientation=2*Math.PI+currentOrientation;
+        }
+        if(currentOrientation>Math.PI){
+            currentOrientation=-2*Math.PI+currentOrientation;
+        }
         ship.setPosition(new Position(x,y,currentOrientation));
         checkCheckpoints();
     }
