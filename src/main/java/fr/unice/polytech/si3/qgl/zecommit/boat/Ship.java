@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import fr.unice.polytech.si3.qgl.zecommit.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
@@ -65,10 +66,6 @@ public class Ship {
         else{
             return true;
         }
-    }
-
-    public boolean hasSail(){
-        return !sails.isEmpty();
     }
 
     /**

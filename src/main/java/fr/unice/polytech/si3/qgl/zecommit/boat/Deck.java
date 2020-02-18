@@ -129,6 +129,10 @@ public class Deck{
     public boolean isRight(Sailor sailor){
         return (sailor.getY() >= ((width / 2) + (width % 2)));
     }
+
+    public boolean hasSail(){
+        return !sails.isEmpty();
+    }
     //------------------------------GETTER-------------------------//
 
     public int getWidth() {
