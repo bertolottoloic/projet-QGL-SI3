@@ -85,7 +85,6 @@ public class ParserNext {
         catch(IllegalStateException e){
             ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
             Logs.add("PB3");
-            //System.out.println("No shape : "+e.toString());
         }
 
         ship.putSailorOnDeck(game.getSailors());
@@ -125,12 +124,13 @@ public class ParserNext {
         JsonNode ventN = rootNode.path("wind");
         try {
             Wind wind = objectMapper.readValue(ventN.toString(), Wind.class);
-            game.setWind(objectMapper.readValue(wind.toString(), Wind.class));
+            game.setWind(wind);
 
         }
         catch (InvalidDefinitionException e){
+            Wind wind = new Wind(0, 0);
+            game.setWind(wind);
             Logs.add("PB5");
-            //System.out.println("No wind : "+e.toString());
         }
 
     }

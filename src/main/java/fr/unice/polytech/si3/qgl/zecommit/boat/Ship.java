@@ -14,6 +14,7 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
+
 /**
  * @author Loic Bertolotto
  */
@@ -27,8 +28,6 @@ public class Ship {
     @JsonProperty("shape")private Shape shape;
 
 
-
-
     @JsonCreator
     public Ship(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
         this.type = "ship";
@@ -39,6 +38,7 @@ public class Ship {
         this.deck.initDeck(entities);
         this.entities = entities;
         this.shape = shape;
+
     }
 
 
@@ -48,14 +48,12 @@ public class Ship {
      * @param checkpoint
      * @return boolean
      */
-    public boolean isInCheckpoint(Checkpoint checkpoint) { //TODO à corriger
-        //cas avec un cercle
-        if (checkpoint.isCircle() && this.distanceTo(checkpoint.getPosition()) < checkpoint.getCircleRadius()) {
-            //Si le centre du bateau est dans le CP
-            return true;
-        }
-        return false;
+    public boolean isInCheckpoint(Checkpoint checkpoint) {
+        Collision collision = new Collision(checkpoint.getShape(), checkpoint.getPosition(), position);
+        return collision.collide();
     }
+
+
 
     public boolean isInFrontOfCheckpoint(Checkpoint checkpoint){
         Position cpPosition=checkpoint.getPosition();
@@ -67,6 +65,10 @@ public class Ship {
         else{
             return true;
         }
+    }
+
+    public boolean hasSail(){
+        return !sails.isEmpty();
     }
 
     /**
@@ -93,7 +95,6 @@ public class Ship {
                 "\n entities : "+this.entities+
                 "\n shape : "+this.shape;
     }
-
 
 
     //--------------------GETTER -------------------------//
@@ -144,6 +145,7 @@ public class Ship {
     public double getYPosition() {
         return this.getPosition().getY();
     }
+
 
 
     //------------------------------SETTER-------------------------//

@@ -9,11 +9,14 @@ import java.util.stream.Collectors;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
+
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
@@ -24,9 +27,9 @@ public class Captain implements CaptainInterface {
     private Deck deck;
     private Regatta goal;
     OrientationTable orientationTable;
-
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
+    private Wind wind;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -68,6 +71,7 @@ public class Captain implements CaptainInterface {
             }
         }
 
+
     }
 
     @Override
@@ -95,6 +99,7 @@ public class Captain implements CaptainInterface {
         if (deck.getRudder() != null && deck.getRudder().hasSailorOn())
             return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),angle);
         return null;
+
     }
 
     @Override
@@ -121,6 +126,7 @@ public class Captain implements CaptainInterface {
     public void refreshGame(Game game){
         ship=game.getShip();
         this.deck.setOars( ship.getDeck().getOars());
+
     }
 
 
@@ -138,6 +144,7 @@ public class Captain implements CaptainInterface {
             l++;
         }
 
+
         // Activation des marins de droite
         int r = 0;
         while (r < compo.getSailorsRight()) {
@@ -150,6 +157,7 @@ public class Captain implements CaptainInterface {
     private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
         Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
+
         boolean upSail = upSail();
         rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
@@ -162,6 +170,7 @@ public class Captain implements CaptainInterface {
         else
            return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
         
+
     }
 
     /**
@@ -169,8 +178,7 @@ public class Captain implements CaptainInterface {
      * @return
      */
     public boolean upSail(){
-        //TODO condition permettant de lever la voile
-        return false;
+        return (wind != null && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())>0 && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())<Math.PI/2);
     }
 
     public void refreshData(Game game){

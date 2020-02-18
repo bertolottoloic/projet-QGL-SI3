@@ -14,14 +14,17 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+
 
 public class CaptainMateTest {
 
     Sailor sailor1;
     // CaptainMate captainMate;
     Ship ship;
-    List<Entity> oars;
+    List<Entity> entities;
     List<Sailor> sailors;
     Game game;
 
@@ -37,9 +40,9 @@ public class CaptainMateTest {
         Sailor s1 = new Sailor(0, 2, 0, "Pouce");
         Sailor s2 = new Sailor(1, 1, 0, "Teach");
 
-        oars = Arrays.asList(new Entity[]{o1,o2});
+        entities = Arrays.asList(new Entity[]{o1,o2});
         sailors = Arrays.asList(new Sailor[]{s1,s2});
-        ship = new Ship(100,new Position(0, 0, 0),"boat",new Deck(4, 10),oars,new Rectangle(4, 10, 0));
+        ship = new Ship(100,new Position(0, 0, 0),"boat",new Deck(4, 10),entities,new Rectangle(4, 10, 0));
     }
 
     // @Test
@@ -105,5 +108,12 @@ public class CaptainMateTest {
     //     assertTrue(o4.hasSailorOn());
     //     assertEquals(o4, s3.getEntity());
     // }
+
+
+    @Test
+    void toLiftSailTest() {
+        Sail sail = new Sail(1,1, false);
+
+    }
 
 }

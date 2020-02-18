@@ -29,6 +29,7 @@ public class CaptainMate {
                 if (sailor.hasEntity() && !sailor.isOnEntity()) {
                     actions.add(captain.getDeck().moveSailor(sailor, sailor.getEntity().getX() - sailor.getX(),
                             sailor.getEntity().getY() - sailor.getY()));
+
                 }
             }
         }
@@ -37,6 +38,7 @@ public class CaptainMate {
     public void activateOars(List<Sailor> sailors) {
         if(!sailors.isEmpty())
             sailors.forEach(sailor -> actions.add(new ToOar(sailor.getId())));
+
     }
 
     public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
@@ -81,6 +83,7 @@ public class CaptainMate {
             toLowerSail(captain.doLowerSail());
         }
         return this.actions;
+
     }
 
     public void refreshData(Game game){

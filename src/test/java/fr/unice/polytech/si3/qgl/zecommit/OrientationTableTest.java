@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
+import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -102,6 +103,32 @@ class OrientationTableTest {
         //PI/2
         assertEquals(0, orientationTable.getCompo(4, 0).getSailorsLeft()); // 0 marin à gauche
         assertEquals(2, orientationTable.getCompo(4, 0).getSailorsRight()); // 2 à droite
+
+    }
+
+
+    @Test
+    void getGoodCompoTest(){
+        Compo compo = new Compo(4,7);
+
+
+        Compo res = new Compo(1,4);
+
+        assertEquals(res.getSailorsRight(), orientationTable.getGoodCompo(compo, 4,3).getSailorsRight());
+        assertEquals(res.getSailorsLeft(), orientationTable.getGoodCompo(compo, 4,3).getSailorsLeft());
+
+    }
+
+
+    @Test
+    void getGoodCompoTest2(){
+        Compo compo = new Compo(5,2);
+
+
+        Compo res = new Compo(2,0);
+
+        assertEquals(res.getSailorsRight(), orientationTable.getGoodCompo(compo, 7,2).getSailorsRight());
+        assertEquals(res.getSailorsLeft(), orientationTable.getGoodCompo(compo, 7,2).getSailorsLeft());
 
     }
 }
