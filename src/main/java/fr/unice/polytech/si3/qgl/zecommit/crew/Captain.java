@@ -99,6 +99,7 @@ public class Captain implements CaptainInterface {
             return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),angle);
         return null;
 
+
     }
 
     @Override

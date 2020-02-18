@@ -32,6 +32,7 @@ public class CaptainMate {
                     actions.add(captain.getDeck().moveSailor(sailor, sailor.getEntity().getX() - sailor.getX(),
                             sailor.getEntity().getY() - sailor.getY()));
 
+
                 }
             }
         }

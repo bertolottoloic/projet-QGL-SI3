@@ -8,33 +8,33 @@ public class Polygone extends Shape {
     protected double orientation;
 
     @JsonProperty("vertexes")
-    protected Point[] vertexes;
+    protected Point[] vertices;
 
 
-    public Polygone(@JsonProperty("orientation")double orientation,@JsonProperty("vertexes")Point[] vertexes) {
+    public Polygone(@JsonProperty("orientation")double orientation,@JsonProperty("vertexes")Point[] vertices) {
         super(ShapeType.POLYGON);
         setCircle(false);
         this.orientation=orientation;
-        this.vertexes=vertexes;
+        this.vertices=vertices;
     }
 
     public Polygone(ShapeType type,double orientation,double width, double height) {
         super(type);
         setCircle(false);
         this.orientation=orientation;
-        this.vertexes=buildVertexes(type, width,height);
+        this.vertices=buildVertexes(type, width,height);
     }
 
 
     public Point[] buildVertexes(ShapeType type,double width, double height){
         Point[] points = new Point[0];
         if(type.equals(ShapeType.RECTANGLE)) {
-            points=vertexesRectangle(width,height);
+            points=verticesRectangle(width,height);
         }
         return points;
     }
 
-    private Point[] vertexesRectangle(double width, double height){
+    private Point[] verticesRectangle(double width, double height){
         Point[] points= new Point[4];
         points[0]= new Point(width/2,height/2);
         points[1]= new Point(-width/2,height/2);
@@ -55,7 +55,7 @@ public class Polygone extends Shape {
         return super.getType();
     }
 
-    public Point[] getVertexes() {
-        return vertexes;
+    public Point[] getVertices() {
+        return vertices;
     }
 }
