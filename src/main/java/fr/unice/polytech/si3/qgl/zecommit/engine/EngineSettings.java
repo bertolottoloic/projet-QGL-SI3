@@ -88,10 +88,24 @@ public class EngineSettings {
         this.sailors= new ArrayList<>();
         this.sailors.add(new Sailor(0,0,0,"jean"));
         this.sailors.add(new Sailor(1,0,1,"paul"));
-        this.sailors.add(new Sailor(2,1,0,"jacques"));
-        this.sailors.add(new Sailor(3,1,1,"pierre"));
-        this.sailors.add(new Sailor(4,0,0,"Vincent"));
-        this.sailors.add(new Sailor(5,3,1,"Joris"));
+        this.sailors.add(new Sailor(2,0,2,"jacques"));
+        this.sailors.add(new Sailor(3,0,3,"pierre"));
+        this.sailors.add(new Sailor(4,0,4,"Vincent"));
+        this.sailors.add(new Sailor(5,1,0,"Joris"));
+        this.sailors.add(new Sailor(6,1,1,"jean"));
+        this.sailors.add(new Sailor(7,1,2,"paul"));
+        this.sailors.add(new Sailor(8,1,3,"jacques"));
+        this.sailors.add(new Sailor(9,1,4,"pierre"));
+        this.sailors.add(new Sailor(10,2,0,"Vincent"));
+        this.sailors.add(new Sailor(11,2,1,"Joris"));
+        this.sailors.add(new Sailor(12,2,2,"jean"));
+        this.sailors.add(new Sailor(13,2,3,"paul"));
+        this.sailors.add(new Sailor(14,2,4,"jacques"));
+        this.sailors.add(new Sailor(15,3,0,"pierre"));
+        this.sailors.add(new Sailor(16,3,1,"Vincent"));
+        this.sailors.add(new Sailor(17,3,2,"Joris"));
+        this.sailors.add(new Sailor(18,3,3,"Joris"));
+        this.sailors.add(new Sailor(19,3,4,"Joris"));
 
 
     }

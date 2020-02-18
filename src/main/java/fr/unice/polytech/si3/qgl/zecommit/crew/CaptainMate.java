@@ -62,7 +62,7 @@ public class CaptainMate {
 
     public void initAttibuteEntityToSailors(List<Sailor> sailors, Ship ship){
         refreshGame(ship);
-        sailors.forEach(s->s.reinitializeEntity());
+        //sailors.forEach(s->s.reinitializeEntity());
         List<Sailor> sailorsTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>();
         oars.addAll(ship.getOars());

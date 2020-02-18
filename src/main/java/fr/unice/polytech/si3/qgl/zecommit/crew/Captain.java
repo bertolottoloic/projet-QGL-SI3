@@ -60,10 +60,10 @@ public class Captain {
             Logs.add("Checkpoint done");
         }
 
-        
-        captainMate.initAttibuteEntityToSailors(sailorList, ship);
-        initGame=false;
-        
+        if(initGame){
+            captainMate.initAttibuteEntityToSailors(sailorList, ship);
+            initGame=false;
+        } 
 
         if(!captainMate.sailorsAreOnTheirEntity(sailorList)) {
             captainMate.initMoveSailor(sailorList);
