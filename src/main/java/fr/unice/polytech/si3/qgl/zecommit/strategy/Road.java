@@ -90,9 +90,9 @@ public class Road {
      */
     public int findClosestPossibleAngle(int oarsNb){
         double angle;
+        angle = orientationToGoal();
         if(orientationToGoal()>-Math.PI/4 && orientationToGoal()<Math.PI/4)
             angle = 0;
-        angle = orientationToGoal();
         double step = Math.PI/(2*oarsNb);
         int res = 0;
         for (int k = 0; k<2*oarsNb; k ++){
