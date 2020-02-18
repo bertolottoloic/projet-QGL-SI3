@@ -44,7 +44,6 @@ public class Captain implements CaptainInterface {
     @Override
     public void attributeEntitiesToSailors() {
         List<Sailor> sailors = deck.getSailors();
-        sailors.forEach(s -> s.reinitializeEntity());
         List<Sailor> sailorsTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>(deck.getOars());
         sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));

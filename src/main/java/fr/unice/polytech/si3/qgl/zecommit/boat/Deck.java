@@ -44,7 +44,7 @@ public class Deck{
                 this.oars.add((Oar) entity);
             }
             if (entity.getType().equals(EntityType.RUDDER)) {
-                this.rudder=new Rudder(entity.getX(),entity.getY());
+                this.rudder=(Rudder)entity;
             }
             if (entity.getType().equals(EntityType.SAIL)) {
                 this.sails.add((Sail) entity);

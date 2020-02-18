@@ -18,6 +18,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ParserNext {
     public void parserNextRound(String jsonString, Game game)  throws JsonProcessingException {
@@ -65,25 +66,31 @@ public class ParserNext {
         Deck deckShip = objectMapper.readValue(deckShipN.toString(), Deck.class);
 
         Ship ship;
-
+        listEntitie = listEntitie.stream().filter(ent -> ent.getType()==EntityType.SAIL).collect(Collectors.toList());
+        List<Sail> sails = game.getShip().getDeck().getSails();
+        for (Sail sail : sails) {
+            Sail sailTmp = (Sail) listEntitie.get(listEntitie.indexOf(sail));
+            sail.setOpenned(sailTmp.isOpenned());
+        }
+            
         JsonNode type = shapeShipN.path("type");
         try{
             switch (type.asText()) {
                 case "rectangle":
                     Rectangle rectangleShip = objectMapper.readValue(shapeShipN.toString(), Rectangle.class);
-                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, rectangleShip);
+                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, game.getShip().getEntities(), rectangleShip);
                     break;
 
                 case "circle":
                     Circle circleShip = objectMapper.readValue(shapeShipN.toString(), Circle.class);
-                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, circleShip);
+                    ship = new Ship(lifeShip, positionShip, nameShip, deckShip, game.getShip().getEntities(), circleShip);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + shapeShipN.asText());
             }
         }
         catch(IllegalStateException e){
-            ship=new Ship(lifeShip, positionShip, nameShip, deckShip, listEntitie, null);
+            ship=new Ship(lifeShip, positionShip, nameShip, deckShip, game.getShip().getEntities(), null);
             Logs.add("PB3");
         }
 

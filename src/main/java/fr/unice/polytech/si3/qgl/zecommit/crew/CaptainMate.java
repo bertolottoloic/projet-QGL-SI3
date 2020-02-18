@@ -16,10 +16,12 @@ public class CaptainMate {
 
     Captain captain;
     List<Action> actions;
+    private boolean initGame;
 
     public CaptainMate(Game game) {
         this.captain = new Captain(game);
         this.actions = new ArrayList<>();
+        this.initGame = true;
     }
 
 
@@ -74,8 +76,11 @@ public class CaptainMate {
 
     public List<Action> actions(Game game){
         refreshData(game);
-        if(captain.pursueGame()){
+        if(this.initGame){
             captain.attributeEntitiesToSailors();
+            this.initGame = false;
+        }
+        if(captain.pursueGame()){
             moveSailorsToTheirEntity(captain.doMoveSailors());
             activateOars(captain.doActivateOars());
             toTurn(captain.doTurn());
