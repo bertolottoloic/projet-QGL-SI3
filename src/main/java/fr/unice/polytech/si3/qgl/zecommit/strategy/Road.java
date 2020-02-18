@@ -85,6 +85,56 @@ public class Road {
 
     }
 
+    /**
+     * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
+     */
+    public int findClosestPossibleAngle(int oarsNb){
+        double angle;
+        if(orientationToGoal()>-Math.PI/4 && orientationToGoal()<Math.PI/4)
+            angle = 0;
+        angle = orientationToGoal();
+        double step = Math.PI/(2*oarsNb);
+        int res = 0;
+        for (int k = 0; k<2*oarsNb; k ++){
+
+            if(k*step-Math.PI/2 <= angle && angle <= (k+1)*step-Math.PI/2 )
+
+                res = k;
+        }
+        if(turnAroundLeft())
+            return oarsNb;
+        if(turnAroundRight())
+            return 0;
+
+        if(res==0)
+            return 0;
+        if(res==2*oarsNb-1)
+            return oarsNb;
+        else
+            return (res+1)/2;
+    }
+
+    /**
+     * demi tour gauche ?
+     * @return
+     */
+    public boolean turnAroundLeft(){
+        if(orientationToGoal() > Math.PI/2 && orientationToGoal() <= Math.PI)
+            return true;
+        return false;
+    }
+
+
+    /**
+     * demi tour droite ?
+     * @return
+     */
+    public boolean turnAroundRight(){
+        if(orientationToGoal() < -Math.PI/2 && orientationToGoal() > -Math.PI)
+            return true;
+        return false;
+    }
+
 
 
     //------------------------GETTER----------------------------

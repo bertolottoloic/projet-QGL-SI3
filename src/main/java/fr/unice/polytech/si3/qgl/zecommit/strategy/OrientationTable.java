@@ -27,7 +27,7 @@ public class OrientationTable {
      * @return
      */
     ArrayList<Double> generateAngleTable(int oarsNb) {
-        ArrayList<Double> myAngleTable = new ArrayList();
+        ArrayList<Double> myAngleTable = new ArrayList<>();
 
         double borneSup =  Math.PI/2;
         double borneInf = -borneSup;

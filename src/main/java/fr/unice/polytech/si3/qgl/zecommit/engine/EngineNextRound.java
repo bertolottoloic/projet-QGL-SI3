@@ -5,10 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
-import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
-import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,15 +39,30 @@ public class EngineNextRound {
             if(textType.equals("TURN")) {
                 turnParser(id,current);
             }
+            if(textType.equals("LIFT_SAIL")) {
+                liftSail(id);
+            }
+            if(textType.equals("LOWER_SAIL")) {
+                lowerSail(id);
+            }
         }
 
 
-    return actionArrayList;
+        return actionArrayList;
     }
 
     public void oarParser(String id){
         ToOar toOar= new ToOar(Integer.parseInt(id));
         actionArrayList.add(toOar);
+    }
+
+    public void liftSail(String id){
+        LiftSail liftSail= new LiftSail(Integer.parseInt(id));
+        actionArrayList.add(liftSail);
+    }
+    public void lowerSail(String id){
+        LowerSail lowerSail= new LowerSail(Integer.parseInt(id));
+        actionArrayList.add(lowerSail);
     }
 
     public void movingParser(String id,JsonNode current){

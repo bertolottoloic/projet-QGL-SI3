@@ -4,6 +4,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
@@ -141,4 +142,6 @@ class ShipTest {
         assertFalse(ship.isInCheckpoint(checkpointCibleOut));
 
     }
+
+
 }

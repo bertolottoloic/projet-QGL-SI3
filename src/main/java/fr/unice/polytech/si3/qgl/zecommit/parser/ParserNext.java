@@ -87,6 +87,7 @@ public class ParserNext {
             Logs.add("PB3");
         }
 
+        ship.putSailorOnDeck(game.getSailors());
         game.setShip(ship);
 
         // Création des visibleEntities

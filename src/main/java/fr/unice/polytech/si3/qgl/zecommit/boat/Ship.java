@@ -1,14 +1,19 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-import com.fasterxml.jackson.annotation.*;
-import fr.unice.polytech.si3.qgl.zecommit.Collision;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Loic Bertolotto
@@ -21,10 +26,6 @@ public class Ship {
     @JsonProperty("deck")private Deck deck;
     @JsonProperty("entities")private List<Entity> entities;
     @JsonProperty("shape")private Shape shape;
-    @JsonIgnore private List<Oar> oars;
-    @JsonIgnore private Rudder rudder;
-    @JsonIgnore private List<Sail> sails;
-
 
 
     @JsonCreator
@@ -34,56 +35,12 @@ public class Ship {
         this.position = position;
         this.name = name;
         this.deck = deck;
+        this.deck.initDeck(entities);
         this.entities = entities;
         this.shape = shape;
-        createOarlist();
-        sortOars();
-        createRudder();
-        createSail();
+
     }
 
-    private void createRudder(){
-        entities.forEach(entity ->
-        {
-            if(entity.getType().equals(EntityType.RUDDER)){
-                rudder=(Rudder)entity;
-            }
-        });
-    }
-    private void createSail(){
-        this.sails = new ArrayList<>();
-        entities.forEach(entity ->
-        {
-            if(entity.getType().equals(EntityType.SAIL)){
-                this.sails.add((Sail)entity);
-            }
-        });
-    }
-
-    private void createOarlist(){
-        this.oars = new ArrayList<>();
-        entities.forEach(entity->
-        {
-            if(entity.getType().equals(EntityType.OAR))
-                this.oars.add((Oar)entity);
-        });
-    }
-
-    /**
-     * Tri la liste de rames de façon à alterner les rames de gauches et de droites.
-     */
-    private void sortOars(){
-        List<Oar> oarsLeft = getLeftOars();
-        List<Oar> oarsRight = getRightOars();
-        List<Oar> oarsSort = new ArrayList<>();
-        for(int i=0;i<Math.max(oarsLeft.size(),oarsRight.size());i++){
-            if(i<oarsLeft.size())
-                oarsSort.add(oarsLeft.get(i));
-            if(i<oarsRight.size())
-                oarsSort.add(oarsRight.get(i));
-        }
-        this.oars=oarsSort;
-    }
 
     /**
      * Méthode permettant de savoir si un bateau est arrivé dans le checkpoint
@@ -121,6 +78,10 @@ public class Ship {
      */
     public double distanceTo(Position position) {
         return Math.sqrt(Math.pow(this.getXPosition() - position.getX(),2) + Math.pow(this.getYPosition() - position.getY(),2));
+    }
+
+    public void putSailorOnDeck(List<Sailor> sailors){
+        deck.setSailors(sailors);
     }
 
 
@@ -185,55 +146,6 @@ public class Ship {
         return this.getPosition().getY();
     }
 
-    @JsonIgnore
-    public List<Oar> getOars(){
-        return this.oars;
-    }
-
-    @JsonIgnore
-    public int getOarsNb() {
-        return oars.size();
-    }
-
-    @JsonIgnore
-    public Rudder getRudder() {
-        return rudder;
-    }
-
-
-    @JsonIgnore
-    /**
-     * 
-     * @return la liste des rames à gauche du bateau.
-     */
-    public List<Oar> getLeftOars(){
-        ArrayList<Oar> oarsList = new ArrayList<>();
-        this.oars.forEach(oar->
-        {
-            if(deck.isLeft(oar))
-                oarsList.add(oar);
-        });
-        return oarsList;
-    }
-
-    @JsonIgnore
-    /**
-     * 
-     * @return la liste des rames à droite du bateau.
-     */
-    public List<Oar> getRightOars(){
-        ArrayList<Oar> oarsList = new ArrayList<>();
-        this.oars.forEach(oar->
-        {
-            if(!deck.isLeft(oar))
-                oarsList.add(oar);
-        });
-        return oarsList;
-    }
-
-    public List<Sail> getSails(){
-        return sails;
-    }
 
 
     //------------------------------SETTER-------------------------//
