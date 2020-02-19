@@ -20,6 +20,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EngineSettings {
     Goal goal;
@@ -51,11 +52,16 @@ public class EngineSettings {
     Rudder rudder;
     @JsonIgnore
     Wind wind;
+    @JsonIgnore
+    ArrayList<Wind> winds;
+    @JsonIgnore
+    Random random= new Random();
 
 
     EngineSettings(){
         this.oarArrayList=new ArrayList<>();
         this.sailArrayList=new ArrayList<>();
+        this.winds=new ArrayList<>();
         this.oM = new ObjectMapper();
         setCheckpoints();
         setGoal();
@@ -67,10 +73,14 @@ public class EngineSettings {
         setVisibleEntities();
         sortEntities();
         setWind();
+        changeWind();
 
     }
 
-    //--------------------SETTINGS-------------------//
+    /**
+     * --------------------SETTINGS-------------------
+     *
+     * */
 
     public void setShip() {
         this.ship= new Ship(100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
@@ -81,7 +91,9 @@ public class EngineSettings {
     }
 
     public void setWind(){
-        this.wind=new Wind(0,50);
+        this.winds.add(new Wind(0,50));
+        this.winds.add(new Wind(12,38));
+        this.winds.add(new Wind(7,89));
     }
 
     public void setSailors() {
@@ -156,7 +168,11 @@ public class EngineSettings {
     }
 
 
-    ///////////////////////////////////////: ENGINE : ///////////////////////////////////////:
+   /**
+    *
+    * ENGINE :
+    * */
+
 
     public String thisToJson(){
         try{
@@ -182,6 +198,7 @@ public class EngineSettings {
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
         rotation=0;
+        changeWind();
         for (Action action: actions) {
             if(action.getType()== ActionType.MOVING){
                 engineMoving((Moving) action);
@@ -296,6 +313,11 @@ public class EngineSettings {
         double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
 
+        ship.setPosition(new Position(x,y,angleCalcul()));
+        checkCheckpoints();
+    }
+
+    public double angleCalcul(){
         double currentOrientation=ship.getPosition().getOrientation();
         double gap= Math.PI/(oarArrayList.size());
         int balanced= rightSailors.size()-leftSailors.size();
@@ -307,8 +329,7 @@ public class EngineSettings {
         if(currentOrientation>Math.PI){
             currentOrientation=-2*Math.PI+currentOrientation;
         }
-        ship.setPosition(new Position(x,y,currentOrientation));
-        checkCheckpoints();
+        return currentOrientation;
     }
 
     public void checkCheckpoints(){
@@ -316,6 +337,10 @@ public class EngineSettings {
             System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
             checkpoints.remove(0);
         }
+    }
+
+    public void changeWind(){
+        wind=winds.get(random.nextInt(winds.size()));
     }
 
     public void sortEntities(){
