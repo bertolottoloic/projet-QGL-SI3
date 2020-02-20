@@ -26,7 +26,7 @@ public class Collision {
 
     public boolean collide(){
         //cas avec un cercle
-        if (shape1.isCircle() && distanceTo(shapePosition, shipPosition) < shape1.getRadius()) {
+        if (shape1.isCircle() && distanceTo() < shape1.getRadius()) {
             //Si le centre du bateau est dans le CP
             return true;
         }
@@ -152,15 +152,12 @@ public class Collision {
 
     /**
      * Methode qui calcule la distance d'une position par rapport au bateau
-     * @param position1,
-     * @param position2
      * @return
      */
     //TODO : duplicate method => A refactorer
-    public double distanceTo(Position position1, Position position2) {
-        return Math.sqrt(Math.pow(position1.getX() - position2.getX(),2) + Math.pow(position1.getY() - position2.getY(),2));
+    public double distanceTo() {
+        return Math.sqrt(Math.pow(shapePosition.getX() - shipPosition.getX(),2) + Math.pow(shapePosition.getY() - shipPosition.getY(),2));
     }
-
 
 
 }

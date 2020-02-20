@@ -14,6 +14,10 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.zecommit.visible.Current;
+import fr.unice.polytech.si3.qgl.zecommit.visible.OtherShip;
+import fr.unice.polytech.si3.qgl.zecommit.visible.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -100,7 +104,7 @@ public class ParserNext {
         // Création des visibleEntities
         try {
             Iterator<JsonNode> iterator = nodeShip.path("visibleEntities").iterator();
-            List<VisibleEntitie> visibleEntities = new ArrayList<>();
+            List<VisibleEntity> visibleEntities = new ArrayList<>();
             while (iterator.hasNext()) {
                 JsonNode current = iterator.next();
                 JsonNode typeVisibleEntities = current.path("type");

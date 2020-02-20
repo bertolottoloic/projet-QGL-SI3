@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.zecommit.parser.ParserInit;
 import fr.unice.polytech.si3.qgl.zecommit.parser.ParserNext;
 import fr.unice.polytech.si3.qgl.zecommit.shape.ShapeType;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -135,6 +136,7 @@ class ParserInitTest {
     }
 
     @Test
+    @Disabled
     void parserNextRound() throws JsonProcessingException {
         Game game =  new Game();
         ParserNext parserNext = new ParserNext();

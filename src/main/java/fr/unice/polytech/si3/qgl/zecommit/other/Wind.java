@@ -17,6 +17,14 @@ public class Wind {
         this.strength = strength;
     }
 
+    @Override
+    public String toString() {
+        return "Wind{" +
+                "orientation=" + orientation +
+                ", strength=" + strength +
+                '}';
+    }
+
     //------------------------------GETTER-------------------------//
 
     public double getOrientation() {
