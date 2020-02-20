@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.other;
+package fr.unice.polytech.si3.qgl.zecommit.visible;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
@@ -8,9 +8,8 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.List;
 
-public class OtherShip extends VisibleEntitie {
+public class OtherShip extends VisibleEntity {
 
-    @JsonProperty("type")private String type;
     @JsonProperty("life")private int life;
     @JsonProperty("position")private Position position;
     @JsonProperty("name")private String name;
@@ -19,8 +18,7 @@ public class OtherShip extends VisibleEntitie {
     @JsonProperty("shape")private Shape shape;
 
     public OtherShip(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
-        super(position, shape);
-        this.type = "ship";
+        super(VisibleEntityType.OTHERSHIP,position, shape);
         this.life = life;
         this.name = name;
         this.deck = deck;
@@ -30,9 +28,6 @@ public class OtherShip extends VisibleEntitie {
 
     //--------------------GETTER -------------------------//
 
-    public String getType() {
-        return type;
-    }
 
     public int getLife() {
         return life;
@@ -63,10 +58,6 @@ public class OtherShip extends VisibleEntitie {
 
     //--------------------SETTER -------------------------//
 
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public void setLife(int life) {
         this.life = life;

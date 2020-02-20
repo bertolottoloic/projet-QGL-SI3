@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.other;
+package fr.unice.polytech.si3.qgl.zecommit.visible;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,15 +23,18 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 /**
  * @author Nathan
  */
-public abstract class VisibleEntitie {
+public abstract class VisibleEntity {
     @JsonProperty("position")
-    Position position;
+    private Position position;
     @JsonProperty("shape")
     private Shape shape;
+    @JsonProperty("type")
+    private VisibleEntityType type;
 
-    public VisibleEntitie (@JsonProperty("position") Position position,@JsonProperty("shape") Shape shape){
+    public VisibleEntity(@JsonProperty("type") VisibleEntityType type, @JsonProperty("position") Position position, @JsonProperty("shape") Shape shape){
         this.position=position;
         this.shape=shape;
+        this.type=type;
     }
     //------------------------------GETTER-------------------------//
 
@@ -43,6 +46,11 @@ public abstract class VisibleEntitie {
     public Shape getShape() {
         return shape;
     }
+
+    public VisibleEntityType getType() {
+        return type;
+    }
+
     //------------------------------SETTER-------------------------//
 
 
@@ -52,5 +60,9 @@ public abstract class VisibleEntitie {
 
     public void setShape(Shape shape) {
         this.shape = shape;
+    }
+
+    public void setType(VisibleEntityType type) {
+        this.type = type;
     }
 }
