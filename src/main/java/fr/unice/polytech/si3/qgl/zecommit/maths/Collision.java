@@ -86,7 +86,7 @@ public class Collision {
      * @param rectangle
      * @return
      */
-    public List<Point> determineRectanglePoints(Rectangle rectangle, Position position ){
+    public static List<Point> determineRectanglePoints(Rectangle rectangle, Position position ){
         ArrayList<Point> res = new ArrayList<>();
 
         double angle = rectangle.getOrientation(); // l'orientation du rectangle

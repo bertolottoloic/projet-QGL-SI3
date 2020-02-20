@@ -17,7 +17,7 @@ public class OtherShip extends VisibleEntity {
         this.life = life;
 
     }
-    
+
 
     //--------------------GETTER -------------------------//
 

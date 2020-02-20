@@ -22,6 +22,7 @@ public class Polygone extends Shape {
         super(type);
         setCircle(false);
         this.orientation=orientation;
+        //TODO points rectangle
         this.vertices=buildVertexes(type, width,height);
     }
 
