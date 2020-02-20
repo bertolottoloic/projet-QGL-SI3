@@ -51,7 +51,7 @@
 					<execution>
 						<phase>test</phase>
 						<goals>
-							<goal>mutationCovergae</goal>
+							<goal>mutationCoverage</goal>
 						</goals>
 					</execution>
 				</executions>
