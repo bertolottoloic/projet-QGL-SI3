@@ -3,7 +3,6 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.unice.polytech.si3.qgl.zecommit.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
@@ -12,6 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.visible.Current;
 import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
@@ -329,10 +329,20 @@ public class EngineSettings {
         return null;
     }
 
+    public double calculCurrent(){
+        Current current =getCurrentOn();
+        if(current!=null){
+            return current.getStrength()*(Math.max(ship.getPosition().getOrientation(),current.getPosition().getOrientation())
+                    /Math.min(ship.getPosition().getOrientation(),current.getPosition().getOrientation()));
+        }
+        else return 0;
+    }
+
     public void calcul(){
 
         double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/oarArrayList.size();
         vitesse+=calculWind();
+        //vitesse+=calculCurrent();
 
         double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();

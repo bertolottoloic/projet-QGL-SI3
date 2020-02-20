@@ -17,9 +17,9 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 
 public class Captain implements CaptainInterface {
 

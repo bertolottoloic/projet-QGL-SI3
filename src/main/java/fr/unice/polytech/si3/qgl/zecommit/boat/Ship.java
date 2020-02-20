@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import fr.unice.polytech.si3.qgl.zecommit.Collision;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 
 
 /**
