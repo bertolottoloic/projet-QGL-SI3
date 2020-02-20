@@ -112,7 +112,7 @@ public class CaptainMateTest {
 
 
     @Test
-    void toLiftSailTest() {
+    public void toLiftSailTest() {
         Sail sail = new Sail(1,1, false);
 
     }
