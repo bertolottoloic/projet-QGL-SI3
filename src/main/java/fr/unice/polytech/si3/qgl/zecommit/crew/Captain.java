@@ -39,6 +39,7 @@ public class Captain implements CaptainInterface {
 
         this.leftSailorList=new ArrayList<>();
         this.rightSailorList=new ArrayList<>();
+        this.wind=game.getWind();
     }
 
     @Override

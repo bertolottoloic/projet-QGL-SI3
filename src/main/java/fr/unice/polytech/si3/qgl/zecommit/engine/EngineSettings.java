@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import fr.unice.polytech.si3.qgl.zecommit.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
@@ -12,10 +13,13 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.visible.Current;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntityType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +34,7 @@ public class EngineSettings {
     ArrayList<Entity> entities;
     Shape shape;
     ArrayList<Sailor> sailors;
-    ArrayList<Entity> visibleEntities;
+    ArrayList<VisibleEntity> visibleEntities;
     @JsonIgnore
     private ObjectMapper oM;
     ///////////////////////////:
@@ -55,6 +59,10 @@ public class EngineSettings {
     @JsonIgnore
     ArrayList<Wind> winds;
     @JsonIgnore
+    ArrayList<Current> currents;
+    @JsonIgnore
+    ArrayList<VisibleEntity> visibles;
+    @JsonIgnore
     Random random= new Random();
 
 
@@ -62,6 +70,8 @@ public class EngineSettings {
         this.oarArrayList=new ArrayList<>();
         this.sailArrayList=new ArrayList<>();
         this.winds=new ArrayList<>();
+        this.currents= new ArrayList<>();
+        this.visibles=new ArrayList<>();
         this.oM = new ObjectMapper();
         setCheckpoints();
         setGoal();
@@ -71,6 +81,7 @@ public class EngineSettings {
         setShape();
         setShip();
         setVisibleEntities();
+        sortVisibleEntities();
         sortEntities();
         setWind();
         changeWind();
@@ -88,6 +99,8 @@ public class EngineSettings {
 
     public void setVisibleEntities() {
         this.visibleEntities=new ArrayList<>();
+        this.visibleEntities.add(new Current(new Position(0,100,0),new Rectangle(100,50,0),100));
+
     }
 
     public void setWind(){
@@ -187,7 +200,7 @@ public class EngineSettings {
     public String thisToJson2(){
         try{
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
-            return oM.writeValueAsString(new EngineSettingsNextRound(ship,visibleEntities,wind));
+            return oM.writeValueAsString(new EngineSettingsNextRound(ship,visibles,wind));
         } catch(IOException e ) {
             System.err.println(e);
             return "{}";
@@ -199,6 +212,7 @@ public class EngineSettings {
         leftSailors=new ArrayList<>();
         rotation=0;
         changeWind();
+        giveVisibleEntities();
         for (Action action: actions) {
             if(action.getType()== ActionType.MOVING){
                 engineMoving((Moving) action);
@@ -305,6 +319,16 @@ public class EngineSettings {
         return value/n;
     }
 
+    public Current getCurrentOn(){
+        for (VisibleEntity entity: visibleEntities) {
+            Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
+            if(entity.getType()==VisibleEntityType.CURRENT &&collision.collide()){
+                return (Current) entity;
+            }
+        }
+        return null;
+    }
+
     public void calcul(){
 
         double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/oarArrayList.size();
@@ -314,6 +338,7 @@ public class EngineSettings {
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
 
         ship.setPosition(new Position(x,y,angleCalcul()));
+        //System.out.println(ship.getPosition());
         checkCheckpoints();
     }
 
@@ -353,6 +378,26 @@ public class EngineSettings {
             }
             if (entity.getType().equals(EntityType.SAIL)) {
                 this.sailArrayList.add((Sail) entity);
+            }
+        }
+    }
+    public void sortVisibleEntities(){
+        for (VisibleEntity entity : visibleEntities){
+            if (entity.getType().equals(VisibleEntityType.CURRENT)) {
+                this.currents.add((Current) entity);
+            }
+            if (entity.getType().equals(VisibleEntityType.OTHERSHIP)) {
+            }
+            if (entity.getType().equals(VisibleEntityType.REEF)) {
+            }
+        }
+    }
+
+    public void giveVisibleEntities(){
+        for (VisibleEntity visible: visibleEntities) {
+            Collision collision = new Collision(visible.getShape(),visible.getPosition(),ship.getPosition());
+            if(collision.distanceTo()<=1000){
+                visibles.add(visible);
             }
         }
     }
@@ -419,16 +464,16 @@ public class EngineSettings {
     /**
      * @return the visibleEntities
      */
-    public List<Entity> getVisibleEntities() {
+    public List<VisibleEntity> getVisibleEntities() {
         return visibleEntities;
     }
 
     private class EngineSettingsNextRound{
         private Ship ship;
-        private List<Entity> visibleEntities;
+        private List<VisibleEntity> visibleEntities;
         private Wind wind;
 
-        EngineSettingsNextRound(Ship s,List<Entity> vE,Wind w){
+        EngineSettingsNextRound(Ship s, List<VisibleEntity> vE, Wind w){
             this.ship = s;
             this.visibleEntities = vE;
             this.wind=w;
@@ -438,7 +483,7 @@ public class EngineSettings {
             return ship;
         }
 
-        public List<Entity> getVisibleEntities() {
+        public List<VisibleEntity> getVisibleEntities() {
             return visibleEntities;
         }
 

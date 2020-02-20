@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.other;
+package fr.unice.polytech.si3.qgl.zecommit.visible;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,32 +9,18 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
  * Classe modélisant les courants marins
  * @author Nathan
  */
-public class Current extends VisibleEntitie{
-
-    @JsonProperty("position")
-    private Position position;
-
-    @JsonProperty("shape")
-    private Shape shape;
-
+public class Current extends VisibleEntity {
     @JsonProperty("strength")
     private double strength;
 
     @JsonCreator
     public Current(@JsonProperty("position") Position position, @JsonProperty("shape") Shape shape, @JsonProperty("strength") double strength) {
-        super(position, shape);
+        super(VisibleEntityType.CURRENT,position, shape);
         this.strength = strength;
     }
 
     //------------------------------GETTER-------------------------//
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public Shape getShape() {
-        return shape;
-    }
 
     public double getStrength() {
         return strength;
@@ -43,14 +29,6 @@ public class Current extends VisibleEntitie{
 
     //------------------------------SETTER-------------------------//
 
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public void setShape(Shape shape) {
-        this.shape = shape;
-    }
 
     public void setStrength(double strength) {
         this.strength = strength;
