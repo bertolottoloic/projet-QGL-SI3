@@ -1,4 +1,8 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.crew;
+
+
+import fr.unice.polytech.si3.qgl.zecommit.Game;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 
 import static org.mockito.Mockito.mock;
 
@@ -43,7 +47,7 @@ public class CaptainMateTest {
 
         entities = Arrays.asList(new Entity[]{o1,o2});
         sailors = Arrays.asList(new Sailor[]{s1,s2});
-        ship = new Ship(100,new Position(0, 0, 0),"boat",new Deck(4, 10),entities,new Rectangle(4, 10, 0));
+        ship = new Ship("ship",100,new Position(0, 0, 0),"boat",new Deck(4, 10),entities,new Rectangle(4, 10, 0));
     }
 
     // @Test
@@ -114,7 +118,6 @@ public class CaptainMateTest {
     @Test
     public void toLiftSailTest() {
         Sail sail = new Sail(1,1, false);
-
     }
 
 }

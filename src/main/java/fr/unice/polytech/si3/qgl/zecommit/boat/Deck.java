@@ -1,36 +1,48 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
-import fr.unice.polytech.si3.qgl.zecommit.action.*;
+import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.DeckDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
 
 /**
  * @author Loic Bertolotto
  */
+@JsonDeserialize(using = DeckDeserializer.class)
 public class Deck{
-    @JsonProperty("width")private int width;
-    @JsonProperty("length")private int length;
-
-    @JsonIgnore
+    private int width;
+    private int length;
     private List<Oar> oars;
-    @JsonIgnore
     private Rudder rudder;
-    @JsonIgnore
     private List<Sail> sails;
-    @JsonIgnore
     private List<Sailor> sailors;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deck deck = (Deck) o;
+        return width == deck.width &&
+                length == deck.length;
+    }
 
-    @JsonCreator
-    public Deck(@JsonProperty("width")int width,@JsonProperty("length") int length){
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, length);
+    }
+
+    public Deck(int width, int length){
+
         this.width = width;
         this.length = length;
         this.oars= new ArrayList<>();

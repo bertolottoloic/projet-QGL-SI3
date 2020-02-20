@@ -1,25 +1,23 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.stream.Collectors;
-
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
-
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
-
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Captain implements CaptainInterface {
 

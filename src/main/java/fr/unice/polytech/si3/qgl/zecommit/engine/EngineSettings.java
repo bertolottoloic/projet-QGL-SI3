@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class EngineSettings {
     Goal goal;
     ArrayList<Checkpoint> checkpoints;
@@ -31,32 +32,21 @@ public class EngineSettings {
     Shape shape;
     ArrayList<Sailor> sailors;
     ArrayList<Entity> visibleEntities;
-    @JsonIgnore
     private ObjectMapper oM;
     ///////////////////////////:
-    @JsonIgnore
     ArrayList<Sailor> leftSailors;
-    @JsonIgnore
     ArrayList<Sailor> rightSailors;
-    @JsonIgnore
     static final int n = 100;
-    @JsonIgnore
     double rotation=0;
-    @JsonIgnore
     int nbSailUsed=0;
-    @JsonIgnore
     ArrayList<Oar> oarArrayList;
-    @JsonIgnore
     ArrayList<Sail> sailArrayList;
-    @JsonIgnore
     Rudder rudder;
-    @JsonIgnore
     Wind wind;
     @JsonIgnore
     ArrayList<Wind> winds;
     @JsonIgnore
     Random random= new Random();
-
 
     EngineSettings(){
         this.oarArrayList=new ArrayList<>();
@@ -82,9 +72,6 @@ public class EngineSettings {
      *
      * */
 
-    public void setShip() {
-        this.ship= new Ship(100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
-    }
 
     public void setVisibleEntities() {
         this.visibleEntities=new ArrayList<>();
@@ -178,7 +165,7 @@ public class EngineSettings {
         try{
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
             return oM.writeValueAsString(this);
-        } catch(IOException e ) { 
+        } catch(IOException e ) {
             System.err.println(e);
             return "{}";
         }
@@ -187,6 +174,7 @@ public class EngineSettings {
     public String thisToJson2(){
         try{
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
+
             return oM.writeValueAsString(new EngineSettingsNextRound(ship,visibleEntities,wind));
         } catch(IOException e ) {
             System.err.println(e);
@@ -199,6 +187,7 @@ public class EngineSettings {
         leftSailors=new ArrayList<>();
         rotation=0;
         changeWind();
+
         for (Action action: actions) {
             if(action.getType()== ActionType.MOVING){
                 engineMoving((Moving) action);
@@ -307,6 +296,7 @@ public class EngineSettings {
 
     public void calcul(){
 
+
         double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/oarArrayList.size();
         vitesse+=calculWind();
 
@@ -330,6 +320,10 @@ public class EngineSettings {
             currentOrientation=-2*Math.PI+currentOrientation;
         }
         return currentOrientation;
+    }
+
+    public void setShip() {
+        this.ship= new Ship("ship", 100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
     }
 
     public void checkCheckpoints(){
@@ -369,7 +363,6 @@ public class EngineSettings {
         return n;
     }
 
-    @JsonIgnore
     /**
      * @return the checkpoints
      */
@@ -384,7 +377,6 @@ public class EngineSettings {
         return ship;
     }
 
-    @JsonIgnore
     /**
      * @return the deck
      */
@@ -392,7 +384,6 @@ public class EngineSettings {
         return deck;
     }
 
-    @JsonIgnore
     /**
      * @return the entities
      */
@@ -400,7 +391,6 @@ public class EngineSettings {
         return entities;
     }
 
-    @JsonIgnore
     /**
      * @return the shape
      */
@@ -415,7 +405,6 @@ public class EngineSettings {
         return sailors;
     }
 
-    @JsonIgnore
     /**
      * @return the visibleEntities
      */

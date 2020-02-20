@@ -1,7 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.entite;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Classe correspondant à la voile du bateau
@@ -11,8 +9,9 @@ public class Sail extends Entity {
 
     private boolean openned;
 
-    @JsonCreator
-    public Sail(@JsonProperty("x")int x, @JsonProperty("y")int y,@JsonProperty("openned") Boolean openned){
+
+    public Sail(int x,int y, Boolean openned){
+
         super(EntityType.SAIL,x,y);
         this.openned = openned;
     }

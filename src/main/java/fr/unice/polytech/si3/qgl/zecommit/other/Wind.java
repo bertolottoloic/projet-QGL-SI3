@@ -1,18 +1,21 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.WindDeserializer;
 
 /**
  * Classe correspondant au vent
  * @author Nathan
  */
+@JsonDeserialize(using = WindDeserializer.class)
 public class Wind {
-    @JsonProperty("orientation") private double orientation;
-    @JsonProperty("strength") private double strength;
+    private double orientation;
+    private double strength;
 
-    @JsonCreator
-    public Wind(@JsonProperty("orientation")double orientation, @JsonProperty("strength")double strength) {
+
+    public Wind(double orientation, double strength) {
+
         this.orientation = orientation;
         this.strength = strength;
     }
