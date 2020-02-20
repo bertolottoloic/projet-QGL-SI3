@@ -51,7 +51,7 @@ public class CaptainMate {
                 angle = Math.min(Math.PI/4, angle);
             else
                 angle = Math.max(-Math.PI/4, angle);
-            actions.add(new Turn(sailorAndAngle.getKey().getId(), sailorAndAngle.getValue()));
+            actions.add(new Turn(sailorAndAngle.getKey().getId(), angle));
         }
     }
 
