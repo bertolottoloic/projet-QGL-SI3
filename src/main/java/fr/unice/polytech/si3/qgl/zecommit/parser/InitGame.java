@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.InitGameDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonDeserialize(using = InitGameDeserializer.class)

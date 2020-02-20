@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.parser;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
@@ -9,7 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -93,7 +97,7 @@ class ParserTest {
 
     @Test
     void parserInitGameTestGoal() {
-        assertEquals(initGame.getGoal().toString(), "REGATTA");
+        assertEquals("REGATTA", initGame.getGoal().toString());
     }
 
     @Test
@@ -108,13 +112,22 @@ class ParserTest {
     @Test
     void parserInitGameTestSailors() {
         List<Sailor> sailors = initGame.getSailors();
-        //Sailor s1 = sailors.get(0);
-        //Sailor s2 = sailors.get(1);
+        Sailor s1 = sailors.get(0);
+        Sailor s2 = sailors.get(1);
 
-        //assertEquals("Edward Teach",s1.getName());
-        //assertEquals("Tom Pouce", s2.getName());
-        System.out.println(sailors);
+        Sailor s1Test = new Sailor(0,0,0,"Edward Teach");
+        Sailor s2Test = new Sailor(1,1,0,"Tom Pouce");
+
+        assertEquals(s1Test, s1);
+        assertEquals(s2Test, s2);
+
     }
 
+    @Test
+    void parserInitGameTestShipCount() {
+        int shipCount = initGame.getShipCount();
+
+        assertEquals(1,shipCount);
+    }
 
 }

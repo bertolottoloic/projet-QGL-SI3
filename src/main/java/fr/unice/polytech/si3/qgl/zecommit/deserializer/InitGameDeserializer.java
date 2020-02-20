@@ -14,6 +14,7 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.parser.InitGame;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class InitGameDeserializer extends StdDeserializer<InitGame> {
@@ -33,7 +34,7 @@ public class InitGameDeserializer extends StdDeserializer<InitGame> {
 
         Goal goal = objectMapper.readValue(node.get("goal").toPrettyString(), Goal.class);
         Ship ship = objectMapper.readValue(node.get("ship").toPrettyString(), Ship.class);
-        List sailors = objectMapper.readValue(node.get("sailors").toPrettyString(), new TypeReference<List>() {});
+        List<Sailor> sailors = objectMapper.readValue(node.get("sailors").toPrettyString(), new TypeReference<>() {});
 
         if (node.has("shipCount")) {
             int shipCount = node.get("shipCount").asInt();

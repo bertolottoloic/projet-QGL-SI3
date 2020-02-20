@@ -3,11 +3,13 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 
-
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.SailorDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
 
@@ -15,7 +17,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
  * Classe correspondant au marin
  * @author joris Liebgott
  */
-
+@JsonDeserialize(using = SailorDeserializer.class)
 public class Sailor {
     private int id;
     private int x;
@@ -117,5 +119,20 @@ public class Sailor {
             this.entity.putSailorOn(null);
         this.entity = e;
         this.entity.putSailorOn(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sailor sailor = (Sailor) o;
+        return id == sailor.id &&
+                x == sailor.x &&
+                y == sailor.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, x, y);
     }
 }

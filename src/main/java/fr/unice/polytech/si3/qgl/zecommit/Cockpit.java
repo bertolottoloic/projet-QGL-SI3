@@ -22,10 +22,13 @@ public class Cockpit implements ICockpit {
 	 */
 	public void initGame(String jsonInitGame) {
 		try {
-			setGameInfo(Parser.parseInitGame(jsonInitGame));
+			game = new Game();
+			InitGame initGame = Parser.parseInitGame(jsonInitGame);
+			setGameInfo(initGame);
 			initCaptain();
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
+			Logs.add(e.getMessage());
 		}
 	}
 
@@ -64,11 +67,10 @@ public class Cockpit implements ICockpit {
 	 * @param initGame
 	 */
 	public void setGameInfo(InitGame initGame) {
-		game = new Game();
-		game.setGoal(initGame.getGoal());
-		game.setShip(initGame.getShip());
-		game.setSailors(initGame.getSailors());
-		game.setShipCount(initGame.getShipCount());
+		//game.setGoal(initGame.getGoal());
+		//game.setShip(initGame.getShip());
+		//game.setSailors(initGame.getSailors());
+		//game.setShipCount(initGame.getShipCount());
 	}
 
 	/**
