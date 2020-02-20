@@ -119,9 +119,7 @@ public class Road {
      * @return
      */
     public boolean turnAroundLeft(){
-        if(orientationToGoal() > Math.PI/2 && orientationToGoal() <= Math.PI)
-            return true;
-        return false;
+        return (orientationToGoal() > Math.PI/2 && orientationToGoal() <= Math.PI);
     }
 
 
@@ -130,9 +128,7 @@ public class Road {
      * @return
      */
     public boolean turnAroundRight(){
-        if(orientationToGoal() < -Math.PI/2 && orientationToGoal() > -Math.PI)
-            return true;
-        return false;
+        return (orientationToGoal() < -Math.PI/2 && orientationToGoal() > -Math.PI);
     }
 
 
