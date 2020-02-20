@@ -1,28 +1,20 @@
 package fr.unice.polytech.si3.qgl.zecommit.visible;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
-import java.util.List;
 
 public class OtherShip extends VisibleEntity {
 
     @JsonProperty("life")private int life;
     @JsonProperty("position")private Position position;
-    @JsonProperty("name")private String name;
-    @JsonProperty("deck")private Deck deck;
-    @JsonProperty("entities")private List<Entity> entities;
     @JsonProperty("shape")private Shape shape;
 
-    public OtherShip(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("name")String name, @JsonProperty("deck")Deck deck, @JsonProperty("entities")List<Entity> entities, @JsonProperty("shape")Shape shape){
+    public OtherShip(@JsonProperty("life")int life, @JsonProperty("position")Position position, @JsonProperty("shape")Shape shape){
         super(VisibleEntityType.OTHERSHIP,position, shape);
         this.life = life;
-        this.name = name;
-        this.deck = deck;
-        this.entities = entities;
+
     }
 
 
@@ -36,18 +28,6 @@ public class OtherShip extends VisibleEntity {
     @Override
     public Position getPosition() {
         return position;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public List<Entity> getEntities() {
-        return entities;
     }
 
     @Override
@@ -68,17 +48,6 @@ public class OtherShip extends VisibleEntity {
         this.position = position;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
-
-    public void setEntities(List<Entity> entities) {
-        this.entities = entities;
-    }
 
     @Override
     public void setShape(Shape shape) {
