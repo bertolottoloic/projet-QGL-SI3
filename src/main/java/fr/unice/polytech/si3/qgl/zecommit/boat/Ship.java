@@ -1,19 +1,14 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
-import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
+import com.fasterxml.jackson.annotation.*;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
+
+import java.util.List;
 
 
 /**
@@ -60,12 +55,8 @@ public class Ship {
         Position cpPosition=checkpoint.getPosition();
         Road road = new Road(this.position,cpPosition);
         double angle = road.orientationToGoal();
-        if(Math.abs(angle)>Math.PI/2){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !(Math.abs(angle)>Math.PI/2);
+
     }
 
     /**

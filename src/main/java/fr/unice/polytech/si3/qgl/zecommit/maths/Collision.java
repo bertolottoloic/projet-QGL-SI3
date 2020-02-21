@@ -66,19 +66,17 @@ public class Collision {
         if (isInRectangleWith0Orientation(rectangle, shipCenter, a, b, c)) return true;
 
 
-        return isInTriangle(a,b,c, shipCenter) && isInTriangle(a,d,c, shipCenter);
+        return isInTriangle(a,b,c, shipCenter) && isInTriangle(a,d,c, shipCenter);//TODO 3?
 
     }
 
     public boolean isInRectangleWith0Orientation(Rectangle rectangle, Point shipCenter, Point a, Point b, Point c) {
-        if(rectangle.getOrientation() % Math.PI/2 == 0
+        return(rectangle.getOrientation() % Math.PI/2 == 0
                 && shipCenter.getX()<=Math.max(a.getX(), Math.max(b.getX(), c.getX()))
                 && shipCenter.getX()>=Math.min(a.getX(), Math.min(b.getX(), c.getX()))
                 && shipCenter.getY()<=Math.max(a.getY(), Math.max(b.getY(), c.getY()))
                 && shipCenter.getY()>=Math.min(a.getY(), Math.min(b.getY(), c.getY()))
-            )
-                return true;
-        return false;
+            );
     }
 
     /**
@@ -143,10 +141,7 @@ public class Collision {
 
         double res = 1-t-tp;
 
-        if ( 0 <= res && res <= 1) {
-            return true;
-        }
-        return false;
+        return ( 0 <= res && res <= 1);
     }
 
 

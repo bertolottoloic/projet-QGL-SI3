@@ -1,25 +1,23 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.stream.Collectors;
-
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
-
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
-
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Captain implements CaptainInterface {
 
@@ -48,7 +46,6 @@ public class Captain implements CaptainInterface {
         List<Sailor> sailorsTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>(deck.getOars());
         sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
-        Sailor sailor;
         if(sailorsTmp.size()>4){
             sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(deck.getRudder());
             if(sailorsTmp.size()%2>0 && !deck.getSails().isEmpty()){
@@ -78,7 +75,7 @@ public class Captain implements CaptainInterface {
     public List<Sailor> doMoveSailors() {
         if (!deck.sailorsAreOnTheirEntity())
             return deck.getSailors();
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -97,7 +94,7 @@ public class Captain implements CaptainInterface {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(deck.getOars().size()));
         if (deck.getRudder() != null && deck.getRudder().hasSailorOn())
-            return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),angle);
+            return new SimpleEntry<>(deck.getRudder().getSailorOn(),angle);
         return null;
 
 
@@ -105,12 +102,12 @@ public class Captain implements CaptainInterface {
 
     @Override
     public List<Sailor> doLiftSail() {
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
     public List<Sailor> doLowerSail() {
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override

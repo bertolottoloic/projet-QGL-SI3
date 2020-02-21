@@ -3,10 +3,10 @@ package fr.unice.polytech.si3.qgl.zecommit.boat;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
+import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
-import fr.unice.polytech.si3.qgl.zecommit.Logs;
-import fr.unice.polytech.si3.qgl.zecommit.action.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,7 @@ public class Deck{
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
         {
-            if(isLeft(oar))
+            if(!isLeft(oar))
                 oarsList.add(oar);
         });
         return oarsList;

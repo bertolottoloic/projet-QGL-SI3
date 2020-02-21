@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.zecommit.visible;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 

@@ -13,12 +13,12 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
-import fr.unice.polytech.si3.qgl.zecommit.visible.Stream;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.visible.Stream;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntityType;
 
 import java.io.IOException;

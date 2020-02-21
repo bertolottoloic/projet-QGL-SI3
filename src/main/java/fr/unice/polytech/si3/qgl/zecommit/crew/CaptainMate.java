@@ -1,16 +1,12 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import fr.unice.polytech.si3.qgl.zecommit.Game;
+import fr.unice.polytech.si3.qgl.zecommit.action.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
-
-import fr.unice.polytech.si3.qgl.zecommit.Game;
-import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-import fr.unice.polytech.si3.qgl.zecommit.action.LiftSail;
-import fr.unice.polytech.si3.qgl.zecommit.action.LowerSail;
-import fr.unice.polytech.si3.qgl.zecommit.action.ToOar;
-import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 
 public class CaptainMate {
 

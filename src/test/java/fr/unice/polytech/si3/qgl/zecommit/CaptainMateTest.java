@@ -1,23 +1,22 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-import static org.mockito.Mockito.mock;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+import static org.mockito.Mockito.mock;
 
-import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 // import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
-import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 
 public class CaptainMateTest {

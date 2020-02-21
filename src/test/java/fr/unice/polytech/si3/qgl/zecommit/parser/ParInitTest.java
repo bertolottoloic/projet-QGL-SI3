@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.parser;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 
 class ParInitTest {
