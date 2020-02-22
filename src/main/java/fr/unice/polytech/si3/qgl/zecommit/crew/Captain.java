@@ -133,7 +133,7 @@ public class Captain implements CaptainInterface {
      *
      * @param compo
      */
-    public ArrayList<Sailor> activateSailors(Compo compo, double angle) {
+    public List<Sailor> activateSailors(Compo compo) {
         ArrayList<Sailor> usedSailors= new ArrayList<>();
         // Activation des marins de gauche
         int l = 0;
@@ -152,21 +152,21 @@ public class Captain implements CaptainInterface {
         return usedSailors;
     }
 
-    private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
+    private List<Sailor> decisionOrientation(Road road, int chosenAngle){
         Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
 
-        boolean upSail = upSail();
+        //boolean upSail = upSail();
         rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
 
         if(!isNear){//si le bateau est loin
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
+            return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus vite
         }
         else
-           return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
+           return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus lentement
         
 
     }

@@ -1,22 +1,23 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
-import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+import static org.mockito.Mockito.mock;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 // import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 
 public class CaptainMateTest {
@@ -80,19 +81,19 @@ public class CaptainMateTest {
     //     assertTrue(oars.get(0).hasSailorOn());
     //     assertEquals(oars.get(0),sailors.get(1).getEntity());
     //     assertTrue(oars.get(1).hasSailorOn());
-    //     assertEquals(oars.get(1),sailors.get(0).getEntity()); 
+    //     assertEquals(oars.get(1),sailors.get(0).getEntity());
     // }
 
     // @Test
-    // void initMoveSailorFirstStepTest(){ 
+    // void initMoveSailorFirstStepTest(){
     //     captainMate.initAttibuteOarToSailors(sailors, ship);
     //     captainMate.initMoveSailor(sailors);
     //     assertTrue(sailors.get(1).isOnEntity());
-    //     assertTrue(sailors.get(0).isOnEntity());    
+    //     assertTrue(sailors.get(0).isOnEntity());
     // }
 
     // @Test
-    // void initMoveSailorSecondStepTest(){   
+    // void initMoveSailorSecondStepTest(){
     //     Oar o4 = new Oar(9,3);
     //     Sailor s3 = new Sailor(2,4,2,"barbe");
     //     List<Entity> oars = Arrays.asList(new Entity[]{o4});
