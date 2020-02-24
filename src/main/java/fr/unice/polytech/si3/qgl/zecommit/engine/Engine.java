@@ -25,9 +25,8 @@ public class Engine {
             System.out.println("ROUND :"+currentStep);
             currentStep++;
             String json2 = engineSettings.thisToJson2();
-            System.out.println(json2);
+
             output = cockpit.nextRound(json2);
-            System.out.println(output);
             engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
             System.out.println(engineSettings.getShip().getPosition()+"\nFIN DU ROUND\n");
         }

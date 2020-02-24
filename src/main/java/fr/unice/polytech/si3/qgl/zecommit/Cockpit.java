@@ -28,12 +28,9 @@ public class Cockpit implements ICockpit {
 	public void initGame(String jsonInitGame) {
 		try {
 			game = new Game();
-
 			InitGame initGame = Parser.parseInitGame(jsonInitGame);
-
 			setGameInfo(initGame);
 			initCaptain();
-
 
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
