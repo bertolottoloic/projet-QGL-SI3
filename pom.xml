@@ -17,7 +17,7 @@
 		<jackson.databind.version>2.10.1</jackson.databind.version>
 		<sonar.exclusions>
 			**/engine/*.java
-		</sonar.exclusions>
+		</sonar.exclusions>  
 	</properties>
 
 	<build>

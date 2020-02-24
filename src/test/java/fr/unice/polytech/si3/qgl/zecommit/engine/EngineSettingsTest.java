@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class EngineSettingsTest{
@@ -12,8 +13,9 @@ class EngineSettingsTest{
     }
 
     @Test
+    @Disabled
     void thisToJsonTest(){
-        System.out.println(es.thisToJson());
-        System.out.println(es.thisToJson2());
+        //System.out.println(es.thisToJson());
+        //System.out.println(es.thisToJson2());
     }
 }
