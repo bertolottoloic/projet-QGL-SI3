@@ -18,14 +18,15 @@ public class Engine {
         EngineNextRound engineNextRound= new EngineNextRound();
         Cockpit cockpit = new Cockpit();
         cockpit.initGame(json);
+
         int currentStep = 0;
         String output="";
         while(!output.equals("[]")&&currentStep<3000) {
             System.out.println("ROUND :"+currentStep);
             currentStep++;
             String json2 = engineSettings.thisToJson2();
+
             output = cockpit.nextRound(json2);
-            System.out.println(output);
             engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
             System.out.println(engineSettings.getShip().getPosition()+"\nFIN DU ROUND\n");
         }

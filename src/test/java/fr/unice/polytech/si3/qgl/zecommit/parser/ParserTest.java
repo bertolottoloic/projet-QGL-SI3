@@ -10,7 +10,11 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
 import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -257,7 +261,17 @@ class ParserTest {
     @Test
     void parseNextRoundTestVisibleEntities() {
         List<VisibleEntitie> visibleEntities = nextRound.getVisibleEntities();
-        visibleEntities.get(0);
+
+        Stream s1 = (Stream) visibleEntities.get(0);
+        Stream stream = new Stream(new Position(500, 0, 0), new Rectangle(50, 500, 0),40);
+        assertEquals(stream, s1);
+    }
+
+    @Test
+    void parseNextRoundWind() {
+        Wind wind = nextRound.getWind();
+
+        assertEquals(new Wind(0,110),wind);
     }
 
 }

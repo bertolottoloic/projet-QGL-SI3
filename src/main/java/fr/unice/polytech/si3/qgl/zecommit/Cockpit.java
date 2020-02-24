@@ -41,9 +41,7 @@ public class Cockpit implements ICockpit {
 	public String nextRound(String jsonNextRound) {
 		String res;
 		try {
-
 			updateGame(Parser.parseNextRound(jsonNextRound));
-
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
 				actions = captainMate.actions(game);
@@ -73,18 +71,18 @@ public class Cockpit implements ICockpit {
 	 * @param initGame
 	 */
 	public void setGameInfo(InitGame initGame) {
-		//game.setGoal(initGame.getGoal());
-		//game.setShip(initGame.getShip());
-		//game.setSailors(initGame.getSailors());
-		//game.setShipCount(initGame.getShipCount());
+		game.setGoal(initGame.getGoal());
+		game.setShip(initGame.getShip());
+		game.setSailors(initGame.getSailors());
+		game.setShipCount(initGame.getShipCount());
 	}
 
 	/**
 	 * Création du CaptainMate et du Captain
 	 */
 	public void initCaptain() {
-		this.captainMate= new CaptainMate(game);
-		this.captain= new Captain(game);
+		this.captainMate = new CaptainMate(game);
+		this.captain = new Captain(game);
 	}
 
 	/**

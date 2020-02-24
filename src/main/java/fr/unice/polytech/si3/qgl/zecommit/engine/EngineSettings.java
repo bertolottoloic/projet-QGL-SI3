@@ -36,7 +36,7 @@ public class EngineSettings {
     ///////////////////////////:
     ArrayList<Sailor> leftSailors;
     ArrayList<Sailor> rightSailors;
-    static final int n = 100;
+    @JsonIgnore static final int n = 100;
     double rotation=0;
     int nbSailUsed=0;
     ArrayList<Oar> oarArrayList;
