@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.parser.NextRound;
 
@@ -31,7 +32,7 @@ public class NextRoundDeserializer extends StdDeserializer<NextRound> {
         JsonNode node = codec.readTree(jsonParser);
 
         Ship ship = objectMapper.readValue(node.get("ship").toPrettyString(), Ship.class);
-        List visibleEntities = objectMapper.readValue(node.get("visibleEntities").toPrettyString(), new TypeReference<List>() {});
+        List<VisibleEntitie> visibleEntities = objectMapper.readValue(node.get("visibleEntities").toPrettyString(), new TypeReference<>() {});
 
 
         if (node.has("wind")) {
