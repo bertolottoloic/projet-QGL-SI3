@@ -12,14 +12,14 @@ public class Polygone extends Shape {
 
 
     public Polygone(@JsonProperty("orientation")double orientation,@JsonProperty("vertexes")Point[] vertices) {
-        super(ShapeType.POLYGON);
+        super(ShapeType.POLYGON.toString());
         setCircle(false);
         this.orientation=orientation;
         this.vertices=vertices;
     }
 
     public Polygone(ShapeType type,double orientation,double width, double height) {
-        super(type);
+        super(type.toString());
         setCircle(false);
         this.orientation=orientation;
         this.vertices=buildVertexes(type, width,height);
@@ -51,7 +51,7 @@ public class Polygone extends Shape {
     }
 
     @Override
-    public ShapeType getType() {
+    public String getType() {
         return super.getType();
     }
 

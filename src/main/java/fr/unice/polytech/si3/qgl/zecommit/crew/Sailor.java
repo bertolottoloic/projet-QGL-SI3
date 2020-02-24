@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.SailorDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
@@ -22,6 +23,7 @@ public class Sailor {
     private int x;
     private int y;
     private String name;
+    @JsonIgnore
     private Entity entity;
 
     public Sailor(int id,int x, int y, String name) {
@@ -50,11 +52,11 @@ public class Sailor {
     public int distanceToEntity(Entity e){
         return Math.abs(x-e.getX()) + Math.abs(y-e.getY());
     }
-
+    @JsonIgnore
     public boolean isOnEntity(){
         return hasEntity() && this.x==this.entity.getX() && this.y==this.entity.getY();
     }
-
+    @JsonIgnore
     public boolean hasEntity(){
         return this.entity!=null;
     }

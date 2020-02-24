@@ -32,7 +32,7 @@ public class ShipDeserializer extends JsonDeserializer {
 
         Deck deck = objectMapper.readValue(node.get("deck").toPrettyString(), Deck.class);
 
-        List<Entity> listEntitie = objectMapper.readValue(node.get("entities").toPrettyString(), new TypeReference<List<Entity>>() {});
+        List<Entity> listEntitie = objectMapper.readValue(node.get("entities").toPrettyString(), new TypeReference<>() {});
 
         Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
 

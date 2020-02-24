@@ -9,7 +9,7 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 public class Rudder extends Entity {
 
     public Rudder(int x,int y){
-        super(EntityType.RUDDER,x,y);
+        super(EntityType.RUDDER.toString(),x,y);
     }
 
 }

@@ -11,11 +11,10 @@ import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShapeDeserializer;
  */
 @JsonDeserialize(using = ShapeDeserializer.class)
 public abstract class Shape {
-    private ShapeType type;
-    private boolean isCircle;
+    private String type;
+    @JsonIgnore private boolean isCircle;
 
-    public Shape(ShapeType type){
-
+    public Shape(String type){
         this.type=type;
         this.isCircle=false;
     }
@@ -26,8 +25,7 @@ public abstract class Shape {
 
     //------------------------GETTER----------------------//
 
-    public ShapeType getType() {
-
+    public String getType() {
         return type;
     }
 
@@ -41,10 +39,11 @@ public abstract class Shape {
     //------------------------SETTER----------------------//
 
 
-    public void setType(ShapeType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
+    @JsonIgnore
     public void setCircle(boolean circle) {
         isCircle = circle;
     }

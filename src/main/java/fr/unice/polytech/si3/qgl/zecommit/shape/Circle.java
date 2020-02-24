@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Forme definissant un cercle
  * @author  Clement P
@@ -10,7 +12,7 @@ public class Circle extends Shape {
 
 
     public Circle(double radius){
-        super(ShapeType.CIRCLE);
+        super(ShapeType.CIRCLE.toString());
 
         this.radius=radius;
         setCircle(true);

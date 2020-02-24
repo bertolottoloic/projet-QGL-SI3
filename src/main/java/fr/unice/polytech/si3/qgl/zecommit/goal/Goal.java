@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.goal;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.GoalDeserializer;
 
@@ -19,6 +20,7 @@ public abstract class Goal {
         return this.mode;
     }
 
+    @JsonIgnore
     public boolean isRegatta(){
         return this.isRegatta;
     }

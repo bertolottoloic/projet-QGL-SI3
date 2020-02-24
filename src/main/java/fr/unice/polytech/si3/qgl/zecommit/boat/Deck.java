@@ -22,9 +22,13 @@ import java.util.stream.Collectors;
 public class Deck{
     private int width;
     private int length;
+    @JsonIgnore
     private List<Oar> oars;
+    @JsonIgnore
     private Rudder rudder;
+    @JsonIgnore
     private List<Sail> sails;
+    @JsonIgnore
     private List<Sailor> sailors;
 
     @Override
@@ -50,6 +54,7 @@ public class Deck{
         this.sailors= new ArrayList<>();
     }
 
+    @JsonIgnore
     public void initDeck(List<Entity> entities){
         for (Entity entity : entities){
             if (entity.getType().equals(EntityType.OAR)) {
@@ -63,7 +68,7 @@ public class Deck{
             }
         }
     }
-
+    @JsonIgnore
     public boolean sailorsAreOnTheirEntity() {
         for (Sailor sailor : sailors) {
             if (!sailor.isOnEntity() && sailor.hasEntity())
@@ -79,6 +84,7 @@ public class Deck{
      * @param xdistance
      * @param ydistance
      */
+    @JsonIgnore
     public Moving moveSailor(Sailor sailor, int xdistance, int ydistance) {
         Moving action = new Moving(sailor.getId(), xdistance, ydistance);
         sailor.move(action.getXDistance(), action.getYDistance());
@@ -89,11 +95,11 @@ public class Deck{
         return null;
     }
 
-    @JsonIgnore
     /**
      *
      * @return la liste des rames à gauche du bateau.
      */
+    @JsonIgnore
     public List<Oar> getLeftOars(){
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
@@ -104,11 +110,11 @@ public class Deck{
         return oarsList;
     }
 
-    @JsonIgnore
     /**
      *
      * @return la liste des rames à droite du bateau.
      */
+    @JsonIgnore
     public List<Oar> getRightOars(){
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
@@ -155,18 +161,22 @@ public class Deck{
         return length;
     }
 
+    @JsonIgnore
     public Rudder getRudder() {
         return rudder;
     }
 
+    @JsonIgnore
     public List<Sailor> getSailors() {
         return sailors;
     }
 
+    @JsonIgnore
     public List<Oar> getOars() {
         return oars;
     }
 
+    @JsonIgnore
     public List<Sail> getSails() {
         return sails;
     }

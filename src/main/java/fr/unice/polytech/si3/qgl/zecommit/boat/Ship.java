@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
@@ -27,8 +28,11 @@ public class Ship {
     private Deck deck;
     private List<Entity> entities;
     private Shape shape;
+    @JsonIgnore
     private List<Oar> oars = new ArrayList<>();
+    @JsonIgnore
     private  Rudder rudder;
+    @JsonIgnore
     private ArrayList<Sail> sails;
 
     public Ship(String type, int life,Position position,String name, Deck deck, List<Entity> entities,Shape shape){
@@ -46,6 +50,7 @@ public class Ship {
     }
 
 
+    @JsonIgnore
     private void createOarlist(){
         this.oars = new ArrayList<>();
         entities.forEach(entity->
@@ -58,6 +63,7 @@ public class Ship {
     /**
      * Tri la liste de rames de façon à alterner les rames de gauches et de droites.
      */
+    @JsonIgnore
     private void sortOars(){
         List<Oar> oarsLeft = getLeftOars();
         List<Oar> oarsRight = getRightOars();
@@ -78,6 +84,7 @@ public class Ship {
      * @param checkpoint
      * @return boolean
      */
+    @JsonIgnore
     public boolean isInCheckpoint(Checkpoint checkpoint) {
         Collision collision = new Collision(checkpoint.getShape(), checkpoint.getPosition(), position);
         return collision.collide();
@@ -85,6 +92,7 @@ public class Ship {
 
 
 
+    @JsonIgnore
     public boolean isInFrontOfCheckpoint(Checkpoint checkpoint){
         Position cpPosition=checkpoint.getPosition();
         Road road = new Road(this.position,cpPosition);
@@ -151,6 +159,7 @@ public class Ship {
      * Retourne la position x du bateau
      * @return
      */
+    @JsonIgnore
     public double getXPosition() {
         return this.getPosition().getX();
     }
@@ -159,15 +168,18 @@ public class Ship {
      * Retourne la position y du bateau
      * @return
      */
+    @JsonIgnore
     public double getYPosition() {
         return this.getPosition().getY();
     }
 
 
+    @JsonIgnore
     public List<Oar> getOars(){
         return this.oars;
     }
 
+    @JsonIgnore
     public int getOarsNb() {
         return oars.size();
     }
@@ -177,6 +189,7 @@ public class Ship {
      * 
      * @return la liste des rames à gauche du bateau.
      */
+    @JsonIgnore
     public List<Oar> getLeftOars(){
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
@@ -191,6 +204,7 @@ public class Ship {
      * 
      * @return la liste des rames à droite du bateau.
      */
+    @JsonIgnore
     public List<Oar> getRightOars(){
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
@@ -201,6 +215,7 @@ public class Ship {
         return oarsList;
     }
 
+    @JsonIgnore
     public List<Sail> getSails(){
         return sails;
     }

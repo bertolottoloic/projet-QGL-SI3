@@ -13,7 +13,7 @@ public class Rectangle extends Shape {
     private double orientation;
 
     public Rectangle(double width,double height, double orientation){
-        super(ShapeType.RECTANGLE);
+        super(ShapeType.RECTANGLE.toString());
 
         this.width=width;
         this.height=height;

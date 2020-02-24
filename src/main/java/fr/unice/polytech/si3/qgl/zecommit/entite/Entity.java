@@ -6,6 +6,7 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.EntityDeserializer;
@@ -14,22 +15,25 @@ import java.util.Objects;
 
 @JsonDeserialize(using = EntityDeserializer.class)
 public abstract class Entity {
-    private EntityType type;
+    private String type;
     private int x;
     private int y;
+    @JsonIgnore
     private Sailor sailorOn;
 
-    public Entity(EntityType type,int x, int y) {
+    public Entity(String type,int x, int y) {
         this.type = type;
         this.x = x;
         this.y = y;
         this.sailorOn = null;
     }
 
+    @JsonIgnore
     public boolean hasSailorOn(){
         return this.sailorOn!=null;
     }
 
+    @JsonIgnore
     public void putSailorOn(Sailor sailor){
         this.sailorOn = sailor;
     }
@@ -58,7 +62,7 @@ public abstract class Entity {
 
     //------------------------------GETTER-------------------------//
 
-    public EntityType getType() {
+    public String getType() {
         return type;
     }
 
@@ -73,13 +77,14 @@ public abstract class Entity {
     /**
      * @return the sailorOn
      */
+    @JsonIgnore
     public Sailor getSailorOn() {
         return sailorOn;
     }
 
     //------------------------------SETTER-------------------------//
 
-    public void setType(EntityType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
