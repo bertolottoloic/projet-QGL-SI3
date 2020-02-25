@@ -248,8 +248,10 @@ class ParserTest {
         assertEquals(deck, ship.getDeck());
 
         List<Entity> entities = ship.getEntities();
+
         Oar o1 = (Oar) entities.get(0);
-        assertEquals(new Oar(1,0), o1);
+        Oar oar1 = new Oar(1,0);
+        assertTrue(oar1.equals(o1));
         Oar o2 = (Oar) entities.get(1);
         assertEquals(new Oar(1,2), o2);
         Sail s1 = (Sail) entities.get(6);

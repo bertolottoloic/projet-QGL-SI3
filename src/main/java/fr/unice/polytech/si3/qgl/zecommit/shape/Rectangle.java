@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Forme definissant un rectangle
  * @author  Clement P
@@ -36,9 +38,8 @@ public class Rectangle extends Shape {
         return height;
     }
 
-
+    @JsonIgnore
     public double getlength() {
-
         return height;
     }
 
