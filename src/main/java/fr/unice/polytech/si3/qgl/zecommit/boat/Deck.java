@@ -71,7 +71,7 @@ public class Deck{
         Moving action = new Moving(sailor.getId(), xdistance, ydistance);
         sailor.move(action.getXDistance(), action.getYDistance());
         if (action.getXDistance() != 0 || action.getYDistance() != 0) {
-            Logs.add("\nS" + sailor.getId() + " is moving to (" + sailor.getX() + "," + sailor.getY() + ")");
+            Logs.add("\nS" + sailor.getId() + " is now on (" + sailor.getX() + "," + sailor.getY() + ")");
             return action;
         }
         return null;

@@ -29,8 +29,16 @@ public class Engine {
             engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
             System.out.println(engineSettings.getShip().getPosition()+"\nFIN DU ROUND\n");
         }
+        System.out.println("##################################################################################################");
+        System.out.println("############################################## Logs ##############################################");
+        System.out.println("##################################################################################################");
 
-        //System.out.println(cockpit.getLogs());
+        System.out.println(cockpit.getLogs());
+
+        System.out.println("##################################################################################################");
+        System.out.println("########################################## Fin des Logs ##########################################");
+        System.out.println("##################################################################################################");
+
 
 
 

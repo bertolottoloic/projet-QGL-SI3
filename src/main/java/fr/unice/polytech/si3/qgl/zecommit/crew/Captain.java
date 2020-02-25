@@ -153,7 +153,6 @@ public class Captain implements CaptainInterface {
     }
 
     private List<Sailor> decisionOrientation(Road road, int chosenAngle){
-        Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
 
         //boolean upSail = upSail();

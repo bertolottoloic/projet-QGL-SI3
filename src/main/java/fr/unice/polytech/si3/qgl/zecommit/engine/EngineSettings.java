@@ -369,7 +369,7 @@ public class EngineSettings {
 
     public void checkCheckpoints(){
         if(ship.isInCheckpoint(checkpoints.get(0))&&checkpoints.size()>1){
-            System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
+            //System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
             checkpoints.remove(0);
         }
     }

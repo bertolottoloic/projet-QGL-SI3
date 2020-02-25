@@ -29,6 +29,7 @@ public class Cockpit implements ICockpit {
 
 	public String nextRound(String round) {
 		String res;
+		Logs.add("\n - - - \n");
 		ParserNext parserNext = new ParserNext();
 
 		if(round.equals("{}")) {
