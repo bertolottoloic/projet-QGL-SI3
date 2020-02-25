@@ -274,4 +274,5 @@ class ParserTest {
         assertEquals(new Wind(0,110),wind);
     }
 
+
 }
