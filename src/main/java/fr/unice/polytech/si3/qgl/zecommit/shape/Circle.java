@@ -17,6 +17,13 @@ public class Circle extends Shape {
         setCircle(true);
     }
 
+    @Override
+    public String toString() {
+        String chaine = "type : "+super.getType()+
+                " [ radius : "+this.radius+" ] ";
+        return chaine;
+    }
+
     //--------------------GETTER -------------------------//
 
     /**

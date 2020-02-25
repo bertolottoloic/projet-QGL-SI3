@@ -368,6 +368,7 @@ public class EngineSettings {
     /**
      * @return the checkpoints
      */
+    @JsonIgnore
     public List<Checkpoint> getCheckpoints() {
         return checkpoints;
     }
@@ -389,14 +390,14 @@ public class EngineSettings {
     /**
      * @return the entities
      */
-    public List<Entity> getEntities() {
+    @JsonIgnore public List<Entity> getEntities() {
         return entities;
     }
 
     /**
      * @return the shape
      */
-    public Shape getShape() {
+    @JsonIgnore public Shape getShape() {
         return shape;
     }
 

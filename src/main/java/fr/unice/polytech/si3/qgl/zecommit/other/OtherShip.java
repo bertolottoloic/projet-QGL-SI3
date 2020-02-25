@@ -12,18 +12,14 @@ public class OtherShip extends VisibleEntitie {
     private String type;
     private int life;
     private Position position;
-    private String name;
-    private Deck deck;
-    private List<Entity> entities;
     private Shape shape;
 
-    public OtherShip(int life, Position position, String name,Deck deck, List<Entity> entities,Shape shape){
+    public OtherShip(int life, Position position, Shape shape){
         super(position, shape);
         this.type = "ship";
         this.life = life;
-        this.name = name;
-        this.deck = deck;
-        this.entities = entities;
+
+
     }
 
 
@@ -40,18 +36,6 @@ public class OtherShip extends VisibleEntitie {
     @Override
     public Position getPosition() {
         return position;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public List<Entity> getEntities() {
-        return entities;
     }
 
     @Override
@@ -74,18 +58,6 @@ public class OtherShip extends VisibleEntitie {
     @Override
     public void setPosition(Position position) {
         this.position = position;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
-
-    public void setEntities(List<Entity> entities) {
-        this.entities = entities;
     }
 
     @Override
