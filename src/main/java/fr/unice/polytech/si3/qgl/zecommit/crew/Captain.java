@@ -23,7 +23,7 @@ public class Captain implements CaptainInterface {
 
     private Ship ship;
     private Regatta goal;
-    OrientationTable orientationTable;
+    private OrientationTable orientationTable;
     private Wind wind;
 
     public Captain(Game game) {
@@ -39,7 +39,6 @@ public class Captain implements CaptainInterface {
         List<Sailor> sailorsTmp = new ArrayList<>(sailors);
         List<Entity> oars = new ArrayList<>(ship.getDeck().getOars());
         sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
-        Sailor sailor;
         if(sailorsTmp.size()>4){
             sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeck().getRudder());
             if(sailorsTmp.size()%2>0 && !ship.getDeck().getSails().isEmpty()){
@@ -106,13 +105,13 @@ public class Captain implements CaptainInterface {
 
     @Override
     public boolean pursueGame() {
-        return !(ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size()-1)) && goal.getCheckpoints().size()==1);
+        return !(ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size() - 1)) && goal.getCheckpoints().size() == 1);
     }
-
 
 
     /**
      * Met a jour les informations du capitaine récupérées par le parseurNext
+     *
      * @param game
      */
     public void refreshGame(Game game){
@@ -167,6 +166,7 @@ public class Captain implements CaptainInterface {
 
     /**
      * Méthode indiquant quand activer la voile
+     *
      * @return
      */
     public boolean upSail(){
