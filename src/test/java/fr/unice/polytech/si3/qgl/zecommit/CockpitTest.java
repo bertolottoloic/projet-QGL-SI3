@@ -111,7 +111,6 @@ class CockpitTest {
         this.cockpit = new Cockpit();
         this.cockpit.initGame(jsonInit);
     }
-    @Disabled
     @Test
     void nextRoundTest() {
         assertEquals("[{\"sailorId\":0,\"type\":\"OAR\"},{\"sailorId\":1,\"type\":\"OAR\"}]", this.cockpit.nextRound(jsonNR));
