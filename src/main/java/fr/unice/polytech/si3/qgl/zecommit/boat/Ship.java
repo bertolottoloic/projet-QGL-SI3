@@ -218,6 +218,38 @@ public class Ship {
         return sails;
     }
 
+    /**
+     * retourne les marins du deck
+     * @return
+     */
+    public List<Sailor> getDeckSailors() {
+        return this.deck.getSailors();
+    }
+
+
+    /**
+     * retourne les rames du deck
+     * @return
+     */
+    public List<Oar> getDeckOars() {
+        return this.deck.getOars();
+    }
+
+    /**
+     * retourne les voiles du deck
+     * @return
+     */
+    public List<Sail> getDeckSails() {
+        return this.deck.getSails();
+    }
+
+    /**
+     * retourne le gouvernail du deck
+     * @return
+     */
+    public Rudder getDeckRudder() {
+        return this.deck.getRudder();
+    }
 
 
     //------------------------------SETTER-------------------------//

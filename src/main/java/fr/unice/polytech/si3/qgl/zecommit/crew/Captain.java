@@ -35,26 +35,26 @@ public class Captain implements CaptainInterface {
 
     @Override
     public void attributeEntitiesToSailors() {
-        List<Sailor> sailors = ship.getDeck().getSailors();
+        List<Sailor> sailors = ship.getDeckSailors();
         List<Sailor> sailorsTmp = new ArrayList<>(sailors);
-        List<Entity> oars = new ArrayList<>(ship.getDeck().getOars());
+        List<Entity> oars = new ArrayList<>(ship.getDeckOars());
         sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
         if(sailorsTmp.size()>4){
-            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeck().getRudder());
+            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeckRudder());
             if(sailorsTmp.size()%2>0 && !ship.getDeck().getSails().isEmpty()){
-                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeck().getSails().get(0));
+                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeckSails().get(0));
             }
         }
         for (Sailor tmp : sailorsTmp) {
-            ship.getDeck().getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
-            Oar closestOar = ship.getDeck().getOars().get(0);
+            ship.getDeckOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
+            Oar closestOar = ship.getDeckOars().get(0);
             if (!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar) <= 5 && !tmp.hasEntity()) {
                 tmp.setOnEntity(closestOar);
             }
         }
         for (Sailor tmp : sailorsTmp) {
-            ship.getDeck().getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
-            for (Oar oar : ship.getDeck().getOars()) {
+            ship.getDeckOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
+            for (Oar oar : ship.getDeckOars()) {
                 if (!oar.hasSailorOn() && !tmp.hasEntity()) {
                     tmp.setOnEntity(oar);
                 }
@@ -67,7 +67,7 @@ public class Captain implements CaptainInterface {
     @Override
     public List<Sailor> doMoveSailors() {
         if (!ship.getDeck().sailorsAreOnTheirEntity())
-            return ship.getDeck().getSailors();
+            return ship.getDeckSailors();
         return new ArrayList<Sailor>();
     }
 
@@ -78,7 +78,7 @@ public class Captain implements CaptainInterface {
             Logs.add("Checkpoint done");
         }
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        int chosenAngle = road.findClosestPossibleAngle(ship.getDeck().getOars().size());
+        int chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size());
         return decisionOrientation(road,chosenAngle);
     }
 
@@ -86,8 +86,8 @@ public class Captain implements CaptainInterface {
     public SimpleEntry<Sailor, Double> doTurn() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size()));
-        if (ship.getDeck().getRudder() != null && ship.getDeck().getRudder().hasSailorOn())
-            return new SimpleEntry<Sailor,Double>(ship.getDeck().getRudder().getSailorOn(),angle);
+        if (ship.getDeckRudder() != null && ship.getDeckRudder().hasSailorOn())
+            return new SimpleEntry<Sailor,Double>(ship.getDeckRudder().getSailorOn(),angle);
         return null;
 
 
@@ -108,19 +108,7 @@ public class Captain implements CaptainInterface {
         return !(ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size() - 1)) && goal.getCheckpoints().size() == 1);
     }
 
-
-    /**
-     * Met a jour les informations du capitaine récupérées par le parseurNext
-     *
-     * @param game
-     */
-    public void refreshGame(Game game){
-        ship=game.getShip();
-        this.getDeck().setOars( ship.getDeck().getOars());
-
-    }
-
-
+    
     /**
      * Effectue l'ordre d'activation des marins aux rames et au gouvernail
      *
