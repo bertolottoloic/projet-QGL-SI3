@@ -12,7 +12,6 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.stream.Collectors;
 
 
@@ -31,7 +30,9 @@ public class Deck{
     private List<Sail> sails;
     @JsonIgnore
     private List<Sailor> sailors;
+    @JsonIgnore
     private List<Sailor> rightSailorList;
+    @JsonIgnore
     private List<Sailor> leftSailorList;
 
     @Override

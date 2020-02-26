@@ -108,7 +108,7 @@ public class Captain implements CaptainInterface {
         return !(ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size() - 1)) && goal.getCheckpoints().size() == 1);
     }
 
-    
+
     /**
      * Effectue l'ordre d'activation des marins aux rames et au gouvernail
      *
@@ -136,12 +136,18 @@ public class Captain implements CaptainInterface {
     private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
         Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
-
         boolean upSail = upSail();
         List<Sailor> rightSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList()); //TODO comprend pas
+        for (Sailor sailor : rightSailorList) {
+            ship.getDeck().addSailor(sailor);
+        }
         List<Sailor> leftSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
-        int nbSailorsRight = rightSailorList.size();
-        int nbSailorsLeft = leftSailorList.size();
+        for (Sailor sailor : leftSailorList) {
+            ship.getDeck().addSailor(sailor);
+        }
+
+        int nbSailorsRight = ship.getDeck().getNumberRightSailors();
+        int nbSailorsLeft = ship.getDeck().getNumberLeftSailors();
 
         if(!isNear){//si le bateau est loin
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
