@@ -12,6 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -28,13 +29,14 @@ public class Captain implements CaptainInterface {
     private List<Sailor> rightSailorList;
     private List<Sailor> leftSailorList;
     private Wind wind;
+    private List<VisibleEntity> visibleEntities;
 
     public Captain(Game game) {
         this.ship = game.getShip();
         this.deck = ship.getDeck();
         this.goal= (Regatta) game.getGoal();
         this.orientationTable = new OrientationTable(deck.getOars().size());
-
+        this.visibleEntities= game.getVisibleEntities();
         this.leftSailorList=new ArrayList<>();
         this.rightSailorList=new ArrayList<>();
         this.wind=game.getWind();
@@ -181,6 +183,8 @@ public class Captain implements CaptainInterface {
     public void refreshData(Game game){
         this.ship = game.getShip();
         this.deck = ship.getDeck();
+        this.visibleEntities=game.getVisibleEntities();
+        this.wind=game.getWind();
     }
 
 
