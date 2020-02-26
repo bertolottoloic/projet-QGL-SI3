@@ -14,8 +14,8 @@ public class CaptainMate {
     List<Action> actions;
     private boolean initGame;
 
-    public CaptainMate(Game game) {
-        this.captain = new Captain(game);
+    public CaptainMate(Captain captain) {
+        this.captain = captain;
         this.actions = new ArrayList<>();
         this.initGame = true;
     }

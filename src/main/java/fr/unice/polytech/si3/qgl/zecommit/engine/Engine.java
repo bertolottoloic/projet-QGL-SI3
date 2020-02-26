@@ -15,6 +15,7 @@ public class Engine {
 
         EngineSettings engineSettings= new EngineSettings();
         String json = engineSettings.thisToJson();
+        System.out.println(json);
         EngineNextRound engineNextRound= new EngineNextRound();
         Cockpit cockpit = new Cockpit();
         cockpit.initGame(json);

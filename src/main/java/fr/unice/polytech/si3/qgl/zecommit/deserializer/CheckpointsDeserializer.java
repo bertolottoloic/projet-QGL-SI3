@@ -25,7 +25,7 @@ public class CheckpointsDeserializer extends StdDeserializer<Checkpoints> {
         this(null);
     }
 
-    
+
     @Override
     public Checkpoints deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
 

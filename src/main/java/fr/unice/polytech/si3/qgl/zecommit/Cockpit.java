@@ -84,8 +84,8 @@ public class Cockpit implements ICockpit {
 	 * Création du CaptainMate et du Captain
 	 */
 	public void initCaptain() {
-		this.captainMate = new CaptainMate(game);
 		this.captain = new Captain(game);
+		this.captainMate = new CaptainMate(captain);
 	}
 
 	/**
