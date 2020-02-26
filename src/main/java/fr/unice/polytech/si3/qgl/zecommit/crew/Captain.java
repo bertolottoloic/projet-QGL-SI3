@@ -26,8 +26,6 @@ public class Captain implements CaptainInterface {
     private Regatta goal;
     private OrientationTable orientationTable;
     private Wind wind;
-    private List<Sailor> rightSailorList;
-    private List<Sailor> leftSailorList;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -141,11 +139,11 @@ public class Captain implements CaptainInterface {
         Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
         boolean upSail = upSail();
-        rightSailorList  = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList()); //TODO comprend pas
+        List<Sailor> rightSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList()); //TODO comprend pas
         for (Sailor sailor : rightSailorList) {
             ship.getDeck().addSailor(sailor);
         }
-        leftSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        List<Sailor> leftSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         for (Sailor sailor : leftSailorList) {
             ship.getDeck().addSailor(sailor);
         }
@@ -157,8 +155,8 @@ public class Captain implements CaptainInterface {
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
         }
         else
-           return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
-        
+            return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
+
 
     }
 
@@ -189,7 +187,6 @@ public class Captain implements CaptainInterface {
     public Ship getShip() {
         return ship;
     }
-
 
     /**
      * @param ship the ship to set
