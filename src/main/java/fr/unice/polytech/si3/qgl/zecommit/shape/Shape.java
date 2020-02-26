@@ -18,7 +18,7 @@ public abstract class Shape {
         this.type=type;
         this.isCircle=false;
     }
-
+    @JsonIgnore
     public boolean isCircle(){
         return this.isCircle;
     }
@@ -30,9 +30,9 @@ public abstract class Shape {
     }
 
     @JsonIgnore
-    public double getRadius() {
+    public double getShapeRadius() {
         if(isCircle)
-            return this.getRadius();
+            return ((Circle)this).getRadius();
         return ((Rectangle)this).getHeight()/2;
     }
 

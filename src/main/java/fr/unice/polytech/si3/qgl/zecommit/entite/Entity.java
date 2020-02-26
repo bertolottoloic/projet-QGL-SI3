@@ -50,7 +50,7 @@ public abstract class Entity {
         if(obj==this) return true;
         if(obj instanceof Entity){
             Entity e = (Entity)obj;
-            return (this.type==e.type && this.x==e.x && this.y==e.y);
+            return (this.type.equals(e.type) && this.x==e.x && this.y==e.y);
         }
         return false;
     }

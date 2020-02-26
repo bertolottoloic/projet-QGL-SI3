@@ -24,29 +24,30 @@ import java.util.Random;
 
 
 public class EngineSettings {
-    Goal goal;
-    ArrayList<Checkpoint> checkpoints;
-    Ship ship;
-    Deck deck;
-    ArrayList<Entity> entities;
-    Shape shape;
-    ArrayList<Sailor> sailors;
-    ArrayList<Entity> visibleEntities;
+    private Goal goal;
+    private ArrayList<Checkpoint> checkpoints;
+    private Ship ship;
+    private Deck deck;
+    private ArrayList<Entity> entities;
+    private Shape shape;
+    private ArrayList<Sailor> sailors;
+    private ArrayList<Entity> visibleEntities;
     private ObjectMapper oM;
     ///////////////////////////:
-    ArrayList<Sailor> leftSailors;
-    ArrayList<Sailor> rightSailors;
-    @JsonIgnore static final int n = 100;
-    double rotation=0;
-    int nbSailUsed=0;
-    ArrayList<Oar> oarArrayList;
-    ArrayList<Sail> sailArrayList;
-    Rudder rudder;
-    Wind wind;
+    private ArrayList<Sailor> leftSailors;
+    private ArrayList<Sailor> rightSailors;
     @JsonIgnore
-    ArrayList<Wind> winds;
+    static final int n = 100;
+    private double rotation=0;
+    private int nbSailUsed=0;
+    private ArrayList<Oar> oarArrayList;
+    private ArrayList<Sail> sailArrayList;
+    private Rudder rudder;
+    private Wind wind;
     @JsonIgnore
-    Random random= new Random();
+    private ArrayList<Wind> winds;
+    @JsonIgnore
+    private Random random= new Random();
 
     EngineSettings(){
         this.oarArrayList=new ArrayList<>();
@@ -359,6 +360,7 @@ public class EngineSettings {
         return this.goal;
     }
 
+    @JsonIgnore
     public int getN() {
         return n;
     }
@@ -366,6 +368,7 @@ public class EngineSettings {
     /**
      * @return the checkpoints
      */
+    @JsonIgnore
     public List<Checkpoint> getCheckpoints() {
         return checkpoints;
     }
@@ -387,14 +390,14 @@ public class EngineSettings {
     /**
      * @return the entities
      */
-    public List<Entity> getEntities() {
+    @JsonIgnore public List<Entity> getEntities() {
         return entities;
     }
 
     /**
      * @return the shape
      */
-    public Shape getShape() {
+    @JsonIgnore public Shape getShape() {
         return shape;
     }
 

@@ -35,6 +35,7 @@ public class Cockpit implements ICockpit {
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
 			Logs.add(e.getMessage());
+			System.out.println(Logs.sortie());//TODO à supprimer
 		}
 	}
 
@@ -52,6 +53,8 @@ public class Cockpit implements ICockpit {
 
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur nextRound");
+			System.out.println(Logs.sortie()); //TODO à supprimer
+
 			res = "[ ]";
 		}
 

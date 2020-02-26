@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Forme definissant un cercle
@@ -16,6 +15,13 @@ public class Circle extends Shape {
 
         this.radius=radius;
         setCircle(true);
+    }
+
+    @Override
+    public String toString() {
+        String chaine = "type : "+super.getType()+
+                " [ radius : "+this.radius+" ] ";
+        return chaine;
     }
 
     //--------------------GETTER -------------------------//
