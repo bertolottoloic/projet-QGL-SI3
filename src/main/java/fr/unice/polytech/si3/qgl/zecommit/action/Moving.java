@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
+
 public class Moving extends Action{
 
     private int xdistance;
@@ -29,7 +31,9 @@ public class Moving extends Action{
             }
 
         }
-       
+        Logs.add("S" + sailorId + ": move: " + this.xdistance +"x, " + this.ydistance +"y");
+
+
     }
 
     //------------------------------GETTER-------------------------//

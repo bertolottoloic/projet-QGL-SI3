@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 /**
  * Forme definissant un rectangle
  * @author  Clement P
@@ -34,7 +36,22 @@ public class Rectangle extends Polygone {
         return chaine;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, height);
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Rectangle)) {
+            return false;
+        }
+        Rectangle rectangle = (Rectangle) obj;
+        return(rectangle.width == this.width && rectangle.height == this.height&&rectangle.orientation==this.orientation);
+    }
     //-------------------------GETTER-------------------------//
 
     @JsonProperty("height")

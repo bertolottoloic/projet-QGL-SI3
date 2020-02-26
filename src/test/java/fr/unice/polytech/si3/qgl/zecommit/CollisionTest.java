@@ -215,9 +215,20 @@ public class CollisionTest {
         Rectangle rectangle = new Rectangle(2.84,5.66, 0.79);
         Position rectanglePosition = new Position(4,5,0);
         Position M = new Position(2,4, 0);
+        Position N = new Position(4,4, 0);
+        Position O = new Position(5,6, 0);
+        Position P = new Position(4,6, 0);
 
         Collision collision = new Collision(new Circle(0), rectanglePosition, M);
+        assertTrue(collision.isInRectangle(rectangle));
 
+        collision = new Collision(new Circle(0), rectanglePosition, N);
+        assertTrue(collision.isInRectangle(rectangle));
+
+        collision = new Collision(new Circle(0), rectanglePosition, O);
+        assertTrue(collision.isInRectangle(rectangle));
+
+        collision = new Collision(new Circle(0), rectanglePosition, P);
         assertTrue(collision.isInRectangle(rectangle));
     }
 

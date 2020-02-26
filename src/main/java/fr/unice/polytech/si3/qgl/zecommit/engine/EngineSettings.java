@@ -13,12 +13,12 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
-import fr.unice.polytech.si3.qgl.zecommit.visible.Current;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.visible.Stream;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntityType;
 
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class EngineSettings {
     @JsonIgnore
     ArrayList<Wind> winds;
     @JsonIgnore
-    ArrayList<Current> currents;
+    ArrayList<Stream> streams;
     @JsonIgnore
     ArrayList<VisibleEntity> visibles;
     @JsonIgnore
@@ -70,7 +70,7 @@ public class EngineSettings {
         this.oarArrayList=new ArrayList<>();
         this.sailArrayList=new ArrayList<>();
         this.winds=new ArrayList<>();
-        this.currents= new ArrayList<>();
+        this.streams = new ArrayList<>();
         this.visibles=new ArrayList<>();
         this.oM = new ObjectMapper();
         setCheckpoints();
@@ -99,7 +99,7 @@ public class EngineSettings {
 
     public void setVisibleEntities() {
         this.visibleEntities=new ArrayList<>();
-        this.visibleEntities.add(new Current(new Position(0,100,0),new Rectangle(100,50,0),100));
+        this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
 
     }
 
@@ -319,30 +319,30 @@ public class EngineSettings {
         return value/n;
     }
 
-    public Current getCurrentOn(){
+    public Stream getCurrentOn(){
         for (VisibleEntity entity: visibleEntities) {
             Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
             if(entity.getType()==VisibleEntityType.CURRENT &&collision.collide()){
-                return (Current) entity;
+                return (Stream) entity;
             }
         }
         return null;
     }
 
     public double calculCurrent(){
-        Current current =getCurrentOn();
-        if(current!=null){
-            return current.getStrength()*(Math.max(ship.getPosition().getOrientation(),current.getPosition().getOrientation())
-                    /Math.min(ship.getPosition().getOrientation(),current.getPosition().getOrientation()));
+        Stream stream =getCurrentOn();
+        if(stream !=null){
+            if(stream.getPosition().getOrientation()==ship.getPosition().getOrientation()){
+                return stream.getStrength()/n;}
         }
-        else return 0;
+        return 0;
     }
 
     public void calcul(){
 
         double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/oarArrayList.size();
         vitesse+=calculWind();
-        //vitesse+=calculCurrent();
+        vitesse+=calculCurrent();
 
         double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
@@ -369,7 +369,7 @@ public class EngineSettings {
 
     public void checkCheckpoints(){
         if(ship.isInCheckpoint(checkpoints.get(0))&&checkpoints.size()>1){
-            System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
+            //System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
             checkpoints.remove(0);
         }
     }
@@ -394,7 +394,7 @@ public class EngineSettings {
     public void sortVisibleEntities(){
         for (VisibleEntity entity : visibleEntities){
             if (entity.getType().equals(VisibleEntityType.CURRENT)) {
-                this.currents.add((Current) entity);
+                this.streams.add((Stream) entity);
             }
             if (entity.getType().equals(VisibleEntityType.OTHERSHIP)) {
             }

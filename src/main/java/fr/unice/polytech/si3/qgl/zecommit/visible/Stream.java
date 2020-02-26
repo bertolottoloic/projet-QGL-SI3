@@ -5,18 +5,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
+import java.util.Objects;
+
 /**
  * Classe modélisant les courants marins
  * @author Nathan
  */
-public class Current extends VisibleEntity {
+public class Stream extends VisibleEntity {
     @JsonProperty("strength")
     private double strength;
 
     @JsonCreator
-    public Current(@JsonProperty("position") Position position, @JsonProperty("shape") Shape shape, @JsonProperty("strength") double strength) {
+    public Stream(@JsonProperty("position") Position position, @JsonProperty("shape") Shape shape, @JsonProperty("strength") double strength) {
         super(VisibleEntityType.CURRENT,position, shape);
         this.strength = strength;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strength,getPosition());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Stream)) {
+            return false;
+        }
+        Stream stream = (Stream) obj;
+        return( stream.strength== this.strength && stream.getPosition().equals(this.getPosition()));
     }
 
     //------------------------------GETTER-------------------------//

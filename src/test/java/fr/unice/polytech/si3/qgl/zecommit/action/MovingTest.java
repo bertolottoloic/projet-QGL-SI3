@@ -40,4 +40,26 @@ class MovingTest {
         assertEquals(0, moving.getYDistance());
     }
 
+    @Test
+    void mouvAvecDistanceNegativeTest() {
+        Moving moving = new Moving(s.getId(), 3,-3);
+        assertEquals(3, moving.getXDistance());
+        assertEquals(-2, moving.getYDistance());
+    }
+
+
+    @Test
+    void mouvAvecDistanceNegativeTest2() {
+        Moving moving = new Moving(s.getId(), -7,-3);
+        assertEquals(-5, moving.getXDistance());
+        assertEquals(0, moving.getYDistance());
+    }
+
+    @Test
+    void mouvTest() {
+        Moving moving = new Moving(s.getId(), 7,-3);
+        assertEquals(5, moving.getXDistance());
+        assertEquals(0, moving.getYDistance());
+    }
+
 }

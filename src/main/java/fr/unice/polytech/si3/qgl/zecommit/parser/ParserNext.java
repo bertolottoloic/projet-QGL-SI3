@@ -11,12 +11,12 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
-import fr.unice.polytech.si3.qgl.zecommit.other.*;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.visible.Current;
 import fr.unice.polytech.si3.qgl.zecommit.visible.OtherShip;
 import fr.unice.polytech.si3.qgl.zecommit.visible.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.visible.Stream;
 import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
 
 import java.util.ArrayList;
@@ -111,7 +111,7 @@ public class ParserNext {
                 String textType = typeVisibleEntities.asText();
                 switch (textType) {
                     case "stream":
-                        Current courant = objectMapper.readValue(current.toString(), Current.class);
+                        Stream courant = objectMapper.readValue(current.toString(), Stream.class);
                         visibleEntities.add(courant);
                         break;
                     case "reef":

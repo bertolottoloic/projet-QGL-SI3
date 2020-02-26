@@ -8,6 +8,7 @@ public class Turn extends Action{
         super(id,ActionType.TURN);
         if(rotation<=Math.PI/4&&rotation>=-Math.PI/4){
             this.rotation = rotation;
+            //Logs.add("S" + sailorId + ": turn : " + rotation);
         }
         else{
             this.rotation=0;
