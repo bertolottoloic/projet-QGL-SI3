@@ -28,6 +28,8 @@ public class Ship {
     private Deck deck;
     private List<Entity> entities;
     private Shape shape;
+    @JsonIgnore
+    private List<Oar> oars = new ArrayList<>();
 
 
     public Ship(String type, int life,Position position,String name, Deck deck, List<Entity> entities,Shape shape){
@@ -43,6 +45,32 @@ public class Ship {
     }
 
 
+    @JsonIgnore
+    private void createOarlist(){
+        this.oars = new ArrayList<>();
+        entities.forEach(entity->
+        {
+            if(entity.getType().equals(EntityType.OAR))
+                this.oars.add((Oar)entity);
+        });
+    }
+
+    /**
+     * Tri la liste de rames de façon à alterner les rames de gauches et de droites.
+     */
+    @JsonIgnore
+    private void sortOars(){
+        List<Oar> oarsLeft = getLeftOars();
+        List<Oar> oarsRight = getRightOars();
+        List<Oar> oarsSort = new ArrayList<>();
+        for(int i=0;i<Math.max(oarsLeft.size(),oarsRight.size());i++){
+            if(i<oarsLeft.size())
+                oarsSort.add(oarsLeft.get(i));
+            if(i<oarsRight.size())
+                oarsSort.add(oarsRight.get(i));
+        }
+        this.oars=oarsSort;
+    }
 
 
     /**
@@ -141,6 +169,79 @@ public class Ship {
     }
 
 
+    @JsonIgnore
+    public List<Oar> getOars(){
+        return this.oars;
+    }
+
+    @JsonIgnore
+    public int getOarsNb() {
+        return oars.size();
+    }
+
+
+    /**
+     *
+     * @return la liste des rames à gauche du bateau.
+     */
+    @JsonIgnore
+    public List<Oar> getLeftOars(){
+        ArrayList<Oar> oarsList = new ArrayList<>();
+        this.oars.forEach(oar->
+        {
+            if(deck.isLeft(oar))
+                oarsList.add(oar);
+        });
+        return oarsList;
+    }
+
+    /**
+     *
+     * @return la liste des rames à droite du bateau.
+     */
+    @JsonIgnore
+    public List<Oar> getRightOars(){
+        ArrayList<Oar> oarsList = new ArrayList<>();
+        this.oars.forEach(oar->
+        {
+            if(!deck.isLeft(oar))
+                oarsList.add(oar);
+        });
+        return oarsList;
+    }
+
+    /**
+     * retourne les marins du deck
+     * @return
+     */
+    public List<Sailor> getDeckSailors() {
+        return this.deck.getSailors();
+    }
+
+
+    /**
+     * retourne les rames du deck
+     * @return
+     */
+    public List<Oar> getDeckOars() {
+        return this.deck.getOars();
+    }
+
+    /**
+     * retourne les voiles du deck
+     * @return
+     */
+    public List<Sail> getDeckSails() {
+        return this.deck.getSails();
+    }
+
+    /**
+     * retourne le gouvernail du deck
+     * @return
+     */
+    public Rudder getDeckRudder() {
+        return this.deck.getRudder();
+    }
 
 
     //------------------------------SETTER-------------------------//
@@ -167,4 +268,5 @@ public class Ship {
     public void setShape(Shape shape) {
         this.shape = shape;
     }
+
 }

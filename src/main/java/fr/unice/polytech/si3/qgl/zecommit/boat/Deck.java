@@ -30,7 +30,9 @@ public class Deck{
     private List<Sail> sails;
     @JsonIgnore
     private List<Sailor> sailors;
+    @JsonIgnore
     private List<Sailor> rightSailorList;
+    @JsonIgnore
     private List<Sailor> leftSailorList;
 
     @Override
@@ -155,6 +157,25 @@ public class Deck{
     public boolean hasSail(){
         return !sails.isEmpty();
     }
+
+    public void addSailor(Sailor sailor) {
+        if (isLeft(sailor)) {
+            this.leftSailorList.add(sailor);
+        }
+        else {
+            this.rightSailorList.add(sailor);
+        }
+    }
+
+    public void deleteSailor(Sailor sailor) {
+        if (isLeft(sailor)) {
+            this.leftSailorList.remove(sailor);
+        }
+
+        else {
+            this.rightSailorList.remove(sailor);
+        }
+    }
     //------------------------------GETTER-------------------------//
 
     public int getWidth() {
@@ -191,6 +212,14 @@ public class Deck{
 
     public List<Sailor> getRightSailors() {
         return this.rightSailorList;
+    }
+
+    public int getNumberRightSailors() {
+        return this.rightSailorList.size();
+    }
+
+    public int getNumberLeftSailors() {
+        return this.leftSailorList.size();
     }
 
     //------------------------------SETTER-------------------------//
