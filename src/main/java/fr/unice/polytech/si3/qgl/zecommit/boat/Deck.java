@@ -12,7 +12,6 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.stream.Collectors;
 
 
@@ -52,11 +51,11 @@ public class Deck{
 
         this.width = width;
         this.length = length;
-        this.oars= new ArrayList<>();
-        this.sails= new ArrayList<>();
-        this.sailors= new ArrayList<>();
-        this.leftSailorList=new ArrayList<>();
-        this.rightSailorList=new ArrayList<>();
+        this.oars = new ArrayList<>();
+        this.sails = new ArrayList<>();
+        this.sailors = new ArrayList<>();
+        this.leftSailorList = new ArrayList<>();
+        this.rightSailorList = new ArrayList<>();
     }
 
     @JsonIgnore

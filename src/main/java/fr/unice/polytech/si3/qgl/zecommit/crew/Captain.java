@@ -30,9 +30,9 @@ public class Captain implements CaptainInterface {
     public Captain(Game game) {
         this.ship = game.getShip();
         this.deck = ship.getDeck();
-        this.goal= (Regatta) game.getGoal();
+        this.goal = (Regatta) game.getGoal();
         this.orientationTable = new OrientationTable(deck.getOars().size());
-        this.wind=game.getWind();
+        this.wind = game.getWind();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Captain implements CaptainInterface {
     public List<Sailor> doMoveSailors() {
         if (!deck.sailorsAreOnTheirEntity())
             return deck.getSailors();
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -97,12 +97,12 @@ public class Captain implements CaptainInterface {
 
     @Override
     public List<Sailor> doLiftSail() {
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
     public List<Sailor> doLowerSail() {
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -147,7 +147,7 @@ public class Captain implements CaptainInterface {
         return usedSailors;
     }
 
-    private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
+    private List<Sailor> decisionOrientation(Road road, int chosenAngle){
         Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
 

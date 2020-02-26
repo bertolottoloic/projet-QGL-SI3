@@ -13,8 +13,6 @@ import fr.unice.polytech.si3.qgl.zecommit.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
-// import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
-// import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 
 public class Cockpit implements ICockpit {
 	Game game;

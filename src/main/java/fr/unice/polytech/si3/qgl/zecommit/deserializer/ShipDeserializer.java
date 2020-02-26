@@ -36,7 +36,6 @@ public class ShipDeserializer extends JsonDeserializer {
 
         Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
 
-
         return new Ship(node.get("type").asText(), node.get("life").asInt(), position, node.get("name").asText(), deck, listEntitie, shape);
     }
 }
