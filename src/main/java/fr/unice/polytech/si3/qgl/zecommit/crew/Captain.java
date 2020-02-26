@@ -25,8 +25,6 @@ public class Captain implements CaptainInterface {
     private Deck deck;
     private Regatta goal;
     OrientationTable orientationTable;
-    private List<Sailor> rightSailorList;
-    private List<Sailor> leftSailorList;
     private Wind wind;
 
     public Captain(Game game) {
@@ -34,9 +32,6 @@ public class Captain implements CaptainInterface {
         this.deck = ship.getDeck();
         this.goal= (Regatta) game.getGoal();
         this.orientationTable = new OrientationTable(deck.getOars().size());
-
-        this.leftSailorList=new ArrayList<>();
-        this.rightSailorList=new ArrayList<>();
         this.wind=game.getWind();
     }
 
@@ -139,7 +134,7 @@ public class Captain implements CaptainInterface {
         // Activation des marins de gauche
         int l = 0;
         while (l < compo.getSailorsLeft()) {
-            usedSailors.add(leftSailorList.get(l));
+            usedSailors.add(deck.getLeftSailors().get(l));
             l++;
         }
 
@@ -147,7 +142,7 @@ public class Captain implements CaptainInterface {
         // Activation des marins de droite
         int r = 0;
         while (r < compo.getSailorsRight()) {
-            usedSailors.add(rightSailorList.get(r));
+            usedSailors.add(deck.getRightSailors().get(r));
             r++;
         }
         return usedSailors;
@@ -158,8 +153,8 @@ public class Captain implements CaptainInterface {
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
 
         boolean upSail = upSail();
-        rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
-        leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        List<Sailor> rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList()); //TODO comprend pas
+        List<Sailor> leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
 

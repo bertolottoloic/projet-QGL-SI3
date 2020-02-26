@@ -12,6 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.stream.Collectors;
 
 
@@ -30,6 +31,8 @@ public class Deck{
     private List<Sail> sails;
     @JsonIgnore
     private List<Sailor> sailors;
+    private List<Sailor> rightSailorList;
+    private List<Sailor> leftSailorList;
 
     @Override
     public boolean equals(Object o) {
@@ -52,6 +55,8 @@ public class Deck{
         this.oars= new ArrayList<>();
         this.sails= new ArrayList<>();
         this.sailors= new ArrayList<>();
+        this.leftSailorList=new ArrayList<>();
+        this.rightSailorList=new ArrayList<>();
     }
 
     @JsonIgnore
@@ -179,6 +184,14 @@ public class Deck{
     @JsonIgnore
     public List<Sail> getSails() {
         return sails;
+    }
+
+    public List<Sailor> getLeftSailors() {
+        return this.leftSailorList;
+    }
+
+    public List<Sailor> getRightSailors() {
+        return this.rightSailorList;
     }
 
     //------------------------------SETTER-------------------------//
