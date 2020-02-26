@@ -33,16 +33,6 @@ public class Sailor {
         this.name = name;
         this.entity = null;
     }
-    
-
-    @Override
-    public String toString(){
-        return "\n[id : "+this.id+
-                "\nx : "+this.x+
-                "\ny : "+this.y+
-                "\nname : "+this.name+"]";
-    }
-
 
     public void move(int xdistance, int ydistance){
         this.x+=xdistance;
@@ -52,10 +42,12 @@ public class Sailor {
     public int distanceToEntity(Entity e){
         return Math.abs(x-e.getX()) + Math.abs(y-e.getY());
     }
+
     @JsonIgnore
     public boolean isOnEntity(){
         return hasEntity() && this.x==this.entity.getX() && this.y==this.entity.getY();
     }
+
     @JsonIgnore
     public boolean hasEntity(){
         return this.entity!=null;
@@ -122,6 +114,8 @@ public class Sailor {
         this.entity.putSailorOn(this);
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -135,5 +129,14 @@ public class Sailor {
     @Override
     public int hashCode() {
         return Objects.hash(id, x, y);
+    }
+
+
+    @Override
+    public String toString(){
+        return "\n[id : "+this.id+
+                "\nx : "+this.x+
+                "\ny : "+this.y+
+                "\nname : "+this.name+"]";
     }
 }

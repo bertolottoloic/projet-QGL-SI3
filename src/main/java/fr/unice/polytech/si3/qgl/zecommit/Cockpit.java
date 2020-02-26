@@ -3,6 +3,8 @@ package fr.unice.polytech.si3.qgl.zecommit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.parser.InitGame;
@@ -13,8 +15,6 @@ import fr.unice.polytech.si3.qgl.zecommit.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
-// import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
-// import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 
 public class Cockpit implements ICockpit {
 	Game game;
@@ -58,7 +58,6 @@ public class Cockpit implements ICockpit {
 			res = "[ ]";
 		}
 
-		res = "";
 		return res;
 	}
 
@@ -93,7 +92,12 @@ public class Cockpit implements ICockpit {
 	 * @param nextRound
 	 */
 	public void updateGame(NextRound nextRound) {
-		game.setShip(nextRound.getShip());
+		Deck deck = game.getShip().getDeck();
+		Ship newShip = nextRound.getShip();
+		deck.updateSails(newShip.getEntities());
+		newShip.setDeck(deck);
+		game.setShip(newShip);
+		captain.setShip(newShip);
 		game.setVisibleEntities(nextRound.getVisibleEntities());
 		game.setWind(nextRound.getWind());
 	}

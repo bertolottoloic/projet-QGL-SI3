@@ -19,6 +19,7 @@ public class InitGame  {
         this.goal = goal;
         this.ship = ship;
         this.sailors = sailors;
+        this.ship.getDeck().setSailors(sailors);
         this.shipCount = shipCount;
     }
 

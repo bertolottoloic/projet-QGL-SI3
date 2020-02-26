@@ -12,7 +12,7 @@ public class Sail extends Entity {
 
     public Sail(int x,int y, Boolean openned){
 
-        super(EntityType.SAIL.toString(),x,y);
+        super(EntityType.sail,x,y);
         this.openned = openned;
     }
 

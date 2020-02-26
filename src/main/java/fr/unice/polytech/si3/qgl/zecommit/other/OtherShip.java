@@ -1,12 +1,16 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.OtherShipDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShipDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.List;
 
+@JsonDeserialize(using = OtherShipDeserializer.class)
 public class OtherShip extends VisibleEntitie {
 
     private String type;
@@ -14,11 +18,10 @@ public class OtherShip extends VisibleEntitie {
     private Position position;
     private Shape shape;
 
-    public OtherShip(int life, Position position, Shape shape){
+    public OtherShip(String type, int life, Position position, Shape shape){
         super(position, shape);
-        this.type = "ship";
+        this.type = type;
         this.life = life;
-
 
     }
 

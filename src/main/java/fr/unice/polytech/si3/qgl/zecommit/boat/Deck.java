@@ -53,23 +53,23 @@ public class Deck{
 
         this.width = width;
         this.length = length;
-        this.oars= new ArrayList<>();
-        this.sails= new ArrayList<>();
-        this.sailors= new ArrayList<>();
-        this.leftSailorList=new ArrayList<>();
-        this.rightSailorList=new ArrayList<>();
+        this.oars = new ArrayList<>();
+        this.sails = new ArrayList<>();
+        this.sailors = new ArrayList<>();
+        this.leftSailorList = new ArrayList<>();
+        this.rightSailorList = new ArrayList<>();
     }
 
     @JsonIgnore
     public void initDeck(List<Entity> entities){
         for (Entity entity : entities){
-            if (entity.getType().equals(EntityType.OAR)) {
+            if (entity.getType().equals(EntityType.oar)) {
                 this.oars.add((Oar) entity);
             }
-            if (entity.getType().equals(EntityType.RUDDER)) {
+            if (entity.getType().equals(EntityType.rudder)) {
                 this.rudder=(Rudder)entity;
             }
-            if (entity.getType().equals(EntityType.SAIL)) {
+            if (entity.getType().equals(EntityType.sail)) {
                 this.sails.add((Sail) entity);
             }
         }
@@ -176,6 +176,18 @@ public class Deck{
             this.rightSailorList.remove(sailor);
         }
     }
+
+    public void updateSails(List<Entity> entities){
+        List<Sail> sails = new ArrayList<>();
+        for (Entity entity : entities) {
+            if(entity.getType()==EntityType.sail)
+                sails.add((Sail)entity);
+        }
+        this.sails.forEach(sail -> {
+            Sail same = sails.stream().filter(s-> s.equals(sail)).findAny().get();
+            sail.setOpenned(same.isOpenned());
+        });
+    }
     //------------------------------GETTER-------------------------//
 
     public int getWidth() {
@@ -206,18 +218,22 @@ public class Deck{
         return sails;
     }
 
+    @JsonIgnore
     public List<Sailor> getLeftSailors() {
         return this.leftSailorList;
     }
 
+    @JsonIgnore
     public List<Sailor> getRightSailors() {
         return this.rightSailorList;
     }
 
+    @JsonIgnore
     public int getNumberRightSailors() {
         return this.rightSailorList.size();
     }
 
+    @JsonIgnore
     public int getNumberLeftSailors() {
         return this.leftSailorList.size();
     }

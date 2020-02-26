@@ -93,5 +93,4 @@ public class CaptainMate {
         refreshData(game);
         this.actions.removeAll(this.actions);
     }
-
 }

@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
@@ -30,6 +31,7 @@ public class Captain implements CaptainInterface {
 
     public Captain(Game game) {
         this.ship = game.getShip();
+
         this.goal= (Regatta) game.getGoal();
         this.orientationTable = new OrientationTable(ship.getDeck().getOars().size());
         this.wind=game.getWind();
@@ -70,7 +72,7 @@ public class Captain implements CaptainInterface {
     public List<Sailor> doMoveSailors() {
         if (!ship.getDeck().sailorsAreOnTheirEntity())
             return ship.getDeckSailors();
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -97,12 +99,12 @@ public class Captain implements CaptainInterface {
 
     @Override
     public List<Sailor> doLiftSail() {
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
     public List<Sailor> doLowerSail() {
-        return new ArrayList<Sailor>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -135,7 +137,7 @@ public class Captain implements CaptainInterface {
         return usedSailors;
     }
 
-    private ArrayList<Sailor> decisionOrientation(Road road, int chosenAngle){
+    private List<Sailor> decisionOrientation(Road road, int chosenAngle){
         Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
         boolean upSail = upSail();
@@ -188,11 +190,12 @@ public class Captain implements CaptainInterface {
         return ship;
     }
 
-    public void refreshData(Game game){
-        this.ship = game.getShip();
-        //this.visibleEntities=game.getVisibleEntities();
-        this.wind=game.getWind();
-    }
 
+    /**
+     * @param ship the ship to set
+     */
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
 
 }

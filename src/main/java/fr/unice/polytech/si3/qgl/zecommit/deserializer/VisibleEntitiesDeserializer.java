@@ -45,10 +45,8 @@ public class VisibleEntitiesDeserializer extends StdDeserializer {
         }
         else if (type.equals("ship")) {
             Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
-            Deck deck = objectMapper.readValue(node.get("deck").toPrettyString(), Deck.class);
             Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
-            List<Entity> entities = objectMapper.readValue(node.get("entities").toPrettyString(), new TypeReference<>() {});
-            return new OtherShip(node.get("life").asInt(), position, shape);
+            return new OtherShip(node.get("type").asText(), node.get("life").asInt(), position, shape);
         }
         else if (type.equals("reef")) {
             Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);

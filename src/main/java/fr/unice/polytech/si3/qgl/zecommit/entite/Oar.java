@@ -10,6 +10,6 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 public class Oar extends Entity {
     public Oar(int x, int y){
-        super(EntityType.OAR.toString(),x,y);
+        super(EntityType.oar,x,y);
     }
 }

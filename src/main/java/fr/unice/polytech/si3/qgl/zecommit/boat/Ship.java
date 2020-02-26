@@ -30,10 +30,7 @@ public class Ship {
     private Shape shape;
     @JsonIgnore
     private List<Oar> oars = new ArrayList<>();
-    @JsonIgnore
-    private  Rudder rudder;
-    @JsonIgnore
-    private ArrayList<Sail> sails;
+
 
     public Ship(String type, int life,Position position,String name, Deck deck, List<Entity> entities,Shape shape){
         this.type = type;
@@ -53,7 +50,7 @@ public class Ship {
         this.oars = new ArrayList<>();
         entities.forEach(entity->
         {
-            if(entity.getType().equals(EntityType.OAR))
+            if(entity.getType().equals(EntityType.oar))
                 this.oars.add((Oar)entity);
         });
     }
@@ -184,7 +181,7 @@ public class Ship {
 
 
     /**
-     * 
+     *
      * @return la liste des rames à gauche du bateau.
      */
     @JsonIgnore
@@ -199,7 +196,7 @@ public class Ship {
     }
 
     /**
-     * 
+     *
      * @return la liste des rames à droite du bateau.
      */
     @JsonIgnore
@@ -213,15 +210,11 @@ public class Ship {
         return oarsList;
     }
 
-    @JsonIgnore
-    public List<Sail> getSails(){
-        return sails;
-    }
-
     /**
      * retourne les marins du deck
      * @return
      */
+    @JsonIgnore
     public List<Sailor> getDeckSailors() {
         return this.deck.getSailors();
     }
@@ -231,6 +224,7 @@ public class Ship {
      * retourne les rames du deck
      * @return
      */
+    @JsonIgnore
     public List<Oar> getDeckOars() {
         return this.deck.getOars();
     }
@@ -239,6 +233,7 @@ public class Ship {
      * retourne les voiles du deck
      * @return
      */
+    @JsonIgnore
     public List<Sail> getDeckSails() {
         return this.deck.getSails();
     }
@@ -247,6 +242,7 @@ public class Ship {
      * retourne le gouvernail du deck
      * @return
      */
+    @JsonIgnore
     public Rudder getDeckRudder() {
         return this.deck.getRudder();
     }
@@ -277,7 +273,4 @@ public class Ship {
         this.shape = shape;
     }
 
-    public Entity getRudder() {
-        return this.rudder;
-    }
 }

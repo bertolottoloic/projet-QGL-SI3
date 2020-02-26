@@ -108,6 +108,7 @@ public class EngineSettings {
         this.sailors.add(new Sailor(19,3,4,"Joris"));
 
 
+
     }
 
     public void setGoal() {
@@ -147,8 +148,9 @@ public class EngineSettings {
         this.entities.add(new Oar(8,4));
         this.entities.add(new Oar(9,4));
         this.entities.add(new Rudder(10,4));
-        
+
         this.entities.add(new Sail(5,2,false));
+
     }
 
     public void setShape() {
@@ -340,13 +342,13 @@ public class EngineSettings {
 
     public void sortEntities(){
         for (Entity entity : entities){
-            if (entity.getType().equals(EntityType.OAR)) {
+            if (entity.getType().equals(EntityType.oar)) {
                 this.oarArrayList.add((Oar) entity);
             }
-            if (entity.getType().equals(EntityType.RUDDER)) {
+            if (entity.getType().equals(EntityType.rudder)) {
                 this.rudder=new Rudder(entity.getX(),entity.getY());
             }
-            if (entity.getType().equals(EntityType.SAIL)) {
+            if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
             }
         }
@@ -383,6 +385,7 @@ public class EngineSettings {
     /**
      * @return the deck
      */
+    @JsonIgnore
     public Deck getDeck() {
         return deck;
     }
