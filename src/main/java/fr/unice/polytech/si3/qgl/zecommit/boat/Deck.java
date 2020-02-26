@@ -206,18 +206,22 @@ public class Deck{
         return sails;
     }
 
+    @JsonIgnore
     public List<Sailor> getLeftSailors() {
         return this.leftSailorList;
     }
 
+    @JsonIgnore
     public List<Sailor> getRightSailors() {
         return this.rightSailorList;
     }
 
+    @JsonIgnore
     public int getNumberRightSailors() {
         return this.rightSailorList.size();
     }
 
+    @JsonIgnore
     public int getNumberLeftSailors() {
         return this.leftSailorList.size();
     }

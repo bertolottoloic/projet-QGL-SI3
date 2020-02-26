@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;

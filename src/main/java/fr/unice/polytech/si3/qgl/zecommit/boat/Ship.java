@@ -214,6 +214,7 @@ public class Ship {
      * retourne les marins du deck
      * @return
      */
+    @JsonIgnore
     public List<Sailor> getDeckSailors() {
         return this.deck.getSailors();
     }
@@ -223,6 +224,7 @@ public class Ship {
      * retourne les rames du deck
      * @return
      */
+    @JsonIgnore
     public List<Oar> getDeckOars() {
         return this.deck.getOars();
     }
@@ -231,6 +233,7 @@ public class Ship {
      * retourne les voiles du deck
      * @return
      */
+    @JsonIgnore
     public List<Sail> getDeckSails() {
         return this.deck.getSails();
     }
@@ -239,6 +242,7 @@ public class Ship {
      * retourne le gouvernail du deck
      * @return
      */
+    @JsonIgnore
     public Rudder getDeckRudder() {
         return this.deck.getRudder();
     }
