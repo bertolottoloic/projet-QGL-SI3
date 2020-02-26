@@ -50,7 +50,7 @@ public class Ship {
         this.oars = new ArrayList<>();
         entities.forEach(entity->
         {
-            if(entity.getType().equals(EntityType.OAR))
+            if(entity.getType().equals(EntityType.oar))
                 this.oars.add((Oar)entity);
         });
     }

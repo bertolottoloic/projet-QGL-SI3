@@ -340,13 +340,13 @@ public class EngineSettings {
 
     public void sortEntities(){
         for (Entity entity : entities){
-            if (entity.getType().equals(EntityType.OAR)) {
+            if (entity.getType().equals(EntityType.oar)) {
                 this.oarArrayList.add((Oar) entity);
             }
-            if (entity.getType().equals(EntityType.RUDDER)) {
+            if (entity.getType().equals(EntityType.rudder)) {
                 this.rudder=new Rudder(entity.getX(),entity.getY());
             }
-            if (entity.getType().equals(EntityType.SAIL)) {
+            if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
             }
         }

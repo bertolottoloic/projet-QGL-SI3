@@ -187,6 +187,11 @@ public class Captain implements CaptainInterface {
         return ship;
     }
 
-
+    /**
+     * @param ship the ship to set
+     */
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
 
 }

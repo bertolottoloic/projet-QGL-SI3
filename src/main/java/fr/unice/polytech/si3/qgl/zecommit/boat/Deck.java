@@ -63,13 +63,13 @@ public class Deck{
     @JsonIgnore
     public void initDeck(List<Entity> entities){
         for (Entity entity : entities){
-            if (entity.getType().equals(EntityType.OAR)) {
+            if (entity.getType().equals(EntityType.oar)) {
                 this.oars.add((Oar) entity);
             }
-            if (entity.getType().equals(EntityType.RUDDER)) {
+            if (entity.getType().equals(EntityType.rudder)) {
                 this.rudder=(Rudder)entity;
             }
-            if (entity.getType().equals(EntityType.SAIL)) {
+            if (entity.getType().equals(EntityType.sail)) {
                 this.sails.add((Sail) entity);
             }
         }
@@ -175,6 +175,18 @@ public class Deck{
         else {
             this.rightSailorList.remove(sailor);
         }
+    }
+
+    public void updateSails(List<Entity> entities){
+        List<Sail> sails = new ArrayList<>();
+        for (Entity entity : entities) {
+            if(entity.getType()==EntityType.sail)
+                sails.add((Sail)entity);
+        }
+        this.sails.forEach(sail -> {
+            Sail same = sails.stream().filter(s-> s.equals(sail)).findAny().get();
+            sail.setOpenned(same.isOpenned());
+        });
     }
     //------------------------------GETTER-------------------------//
 
