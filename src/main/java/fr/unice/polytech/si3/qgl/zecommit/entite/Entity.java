@@ -15,13 +15,13 @@ import java.util.Objects;
 
 @JsonDeserialize(using = EntityDeserializer.class)
 public abstract class Entity {
-    private String type;
+    private EntityType type;
     private int x;
     private int y;
     @JsonIgnore
     private Sailor sailorOn;
 
-    public Entity(String type,int x, int y) {
+    public Entity(EntityType type,int x, int y) {
         this.type = type;
         this.x = x;
         this.y = y;
@@ -62,7 +62,7 @@ public abstract class Entity {
 
     //------------------------------GETTER-------------------------//
 
-    public String getType() {
+    public EntityType getType() {
         return type;
     }
 
@@ -84,7 +84,7 @@ public abstract class Entity {
 
     //------------------------------SETTER-------------------------//
 
-    public void setType(String type) {
+    public void setType(EntityType type) {
         this.type = type;
     }
 

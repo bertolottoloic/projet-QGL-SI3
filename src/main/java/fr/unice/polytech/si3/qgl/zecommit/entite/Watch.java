@@ -8,7 +8,7 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
 public class Watch extends Entity {
 
     public Watch(int x, int y){
-    super(EntityType.WATCH.toString(),x,y);
+    super(EntityType.watch,x,y);
     }
 }
 
