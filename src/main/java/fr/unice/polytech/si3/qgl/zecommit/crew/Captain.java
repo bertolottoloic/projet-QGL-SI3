@@ -22,42 +22,40 @@ import java.util.stream.Collectors;
 public class Captain implements CaptainInterface {
 
     private Ship ship;
-    private Deck deck;
     private Regatta goal;
     OrientationTable orientationTable;
     private Wind wind;
 
     public Captain(Game game) {
         this.ship = game.getShip();
-        this.deck = ship.getDeck();
         this.goal= (Regatta) game.getGoal();
-        this.orientationTable = new OrientationTable(deck.getOars().size());
+        this.orientationTable = new OrientationTable(ship.getDeck().getOars().size());
         this.wind=game.getWind();
     }
 
     @Override
     public void attributeEntitiesToSailors() {
-        List<Sailor> sailors = deck.getSailors();
+        List<Sailor> sailors = ship.getDeck().getSailors();
         List<Sailor> sailorsTmp = new ArrayList<>(sailors);
-        List<Entity> oars = new ArrayList<>(deck.getOars());
+        List<Entity> oars = new ArrayList<>(ship.getDeck().getOars());
         sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
         Sailor sailor;
         if(sailorsTmp.size()>4){
-            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(deck.getRudder());
-            if(sailorsTmp.size()%2>0 && !deck.getSails().isEmpty()){
-                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(deck.getSails().get(0));
+            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeck().getRudder());
+            if(sailorsTmp.size()%2>0 && !ship.getDeck().getSails().isEmpty()){
+                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeck().getSails().get(0));
             }
         }
         for (Sailor tmp : sailorsTmp) {
-            deck.getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
-            Oar closestOar = deck.getOars().get(0);
+            ship.getDeck().getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
+            Oar closestOar = ship.getDeck().getOars().get(0);
             if (!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar) <= 5 && !tmp.hasEntity()) {
                 tmp.setOnEntity(closestOar);
             }
         }
         for (Sailor tmp : sailorsTmp) {
-            deck.getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
-            for (Oar oar : deck.getOars()) {
+            ship.getDeck().getOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
+            for (Oar oar : ship.getDeck().getOars()) {
                 if (!oar.hasSailorOn() && !tmp.hasEntity()) {
                     tmp.setOnEntity(oar);
                 }
@@ -69,8 +67,8 @@ public class Captain implements CaptainInterface {
 
     @Override
     public List<Sailor> doMoveSailors() {
-        if (!deck.sailorsAreOnTheirEntity())
-            return deck.getSailors();
+        if (!ship.getDeck().sailorsAreOnTheirEntity())
+            return ship.getDeck().getSailors();
         return new ArrayList<Sailor>();
     }
 
@@ -81,16 +79,16 @@ public class Captain implements CaptainInterface {
             Logs.add("Checkpoint done");
         }
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        int chosenAngle = road.findClosestPossibleAngle(deck.getOars().size());
+        int chosenAngle = road.findClosestPossibleAngle(ship.getDeck().getOars().size());
         return decisionOrientation(road,chosenAngle);
     }
 
     @Override
     public SimpleEntry<Sailor, Double> doTurn() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(deck.getOars().size()));
-        if (deck.getRudder() != null && deck.getRudder().hasSailorOn())
-            return new SimpleEntry<Sailor,Double>(deck.getRudder().getSailorOn(),angle);
+        double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size()));
+        if (ship.getDeck().getRudder() != null && ship.getDeck().getRudder().hasSailorOn())
+            return new SimpleEntry<Sailor,Double>(ship.getDeck().getRudder().getSailorOn(),angle);
         return null;
 
 
@@ -119,7 +117,7 @@ public class Captain implements CaptainInterface {
      */
     public void refreshGame(Game game){
         ship=game.getShip();
-        this.deck.setOars( ship.getDeck().getOars());
+        this.getDeck().setOars( ship.getDeck().getOars());
 
     }
 
@@ -134,7 +132,7 @@ public class Captain implements CaptainInterface {
         // Activation des marins de gauche
         int l = 0;
         while (l < compo.getSailorsLeft()) {
-            usedSailors.add(deck.getLeftSailors().get(l));
+            usedSailors.add(ship.getDeck().getLeftSailors().get(l));
             l++;
         }
 
@@ -142,7 +140,7 @@ public class Captain implements CaptainInterface {
         // Activation des marins de droite
         int r = 0;
         while (r < compo.getSailorsRight()) {
-            usedSailors.add(deck.getRightSailors().get(r));
+            usedSailors.add(ship.getDeck().getRightSailors().get(r));
             r++;
         }
         return usedSailors;
@@ -153,8 +151,8 @@ public class Captain implements CaptainInterface {
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
 
         boolean upSail = upSail();
-        List<Sailor> rightSailorList = deck.getUsedOars().stream().filter(oar -> !deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList()); //TODO comprend pas
-        List<Sailor> leftSailorList = deck.getUsedOars().stream().filter(oar -> deck.isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        List<Sailor> rightSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList()); //TODO comprend pas
+        List<Sailor> leftSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList());
         int nbSailorsRight = rightSailorList.size();
         int nbSailorsLeft = leftSailorList.size();
 
@@ -175,16 +173,12 @@ public class Captain implements CaptainInterface {
         return (wind != null && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())>0 && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())<Math.PI/2);
     }
 
-    public void refreshData(Game game){
-        this.ship = game.getShip();
-        this.deck = ship.getDeck();
-    }
 
 
     ////////////////////// GETTER ////////////////////////////////////////////
 
     public Deck getDeck(){
-        return this.deck;
+        return this.ship.getDeck();
     }
 
     public Goal getGoal(){

@@ -73,7 +73,7 @@ public class CaptainMate {
     }
 
     public List<Action> actions(Game game){
-        refreshData(game);
+        refreshData();
         if(this.initGame){
             captain.attributeEntitiesToSailors();
             this.initGame = false;
@@ -89,8 +89,7 @@ public class CaptainMate {
 
     }
 
-    public void refreshData(Game game){
-        captain.refreshData(game);
+    public void refreshData(){
         this.actions.removeAll(this.actions);
     }
 
