@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 
@@ -72,7 +71,7 @@ public class CaptainMate {
         }
     }
 
-    public List<Action> actions(Game game){
+    public List<Action> actions(){
         refreshData();
         if(this.initGame){
             captain.attributeEntitiesToSailors();

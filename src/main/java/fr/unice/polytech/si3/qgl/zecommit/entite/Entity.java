@@ -5,13 +5,10 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
  */
 
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.EntityDeserializer;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.Objects;
 

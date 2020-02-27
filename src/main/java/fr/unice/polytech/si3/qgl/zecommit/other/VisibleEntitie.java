@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.VisibleEntitiesDeserializer;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 
@@ -35,7 +34,6 @@ public abstract class VisibleEntitie {
         return shape;
     }
 
-    @JsonIgnore
     public VisibleEntityType getType(){return this.type;}
     //------------------------------SETTER-------------------------//
 

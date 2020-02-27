@@ -3,10 +3,8 @@ package fr.unice.polytech.si3.qgl.zecommit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
-
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
-
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.parser.InitGame;
@@ -48,7 +46,7 @@ public class Cockpit implements ICockpit {
 			updateGame(Parser.parseNextRound(jsonNextRound));
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
-				actions = captainMate.actions(game);
+				actions = captainMate.actions();
 			}
 
 			Output output = new Output();

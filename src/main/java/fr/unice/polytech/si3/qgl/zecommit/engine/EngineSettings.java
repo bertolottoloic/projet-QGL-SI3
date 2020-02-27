@@ -14,12 +14,11 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -415,12 +414,12 @@ public class EngineSettings{
 
     public void sortVisibleEntities(){
         for (Stream entity : visibleEntities){
-            if (entity.getType().equals(VisibleEntityType.CURRENT)) {
+            if (entity.getType().equals(VisibleEntityType.stream)) {
                 this.streams.add((Stream) entity);
             }
-            if (entity.getType().equals(VisibleEntityType.OTHERSHIP)) {
+            if (entity.getType().equals(VisibleEntityType.ship)) {
             }
-            if (entity.getType().equals(VisibleEntityType.REEF)) {
+            if (entity.getType().equals(VisibleEntityType.reef)) {
             }
         }
     }

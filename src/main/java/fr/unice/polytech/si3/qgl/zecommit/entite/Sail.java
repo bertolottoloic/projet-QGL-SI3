@@ -1,9 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-
 import java.util.Objects;
 
 /**

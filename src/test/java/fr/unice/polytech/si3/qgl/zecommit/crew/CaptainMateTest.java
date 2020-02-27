@@ -2,43 +2,43 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 
 import fr.unice.polytech.si3.qgl.zecommit.Game;
-import fr.unice.polytech.si3.qgl.zecommit.Logs;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import static org.mockito.Mockito.mock;
 
 import java.util.Arrays;
 import java.util.List;
 
+import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
-// import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
-import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+import org.junit.jupiter.api.Disabled;
 
 
 public class CaptainMateTest {
 
     Sailor sailor1;
-    // CaptainMate captainMate;
+    CaptainMate captainMate;
     Ship ship;
     List<Entity> entities;
     List<Sailor> sailors;
-    Game game;
+    Captain captain;
 
     @BeforeEach
-    void setUp() {
-        Logs logs = new Logs();
+    public void setUp() {
         Game game = mock(Game.class);
         sailor1 = new Sailor(1, 0, 0, "sailor1");
-        // captainMate = new CaptainMate(game);
+        captain = new Captain(game);
+        captainMate = new CaptainMate(captain);
         Oar o1 = new Oar(2,0);
         Oar o2 = new Oar(2,3);
 
@@ -115,9 +115,5 @@ public class CaptainMateTest {
     // }
 
 
-    @Test
-    public void toLiftSailTest() {
-        Sail sail = new Sail(1,1, false);
-    }
 
 }

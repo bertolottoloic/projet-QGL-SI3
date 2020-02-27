@@ -17,7 +17,7 @@ public class Stream extends VisibleEntitie {
     private double strength;
 
     public Stream(Position position, Shape shape, double strength) {
-        super(VisibleEntityType.CURRENT, position, shape);
+        super(VisibleEntityType.stream, position, shape);
         this.strength = strength;
     }
 
@@ -42,29 +42,12 @@ public class Stream extends VisibleEntitie {
 
     //------------------------------GETTER-------------------------//
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public Shape getShape() {
-        return shape;
-    }
-
     public double getStrength() {
         return strength;
     }
 
 
     //------------------------------SETTER-------------------------//
-
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public void setShape(Shape shape) {
-        this.shape = shape;
-    }
 
     public void setStrength(double strength) {
         this.strength = strength;

@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -14,7 +13,7 @@ import java.io.IOException;
 public class PositionDeserializer extends JsonDeserializer {
 
     @Override
-    public Position deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Position deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         ObjectCodec oc = jsonParser.getCodec();
         JsonNode node = oc.readTree(jsonParser);
         return new Position(node.get("x").asDouble(), node.get("y").asDouble(), node.get("orientation").asDouble());

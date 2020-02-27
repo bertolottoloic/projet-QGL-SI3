@@ -8,17 +8,17 @@ import java.util.List;
 @JsonDeserialize(using = CheckpointsDeserializer.class)
 public class Checkpoints {
 
-    List<Checkpoint> checkpoints;
+    List<Checkpoint> myCheckpoints;
 
     public Checkpoints(List<Checkpoint> checkpoints) {
-        this.checkpoints = checkpoints;
+        this.myCheckpoints = checkpoints;
     }
 
     public List<Checkpoint> getCheckpoints() {
-        return checkpoints;
+        return myCheckpoints;
     }
 
     public void setCheckpoints(List<Checkpoint> checkpoints) {
-        this.checkpoints = checkpoints;
+        this.myCheckpoints = checkpoints;
     }
 }

@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -25,7 +24,7 @@ public class InitGameDeserializer extends StdDeserializer<InitGame> {
     }
 
     @Override
-    public InitGame deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public InitGame deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         ObjectCodec codec = jsonParser.getCodec();

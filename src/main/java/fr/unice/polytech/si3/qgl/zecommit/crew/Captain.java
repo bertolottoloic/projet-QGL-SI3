@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 
-
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
@@ -14,8 +13,6 @@ import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
-
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -29,7 +26,6 @@ public class Captain implements CaptainInterface {
     private Regatta goal;
     private OrientationTable orientationTable;
     private Wind wind;
-    private List<VisibleEntitie> visibleEntities;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -92,7 +88,7 @@ public class Captain implements CaptainInterface {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size()));
         if (ship.getDeckRudder() != null && ship.getDeckRudder().hasSailorOn())
-            return new SimpleEntry<Sailor,Double>(ship.getDeckRudder().getSailorOn(),angle);
+            return new SimpleEntry<>(ship.getDeckRudder().getSailorOn(),angle);
         return null;
 
 

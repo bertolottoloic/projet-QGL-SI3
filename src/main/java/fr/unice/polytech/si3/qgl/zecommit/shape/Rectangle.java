@@ -28,9 +28,8 @@ public class Rectangle extends Shape {
 
     @Override
     public String toString() {
-        String chaine = "type : "+super.getType()+
+        return "type : "+super.getType()+
                 " [ width : "+this.width+" , height : "+this.height+" , orientation : "+this.orientation+" ] ";
-        return chaine;
     }
 
 
