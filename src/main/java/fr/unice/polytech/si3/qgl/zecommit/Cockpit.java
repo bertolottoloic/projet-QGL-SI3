@@ -44,6 +44,7 @@ public class Cockpit implements ICockpit {
 	public String nextRound(String jsonNextRound) {
 		String res;
 		try {
+			Logs.add("\n - - - \n");
 			updateGame(Parser.parseNextRound(jsonNextRound));
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
@@ -55,8 +56,6 @@ public class Cockpit implements ICockpit {
 
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur nextRound");
-			System.out.println(Logs.sortie()); //TODO à supprimer
-
 			res = "[ ]";
 		}
 

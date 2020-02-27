@@ -140,7 +140,6 @@ public class Captain implements CaptainInterface {
 
     private List<Sailor> decisionOrientation(Road road, int chosenAngle){
 
-        Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
         boolean upSail = upSail();
         List<Sailor> rightSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar)).map(oar -> oar.getSailorOn()).collect(Collectors.toList()); //TODO comprend pas
