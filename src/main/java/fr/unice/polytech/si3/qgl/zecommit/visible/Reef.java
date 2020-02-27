@@ -9,11 +9,11 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
  * Classe correspondant aux récifs
  * @author Nathan
  */
-public class Reef extends VisibleEntity {
+public class Reef extends VisibleEntitie {
 
     @JsonCreator
-    public Reef(@JsonProperty("position") Position position, @JsonProperty("shape") Shape shape) {
-        super(VisibleEntityType.REEF,position, shape);
+    public Reef(Position position, Shape shape) {
+        super(position, shape);
     }
 
 

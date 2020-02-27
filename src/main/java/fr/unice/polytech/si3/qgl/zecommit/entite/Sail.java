@@ -1,7 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.entite;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.Objects;
 
@@ -13,9 +14,10 @@ public class Sail extends Entity {
 
     private boolean openned;
 
-    @JsonCreator
-    public Sail(@JsonProperty("x")int x, @JsonProperty("y")int y,@JsonProperty("openned") Boolean openned){
-        super(EntityType.SAIL,x,y);
+
+    public Sail(int x,int y, Boolean openned){
+
+        super(EntityType.sail,x,y);
         this.openned = openned;
     }
 
@@ -44,5 +46,6 @@ public class Sail extends Entity {
     public int hashCode() {
         return Objects.hash(super.hashCode(), openned);
     }
+
 }
 

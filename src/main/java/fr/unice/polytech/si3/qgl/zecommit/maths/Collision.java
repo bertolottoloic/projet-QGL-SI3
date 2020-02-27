@@ -26,7 +26,9 @@ public class Collision {
 
     public boolean collide(){
         //cas avec un cercle
-        if (shape1.isCircle() && distanceTo() < shape1.getRadius()) {
+
+        if (shape1.isCircle() && distanceTo() < shape1.getShapeRadius()) {
+
             //Si le centre du bateau est dans le CP
             return true;
         }

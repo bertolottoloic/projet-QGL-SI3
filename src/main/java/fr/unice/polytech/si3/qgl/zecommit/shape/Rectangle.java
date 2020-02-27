@@ -1,9 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
@@ -12,16 +10,15 @@ import java.util.Objects;
  * @author  Clement P
  */
 
-public class Rectangle extends Polygone {
-    @JsonProperty("width")
-    protected double width;
-    @JsonAlias({"length", "height"})
-    protected double height;
 
+public class Rectangle extends Shape {
+    private double width;
+    private double height;
+    private double orientation;
 
-    @JsonCreator
-    public Rectangle(@JsonProperty("width")double width, @JsonProperty("height")double height, @JsonProperty("orientation")double orientation){
-        super(ShapeType.RECTANGLE, orientation,width,height);
+    public Rectangle(double width,double height, double orientation){
+        super(ShapeType.RECTANGLE.toString());
+
         this.width=width;
         this.height=height;
         this.orientation=orientation;
@@ -35,6 +32,7 @@ public class Rectangle extends Polygone {
                 " [ width : "+this.width+" , height : "+this.height+" , orientation : "+this.orientation+" ] ";
         return chaine;
     }
+
 
     @Override
     public int hashCode() {
@@ -54,23 +52,19 @@ public class Rectangle extends Polygone {
     }
     //-------------------------GETTER-------------------------//
 
-    @JsonProperty("height")
     public double getHeight() {
         return height;
     }
 
-    @JsonProperty("length")
     @JsonIgnore
-    public double getLength() {
+    public double getlength() {
         return height;
     }
 
-    @JsonProperty("width")
     public double getWidth() {
         return width;
     }
 
-    @JsonProperty("orientation")
     public double getOrientation() {
         return orientation;
     }
@@ -78,22 +72,18 @@ public class Rectangle extends Polygone {
     //-------------------------SETTER-------------------------//
 
 
-    @JsonProperty("width")
     public void setWidth(double width) {
         this.width = width;
     }
 
-    @JsonProperty("height")
     public void setHeight(double height) {
         this.height = height;
     }
 
-    @JsonProperty("length")
     public void setlength(double height) {
         this.height = height;
     }
 
-    @JsonProperty("orientation")
     public void setOrientation(double orientation) {
         this.orientation = orientation;
     }

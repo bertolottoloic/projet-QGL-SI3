@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.visible;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.Objects;
@@ -11,13 +12,13 @@ import java.util.Objects;
  * Classe modélisant les courants marins
  * @author Nathan
  */
-public class Stream extends VisibleEntity {
+public class Stream extends VisibleEntitie {
     @JsonProperty("strength")
     private double strength;
 
     @JsonCreator
     public Stream(@JsonProperty("position") Position position, @JsonProperty("shape") Shape shape, @JsonProperty("strength") double strength) {
-        super(VisibleEntityType.CURRENT,position, shape);
+        super(position, shape);
         this.strength = strength;
     }
 
@@ -52,4 +53,6 @@ public class Stream extends VisibleEntity {
     public void setStrength(double strength) {
         this.strength = strength;
     }
+
+
 }

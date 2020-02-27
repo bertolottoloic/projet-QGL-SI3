@@ -1,58 +1,45 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
-import com.fasterxml.jackson.annotation.*;
-
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Rectangle.class, name = "rectangle"),
-        @JsonSubTypes.Type(value = Circle.class, name = "circle")
-})
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShapeDeserializer;
 
 
 /**
  * Model de Forme
  * @author Clement P
  */
+@JsonDeserialize(using = ShapeDeserializer.class)
 public abstract class Shape {
-    @JsonProperty("type")
-    @JsonIgnore
-    private ShapeType type;
-    @JsonIgnore
-    private boolean isCircle;
+    private String type;
+    @JsonIgnore private boolean isCircle;
 
-    @JsonCreator
-    public Shape(@JsonProperty("type")ShapeType type){
+    public Shape(String type){
         this.type=type;
         this.isCircle=false;
     }
-
     @JsonIgnore
     public boolean isCircle(){
         return this.isCircle;
     }
 
     //------------------------GETTER----------------------//
-    @JsonProperty("type")
-    @JsonIgnore
-    public ShapeType getType() {
+
+    public String getType() {
         return type;
     }
 
     @JsonIgnore
-    public double getRadius() {
+    public double getShapeRadius() {
         if(isCircle)
-            return this.getRadius();
+            return ((Circle)this).getRadius();
         return ((Rectangle)this).getHeight()/2;
     }
 
     //------------------------SETTER----------------------//
 
-    @JsonProperty("type")
-    public void setType(ShapeType type) {
+
+    public void setType(String type) {
         this.type = type;
     }
 

@@ -18,7 +18,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import fr.unice.polytech.si3.qgl.zecommit.visible.Stream;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
+
 import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntityType;
 
 import java.io.IOException;
@@ -26,44 +26,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EngineSettings {
-    Goal goal;
-    ArrayList<Checkpoint> checkpoints;
-    Ship ship;
-    Deck deck;
-    ArrayList<Entity> entities;
-    Shape shape;
-    ArrayList<Sailor> sailors;
-    ArrayList<VisibleEntity> visibleEntities;
-    @JsonIgnore
+
+public class EngineSettings{
+
+    private Goal goal;
+    private ArrayList<Checkpoint> checkpoints;
+    private Ship ship;
+    private Deck deck;
+    private ArrayList<Entity> entities;
+    private Shape shape;
+    private ArrayList<Sailor> sailors;
+    private ArrayList<Stream> visibleEntities;
     private ObjectMapper oM;
     ///////////////////////////:
-    @JsonIgnore
-    ArrayList<Sailor> leftSailors;
-    @JsonIgnore
-    ArrayList<Sailor> rightSailors;
+    private ArrayList<Sailor> leftSailors;
+    private ArrayList<Sailor> rightSailors;
     @JsonIgnore
     static final int n = 100;
+    private double rotation=0;
+    private int nbSailUsed=0;
+    private ArrayList<Oar> oarArrayList;
+    private ArrayList<Sail> sailArrayList;
+    private Rudder rudder;
+    private Wind wind;
     @JsonIgnore
-    double rotation=0;
+    private ArrayList<Wind> winds;
     @JsonIgnore
-    int nbSailUsed=0;
-    @JsonIgnore
-    ArrayList<Oar> oarArrayList;
-    @JsonIgnore
-    ArrayList<Sail> sailArrayList;
-    @JsonIgnore
-    Rudder rudder;
-    @JsonIgnore
-    Wind wind;
-    @JsonIgnore
-    ArrayList<Wind> winds;
+    private Random random= new Random();
+
+
     @JsonIgnore
     ArrayList<Stream> streams;
     @JsonIgnore
-    ArrayList<VisibleEntity> visibles;
+    ArrayList<Stream> visibles;
     @JsonIgnore
-    Random random= new Random();
+
+
 
 
     EngineSettings(){
@@ -71,7 +69,7 @@ public class EngineSettings {
         this.sailArrayList=new ArrayList<>();
         this.winds=new ArrayList<>();
         this.streams = new ArrayList<>();
-        this.visibles=new ArrayList<>();
+        this.visibles=new ArrayList<Stream>();
         this.oM = new ObjectMapper();
         setCheckpoints();
         setGoal();
@@ -81,7 +79,7 @@ public class EngineSettings {
         setShape();
         setShip();
         setVisibleEntities();
-        sortVisibleEntities();
+        //sortVisibleEntities();
         sortEntities();
         setWind();
         changeWind();
@@ -93,12 +91,9 @@ public class EngineSettings {
      *
      * */
 
-    public void setShip() {
-        this.ship= new Ship(100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
-    }
 
     public void setVisibleEntities() {
-        this.visibleEntities=new ArrayList<>();
+        this.visibleEntities=new ArrayList<Stream>();
         this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
 
     }
@@ -131,6 +126,7 @@ public class EngineSettings {
         this.sailors.add(new Sailor(17,3,2,"Joris"));
         this.sailors.add(new Sailor(18,3,3,"Joris"));
         this.sailors.add(new Sailor(19,3,4,"Joris"));
+
 
 
     }
@@ -172,8 +168,9 @@ public class EngineSettings {
         this.entities.add(new Oar(8,4));
         this.entities.add(new Oar(9,4));
         this.entities.add(new Rudder(10,4));
-        
+
         this.entities.add(new Sail(5,2,false));
+
     }
 
     public void setShape() {
@@ -191,7 +188,7 @@ public class EngineSettings {
         try{
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
             return oM.writeValueAsString(this);
-        } catch(IOException e ) { 
+        } catch(IOException e ) {
             System.err.println(e);
             return "{}";
         }
@@ -200,19 +197,23 @@ public class EngineSettings {
     public String thisToJson2(){
         try{
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
-            return oM.writeValueAsString(new EngineSettingsNextRound(ship,visibles,wind));
+
+            return oM.writeValueAsString(new EngineSettingsNextRound(ship,visibleEntities,wind));
+
         } catch(IOException e ) {
             System.err.println(e);
             return "{}";
         }
     }
-
+/*
     public void updateEngine(List<Action> actions){
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
         rotation=0;
         changeWind();
+
         giveVisibleEntities();
+
         for (Action action: actions) {
             if(action.getType()== ActionType.MOVING){
                 engineMoving((Moving) action);
@@ -234,6 +235,8 @@ public class EngineSettings {
             calcul();
         }
     }
+
+ */
 
     public void engineTurn(Turn turn){
         for(Sailor sailor :sailors){
@@ -319,8 +322,9 @@ public class EngineSettings {
         return value/n;
     }
 
+    /*
     public Stream getCurrentOn(){
-        for (VisibleEntity entity: visibleEntities) {
+        for (Stream entity: visibleEntities) {
             Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
             if(entity.getType()==VisibleEntityType.CURRENT &&collision.collide()){
                 return (Stream) entity;
@@ -329,6 +333,8 @@ public class EngineSettings {
         return null;
     }
 
+     */
+/*
     public double calculCurrent(){
         Stream stream =getCurrentOn();
         if(stream !=null){
@@ -338,7 +344,10 @@ public class EngineSettings {
         return 0;
     }
 
+ */
+/*
     public void calcul(){
+
 
         double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/oarArrayList.size();
         vitesse+=calculWind();
@@ -351,6 +360,8 @@ public class EngineSettings {
         //System.out.println(ship.getPosition());
         checkCheckpoints();
     }
+
+ */
 
     public double angleCalcul(){
         double currentOrientation=ship.getPosition().getOrientation();
@@ -367,6 +378,10 @@ public class EngineSettings {
         return currentOrientation;
     }
 
+    public void setShip() {
+        this.ship= new Ship("ship", 100,new Position(0,0,0),"ZECOMMIT",deck,entities,shape);
+    }
+
     public void checkCheckpoints(){
         if(ship.isInCheckpoint(checkpoints.get(0))&&checkpoints.size()>1){
             //System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
@@ -380,19 +395,22 @@ public class EngineSettings {
 
     public void sortEntities(){
         for (Entity entity : entities){
-            if (entity.getType().equals(EntityType.OAR)) {
+            if (entity.getType().equals(EntityType.oar)) {
                 this.oarArrayList.add((Oar) entity);
             }
-            if (entity.getType().equals(EntityType.RUDDER)) {
+            if (entity.getType().equals(EntityType.rudder)) {
                 this.rudder=new Rudder(entity.getX(),entity.getY());
             }
-            if (entity.getType().equals(EntityType.SAIL)) {
+            if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
             }
         }
     }
+
+    /*
+
     public void sortVisibleEntities(){
-        for (VisibleEntity entity : visibleEntities){
+        for (Stream entity : visibleEntities){
             if (entity.getType().equals(VisibleEntityType.CURRENT)) {
                 this.streams.add((Stream) entity);
             }
@@ -403,8 +421,10 @@ public class EngineSettings {
         }
     }
 
+     */
+
     public void giveVisibleEntities(){
-        for (VisibleEntity visible: visibleEntities) {
+        for (Stream visible: visibleEntities) {
             Collision collision = new Collision(visible.getShape(),visible.getPosition(),ship.getPosition());
             if(collision.distanceTo()<=1000){
                 visibles.add(visible);
@@ -420,14 +440,15 @@ public class EngineSettings {
         return this.goal;
     }
 
+    @JsonIgnore
     public int getN() {
         return n;
     }
 
-    @JsonIgnore
     /**
      * @return the checkpoints
      */
+    @JsonIgnore
     public List<Checkpoint> getCheckpoints() {
         return checkpoints;
     }
@@ -439,27 +460,25 @@ public class EngineSettings {
         return ship;
     }
 
-    @JsonIgnore
     /**
      * @return the deck
      */
+    @JsonIgnore
     public Deck getDeck() {
         return deck;
     }
 
-    @JsonIgnore
     /**
      * @return the entities
      */
-    public List<Entity> getEntities() {
+    @JsonIgnore public List<Entity> getEntities() {
         return entities;
     }
 
-    @JsonIgnore
     /**
      * @return the shape
      */
-    public Shape getShape() {
+    @JsonIgnore public Shape getShape() {
         return shape;
     }
 
@@ -470,20 +489,19 @@ public class EngineSettings {
         return sailors;
     }
 
-    @JsonIgnore
     /**
      * @return the visibleEntities
      */
-    public List<VisibleEntity> getVisibleEntities() {
+    public List<Stream> getVisibleEntities() {
         return visibleEntities;
     }
 
     private class EngineSettingsNextRound{
         private Ship ship;
-        private List<VisibleEntity> visibleEntities;
+        private ArrayList<Stream> visibleEntities;
         private Wind wind;
 
-        EngineSettingsNextRound(Ship s, List<VisibleEntity> vE, Wind w){
+        EngineSettingsNextRound(Ship s, ArrayList<Stream> vE, Wind w){
             this.ship = s;
             this.visibleEntities = vE;
             this.wind=w;
@@ -493,7 +511,7 @@ public class EngineSettings {
             return ship;
         }
 
-        public List<VisibleEntity> getVisibleEntities() {
+        public ArrayList<Stream> getVisibleEntities() {
             return visibleEntities;
         }
 

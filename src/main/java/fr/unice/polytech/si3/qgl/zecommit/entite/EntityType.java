@@ -1,11 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 public enum EntityType{
-    OAR,RUDDER,SAIL,WATCH;
+    oar,rudder,sail,watch;
 
 
     @Override
     public String toString(){
-        return this.name();
+        return this.name().toLowerCase();
     }
 }

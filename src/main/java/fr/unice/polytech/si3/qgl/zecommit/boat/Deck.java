@@ -1,24 +1,27 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.DeckDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
 
 /**
  * @author Loic Bertolotto
  */
+@JsonDeserialize(using = DeckDeserializer.class)
 public class Deck{
-    @JsonProperty("width")private int width;
-    @JsonProperty("length")private int length;
-
+    private int width;
+    private int length;
     @JsonIgnore
     private List<Oar> oars;
     @JsonIgnore
@@ -27,31 +30,51 @@ public class Deck{
     private List<Sail> sails;
     @JsonIgnore
     private List<Sailor> sailors;
+    @JsonIgnore
+    private List<Sailor> rightSailorList;
+    @JsonIgnore
+    private List<Sailor> leftSailorList;
 
-
-    @JsonCreator
-    public Deck(@JsonProperty("width")int width,@JsonProperty("length") int length){
-        this.width = width;
-        this.length = length;
-        this.oars= new ArrayList<>();
-        this.sails= new ArrayList<>();
-        this.sailors= new ArrayList<>();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deck deck = (Deck) o;
+        return width == deck.width &&
+                length == deck.length;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, length);
+    }
+
+    public Deck(int width, int length){
+
+        this.width = width;
+        this.length = length;
+        this.oars = new ArrayList<>();
+        this.sails = new ArrayList<>();
+        this.sailors = new ArrayList<>();
+        this.leftSailorList = new ArrayList<>();
+        this.rightSailorList = new ArrayList<>();
+    }
+
+    @JsonIgnore
     public void initDeck(List<Entity> entities){
         for (Entity entity : entities){
-            if (entity.getType().equals(EntityType.OAR)) {
+            if (entity.getType().equals(EntityType.oar)) {
                 this.oars.add((Oar) entity);
             }
-            if (entity.getType().equals(EntityType.RUDDER)) {
+            if (entity.getType().equals(EntityType.rudder)) {
                 this.rudder=(Rudder)entity;
             }
-            if (entity.getType().equals(EntityType.SAIL)) {
+            if (entity.getType().equals(EntityType.sail)) {
                 this.sails.add((Sail) entity);
             }
         }
     }
-
+    @JsonIgnore
     public boolean sailorsAreOnTheirEntity() {
         for (Sailor sailor : sailors) {
             if (!sailor.isOnEntity() && sailor.hasEntity())
@@ -67,6 +90,7 @@ public class Deck{
      * @param xdistance
      * @param ydistance
      */
+    @JsonIgnore
     public Moving moveSailor(Sailor sailor, int xdistance, int ydistance) {
         Moving action = new Moving(sailor.getId(), xdistance, ydistance);
         sailor.move(action.getXDistance(), action.getYDistance());
@@ -77,11 +101,11 @@ public class Deck{
         return null;
     }
 
-    @JsonIgnore
     /**
      *
      * @return la liste des rames à gauche du bateau.
      */
+    @JsonIgnore
     public List<Oar> getLeftOars(){
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
@@ -92,11 +116,11 @@ public class Deck{
         return oarsList;
     }
 
-    @JsonIgnore
     /**
      *
      * @return la liste des rames à droite du bateau.
      */
+    @JsonIgnore
     public List<Oar> getRightOars(){
         ArrayList<Oar> oarsList = new ArrayList<>();
         this.oars.forEach(oar->
@@ -133,6 +157,37 @@ public class Deck{
     public boolean hasSail(){
         return !sails.isEmpty();
     }
+
+    public void addSailor(Sailor sailor) {
+        if (isLeft(sailor)) {
+            this.leftSailorList.add(sailor);
+        }
+        else {
+            this.rightSailorList.add(sailor);
+        }
+    }
+
+    public void deleteSailor(Sailor sailor) {
+        if (isLeft(sailor)) {
+            this.leftSailorList.remove(sailor);
+        }
+
+        else {
+            this.rightSailorList.remove(sailor);
+        }
+    }
+
+    public void updateSails(List<Entity> entities){
+        List<Sail> sails = new ArrayList<>();
+        for (Entity entity : entities) {
+            if(entity.getType()==EntityType.sail)
+                sails.add((Sail)entity);
+        }
+        this.sails.forEach(sail -> {
+            Sail same = sails.stream().filter(s-> s.equals(sail)).findAny().get();
+            sail.setOpenned(same.isOpenned());
+        });
+    }
     //------------------------------GETTER-------------------------//
 
     public int getWidth() {
@@ -143,20 +198,44 @@ public class Deck{
         return length;
     }
 
+    @JsonIgnore
     public Rudder getRudder() {
         return rudder;
     }
 
+    @JsonIgnore
     public List<Sailor> getSailors() {
         return sailors;
     }
 
+    @JsonIgnore
     public List<Oar> getOars() {
         return oars;
     }
 
+    @JsonIgnore
     public List<Sail> getSails() {
         return sails;
+    }
+
+    @JsonIgnore
+    public List<Sailor> getLeftSailors() {
+        return this.leftSailorList;
+    }
+
+    @JsonIgnore
+    public List<Sailor> getRightSailors() {
+        return this.rightSailorList;
+    }
+
+    @JsonIgnore
+    public int getNumberRightSailors() {
+        return this.rightSailorList.size();
+    }
+
+    @JsonIgnore
+    public int getNumberLeftSailors() {
+        return this.leftSailorList.size();
     }
 
     //------------------------------SETTER-------------------------//

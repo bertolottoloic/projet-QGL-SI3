@@ -4,45 +4,38 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
  * Classe mère décrivant les objets présents sur le bateau
  */
 
-import com.fasterxml.jackson.annotation.*;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.EntityDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.Objects;
 
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Oar.class, name = "oar"),
-        @JsonSubTypes.Type(value = Rudder.class, name = "rudder"),
-        @JsonSubTypes.Type(value = Watch.class, name = "watch"),
-        @JsonSubTypes.Type(value = Sail.class, name = "sail")
-
-})
-
+@JsonDeserialize(using = EntityDeserializer.class)
 public abstract class Entity {
-    @JsonProperty("type")
-    @JsonIgnore
     private EntityType type;
-    @JsonProperty("x")
     private int x;
-    @JsonProperty("y")
     private int y;
-    @JsonIgnore private Sailor sailorOn;
+    @JsonIgnore
+    private Sailor sailorOn;
 
-    @JsonCreator
-    public Entity(@JsonProperty("type") EntityType type, @JsonProperty("x") int x, @JsonProperty("y")int y) {
+    public Entity(EntityType type,int x, int y) {
         this.type = type;
         this.x = x;
         this.y = y;
         this.sailorOn = null;
     }
 
+    @JsonIgnore
     public boolean hasSailorOn(){
         return this.sailorOn!=null;
     }
 
+    @JsonIgnore
     public void putSailorOn(Sailor sailor){
         this.sailorOn = sailor;
     }
@@ -59,7 +52,7 @@ public abstract class Entity {
         if(obj==this) return true;
         if(obj instanceof Entity){
             Entity e = (Entity)obj;
-            return (this.type==e.type && this.x==e.x && this.y==e.y);
+            return (this.type.equals(e.type) && this.x==e.x && this.y==e.y);
         }
         return false;
     }
@@ -71,7 +64,6 @@ public abstract class Entity {
 
     //------------------------------GETTER-------------------------//
 
-    @JsonIgnore
     public EntityType getType() {
         return type;
     }
@@ -87,6 +79,7 @@ public abstract class Entity {
     /**
      * @return the sailorOn
      */
+    @JsonIgnore
     public Sailor getSailorOn() {
         return sailorOn;
     }
@@ -104,7 +97,6 @@ public abstract class Entity {
     public void setY(int y) {
         this.y = y;
     }
-
 
 }
 

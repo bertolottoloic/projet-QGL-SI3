@@ -1,9 +1,10 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.deserializer.CheckPointDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
@@ -11,12 +12,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
  * Classe indiquant la position et forme d'un checkpoint
  * @author Nathan
  */
+@JsonDeserialize(using = CheckPointDeserializer.class)
 public class Checkpoint {
-    @JsonProperty("position")Position position;
-    @JsonProperty("shape")Shape shape;
+    Position position;
+    Shape shape;
 
-    @JsonCreator
-    public Checkpoint(@JsonProperty("position")Position position, @JsonProperty("shape")Shape shape){
+    public Checkpoint(Position position,Shape shape){
         this.position = position;
         this.shape = shape;
     }

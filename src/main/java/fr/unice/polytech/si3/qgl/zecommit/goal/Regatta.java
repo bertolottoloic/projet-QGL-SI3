@@ -1,8 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.goal;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
@@ -10,11 +9,9 @@ import java.util.List;
 
 public class Regatta extends Goal {
 
-    @JsonProperty
     private List<Checkpoint> checkpoints;
 
-    @JsonCreator
-    public Regatta(@JsonProperty("checkpoints")List<Checkpoint> checkpoints) {
+    public Regatta(List<Checkpoint> checkpoints) {
         super("REGATTA");
         this.checkpoints = checkpoints;
         setRegatta(true);
@@ -30,11 +27,11 @@ public class Regatta extends Goal {
         return checkpoints;
     }
 
-    @JsonIgnore
     /**
      * Donne le premier checkpoint de la list de cp, renvoie null si plus de cp
      * @return
      */
+    @JsonIgnore
     public Checkpoint getFirstCheckpoint() {
         if (!this.checkpoints.isEmpty()) {
             return this.checkpoints.get(0);

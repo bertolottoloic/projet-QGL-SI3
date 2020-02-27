@@ -5,7 +5,8 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntity;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
+
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Game {
     private List<Entity> entityList;
     private int shipCount;
     private Wind wind;
-    private List<VisibleEntity> visibleEntities;
+    private List<VisibleEntitie> visibleEntities;
 
 
     //------------------------GETTER-------------------------------------------
@@ -42,7 +43,7 @@ public class Game {
         return entityList;
     }
 
-    public List<VisibleEntity> getVisibleEntities() {
+    public List<VisibleEntitie> getVisibleEntities() {
         return visibleEntities;
     }
 
@@ -73,7 +74,7 @@ public class Game {
         this.shipCount = shipCount;
     }
 
-    public void setVisibleEntities(List<VisibleEntity> visibleEntities) {
+    public void setVisibleEntities(List<VisibleEntitie> visibleEntities) {
         this.visibleEntities = visibleEntities;
     }
 

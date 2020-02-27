@@ -14,8 +14,8 @@ public class CaptainMate {
     List<Action> actions;
     private boolean initGame;
 
-    public CaptainMate(Game game) {
-        this.captain = new Captain(game);
+    public CaptainMate(Captain captain) {
+        this.captain = captain;
         this.actions = new ArrayList<>();
         this.initGame = true;
     }
@@ -49,6 +49,7 @@ public class CaptainMate {
                 angle = Math.max(-Math.PI/4, angle);
             actions.add(new Turn(sailorAndAngle.getKey().getId(), angle));
         }
+
     }
 
     public void toLiftSail(List<Sailor> sailors) {
@@ -72,7 +73,7 @@ public class CaptainMate {
     }
 
     public List<Action> actions(Game game){
-        refreshData(game);
+        refreshData();
         if(this.initGame){
             captain.attributeEntitiesToSailors();
             this.initGame = false;
@@ -88,8 +89,7 @@ public class CaptainMate {
 
     }
 
-    public void refreshData(Game game){
-        captain.refreshData(game);
+    public void refreshData(){
         this.actions.removeAll(this.actions);
     }
 

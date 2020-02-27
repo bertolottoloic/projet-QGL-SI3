@@ -1,50 +1,40 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.parser;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CockpitTest {
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-    Cockpit cockpit;
-    String jsonInit;
-    String jsonNR;
+import static org.junit.jupiter.api.Assertions.*;
+
+class ParserTest {
+    String jsonInitGame;
     String jsonNextRound;
+    InitGame initGame;
+    NextRound nextRound;
 
     @BeforeEach
-    void setUp() {
-        jsonNR = "{\n "+ 
-                "  \"ship\": {\n "+ 
-                "    \"type\": \"ship\",\n "+ 
-                "    \"life\": 100,\n "+ 
-                "    \"position\": {\n "+ 
-                "      \"x\": 0,\n "+
-                "      \"y\": 0,\n "+
-                "      \"orientation\": 0\n "+
-                "    },\n "+ 
-                "    \"name\": \"Les copaings d'abord!\",\n "+ 
-                "    \"deck\": {\n "+ 
-                "      \"width\": 2,\n "+ 
-                "      \"length\": 1\n "+ 
-                "    },\n "+ 
-                "    \"entities\": [\n "+ 
-                "      {\n "+ 
-                "        \"x\": 0,\n "+ 
-                "        \"y\": 0,\n "+ 
-                "        \"type\": \"oar\"\n "+ 
-                "      },\n "+ 
-                "      {\n "+ 
-                "        \"x\": 0,\n "+
-                "        \"y\": 1,\n "+
-                "        \"type\": \"oar\"\n "+ 
-                "      }\n "+ 
-                "    ]\n "+ 
-                "  },\n "+ 
-                "  \"visibleEntities\": []\n "+ 
-                "}";
-    jsonInit = "{\n" +
+    void setUp() throws JsonProcessingException {
+        jsonInitGame = "{\n" +
                 "  \"goal\": {\n" +
                 "    \"mode\": \"REGATTA\",\n" +
                 "    \"checkpoints\": [\n" +
@@ -102,14 +92,15 @@ class CockpitTest {
                 "      \"name\": \"Edward Teach\"\n" +
                 "    },\n" +
                 "    {\n" +
-                "      \"x\": 0,\n" +
-                "      \"y\": 1,\n" +
+                "      \"x\": 1,\n" +
+                "      \"y\": 0,\n" +
                 "      \"id\": 1,\n" +
                 "      \"name\": \"Tom Pouce\"\n" +
                 "    }\n" +
                 "  ]\n" +
                 "}";
 
+        initGame = Parser.parseInitGame(jsonInitGame);
 
         jsonNextRound = "{\n" +
                 "  \"ship\": {\n" +
@@ -197,12 +188,95 @@ class CockpitTest {
                 "    \"strength\": 110\n" +
                 "  }\n" +
                 "}";
-        this.cockpit = new Cockpit();
-        this.cockpit.initGame(jsonInit);
-    }
-    @Test
-    void nextRoundTest() {
-        assertEquals("[{\"sailorId\":0,\"type\":\"OAR\"},{\"sailorId\":1,\"type\":\"OAR\"}]", this.cockpit.nextRound(jsonNextRound));
+
+        nextRound = Parser.parseNextRound(jsonNextRound);
+
     }
 
+    /**
+     * Test InitiGame
+     */
+    @Test
+    void parserInitGameTestGoal() {
+        assertEquals("REGATTA", initGame.getGoal().toString());
+    }
+
+    @Test
+    void parserInitGameTestShip() {
+        Ship ship = initGame.getShip();
+        assertEquals("ship", ship.getType());
+        assertEquals(new Position(0,0,0),ship.getPosition());
+        assertEquals(100, ship.getLife());
+        assertEquals("Les copaings d'abord!",ship.getName());
+    }
+
+    @Test
+    void parserInitGameTestSailors() {
+        List<Sailor> sailors = initGame.getSailors();
+        Sailor s1 = sailors.get(0);
+        Sailor s2 = sailors.get(1);
+
+        Sailor s1Test = new Sailor(0,0,0,"Edward Teach");
+        Sailor s2Test = new Sailor(1,1,0,"Tom Pouce");
+
+        assertEquals(s1Test, s1);
+        assertEquals(s2Test, s2);
+
+    }
+
+    @Test
+    void parserInitGameTestShipCount() {
+        int shipCount = initGame.getShipCount();
+
+        assertEquals(1,shipCount);
+    }
+
+
+    /**
+     * test NextRound
+     */
+
+    @Test
+    void parseNextRoundTestShip() {
+        Deck deck = new Deck(3,6);
+        Ship ship = nextRound.getShip();
+
+        assertEquals("ship", ship.getType());
+        assertEquals(new Position(0,0,0),ship.getPosition());
+        assertEquals(100, ship.getLife());
+        assertEquals("Les copaings d'abord!",ship.getName());
+        assertEquals(deck, ship.getDeck());
+
+        List<Entity> entities = ship.getEntities();
+
+        Oar o1 = (Oar) entities.get(0);
+        Oar oar1 = new Oar(1,0);
+        assertTrue(oar1.equals(o1));
+        Oar o2 = (Oar) entities.get(1);
+        assertEquals(new Oar(1,2), o2);
+        Sail s1 = (Sail) entities.get(6);
+        assertEquals(new Sail(2,1, false), s1);
+        Rudder r1 = (Rudder) entities.get(7);
+        assertEquals(new Rudder(5,0), r1);
+    }
+
+    @Test
+    void parseNextRoundTestVisibleEntities() {
+        List<VisibleEntitie> visibleEntities = nextRound.getVisibleEntities();
+
+        Stream s1 = (Stream) visibleEntities.get(0);
+        Stream stream = new Stream(new Position(500, 0, 0), new Rectangle(50, 500, 0),40);
+        assertEquals(stream, s1);
+    }
+
+    @Test
+    void parseNextRoundWind() {
+        Wind wind = nextRound.getWind();
+
+        assertEquals(new Wind(0,110),wind);
+    }
+
+
+
 }
+
