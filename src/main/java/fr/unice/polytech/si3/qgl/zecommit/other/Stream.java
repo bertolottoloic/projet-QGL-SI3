@@ -3,7 +3,6 @@ package fr.unice.polytech.si3.qgl.zecommit.other;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
 
 import java.util.Objects;
 
@@ -16,6 +15,13 @@ public class Stream extends VisibleEntitie {
     private Position position;
     private Shape shape;
     private double strength;
+
+    public Stream(Position position, Shape shape, double strength) {
+        super(VisibleEntityType.CURRENT, position, shape);
+        this.strength = strength;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -32,10 +38,7 @@ public class Stream extends VisibleEntitie {
         return Objects.hash(position, shape, strength);
     }
 
-    public Stream(Position position, Shape shape, double strength) {
-        super(position, shape);
-        this.strength = strength;
-    }
+
 
     //------------------------------GETTER-------------------------//
 

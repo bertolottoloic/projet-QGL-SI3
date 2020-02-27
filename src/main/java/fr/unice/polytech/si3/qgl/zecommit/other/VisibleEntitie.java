@@ -1,9 +1,11 @@
-package fr.unice.polytech.si3.qgl.zecommit.visible;
+package fr.unice.polytech.si3.qgl.zecommit.other;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.VisibleEntitiesDeserializer;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 
@@ -13,10 +15,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
  */
 @JsonDeserialize(using = VisibleEntitiesDeserializer.class)
 public abstract class VisibleEntitie {
-    Position position;
+    private Position position;
     private Shape shape;
+    private VisibleEntityType type;
 
-    public VisibleEntitie (Position position,Shape shape){
+    public VisibleEntitie (VisibleEntityType type, Position position,Shape shape){
+        this.type=type;
         this.position=position;
         this.shape=shape;
     }
@@ -30,6 +34,9 @@ public abstract class VisibleEntitie {
     public Shape getShape() {
         return shape;
     }
+
+    @JsonIgnore
+    public VisibleEntityType getType(){return this.type;}
     //------------------------------SETTER-------------------------//
 
 

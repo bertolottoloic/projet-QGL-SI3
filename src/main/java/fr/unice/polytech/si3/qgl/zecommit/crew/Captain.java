@@ -14,14 +14,8 @@ import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 
-
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;

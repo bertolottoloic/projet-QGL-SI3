@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.parser.NextRound;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 
 import java.io.IOException;
 import java.util.List;

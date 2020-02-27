@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.OtherShip;
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
 import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
@@ -37,21 +37,22 @@ public class VisibleEntitiesDeserializer extends StdDeserializer {
 
         String type = node.get("type").asText();
 
-        if (type.equals("stream")){
-            Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
-            Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
-            return new Stream(position, shape, node.get("strength").asDouble());
+        switch (type) {
+            case "stream":
+                Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
+                return new Stream(position, shape, node.get("strength").asDouble());
+            case "ship":
+                Position shipPosition = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                Shape shipShape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
+                return new OtherShip(node.get("life").asInt(), shipPosition, shipShape);
+            case "reef":
+                Position reefPosition = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                Shape reefShape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
+                return new Reef(reefPosition, reefShape);
+
+            default:
+                return null;
         }
-        else if (type.equals("ship")) {
-            Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
-            Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
-            return new OtherShip(node.get("type").asText(), node.get("life").asInt(), position, shape);
-        }
-        else if (type.equals("reef")) {
-            Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
-            Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
-            return new Reef(position, shape);
-        }
-        return null;
     }
 }

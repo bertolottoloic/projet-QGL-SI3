@@ -13,13 +13,13 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-import fr.unice.polytech.si3.qgl.zecommit.visible.Stream;
 
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntityType;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,7 +79,7 @@ public class EngineSettings{
         setShape();
         setShip();
         setVisibleEntities();
-        //sortVisibleEntities();
+        sortVisibleEntities();
         sortEntities();
         setWind();
         changeWind();
@@ -93,8 +93,8 @@ public class EngineSettings{
 
 
     public void setVisibleEntities() {
-        this.visibleEntities=new ArrayList<Stream>();
-        this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
+        this.visibleEntities=new ArrayList<>();
+        //this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
 
     }
 
@@ -205,7 +205,7 @@ public class EngineSettings{
             return "{}";
         }
     }
-/*
+
     public void updateEngine(List<Action> actions){
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
@@ -236,7 +236,7 @@ public class EngineSettings{
         }
     }
 
- */
+
 
     public void engineTurn(Turn turn){
         for(Sailor sailor :sailors){
@@ -334,6 +334,8 @@ public class EngineSettings{
     }
 
      */
+
+
 /*
     public double calculCurrent(){
         Stream stream =getCurrentOn();
@@ -345,13 +347,15 @@ public class EngineSettings{
     }
 
  */
-/*
+
+
+
     public void calcul(){
 
 
         double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/oarArrayList.size();
         vitesse+=calculWind();
-        vitesse+=calculCurrent();
+        //vitesse+=calculCurrent();
 
         double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
@@ -361,7 +365,7 @@ public class EngineSettings{
         checkCheckpoints();
     }
 
- */
+
 
     public double angleCalcul(){
         double currentOrientation=ship.getPosition().getOrientation();
@@ -407,7 +411,7 @@ public class EngineSettings{
         }
     }
 
-    /*
+
 
     public void sortVisibleEntities(){
         for (Stream entity : visibleEntities){
@@ -421,7 +425,7 @@ public class EngineSettings{
         }
     }
 
-     */
+
 
     public void giveVisibleEntities(){
         for (Stream visible: visibleEntities) {

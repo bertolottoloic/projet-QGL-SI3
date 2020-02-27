@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.visible;
+package fr.unice.polytech.si3.qgl.zecommit.other;
 
 public enum VisibleEntityType{
     CURRENT,OTHERSHIP,REEF;
@@ -6,6 +6,6 @@ public enum VisibleEntityType{
 
     @Override
     public String toString(){
-        return this.name();
+        return this.name().toLowerCase();
     }
 }

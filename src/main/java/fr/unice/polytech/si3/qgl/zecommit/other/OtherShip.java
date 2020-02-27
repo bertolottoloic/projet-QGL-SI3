@@ -1,28 +1,18 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.deserializer.OtherShipDeserializer;
-import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShipDeserializer;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
-import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
 
-
-import java.util.List;
-
-@JsonDeserialize(using = OtherShipDeserializer.class)
 public class OtherShip extends VisibleEntitie {
 
-    private String type;
+    private VisibleEntityType type;
     private int life;
     private Position position;
     private Shape shape;
 
-    public OtherShip(String type, int life, Position position, Shape shape){
-        super(position, shape);
-        this.type = type;
+    public OtherShip(int life, Position position, Shape shape){
+        super(VisibleEntityType.OTHERSHIP ,position, shape);
         this.life = life;
 
     }
@@ -30,7 +20,7 @@ public class OtherShip extends VisibleEntitie {
 
     //--------------------GETTER -------------------------//
 
-    public String getType() {
+    public VisibleEntityType getType() {
         return type;
     }
 
@@ -52,7 +42,7 @@ public class OtherShip extends VisibleEntitie {
     //--------------------SETTER -------------------------//
 
 
-    public void setType(String type) {
+    public void setType(VisibleEntityType type) {
         this.type = type;
     }
 
