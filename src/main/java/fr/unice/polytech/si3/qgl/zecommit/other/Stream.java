@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.other;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
 
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
  * Classe modélisant les courants marins
  * @author Nathan
  */
-public class Stream extends VisibleEntitie{
+public class Stream extends VisibleEntitie {
 
     private Position position;
     private Shape shape;

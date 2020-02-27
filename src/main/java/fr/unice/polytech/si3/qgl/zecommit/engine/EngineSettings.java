@@ -11,11 +11,15 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.visible.Stream;
+
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntityType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +27,8 @@ import java.util.List;
 import java.util.Random;
 
 
-public class EngineSettings {
+public class EngineSettings{
+
     private Goal goal;
     private ArrayList<Checkpoint> checkpoints;
     private Ship ship;
@@ -31,7 +36,7 @@ public class EngineSettings {
     private ArrayList<Entity> entities;
     private Shape shape;
     private ArrayList<Sailor> sailors;
-    private ArrayList<Entity> visibleEntities;
+    private ArrayList<Stream> visibleEntities;
     private ObjectMapper oM;
     ///////////////////////////:
     private ArrayList<Sailor> leftSailors;
@@ -49,10 +54,22 @@ public class EngineSettings {
     @JsonIgnore
     private Random random= new Random();
 
+
+    @JsonIgnore
+    ArrayList<Stream> streams;
+    @JsonIgnore
+    ArrayList<Stream> visibles;
+    @JsonIgnore
+
+
+
+
     EngineSettings(){
         this.oarArrayList=new ArrayList<>();
         this.sailArrayList=new ArrayList<>();
         this.winds=new ArrayList<>();
+        this.streams = new ArrayList<>();
+        this.visibles=new ArrayList<Stream>();
         this.oM = new ObjectMapper();
         setCheckpoints();
         setGoal();
@@ -62,6 +79,7 @@ public class EngineSettings {
         setShape();
         setShip();
         setVisibleEntities();
+        //sortVisibleEntities();
         sortEntities();
         setWind();
         changeWind();
@@ -75,7 +93,9 @@ public class EngineSettings {
 
 
     public void setVisibleEntities() {
-        this.visibleEntities=new ArrayList<>();
+        this.visibleEntities=new ArrayList<Stream>();
+        this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
+
     }
 
     public void setWind(){
@@ -179,17 +199,20 @@ public class EngineSettings {
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
 
             return oM.writeValueAsString(new EngineSettingsNextRound(ship,visibleEntities,wind));
+
         } catch(IOException e ) {
             System.err.println(e);
             return "{}";
         }
     }
-
+/*
     public void updateEngine(List<Action> actions){
         rightSailors=new ArrayList<>();
         leftSailors=new ArrayList<>();
         rotation=0;
         changeWind();
+
+        giveVisibleEntities();
 
         for (Action action: actions) {
             if(action.getType()== ActionType.MOVING){
@@ -212,6 +235,8 @@ public class EngineSettings {
             calcul();
         }
     }
+
+ */
 
     public void engineTurn(Turn turn){
         for(Sailor sailor :sailors){
@@ -297,18 +322,46 @@ public class EngineSettings {
         return value/n;
     }
 
+    /*
+    public Stream getCurrentOn(){
+        for (Stream entity: visibleEntities) {
+            Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
+            if(entity.getType()==VisibleEntityType.CURRENT &&collision.collide()){
+                return (Stream) entity;
+            }
+        }
+        return null;
+    }
+
+     */
+/*
+    public double calculCurrent(){
+        Stream stream =getCurrentOn();
+        if(stream !=null){
+            if(stream.getPosition().getOrientation()==ship.getPosition().getOrientation()){
+                return stream.getStrength()/n;}
+        }
+        return 0;
+    }
+
+ */
+/*
     public void calcul(){
 
 
         double vitesse=((double) 165/n)*(leftSailors.size()+rightSailors.size())/oarArrayList.size();
         vitesse+=calculWind();
+        vitesse+=calculCurrent();
 
         double x =vitesse*Math.cos(ship.getPosition().getOrientation())+ship.getPosition().getX();
         double y =vitesse*Math.sin(ship.getPosition().getOrientation())+ship.getPosition().getY();
 
         ship.setPosition(new Position(x,y,angleCalcul()));
+        //System.out.println(ship.getPosition());
         checkCheckpoints();
     }
+
+ */
 
     public double angleCalcul(){
         double currentOrientation=ship.getPosition().getOrientation();
@@ -331,7 +384,7 @@ public class EngineSettings {
 
     public void checkCheckpoints(){
         if(ship.isInCheckpoint(checkpoints.get(0))&&checkpoints.size()>1){
-            System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
+            //System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
             checkpoints.remove(0);
         }
     }
@@ -350,6 +403,31 @@ public class EngineSettings {
             }
             if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
+            }
+        }
+    }
+
+    /*
+
+    public void sortVisibleEntities(){
+        for (Stream entity : visibleEntities){
+            if (entity.getType().equals(VisibleEntityType.CURRENT)) {
+                this.streams.add((Stream) entity);
+            }
+            if (entity.getType().equals(VisibleEntityType.OTHERSHIP)) {
+            }
+            if (entity.getType().equals(VisibleEntityType.REEF)) {
+            }
+        }
+    }
+
+     */
+
+    public void giveVisibleEntities(){
+        for (Stream visible: visibleEntities) {
+            Collision collision = new Collision(visible.getShape(),visible.getPosition(),ship.getPosition());
+            if(collision.distanceTo()<=1000){
+                visibles.add(visible);
             }
         }
     }
@@ -414,16 +492,16 @@ public class EngineSettings {
     /**
      * @return the visibleEntities
      */
-    public List<Entity> getVisibleEntities() {
+    public List<Stream> getVisibleEntities() {
         return visibleEntities;
     }
 
     private class EngineSettingsNextRound{
         private Ship ship;
-        private List<Entity> visibleEntities;
+        private ArrayList<Stream> visibleEntities;
         private Wind wind;
 
-        EngineSettingsNextRound(Ship s,List<Entity> vE,Wind w){
+        EngineSettingsNextRound(Ship s, ArrayList<Stream> vE, Wind w){
             this.ship = s;
             this.visibleEntities = vE;
             this.wind=w;
@@ -433,7 +511,7 @@ public class EngineSettings {
             return ship;
         }
 
-        public List<Entity> getVisibleEntities() {
+        public ArrayList<Stream> getVisibleEntities() {
             return visibleEntities;
         }
 

@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.strategy;
+package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
@@ -119,9 +119,8 @@ public class Road {
      * @return
      */
     public boolean turnAroundLeft(){
-        if(orientationToGoal() > Math.PI/2 && orientationToGoal() <= Math.PI)
-            return true;
-        return false;
+        return (orientationToGoal() > Math.PI/2 && orientationToGoal() <= Math.PI);
+
     }
 
 
@@ -130,9 +129,7 @@ public class Road {
      * @return
      */
     public boolean turnAroundRight(){
-        if(orientationToGoal() < -Math.PI/2 && orientationToGoal() > -Math.PI)
-            return true;
-        return false;
+        return (orientationToGoal() < -Math.PI/2 && orientationToGoal() > -Math.PI);
     }
 
 

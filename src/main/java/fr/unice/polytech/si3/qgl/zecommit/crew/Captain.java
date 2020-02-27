@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
@@ -9,10 +10,18 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Road;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
+
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -26,10 +35,10 @@ public class Captain implements CaptainInterface {
     private Regatta goal;
     private OrientationTable orientationTable;
     private Wind wind;
+    private List<VisibleEntitie> visibleEntities;
 
     public Captain(Game game) {
         this.ship = game.getShip();
-
         this.goal= (Regatta) game.getGoal();
         this.orientationTable = new OrientationTable(ship.getDeck().getOars().size());
         this.wind=game.getWind();
@@ -116,7 +125,7 @@ public class Captain implements CaptainInterface {
      *
      * @param compo
      */
-    public ArrayList<Sailor> activateSailors(Compo compo, double angle) {
+    public List<Sailor> activateSailors(Compo compo) {
         ArrayList<Sailor> usedSailors= new ArrayList<>();
         // Activation des marins de gauche
         int l = 0;
@@ -136,6 +145,7 @@ public class Captain implements CaptainInterface {
     }
 
     private List<Sailor> decisionOrientation(Road road, int chosenAngle){
+
         Logs.add(chosenAngle +"");
         boolean isNear = road.distanceToGoal() < (165-goal.getFirstCheckpoint().getCircleRadius());
         boolean upSail = upSail();
@@ -152,10 +162,11 @@ public class Captain implements CaptainInterface {
         int nbSailorsLeft = ship.getDeck().getNumberLeftSailors();
 
         if(!isNear){//si le bateau est loin
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft), road.orientationToGoal());//on choisit la compo permettant d'aller le plus vite
+            return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus vite
         }
         else
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft),road.orientationToGoal());//on choisit la compo permettant d'aller le plus lentement
+
+           return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),nbSailorsRight, nbSailorsLeft));//on choisit la compo permettant d'aller le plus lentement
 
 
     }
@@ -168,7 +179,6 @@ public class Captain implements CaptainInterface {
     public boolean upSail(){
         return (wind != null && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())>0 && Math.abs(ship.getPosition().getOrientation()-wind.getStrength())<Math.PI/2);
     }
-
 
 
     ////////////////////// GETTER ////////////////////////////////////////////

@@ -22,6 +22,7 @@ public class Polygone extends Shape {
         super(type.toString());
         setCircle(false);
         this.orientation=orientation;
+        //TODO points rectangle
         this.vertices=buildVertexes(type, width,height);
     }
 
@@ -54,6 +55,7 @@ public class Polygone extends Shape {
     public String getType() {
         return super.getType();
     }
+
 
     public Point[] getVertices() {
         return vertices;

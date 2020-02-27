@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit;
+package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
@@ -26,7 +26,9 @@ public class Collision {
 
     public boolean collide(){
         //cas avec un cercle
-        if (shape1.isCircle() && distanceTo(shapePosition, shipPosition) < shape1.getShapeRadius()) {
+
+        if (shape1.isCircle() && distanceTo() < shape1.getShapeRadius()) {
+
             //Si le centre du bateau est dans le CP
             return true;
         }
@@ -66,19 +68,17 @@ public class Collision {
         if (isInRectangleWith0Orientation(rectangle, shipCenter, a, b, c)) return true;
 
 
-        return isInTriangle(a,b,c, shipCenter) && isInTriangle(a,d,c, shipCenter);
+        return isInTriangle(a,b,c, shipCenter) && isInTriangle(a,d,c, shipCenter);//TODO 3?
 
     }
 
     public boolean isInRectangleWith0Orientation(Rectangle rectangle, Point shipCenter, Point a, Point b, Point c) {
-        if(rectangle.getOrientation() % Math.PI/2 == 0
+        return(rectangle.getOrientation() % Math.PI/2 == 0
                 && shipCenter.getX()<=Math.max(a.getX(), Math.max(b.getX(), c.getX()))
                 && shipCenter.getX()>=Math.min(a.getX(), Math.min(b.getX(), c.getX()))
                 && shipCenter.getY()<=Math.max(a.getY(), Math.max(b.getY(), c.getY()))
                 && shipCenter.getY()>=Math.min(a.getY(), Math.min(b.getY(), c.getY()))
-            )
-                return true;
-        return false;
+            );
     }
 
     /**
@@ -86,7 +86,7 @@ public class Collision {
      * @param rectangle
      * @return
      */
-    public List<Point> determineRectanglePoints(Rectangle rectangle, Position position ){
+    public static List<Point> determineRectanglePoints(Rectangle rectangle, Position position ){
         ArrayList<Point> res = new ArrayList<>();
 
         double angle = rectangle.getOrientation(); // l'orientation du rectangle
@@ -143,24 +143,18 @@ public class Collision {
 
         double res = 1-t-tp;
 
-        if ( 0 <= res && res <= 1) {
-            return true;
-        }
-        return false;
+        return ( 0 <= res && res <= 1);
     }
 
 
     /**
      * Methode qui calcule la distance d'une position par rapport au bateau
-     * @param position1,
-     * @param position2
      * @return
      */
     //TODO : duplicate method => A refactorer
-    public double distanceTo(Position position1, Position position2) {
-        return Math.sqrt(Math.pow(position1.getX() - position2.getX(),2) + Math.pow(position1.getY() - position2.getY(),2));
+    public double distanceTo() {
+        return Math.sqrt(Math.pow(shapePosition.getX() - shipPosition.getX(),2) + Math.pow(shapePosition.getY() - shipPosition.getY(),2));
     }
-
 
 
 }

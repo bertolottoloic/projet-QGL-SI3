@@ -4,8 +4,9 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.visible.VisibleEntitie;
+
 
 import java.util.List;
 

@@ -15,7 +15,6 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.OtherShip;
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
 import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;

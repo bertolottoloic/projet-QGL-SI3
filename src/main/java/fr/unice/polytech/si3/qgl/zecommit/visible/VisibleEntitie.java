@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.other;
+package fr.unice.polytech.si3.qgl.zecommit.visible;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -40,4 +40,6 @@ public abstract class VisibleEntitie {
     public void setShape(Shape shape) {
         this.shape = shape;
     }
+
+
 }

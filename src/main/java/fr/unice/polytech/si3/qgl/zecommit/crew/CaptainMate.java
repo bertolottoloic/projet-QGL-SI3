@@ -92,4 +92,5 @@ public class CaptainMate {
     public void refreshData(){
         this.actions.removeAll(this.actions);
     }
+
 }

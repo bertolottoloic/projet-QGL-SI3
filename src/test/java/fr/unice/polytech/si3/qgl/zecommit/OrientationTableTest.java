@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-import fr.unice.polytech.si3.qgl.zecommit.strategy.Compo;
-import fr.unice.polytech.si3.qgl.zecommit.strategy.OrientationTable;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
+import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

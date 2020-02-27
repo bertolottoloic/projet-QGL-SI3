@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.strategy;
+package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 public class Compo {
     private int sailorsRight;
