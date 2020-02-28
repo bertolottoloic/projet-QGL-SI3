@@ -14,6 +14,7 @@ public class Engine {
 
 
         EngineSettings engineSettings= new EngineSettings();
+        engineSettings.initiateSettings();
         String json = engineSettings.thisToJson();
         System.out.println(json);
         EngineNextRound engineNextRound= new EngineNextRound();

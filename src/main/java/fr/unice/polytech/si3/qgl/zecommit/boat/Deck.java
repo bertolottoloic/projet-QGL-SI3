@@ -35,6 +35,18 @@ public class Deck{
     @JsonIgnore
     private List<Sailor> leftSailorList;
 
+    public Deck(int width, int length){
+
+        this.width = width;
+        this.length = length;
+        this.oars = new ArrayList<>();
+        this.sails = new ArrayList<>();
+        this.sailors = new ArrayList<>();
+        this.leftSailorList = new ArrayList<>();
+        this.rightSailorList = new ArrayList<>();
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,17 +59,6 @@ public class Deck{
     @Override
     public int hashCode() {
         return Objects.hash(width, length);
-    }
-
-    public Deck(int width, int length){
-
-        this.width = width;
-        this.length = length;
-        this.oars = new ArrayList<>();
-        this.sails = new ArrayList<>();
-        this.sailors = new ArrayList<>();
-        this.leftSailorList = new ArrayList<>();
-        this.rightSailorList = new ArrayList<>();
     }
 
     @JsonIgnore
@@ -178,10 +179,10 @@ public class Deck{
     }
 
     public void updateSails(List<Entity> entities){
-        List<Sail> sails = new ArrayList<>();
+        List<Sail> mySails = new ArrayList<>();
         for (Entity entity : entities) {
             if(entity.getType()==EntityType.sail)
-                sails.add((Sail)entity);
+                mySails.add((Sail)entity);
         }
         this.sails.forEach(sail -> {
             Sail same = sails.stream().filter(s-> s.equals(sail)).findAny().get();

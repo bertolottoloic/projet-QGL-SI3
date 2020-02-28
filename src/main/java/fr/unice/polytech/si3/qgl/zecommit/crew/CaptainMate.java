@@ -9,8 +9,8 @@ import java.util.List;
 
 public class CaptainMate {
 
-    Captain captain;
-    List<Action> actions;
+    private Captain captain;
+    private List<Action> actions;
     private boolean initGame;
 
     public CaptainMate(Captain captain) {
