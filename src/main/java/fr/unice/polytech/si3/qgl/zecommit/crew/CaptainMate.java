@@ -54,9 +54,9 @@ public class CaptainMate {
     public void toLiftSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
-                actions.add(new LiftSail(sailor.getId()));
-                Sail sail = (Sail)sailor.getEntity();
-                sail.setOpenned(true);
+                    actions.add(new LiftSail(sailor.getId()));
+                    Sail sail = (Sail)sailor.getEntity();
+                    sail.setOpenned(true);
             });
         }
     }
