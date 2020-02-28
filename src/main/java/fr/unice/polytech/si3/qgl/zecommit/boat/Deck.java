@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
@@ -12,6 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -25,7 +25,7 @@ public class Deck{
     @JsonIgnore
     private List<Oar> oars;
     @JsonIgnore
-    private Rudder rudder;
+    private Optional<Rudder> rudder;
     @JsonIgnore
     private List<Sail> sails;
     @JsonIgnore
@@ -68,7 +68,7 @@ public class Deck{
                 this.oars.add((Oar) entity);
             }
             if (entity.getType().equals(EntityType.rudder)) {
-                this.rudder=(Rudder)entity;
+                this.rudder=Optional.of((Rudder)entity);
             }
             if (entity.getType().equals(EntityType.sail)) {
                 this.sails.add((Sail) entity);
@@ -200,7 +200,7 @@ public class Deck{
     }
 
     @JsonIgnore
-    public Rudder getRudder() {
+    public Optional<Rudder> getRudder() {
         return rudder;
     }
 
@@ -259,7 +259,7 @@ public class Deck{
     }
 
     public void setRudder(Rudder rudder) {
-        this.rudder = rudder;
+        this.rudder = Optional.of(rudder);
     }
 
     public void setSails(List<Sail> sails) {

@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
@@ -13,6 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -239,7 +239,7 @@ public class Ship {
      * @return
      */
     @JsonIgnore
-    public Rudder getDeckRudder() {
+    public Optional<Rudder> getDeckRudder() {
         return this.deck.getRudder();
     }
 

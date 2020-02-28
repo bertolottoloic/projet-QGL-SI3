@@ -1,12 +1,13 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
@@ -18,6 +19,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Captain implements CaptainInterface {
@@ -36,33 +38,33 @@ public class Captain implements CaptainInterface {
 
     @Override
     public void attributeEntitiesToSailors() {
-        List<Sailor> sailors = ship.getDeckSailors();
-        List<Sailor> sailorsTmp = new ArrayList<>(sailors);
+        List<Sailor> sailors = new ArrayList<>(ship.getDeckSailors());
         List<Entity> oars = new ArrayList<>(ship.getDeckOars());
-        sailorsTmp.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
-        if(sailorsTmp.size()>4){
-            sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeckRudder());
-            if(sailorsTmp.size()%2>0 && !ship.getDeck().getSails().isEmpty()){
-                sailorsTmp.remove(sailorsTmp.size()-1).setOnEntity(ship.getDeckSails().get(0));
+        List<Sail> sails = new ArrayList<>(ship.getDeckSails());
+        Optional<Rudder> rudder = ship.getDeckRudder();
+        sailors.sort(Comparator.comparingInt(a -> a.distanceToNearestEntity(oars)));
+        if(sailors.size()>4 && rudder.isPresent()){
+            sailors.remove(sailors.size()-1).setOnEntity(rudder.get());
+        }
+        for (int i = 0; i<sailors.size();i++) {
+            Sailor sailor = sailors.get(i);
+            Optional<Entity> closestOar = oars.stream().min(Comparator.comparingInt(a -> sailor.distanceToEntity(a)));
+            if (closestOar.isPresent() && !closestOar.get().hasSailorOn() && !sailor.hasEntity()) {
+                sailor.setOnEntity(closestOar.get());
+                oars.remove(closestOar.get());
+                sailors.remove(sailor);
+                i--;
             }
         }
-        for (Sailor tmp : sailorsTmp) {
-            ship.getDeckOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
-            Oar closestOar = ship.getDeckOars().get(0);
-            if (!closestOar.hasSailorOn() && tmp.distanceToEntity(closestOar) <= 5 && !tmp.hasEntity()) {
-                tmp.setOnEntity(closestOar);
-            }
-        }
-        for (Sailor tmp : sailorsTmp) {
-            ship.getDeckOars().sort(Comparator.comparingInt(a -> tmp.distanceToEntity(a)));
-            for (Oar oar : ship.getDeckOars()) {
-                if (!oar.hasSailorOn() && !tmp.hasEntity()) {
-                    tmp.setOnEntity(oar);
+        if(!sailors.isEmpty() && !sails.isEmpty()){
+            for (Sailor sailor : sailors) {
+                Optional<Sail> sail = sails.stream().min(Comparator.comparingInt(a -> sailor.distanceToEntity(a)));
+                if (sail.isPresent() && !sail.get().hasSailorOn()) {
+                    sailor.setOnEntity(sail.get());
+                    sails.remove(sail.get());
                 }
             }
         }
-
-
     }
 
     @Override
@@ -87,11 +89,9 @@ public class Captain implements CaptainInterface {
     public SimpleEntry<Sailor, Double> doTurn() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         double angle = road.orientationToGoal() - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size()));
-        if (ship.getDeckRudder() != null && ship.getDeckRudder().hasSailorOn())
-            return new SimpleEntry<>(ship.getDeckRudder().getSailorOn(),angle);
+        if (ship.getDeckRudder().isPresent() && ship.getDeckRudder().get().hasSailorOn())
+            return new SimpleEntry<>(ship.getDeckRudder().get().getSailorOn(),angle);
         return null;
-
-
     }
 
     @Override
