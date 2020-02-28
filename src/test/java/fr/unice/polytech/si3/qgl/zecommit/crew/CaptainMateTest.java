@@ -48,7 +48,6 @@ public class CaptainMateTest {
 
         entities = Arrays.asList(new Entity[]{o1,o2});
         sailors = Arrays.asList(new Sailor[]{s1,s2});
-        ship = new Ship("ship",100,new Position(0, 0, 0),"boat",new Deck(4, 10),entities,new Rectangle(4, 10, 0));
     }
 
 

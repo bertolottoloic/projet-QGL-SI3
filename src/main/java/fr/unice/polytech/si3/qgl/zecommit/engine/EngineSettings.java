@@ -42,6 +42,7 @@ public class EngineSettings {
     private ArrayList<Sailor> rightSailors;
     @JsonIgnore
     static final int n = 100;
+    private int shipCount = 1;
     private double rotation = 0;
     private int nbSailUsed = 0;
     private ArrayList<Oar> oarArrayList;
@@ -90,6 +91,7 @@ public class EngineSettings {
         this.checkpoints = new ArrayList<>();
         this.entities = new ArrayList<>();
         this.sailors = new ArrayList<>();
+        this.visibleEntities = new ArrayList<>();
     }
     public void addCheckpoint(Checkpoint checkpoint) {
         this.checkpoints.add(checkpoint);
@@ -520,6 +522,13 @@ public class EngineSettings {
      */
     public List<Stream> getVisibleEntities() {
         return visibleEntities;
+    }
+
+    /**
+     * @return the shipCount
+     */
+    public int getShipCount() {
+        return shipCount;
     }
 
     /**
