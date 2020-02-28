@@ -44,6 +44,7 @@ public class Deck{
         this.sailors = new ArrayList<>();
         this.leftSailorList = new ArrayList<>();
         this.rightSailorList = new ArrayList<>();
+        this.rudder = Optional.empty();
     }
 
 
