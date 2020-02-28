@@ -89,7 +89,7 @@ class EngineSettingsTest{
                 "  \"shipCount\" : 1" +
                 "\n}";
     }
-    
+
 
     @Test
     void engineTurnTestFalse(){
