@@ -39,6 +39,7 @@ public class EngineSettings {
     private ArrayList<Sailor> rightSailors;
     @JsonIgnore
     static final int n = 100;
+    private int shipCount = 1;
     private double rotation = 0;
     private int nbSailUsed = 0;
     private ArrayList<Oar> oarArrayList;
@@ -86,6 +87,16 @@ public class EngineSettings {
         changeWind();
     }
 
+<<<<<<< HEAD
+=======
+
+    public void createList() {
+        this.checkpoints = new ArrayList<>();
+        this.entities = new ArrayList<>();
+        this.sailors = new ArrayList<>();
+        this.visibleEntities = new ArrayList<>();
+    }
+>>>>>>> 1ce1f03b6c457424a65234c7c89f676bf22bd2b5
     public void addCheckpoint(Checkpoint checkpoint) {
         this.checkpoints.add(checkpoint);
     }
@@ -555,6 +566,13 @@ public class EngineSettings {
 
     public int getNbSailUsed() {
         return nbSailUsed;
+    }
+
+    /**
+     * @return the shipCount
+     */
+    public int getShipCount() {
+        return shipCount;
     }
 
     /**

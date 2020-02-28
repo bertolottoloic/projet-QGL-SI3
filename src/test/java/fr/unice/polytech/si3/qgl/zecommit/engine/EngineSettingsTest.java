@@ -16,6 +16,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,85 +31,65 @@ class EngineSettingsTest{
     void setUp() {
         engineSettings= new EngineSettings();
         json1 = "{\n" +
-                "  \"goal\": {\n" +
-                "    \"mode\": \"REGATTA\",\n" +
-                "    \"checkpoints\": [\n" +
-                "      {\n" +
-                "        \"position\": {\n" +
-                "          \"x\": 1000,\n" +
-                "          \"y\": 0,\n" +
-                "          \"orientation\": 0\n" +
-                "        },\n" +
-                "        \"shape\": {\n" +
-                "          \"type\": \"circle\",\n" +
-                "          \"radius\": 50\n" +
-                "        }\n" +
-                "      }\n" +
-                "    ]\n" +
-                "  },\n" +
-                "  \"shipCount\": 1,\n" +
-                "  \"ship\": {\n" +
-                "    \"type\": \"ship\",\n" +
-                "    \"life\": 100,\n" +
-                "    \"position\": {\n" +
-                "      \"x\": 0,\n" +
-                "      \"y\": 0,\n" +
-                "      \"orientation\": 0\n" +
-                "    },\n" +
-                "    \"name\": \"Les copaings d'abord!\",\n" +
-                "    \"deck\": {\n" +
-                "      \"width\": 2,\n" +
-                "      \"length\": 1\n" +
-                "    },\n" +
-                "    \"entities\": [\n" +
-                "      {\n" +
-                "        \"x\": 0,\n" +
-                "        \"y\": 0,\n" +
-                "        \"type\": \"oar\"\n" +
+                "  \"goal\" : {\n" +
+                "    \"mode\" : \"REGATTA\",\n" +
+                "    \"checkpoints\" : [ {\n" +
+                "      \"position\" : {\n" +
+                "        \"x\" : 1000.0,\n" +
+                "        \"y\" : 0.0,\n" +
+                "        \"orientation\" : 0.0\n" +
                 "      },\n" +
-                "      {\n" +
-                "        \"x\": 0,\n" +
-                "        \"y\": 1,\n" +
-                "        \"type\": \"oar\"\n" +
+                "      \"shape\" : {\n" +
+                "        \"type\" : \"circle\",\n" +
+                "        \"radius\" : 50.0\n" +
                 "      }\n" +
-                "    ],\n" +
-                "    \"shape\": {\n" +
-                "      \"type\": \"rectangle\",\n" +
-                "      \"width\": 2,\n" +
-                "      \"height\": 3,\n" +
-                "      \"orientation\": 0\n" +
+                "    } ]\n" +
+                "  },\n" +
+                "  \"ship\" : {\n" +
+                "    \"type\" : \"ship\",\n" +
+                "    \"life\" : 100,\n" +
+                "    \"position\" : {\n" +
+                "      \"x\" : 0.0,\n" +
+                "      \"y\" : 0.0,\n" +
+                "      \"orientation\" : 0.0\n" +
+                "    },\n" +
+                "    \"name\" : \"Les copaings d'abord!\",\n" +
+                "    \"deck\" : {\n" +
+                "      \"width\" : 2,\n" +
+                "      \"length\" : 1\n" +
+                "    },\n" +
+                "    \"entities\" : [ {\n" +
+                "      \"type\" : \"oar\",\n" +
+                "      \"x\" : 0,\n" +
+                "      \"y\" : 0\n" +
+                "    }, {\n" +
+                "      \"type\" : \"oar\",\n" +
+                "      \"x\" : 0,\n" +
+                "      \"y\" : 1\n" +
+                "    } ],\n" +
+                "    \"shape\" : {\n" +
+                "      \"type\" : \"rectangle\",\n" +
+                "      \"width\" : 2.0,\n" +
+                "      \"height\" : 3.0,\n" +
+                "      \"orientation\" : 0.0\n" +
                 "    }\n" +
                 "  },\n" +
-                "  \"sailors\": [\n" +
-                "    {\n" +
-                "      \"x\": 0,\n" +
-                "      \"y\": 0,\n" +
-                "      \"id\": 0,\n" +
-                "      \"name\": \"Edward Teach\"\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"x\": 1,\n" +
-                "      \"y\": 0,\n" +
-                "      \"id\": 1,\n" +
-                "      \"name\": \"Tom Pouce\"\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}";
-
+                "  \"sailors\" : [ {\n" +
+                "    \"id\" : 0,\n" +
+                "    \"x\" : 0,\n" +
+                "    \"y\" : 0,\n" +
+                "    \"name\" : \"Edward Teach\"\n" +
+                "  }, {\n" +
+                "    \"id\" : 1,\n" +
+                "    \"x\" : 0,\n" +
+                "    \"y\" : 1,\n" +
+                "    \"name\" : \"Tom Pouce\"\n" +
+                "  } ],\n" +
+                "  \"visibleEntities\" : [ ],\n" +
+                "  \"shipCount\" : 1" +
+                "\n}";
     }
-
-
-    @Test
-    void engineTurnTest(){
-        engineSettings.addSailors(new Sailor(1,2,3,"name"));
-        engineSettings.addEntities(new Rudder(2,3));
-        engineSettings.sortEntities();
-        Turn turn= mock(Turn.class);
-        when(turn.getSailorId()).thenReturn(1);
-        when(turn.getRotation()).thenReturn(1.3);
-        engineSettings.engineTurn(turn);
-        assertEquals(1.3,engineSettings.getRotation());
-    }
+    
 
     @Test
     void engineTurnTestFalse(){
