@@ -114,6 +114,10 @@ public class EngineSettings {
         this.deck=deck;
    }
 
+   public void addShip(Ship ship){
+        this.ship=ship;
+   }
+
 
     /**
      * ################################################ SETTINGS ################################################
@@ -212,7 +216,7 @@ public class EngineSettings {
     public String thisToJson() {
         try {
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
-            return oM.writeValueAsString(new EngineSettingsInit(goal,ship));
+            return oM.writeValueAsString(new EngineSettingsInit(goal,ship,sailors));
         } catch (IOException e) {
             System.err.println(e);
             return "{}";
@@ -606,11 +610,11 @@ public class EngineSettings {
         private Ship ship;
         private List<Sailor> sailors;
 
-        EngineSettingsInit(Goal goal,Ship s) {
+        EngineSettingsInit(Goal goal,Ship s,List<Sailor> sailors) {
             this.goal=goal;
             this.shipCount=1;
             this.ship = s;
-            this.sailors=ship.getDeckSailors();
+            this.sailors=sailors;
         }
 
         public Goal getGoal(){
@@ -626,7 +630,7 @@ public class EngineSettings {
         }
 
         public List<Sailor> getSailors(){
-            return ship.getDeck().getSailors();
+            return sailors;
         }
 
     }

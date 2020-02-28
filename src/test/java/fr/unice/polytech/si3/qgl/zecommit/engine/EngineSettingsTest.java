@@ -11,6 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.Ignore;
@@ -45,6 +46,7 @@ class EngineSettingsTest{
                 "      }\n" +
                 "    } ]\n" +
                 "  },\n" +
+                "  \"shipCount\" : 1,\n"+
                 "  \"ship\" : {\n" +
                 "    \"type\" : \"ship\",\n" +
                 "    \"life\" : 100,\n" +
@@ -84,12 +86,31 @@ class EngineSettingsTest{
                 "    \"x\" : 0,\n" +
                 "    \"y\" : 1,\n" +
                 "    \"name\" : \"Tom Pouce\"\n" +
-                "  } ],\n" +
-                "  \"visibleEntities\" : [ ],\n" +
-                "  \"shipCount\" : 1" +
-                "\n}";
+                "  } ]\n" +
+                "}";
     }
 
+    @Disabled
+    void thisToJsonTest(){
+        EngineSettings engineSettings = new EngineSettings();
+        engineSettings.createList();
+        Checkpoint checkpoint = new Checkpoint(new Position(1000,0,0), new Circle(50));
+        engineSettings.addCheckpoint(checkpoint);
+        engineSettings.setGoal();
+
+        engineSettings.addEntities(new Oar(0,0));
+        engineSettings.addEntities(new Oar(0,1));
+
+        engineSettings.addSailors(new Sailor(0,0,0,"Edward Teach"));
+        engineSettings.addSailors(new Sailor(1,0,1,"Tom Pouce"));
+
+        Deck deck = new Deck(2,1);
+        engineSettings.addDeck(deck);
+        Shape shape = new Rectangle(2,3,0);
+        engineSettings.addShip(new Ship("ship", 100, new Position(0,0, 0),"Les copaings d'abord!", deck, engineSettings.getEntities(), shape  ));
+
+        assertEquals(json1,engineSettings.thisToJson());
+    }
 
     @Test
     void engineTurnTestFalse(){
@@ -167,14 +188,35 @@ class EngineSettingsTest{
         assertEquals(0,engineSettings.getNbSailUsed());
     }
 
-    @Ignore
+    @Test
     void calculWindTest(){
         Sailor sailorTest=new Sailor(3,0,1,"name");
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(0.0);
+        engineSettings.addShip(shiptest);
         engineSettings.addSailors(sailorTest);
+        engineSettings.addWind(new Wind(0,100));
         engineSettings.addEntities(new Sail(0,1,false));
         engineSettings.sortEntities();
         engineSettings.engineLiftSailAction(sailorTest);
-        engineSettings.calculWind();
+        assertEquals(100/engineSettings.getN(),engineSettings.calculWind());
+    }
+    @Test
+    void calculWindTest2(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(0.0);
+        engineSettings.addShip(shiptest);
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addWind(new Wind(-Math.PI,100));
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        assertEquals(100/engineSettings.getN(),engineSettings.calculWind());
     }
 
 }
