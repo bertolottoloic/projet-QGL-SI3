@@ -216,7 +216,7 @@ class EngineSettingsTest{
         engineSettings.addEntities(new Sail(0,1,false));
         engineSettings.sortEntities();
         engineSettings.engineLiftSailAction(sailorTest);
-        assertEquals(100/engineSettings.getN(),engineSettings.calculWind());
+        assertEquals(-100/engineSettings.getN(),engineSettings.calculWind());
     }
 
 }
