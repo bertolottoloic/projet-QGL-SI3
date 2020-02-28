@@ -1,24 +1,34 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
+import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class EngineSettingsTest{
     String json1;
+    EngineSettings engineSettings;
 
     @BeforeEach
     void setUp() {
+        engineSettings= new EngineSettings();
         json1 = "{\n" +
                 "  \"goal\": {\n" +
                 "    \"mode\": \"REGATTA\",\n" +
@@ -89,24 +99,101 @@ class EngineSettingsTest{
 
 
     @Test
-    void thisToJsonTest(){
-        EngineSettings engineSettings = new EngineSettings();
-        engineSettings.createList();
-        Checkpoint checkpoint = new Checkpoint(new Position(1000,0,0), new Circle(50));
-        engineSettings.addCheckpoint(checkpoint);
-        engineSettings.setGoal();
-
-        engineSettings.addEntities(new Oar(0,0));
-        engineSettings.addEntities(new Oar(0,1));
-
-        engineSettings.addSailors(new Sailor(0,0,0,"Edward Teach"));
-        engineSettings.addSailors(new Sailor(1,0,1,"Tom Pouce"));
-
-        Deck deck = new Deck(2,1);
-        engineSettings.createDeck(deck);
-        Shape shape = new Rectangle(2,3,0);
-        engineSettings.createShip(new Ship("ship", 100, new Position(0,0, 0),"Les copaings d'abord!", deck, engineSettings.getEntities(), shape  ));
-
-        assertEquals(engineSettings.thisToJson(), json1);
+    void engineTurnTest(){
+        engineSettings.addSailors(new Sailor(1,2,3,"name"));
+        engineSettings.addEntities(new Rudder(2,3));
+        engineSettings.sortEntities();
+        Turn turn= mock(Turn.class);
+        when(turn.getSailorId()).thenReturn(1);
+        when(turn.getRotation()).thenReturn(1.3);
+        engineSettings.engineTurn(turn);
+        assertEquals(1.3,engineSettings.getRotation());
     }
+
+    @Test
+    void engineTurnTestFalse(){
+        engineSettings.addSailors(new Sailor(1,2,3,"name"));
+        engineSettings.addEntities(new Rudder(3,3));
+        engineSettings.sortEntities();
+        Turn turn= mock(Turn.class);
+        when(turn.getSailorId()).thenReturn(1);
+        when(turn.getRotation()).thenReturn(1.3);
+        engineSettings.engineTurn(turn);
+        assertFalse(engineSettings.getRotation()==1.3);
+        assertTrue(engineSettings.getRotation()==0);
+    }
+
+    @Test
+    void engineOarLeftRightTest(){
+        Sailor sailorTest=new Sailor(3,7,3,"name");
+        engineSettings.addDeck(new Deck(5,10));
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Oar(7,3));
+        engineSettings.sortEntities();
+        engineSettings.engineOarLeftRight(sailorTest);
+        assertEquals(1,engineSettings.getRightSailors().size());
+        assertEquals(0,engineSettings.getLeftSailors().size());
+    }
+
+    @Test
+    void engineOarLeftRightTest2(){
+        Sailor sailorTest=new Sailor(3,7,1,"name");
+        engineSettings.addDeck(new Deck(5,10));
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Oar(7,1));
+        engineSettings.sortEntities();
+        engineSettings.engineOarLeftRight(sailorTest);
+        assertEquals(0,engineSettings.getRightSailors().size());
+        assertEquals(1,engineSettings.getLeftSailors().size());
+    }
+
+    @Test
+    void engineLiftSailActionTest(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        assertEquals(1,engineSettings.getNbSailUsed());
+    }
+    @Test
+    void engineLiftSailActionTest2(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(1,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        assertEquals(0,engineSettings.getNbSailUsed());
+    }
+
+    @Test
+    void engineLowerSailActionTest(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        engineSettings.engineLowerSailAction(sailorTest);
+        assertEquals(0,engineSettings.getNbSailUsed());
+    }
+    @Test
+    void engineLowerSailActionTest2(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLowerSailAction(sailorTest);
+        assertEquals(0,engineSettings.getNbSailUsed());
+    }
+
+    @Ignore
+    void calculWindTest(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        engineSettings.calculWind();
+    }
+
 }

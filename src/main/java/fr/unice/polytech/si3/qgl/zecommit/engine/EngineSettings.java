@@ -12,10 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
-import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
-import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
@@ -35,7 +32,7 @@ public class EngineSettings {
     private ArrayList<Entity> entities;
     private Shape shape;
     private ArrayList<Sailor> sailors;
-    private ArrayList<Stream> visibleEntities;
+    private ArrayList<VisibleEntitie> visibleEntities;
     private ObjectMapper oM;
     ///////////////////////////:
     private ArrayList<Sailor> leftSailors;
@@ -57,10 +54,12 @@ public class EngineSettings {
     @JsonIgnore
     ArrayList<Stream> streams;
     @JsonIgnore
-    ArrayList<Stream> visibles;
+    ArrayList<VisibleEntitie> visibles;
 
     @JsonIgnore
     EngineSettings() {
+        this.entities=new ArrayList<>();
+        this.sailors=new ArrayList<>();
         this.oarArrayList = new ArrayList<>();
         this.sailArrayList = new ArrayList<>();
         this.winds = new ArrayList<>();
@@ -68,6 +67,8 @@ public class EngineSettings {
         this.visibles = new ArrayList<>();
         this.oM = new ObjectMapper();
 
+        this.rightSailors=new ArrayList<>();
+        this.leftSailors=new ArrayList<>();
     }
 
     public void initiateSettings() {
@@ -85,14 +86,12 @@ public class EngineSettings {
         changeWind();
     }
 
-
-    public void createList() {
-        this.checkpoints = new ArrayList<>();
-        this.entities = new ArrayList<>();
-        this.sailors = new ArrayList<>();
-    }
     public void addCheckpoint(Checkpoint checkpoint) {
         this.checkpoints.add(checkpoint);
+    }
+
+    public void addWind(Wind wind){
+        this.wind=wind;
     }
 
     public void addEntities(Entity entity) {
@@ -103,17 +102,9 @@ public class EngineSettings {
         this.sailors.add(sailor);
     }
 
-    public void createDeck(Deck deck) {
-        this.deck = deck;
-    }
-
-    public void createShip(Ship ship) {
-        this.ship = ship;
-    }
-
-    public void createWind(Wind wind) {
-        this.wind = wind;
-    }
+   public void addDeck(Deck deck){
+        this.deck=deck;
+   }
 
 
     /**
@@ -123,7 +114,7 @@ public class EngineSettings {
 
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
-        //this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
+        this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
 
     }
 
@@ -173,6 +164,7 @@ public class EngineSettings {
 
     public void setDeck() {
         this.deck = new Deck(5, 11);
+        this.deck.setSailors(sailors);
     }
 
     public void setEntities() {
@@ -212,7 +204,7 @@ public class EngineSettings {
     public String thisToJson() {
         try {
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
-            return oM.writeValueAsString(this);
+            return oM.writeValueAsString(new EngineSettingsInit(goal,ship));
         } catch (IOException e) {
             System.err.println(e);
             return "{}";
@@ -222,7 +214,6 @@ public class EngineSettings {
     public String thisToJson2() {
         try {
             oM.configure(SerializationFeature.INDENT_OUTPUT, true);
-
             return oM.writeValueAsString(new EngineSettingsNextRound(ship, visibleEntities, wind));
 
         } catch (IOException e) {
@@ -434,7 +425,7 @@ public class EngineSettings {
 
 
     public void sortVisibleEntities() {
-        for (Stream entity : visibleEntities) {
+        for (VisibleEntitie entity : visibleEntities) {
             if (entity.getType().equals(VisibleEntityType.stream)) {
                 this.streams.add((Stream) entity);
             }
@@ -447,7 +438,7 @@ public class EngineSettings {
 
 
     public void giveVisibleEntities() {
-        for (Stream visible : visibleEntities) {
+        for (VisibleEntitie visible : visibleEntities) {
             Collision collision = new Collision(visible.getShape(), visible.getPosition(), ship.getPosition());
             if (collision.distanceTo() <= 1000) {
                 visibles.add(visible);
@@ -518,8 +509,52 @@ public class EngineSettings {
     /**
      * @return the visibleEntities
      */
-    public List<Stream> getVisibleEntities() {
+    public List<VisibleEntitie> getVisibleEntities() {
         return visibleEntities;
+    }
+
+    public double getRotation() {
+        return rotation;
+    }
+
+    public Rudder getRudder() {
+        return rudder;
+    }
+
+    public Wind getWind() {
+        return wind;
+    }
+
+    public ArrayList<Sailor> getLeftSailors() {
+        return leftSailors;
+    }
+
+    public ArrayList<Sailor> getRightSailors() {
+        return rightSailors;
+    }
+
+    public ArrayList<Oar> getOarArrayList() {
+        return oarArrayList;
+    }
+
+    public ArrayList<Sail> getSailArrayList() {
+        return sailArrayList;
+    }
+
+    public ArrayList<Stream> getStreams() {
+        return streams;
+    }
+
+    public ArrayList<VisibleEntitie> getVisibles() {
+        return visibles;
+    }
+
+    public ArrayList<Wind> getWinds() {
+        return winds;
+    }
+
+    public int getNbSailUsed() {
+        return nbSailUsed;
     }
 
     /**
@@ -528,10 +563,10 @@ public class EngineSettings {
 
     private class EngineSettingsNextRound {
         private Ship ship;
-        private ArrayList<Stream> visibleEntities;
+        private ArrayList<VisibleEntitie> visibleEntities;
         private Wind wind;
 
-        EngineSettingsNextRound(Ship s, ArrayList<Stream> vE, Wind w) {
+        EngineSettingsNextRound(Ship s, ArrayList<VisibleEntitie> vE, Wind w) {
             this.ship = s;
             this.visibleEntities = vE;
             this.wind = w;
@@ -541,13 +576,44 @@ public class EngineSettings {
             return ship;
         }
 
-        public ArrayList<Stream> getVisibleEntities() {
+        public ArrayList<VisibleEntitie> getVisibleEntities() {
             return visibleEntities;
         }
 
         public Wind getWind() {
             return wind;
         }
+    }
+
+    private class EngineSettingsInit {
+        private Goal goal;
+        private int shipCount;
+        private Ship ship;
+        private List<Sailor> sailors;
+
+        EngineSettingsInit(Goal goal,Ship s) {
+            this.goal=goal;
+            this.shipCount=1;
+            this.ship = s;
+            this.sailors=ship.getDeckSailors();
+        }
+
+        public Goal getGoal(){
+            return goal;
+        }
+
+        public int getShipCount() {
+            return shipCount;
+        }
+
+        public Ship getShip() {
+            return ship;
+        }
+
+        public List<Sailor> getSailors(){
+            return ship.getDeck().getSailors();
+        }
+
     }
 
 }
