@@ -9,6 +9,8 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
@@ -19,6 +21,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -219,4 +223,83 @@ class EngineSettingsTest{
         assertEquals(-100/engineSettings.getN(),engineSettings.calculWind());
     }
 
+
+    @Test
+    void angleCalculTest(){
+        final double orientation =Math.PI/2;
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(orientation);
+        engineSettings.addShip(shiptest);
+        ArrayList<Sailor> leftListMock=mock(ArrayList.class);
+        when(leftListMock.size()).thenReturn(0);
+        ArrayList<Sailor> rightListMock=mock(ArrayList.class);
+        when(rightListMock.size()).thenReturn(3);
+        ArrayList<Oar> oarListMock=mock(ArrayList.class);
+        when(oarListMock.size()).thenReturn(6);
+        engineSettings.addOarList(oarListMock);
+        engineSettings.addLeftSailors(leftListMock);
+        engineSettings.addRightSailors(rightListMock);
+        engineSettings.addRotation(0);
+        assertEquals(orientation+(orientation/engineSettings.getN()),engineSettings.angleCalcul());
+    }
+
+    @Test
+    void angleCalculTest2(){
+        final double orientation =Math.PI;
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(orientation);
+        engineSettings.addShip(shiptest);
+        ArrayList<Sailor> leftListMock=mock(ArrayList.class);
+        when(leftListMock.size()).thenReturn(3);
+        ArrayList<Sailor> rightListMock=mock(ArrayList.class);
+        when(rightListMock.size()).thenReturn(3);
+        ArrayList<Oar> oarListMock=mock(ArrayList.class);
+        when(oarListMock.size()).thenReturn(6);
+        engineSettings.addOarList(oarListMock);
+        engineSettings.addLeftSailors(leftListMock);
+        engineSettings.addRightSailors(rightListMock);
+        engineSettings.addRotation(0.1);
+        assertEquals(-orientation+(0.1/engineSettings.getN()),engineSettings.angleCalcul());
+    }
+
+    @Test
+    void giveVisibleEntitiesTest(){
+        Ship shiptest= mock(Ship.class);
+        Position pos=new Position(0,0,0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.addShip(shiptest);
+        ArrayList<VisibleEntitie> visibleEntities=new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(1000,0,0),new Rectangle(10,10,0),100));
+        engineSettings.addVisibleEntities(visibleEntities);
+        engineSettings.giveVisibleEntities();
+        assertEquals(1,engineSettings.getVisibles().size());
+    }
+    @Test
+    void giveVisibleEntitiesTest2(){
+        Ship shiptest= mock(Ship.class);
+        Position pos=new Position(0,0,0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.addShip(shiptest);
+        ArrayList<VisibleEntitie> visibleEntities=new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(700,700,0),new Rectangle(10,10,0),100));
+        engineSettings.addVisibleEntities(visibleEntities);
+        engineSettings.giveVisibleEntities();
+        assertEquals(1,engineSettings.getVisibles().size());
+    }
+    @Test
+    void giveVisibleEntitiesTest3(){
+        Ship shiptest= mock(Ship.class);
+        Position pos=new Position(0,0,0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.addShip(shiptest);
+        ArrayList<VisibleEntitie> visibleEntities=new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(800,800,0),new Rectangle(10,10,0),100));
+        engineSettings.addVisibleEntities(visibleEntities);
+        engineSettings.giveVisibleEntities();
+        assertEquals(0,engineSettings.getVisibles().size());
+    }
 }

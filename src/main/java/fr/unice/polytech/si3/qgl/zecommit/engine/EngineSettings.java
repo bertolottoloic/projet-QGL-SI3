@@ -118,6 +118,24 @@ public class EngineSettings {
         this.ship=ship;
    }
 
+   public void addRightSailors(ArrayList<Sailor> sailors){
+        this.rightSailors=sailors;
+   }
+    public void addLeftSailors(ArrayList<Sailor> sailors){
+        this.leftSailors=sailors;
+    }
+
+    public void addRotation(double rotation){
+        this.rotation=rotation;
+    }
+
+    public void addOarList(ArrayList<Oar> oars){
+        this.oarArrayList=oars;
+    }
+
+    public void addVisibleEntities(ArrayList<VisibleEntitie> visibles){
+        this.visibleEntities=visibles;
+    }
 
     /**
      * ################################################ SETTINGS ################################################
