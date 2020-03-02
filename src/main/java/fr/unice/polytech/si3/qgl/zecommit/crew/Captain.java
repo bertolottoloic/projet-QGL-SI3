@@ -89,8 +89,9 @@ public class Captain implements CaptainInterface {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         double angle = road.orientationToGoal()
                 - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size()));
-        if (ship.getDeckRudder().isPresent() && ship.getDeckRudder().get().hasSailorOn())
-            return new SimpleEntry<>(ship.getDeckRudder().get().getSailorOn(), angle);
+        Optional<Rudder> res = ship.getDeckRudder();
+        if (res.isPresent() && res.get().hasSailorOn())
+                return new SimpleEntry<>(res.get().getSailorOn(), angle);
         return null;
     }
 

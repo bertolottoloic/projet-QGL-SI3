@@ -366,21 +366,21 @@ public class EngineSettings {
         return value / n;
     }
 
-    /*
+
     public Stream getCurrentOn(){
-        for (Stream entity: visibleEntities) {
+        for (VisibleEntitie entity: visibleEntities) {
             Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
-            if(entity.getType()==VisibleEntityType.CURRENT &&collision.collide()){
+            if(entity.getType()==VisibleEntityType.stream &&collision.collide()){
                 return (Stream) entity;
             }
         }
         return null;
     }
 
-     */
 
 
-/*
+
+
     public double calculCurrent(){
         Stream stream =getCurrentOn();
         if(stream !=null){
@@ -390,7 +390,7 @@ public class EngineSettings {
         return 0;
     }
 
- */
+
 
 
     public void calcul() {

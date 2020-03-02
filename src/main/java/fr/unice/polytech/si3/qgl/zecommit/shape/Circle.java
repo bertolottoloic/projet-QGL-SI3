@@ -10,7 +10,7 @@ public class Circle extends Shape {
 
 
     public Circle(double radius){
-        super(ShapeType.CIRCLE.toString());
+        super(ShapeType.circle.toString());
 
         this.radius=radius;
         setCircle(true);

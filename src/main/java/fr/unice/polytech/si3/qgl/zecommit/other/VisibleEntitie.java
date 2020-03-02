@@ -14,9 +14,9 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
  */
 @JsonDeserialize(using = VisibleEntitiesDeserializer.class)
 public abstract class VisibleEntitie {
+    private VisibleEntityType type;
     private Position position;
     private Shape shape;
-    private VisibleEntityType type;
 
     public VisibleEntitie (VisibleEntityType type, Position position,Shape shape){
         this.type=type;
@@ -25,6 +25,7 @@ public abstract class VisibleEntitie {
     }
     //------------------------------GETTER-------------------------//
 
+    public VisibleEntityType getType(){return this.type;}
 
     public Position getPosition() {
         return position;
@@ -34,7 +35,6 @@ public abstract class VisibleEntitie {
         return shape;
     }
 
-    public VisibleEntityType getType(){return this.type;}
     //------------------------------SETTER-------------------------//
 
 

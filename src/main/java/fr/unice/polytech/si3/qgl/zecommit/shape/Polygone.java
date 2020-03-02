@@ -12,7 +12,7 @@ public class Polygone extends Shape {
 
 
     public Polygone(@JsonProperty("orientation")double orientation,@JsonProperty("vertexes")Point[] vertices) {
-        super(ShapeType.POLYGON.toString());
+        super(ShapeType.polygon.toString());
         setCircle(false);
         this.orientation=orientation;
         this.vertices=vertices;
@@ -29,7 +29,7 @@ public class Polygone extends Shape {
 
     public Point[] buildVertexes(ShapeType type,double width, double height){
         Point[] points = new Point[0];
-        if(type.equals(ShapeType.RECTANGLE)) {
+        if(type.equals(ShapeType.rectangle)) {
             points=verticesRectangle(width,height);
         }
         return points;
