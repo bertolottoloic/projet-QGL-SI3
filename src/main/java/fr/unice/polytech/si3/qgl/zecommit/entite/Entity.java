@@ -4,13 +4,15 @@ package fr.unice.polytech.si3.qgl.zecommit.entite;
  * Classe mère décrivant les objets présents sur le bateau
  */
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.EntityDeserializer;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @JsonDeserialize(using = EntityDeserializer.class)
 public abstract class Entity {
@@ -35,6 +37,13 @@ public abstract class Entity {
     @JsonIgnore
     public void putSailorOn(Sailor sailor){
         this.sailorOn = sailor;
+    }
+
+    public int distanceToNearestSailor(List<Sailor> sailors){
+        Optional<Sailor> sailor = sailors.stream().min(Comparator.comparingInt(a->a.distanceToEntity(this)));
+        if(sailor.isPresent())
+            return sailor.get().distanceToEntity(this);
+        return 0;
     }
 
     @Override

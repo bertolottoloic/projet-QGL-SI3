@@ -12,6 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
@@ -45,13 +46,13 @@ public class Captain implements CaptainInterface {
         if (sailors.size() > 4 && rudder.isPresent()) {
             sailors.remove(sailors.size() - 1).setOnEntity(rudder.get());
         }
-        for (int i = 0; i < sailors.size(); i++) {
-            Sailor sailor = sailors.get(i);
-            Optional<Entity> closestOar = oars.stream().min(Comparator.comparingInt(a -> sailor.distanceToEntity(a)));
-            if (closestOar.isPresent() && !closestOar.get().hasSailorOn() && !sailor.hasEntity()) {
-                sailor.setOnEntity(closestOar.get());
-                oars.remove(closestOar.get());
-                sailors.remove(sailor);
+        for (int i = 0; i < oars.size(); i++) {
+            Oar oar = (Oar)oars.get(i);
+            Optional<Sailor> closestSailor = sailors.stream().min(Comparator.comparingInt(a -> a.distanceToEntity(oar)));
+            if (closestSailor.isPresent() && !closestSailor.get().hasEntity()) {
+                closestSailor.get().setOnEntity(oar);
+                oars.remove(oar);
+                sailors.remove(closestSailor.get());
                 i--;
             }
         }
