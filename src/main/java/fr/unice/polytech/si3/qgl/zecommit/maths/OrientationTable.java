@@ -154,6 +154,8 @@ public class OrientationTable {
     }
 
     public Compo getLastCompo(int indexAngle) {
+        if(compoTable.isEmpty() || compoTable.get(indexAngle).isEmpty())
+            return new Compo(0,0);
         return compoTable.get(indexAngle).get(compoTable.get(indexAngle).size()-1);
     }
 
