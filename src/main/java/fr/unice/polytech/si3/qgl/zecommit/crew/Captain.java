@@ -176,7 +176,7 @@ public class Captain implements CaptainInterface {
     public boolean upSail() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         List<Sail> activeSails = ship.getDeckSails().stream().filter(sail -> sail.hasSailorOn()).collect(Collectors.toList());
-        return (wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) > 0
+        return (wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
                 && road.distanceToGoal() > (165 + wind.getStrength()*activeSails.size());
     }
@@ -203,6 +203,10 @@ public class Captain implements CaptainInterface {
      */
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    public void setWind(Wind wind){
+        this.wind = wind;
     }
 
 }

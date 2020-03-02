@@ -23,11 +23,11 @@ public class Engine {
 
         int currentStep = 0;
         String output="";
-        while(!output.equals("[]")&&currentStep<3000) {
+        while(!output.equals("[]")&&currentStep<300) {
             System.out.println("ROUND :"+currentStep);
             currentStep++;
             String json2 = engineSettings.thisToJson2();
-            System.out.println(json2);
+            //System.out.println(json2);
             output = cockpit.nextRound(json2);
             System.out.println(output);
             engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
