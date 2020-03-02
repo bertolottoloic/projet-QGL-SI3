@@ -353,29 +353,23 @@ public class EngineSettings {
 
 
 
-
-
-    public double calculCurrent(){
-        Stream stream =getCurrentOn();
-        if(stream !=null){
-            if(stream.getPosition().getOrientation()==ship.getPosition().getOrientation()){
-                return stream.getStrength()/n;}
-        }
-        return 0;
-    }
-
-
-
-
     public void calcul() {
 
 
         double vitesse = ((double) 165 / n) * (leftSailors.size() + rightSailors.size()) / oarArrayList.size();
         vitesse += calculWind();
-        //vitesse+=calculCurrent();
 
         double x = vitesse * Math.cos(ship.getPosition().getOrientation()) + ship.getPosition().getX();
         double y = vitesse * Math.sin(ship.getPosition().getOrientation()) + ship.getPosition().getY();
+
+        Stream stream =getCurrentOn();
+        if(stream !=null){
+            if(stream.getPosition().getOrientation()==ship.getPosition().getOrientation()){
+               x+=((double)stream.getStrength()/n)*Math.cos(Math.abs(ship.getPosition().getOrientation()-stream.getPosition().getOrientation()));
+               y+=((double)stream.getStrength()/n)*Math.sin(Math.abs(ship.getPosition().getOrientation()-stream.getPosition().getOrientation()));
+            }
+        }
+
 
         ship.setPosition(new Position(x, y, angleCalcul()));
         //System.out.println(ship.getPosition());
