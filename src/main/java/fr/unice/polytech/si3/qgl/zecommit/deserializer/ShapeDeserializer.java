@@ -2,17 +2,18 @@ package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
 import java.io.IOException;
-
+import java.util.List;
 
 
 @JsonDeserialize(using = ShapeDeserializer.class)
@@ -25,7 +26,9 @@ public class ShapeDeserializer extends JsonDeserializer {
 
 
     @Override
-    public Shape deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+
+    public Shape deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
 
         ObjectCodec codec = jsonParser.getCodec();
         JsonNode nodeShape = codec.readTree(jsonParser);
@@ -36,7 +39,14 @@ public class ShapeDeserializer extends JsonDeserializer {
              return new Circle(nodeShape.get("radius").asDouble());
         }
 
-        return new Rectangle(nodeShape.get("width").asDouble(), nodeShape.get("height").asDouble(), nodeShape.get("orientation").asDouble());
+        else if (type.equals("rectangle")) {
+            return new Rectangle(nodeShape.get("width").asDouble(), nodeShape.get("height").asDouble(), nodeShape.get("orientation").asDouble());
+        }
+
+        else {
+            Point[] points = objectMapper.readValue(nodeShape.get("vertexes").toPrettyString(), new TypeReference<Point[]>() {});
+            return new Polygone(nodeShape.get("orientation").asDouble(), points);
+        }
 
     }
 }

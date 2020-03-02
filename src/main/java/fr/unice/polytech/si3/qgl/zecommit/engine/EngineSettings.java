@@ -145,8 +145,9 @@ public class EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
         this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
-
+        
     }
+
 
     public void setWind() {
         this.winds.add(new Wind(0, 50));
@@ -160,23 +161,6 @@ public class EngineSettings {
         this.sailors.add(new Sailor(1, 0, 1, "paul"));
         this.sailors.add(new Sailor(2, 0, 2, "jacques"));
         this.sailors.add(new Sailor(3, 0, 3, "pierre"));
-        this.sailors.add(new Sailor(4, 0, 4, "Vincent"));
-        this.sailors.add(new Sailor(5, 1, 0, "Joris"));
-        this.sailors.add(new Sailor(6, 1, 1, "jean"));
-        this.sailors.add(new Sailor(7, 1, 2, "paul"));
-        this.sailors.add(new Sailor(8, 1, 3, "jacques"));
-        this.sailors.add(new Sailor(9, 1, 4, "pierre"));
-        this.sailors.add(new Sailor(10, 2, 0, "Vincent"));
-        this.sailors.add(new Sailor(11, 2, 1, "Joris"));
-        this.sailors.add(new Sailor(12, 2, 2, "jean"));
-        this.sailors.add(new Sailor(13, 2, 3, "paul"));
-        this.sailors.add(new Sailor(14, 2, 4, "jacques"));
-        this.sailors.add(new Sailor(15, 3, 0, "pierre"));
-        this.sailors.add(new Sailor(16, 3, 1, "Vincent"));
-        this.sailors.add(new Sailor(17, 3, 2, "Joris"));
-        this.sailors.add(new Sailor(18, 3, 3, "Joris"));
-        this.sailors.add(new Sailor(19, 3, 4, "Joris"));
-
 
     }
 
@@ -185,10 +169,10 @@ public class EngineSettings {
     }
 
     public void setCheckpoints() {
-        this.checkpoints = new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(1600, 350, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(345, 1550, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(0, 0, 0), new Circle(70)));
+
+        this.checkpoints= new ArrayList<>();
+        this.checkpoints.add(new Checkpoint(new Position(1600,350,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(345,1550,0), new Circle(50)));
 
     }
 
@@ -198,28 +182,18 @@ public class EngineSettings {
     }
 
     public void setEntities() {
+
         this.entities = new ArrayList<>();
         this.entities.add(new Oar(1, 0));
         this.entities.add(new Oar(2, 0));
-        this.entities.add(new Oar(3, 0));
-        this.entities.add(new Oar(4, 0));
-        this.entities.add(new Oar(5, 0));
-        this.entities.add(new Oar(6, 0));
-        this.entities.add(new Oar(7, 0));
-        this.entities.add(new Oar(8, 0));
-        this.entities.add(new Oar(9, 0));
+
         this.entities.add(new Oar(1, 4));
         this.entities.add(new Oar(2, 4));
-        this.entities.add(new Oar(3, 4));
-        this.entities.add(new Oar(4, 4));
-        this.entities.add(new Oar(5, 4));
-        this.entities.add(new Oar(6, 4));
-        this.entities.add(new Oar(7, 4));
-        this.entities.add(new Oar(8, 4));
-        this.entities.add(new Oar(9, 4));
+
         this.entities.add(new Rudder(10, 4));
 
         this.entities.add(new Sail(5, 2, false));
+
 
     }
 

@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Polygone extends Shape {
 
-    @JsonProperty("orientation")
     protected double orientation;
-
-    @JsonProperty("vertexes")
     protected Point[] vertices;
 
 
-    public Polygone(@JsonProperty("orientation")double orientation,@JsonProperty("vertexes")Point[] vertices) {
+
+    public Polygone(double orientation,Point[] vertices) {
         super(ShapeType.polygon.toString());
         setCircle(false);
         this.orientation=orientation;
