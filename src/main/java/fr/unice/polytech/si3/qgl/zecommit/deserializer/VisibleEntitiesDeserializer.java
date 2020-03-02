@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,7 +23,7 @@ public class VisibleEntitiesDeserializer extends StdDeserializer {
     }
 
     @Override
-    public Object deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Object deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         ObjectCodec codec = jsonParser.getCodec();

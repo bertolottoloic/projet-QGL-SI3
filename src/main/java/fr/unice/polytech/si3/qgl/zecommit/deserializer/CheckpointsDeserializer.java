@@ -1,14 +1,12 @@
 package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoints;
 
@@ -27,7 +25,7 @@ public class CheckpointsDeserializer extends StdDeserializer<Checkpoints> {
 
 
     @Override
-    public Checkpoints deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Checkpoints deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 

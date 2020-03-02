@@ -13,29 +13,8 @@ public class Reef extends VisibleEntitie {
     private Shape shape;
 
     public Reef(Position position, Shape shape) {
-        super(VisibleEntityType.REEF, position, shape);
+        super(VisibleEntityType.reef, position, shape);
     }
 
-    //------------------------------GETTER-------------------------//
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public Shape getShape() {
-        return shape;
-    }
-
-
-    //------------------------------SETTER-------------------------//
-
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public void setShape(Shape shape) {
-        this.shape = shape;
-    }
 }
 

@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
@@ -12,6 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -25,7 +25,7 @@ public class Deck{
     @JsonIgnore
     private List<Oar> oars;
     @JsonIgnore
-    private Rudder rudder;
+    private Optional<Rudder> rudder;
     @JsonIgnore
     private List<Sail> sails;
     @JsonIgnore
@@ -34,6 +34,19 @@ public class Deck{
     private List<Sailor> rightSailorList;
     @JsonIgnore
     private List<Sailor> leftSailorList;
+
+    public Deck(int width, int length){
+
+        this.width = width;
+        this.length = length;
+        this.oars = new ArrayList<>();
+        this.sails = new ArrayList<>();
+        this.sailors = new ArrayList<>();
+        this.leftSailorList = new ArrayList<>();
+        this.rightSailorList = new ArrayList<>();
+        this.rudder = Optional.empty();
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -49,17 +62,6 @@ public class Deck{
         return Objects.hash(width, length);
     }
 
-    public Deck(int width, int length){
-
-        this.width = width;
-        this.length = length;
-        this.oars = new ArrayList<>();
-        this.sails = new ArrayList<>();
-        this.sailors = new ArrayList<>();
-        this.leftSailorList = new ArrayList<>();
-        this.rightSailorList = new ArrayList<>();
-    }
-
     @JsonIgnore
     public void initDeck(List<Entity> entities){
         for (Entity entity : entities){
@@ -67,7 +69,7 @@ public class Deck{
                 this.oars.add((Oar) entity);
             }
             if (entity.getType().equals(EntityType.rudder)) {
-                this.rudder=(Rudder)entity;
+                this.rudder=Optional.of((Rudder)entity);
             }
             if (entity.getType().equals(EntityType.sail)) {
                 this.sails.add((Sail) entity);
@@ -178,10 +180,10 @@ public class Deck{
     }
 
     public void updateSails(List<Entity> entities){
-        List<Sail> sails = new ArrayList<>();
+        List<Sail> mySails = new ArrayList<>();
         for (Entity entity : entities) {
             if(entity.getType()==EntityType.sail)
-                sails.add((Sail)entity);
+                mySails.add((Sail)entity);
         }
         this.sails.forEach(sail -> {
             Sail same = sails.stream().filter(s-> s.equals(sail)).findAny().get();
@@ -199,7 +201,7 @@ public class Deck{
     }
 
     @JsonIgnore
-    public Rudder getRudder() {
+    public Optional<Rudder> getRudder() {
         return rudder;
     }
 
@@ -258,7 +260,7 @@ public class Deck{
     }
 
     public void setRudder(Rudder rudder) {
-        this.rudder = rudder;
+        this.rudder = Optional.of(rudder);
     }
 
     public void setSails(List<Sail> sails) {

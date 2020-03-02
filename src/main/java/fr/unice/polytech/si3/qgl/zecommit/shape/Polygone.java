@@ -48,11 +48,6 @@ public class Polygone extends Shape {
         return orientation;
     }
 
-    @Override
-    public String getType() {
-        return super.getType();
-    }
-
 
     public Point[] getVertices() {
         return vertices;

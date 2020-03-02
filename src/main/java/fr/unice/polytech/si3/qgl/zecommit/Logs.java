@@ -9,7 +9,8 @@ import java.util.List;
  * @author Nathan
  */
 public class Logs {
-    public Logs() {
+    Logs() {
+        //Constructeur vide
     }
 
     protected static final List<String> myLogs = new ArrayList<>();

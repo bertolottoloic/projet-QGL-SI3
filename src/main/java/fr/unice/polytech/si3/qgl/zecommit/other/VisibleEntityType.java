@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
 public enum VisibleEntityType{
-    CURRENT,OTHERSHIP,REEF;
+    stream,ship,reef; //en miniscule sinon problème lors de la création du JSON par le moteur
 
 
     @Override

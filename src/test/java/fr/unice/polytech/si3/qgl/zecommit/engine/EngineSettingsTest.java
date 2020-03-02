@@ -1,26 +1,305 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
+import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class EngineSettingsTest{
-    EngineSettings es;
-    String json;
+    String json1;
+    EngineSettings engineSettings;
 
     @BeforeEach
-    void setUp(){
-        es = new EngineSettings();
-        json = "{\"goal\":{\"mode\":\"REGATTA\",\"checkpoints\":[{\"position\":{\"x\":1600.0,\"y\":350.0,\"orientation\":0.0},\"shape\":{\"type\":\"circle\",\"radius\":50.0}},{\"position\":{\"x\":345.0,\"y\":1550.0,\"orientation\":0.0},\"shape\":{\"type\":\"circle\",\"radius\":50.0}},{\"position\":{\"x\":0.0,\"y\":0.0,\"orientation\":0.0},\"shape\":{\"type\":\"circle\",\"radius\":70.0}}]},\"ship\":{\"type\":\"ship\",\"position\":{\"x\":0.0,\"y\":0.0,\"orientation\":0.0},\"name\":\"Drakkar\",\"deck\":{\"width\":5,\"length\":11},\"entities\":[{\"x\":1,\"y\":0,\"type\":\"oar\"},{\"x\":2,\"y\":0,\"type\":\"oar\"},{\"x\":3,\"y\":0,\"type\":\"oar\"},{\"x\":4,\"y\":0,\"type\":\"oar\"},{\"x\":5,\"y\":0,\"type\":\"oar\"},{\"x\":6,\"y\":0,\"type\":\"oar\"},{\"x\":7,\"y\":0,\"type\":\"oar\"},{\"x\":8,\"y\":0,\"type\":\"oar\"},{\"x\":9,\"y\":0,\"type\":\"oar\"},{\"x\":1,\"y\":4,\"type\":\"oar\"},{\"x\":2,\"y\":4,\"type\":\"oar\"},{\"x\":3,\"y\":4,\"type\":\"oar\"},{\"x\":4,\"y\":4,\"type\":\"oar\"},{\"x\":5,\"y\":4,\"type\":\"oar\"},{\"x\":6,\"y\":4,\"type\":\"oar\"},{\"x\":7,\"y\":4,\"type\":\"oar\"},{\"x\":8,\"y\":4,\"type\":\"oar\"},{\"x\":9,\"y\":4,\"type\":\"oar\"},{\"x\":10,\"y\":4,\"type\":\"rudder\"},{\"x\":5,\"y\":2,\"type\":\"sail\",\"openned\":false}],\"life\":2200,\"shape\":{\"type\":\"rectangle\",\"width\":5.0,\"height\":11.0,\"orientation\":0.0}},\"sailors\":[{\"x\":0,\"y\":0,\"id\":0,\"name\":\"Luffy Teach\"},{\"x\":0,\"y\":1,\"id\":1,\"name\":\"Luffy Teach\"},{\"x\":0,\"y\":2,\"id\":2,\"name\":\"Jack Teach\"},{\"x\":0,\"y\":3,\"id\":3,\"name\":\"Luffy Teach\"},{\"x\":0,\"y\":4,\"id\":4,\"name\":\"Edward Teach\"},{\"x\":1,\"y\":0,\"id\":5,\"name\":\"Jack Teach\"},{\"x\":1,\"y\":1,\"id\":6,\"name\":\"Jack Pouce\"},{\"x\":1,\"y\":2,\"id\":7,\"name\":\"Jack Pouce\"},{\"x\":1,\"y\":3,\"id\":8,\"name\":\"Luffy Teach\"},{\"x\":1,\"y\":4,\"id\":9,\"name\":\"Edward Teach\"},{\"x\":2,\"y\":0,\"id\":10,\"name\":\"Tom Pouce\"},{\"x\":2,\"y\":1,\"id\":11,\"name\":\"Edward Teach\"},{\"x\":2,\"y\":2,\"id\":12,\"name\":\"Tom Pouce\"},{\"x\":2,\"y\":3,\"id\":13,\"name\":\"Luffy Pouce\"},{\"x\":2,\"y\":4,\"id\":14,\"name\":\"Edward Pouce\"},{\"x\":3,\"y\":0,\"id\":15,\"name\":\"Luffy Teach\"},{\"x\":3,\"y\":1,\"id\":16,\"name\":\"Jack Teach\"},{\"x\":3,\"y\":2,\"id\":17,\"name\":\"Jack Pouce\"},{\"x\":3,\"y\":3,\"id\":18,\"name\":\"Luffy Pouce\"},{\"x\":3,\"y\":4,\"id\":19,\"name\":\"Tom Pouce\"}],\"shipCount\":1}";
+    void setUp() {
+        engineSettings= new EngineSettings();
+        json1 = "{\n" +
+                "  \"goal\" : {\n" +
+                "    \"mode\" : \"REGATTA\",\n" +
+                "    \"checkpoints\" : [ {\n" +
+                "      \"position\" : {\n" +
+                "        \"x\" : 1000.0,\n" +
+                "        \"y\" : 0.0,\n" +
+                "        \"orientation\" : 0.0\n" +
+                "      },\n" +
+                "      \"shape\" : {\n" +
+                "        \"type\" : \"circle\",\n" +
+                "        \"radius\" : 50.0\n" +
+                "      }\n" +
+                "    } ]\n" +
+                "  },\n" +
+                "  \"shipCount\" : 1,\n"+
+                "  \"ship\" : {\n" +
+                "    \"type\" : \"ship\",\n" +
+                "    \"life\" : 100,\n" +
+                "    \"position\" : {\n" +
+                "      \"x\" : 0.0,\n" +
+                "      \"y\" : 0.0,\n" +
+                "      \"orientation\" : 0.0\n" +
+                "    },\n" +
+                "    \"name\" : \"Les copaings d'abord!\",\n" +
+                "    \"deck\" : {\n" +
+                "      \"width\" : 2,\n" +
+                "      \"length\" : 1\n" +
+                "    },\n" +
+                "    \"entities\" : [ {\n" +
+                "      \"type\" : \"oar\",\n" +
+                "      \"x\" : 0,\n" +
+                "      \"y\" : 0\n" +
+                "    }, {\n" +
+                "      \"type\" : \"oar\",\n" +
+                "      \"x\" : 0,\n" +
+                "      \"y\" : 1\n" +
+                "    } ],\n" +
+                "    \"shape\" : {\n" +
+                "      \"type\" : \"rectangle\",\n" +
+                "      \"width\" : 2.0,\n" +
+                "      \"height\" : 3.0,\n" +
+                "      \"orientation\" : 0.0\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"sailors\" : [ {\n" +
+                "    \"id\" : 0,\n" +
+                "    \"x\" : 0,\n" +
+                "    \"y\" : 0,\n" +
+                "    \"name\" : \"Edward Teach\"\n" +
+                "  }, {\n" +
+                "    \"id\" : 1,\n" +
+                "    \"x\" : 0,\n" +
+                "    \"y\" : 1,\n" +
+                "    \"name\" : \"Tom Pouce\"\n" +
+                "  } ]\n" +
+                "}";
+    }
+
+    @Disabled
+    void thisToJsonTest(){
+        EngineSettings engineSettings = new EngineSettings();
+        engineSettings.createList();
+        Checkpoint checkpoint = new Checkpoint(new Position(1000,0,0), new Circle(50));
+        engineSettings.addCheckpoint(checkpoint);
+        engineSettings.setGoal();
+
+        engineSettings.addEntities(new Oar(0,0));
+        engineSettings.addEntities(new Oar(0,1));
+
+        engineSettings.addSailors(new Sailor(0,0,0,"Edward Teach"));
+        engineSettings.addSailors(new Sailor(1,0,1,"Tom Pouce"));
+
+        Deck deck = new Deck(2,1);
+        engineSettings.addDeck(deck);
+        Shape shape = new Rectangle(2,3,0);
+        engineSettings.addShip(new Ship("ship", 100, new Position(0,0, 0),"Les copaings d'abord!", deck, engineSettings.getEntities(), shape  ));
+
+        assertEquals(json1,engineSettings.thisToJson());
+    }
+
+    @Test
+    void engineTurnTestFalse(){
+        engineSettings.addSailors(new Sailor(1,2,3,"name"));
+        engineSettings.addEntities(new Rudder(3,3));
+        engineSettings.sortEntities();
+        Turn turn= mock(Turn.class);
+        when(turn.getSailorId()).thenReturn(1);
+        when(turn.getRotation()).thenReturn(1.3);
+        engineSettings.engineTurn(turn);
+        assertFalse(engineSettings.getRotation()==1.3);
+        assertTrue(engineSettings.getRotation()==0);
+    }
+
+    @Test
+    void engineOarLeftRightTest(){
+        Sailor sailorTest=new Sailor(3,7,3,"name");
+        engineSettings.addDeck(new Deck(5,10));
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Oar(7,3));
+        engineSettings.sortEntities();
+        engineSettings.engineOarLeftRight(sailorTest);
+        assertEquals(1,engineSettings.getRightSailors().size());
+        assertEquals(0,engineSettings.getLeftSailors().size());
+    }
+
+    @Test
+    void engineOarLeftRightTest2(){
+        Sailor sailorTest=new Sailor(3,7,1,"name");
+        engineSettings.addDeck(new Deck(5,10));
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Oar(7,1));
+        engineSettings.sortEntities();
+        engineSettings.engineOarLeftRight(sailorTest);
+        assertEquals(0,engineSettings.getRightSailors().size());
+        assertEquals(1,engineSettings.getLeftSailors().size());
+    }
+
+    @Test
+    void engineLiftSailActionTest(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        assertEquals(1,engineSettings.getNbSailUsed());
+    }
+    @Test
+    void engineLiftSailActionTest2(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(1,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        assertEquals(0,engineSettings.getNbSailUsed());
+    }
+
+    @Test
+    void engineLowerSailActionTest(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        engineSettings.engineLowerSailAction(sailorTest);
+        assertEquals(0,engineSettings.getNbSailUsed());
+    }
+    @Test
+    void engineLowerSailActionTest2(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLowerSailAction(sailorTest);
+        assertEquals(0,engineSettings.getNbSailUsed());
+    }
+
+    @Test
+    void calculWindTest(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(0.0);
+        engineSettings.addShip(shiptest);
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addWind(new Wind(0,100));
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        assertEquals(100/engineSettings.getN(),engineSettings.calculWind());
+    }
+    @Test
+    void calculWindTest2(){
+        Sailor sailorTest=new Sailor(3,0,1,"name");
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(0.0);
+        engineSettings.addShip(shiptest);
+        engineSettings.addSailors(sailorTest);
+        engineSettings.addWind(new Wind(-Math.PI,100));
+        engineSettings.addEntities(new Sail(0,1,false));
+        engineSettings.sortEntities();
+        engineSettings.engineLiftSailAction(sailorTest);
+        assertEquals(-100/engineSettings.getN(),engineSettings.calculWind());
     }
 
 
     @Test
-    @Disabled
-    void thisToJsonTest(){
+    void angleCalculTest(){
+        final double orientation =Math.PI/2;
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(orientation);
+        engineSettings.addShip(shiptest);
+        ArrayList<Sailor> leftListMock=mock(ArrayList.class);
+        when(leftListMock.size()).thenReturn(0);
+        ArrayList<Sailor> rightListMock=mock(ArrayList.class);
+        when(rightListMock.size()).thenReturn(3);
+        ArrayList<Oar> oarListMock=mock(ArrayList.class);
+        when(oarListMock.size()).thenReturn(6);
+        engineSettings.addOarList(oarListMock);
+        engineSettings.addLeftSailors(leftListMock);
+        engineSettings.addRightSailors(rightListMock);
+        engineSettings.addRotation(0);
+        assertEquals(orientation+(orientation/engineSettings.getN()),engineSettings.angleCalcul());
+    }
 
-        EngineSettings engineSettings = new EngineSettings();
-        assertEquals(engineSettings.thisToJson2(), json);
+    @Test
+    void angleCalculTest2(){
+        final double orientation =Math.PI;
+        Ship shiptest= mock(Ship.class);
+        Position posTest=mock(Position.class);
+        when(shiptest.getPosition()).thenReturn(posTest);
+        when(shiptest.getPosition().getOrientation()).thenReturn(orientation);
+        engineSettings.addShip(shiptest);
+        ArrayList<Sailor> leftListMock=mock(ArrayList.class);
+        when(leftListMock.size()).thenReturn(3);
+        ArrayList<Sailor> rightListMock=mock(ArrayList.class);
+        when(rightListMock.size()).thenReturn(3);
+        ArrayList<Oar> oarListMock=mock(ArrayList.class);
+        when(oarListMock.size()).thenReturn(6);
+        engineSettings.addOarList(oarListMock);
+        engineSettings.addLeftSailors(leftListMock);
+        engineSettings.addRightSailors(rightListMock);
+        engineSettings.addRotation(0.1);
+        assertEquals(-orientation+(0.1/engineSettings.getN()),engineSettings.angleCalcul());
+    }
+
+    @Test
+    void giveVisibleEntitiesTest(){
+        Ship shiptest= mock(Ship.class);
+        Position pos=new Position(0,0,0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.addShip(shiptest);
+        ArrayList<VisibleEntitie> visibleEntities=new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(1000,0,0),new Rectangle(10,10,0),100));
+        engineSettings.addVisibleEntities(visibleEntities);
+        engineSettings.giveVisibleEntities();
+        assertEquals(1,engineSettings.getVisibles().size());
+    }
+    @Test
+    void giveVisibleEntitiesTest2(){
+        Ship shiptest= mock(Ship.class);
+        Position pos=new Position(0,0,0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.addShip(shiptest);
+        ArrayList<VisibleEntitie> visibleEntities=new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(700,700,0),new Rectangle(10,10,0),100));
+        engineSettings.addVisibleEntities(visibleEntities);
+        engineSettings.giveVisibleEntities();
+        assertEquals(1,engineSettings.getVisibles().size());
+    }
+    @Test
+    void giveVisibleEntitiesTest3(){
+        Ship shiptest= mock(Ship.class);
+        Position pos=new Position(0,0,0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.addShip(shiptest);
+        ArrayList<VisibleEntitie> visibleEntities=new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(800,800,0),new Rectangle(10,10,0),100));
+        engineSettings.addVisibleEntities(visibleEntities);
+        engineSettings.giveVisibleEntities();
+        assertEquals(0,engineSettings.getVisibles().size());
     }
 }

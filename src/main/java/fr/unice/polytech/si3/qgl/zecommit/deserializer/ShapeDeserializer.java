@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 
 
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -27,8 +26,10 @@ public class ShapeDeserializer extends JsonDeserializer {
 
 
     @Override
+
     public Shape deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
+
         ObjectCodec codec = jsonParser.getCodec();
         JsonNode nodeShape = codec.readTree(jsonParser);
 

@@ -1,9 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 
-
-import java.util.Objects;
-
 /**
  * Forme definissant un cercle
  * @author  Clement P
@@ -21,10 +18,8 @@ public class Circle extends Shape {
 
     @Override
     public String toString() {
-        String chaine = "type : "+super.getType()+
+        return  "type : "+super.getType()+
                 " [ radius : "+this.radius+" ] ";
-        return chaine;
-
     }
 
     //--------------------GETTER -------------------------//

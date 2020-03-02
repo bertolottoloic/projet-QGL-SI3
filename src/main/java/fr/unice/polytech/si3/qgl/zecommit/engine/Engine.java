@@ -14,6 +14,7 @@ public class Engine {
 
 
         EngineSettings engineSettings= new EngineSettings();
+        engineSettings.initiateSettings();
         String json = engineSettings.thisToJson();
         System.out.println(json);
         EngineNextRound engineNextRound= new EngineNextRound();
@@ -26,7 +27,7 @@ public class Engine {
             System.out.println("ROUND :"+currentStep);
             currentStep++;
             String json2 = engineSettings.thisToJson2();
-
+            System.out.println(json2);
             output = cockpit.nextRound(json2);
             System.out.println(output);
             engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));

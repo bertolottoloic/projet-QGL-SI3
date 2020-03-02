@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 
@@ -10,8 +9,8 @@ import java.util.List;
 
 public class CaptainMate {
 
-    Captain captain;
-    List<Action> actions;
+    private Captain captain;
+    private List<Action> actions;
     private boolean initGame;
 
     public CaptainMate(Captain captain) {
@@ -55,9 +54,9 @@ public class CaptainMate {
     public void toLiftSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
-                actions.add(new LiftSail(sailor.getId()));
-                Sail sail = (Sail)sailor.getEntity();
-                sail.setOpenned(true);
+                    actions.add(new LiftSail(sailor.getId()));
+                    Sail sail = (Sail)sailor.getEntity();
+                    sail.setOpenned(true);
             });
         }
     }
@@ -72,7 +71,7 @@ public class CaptainMate {
         }
     }
 
-    public List<Action> actions(Game game){
+    public List<Action> actions(){
         refreshData();
         if(this.initGame){
             captain.attributeEntitiesToSailors();
