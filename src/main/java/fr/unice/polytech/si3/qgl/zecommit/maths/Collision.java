@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
@@ -20,13 +21,12 @@ public class Collision {
 
     public Collision(Shape shape1, Position shapePosition, Position shipPosition) {
         this.shape1 = shape1;
-        this.shapePosition = shapePosition;
+        this.shapePosition = shapePosition; //TODO optionel si polygone
         this.shipPosition = shipPosition;
     }
 
     public boolean collide(){
-        //cas avec un cercle
-
+        //cas avec un checkpoint circulaire
         if (shape1.isCircle() && distanceTo() < shape1.getShapeRadius()) {
 
             //Si le centre du bateau est dans le CP
@@ -43,9 +43,28 @@ public class Collision {
 
     }
 
+    public boolean isInpolygone(Polygone polygone){
+        Point shipCenter = new Point(shipPosition.getX(), shipPosition.getY());
+        int nbVertices = polygone.getVertices().length;
+        boolean res = false;
+
+        //On subdivise le polygone en plusieurs triangles
+        for(int i = 0; i<nbVertices-1 ; i++) {
+            Point a = polygone.getVertice(i);
+            Point b = polygone.getVertice(i + 1);
+
+            int k = nbVertices/2;
+            Point c = polygone.getVertice((i + 1 + k)%nbVertices);
+
+            if (isInTriangle(a, b, c, shipCenter))
+                res = true;
+        }
+        return res;
+    }
+
 
     /**
-     * Méthode pour determiner si le bateau est dans le CP
+     * Méthode pour determiner si le bateau est dans un CP rectangulaire
      * Cette méthode coupe le rectangle en 2 triangles
      *
      *  A ___ B
@@ -64,21 +83,8 @@ public class Collision {
         Point c = vertexList.get(2);
         Point d = vertexList.get(3);
 
-        // cas d'un rectangle avec une orientation de 0, PI/2, PI...
-        if (isInRectangleWith0Orientation(rectangle, shipCenter, a, b, c)) return true;
+        return isInTriangle(a,b,c, shipCenter) || isInTriangle(c,d,a, shipCenter) || isInTriangle(b,c,d, shipCenter);
 
-
-        return isInTriangle(a,b,c, shipCenter) && isInTriangle(a,d,c, shipCenter);//TODO 3?
-
-    }
-
-    public boolean isInRectangleWith0Orientation(Rectangle rectangle, Point shipCenter, Point a, Point b, Point c) {
-        return(rectangle.getOrientation() % Math.PI/2 == 0
-                && shipCenter.getX()<=Math.max(a.getX(), Math.max(b.getX(), c.getX()))
-                && shipCenter.getX()>=Math.min(a.getX(), Math.min(b.getX(), c.getX()))
-                && shipCenter.getY()<=Math.max(a.getY(), Math.max(b.getY(), c.getY()))
-                && shipCenter.getY()>=Math.min(a.getY(), Math.min(b.getY(), c.getY()))
-            );
     }
 
     /**
@@ -135,15 +141,31 @@ public class Collision {
         }
         tp = ((f*g) - (d*i)) / ((e*g) - (h*d));
 
-        if(d==0)
-            return false;//Cas non pris en compte pour les triangles mais fonctionnel pour les rectangles
+        if(d==0){
+            return isInTriangleParticularCase(b, c, m, e, g, i);
+
+        }
 
         else
-            t = (f - (tp * e)) / d;
+            t =(f - (tp * e)) / d;
 
-        double res = 1-t-tp;
+        return (0 <= t) && (t <= 1) && (0 <= tp) && (tp <= 1) && (t+tp <= 1);
+    }
 
-        return ( 0 <= res && res <= 1);
+    /**
+     * Méthode pour savoir si un point est dans un triangle dans le cas particulier où d=0
+     * @param b
+     * @param c
+     * @param m
+     * @param e
+     * @param g
+     * @param i
+     * @return
+     */
+    public boolean isInTriangleParticularCase(Point b, Point c, Point m, double e, double g, double i) {
+        return Math.abs(Math.atan(i/(c.getX()-m.getX()))) < Math.abs(Math.atan(g/e))
+                && Math.min(c.getX(), b.getX()) <=m.getX()
+                && Math.max(c.getX(), b.getX()) >= m.getX();
     }
 
 
