@@ -18,6 +18,8 @@ public class Rectangle extends Shape {
 
     public Rectangle(double width,double height, double orientation){
         super(ShapeType.rectangle.toString());
+        setCircle(false);
+        setRectangle(true);
 
         this.width=width;
         this.height=height;

@@ -25,21 +25,20 @@ public class Collision {
         this.shipPosition = shipPosition;
     }
 
-    public boolean collide(){
+    public boolean collide() {
         //cas avec un checkpoint circulaire
-        if (shape1.isCircle() && distanceTo() < shape1.getShapeRadius()) {
-
-            //Si le centre du bateau est dans le CP
+        if (shape1.isCircle() && !shape1.isRectangle() && distanceTo() < shape1.getShapeRadius()) {
             return true;
         }
-        else {
-            if (!shape1.isCircle() && isInRectangle((Rectangle)shape1)){
-                return true;
-            }
-
+        //cas avec un checkpoint rectangulaire
+        if (!shape1.isCircle() && shape1.isRectangle() && isInRectangle((Rectangle) shape1)) {
+            return true;
         }
-        return false;
+        //cas avec un checkpoint polygonal
+        if (!shape1.isCircle() && !shape1.isRectangle() && isInpolygone((Polygone) shape1))
+            return true;
 
+        return false;
 
     }
 

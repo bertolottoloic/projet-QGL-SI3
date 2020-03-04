@@ -10,6 +10,7 @@ public class Polygone extends Shape {
     public Polygone(double orientation,Point[] vertices) {
         super(ShapeType.polygon.toString());
         setCircle(false);
+        setRectangle(false);
         this.orientation=orientation;
         this.vertices=vertices;
     }
