@@ -99,7 +99,7 @@ public class Captain implements CaptainInterface {
     @Override
     public List<Sailor> doLiftSail() {
         if (upSail()) {
-            return ship.getDeckSails().stream().filter(sail -> !sail.isOpenned()).map(sail -> sail.getSailorOn()).collect(Collectors.toList());
+            return ship.getDeckSails().stream().filter(sail -> !sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(sail -> sail.getSailorOn()).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
@@ -107,7 +107,7 @@ public class Captain implements CaptainInterface {
     @Override
     public List<Sailor> doLowerSail() {
         if (!upSail()) {
-            return ship.getDeckSails().stream().filter(sail -> sail.isOpenned()).map(sail -> sail.getSailorOn()).collect(Collectors.toList());
+            return ship.getDeckSails().stream().filter(sail -> sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(sail -> sail.getSailorOn()).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
