@@ -190,20 +190,21 @@ public class Deck{
     }
 
     private void sortOars(){
-        oars.sort(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
         List<Oar> tmpOars = new ArrayList<>(oars);
         List<Oar> sortOars = new ArrayList<>();
         boolean left = true;
-        for(int i=0; i<tmpOars.size();i++){
-            if(left && isLeft(tmpOars.get(i))){
-                sortOars.add(tmpOars.remove(i));
+        Optional<Oar> currentOar;
+        while(!tmpOars.isEmpty()){
+            if(left){
+                currentOar = tmpOars.stream().filter( oar -> isLeft(oar)).min(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
                 left = false;
-                i=0;
-            }
-            if(!left && !isLeft(tmpOars.get(i))){
-                sortOars.add(tmpOars.remove(i));
+            } else {
+                currentOar = tmpOars.stream().filter( oar -> !isLeft(oar)).min(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
                 left = true;
-                i=0;
+            }
+            if(currentOar.isPresent()){
+                sortOars.add(currentOar.get());
+                tmpOars.remove(currentOar.get());
             }
         }
         oars = sortOars;
