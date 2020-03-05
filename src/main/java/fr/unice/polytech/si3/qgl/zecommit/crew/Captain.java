@@ -92,7 +92,7 @@ public class Captain implements CaptainInterface {
         double angle = road.orientationToGoal()
                 - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size(),ship.getDeck().canUseRudder()));
         
-        if (ship.getDeck().canUseRudder())
+        if (res.isPresent() && ship.getDeck().canUseRudder())
                 return new SimpleEntry<>(res.get().getSailorOn(), angle);
         return null;
     }
