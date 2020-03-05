@@ -1,9 +1,5 @@
 language: java
-
-jdk:
-  - openjdk11
-
-script: ./mvnw clean install
-
+os: windows
+script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 notifications:
   email: nathan.meulle@gmail.com
