@@ -56,16 +56,16 @@ public class Window extends JFrame{
                 super.paintComponent(g);
 
                 Graphics2D graph2 = (Graphics2D) g;
-
                 graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
                 graph2.setColor(Color.BLACK);
 
                 Dimension size = getSize();
                 int w = size.width ;
                 int h = size.height;
-                int v =500;
-                graph2.drawLine(v, v, v, v);
+                int coef= 100;
+                int scale = w/coef;
+                graph2.drawLine(600,600 ,600 ,600 );
+                graph2.drawLine(700,700 ,700 ,700 );
 
                 for (int i = 0; i <= 100; i++) {
                     Random r = new Random();
