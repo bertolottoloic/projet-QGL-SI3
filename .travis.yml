@@ -1,5 +1,4 @@
 language: java
-os: windows
-script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script: ./mvnw clean install
 notifications:
   email: nathan.meulle@gmail.com
