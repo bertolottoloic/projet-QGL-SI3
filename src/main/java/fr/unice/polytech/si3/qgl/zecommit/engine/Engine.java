@@ -16,7 +16,7 @@ public class Engine {
 
     public static void main(String [] args) throws JsonProcessingException {
 
-        //Window fenetre= new Window();
+
         ArrayList<Position> positions = new ArrayList<>();
 
         EngineSettings engineSettings= new EngineSettings();
@@ -46,6 +46,8 @@ public class Engine {
             positions.add(position);
             System.out.println(position+"\nFIN DU ROUND\n");
         }
+        Window fenetre= new Window(positions,engineSettings.getAllCheckpoints(),engineSettings.getVisibleEntities());
+
         System.out.println("##################################################################################################");
         System.out.println("############################################## Logs ##############################################");
         System.out.println("##################################################################################################");
@@ -55,10 +57,6 @@ public class Engine {
         System.out.println("##################################################################################################");
         System.out.println("########################################## Fin des Logs ##########################################");
         System.out.println("##################################################################################################");
-
-
-
-
 
     }
 }

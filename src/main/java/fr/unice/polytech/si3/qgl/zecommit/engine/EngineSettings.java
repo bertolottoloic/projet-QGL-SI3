@@ -24,6 +24,7 @@ import java.util.Random;
 public class EngineSettings {
 
     private Goal goal;
+    private ArrayList<Checkpoint> allCheckpoints;
     private ArrayList<Checkpoint> checkpoints;
     private Ship ship;
     private Deck deck;
@@ -145,7 +146,7 @@ public class EngineSettings {
 
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
-        this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
+        this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(100,50,0),100));
 
     }
 
@@ -182,15 +183,16 @@ public class EngineSettings {
     }
 
     public void setGoal() {
-        this.goal = new Regatta(checkpoints);
+        this.goal = new Regatta(new ArrayList<>(checkpoints));
     }
 
     public void setCheckpoints() {
 
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(1600,350,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1600,0,0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(345,1550,0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(-500,700,0), new Polygone(0, new Point[]{new Point(0, 20),new Point(20, 10),new Point(10, -20),new Point(-10, -20),new Point(-20, 10)})));
+        this.allCheckpoints= new ArrayList<>(checkpoints);
     }
 
     public void setDeck() {
@@ -591,6 +593,10 @@ public class EngineSettings {
 
     public int getNbSailUsed() {
         return nbSailUsed;
+    }
+
+    public ArrayList<Checkpoint> getAllCheckpoints() {
+        return allCheckpoints;
     }
 
     /**
