@@ -3,6 +3,10 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+
+import java.util.ArrayList;
+
 
 /**
  * Classe simulant l'appel du projet
@@ -12,6 +16,8 @@ public class Engine {
 
     public static void main(String [] args) throws JsonProcessingException {
 
+        Window fenetre= new Window();
+        ArrayList<Position> positions = new ArrayList<>();
 
         EngineSettings engineSettings= new EngineSettings();
         engineSettings.initiateSettings();
@@ -23,15 +29,17 @@ public class Engine {
 
         int currentStep = 0;
         String output="";
-        while(!output.equals("[]")&&currentStep<3000) {
+        while(!output.equals("[]")&&currentStep<500) {
             System.out.println("ROUND :"+currentStep);
             currentStep++;
             String json2 = engineSettings.thisToJson2();
-            System.out.println(json2);
+            //System.out.println(json2);
             output = cockpit.nextRound(json2);
             System.out.println(output);
             engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
-            System.out.println(engineSettings.getShip().getPosition()+"\nFIN DU ROUND\n");
+            Position position = engineSettings.getShip().getPosition();
+            positions.add(position);
+            System.out.println(position+"\nFIN DU ROUND\n");
         }
         System.out.println("##################################################################################################");
         System.out.println("############################################## Logs ##############################################");

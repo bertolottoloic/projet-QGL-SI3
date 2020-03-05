@@ -9,6 +9,7 @@ import fr.unice.polytech.si3.qgl.zecommit.deserializer.DeckDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -75,6 +76,7 @@ public class Deck{
                 this.sails.add((Sail) entity);
             }
         }
+        sortOars();
     }
     @JsonIgnore
     public boolean sailorsAreOnTheirEntity() {
@@ -189,6 +191,26 @@ public class Deck{
             Sail same = sails.stream().filter(s-> s.equals(sail)).findAny().get();
             sail.setOpenned(same.isOpenned());
         });
+    }
+
+    private void sortOars(){
+        oars.sort(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
+        List<Oar> tmpOars = new ArrayList<>(oars);
+        List<Oar> sortOars = new ArrayList<>();
+        boolean left = true;
+        for(int i=0; i<tmpOars.size();i++){
+            if(left && isLeft(tmpOars.get(i))){
+                sortOars.add(tmpOars.remove(i));
+                left = false;
+                i=0;
+            }
+            if(!left && !isLeft(tmpOars.get(i))){
+                sortOars.add(tmpOars.remove(i));
+                left = true;
+                i=0;
+            }
+        }
+        oars = sortOars;
     }
     //------------------------------GETTER-------------------------//
 

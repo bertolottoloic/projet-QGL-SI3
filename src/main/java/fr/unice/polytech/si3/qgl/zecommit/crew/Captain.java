@@ -12,6 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
@@ -45,13 +46,13 @@ public class Captain implements CaptainInterface {
         if (sailors.size() > 4 && rudder.isPresent()) {
             sailors.remove(sailors.size() - 1).setOnEntity(rudder.get());
         }
-        for (int i = 0; i < sailors.size(); i++) {
-            Sailor sailor = sailors.get(i);
-            Optional<Entity> closestOar = oars.stream().min(Comparator.comparingInt(a -> sailor.distanceToEntity(a)));
-            if (closestOar.isPresent() && !closestOar.get().hasSailorOn() && !sailor.hasEntity()) {
-                sailor.setOnEntity(closestOar.get());
-                oars.remove(closestOar.get());
-                sailors.remove(sailor);
+        for (int i = 0; i < oars.size(); i++) {
+            Oar oar = (Oar)oars.get(i);
+            Optional<Sailor> closestSailor = sailors.stream().min(Comparator.comparingInt(a -> a.distanceToEntity(oar)));
+            if (closestSailor.isPresent() && !closestSailor.get().hasEntity()) {
+                closestSailor.get().setOnEntity(oar);
+                oars.remove(oar);
+                sailors.remove(closestSailor.get());
                 i--;
             }
         }
@@ -89,8 +90,9 @@ public class Captain implements CaptainInterface {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         double angle = road.orientationToGoal()
                 - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size()));
-        if (ship.getDeckRudder().isPresent() && ship.getDeckRudder().get().hasSailorOn())
-            return new SimpleEntry<>(ship.getDeckRudder().get().getSailorOn(), angle);
+        Optional<Rudder> res = ship.getDeckRudder();
+        if (res.isPresent() && res.get().hasSailorOn())
+                return new SimpleEntry<>(res.get().getSailorOn(), angle);
         return null;
     }
 
@@ -173,8 +175,8 @@ public class Captain implements CaptainInterface {
      */
     public boolean upSail() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        List<Sail> activeSails = ship.getDeckSails().stream().filter(sail -> sail.hasSailorOn()).collect(Collectors.toList());
-        return (wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) > 0
+        List<Sail> activeSails = ship.getDeckSails().stream().filter(sail -> sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).collect(Collectors.toList());
+        return (wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
                 && road.distanceToGoal() > (165 + wind.getStrength()*activeSails.size());
     }
@@ -201,6 +203,10 @@ public class Captain implements CaptainInterface {
      */
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    public void setWind(Wind wind){
+        this.wind = wind;
     }
 
 }

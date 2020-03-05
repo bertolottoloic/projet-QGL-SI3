@@ -340,31 +340,17 @@ public class EngineSettings {
         return value / n;
     }
 
-    /*
+
     public Stream getCurrentOn(){
-        for (Stream entity: visibleEntities) {
+        for (VisibleEntitie entity: visibleEntities) {
             Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
-            if(entity.getType()==VisibleEntityType.CURRENT &&collision.collide()){
+            if(entity.getType()==VisibleEntityType.stream &&collision.collide()){
                 return (Stream) entity;
             }
         }
         return null;
     }
 
-     */
-
-
-/*
-    public double calculCurrent(){
-        Stream stream =getCurrentOn();
-        if(stream !=null){
-            if(stream.getPosition().getOrientation()==ship.getPosition().getOrientation()){
-                return stream.getStrength()/n;}
-        }
-        return 0;
-    }
-
- */
 
 
     public void calcul() {
@@ -372,10 +358,18 @@ public class EngineSettings {
 
         double vitesse = ((double) 165 / n) * (leftSailors.size() + rightSailors.size()) / oarArrayList.size();
         vitesse += calculWind();
-        //vitesse+=calculCurrent();
 
         double x = vitesse * Math.cos(ship.getPosition().getOrientation()) + ship.getPosition().getX();
         double y = vitesse * Math.sin(ship.getPosition().getOrientation()) + ship.getPosition().getY();
+
+        Stream stream =getCurrentOn();
+        if(stream !=null){
+            if(stream.getPosition().getOrientation()==ship.getPosition().getOrientation()){
+               x+=((double)stream.getStrength()/n)*Math.cos(Math.abs(ship.getPosition().getOrientation()-stream.getPosition().getOrientation()));
+               y+=((double)stream.getStrength()/n)*Math.sin(Math.abs(ship.getPosition().getOrientation()-stream.getPosition().getOrientation()));
+            }
+        }
+
 
         ship.setPosition(new Position(x, y, angleCalcul()));
         //System.out.println(ship.getPosition());
