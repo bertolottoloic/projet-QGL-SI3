@@ -15,6 +15,7 @@ public class Polygone extends Shape {
         this.vertices=vertices;
     }
 
+
     /////////////////////////////// GETTER //////////////////////////////
 
 
@@ -29,5 +30,17 @@ public class Polygone extends Shape {
 
     public Point getVertice(int index){
         return vertices[index];
+    }
+
+    public double getRadius() {
+        double max = 0;
+        int nbVertices = vertices.length;
+        for (int i = 0; i < nbVertices; i++) {
+            int k = vertices.length/2;
+            double distance = vertices[i].distanceTo(vertices[(i+1+k)%nbVertices]);
+            if(max < distance)
+                max = distance;
+        }
+        return max;
     }
 }

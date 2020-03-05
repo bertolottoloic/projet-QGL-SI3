@@ -367,21 +367,8 @@ public class EngineSettings {
     }
 
 
-    public Stream getCurrentOn(){
-        for (VisibleEntitie entity: visibleEntities) {
-            Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
-            if(entity.getType()==VisibleEntityType.stream &&collision.collide()){
-                return (Stream) entity;
-            }
-        }
-        return null;
-    }
-
-
 
     public void calcul() {
-
-
         double vitesse = ((double) 165 / n) * (leftSailors.size() + rightSailors.size()) / oarArrayList.size();
         vitesse += calculWind();
 
@@ -586,6 +573,16 @@ public class EngineSettings {
      */
     public int getShipCount() {
         return shipCount;
+    }
+
+    public Stream getCurrentOn(){
+        for (VisibleEntitie entity: visibleEntities) {
+            Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
+            if(entity.getType()==VisibleEntityType.stream &&collision.collide()){
+                return (Stream) entity;
+            }
+        }
+        return null;
     }
 
     /**
