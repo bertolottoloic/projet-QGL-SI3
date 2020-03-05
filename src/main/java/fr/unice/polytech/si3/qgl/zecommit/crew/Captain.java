@@ -81,17 +81,18 @@ public class Captain implements CaptainInterface {
             Logs.add("Checkpoint done");
         }
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        int chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size());
+        int chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size(),ship.getDeck().canUseRudder());
         return decisionOrientation(road, chosenAngle);
     }
 
     @Override
     public SimpleEntry<Sailor, Double> doTurn() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        double angle = road.orientationToGoal()
-                - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size()));
         Optional<Rudder> res = ship.getDeckRudder();
-        if (res.isPresent() && res.get().hasSailorOn())
+        double angle = road.orientationToGoal()
+                - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size(),ship.getDeck().canUseRudder()));
+        
+        if (ship.getDeck().canUseRudder())
                 return new SimpleEntry<>(res.get().getSailorOn(), angle);
         return null;
     }

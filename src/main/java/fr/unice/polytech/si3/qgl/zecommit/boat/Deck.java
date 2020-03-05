@@ -212,6 +212,10 @@ public class Deck{
         }
         oars = sortOars;
     }
+
+    public boolean canUseRudder(){
+        return rudder.isPresent() && rudder.get().hasSailorOn() && rudder.get().getSailorOn().isOnEntity();
+    }
     //------------------------------GETTER-------------------------//
 
     public int getWidth() {
