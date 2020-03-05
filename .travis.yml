@@ -1,8 +1,5 @@
 language: java
-
 os: windows
-
-script: ./mvnw clean install
-
+script: ./mvn clean install
 notifications:
   email: nathan.meulle@gmail.com
