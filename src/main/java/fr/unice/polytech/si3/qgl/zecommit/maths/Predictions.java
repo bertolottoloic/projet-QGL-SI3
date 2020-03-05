@@ -11,24 +11,25 @@ import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe permettant de prévoir la prochaine position du bateau
  * @author Nathan
  */
 public class Predictions {
-    private ArrayList<Sailor> leftSailors;
-    private ArrayList<Sailor> rightSailors;
-    private ArrayList<Oar> oarArrayList;
+    private List<Sailor> leftSailors;
+    private List<Sailor> rightSailors;
+    private List<Oar> oarArrayList;
     private Ship ship;
-    private ArrayList<VisibleEntitie> visibleEntities;
+    private List<VisibleEntitie> visibleEntities;
     private double rotation;
-    private ArrayList<Sail> sailArrayList;
+    private List<Sail> sailArrayList;
     private Wind wind;
     private int nbSailUsed;
 
 
-    public Predictions(ArrayList<Sailor> leftSailors, ArrayList<Sailor> rightSailors, ArrayList<Oar> oarArrayList, Ship ship, ArrayList<VisibleEntitie> visibleEntities, double rotation, ArrayList<Sail> sailArrayList, Wind wind) {
+    public Predictions(List<Sailor> leftSailors, List<Sailor> rightSailors, List<Oar> oarArrayList, Ship ship, List<VisibleEntitie> visibleEntities, double rotation, List<Sail> sailArrayList, Wind wind) {
         this.leftSailors = leftSailors;
         this.rightSailors = rightSailors;
         this.oarArrayList = oarArrayList;
@@ -41,7 +42,7 @@ public class Predictions {
 
     public Position predictPosition() {
 
-        double vitesse = 165 * (leftSailors.size() + rightSailors.size()) / oarArrayList.size();
+        double vitesse = 165 * (double)(leftSailors.size() + rightSailors.size()) / oarArrayList.size();
         vitesse += calculWind();
 
         double x = vitesse * Math.cos(ship.getPosition().getOrientation()) + ship.getPosition().getX();

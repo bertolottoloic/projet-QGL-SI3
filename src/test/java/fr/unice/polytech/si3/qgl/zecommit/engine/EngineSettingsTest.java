@@ -94,27 +94,6 @@ class EngineSettingsTest{
                 "}";
     }
 
-    @Disabled
-    void thisToJsonTest(){
-        EngineSettings engineSettings = new EngineSettings();
-        engineSettings.createList();
-        Checkpoint checkpoint = new Checkpoint(new Position(1000,0,0), new Circle(50));
-        engineSettings.addCheckpoint(checkpoint);
-        engineSettings.setGoal();
-
-        engineSettings.addEntities(new Oar(0,0));
-        engineSettings.addEntities(new Oar(0,1));
-
-        engineSettings.addSailors(new Sailor(0,0,0,"Edward Teach"));
-        engineSettings.addSailors(new Sailor(1,0,1,"Tom Pouce"));
-
-        Deck deck = new Deck(2,1);
-        engineSettings.addDeck(deck);
-        Shape shape = new Rectangle(2,3,0);
-        engineSettings.addShip(new Ship("ship", 100, new Position(0,0, 0),"Les copaings d'abord!", deck, engineSettings.getEntities(), shape  ));
-
-        assertEquals(json1,engineSettings.thisToJson());
-    }
 
     @Test
     void engineTurnTestFalse(){

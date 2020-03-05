@@ -27,7 +27,7 @@ public class ShapeDeserializer extends JsonDeserializer {
 
     @Override
 
-    public Shape deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Shape deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         ObjectCodec codec = jsonParser.getCodec();

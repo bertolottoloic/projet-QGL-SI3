@@ -25,6 +25,10 @@ public class Collision {
         this.shipPosition = shipPosition;
     }
 
+    /**
+     * Méthode détectant les collisions
+     * @return true si la collision se produit
+     */
     public boolean collide() {
         //cas avec un checkpoint circulaire
         if (shape1.isCircle() && !shape1.isRectangle() && distanceTo() < shape1.getShapeRadius()) {

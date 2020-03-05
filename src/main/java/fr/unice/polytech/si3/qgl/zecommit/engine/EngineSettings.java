@@ -21,7 +21,6 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -58,6 +57,8 @@ public class EngineSettings {
     @JsonIgnore
     ArrayList<Stream> streams;
     @JsonIgnore
+    ArrayList<Reef> reefs;
+    @JsonIgnore
     ArrayList<VisibleEntitie> visibles;
 
     @JsonIgnore
@@ -68,6 +69,7 @@ public class EngineSettings {
         this.sailArrayList = new ArrayList<>();
         this.winds = new ArrayList<>();
         this.streams = new ArrayList<>();
+        this.reefs = new ArrayList<>();
         this.visibles = new ArrayList<>();
         this.oM = new ObjectMapper();
 
@@ -255,7 +257,7 @@ public class EngineSettings {
         }
     }
 
-    public void updateEngine(List<Action> actions) {
+    public void updateEngine(List<Action> actions) throws Exception {
         rightSailors = new ArrayList<>();
         leftSailors = new ArrayList<>();
         rotation = 0;
@@ -371,7 +373,7 @@ public class EngineSettings {
 
 
 
-    public void calcul() {
+    public void calcul() throws Exception {
         double vitesse = ((double) 165 / n) * (leftSailors.size() + rightSailors.size()) / oarArrayList.size();
         vitesse += calculWind();
 
@@ -386,10 +388,33 @@ public class EngineSettings {
             }
         }
 
+        Position newPosition = new Position(x, y, angleCalcul());
 
-        ship.setPosition(new Position(x, y, angleCalcul()));
+        boolean res = checkCollision(newPosition);
+
+        if(res)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
+            throw new Exception("Collision Détectée ! Déplacement annulé !");
+        else {
+            ship.setPosition(newPosition);
+        }
         //System.out.println(ship.getPosition());
         checkCheckpoints();
+    }
+
+    /**
+     * Méthode vérifiant les collisions avec tous les récifs présents
+     * @param newPosition
+     * @return
+     */
+    public boolean checkCollision(Position newPosition) {
+        boolean res = false;
+        for (Reef reef : reefs) {
+            Collision collision = new Collision(reef.getShape(), reef.getPosition(), newPosition);
+            if (collision.collide()) {
+                res = true;
+            }
+        }
+        return res;
     }
 
 
@@ -446,6 +471,7 @@ public class EngineSettings {
             if (entity.getType().equals(VisibleEntityType.ship)) {
             }
             if (entity.getType().equals(VisibleEntityType.reef)) {
+                this.reefs.add((Reef) entity);
             }
         }
     }

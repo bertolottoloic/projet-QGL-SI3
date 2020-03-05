@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -37,7 +38,12 @@ public class Engine {
             //System.out.println(json2);
             output = cockpit.nextRound(json2);
             System.out.println(output);
-            engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
+
+            try {
+                engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
+            }catch (Exception e){
+                System.err.println(e.getMessage()); //lève une exception en cas de collision
+            }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);
             System.out.println(position+"\nFIN DU ROUND\n");
