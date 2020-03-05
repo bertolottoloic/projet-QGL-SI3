@@ -44,7 +44,7 @@ public class ShapeDeserializer extends JsonDeserializer {
         }
 
         else {
-            Point[] points = objectMapper.readValue(nodeShape.get("vertexes").toPrettyString(), new TypeReference<Point[]>() {});
+            Point[] points = objectMapper.readValue(nodeShape.get("vertices").toPrettyString(), new TypeReference<Point[]>() {});
             return new Polygone(nodeShape.get("orientation").asDouble(), points);
         }
 

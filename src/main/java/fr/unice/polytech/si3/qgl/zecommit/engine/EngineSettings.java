@@ -192,7 +192,7 @@ public class EngineSettings {
         this.checkpoints= new ArrayList<>();
         this.checkpoints.add(new Checkpoint(new Position(1600,350,0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(345,1550,0), new Circle(50)));
-        //this.checkpoints.add(new Checkpoint(new Position(-500,700,0), new Polygone(0, new Point[]{new Point(0, 2),new Point(2, 1),new Point(1, -2),new Point(-1, -2),new Point(-2, 1)})));
+        this.checkpoints.add(new Checkpoint(new Position(-500,700,0), new Polygone(0, new Point[]{new Point(0, 20),new Point(20, 10),new Point(10, -20),new Point(-10, -20),new Point(-20, 10)})));
     }
 
     public void setDeck() {

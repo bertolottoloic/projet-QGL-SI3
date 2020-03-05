@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Polygone extends Shape {
 
@@ -32,6 +33,7 @@ public class Polygone extends Shape {
         return vertices[index];
     }
 
+    @JsonIgnore
     public double getRadius() {
         double max = 0;
         int nbVertices = vertices.length;
@@ -41,6 +43,6 @@ public class Polygone extends Shape {
             if(max < distance)
                 max = distance;
         }
-        return max;
+        return max/2;
     }
 }
