@@ -88,10 +88,10 @@ public class Road {
     /**
      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
      */
-    public int findClosestPossibleAngle(int oarsNb){
+    public int findClosestPossibleAngle(int oarsNb, boolean canUseRuddder){
         double angle;
         angle = orientationToGoal();
-        if(orientationToGoal()>-Math.PI/4 && orientationToGoal()<Math.PI/4)
+        if(orientationToGoal()>-Math.PI/4 && orientationToGoal()<Math.PI/4 && canUseRuddder)
             angle = 0;
         double step = Math.PI/(2*oarsNb);
         int res = 0;

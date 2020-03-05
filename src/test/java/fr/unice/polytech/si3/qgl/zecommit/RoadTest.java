@@ -170,22 +170,22 @@ public class RoadTest {
         when(posMock.getOrientation()).thenReturn(0.0);
         when(posMock.getX()).thenReturn(5000.0);
         when(posMock.getY()).thenReturn(-12071.0);
-        assertEquals(1,road.findClosestPossibleAngle(4)); //pour un angle de -3pi/8
+        assertEquals(1,road.findClosestPossibleAngle(4,true)); //pour un angle de -3pi/8
         when(posMock.getX()).thenReturn(4.0);
         when(posMock.getY()).thenReturn(-4.0);
-        assertEquals(1,road.findClosestPossibleAngle(4)); //pour un angle de -pi/4
+        assertEquals(1,road.findClosestPossibleAngle(4,true)); //pour un angle de -pi/4
         when(posMock.getX()).thenReturn(10000.0);
         when(posMock.getY()).thenReturn(-19209.0);
-        assertEquals(1,road.findClosestPossibleAngle(4)); //pour un angle -25pi/72
+        assertEquals(1,road.findClosestPossibleAngle(4,true)); //pour un angle -25pi/72
         when(posMock.getX()).thenReturn(5000.0);
         when(posMock.getY()).thenReturn(437.0);
-        assertEquals(2,road.findClosestPossibleAngle(4)); //pour un angle de pi/36
+        assertEquals(2,road.findClosestPossibleAngle(4,true)); //pour un angle de pi/36
         when(posMock.getX()).thenReturn(5000.0);
         when(posMock.getY()).thenReturn(12072.0);
-        assertEquals(4, road.findClosestPossibleAngle(4)); //pour un angle de 3pi/8
+        assertEquals(4, road.findClosestPossibleAngle(4,true)); //pour un angle de 3pi/8
         when(posMock.getX()).thenReturn(100.0);
         when(posMock.getY()).thenReturn(1143.0);
-        assertEquals(4,road.findClosestPossibleAngle(4)); //pour un angle de 17pi/36
+        assertEquals(4,road.findClosestPossibleAngle(4,true)); //pour un angle de 17pi/36
 
     }
 
@@ -195,7 +195,7 @@ public class RoadTest {
         Road road = new Road(new Position(0, 0, 0),posMock);
         when(posMock.getX()).thenReturn(10000.0);
         when(posMock.getY()).thenReturn(9696.7);
-        assertEquals(3,road.findClosestPossibleAngle(6));
+        assertEquals(3,road.findClosestPossibleAngle(6,true));
 
     }
 
@@ -205,25 +205,25 @@ public class RoadTest {
         Road road = new Road(new Position(0, 0, 0),posMock);
         when(posMock.getX()).thenReturn(0.0);
         when(posMock.getY()).thenReturn(-1.0);
-        assertEquals(0,road.findClosestPossibleAngle(3)); //pour un angle de -pi/2
+        assertEquals(0,road.findClosestPossibleAngle(3,true)); //pour un angle de -pi/2
         when(posMock.getX()).thenReturn(3.0);
         when(posMock.getY()).thenReturn(-Math.sqrt(3));
-        assertEquals(2,road.findClosestPossibleAngle(3)); //pour un angle de -pi/6
+        assertEquals(2,road.findClosestPossibleAngle(3,true)); //pour un angle de -pi/6
         when(posMock.getX()).thenReturn(10000.0);
         when(posMock.getY()).thenReturn(-4663.0);
-        assertEquals(2,road.findClosestPossibleAngle(3)); //pour un angle de -5pi/36
+        assertEquals(2,road.findClosestPossibleAngle(3,true)); //pour un angle de -5pi/36
         when(posMock.getX()).thenReturn(5000.0);
         when(posMock.getY()).thenReturn(437.0);
-        assertEquals(2,road.findClosestPossibleAngle(3)); //pour un angle de pi/36
+        assertEquals(2,road.findClosestPossibleAngle(3,true)); //pour un angle de pi/36
         when(posMock.getX()).thenReturn(3.0);
         when(posMock.getY()).thenReturn(Math.sqrt(3));
-        assertEquals(2,road.findClosestPossibleAngle(3)); //pour un angle de pi/6
+        assertEquals(2,road.findClosestPossibleAngle(3,true)); //pour un angle de pi/6
         when(posMock.getX()).thenReturn(1.0);
         when(posMock.getY()).thenReturn(Math.sqrt(3));
-        assertEquals(3,road.findClosestPossibleAngle(3)); //pour un angle de pi/3
+        assertEquals(3,road.findClosestPossibleAngle(3,true)); //pour un angle de pi/3
         when(posMock.getX()).thenReturn(0.0);
         when(posMock.getY()).thenReturn(1.0);
-        assertEquals(3,road.findClosestPossibleAngle(3)); //pour un angle de pi/2
+        assertEquals(3,road.findClosestPossibleAngle(3,true)); //pour un angle de pi/2
 
     }
 }
