@@ -145,7 +145,7 @@ public class EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
         this.visibleEntities.add(new Stream(new Position(0,100,0),new Rectangle(100,50,0),100));
-        
+
     }
 
 
