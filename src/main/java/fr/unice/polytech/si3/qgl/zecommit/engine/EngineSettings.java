@@ -14,11 +14,14 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -189,7 +192,7 @@ public class EngineSettings {
         this.checkpoints= new ArrayList<>();
         this.checkpoints.add(new Checkpoint(new Position(1600,350,0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(345,1550,0), new Circle(50)));
-
+        //this.checkpoints.add(new Checkpoint(new Position(-500,700,0), new Polygone(0, new Point[]{new Point(0, 2),new Point(2, 1),new Point(1, -2),new Point(-1, -2),new Point(-2, 1)})));
     }
 
     public void setDeck() {
