@@ -2,6 +2,9 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+
+import javax.swing.*;
 
 
 /**
@@ -12,6 +15,7 @@ public class Engine {
 
     public static void main(String [] args) throws JsonProcessingException {
 
+        Window fenetre= new Window();
 
         EngineSettings engineSettings= new EngineSettings();
         engineSettings.initiateSettings();
