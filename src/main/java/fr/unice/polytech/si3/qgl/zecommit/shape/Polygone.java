@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 public class Polygone extends Shape {
 
@@ -31,6 +32,10 @@ public class Polygone extends Shape {
 
     public Point getVertice(int index){
         return vertices[index];
+    }
+
+    public Point getRelativeVertice(int index, Position position){
+        return new Point(vertices[index].getX()+position.getX(), vertices[index].getY()+position.getY());
     }
 
     @JsonIgnore

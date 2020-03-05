@@ -32,6 +32,23 @@ public class Ship {
     private List<Oar> oars = new ArrayList<>();
 
 
+    /**
+     *
+     *                    v  ~.      v
+     *           v           /|
+     *                      / |          v
+     *               v     /__|__
+     *                   \--------/
+     * ~~~~~~~~~~~~~~~~~~~`~~~~~~'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @param type
+     * @param life
+     * @param position
+     * @param name
+     * @param deck
+     * @param entities
+     * @param shape
+     */
     public Ship(String type, int life,Position position,String name, Deck deck, List<Entity> entities,Shape shape){
         this.type = type;
         this.life = life;

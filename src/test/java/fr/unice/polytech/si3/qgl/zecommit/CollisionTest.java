@@ -382,7 +382,7 @@ public class CollisionTest {
         points[2] = new Point(4, 5);
         points[3] = new Point(6, 4);
         points[4] = new Point(5, 2);
-        Position polygonePosition = new Position(4, 5, 0);
+        Position polygonePosition = new Position(0, 0, 0);
 
         Position M = new Position(3, 3, 0);
 
@@ -404,7 +404,7 @@ public class CollisionTest {
         points[3] = new Point(11, 5);
         points[4] = new Point(10, 4);
         points[5] = new Point(9, 4);
-        Position polygonePosition = new Position(4, 5, 0);
+        Position polygonePosition = new Position(0, 0, 0);
 
         Position M = new Position(9, 5, 0);
 
@@ -426,7 +426,7 @@ public class CollisionTest {
         points[3] = new Point(11, 5);
         points[4] = new Point(10, 4);
         points[5] = new Point(9, 4);
-        Position polygonePosition = new Position(4, 5, 0);
+        Position polygonePosition = new Position(0, 0, 0);
 
         Position M = new Position(8, 5, 0);
 
@@ -448,7 +448,7 @@ public class CollisionTest {
         points[3] = new Point(11, 5);
         points[4] = new Point(10, 4);
         points[5] = new Point(9, 4);
-        Position polygonePosition = new Position(4, 5, 0);
+        Position polygonePosition = new Position(0, 0, 0);
 
         Position M = new Position(9.5, 4, 0);
 
@@ -470,7 +470,7 @@ public class CollisionTest {
         points[3] = new Point(11, 5);
         points[4] = new Point(10, 4);
         points[5] = new Point(9, 4);
-        Position polygonePosition = new Position(4, 5, 0);
+        Position polygonePosition = new Position(0, 0, 0);
 
         Position M = new Position(8, 6, 0);
 

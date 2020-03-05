@@ -49,11 +49,11 @@ public class Collision {
 
         //On subdivise le polygone en plusieurs triangles
         for(int i = 0; i<nbVertices-1 ; i++) {
-            Point a = polygone.getVertice(i);
-            Point b = polygone.getVertice(i + 1);
+            Point a = polygone.getRelativeVertice(i, shapePosition);
+            Point b = polygone.getRelativeVertice(i + 1, shapePosition);
 
             int k = nbVertices/2;
-            Point c = polygone.getVertice((i + 1 + k)%nbVertices);
+            Point c = polygone.getRelativeVertice((i + 1 + k)%nbVertices, shapePosition);
 
             if (isInTriangle(a, b, c, shipCenter))
                 res = true;
