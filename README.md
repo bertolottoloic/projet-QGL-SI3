@@ -1,6 +1,8 @@
 # pns-si3-qgl-regatta-1920-ze-commit
 pns-si3-qgl-regatta-1920-ze-commit created by GitHub Classroom
 
+[![Build Status](https://travis-ci.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-ze-commit.svg?token=B3FYLXeem5SKyzsCXNGH&branch=master)](https://travis-ci.com/pns-si3-qgl/pns-si3-qgl-regatta-1920-ze-commit)
+
                                                     _  _
                                                    ' \/ '
                                                    
