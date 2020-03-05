@@ -14,9 +14,10 @@ import java.util.ArrayList;
  */
 public class Engine {
 
+
     public static void main(String [] args) throws JsonProcessingException {
 
-        Window fenetre= new Window();
+        //Window fenetre= new Window();
         ArrayList<Position> positions = new ArrayList<>();
 
         EngineSettings engineSettings= new EngineSettings();

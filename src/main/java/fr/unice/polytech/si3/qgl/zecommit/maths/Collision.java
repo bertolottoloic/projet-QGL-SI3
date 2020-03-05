@@ -21,7 +21,7 @@ public class Collision {
 
     public Collision(Shape shape1, Position shapePosition, Position shipPosition) {
         this.shape1 = shape1;
-        this.shapePosition = shapePosition; //TODO optionel si polygone
+        this.shapePosition = shapePosition;
         this.shipPosition = shipPosition;
     }
 

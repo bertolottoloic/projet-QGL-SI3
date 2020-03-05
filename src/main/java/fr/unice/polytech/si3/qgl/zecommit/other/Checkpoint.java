@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.CheckPointDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 /**
@@ -36,10 +38,23 @@ public class Checkpoint {
     }
 
     @JsonIgnore
+    public boolean isRectangle() {
+        return shape.isRectangle();
+    }
+
+    @JsonIgnore
     public double getCircleRadius() {
         if (this.isCircle()) {
             Circle circle = (Circle) this.getShape();
             return circle.getRadius();
+        }
+        if(this.isRectangle()) {
+            Rectangle rectangle = (Rectangle) this.getShape();
+            return rectangle.getHeight();
+        }
+        if(!this.isCircle() && !this.isRectangle()) {
+            Polygone polygone = (Polygone) this.getShape();
+            return polygone.getRadius();
         }
         return 0;
     }
