@@ -13,14 +13,21 @@ import fr.unice.polytech.si3.qgl.zecommit.deserializer.ShapeDeserializer;
 public abstract class Shape {
     private String type;
     @JsonIgnore private boolean isCircle;
+    @JsonIgnore private boolean isRectangle;
 
     public Shape(String type){
         this.type=type;
         this.isCircle=false;
+        this.isRectangle=false;
     }
     @JsonIgnore
     public boolean isCircle(){
         return this.isCircle;
+    }
+
+    @JsonIgnore
+    public boolean isRectangle(){
+        return this.isRectangle;
     }
 
     //------------------------GETTER----------------------//
@@ -46,6 +53,11 @@ public abstract class Shape {
     @JsonIgnore
     public void setCircle(boolean circle) {
         isCircle = circle;
+    }
+
+    @JsonIgnore
+    public void setRectangle(boolean rectangle) {
+        isRectangle = rectangle;
     }
 
     @Override

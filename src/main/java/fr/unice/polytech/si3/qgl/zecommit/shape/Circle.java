@@ -14,6 +14,7 @@ public class Circle extends Shape {
 
         this.radius=radius;
         setCircle(true);
+        setRectangle(false);
     }
 
     @Override
