@@ -1,12 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
@@ -21,6 +14,13 @@ import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
 import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Captain implements CaptainInterface {
 

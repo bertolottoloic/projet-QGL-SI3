@@ -10,7 +10,6 @@ import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,7 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
-import fr.unice.polytech.si3.qgl.zecommit.Logs;
-
 /**
  * Classe représentant l'action : ramer
  * @author Loic Bertolotto
@@ -10,7 +8,6 @@ import fr.unice.polytech.si3.qgl.zecommit.Logs;
 public class ToOar extends Action{
     public ToOar(int sailorId){
         super(sailorId,ActionType.OAR);
-        //Logs.add("S" + sailorId + ": oar");
 
     }
 }

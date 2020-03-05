@@ -2,11 +2,9 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
-
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 
 /**

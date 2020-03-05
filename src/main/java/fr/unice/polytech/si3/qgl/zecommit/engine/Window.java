@@ -1,18 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.geom.Rectangle2D;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
-
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Window extends JFrame{
 

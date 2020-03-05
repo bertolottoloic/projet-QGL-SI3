@@ -107,7 +107,7 @@ public class Sailor {
         this.name = name;
     }
 
-    public void setOnEntity(Entity e){//TODO à corriger
+    public void setOnEntity(Entity e){
         if(this.entity != null)
             this.entity.putSailorOn(null);
         this.entity = e;

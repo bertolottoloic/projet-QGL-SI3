@@ -12,8 +12,6 @@ import java.util.Objects;
  */
 public class Stream extends VisibleEntitie {
 
-    private Position position;
-    private Shape shape;
     private double strength;
 
     public Stream(Position position, Shape shape, double strength) {
@@ -21,23 +19,18 @@ public class Stream extends VisibleEntitie {
         this.strength = strength;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Stream stream = (Stream) o;
-        return Double.compare(stream.strength, strength) == 0 &&
-                Objects.equals(position, stream.position) &&
-                Objects.equals(shape, stream.shape);
+        return Double.compare(stream.strength, strength) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, shape, strength);
+        return Objects.hash(strength);
     }
-
 
 
     //------------------------------GETTER-------------------------//

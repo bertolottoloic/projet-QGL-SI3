@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.zecommit.deserializer;
 
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -13,7 +12,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
 import java.io.IOException;
-import java.util.List;
 
 
 @JsonDeserialize(using = ShapeDeserializer.class)

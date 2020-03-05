@@ -13,11 +13,7 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

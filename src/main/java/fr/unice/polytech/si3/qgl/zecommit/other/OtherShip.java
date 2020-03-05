@@ -5,10 +5,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 public class OtherShip extends VisibleEntitie {
 
-    private VisibleEntityType type;
     private int life;
-    private Position position;
-    private Shape shape;
 
     public OtherShip(int life, Position position, Shape shape){
         super(VisibleEntityType.ship ,position, shape);

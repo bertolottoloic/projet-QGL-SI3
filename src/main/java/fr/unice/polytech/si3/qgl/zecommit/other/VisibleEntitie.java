@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.other;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.VisibleEntitiesDeserializer;

@@ -36,21 +36,6 @@ class OrientationTableTest {
     }
 
 
-    /**
-     * test du tableau des orientation avec un nombre impair de rames
-     */
-    @Test
-    @Disabled
-    void generateAngleTableImpairTest() {
-        OrientationTable orientationTable = new OrientationTable(5);
-        System.out.println(orientationTable);
-
-        assertEquals(6, orientationTable.getAngleTable().size());
-        assertEquals(-Math.PI/2, orientationTable.getAngleTable().get(0));
-        assertEquals(Math.PI/2, orientationTable.getAngleTable().get(4));
-        assertEquals(0, orientationTable.getAngleTable().get(2));
-
-    }
 
     @Test
     void generateFormationTest() {

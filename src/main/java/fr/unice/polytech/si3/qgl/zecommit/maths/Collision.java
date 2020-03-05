@@ -176,7 +176,6 @@ public class Collision {
      * Methode qui calcule la distance d'une position par rapport au bateau
      * @return
      */
-    //TODO : duplicate method => A refactorer
     public double distanceTo() {
         return Math.sqrt(Math.pow(shapePosition.getX() - shipPosition.getX(),2) + Math.pow(shapePosition.getY() - shipPosition.getY(),2));
     }
