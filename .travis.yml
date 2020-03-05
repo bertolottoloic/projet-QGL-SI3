@@ -1,1 +1,9 @@
 language: java
+
+jdk:
+  - openjdk11
+
+script: ./mvnw clean install
+
+notifications:
+  email: nathan.meulle@gmail.com
