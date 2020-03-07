@@ -88,18 +88,6 @@ public class EngineSettings {
         setWind();
         changeWind();
     }
-
-
-    public void createList() {
-        this.checkpoints = new ArrayList<>();
-        this.entities = new ArrayList<>();
-        this.sailors = new ArrayList<>();
-        this.visibleEntities = new ArrayList<>();
-    }
-    public void addCheckpoint(Checkpoint checkpoint) {
-        this.checkpoints.add(checkpoint);
-    }
-
     public void addWind(Wind wind){
         this.wind=wind;
     }
