@@ -100,6 +100,7 @@ public class Cockpit implements ICockpit {
 		game.setShip(newShip);
 		captain.setShip(newShip);
 		game.setVisibleEntities(nextRound.getVisibleEntities());
+		captain.setVisibleEntities(nextRound.getVisibleEntities());
 		game.setWind(nextRound.getWind());
 		captain.setWind(nextRound.getWind());
 	}

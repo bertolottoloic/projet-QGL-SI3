@@ -3,10 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import javax.swing.*;
 import java.awt.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
-import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
+import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.awt.geom.Ellipse2D;
@@ -43,6 +40,7 @@ public class Window extends JFrame{
 
             revalidate();
             repaint();
+            this.setBackground(new Color(223, 255, 252));
             this.setVisible(true);
 
         }
@@ -51,12 +49,14 @@ public class Window extends JFrame{
             private ArrayList<Position> points;
             private List<Checkpoint> checkPoints;
             private List<Stream> streams;
+            private List<Reef> reefs;
             final double cst= (double)w/2;
 
             public DrawPoints(ArrayList<Position> points,List<Checkpoint> checkpoints,List<VisibleEntitie> visibleEntities){
                  this.points = new ArrayList<>(points);
                  this.checkPoints=new ArrayList<>(checkpoints);
                  this.streams=new ArrayList<>();
+                 this.reefs = new ArrayList<>();
                  sortVisibleEntities(visibleEntities);
             }
 
@@ -68,6 +68,7 @@ public class Window extends JFrame{
                     if (entity.getType().equals(VisibleEntityType.ship)) {
                     }
                     if (entity.getType().equals(VisibleEntityType.reef)) {
+                        this.reefs.add((Reef) entity);
                     }
                 }
             }
@@ -90,6 +91,9 @@ public class Window extends JFrame{
                 for (Stream stream: streams){
                     Shape rect = new java.awt.Rectangle.Double((stream.getPosition().getX()/scale)+cst-(((Rectangle)stream.getShape()).getWidth()/(2*scale)), (stream.getPosition().getY()/scale)+cst-(((Rectangle)stream.getShape()).getHeight()/(2*scale)), (((Rectangle)stream.getShape()).getWidth()/scale),(((Rectangle)stream.getShape()).getHeight()/scale));
                     graph2.draw(rect);
+
+                }
+                for (Reef reef: reefs){
 
                 }
             }

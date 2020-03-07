@@ -40,7 +40,7 @@ public class Engine {
             try {
                 engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
             }catch (Exception e){
-                System.err.println(e.getMessage()); //lève une exception en cas de collision
+                System.err.println(e.getMessage()); //affiche une exception en cas de collision
             }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);
