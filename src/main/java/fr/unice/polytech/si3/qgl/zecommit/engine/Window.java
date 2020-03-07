@@ -144,18 +144,23 @@ public class Window extends JFrame{
                     graph2.drawLine((int)Math.floor((point.getX()/scale)+cst),(int)Math.floor((point.getY()/scale)+cst),(int)(Math.floor((point.getX()/scale)+cst)),(int)Math.floor((point.getY()/scale)+cst));
 
                 }
+                graph2.setColor(Color.ORANGE);
                 for (Checkpoint checkPoint: checkPoints) {
                     java.awt.Shape check = drawCheckpoint(checkPoint);
                     graph2.draw(check);
                 }
+                graph2.setColor(Color.BLUE);
                 for (Stream stream: streams){
                     java.awt.Shape current = drawVisibles(stream);
                     graph2.draw(current);
                 }
+                graph2.setColor(Color.RED);
                 for (Reef reef: reefs){
                     java.awt.Shape rock = drawVisibles(reef);
                     graph2.draw(rock);
                 }
+                graph2.setColor(Color.BLACK);
+
             }
         }
     }
