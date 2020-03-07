@@ -38,6 +38,22 @@ public class Polygone extends Shape {
         return new Point(vertices[index].getX()+position.getX(), vertices[index].getY()+position.getY());
     }
 
+    public int[] getVerticesIntX(){
+        int[] x= new int[this.vertices.length];
+        for (int i=0; i<this.vertices.length;i++) {
+            x[i]=(int)vertices[i].getX();
+
+        }
+        return x;
+    }
+    public int[] getVerticesIntY(){
+        int[] y= new int[this.vertices.length];
+        for (int i=0; i<this.vertices.length;i++) {
+            y[i]=(int)vertices[i].getY();
+        }
+        return y;
+    }
+
     @JsonIgnore
     public double getRadius() {
         double max = 0;

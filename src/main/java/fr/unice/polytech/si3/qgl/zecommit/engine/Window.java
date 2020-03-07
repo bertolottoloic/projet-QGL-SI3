@@ -4,10 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.awt.geom.Ellipse2D;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Window extends JFrame{
@@ -73,6 +77,61 @@ public class Window extends JFrame{
                 }
             }
 
+            public Shape drawCheckpoint(Checkpoint chkp){
+                java.awt.Shape shp=null;
+                switch (chkp.getShape().getType()){
+                    case "circle":
+                        shp=new Ellipse2D.Double((chkp.getPosition().getX()/scale)-(chkp.getCircleRadius()/scale)+cst,(( chkp.getPosition().getY()/scale)-(chkp.getCircleRadius()/scale)+cst),(chkp.getCircleRadius()*2/scale),(chkp.getCircleRadius()*2/scale));
+                        break;
+                    case "rectangle":
+                        shp=new java.awt.Rectangle.Double((chkp.getPosition().getX()/scale)+cst-(((Rectangle)chkp.getShape()).getWidth()/(2*scale)), (chkp.getPosition().getY()/scale)+cst-(((Rectangle)chkp.getShape()).getHeight()/(2*scale)), (((Rectangle)chkp.getShape()).getWidth()/scale),(((Rectangle)chkp.getShape()).getHeight()/scale));
+                        break;
+                    case "polygon":
+                        int[] x=((Polygone)chkp.getShape()).getVerticesIntX();
+                        int[] y=((Polygone)chkp.getShape()).getVerticesIntY();
+
+                        for (int i=0; i<x.length;i++) {
+                            x[i]=(int)(x[i]/scale);
+                            x[i]+=cst+chkp.getPosition().getX()/scale;
+                        }
+                        for (int i=0; i<y.length;i++) {
+                            y[i]=(int)(y[i]/scale);
+
+                            y[i]+=cst+chkp.getPosition().getY()/scale;
+                        }
+                        shp=new Polygon(x,y,((Polygone)chkp.getShape()).getVertices().length);
+                        break;
+                }
+                return shp;
+            }
+
+            public Shape drawVisibles(VisibleEntitie ent){
+                java.awt.Shape shp=null;
+                switch (ent.getShape().getType()){
+                    case "circle":
+                        shp=new Ellipse2D.Double((ent.getPosition().getX()/scale)-(((Circle)ent.getShape()).getRadius()/scale)+cst,(( ent.getPosition().getY()/scale)-(((Circle)ent.getShape()).getRadius()/scale)+cst),((((Circle)ent.getShape()).getRadius()/scale)*2/scale),((((Circle)ent.getShape()).getRadius()/scale)*2/scale));
+                        break;
+                    case "rectangle":
+                        shp=new java.awt.Rectangle.Double((ent.getPosition().getX()/scale)+cst-(((Rectangle)ent.getShape()).getWidth()/(2*scale)), (ent.getPosition().getY()/scale)+cst-(((Rectangle)ent.getShape()).getHeight()/(2*scale)), (((Rectangle)ent.getShape()).getWidth()/scale),(((Rectangle)ent.getShape()).getHeight()/scale));
+                        break;
+                    case "polygon":
+                        int[] x=((Polygone)ent.getShape()).getVerticesIntX();
+                        int[] y=((Polygone)ent.getShape()).getVerticesIntY();
+
+                        for (int i=0; i<x.length;i++) {
+                            x[i]=(int)(x[i]/scale);
+                            x[i]+=cst+ent.getPosition().getX()/scale;
+                        }
+                        for (int i=0; i<y.length;i++) {
+                            y[i]=(int)(y[i]/scale);
+
+                            y[i]+=cst+ent.getPosition().getY()/scale;
+                        }
+                        shp=new Polygon(x,y,((Polygone)ent.getShape()).getVertices().length);
+                        break;
+                }
+                return shp;
+            }
 
             @Override
             protected void paintComponent(Graphics g){
@@ -83,18 +142,19 @@ public class Window extends JFrame{
                 graph2.setColor(Color.BLACK);
                 for (Position point: points) {
                     graph2.drawLine((int)Math.floor((point.getX()/scale)+cst),(int)Math.floor((point.getY()/scale)+cst),(int)(Math.floor((point.getX()/scale)+cst)),(int)Math.floor((point.getY()/scale)+cst));
+
                 }
                 for (Checkpoint checkPoint: checkPoints) {
-                    Shape circle = new Ellipse2D.Double((checkPoint.getPosition().getX()/scale)-(checkPoint.getCircleRadius()/scale)+cst,(( checkPoint.getPosition().getY()/scale)-(checkPoint.getCircleRadius()/scale)+cst),(checkPoint.getCircleRadius()*2/scale),(checkPoint.getCircleRadius()*2/scale));
-                    graph2.draw(circle);
+                    java.awt.Shape check = drawCheckpoint(checkPoint);
+                    graph2.draw(check);
                 }
                 for (Stream stream: streams){
-                    Shape rect = new java.awt.Rectangle.Double((stream.getPosition().getX()/scale)+cst-(((Rectangle)stream.getShape()).getWidth()/(2*scale)), (stream.getPosition().getY()/scale)+cst-(((Rectangle)stream.getShape()).getHeight()/(2*scale)), (((Rectangle)stream.getShape()).getWidth()/scale),(((Rectangle)stream.getShape()).getHeight()/scale));
-                    graph2.draw(rect);
-
+                    java.awt.Shape current = drawVisibles(stream);
+                    graph2.draw(current);
                 }
                 for (Reef reef: reefs){
-
+                    java.awt.Shape rock = drawVisibles(reef);
+                    graph2.draw(rock);
                 }
             }
         }
