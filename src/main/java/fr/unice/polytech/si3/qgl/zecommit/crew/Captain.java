@@ -10,9 +10,8 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
-import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
+import fr.unice.polytech.si3.qgl.zecommit.maths.*;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 
 import java.util.AbstractMap.SimpleEntry;
@@ -28,12 +27,14 @@ public class Captain implements CaptainInterface {
     private Regatta goal;
     private OrientationTable orientationTable;
     private Wind wind;
+    private List<VisibleEntitie> visibleEntities;
 
     public Captain(Game game) {
         this.ship = game.getShip();
         this.goal = (Regatta) game.getGoal();
         this.orientationTable = new OrientationTable(ship.getDeck().getOars().size());
         this.wind = game.getWind();
+        this.visibleEntities = game.getVisibleEntities();
     }
 
     @Override
@@ -159,6 +160,12 @@ public class Captain implements CaptainInterface {
         int nbSailorsRight = ship.getDeck().getNumberRightSailors();
         int nbSailorsLeft = ship.getDeck().getNumberLeftSailors();
 
+        Predictions predictions = new Predictions(leftSailorList, rightSailorList, ship, visibleEntities, chosenAngle, wind);
+        if(predictions.checkCollision()){
+            chosenAngle+=Math.PI/3;
+            isNear=true;
+        }
+
         if (!isNear) {// si le bateau est loin
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
@@ -210,4 +217,7 @@ public class Captain implements CaptainInterface {
         this.wind = wind;
     }
 
+    public void setVisibleEntities(List<VisibleEntitie> visibleEntities) {
+        this.visibleEntities = visibleEntities;
+    }
 }

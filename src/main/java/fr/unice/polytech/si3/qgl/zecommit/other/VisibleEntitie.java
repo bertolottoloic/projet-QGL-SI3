@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.VisibleEntitiesDeserializer;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
+import java.util.Objects;
 
 
 /**
@@ -46,4 +47,18 @@ public abstract class VisibleEntitie {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VisibleEntitie that = (VisibleEntitie) o;
+        return type == that.type &&
+                Objects.equals(position, that.position) &&
+                Objects.equals(shape, that.shape);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, position, shape);
+    }
 }
