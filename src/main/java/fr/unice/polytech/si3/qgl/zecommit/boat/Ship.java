@@ -187,10 +187,6 @@ public class Ship {
         return this.oars;
     }
 
-    @JsonIgnore
-    public int getOarsNb() {
-        return oars.size();
-    }
 
 
     /**

@@ -38,9 +38,12 @@ public abstract class Shape {
 
     @JsonIgnore
     public double getShapeRadius() {
-        if(isCircle)
+        if(isCircle && !isRectangle)
             return ((Circle)this).getRadius();
-        return ((Rectangle)this).getHeight()/2;
+        if(!isCircle && isRectangle)
+            return ((Rectangle)this).getRadius();
+        else
+            return ((Polygone)this).getRadius();
     }
 
     //------------------------SETTER----------------------//

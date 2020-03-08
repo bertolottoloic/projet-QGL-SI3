@@ -12,17 +12,22 @@ import java.util.Objects;
 
 
 public class Rectangle extends Shape {
-    private double width;
-    private double height;
+    private double width; //largeur
+    private double height; // longueur
     private double orientation;
 
     public Rectangle(double width,double height, double orientation){
         super(ShapeType.rectangle.toString());
         setCircle(false);
         setRectangle(true);
-
-        this.width=width;
-        this.height=height;
+        if(width<height) {
+            this.width = width;
+            this.height = height;
+        }
+        else { // si longueur et largeur ont été inversées dans le constructeur
+            this.width = height;
+            this.height = width;
+        }
         this.orientation=orientation;
     }
 
@@ -54,7 +59,7 @@ public class Rectangle extends Shape {
     //-------------------------GETTER-------------------------//
 
     public double getHeight() {
-        return height;
+        return height;//longueur
     }
 
     @JsonIgnore
@@ -64,10 +69,15 @@ public class Rectangle extends Shape {
 
     public double getWidth() {
         return width;
-    }
+    } //largeur
 
     public double getOrientation() {
         return orientation;
+    }
+
+    @JsonIgnore
+    public double getRadius(){
+        return getHeight()/2;
     }
 
     //-------------------------SETTER-------------------------//
