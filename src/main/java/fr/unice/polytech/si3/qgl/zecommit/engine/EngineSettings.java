@@ -140,7 +140,7 @@ public class EngineSettings {
         //this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1250, 650, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Polygone(0, new Point[]{new Point(0, 700),new Point(500, 200),new Point(200, -500),new Point(-200, -500),new Point(-500, 200)})));
-        this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Circle(50)));
+        this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Circle(500)));
 
     }
 

@@ -108,7 +108,7 @@ class ShipTest {
         ship.setPosition(shipPosition);
         when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,-10,0));
         assertFalse(ship.isInFrontOfCheckpoint(mockCheckpoint));
-        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,0,0));
+        when(mockCheckpoint.getPosition()).thenReturn(new Position(-10,-1,0));
         assertFalse(ship.isInFrontOfCheckpoint(mockCheckpoint));
 
 
