@@ -80,23 +80,6 @@ public class Predictions {
         return res;
     }
 
-    public boolean checkFutureFutureCollision(){
-        boolean res = false;
-
-        List<Reef> reefs = getReefs();
-        List<Position> intermediatePositions = subdiviseRoute(predictFinalNextPosition(predictFinalPosition()), predictFinalNextPosition(predictFinalNextPosition(predictFinalPosition()))  );
-
-        for (Reef reef : reefs) {
-            for (Position nextPosition : intermediatePositions) {
-
-                Collision collision = new Collision(reef.getShape(), reef.getPosition(), nextPosition);
-                if (collision.collideWithReef()) {
-                    res = true;
-                }
-            }
-        }
-        return res;
-    }
 
     public Reef getFirstReef(){
         if(problematicReefs.isEmpty())

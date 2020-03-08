@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 
 public class EngineSettings {
@@ -137,8 +136,11 @@ public class EngineSettings {
         this.visibleEntities = new ArrayList<>();
         //this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(50,100,0),100));
         //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 100, 0)));
-        this.visibleEntities.add(new Reef(new Position(400, -20, 0), new Circle(50)));
-        this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
+        //this.visibleEntities.add(new Reef(new Position(400, -20, 0), new Circle(50)));
+        //this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
+        //this.visibleEntities.add(new Reef(new Position(1250, 650, 0), new Circle(50)));
+        //this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Polygone(0, new Point[]{new Point(0, 700),new Point(500, 200),new Point(200, -500),new Point(-200, -500),new Point(-500, 200)})));
+        this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Circle(50)));
 
     }
 

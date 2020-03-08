@@ -50,7 +50,7 @@ public class Road {
         } else {
             angle = shortestAngle(Math.atan(y / x));
         }
-        return adjustAngle(angle);
+        return shortestAngle(adjustAngle((angle)));
     }
 
 
