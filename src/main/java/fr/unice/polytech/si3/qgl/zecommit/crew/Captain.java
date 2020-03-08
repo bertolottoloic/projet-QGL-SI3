@@ -32,6 +32,7 @@ public class Captain implements CaptainInterface {
     private boolean needToSlowDown;
     private int chosenAngle;
     private double orientationToGoal;
+    private int chosenAngleAlteration;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -101,9 +102,9 @@ public class Captain implements CaptainInterface {
                 - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size(), ship.getDeck().canUseRudder()));
 
         if (res.isPresent() && ship.getDeck().canUseRudder()) {
-            if (needToSlowDown && chosenAngle > ship.getOars().size()/2)
+            if (needToSlowDown && chosenAngleAlteration>0)
                 angle = -Math.PI/4;
-            if (needToSlowDown && chosenAngle < ship.getOars().size()/2)
+            if (needToSlowDown && chosenAngleAlteration<0)
                 angle = Math.PI/4;
             if(chosenAngle==0)
                 angle = 0;
@@ -179,6 +180,7 @@ public class Captain implements CaptainInterface {
         if (predictions.checkCollision() || predictions.checkFutureCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter" + chosenAngle);
             needToSlowDown = true;
+            chosenAngleAlteration = chosenAngle;
             Reef reef = predictions.getFirstReef();
             if(reef!=null) {
                 Logs.add("angle : " + road.orientationToGoal() + "angle Recif " + predictions.getAngleToCenterOfReef(reef) + " fin recif " + predictions.getAngleToEndOfReef(reef));
@@ -189,10 +191,13 @@ public class Captain implements CaptainInterface {
                 }if (road.orientationToGoal() > predictions.getAngleToCenterOfReef(reef)) {
                     orientationToGoal = road.orientationToGoal() + predictions.getAngleToEndOfReef(reef);
                     chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(),orientationToGoal);
-                    Logs.add("angle corrigé else" + (road.orientationToGoal() - predictions.getAngleToEndOfReef(reef)));
+                    Logs.add("angle corrigé else" + (road.orientationToGoal() + predictions.getAngleToEndOfReef(reef)));
                 }
             }
             Logs.add("new cap : " + chosenAngle);
+            chosenAngleAlteration -= chosenAngle;
+            Logs.add("alteration : " + chosenAngleAlteration);
+
 
         }
 
