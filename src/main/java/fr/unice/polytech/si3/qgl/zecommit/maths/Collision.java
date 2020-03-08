@@ -26,7 +26,7 @@ public class Collision {
     }
 
     /**
-     * Méthode détectant les collisions
+     * Méthode détectant les collisions avec les checkpoints
      * @return true si la collision se produit
      */
     public boolean collide() {
@@ -39,10 +39,17 @@ public class Collision {
             return true;
         }
         //cas avec un checkpoint polygonal
-        if (!shape1.isCircle() && !shape1.isRectangle() && isInpolygone((Polygone) shape1))
-            return true;
+        return (!shape1.isCircle() && !shape1.isRectangle() && isInpolygone((Polygone) shape1));
+    }
 
-        return false;
+    /**
+     * Méthode détectant les collisions avec les récifs
+     * Meme méthode que la précedente mais engloble chaque récif (de forme rectangulaire ou autre) dans un cercle
+     * Permet d'avoir une marge de sureté pour éviter les récifs
+     * @return true si la collision se produit
+     */
+    public boolean collideWithReef() {
+        return (distanceTo() < shape1.getShapeRadius());
 
     }
 

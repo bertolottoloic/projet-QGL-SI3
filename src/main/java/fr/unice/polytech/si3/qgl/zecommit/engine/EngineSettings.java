@@ -134,15 +134,16 @@ public class EngineSettings {
 
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
-        this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(100,50,0),100));
-        this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(10, 10, Math.PI*3/4)));
+        this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(50,100,0),100));
+        //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 100, 0)));
+        this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Circle(100)));
 
     }
 
 
     public void setWind() {
-        this.winds.add(new Wind(0, 50));
-        this.winds.add(new Wind(12, 38));
+        //this.winds.add(new Wind(0, 50));
+        //this.winds.add(new Wind(12, 38));
         this.winds.add(new Wind(7, 89));
     }
 

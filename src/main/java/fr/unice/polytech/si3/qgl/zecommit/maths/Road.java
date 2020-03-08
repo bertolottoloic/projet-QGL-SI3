@@ -9,27 +9,29 @@ public class Road {
     private Position finishPosition;
     private double shipOrientation;
 
-    public Road(Position start, Position finish){
-        this.shipOrientation=start.getOrientation();
-        this.startPosition=start;
-        this.finishPosition=finish;
+    public Road(Position start, Position finish) {
+        this.shipOrientation = start.getOrientation();
+        this.startPosition = start;
+        this.finishPosition = finish;
     }
 
-    public double xDistanceToGoal(){
-        return Math.abs(startPosition.getX()-finishPosition.getX());
-    }
-    public double yDistanceToGoal(){
-        return Math.abs(startPosition.getY()-finishPosition.getY());
+    public double xDistanceToGoal() {
+        return Math.abs(startPosition.getX() - finishPosition.getX());
     }
 
-    public double distanceToGoal(){
-        return Math.sqrt(Math.pow(xDistanceToGoal(),2)+Math.pow(yDistanceToGoal(),2));
+    public double yDistanceToGoal() {
+        return Math.abs(startPosition.getY() - finishPosition.getY());
+    }
+
+    public double distanceToGoal() {
+        return Math.sqrt(Math.pow(xDistanceToGoal(), 2) + Math.pow(yDistanceToGoal(), 2));
     }
 
 
     /**
-     * Retourne l'angle entre l'oriantation du bateau et l'objectif.
+     * Retourne l'angle entre l'orientation du bateau et l'objectif.
      * Si le bateau est parfaitement orienté avec l'objectif, on regarde s'il point vers l'objectif ou s'en éloigne
+     *
      * @return
      */
     public double orientationToGoal() {
@@ -72,14 +74,15 @@ public class Road {
 
     /**
      * Permet de virer d'un angle le plus petit possible, évite de faire un virage trop grand
+     *
      * @param angle
      * @return
      */
-    public double shortestAngle(double angle){
-        if(angle>Math.PI)
-            return angle - (2*Math.PI);
-        if(angle< -Math.PI)
-            return angle + (2*Math.PI);
+    public double shortestAngle(double angle) {
+        if (angle > Math.PI)
+            return angle - (2 * Math.PI);
+        if (angle < -Math.PI)
+            return angle + (2 * Math.PI);
         return angle;
 
 
@@ -88,49 +91,50 @@ public class Road {
     /**
      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
      */
-    public int findClosestPossibleAngle(int oarsNb, boolean canUseRuddder){
+    public int findClosestPossibleAngle(int oarsNb, boolean canUseRuddder) {
         double angle;
         angle = orientationToGoal();
-        if(orientationToGoal()>-Math.PI/4 && orientationToGoal()<Math.PI/4 && canUseRuddder)
+        if (orientationToGoal() > -Math.PI / 4 && orientationToGoal() < Math.PI / 4 && canUseRuddder)
             angle = 0;
-        double step = Math.PI/(2*oarsNb);
+        double step = Math.PI / (2 * oarsNb);
         int res = 0;
-        for (int k = 0; k<2*oarsNb; k ++){
+        for (int k = 0; k < 2 * oarsNb; k++) {
 
-            if(k*step-Math.PI/2 <= angle && angle <= (k+1)*step-Math.PI/2 )
+            if (k * step - Math.PI / 2 <= angle && angle <= (k + 1) * step - Math.PI / 2)
 
                 res = k;
         }
-        if(turnAroundLeft())
+        if (turnAroundLeft())
             return oarsNb;
-        if(turnAroundRight())
+        if (turnAroundRight())
             return 0;
 
-        if(res==0)
+        if (res == 0)
             return 0;
-        if(res==2*oarsNb-1)
+        if (res == 2 * oarsNb - 1)
             return oarsNb;
         else
-            return (res+1)/2;
+            return (res + 1) / 2;
     }
 
     /**
      * demi tour gauche ?
+     *
      * @return
      */
-    public boolean turnAroundLeft(){
-        return (orientationToGoal() > Math.PI/2 && orientationToGoal() <= Math.PI);
+    public boolean turnAroundLeft() {
+        return (orientationToGoal() > Math.PI / 2 && orientationToGoal() <= Math.PI);
     }
 
 
     /**
      * demi tour droite ?
+     *
      * @return
      */
-    public boolean turnAroundRight(){
-        return (orientationToGoal() < -Math.PI/2 && orientationToGoal() > -Math.PI);
+    public boolean turnAroundRight() {
+        return (orientationToGoal() < -Math.PI / 2 && orientationToGoal() > -Math.PI);
     }
-
 
 
     //------------------------GETTER----------------------------
