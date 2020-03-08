@@ -164,7 +164,7 @@ public class Captain implements CaptainInterface {
 
         Predictions predictions = new Predictions(leftSailorList, rightSailorList, ship, visibleEntities, chosenAngle, wind);
         if (predictions.checkCollision() || predictions.checkFutureCollision()) {
-            Logs.add("Votre Capitaine a identifié l'iceberg et tente de l'éviter" + chosenAngle);
+            Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter" + chosenAngle);
             needToSlowDown = true;
             Reef reef = predictions.getFirstReef();
             if(reef!=null) {

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 
 public class EngineSettings {
@@ -136,7 +137,7 @@ public class EngineSettings {
         this.visibleEntities = new ArrayList<>();
         this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(50,100,0),100));
         //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 100, 0)));
-        this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Circle(100)));
+        this.visibleEntities.add(new Reef(new Position(400, 10, 0), new Circle(50)));
 
     }
 
@@ -250,6 +251,7 @@ public class EngineSettings {
         leftSailors = new ArrayList<>();
         rotation = 0;
         changeWind();
+        Position lastPosition = ship.getPosition();
 
         giveVisibleEntities();
 
@@ -270,9 +272,16 @@ public class EngineSettings {
                 engineLowerSail((LowerSail) action);
             }
         }
+        try {
         for (int i = 0; i < n; i++) {
             calcul();
         }
+
+        } catch (Exception e) {
+            ship.setPosition(lastPosition);
+            throw new Exception("Collision Détectée ! Déplacement annulé !");
+        }
+
     }
 
 
@@ -381,7 +390,7 @@ public class EngineSettings {
         boolean res = checkCollision(newPosition);
 
         if(res)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
-            throw new Exception("Collision Détectée ! Déplacement annulé !");
+            throw new Exception();
         else {
             ship.setPosition(newPosition);
         }

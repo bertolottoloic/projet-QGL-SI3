@@ -43,6 +43,7 @@ public class Cockpit implements ICockpit {
 		String res;
 		try {
 			Logs.add("\n - - - \n");
+			Logs.add("" + game.getShip().getPosition());
 			updateGame(Parser.parseNextRound(jsonNextRound));
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
