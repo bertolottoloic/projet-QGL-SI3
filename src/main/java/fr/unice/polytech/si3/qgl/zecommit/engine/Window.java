@@ -109,7 +109,7 @@ public class Window extends JFrame{
                 java.awt.Shape shp=null;
                 switch (ent.getShape().getType()){
                     case "circle":
-                        shp=new Ellipse2D.Double((ent.getPosition().getX()/scale)-(((Circle)ent.getShape()).getRadius()/scale)+cst,(( ent.getPosition().getY()/scale)-(((Circle)ent.getShape()).getRadius()/scale)+cst),((((Circle)ent.getShape()).getRadius()/scale)*2/scale),((((Circle)ent.getShape()).getRadius()/scale)*2/scale));
+                        shp=new Ellipse2D.Double((ent.getPosition().getX()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,(ent.getPosition().getY()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,((Circle)ent.getShape()).getRadius()*2/(scale),((Circle)ent.getShape()).getRadius()*2/(scale));
                         break;
                     case "rectangle":
                         shp=new java.awt.Rectangle.Double((ent.getPosition().getX()/scale)+cst-(((Rectangle)ent.getShape()).getWidth()/(2*scale)), (ent.getPosition().getY()/scale)+cst-(((Rectangle)ent.getShape()).getHeight()/(2*scale)), (((Rectangle)ent.getShape()).getWidth()/scale),(((Rectangle)ent.getShape()).getHeight()/scale));
