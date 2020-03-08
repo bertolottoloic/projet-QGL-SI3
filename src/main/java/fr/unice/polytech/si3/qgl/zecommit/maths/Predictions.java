@@ -111,8 +111,7 @@ public class Predictions {
     public int findClosestPossibleAngle(int oarsNb, boolean canUseRuddder, double orientation) {
         double angle;
         angle = orientation;
-        if (orientation > -Math.PI / 4 && orientation < Math.PI / 4 && canUseRuddder)
-            angle = 0;
+
         double step = Math.PI / (2 * oarsNb);
         int res = 0;
         for (int k = 0; k < 2 * oarsNb; k++) {

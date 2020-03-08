@@ -29,7 +29,7 @@ public class Engine {
 
         int currentStep = 0;
         String output="";
-        while(!output.equals("[]")&&currentStep<6) {
+        while(!output.equals("[]")&&currentStep<60) {
             System.out.println("ROUND :"+currentStep);
             currentStep++;
             String json2 = engineSettings.thisToJson2();
