@@ -1,17 +1,15 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
-import javax.swing.*;
-import java.awt.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Window extends JFrame{

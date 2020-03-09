@@ -43,6 +43,7 @@ public class Regatta extends Goal {
     }
 
 
+
     //------------------------------SETTER-------------------------//
 
 

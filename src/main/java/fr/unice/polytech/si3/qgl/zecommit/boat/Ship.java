@@ -61,35 +61,6 @@ public class Ship {
 
     }
 
-
-    @JsonIgnore
-    private void createOarlist(){
-        this.oars = new ArrayList<>();
-        entities.forEach(entity->
-        {
-            if(entity.getType().equals(EntityType.oar))
-                this.oars.add((Oar)entity);
-        });
-    }
-
-    /**
-     * Tri la liste de rames de façon à alterner les rames de gauches et de droites.
-     */
-    @JsonIgnore
-    private void sortOars(){
-        List<Oar> oarsLeft = getLeftOars();
-        List<Oar> oarsRight = getRightOars();
-        List<Oar> oarsSort = new ArrayList<>();
-        for(int i=0;i<Math.max(oarsLeft.size(),oarsRight.size());i++){
-            if(i<oarsLeft.size())
-                oarsSort.add(oarsLeft.get(i));
-            if(i<oarsRight.size())
-                oarsSort.add(oarsRight.get(i));
-        }
-        this.oars=oarsSort;
-    }
-
-
     /**
      * Méthode permettant de savoir si un bateau est arrivé dans le checkpoint
      * cette méthode considère un bateau dans la zone si son centre (et non le bateau entier) est à l'intérieur du checkpoint
@@ -101,8 +72,6 @@ public class Ship {
         Collision collision = new Collision(checkpoint.getShape(), checkpoint.getPosition(), position);
         return collision.collide();
     }
-
-
 
     @JsonIgnore
     public boolean isInFrontOfCheckpoint(Checkpoint checkpoint){
@@ -120,10 +89,6 @@ public class Ship {
      */
     public double distanceTo(Position position) {
         return Math.sqrt(Math.pow(this.getXPosition() - position.getX(),2) + Math.pow(this.getYPosition() - position.getY(),2));
-    }
-
-    public void putSailorOnDeck(List<Sailor> sailors){
-        deck.setSailors(sailors);
     }
 
 
@@ -180,13 +145,6 @@ public class Ship {
     public double getYPosition() {
         return this.getPosition().getY();
     }
-
-
-    @JsonIgnore
-    public List<Oar> getOars(){
-        return this.oars;
-    }
-
 
 
     /**

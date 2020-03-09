@@ -162,7 +162,7 @@ public class OrientationTable {
     public Compo getSlowDownCompo(int indexAngle) {
         if(compoTable.isEmpty() || compoTable.get(indexAngle).isEmpty())
             return new Compo(0,0);
-        return compoTable.get(indexAngle).get((compoTable.get(indexAngle).size()-1)/2);
+        return compoTable.get(indexAngle).get((compoTable.get(indexAngle).size()-1));
     }
 
     public Compo getGoodCompo(Compo compo, int nbSailorsRightShip, int nbSailorsLeftShip ){

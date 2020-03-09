@@ -7,6 +7,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.parser.InitGame;
 import fr.unice.polytech.si3.qgl.zecommit.parser.NextRound;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
@@ -79,6 +80,10 @@ public class Cockpit implements ICockpit {
 		game.setShip(initGame.getShip());
 		game.setSailors(initGame.getSailors());
 		game.setShipCount(initGame.getShipCount());
+		Logs.add("nbSailors :" + game.getSailors().size());
+		Logs.add(" nbOar :" + game.getShip().getDeckOars().size());
+		if(game.getGoal().isRegatta())
+		Logs.add(((Regatta)game.getGoal()).getCheckpoints() +"\n");
 	}
 
 	/**
@@ -87,6 +92,7 @@ public class Cockpit implements ICockpit {
 	public void initCaptain() {
 		this.captain = new Captain(game);
 		this.captainMate = new CaptainMate(captain);
+		Logs.add(captain.getOrientationTable().toString());
 	}
 
 	/**

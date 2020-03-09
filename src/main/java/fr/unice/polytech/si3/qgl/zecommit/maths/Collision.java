@@ -49,7 +49,7 @@ public class Collision {
      * @return true si la collision se produit
      */
     public boolean collideWithReef() {
-        return (distanceTo() <= shape1.getShapeRadius());
+        return distanceTo()-20 <= shape1.getShapeRadius();
 
     }
 
