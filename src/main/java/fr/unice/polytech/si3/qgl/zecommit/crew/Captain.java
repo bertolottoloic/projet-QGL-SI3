@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 import fr.unice.polytech.si3.qgl.zecommit.Game;
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
@@ -36,6 +37,7 @@ public class Captain implements CaptainInterface {
     private int chosenAngle;
     private double orientationToGoal;
     private int chosenAngleAlteration;
+    private List<Position> latestPositions;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -44,6 +46,7 @@ public class Captain implements CaptainInterface {
         this.wind = game.getWind();
         this.visibleEntities = game.getVisibleEntities();
         this.needToSlowDown = false;
+        this.latestPositions = new ArrayList<>();
     }
 
     @Override
@@ -57,7 +60,7 @@ public class Captain implements CaptainInterface {
             sailors.remove(sailors.size() - 1).setOnEntity(rudder.get());
         }
         for (int i = 0; i < oars.size(); i++) {
-            Oar oar = (Oar)oars.get(i);
+            Oar oar = (Oar) oars.get(i);
             Optional<Sailor> closestSailor = sailors.stream().min(Comparator.comparingInt(a -> a.distanceToEntity(oar)));
             if (closestSailor.isPresent() && !closestSailor.get().hasEntity()) {
                 closestSailor.get().setOnEntity(oar);
@@ -93,7 +96,7 @@ public class Captain implements CaptainInterface {
         needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         orientationToGoal = road.getOrientation();
-        chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size(),ship.getDeck().canUseRudder());
+        chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder());
         return decisionOrientation(road);
     }
 
@@ -164,6 +167,7 @@ public class Captain implements CaptainInterface {
 
     private List<Sailor> decisionOrientation(Road road) {
         chosenAngleAlteration = 0;
+        needToSlowDown = false;
 
         boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
         List<Sailor> rightSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar))
@@ -186,7 +190,7 @@ public class Captain implements CaptainInterface {
             needToSlowDown = true;
             chosenAngleAlteration += chosenAngle;
             Optional<Reef> reefOp = predictions.getFirstReef();
-            if(reefOp.isPresent()) {
+            if (reefOp.isPresent()) {
                 Reef reef = reefOp.get();
                 if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
                     orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef);
@@ -205,6 +209,17 @@ public class Captain implements CaptainInterface {
 
         }
 
+        if (latestPositions.size()>3 && latestPositions.get(latestPositions.size() - 1).equals(latestPositions.get(latestPositions.size() - 2))){
+            chosenAngle = 0;
+            needToSlowDown = true;
+            Logs.add("Mayday Mayday");
+        }
+
+
+
+
+
+
         if (needToSlowDown) {
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));
@@ -213,8 +228,7 @@ public class Captain implements CaptainInterface {
         if (!isNear) {// si le bateau est loin du checkpoint
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
-        }
-        else {
+        } else {
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
 
@@ -232,7 +246,7 @@ public class Captain implements CaptainInterface {
         List<Sail> activeSails = ship.getDeckSails().stream().filter(sail -> sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).collect(Collectors.toList());
         return (!needToSlowDown && wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
-                && road.distanceToGoal() > (165 + wind.getStrength()*activeSails.size());
+                && road.distanceToGoal() > (165 + wind.getStrength() * activeSails.size());
     }
 
     ////////////////////// GETTER ////////////////////////////////////////////
@@ -263,11 +277,15 @@ public class Captain implements CaptainInterface {
         this.ship = ship;
     }
 
-    public void setWind(Wind wind){
+    public void setWind(Wind wind) {
         this.wind = wind;
     }
 
     public void setVisibleEntities(List<VisibleEntitie> visibleEntities) {
         this.visibleEntities = visibleEntities;
+    }
+
+    public void setLatestPositions(List<Position> latestPositions) {
+        this.latestPositions = latestPositions;
     }
 }

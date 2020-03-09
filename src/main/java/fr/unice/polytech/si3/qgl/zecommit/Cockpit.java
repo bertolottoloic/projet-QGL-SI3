@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
@@ -21,6 +22,7 @@ public class Cockpit implements ICockpit {
 	Game game;
 	CaptainMate captainMate;
 	Captain captain;
+	List<Position> latestPositions;
 
 	/**
 	 * Construit Game Captain et CaptainMate
@@ -32,6 +34,7 @@ public class Cockpit implements ICockpit {
 			InitGame initGame = Parser.parseInitGame(jsonInitGame);
 			setGameInfo(initGame);
 			initCaptain();
+			latestPositions = new ArrayList<>();
 
 		} catch (JsonProcessingException e) {
 			Logs.add("Erreur Parseur InitGame");
@@ -45,6 +48,7 @@ public class Cockpit implements ICockpit {
 		try {
 			Logs.add("\n - - - \n");
 			Logs.add("" + game.getShip().getPosition());
+			latestPositions.add(game.getShip().getPosition());
 			updateGame(Parser.parseNextRound(jsonNextRound));
 			List<Action> actions = new ArrayList<>();
 			if(game.getGoal().isRegatta()){
@@ -110,6 +114,7 @@ public class Cockpit implements ICockpit {
 		captain.setVisibleEntities(nextRound.getVisibleEntities());
 		game.setWind(nextRound.getWind());
 		captain.setWind(nextRound.getWind());
+		captain.setLatestPositions(latestPositions);
 	}
 
 }

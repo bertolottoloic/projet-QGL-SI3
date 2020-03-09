@@ -138,17 +138,17 @@ public class EngineSettings {
         //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 200, 0)));
         //this.visibleEntities.add(new Reef(new Position(400, -20, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
-        //this.visibleEntities.add(new Reef(new Position(1250, 650, 0), new Circle(50)));
-        this.visibleEntities.add(new Reef(new Position(1600, 100, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
-        //this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Circle(500)));
+        //this.visibleEntities.add(new Reef(new Position(1200, 200, 0), new Circle(50)));
+        this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
+        //this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Circle(324)));
 
     }
 
 
     public void setWind() {
         //this.winds.add(new Wind(0, 50));
-        //this.winds.add(new Wind(12, 38));
-        this.winds.add(new Wind(7, 89));
+        this.winds.add(new Wind(12, 38));
+        //this.winds.add(new Wind(7, 89));
     }
 
     public void setSailors() {

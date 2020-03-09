@@ -44,7 +44,6 @@ public class Predictions {
      */
     public boolean checkCollision() {
         boolean res = false;
-
         List<Reef> reefs = getReefs();
         List<Position> intermediatePositions = subdiviseRoute(ship.getPosition(), predictFinalPosition());
 
