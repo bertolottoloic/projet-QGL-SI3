@@ -25,7 +25,6 @@ public class Predictions {
     private List<Sail> sailArrayList;
     private Wind wind;
     private int nbSailUsed;
-    private List<Reef> problematicReefs;//Liste des récifs pouvant engendrer une collision
 
 
     public Predictions(List<Sailor> leftSailors, List<Sailor> rightSailors,Ship ship, List<VisibleEntitie> visibleEntities, double rotation, Wind wind) {
@@ -37,7 +36,6 @@ public class Predictions {
         this.rotation = rotation;
         this.sailArrayList = ship.getDeckSails();
         this.wind = wind;
-        this.problematicReefs = new ArrayList<>();
     }
 
     /**
@@ -46,7 +44,6 @@ public class Predictions {
      */
     public boolean checkCollision() {
         boolean res = false;
-        problematicReefs.clear();
 
         List<Reef> reefs = getReefs();
         List<Position> intermediatePositions = subdiviseRoute(ship.getPosition(), predictFinalPosition());
@@ -57,7 +54,6 @@ public class Predictions {
                 Collision collision = new Collision(reef.getShape(), reef.getPosition(), nextPosition);
                 if (collision.collideWithReef()) {
                     res = true;
-                    problematicReefs.add(reef);
                 }
             }
         }
@@ -116,9 +112,7 @@ public class Predictions {
 
 
     public Optional<Reef> getFirstReef(){
-        if(problematicReefs.isEmpty())
-            return null;
-        return problematicReefs.stream().min(Comparator.comparingDouble(reef->ship.distanceTo(reef.getPosition())));
+        return getReefs().stream().min(Comparator.comparingDouble(reef->ship.distanceTo(reef.getPosition())));
     }
 
 

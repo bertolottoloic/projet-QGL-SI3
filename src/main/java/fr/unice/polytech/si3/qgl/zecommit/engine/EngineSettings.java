@@ -135,11 +135,11 @@ public class EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
         //this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(50,100,0),100));
-        //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 100, 0)));
+        //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 200, 0)));
         //this.visibleEntities.add(new Reef(new Position(400, -20, 0), new Circle(50)));
-        this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
+        //this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1250, 650, 0), new Circle(50)));
-        //this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
+        this.visibleEntities.add(new Reef(new Position(1600, 100, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
         //this.visibleEntities.add(new Reef(new Position(700, 0, 0), new Circle(500)));
 
     }
@@ -183,8 +183,8 @@ public class EngineSettings {
     public void setCheckpoints() {
 
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(1600,0,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(345,1550,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(2600,200,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(900,1750,0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(-500,700,0), new Polygone(0, new Point[]{new Point(0, 20),new Point(20, 10),new Point(10, -20),new Point(-10, -20),new Point(-20, 10)})));
         this.allCheckpoints= new ArrayList<>(checkpoints);
     }

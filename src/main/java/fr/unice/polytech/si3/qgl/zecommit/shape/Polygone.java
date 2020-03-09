@@ -64,6 +64,6 @@ public class Polygone extends Shape {
             if(max < distance)
                 max = distance;
         }
-        return max/2;
+        return max/2 +20;
     }
 }

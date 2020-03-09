@@ -186,7 +186,7 @@ public class Captain implements CaptainInterface {
             needToSlowDown = true;
             chosenAngleAlteration += chosenAngle;
             Optional<Reef> reefOp = predictions.getFirstReef();
-            if(reefOp!= null && reefOp.isPresent()) {
+            if(reefOp.isPresent()) {
                 Reef reef = reefOp.get();
                 if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
                     orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef);
