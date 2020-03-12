@@ -109,9 +109,9 @@ public class Captain implements CaptainInterface {
 
         if (res.isPresent() && ship.getDeck().canUseRudder()) {
             if (needToSlowDown && chosenAngleAlteration > 0)
-                angle = -0.1;
+                angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
             if (needToSlowDown && chosenAngleAlteration < 0)
-                angle = 0.1;
+                angle = (orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
             if (chosenAngle == 0)
                 angle = 0;
 

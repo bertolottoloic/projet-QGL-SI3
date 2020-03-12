@@ -58,19 +58,7 @@ public class Predictions {
         }
         return res;
     }
-    
 
-    public List<Position> getTestingPositions(Position finalPosition) {
-        List<Position> res = new ArrayList<>();
-        res.add(finalPosition);
-
-        res.add(new Position(finalPosition.getX() + 50, finalPosition.getY(), finalPosition.getOrientation()));
-        res.add(new Position(finalPosition.getX() - 50, finalPosition.getY(), finalPosition.getOrientation()));
-        res.add(new Position(finalPosition.getX(), finalPosition.getY() + 50, finalPosition.getOrientation()));
-        res.add(new Position(finalPosition.getX(), finalPosition.getY() - 50, finalPosition.getOrientation()));
-
-        return res;
-    }
 
 
     public Optional<Reef> getFirstReef(){
@@ -193,41 +181,41 @@ public class Predictions {
         }
 
         if (xStart > xFinish && yStart < yFinish) {
-            for (int k = 1; k < 200; k++) {
+            for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart - (double)1 / step * k * xDiff, yStart + (double)1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart > xFinish && yStart > yFinish) {
-            for (int k = 1; k < 200; k++) {
+            for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart - (double)1 / step * k * xDiff, yStart - (double)1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart < xFinish && yStart > yFinish) {
-            for (int k = 1; k < 200; k++) {
+            for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart + (double)1 / step * k * xDiff, yStart - (double)1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart == xFinish && yStart > yFinish) {
-            for (int k = 1; k < 200; k++) {
+            for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart, yStart - (double)1 / step * k * yDiff, position.getOrientation()));
             }
         }
         if (xStart == xFinish && yStart < yFinish) {
-            for (int k = 1; k < 200; k++) {
+            for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart, yStart + (double)1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart > xFinish && yStart == yFinish) {
-            for (int k = 1; k < 200; k++) {
+            for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart - (double)1 / step * k * xDiff, yStart, position.getOrientation()));
             }
         }
         if (xStart < xFinish && yStart == yFinish) {
-            for (int k = 1; k < 200; k++) {
+            for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart + (double)1 / step * k * xDiff, yStart, position.getOrientation()));
             }
         }
@@ -264,24 +252,6 @@ public class Predictions {
             }
         }
 
-        return new Position(x, y, angleCalcul());
-    }
-
-    public Position predictFinalNextPosition(Position position) {
-
-        double vitesse = 165 * (double)(leftSailors.size() + rightSailors.size()) / oarsNb;
-        vitesse += calculWind();
-
-        double x = vitesse * Math.cos(position.getOrientation()) + position.getX();
-        double y = vitesse * Math.sin(position.getOrientation()) + position.getY();
-
-        Stream stream =getCurrentOn();
-        if(stream !=null){
-            if(stream.getPosition().getOrientation()==position.getOrientation()){
-                x+= stream.getStrength()*Math.cos(Math.abs(position.getOrientation()-stream.getPosition().getOrientation()));
-                y+= stream.getStrength()*Math.sin(Math.abs(position.getOrientation()-stream.getPosition().getOrientation()));
-            }
-        }
         return new Position(x, y, angleCalcul());
     }
 

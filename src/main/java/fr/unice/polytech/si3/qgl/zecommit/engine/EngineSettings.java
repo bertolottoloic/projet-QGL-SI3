@@ -134,8 +134,8 @@ public class EngineSettings {
 
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
-        //this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(50,100,0),100));
-        //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 200, Math.PI/4)));
+        this.visibleEntities.add(new Stream(new Position(1000,1000,Math.PI/4),new Rectangle(100,1400,0),150));
+        //this.visibleEntities.add(new Reef(new Position(100, 100, 0), new Rectangle(40, 200, -Math.PI/4)));
         //this.visibleEntities.add(new Reef(new Position(400, -20, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1200, 200, 0), new Circle(50)));
@@ -383,10 +383,10 @@ public class EngineSettings {
         double y = vitesse * Math.sin(ship.getPosition().getOrientation()) + ship.getPosition().getY();
 
         Stream stream =getCurrentOn();
-        if(stream !=null){
-            if(stream.getPosition().getOrientation()==ship.getPosition().getOrientation()){
-               x+=((double)stream.getStrength()/n)*Math.cos(Math.abs(ship.getPosition().getOrientation()-stream.getPosition().getOrientation()));
-               y+=((double)stream.getStrength()/n)*Math.sin(Math.abs(ship.getPosition().getOrientation()-stream.getPosition().getOrientation()));
+        if(stream !=null) {
+            if (stream.getPosition().getOrientation() == ship.getPosition().getOrientation()) {
+                x += ((double) stream.getStrength() / n) * Math.cos(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
+                y += ((double) stream.getStrength() / n) * Math.sin(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
             }
         }
 
