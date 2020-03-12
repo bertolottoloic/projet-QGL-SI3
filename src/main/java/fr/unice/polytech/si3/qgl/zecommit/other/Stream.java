@@ -32,6 +32,15 @@ public class Stream extends VisibleEntitie {
         return Objects.hash(strength);
     }
 
+    @Override
+    public String toString() {
+        return "Stream{" +
+                super.getPosition()
+                +
+                "strength=" + strength +
+                '}';
+    }
+
 
     //------------------------------GETTER-------------------------//
 
