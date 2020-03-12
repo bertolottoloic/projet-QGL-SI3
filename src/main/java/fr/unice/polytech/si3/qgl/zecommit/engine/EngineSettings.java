@@ -390,8 +390,8 @@ public class EngineSettings {
         Stream stream =getCurrentOn();
         if(stream !=null) {
 
-                x += ((double) stream.getStrength() / n) * Math.cos(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
-                y += ((double) stream.getStrength() / n) * Math.sin(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
+                x += ((double) stream.getStrength() / n) * Math.cos(Math.abs(ship.getPosition().getOrientation() - (stream.getPosition().getOrientation()+((Rectangle)stream.getShape()).getOrientation())));
+                y += ((double) stream.getStrength() / n) * Math.sin(Math.abs(ship.getPosition().getOrientation() - (stream.getPosition().getOrientation()+((Rectangle)stream.getShape()).getOrientation())));
 
         }
 
