@@ -135,7 +135,7 @@ public class EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
         //this.visibleEntities.add(new Stream(new Position(0,0,0),new Rectangle(50,100,0),100));
-        this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 200, Math.PI/4)));
+        //this.visibleEntities.add(new Reef(new Position(1200, 500, 0), new Rectangle(40, 200, Math.PI/4)));
         //this.visibleEntities.add(new Reef(new Position(400, -20, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1200, 200, 0), new Circle(50)));

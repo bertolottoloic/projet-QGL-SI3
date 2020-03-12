@@ -109,9 +109,9 @@ public class Captain implements CaptainInterface {
 
         if (res.isPresent() && ship.getDeck().canUseRudder()) {
             if (needToSlowDown && chosenAngleAlteration > 0)
-                angle = -Math.PI / 4;
+                angle = -0.1;
             if (needToSlowDown && chosenAngleAlteration < 0)
-                angle = Math.PI / 4;
+                angle = 0.1;
             if (chosenAngle == 0)
                 angle = 0;
 
@@ -185,7 +185,7 @@ public class Captain implements CaptainInterface {
         int nbSailorsLeft = ship.getDeck().getNumberLeftSailors();
 
         Predictions predictions = new Predictions(leftSailorList, rightSailorList, ship, visibleEntities, chosenAngle, wind);
-        if (predictions.checkCollision() || predictions.checkFutureCollision() || predictions.verify()) {
+        if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
             needToSlowDown = true;
             chosenAngleAlteration += chosenAngle;

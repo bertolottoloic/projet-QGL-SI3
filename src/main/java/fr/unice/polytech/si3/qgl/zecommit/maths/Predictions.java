@@ -58,44 +58,7 @@ public class Predictions {
         }
         return res;
     }
-
-    public boolean checkFutureCollision(){
-        boolean res = false;
-
-        List<Reef> reefs = getReefs();
-        List<Position> intermediatePositions = subdiviseRoute(predictFinalPosition(), predictFinalNextPosition(predictFinalPosition()));
-
-        for (Reef reef : reefs) {
-            for (Position nextPosition : intermediatePositions) {
-
-                Collision collision = new Collision(reef.getShape(), reef.getPosition(), nextPosition);
-                if (collision.collideWithReef()) {
-                    res = true;
-                }
-            }
-        }
-        return res;
-    }
-
-    public boolean verify() {
-        boolean res = false;
-
-        List<Reef> reefs = getReefs();
-
-        Position finalPosition = predictFinalPosition();
-        List<Position> intermediatePositions = getTestingPositions(finalPosition);
-
-
-        for (Reef reef : reefs) {
-            for (Position nextPosition : intermediatePositions) {
-                Collision collision = new Collision(reef.getShape(), reef.getPosition(), nextPosition);
-                if (collision.collideWithReef()) {
-                    res = true;
-                }
-            }
-        }
-        return res;
-    }
+    
 
     public List<Position> getTestingPositions(Position finalPosition) {
         List<Position> res = new ArrayList<>();

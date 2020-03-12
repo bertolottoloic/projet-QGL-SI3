@@ -105,7 +105,7 @@ public class Collision {
     public static List<Point> determineRectanglePoints(Rectangle rectangle, Position position ){
         ArrayList<Point> res = new ArrayList<>();
 
-        double angle = rectangle.getOrientation(); // l'orientation du rectangle
+        double angle = rectangle.getOrientation() + position.getOrientation(); // l'orientation du rectangle
 
         double largeur = rectangle.getWidth(); //Largeur
         double l = rectangle.getHeight(); // Longueur
