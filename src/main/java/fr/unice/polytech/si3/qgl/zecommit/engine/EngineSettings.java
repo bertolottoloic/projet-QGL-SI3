@@ -139,15 +139,17 @@ public class EngineSettings {
         //this.visibleEntities.add(new Reef(new Position(400, -20, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1100, 700, 0), new Circle(50)));
         //this.visibleEntities.add(new Reef(new Position(1200, 200, 0), new Circle(50)));
-        this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
+        //this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
         //this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Circle(324)));
+        this.visibleEntities.add(new Reef(new Position(1500, 500, 0.78539816339), new Rectangle(1250.0, 1300, 0)));
+        this.visibleEntities.add(new Reef(new Position(500, 1500, 0.78539816339), new Rectangle(1250.0, 1300.0, 0.0)));
 
     }
 
 
     public void setWind() {
-        //this.winds.add(new Wind(0, 50));
-        this.winds.add(new Wind(12, 38));
+        this.winds.add(new Wind(0.0, 50));
+        //this.winds.add(new Wind(12, 38));
         //this.winds.add(new Wind(7, 89));
     }
 
@@ -183,9 +185,9 @@ public class EngineSettings {
     public void setCheckpoints() {
 
         this.checkpoints= new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(2600,200,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(900,1750,0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(-500,700,0), new Polygone(0, new Point[]{new Point(0, 20),new Point(20, 10),new Point(10, -20),new Point(-10, -20),new Point(-20, 10)})));
+        this.checkpoints.add(new Checkpoint(new Position(500,500,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1000,1000,0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1500,1500,0), new Circle(60)));
         this.allCheckpoints= new ArrayList<>(checkpoints);
     }
 
