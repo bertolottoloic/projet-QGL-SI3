@@ -384,7 +384,6 @@ public class EngineSettings {
         double y = vitesse * Math.sin(ship.getPosition().getOrientation()) + ship.getPosition().getY();
 
         Stream stream =getCurrentOn();
-        System.out.println(stream);
         if(stream !=null){
 
                x+=((double)stream.getStrength()/n)*Math.cos(Math.abs(ship.getPosition().getOrientation()-stream.getPosition().getOrientation()));
