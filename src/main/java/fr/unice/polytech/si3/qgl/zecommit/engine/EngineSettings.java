@@ -386,10 +386,10 @@ public class EngineSettings {
 
         Stream stream =getCurrentOn();
         if(stream !=null) {
-            if (stream.getPosition().getOrientation() == ship.getPosition().getOrientation()) {
+
                 x += ((double) stream.getStrength() / n) * Math.cos(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
                 y += ((double) stream.getStrength() / n) * Math.sin(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
-            }
+
         }
 
         Position newPosition = new Position(x, y, angleCalcul());

@@ -169,7 +169,7 @@ public class Captain implements CaptainInterface {
         chosenAngleAlteration = 0;
         needToSlowDown = false;
 
-        boolean isNear = road.distanceToGoal() < (165 +150 - goal.getFirstCheckpoint().getCircleRadius());
+        boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
         List<Sailor> rightSailors = ship.getDeck().rightSailors();
         List<Sailor> leftSailors = ship.getDeck().leftSailors();
 
