@@ -142,9 +142,12 @@ public class EngineSettings {
         //this.visibleEntities.add(new Reef(new Position(1200, 200, 0), new Circle(50)));
         // this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
         //this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Circle(324)));
-        this.visibleEntities.add(new Stream(new Position(1000,1000,Math.PI/4),new Rectangle(100,1400,0),150 ));
+        //this.visibleEntities.add(new Stream(new Position(1000,1000,Math.PI/4),new Rectangle(100,1400,0),150 ));
         this.visibleEntities.add(new Reef(new Position(1500, 500, 0.78539816339), new Rectangle(1250.0, 1300, 0)));
+        //this.visibleEntities.add(new Reef(new Position(1500, 500, 0.78539816339), new Circle(600)));
+
         this.visibleEntities.add(new Reef(new Position(500, 1500, 0.78539816339), new Rectangle(1250.0, 1300.0, 0.0)));
+        //this.visibleEntities.add(new Reef(new Position(500, 1500, 0.78539816339), new Circle(600)));
 
     }
 

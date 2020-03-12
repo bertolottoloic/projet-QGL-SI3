@@ -246,10 +246,8 @@ public class Predictions {
 
         Stream stream = getCurrentOn();
         if (stream != null) {
-            if (stream.getPosition().getOrientation() == ship.getPosition().getOrientation()) {
                 x += stream.getStrength() * Math.cos(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
                 y += stream.getStrength() * Math.sin(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
-            }
         }
 
         return new Position(x, y, angleCalcul());

@@ -212,7 +212,7 @@ public class Captain implements CaptainInterface {
 
 
 
-        if (needToSlowDown&& (!isNear)) {
+        if (needToSlowDown && (!isNear)) {
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));
         }
