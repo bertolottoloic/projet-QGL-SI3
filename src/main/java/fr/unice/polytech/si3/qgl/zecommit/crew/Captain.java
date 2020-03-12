@@ -152,14 +152,14 @@ public class Captain implements CaptainInterface {
         // Activation des marins de gauche
         int l = 0;
         while (l < compo.getSailorsLeft()) {
-            usedSailors.add(ship.getDeck().getLeftSailors().get(l));
+            usedSailors.add(ship.getDeck().leftSailors().get(l));
             l++;
         }
 
         // Activation des marins de droite
         int r = 0;
         while (r < compo.getSailorsRight()) {
-            usedSailors.add(ship.getDeck().getRightSailors().get(r));
+            usedSailors.add(ship.getDeck().rightSailors().get(r));
             r++;
         }
         return usedSailors;
@@ -169,22 +169,14 @@ public class Captain implements CaptainInterface {
         chosenAngleAlteration = 0;
         needToSlowDown = false;
 
-        boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
-        List<Sailor> rightSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar))
-                .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
-        for (Sailor sailor : rightSailorList) {
-            ship.getDeck().addSailor(sailor);
-        }
-        List<Sailor> leftSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> ship.getDeck().isLeft(oar))
-                .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
-        for (Sailor sailor : leftSailorList) {
-            ship.getDeck().addSailor(sailor);
-        }
+        boolean isNear = road.distanceToGoal() < (165 +150 - goal.getFirstCheckpoint().getCircleRadius());
+        List<Sailor> rightSailors = ship.getDeck().rightSailors();
+        List<Sailor> leftSailors = ship.getDeck().leftSailors();
 
-        int nbSailorsRight = ship.getDeck().getNumberRightSailors();
-        int nbSailorsLeft = ship.getDeck().getNumberLeftSailors();
+        int nbSailorsRight = rightSailors.size();
+        int nbSailorsLeft = leftSailors.size();
 
-        Predictions predictions = new Predictions(leftSailorList, rightSailorList, ship, visibleEntities, chosenAngle, wind);
+        Predictions predictions = new Predictions(leftSailors, rightSailors, ship, visibleEntities, chosenAngle, wind);
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
             needToSlowDown = true;
@@ -220,7 +212,7 @@ public class Captain implements CaptainInterface {
 
 
 
-        if (needToSlowDown) {
+        if (needToSlowDown&& (!isNear)) {
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));
         }

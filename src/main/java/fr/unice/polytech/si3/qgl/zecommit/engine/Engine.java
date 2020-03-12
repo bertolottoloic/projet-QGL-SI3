@@ -46,6 +46,7 @@ public class Engine {
             positions.add(position);
             System.out.println(position+"\nFIN DU ROUND\n");
         }
+        System.out.println(engineSettings.getVisibleEntities());
         Window fenetre= new Window(positions,engineSettings.getAllCheckpoints(),engineSettings.getVisibleEntities());
 
         System.out.println("##################################################################################################");

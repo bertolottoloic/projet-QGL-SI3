@@ -51,7 +51,7 @@ public class Predictions {
             for (Position nextPosition : intermediatePositions) {
 
                 Collision collision = new Collision(reef.getShape(), reef.getPosition(), nextPosition);
-                if (collision.collideWithReef()) {
+                if (collision.collide()) {
                     res = true;
                 }
             }
