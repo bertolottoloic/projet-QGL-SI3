@@ -21,6 +21,6 @@ public class PolygoneTest {
 
         Polygone polygone = new Polygone(0, points);
 
-        assertEquals(20 + 1.12, (double)Math.round(polygone.getRadius()*100)/100.0);
+        assertEquals(1.12, (double)Math.round(polygone.getRadius()*100)/100.0);
     }
 }
