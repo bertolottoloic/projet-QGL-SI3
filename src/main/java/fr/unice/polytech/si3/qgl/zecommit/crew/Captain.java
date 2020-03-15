@@ -220,7 +220,17 @@ public class Captain implements CaptainInterface {
                 if (predictions.checkCollision()) {
                     Reef reef2 = predictions.getSortedReef().get(1);
                     Logs.add("encore collision !!!!!!!dtxcfygvuhibuoiyguftydrtesdryftugyihuoiyutfyrdtxfg");
+                    if (reef2 != null) {
+                        if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef2)) {
+                            orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef2) - predictions.getAngleToEndOfReef(reef2);
+                            chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
+                        }
+                        if (road.orientationToGoal() > predictions.getAngleToCenterOfReef(reef2)) {
+                            orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef2) + predictions.getAngleToEndOfReef(reef2);
+                            chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
+                        }
 
+                    }
                 }
 
                 Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveaux cap : " + chosenAngle);

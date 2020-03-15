@@ -111,7 +111,7 @@ public class Ship {
             double min = distanceTo(reef.getPosition());
             Polygone poly = (Polygone)(reef.getShape());
             for(Point point : poly.getVertices()){
-                double distance = distanceTo(point.getPosition());
+                double distance = distanceTo(new Position(point.getX() + reef.getPosition().getX(), point.getY()+ reef.getPosition().getY(), 0));
                 if(distance<min)
                     min = distance;
             }

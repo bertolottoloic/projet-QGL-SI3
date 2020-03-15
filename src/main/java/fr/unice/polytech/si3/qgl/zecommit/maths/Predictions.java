@@ -113,7 +113,7 @@ public class Predictions {
             return Math.asin(reef.getShape().getShapeRadius() / ship.distanceTo(reef.getPosition()));
         else {
             Logs.add("le problème vient de là !!!!!!!!");
-            return Math.PI/3;
+            return Math.PI/4;
         }
 
     }

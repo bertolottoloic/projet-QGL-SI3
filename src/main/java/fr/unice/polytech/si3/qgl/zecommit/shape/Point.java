@@ -33,10 +33,6 @@ public class Point {
         return y;
     }
 
-    @JsonIgnore
-    public Position getPosition(){
-        return new Position(x, y, 0);
-    }
 
     @Override
     public String toString() {
