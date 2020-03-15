@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.maths;
 
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
@@ -27,7 +28,7 @@ public class Predictions {
     private int nbSailUsed;
 
 
-    public Predictions(List<Sailor> leftSailors, List<Sailor> rightSailors,Ship ship, List<VisibleEntitie> visibleEntities, double rotation, Wind wind) {
+    public Predictions(List<Sailor> leftSailors, List<Sailor> rightSailors, Ship ship, List<VisibleEntitie> visibleEntities, double rotation, Wind wind) {
         this.leftSailors = leftSailors;
         this.rightSailors = rightSailors;
         this.oarsNb = leftSailors.size() + rightSailors.size();
@@ -40,6 +41,7 @@ public class Predictions {
 
     /**
      * Méthode vérifiant les collisions avec tous les récifs présents
+     *
      * @return true en cas de collision
      */
     public boolean checkCollision() {
@@ -61,8 +63,8 @@ public class Predictions {
 
 
 
-    public Optional<Reef> getFirstReef(){
-        return getReefs().stream().min(Comparator.comparingDouble(reef->ship.distanceTo(reef.getPosition())));
+    public Optional<Reef>  getFirstReef(){
+        return getReefs().stream().min(Comparator.comparingDouble(reef->ship.distanceTo(reef.getPosition())-reef.getShape().getShapeRadius()));
     }
 
 
@@ -81,7 +83,7 @@ public class Predictions {
 
                 res = k;
         }
-        if (orientation> Math.PI / 2 && orientation <= Math.PI)
+        if (orientation > Math.PI / 2 && orientation <= Math.PI)
             return oarsNb;
         if (orientation < -Math.PI / 2 && orientation > -Math.PI)
             return 0;
@@ -96,13 +98,20 @@ public class Predictions {
 
 
     public double getAngleToEndOfReef(Reef reef) { //TODO supprimer ..get()
-        return Math.asin(reef.getShape().getShapeRadius() / ship.distanceTo(reef.getPosition()));
+        Logs.add("shape Radius " +reef.getShape().getShapeRadius());
+        Logs.add("shape Radius " +reef.getPosition());
+
+        Logs.add("distance to reef " +ship.distanceTo(reef.getPosition()));
+        if(reef.getShape().getShapeRadius() < ship.distanceTo(reef.getPosition()))
+            return Math.asin(reef.getShape().getShapeRadius() / ship.distanceTo(reef.getPosition()));
+        else
+            return 0;
 
     }
 
     /**
      * Renvoie l'angle entre l'orientation du bateau et le centre du récif
--     * @return
+     * @return
      */
     public double getAngleToCenterOfReef(Reef reef) { //TODO supprimer les .get().get()
         double angle = ship.getPosition().getOrientation();
@@ -127,7 +136,6 @@ public class Predictions {
     }
 
 
-
     public double adjustAngle(double angle, Position startPosition, Position finishPosition) { //TODO supprimer ..get()
         if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() <= startPosition.getY()) {
             angle -= Math.PI;
@@ -145,19 +153,19 @@ public class Predictions {
         return angle;
     }
 
-    public double shortestAngle(double angle){
-        if(angle>Math.PI)
-            return angle - (2*Math.PI);
-        if(angle< -Math.PI)
-            return angle + (2*Math.PI);
+    public double shortestAngle(double angle) {
+        if (angle > Math.PI)
+            return angle - (2 * Math.PI);
+        if (angle < -Math.PI)
+            return angle + (2 * Math.PI);
         return angle;
     }
 
 
-
     /**
      * Subdivise le trajet en une liste de Positions
-     * @param position du bateau
+     *
+     * @param position             du bateau
      * @param predictFinalPosition la position prévue
      * @return liste de positions
      */
@@ -176,47 +184,47 @@ public class Predictions {
 
         if (xStart < xFinish && yStart < yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart + (double)1 / step * k * xDiff, yStart + (double)1 / step * k * yDiff, position.getOrientation()));
+                resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart > xFinish && yStart < yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart - (double)1 / step * k * xDiff, yStart + (double)1 / step * k * yDiff, position.getOrientation()));
+                resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart > xFinish && yStart > yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart - (double)1 / step * k * xDiff, yStart - (double)1 / step * k * yDiff, position.getOrientation()));
+                resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart < xFinish && yStart > yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart + (double)1 / step * k * xDiff, yStart - (double)1 / step * k * yDiff, position.getOrientation()));
+                resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart == xFinish && yStart > yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart, yStart - (double)1 / step * k * yDiff, position.getOrientation()));
+                resPositions.add(new Position(xStart, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
         if (xStart == xFinish && yStart < yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart, yStart + (double)1 / step * k * yDiff, position.getOrientation()));
+                resPositions.add(new Position(xStart, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart > xFinish && yStart == yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart - (double)1 / step * k * xDiff, yStart, position.getOrientation()));
+                resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart, position.getOrientation()));
             }
         }
         if (xStart < xFinish && yStart == yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart + (double)1 / step * k * xDiff, yStart, position.getOrientation()));
+                resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart, position.getOrientation()));
             }
         }
         resPositions.add(predictFinalPosition);
@@ -227,13 +235,14 @@ public class Predictions {
     public List<Reef> getReefs() {
         List<Reef> reefs = new ArrayList<>();
         for (VisibleEntitie visibleEntitie : visibleEntities)
-            if(visibleEntitie.getType().equals(VisibleEntityType.reef))
-                reefs.add((Reef)visibleEntitie);
+            if (visibleEntitie.getType().equals(VisibleEntityType.reef))
+                reefs.add((Reef) visibleEntitie);
         return reefs;
     }
 
     /**
      * Méthode donnant la prochaine position du bateau
+     *
      * @return la nouvelle position
      */
     public Position predictFinalPosition() {
@@ -246,17 +255,17 @@ public class Predictions {
 
         Stream stream = getCurrentOn();
         if (stream != null) {
-                x += stream.getStrength() * Math.cos(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
-                y += stream.getStrength() * Math.sin(Math.abs(ship.getPosition().getOrientation() - stream.getPosition().getOrientation()));
+            x += stream.getStrength() * Math.cos(Math.abs(ship.getPosition().getOrientation() +rotation - stream.getPosition().getOrientation()));
+            y += stream.getStrength() * Math.sin(Math.abs(ship.getPosition().getOrientation() + rotation - stream.getPosition().getOrientation()));
         }
 
         return new Position(x, y, angleCalcul());
     }
 
 
-
     /**
      * Méthode calculant la prochaine orientation du bateau
+     *
      * @return la nouvelle orientation
      */
     public double angleCalcul() {
@@ -285,15 +294,14 @@ public class Predictions {
     }
 
 
-    public Stream getCurrentOn(){
-        for (VisibleEntitie entity: visibleEntities) {
-            Collision collision = new Collision(entity.getShape(),entity.getPosition(),ship.getPosition());
-            if(entity.getType()== VisibleEntityType.stream &&collision.collide()){
+    public Stream getCurrentOn() {
+        for (VisibleEntitie entity : visibleEntities) {
+            Collision collision = new Collision(entity.getShape(), entity.getPosition(), ship.getPosition());
+            if (entity.getType() == VisibleEntityType.stream && collision.collide()) {
                 return (Stream) entity;
             }
         }
         return null;
     }
-
 
 }

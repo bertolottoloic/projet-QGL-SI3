@@ -11,10 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
-import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Predictions;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
+import fr.unice.polytech.si3.qgl.zecommit.maths.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
 import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
@@ -176,7 +173,33 @@ public class Captain implements CaptainInterface {
         int nbSailorsRight = rightSailors.size();
         int nbSailorsLeft = leftSailors.size();
 
-        Predictions predictions = new Predictions(leftSailors, rightSailors, ship, visibleEntities, chosenAngle, wind);
+        recalculateChosenAngle(road, leftSailors, rightSailors);
+
+        if (latestPositions.size()>3 && latestPositions.get(latestPositions.size() - 1).equals(latestPositions.get(latestPositions.size() - 2))){
+            chosenAngle = 0;
+            needToSlowDown = true;
+            Logs.add("Mayday Mayday");
+        }
+
+
+        if (needToSlowDown && (!isNear)) {
+            return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
+                    nbSailorsRight, nbSailorsLeft));
+        }
+
+        if (!isNear) {// si le bateau est loin du checkpoint
+            return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
+                    nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
+        } else {
+            return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
+                    nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
+
+        }
+
+    }
+
+    private void recalculateChosenAngle(Road road, List<Sailor> leftSailors, List<Sailor> rightSailors) {
+        Predictions predictions = new Predictions(leftSailors, rightSailors,ship, visibleEntities,  chosenAngle, wind);
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
             needToSlowDown = true;
@@ -200,32 +223,6 @@ public class Captain implements CaptainInterface {
 
 
         }
-
-        if (latestPositions.size()>3 && latestPositions.get(latestPositions.size() - 1).equals(latestPositions.get(latestPositions.size() - 2))){
-            chosenAngle = 0;
-            needToSlowDown = true;
-            Logs.add("Mayday Mayday");
-        }
-
-
-
-
-
-
-        if (needToSlowDown && (!isNear)) {
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
-                    nbSailorsRight, nbSailorsLeft));
-        }
-
-        if (!isNear) {// si le bateau est loin du checkpoint
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
-                    nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
-        } else {
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
-                    nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
-
-        }
-
     }
 
     /**

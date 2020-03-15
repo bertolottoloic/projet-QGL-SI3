@@ -2,9 +2,9 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
@@ -18,7 +18,7 @@ public class Window extends JFrame{
 
     public int w;
     public int h;
-    public double scale = 10;
+    public double scale = 5;
 
     public Window(ArrayList<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles){
 
