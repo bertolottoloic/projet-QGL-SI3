@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import java.util.Objects;
 
@@ -29,6 +31,11 @@ public class Point {
 
     public double getY() {
         return y;
+    }
+
+    @JsonIgnore
+    public Position getPosition(){
+        return new Position(x, y, 0);
     }
 
     @Override

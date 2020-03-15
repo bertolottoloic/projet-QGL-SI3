@@ -11,6 +11,9 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
@@ -93,6 +96,30 @@ public class Ship {
     public double distanceTo(Position position) {
         return Math.sqrt(Math.pow(this.getXPosition() - position.getX(),2) + Math.pow(this.getYPosition() - position.getY(),2));
     }
+
+
+    @JsonIgnore
+    public double distanceToforReef(Reef reef){
+        if (reef.getShape().isCircle() && !reef.getShape().isRectangle()){
+            return distanceTo(reef.getPosition()) - reef.getShape().getShapeRadius();
+        }
+
+        if (!reef.getShape().isCircle() && reef.getShape().isRectangle()){
+            return distanceTo(reef.getPosition()) - reef.getShape().getShapeRadius();
+        }
+        else {
+            double min = distanceTo(reef.getPosition());
+            Polygone poly = (Polygone)(reef.getShape());
+            for(Point point : poly.getVertices()){
+                double distance = distanceTo(point.getPosition());
+                if(distance<min)
+                    min = distance;
+            }
+            return min;
+
+        }
+    }
+
 
 
     @Override

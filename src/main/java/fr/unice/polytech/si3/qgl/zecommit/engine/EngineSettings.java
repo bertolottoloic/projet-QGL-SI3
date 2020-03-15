@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
@@ -145,13 +146,15 @@ public class EngineSettings {
         // this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Polygone(0, new Point[]{new Point(0, 300),new Point(300, 100),new Point(100, -300),new Point(-100, -300),new Point(-300, 100)})));
         //this.visibleEntities.add(new Reef(new Position(1400, 100, 0), new Circle(324)));
 
-        this.visibleEntities.add(new Stream(new Position(1000, 1000, Math.PI / 4), new Rectangle(100, 1400, 0), 150));
-
+        /*
+        this.visibleEntities.add(new Stream(new Position(1000, 1000, Math.PI / 4), new Rectangle(100, 1400, 0), 50));
         this.visibleEntities.add(new Reef(new Position(1500, 500, 0.78539816339), new Rectangle(1250.0, 1300, 0)));
 
-        //this.visibleEntities.add(new Reef(new Position(500, 1500, 0.78539816339), new Rectangle(1250.0, 1300.0, 0.0)));
+        this.visibleEntities.add(new Reef(new Position(500, 1500, 0.78539816339), new Rectangle(1250.0, 1300.0, 0.0)));
 
-        /*
+         */
+
+
         //TOUR DE RE
         Polygone polygon = new Polygone(0, new Point[]{new Point(-135.99999999999997, -596.0), new Point(163.99999999999997, -336.0), new Point(324.0, 64.0), new Point(284.00000000000006, 704.0), new Point(-636.0, 164.00000000000006)});
         Position position = new Position(1876.0, 2096.0, 0.0);
@@ -193,7 +196,7 @@ public class EngineSettings {
         Position position10 = new Position(1000.0, 1000.0, 0.78539816339);
         this.visibleEntities.add(new Stream(position10, polygon10, 150));
 
-         */
+
 
     }
 
@@ -241,6 +244,8 @@ public class EngineSettings {
 
 
 
+
+
     }
 
     public void setGoal() {
@@ -250,13 +255,15 @@ public class EngineSettings {
     public void setCheckpoints() {
 
         this.checkpoints = new ArrayList<>();
-        // M7 à ne pas supprimer
+        /* M7 à ne pas supprimer
         this.checkpoints.add(new Checkpoint(new Position(500, 500, 0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(1000, 1000, 0), new Circle(50)));
         this.checkpoints.add(new Checkpoint(new Position(1500, 1500, 0), new Circle(60)));
 
+         */
 
-        /*
+
+
         this.checkpoints.add(new Checkpoint(new Position(300.0,1800.0,0), new Circle(150)));
         this.checkpoints.add(new Checkpoint(new Position(1900.0,3800.0,0), new Circle(150)));
         this.checkpoints.add(new Checkpoint(new Position(2000.0,5240.0,0), new Circle(150)));
@@ -266,7 +273,7 @@ public class EngineSettings {
         this.checkpoints.add(new Checkpoint(new Position(1800.0,360.0,0), new Circle(150)));
         this.checkpoints.add(new Checkpoint(new Position(360.0,320.0,0), new Circle(150)));
 
-         */
+
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
 
@@ -303,6 +310,8 @@ public class EngineSettings {
 
 
 
+
+
         this.entities = new ArrayList<>();
         this.entities.add(new Oar(1, 0));
         this.entities.add(new Oar(2, 0));
@@ -311,6 +320,8 @@ public class EngineSettings {
         this.entities.add(new Rudder(3, 1));
         this.entities.add(new Watch(0, 1));
         this.entities.add(new Sail(1, 1, false));
+
+
 
 
 
@@ -488,7 +499,7 @@ public class EngineSettings {
 
         boolean res = checkCollision(newPosition);
 
-        if (false)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
+        if (res)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
             throw new Exception();
         else {
             ship.setPosition(newPosition);

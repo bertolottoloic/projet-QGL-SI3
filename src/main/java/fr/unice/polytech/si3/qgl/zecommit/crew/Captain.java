@@ -12,9 +12,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.*;
-import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
-import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.other.*;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -108,12 +106,11 @@ public class Captain implements CaptainInterface {
             if (needToSlowDown && chosenAngleAlteration > 0)
                 angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
             if (needToSlowDown && chosenAngleAlteration < 0)
-                angle = (orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
-            if (chosenAngle == 0)
-                angle = 0;
+                angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
 
             return new SimpleEntry<>(res.get().getSailorOn(), angle);
         }
+
         return null;
     }
 
@@ -173,24 +170,25 @@ public class Captain implements CaptainInterface {
         int nbSailorsRight = rightSailors.size();
         int nbSailorsLeft = leftSailors.size();
 
-        recalculateChosenAngle(road, leftSailors, rightSailors);
-
-        if (latestPositions.size()>3 && latestPositions.get(latestPositions.size() - 1).equals(latestPositions.get(latestPositions.size() - 2))){
-            chosenAngle = 0;
-            needToSlowDown = true;
-            Logs.add("Mayday Mayday");
-        }
 
 
-        if (needToSlowDown && (!isNear)) {
+        if (needToSlowDown && !isNear && !isInStream()) {
+            Compo compo = orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
+            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));
         }
 
-        if (!isNear) {// si le bateau est loin du checkpoint
+        if (!isNear && !isInStream()) {// si le bateau est loin du checkpoint
+            Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
+            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
+
+
         } else {
+            Compo compo = orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0), nbSailorsRight, nbSailorsLeft);
+            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
 
@@ -198,15 +196,16 @@ public class Captain implements CaptainInterface {
 
     }
 
-    private void recalculateChosenAngle(Road road, List<Sailor> leftSailors, List<Sailor> rightSailors) {
-        Predictions predictions = new Predictions(leftSailors, rightSailors,ship, visibleEntities,  chosenAngle, wind);
+    private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
+        Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize,ship, visibleEntities,  chosenAngle, wind, upSail());
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
+            Logs.add("angle : " + orientationToGoal);
+
             needToSlowDown = true;
             chosenAngleAlteration += chosenAngle;
-            Optional<Reef> reefOp = predictions.getFirstReef();
-            if (reefOp.isPresent()) {
-                Reef reef = reefOp.get();
+            Reef reef = predictions.getFirstReef();
+            if (reef!=null) {
                 if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
                     orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef);
                     chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
@@ -216,7 +215,17 @@ public class Captain implements CaptainInterface {
                     chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
                 }
 
-                Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveau cap : " + chosenAngle);
+
+                predictions = new Predictions(leftSailorsSize, rightSailorsSize,ship, visibleEntities,  chosenAngle, wind, upSail());
+                if (predictions.checkCollision()) {
+                    Reef reef2 = predictions.getSortedReef().get(1);
+                    Logs.add("encore collision !!!!!!!dtxcfygvuhibuoiyguftydrtesdryftugyihuoiyutfyrdtxfg");
+
+                }
+
+                Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveaux cap : " + chosenAngle);
+                Logs.add("\nnouvel angle : " + orientationToGoal);
+
                 chosenAngleAlteration -= chosenAngle;
 
             }
@@ -237,6 +246,26 @@ public class Captain implements CaptainInterface {
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
                 && road.distanceToGoal() > (165 + wind.getStrength() * activeSails.size());
     }
+
+    /**
+     * Méthode indiquant quand le bateau est dans un courant
+     *
+     * @return
+     */
+    public boolean isInStream() {
+        boolean res = false;
+        for (VisibleEntitie visibleEntitie : visibleEntities)
+            if (visibleEntitie.getType().equals(VisibleEntityType.stream)) {
+                Stream stream = (Stream) visibleEntitie;
+                Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
+                if (collision.collide())
+                    res = true;
+            }
+        System.out.println(res);
+        return res;
+    }
+
+
 
     ////////////////////// GETTER ////////////////////////////////////////////
 
