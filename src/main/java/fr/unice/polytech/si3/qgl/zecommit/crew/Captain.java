@@ -223,14 +223,15 @@ public class Captain implements CaptainInterface {
             Reef reef = predictions.getFirstReef();
             if (reef != null) {
                 if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
-                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef);
+                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef, orientationTable);
                     chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
                 }
                 if (road.orientationToGoal() > predictions.getAngleToCenterOfReef(reef)) {
-                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) + predictions.getAngleToEndOfReef(reef);
+                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) + predictions.getAngleToEndOfReef(reef, orientationTable);
                     chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
                 }
             }
+
 
             Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveaux cap : " + chosenAngle);
             chosenAngleAlteration -= chosenAngle;

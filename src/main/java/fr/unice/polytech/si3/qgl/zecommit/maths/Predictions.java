@@ -108,12 +108,11 @@ public class Predictions {
     }
 
 
-    public double getAngleToEndOfReef(Reef reef) { //TODO supprimer ..get()
+    public double getAngleToEndOfReef(Reef reef, OrientationTable orientationTable) { //TODO supprimer ..get()
         if(reef.getShape().getShapeRadius() < ship.distanceTo(reef.getPosition()))
             return Math.asin(reef.getShape().getShapeRadius() / ship.distanceTo(reef.getPosition()));
         else {
-            Logs.add("le problème vient de là !!!!!!!!");
-            return 0;
+            return (orientationTable.getAngleTable().size()-1 )/2;
         }
 
     }
