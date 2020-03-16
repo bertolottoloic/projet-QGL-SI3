@@ -3,7 +3,10 @@ package fr.unice.polytech.si3.qgl.zecommit;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
-import fr.unice.polytech.si3.qgl.zecommit.shape.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

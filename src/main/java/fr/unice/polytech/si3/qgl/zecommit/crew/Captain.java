@@ -11,13 +11,9 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Compo;
-import fr.unice.polytech.si3.qgl.zecommit.maths.OrientationTable;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Predictions;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
-import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
-import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.maths.*;
+import fr.unice.polytech.si3.qgl.zecommit.other.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -37,7 +33,6 @@ public class Captain implements CaptainInterface {
     private int chosenAngle;
     private double orientationToGoal;
     private int chosenAngleAlteration;
-    private List<Position> latestPositions;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -46,7 +41,6 @@ public class Captain implements CaptainInterface {
         this.wind = game.getWind();
         this.visibleEntities = game.getVisibleEntities();
         this.needToSlowDown = false;
-        this.latestPositions = new ArrayList<>();
     }
 
     @Override
@@ -92,6 +86,24 @@ public class Captain implements CaptainInterface {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {
             goal.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
+            List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+            if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
+                Logs.add("Obstacle détécté sur votre trajet");
+                List<Position> positionList = Calculs.findIntersectionsCercle(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+
+                List<Position> root1 = new ArrayList<>();
+                root1.add(positionList.get(0));
+                if (Calculs.checkCollision(getReefs(), root1)) {
+                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(1), new Circle(200)));
+                    //On crée un CP intermédiaire loin du récif
+                } else {
+                    List<Position> root2 = new ArrayList<>();
+                    root2.add(positionList.get(1));
+                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(0), new Circle(200)));
+
+
+                }
+            }
         }
         needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
@@ -109,14 +121,13 @@ public class Captain implements CaptainInterface {
 
         if (res.isPresent() && ship.getDeck().canUseRudder()) {
             if (needToSlowDown && chosenAngleAlteration > 0)
-                angle = -Math.PI / 4;
+                angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
             if (needToSlowDown && chosenAngleAlteration < 0)
-                angle = Math.PI / 4;
-            if (chosenAngle == 0)
-                angle = 0;
+                angle = (orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
 
             return new SimpleEntry<>(res.get().getSailorOn(), angle);
         }
+
         return null;
     }
 
@@ -152,14 +163,14 @@ public class Captain implements CaptainInterface {
         // Activation des marins de gauche
         int l = 0;
         while (l < compo.getSailorsLeft()) {
-            usedSailors.add(ship.getDeck().getLeftSailors().get(l));
+            usedSailors.add(ship.getDeck().leftSailors().get(l));
             l++;
         }
 
         // Activation des marins de droite
         int r = 0;
         while (r < compo.getSailorsRight()) {
-            usedSailors.add(ship.getDeck().getRightSailors().get(r));
+            usedSailors.add(ship.getDeck().rightSailors().get(r));
             r++;
         }
         return usedSailors;
@@ -170,70 +181,61 @@ public class Captain implements CaptainInterface {
         needToSlowDown = false;
 
         boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
-        List<Sailor> rightSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> !ship.getDeck().isLeft(oar))
-                .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
-        for (Sailor sailor : rightSailorList) {
-            ship.getDeck().addSailor(sailor);
-        }
-        List<Sailor> leftSailorList = ship.getDeck().getUsedOars().stream().filter(oar -> ship.getDeck().isLeft(oar))
-                .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
-        for (Sailor sailor : leftSailorList) {
-            ship.getDeck().addSailor(sailor);
-        }
+        List<Sailor> rightSailors = ship.getDeck().rightSailors();
+        List<Sailor> leftSailors = ship.getDeck().leftSailors();
 
-        int nbSailorsRight = ship.getDeck().getNumberRightSailors();
-        int nbSailorsLeft = ship.getDeck().getNumberLeftSailors();
-
-        Predictions predictions = new Predictions(leftSailorList, rightSailorList, ship, visibleEntities, chosenAngle, wind);
-        if (predictions.checkCollision() || predictions.checkFutureCollision() || predictions.verify()) {
-            Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
-            needToSlowDown = true;
-            chosenAngleAlteration += chosenAngle;
-            Optional<Reef> reefOp = predictions.getFirstReef();
-            if (reefOp.isPresent()) {
-                Reef reef = reefOp.get();
-                if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
-                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef);
-                    chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
-                }
-                if (road.orientationToGoal() > predictions.getAngleToCenterOfReef(reef)) {
-                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) + predictions.getAngleToEndOfReef(reef);
-                    chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
-                }
-
-                Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveau cap : " + chosenAngle);
-                chosenAngleAlteration -= chosenAngle;
-
-            }
-
-
-        }
-
-        if (latestPositions.size()>3 && latestPositions.get(latestPositions.size() - 1).equals(latestPositions.get(latestPositions.size() - 2))){
-            chosenAngle = 0;
-            needToSlowDown = true;
-            Logs.add("Mayday Mayday");
-        }
+        int nbSailorsRight = rightSailors.size();
+        int nbSailorsLeft = leftSailors.size();
 
 
 
-
-
-
-        if (needToSlowDown) {
+        if (needToSlowDown && !isNear && !isInStream()) {
+            Compo compo = orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
+            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));
         }
 
-        if (!isNear) {// si le bateau est loin du checkpoint
+        if (!isNear && !isInStream()) {// si le bateau est loin du checkpoint
+            Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
+            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
+
+
         } else {
+            Compo compo = orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0), nbSailorsRight, nbSailorsLeft);
+            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
 
         }
 
+    }
+
+    private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
+        Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
+        if (predictions.checkCollision()) {
+            Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
+
+            needToSlowDown = true;
+            chosenAngleAlteration += chosenAngle;
+            Reef reef = predictions.getFirstReef();
+            if (reef != null) {
+                if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
+                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef, orientationTable);
+                    chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
+                }
+                if (road.orientationToGoal() > predictions.getAngleToCenterOfReef(reef)) {
+                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) + predictions.getAngleToEndOfReef(reef, orientationTable);
+                    chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
+                }
+            }
+
+
+            Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveaux cap : " + chosenAngle);
+            chosenAngleAlteration -= chosenAngle;
+        }
     }
 
     /**
@@ -248,6 +250,25 @@ public class Captain implements CaptainInterface {
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
                 && road.distanceToGoal() > (165 + wind.getStrength() * activeSails.size());
     }
+
+    /**
+     * Méthode indiquant quand le bateau est dans un courant
+     *
+     * @return
+     */
+    public boolean isInStream() {
+        boolean res = false;
+        for (VisibleEntitie visibleEntitie : visibleEntities)
+            if (visibleEntitie.getType().equals(VisibleEntityType.stream)) {
+                Stream stream = (Stream) visibleEntitie;
+                Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
+                if (collision.collide())
+                    res = true;
+            }
+        return res;
+    }
+
+
 
     ////////////////////// GETTER ////////////////////////////////////////////
 
@@ -270,6 +291,14 @@ public class Captain implements CaptainInterface {
         return orientationTable;
     }
 
+    public List<Reef> getReefs() {
+        List<Reef> reefs = new ArrayList<>();
+        for (VisibleEntitie visibleEntitie : visibleEntities)
+            if (visibleEntitie.getType().equals(VisibleEntityType.reef))
+                reefs.add((Reef) visibleEntitie);
+        return reefs;
+    }
+
     /**
      * @param ship the ship to set
      */
@@ -285,7 +314,4 @@ public class Captain implements CaptainInterface {
         this.visibleEntities = visibleEntities;
     }
 
-    public void setLatestPositions(List<Position> latestPositions) {
-        this.latestPositions = latestPositions;
-    }
 }

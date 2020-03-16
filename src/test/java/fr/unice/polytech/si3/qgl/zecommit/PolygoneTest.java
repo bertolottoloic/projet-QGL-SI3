@@ -1,13 +1,10 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
-
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PolygoneTest {
 
@@ -24,6 +21,6 @@ public class PolygoneTest {
 
         Polygone polygone = new Polygone(0, points);
 
-        assertEquals(20 + 1.12, (double)Math.round(polygone.getRadius()*100)/100.0);
+        assertEquals(1.12, (double)Math.round(polygone.getRadius()*100)/100.0);
     }
 }

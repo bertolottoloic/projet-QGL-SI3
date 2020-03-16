@@ -27,10 +27,6 @@ public class Deck{
     private List<Sail> sails;
     @JsonIgnore
     private List<Sailor> sailors;
-    @JsonIgnore
-    private List<Sailor> rightSailorList;
-    @JsonIgnore
-    private List<Sailor> leftSailorList;
 
     public Deck(int width, int length){
 
@@ -39,8 +35,6 @@ public class Deck{
         this.oars = new ArrayList<>();
         this.sails = new ArrayList<>();
         this.sailors = new ArrayList<>();
-        this.leftSailorList = new ArrayList<>();
-        this.rightSailorList = new ArrayList<>();
         this.rudder = Optional.empty();
     }
 
@@ -158,23 +152,14 @@ public class Deck{
         return !sails.isEmpty();
     }
 
-    public void addSailor(Sailor sailor) {
-        if (isLeft(sailor)) {
-            this.leftSailorList.add(sailor);
-        }
-        else {
-            this.rightSailorList.add(sailor);
-        }
+    public List<Sailor> rightSailors(){
+        return getUsedOars().stream().filter(oar -> !isLeft(oar))
+        .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
     }
 
-    public void deleteSailor(Sailor sailor) {
-        if (isLeft(sailor)) {
-            this.leftSailorList.remove(sailor);
-        }
-
-        else {
-            this.rightSailorList.remove(sailor);
-        }
+    public List<Sailor> leftSailors(){
+        return getUsedOars().stream().filter(oar -> isLeft(oar))
+        .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
     }
 
     public void updateSails(List<Entity> entities){
@@ -241,26 +226,6 @@ public class Deck{
     @JsonIgnore
     public List<Sail> getSails() {
         return sails;
-    }
-
-    @JsonIgnore
-    public List<Sailor> getLeftSailors() {
-        return this.leftSailorList;
-    }
-
-    @JsonIgnore
-    public List<Sailor> getRightSailors() {
-        return this.rightSailorList;
-    }
-
-    @JsonIgnore
-    public int getNumberRightSailors() {
-        return this.rightSailorList.size();
-    }
-
-    @JsonIgnore
-    public int getNumberLeftSailors() {
-        return this.leftSailorList.size();
     }
 
     //------------------------------SETTER-------------------------//

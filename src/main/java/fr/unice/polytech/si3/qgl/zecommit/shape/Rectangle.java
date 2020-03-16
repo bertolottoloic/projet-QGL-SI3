@@ -77,7 +77,7 @@ public class Rectangle extends Shape {
 
     @JsonIgnore
     public double getRadius(){
-        return getHeight()/2;
+        return Math.sqrt((width/2)*(width/2) + (height/2)*(height/2));
     }
 
     //-------------------------SETTER-------------------------//

@@ -46,6 +46,15 @@ public abstract class Shape {
             return ((Polygone)this).getRadius();
     }
 
+    public double getShapeOrientation(){
+        if(isCircle && !isRectangle)
+            return 0;
+        if(!isCircle && isRectangle)
+            return ((Rectangle)this).getOrientation();
+        else
+            return ((Polygone)this).getOrientation();
+    }
+
     //------------------------SETTER----------------------//
 
 

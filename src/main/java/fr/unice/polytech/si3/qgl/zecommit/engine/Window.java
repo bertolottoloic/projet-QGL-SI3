@@ -1,8 +1,10 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
@@ -76,17 +78,32 @@ public class Window extends JFrame{
             }
 
             public Shape drawCheckpoint(Checkpoint chkp){
+                int[] x;
+                int[] y;
                 java.awt.Shape shp=null;
                 switch (chkp.getShape().getType()){
                     case "circle":
                         shp=new Ellipse2D.Double((chkp.getPosition().getX()/scale)-(chkp.getCircleRadius()/scale)+cst,(( chkp.getPosition().getY()/scale)-(chkp.getCircleRadius()/scale)+cst),(chkp.getCircleRadius()*2/scale),(chkp.getCircleRadius()*2/scale));
                         break;
                     case "rectangle":
-                        shp=new java.awt.Rectangle.Double((chkp.getPosition().getX()/scale)+cst-(((Rectangle)chkp.getShape()).getWidth()/(2*scale)), (chkp.getPosition().getY()/scale)+cst-(((Rectangle)chkp.getShape()).getHeight()/(2*scale)), (((Rectangle)chkp.getShape()).getWidth()/scale),(((Rectangle)chkp.getShape()).getHeight()/scale));
+                        List<Point> vertices=Collision.determineRectanglePoints((Rectangle) chkp.getShape(),chkp.getPosition());
+                        x=new int[vertices.size()];
+                        y=new int[vertices.size()];
+
+                        for (int i=0; i<vertices.size();i++) {
+                            x[i]=(int)(vertices.get(i).getX()/scale);
+                            x[i]+=cst;
+                        }
+                        for (int i=0; i<vertices.size();i++) {
+                            y[i]=(int)(vertices.get(i).getY()/scale);
+                            y[i]+=cst;
+                        }
+                        shp=new Polygon(x,y,vertices.size());
+                        //shp=new java.awt.Rectangle.Double((chkp.getPosition().getX()/scale)+cst-(((Rectangle)chkp.getShape()).getWidth()/(2*scale)), (chkp.getPosition().getY()/scale)+cst-(((Rectangle)chkp.getShape()).getHeight()/(2*scale)), (((Rectangle)chkp.getShape()).getWidth()/scale),(((Rectangle)chkp.getShape()).getHeight()/scale));
                         break;
                     case "polygon":
-                        int[] x=((Polygone)chkp.getShape()).getVerticesIntX();
-                        int[] y=((Polygone)chkp.getShape()).getVerticesIntY();
+                        x=((Polygone)chkp.getShape()).getVerticesIntX();
+                        y=((Polygone)chkp.getShape()).getVerticesIntY();
 
                         for (int i=0; i<x.length;i++) {
                             x[i]=(int)(x[i]/scale);
@@ -104,17 +121,31 @@ public class Window extends JFrame{
             }
 
             public Shape drawVisibles(VisibleEntitie ent){
+                int[] x;
+                int[] y;
                 java.awt.Shape shp=null;
                 switch (ent.getShape().getType()){
                     case "circle":
                         shp=new Ellipse2D.Double((ent.getPosition().getX()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,(ent.getPosition().getY()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,((Circle)ent.getShape()).getRadius()*2/(scale),((Circle)ent.getShape()).getRadius()*2/(scale));
                         break;
                     case "rectangle":
-                        shp=new java.awt.Rectangle.Double((ent.getPosition().getX()/scale)+cst-(((Rectangle)ent.getShape()).getWidth()/(2*scale)), (ent.getPosition().getY()/scale)+cst-(((Rectangle)ent.getShape()).getHeight()/(2*scale)), (((Rectangle)ent.getShape()).getWidth()/scale),(((Rectangle)ent.getShape()).getHeight()/scale));
+                        List<Point> vertices=Collision.determineRectanglePoints((Rectangle) ent.getShape(),ent.getPosition());
+                        x=new int[vertices.size()];
+                        y=new int[vertices.size()];
+
+                        for (int i=0; i<vertices.size();i++) {
+                            x[i]=(int)(vertices.get(i).getX()/scale);
+                            x[i]+=cst;
+                        }
+                        for (int i=0; i<vertices.size();i++) {
+                            y[i]=(int)(vertices.get(i).getY()/scale);
+                            y[i]+=cst;
+                        }
+                        shp=new Polygon(x,y,vertices.size());
                         break;
                     case "polygon":
-                        int[] x=((Polygone)ent.getShape()).getVerticesIntX();
-                        int[] y=((Polygone)ent.getShape()).getVerticesIntY();
+                        x=((Polygone)ent.getShape()).getVerticesIntX();
+                        y=((Polygone)ent.getShape()).getVerticesIntY();
 
                         for (int i=0; i<x.length;i++) {
                             x[i]=(int)(x[i]/scale);
