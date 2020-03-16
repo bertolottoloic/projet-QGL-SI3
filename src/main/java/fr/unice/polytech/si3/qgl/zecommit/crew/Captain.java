@@ -14,7 +14,6 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
-import javafx.geometry.Pos;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -216,7 +215,7 @@ public class Captain implements CaptainInterface {
 
     private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
-        if (predictions.checkCollision()) {
+        if (predictions.checkCollision() && false) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
 
             needToSlowDown = true;
