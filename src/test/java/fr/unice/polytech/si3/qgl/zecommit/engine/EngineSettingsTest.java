@@ -87,7 +87,7 @@ class EngineSettingsTest {
                 "}";
     }
 
-
+/*
     @Test
     void engineTurnTestFalse() {
         engineSettings.addSailors(new Sailor(1, 2, 3, "name"));
@@ -279,4 +279,6 @@ class EngineSettingsTest {
         engineSettings.giveVisibleEntities();
         assertEquals(0, engineSettings.getVisibles().size());
     }
+
+ */
 }

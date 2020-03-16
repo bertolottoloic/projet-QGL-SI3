@@ -16,12 +16,12 @@ public class Engine {
 
     public static void main(String[] args) throws JsonProcessingException {
 
-
         ArrayList<Position> positions = new ArrayList<>();
 
         EngineSettings engineSettings = new EngineSettings();
         engineSettings.initiateSettings();
-        String json = engineSettings.thisToJson();
+        EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
+        String json = engineCalcul.thisToJson();
         System.out.println(json);
         EngineNextRound engineNextRound = new EngineNextRound();
         Cockpit cockpit = new Cockpit();
@@ -32,13 +32,13 @@ public class Engine {
         while (!output.equals("[]") && currentStep < 500) {
             System.out.println("ROUND :" + currentStep);
             currentStep++;
-            String json2 = engineSettings.thisToJson2();
-            //System.out.println(json2);
+            String json2 = engineCalcul.thisToJson2();
+            System.out.println(json2);
             output = cockpit.nextRound(json2);
             System.out.println(output);
 
             try {
-                engineSettings.updateEngine(engineNextRound.getEngineNextRound(output));
+                engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
             } catch (Exception e) {
                 System.err.println(e.getMessage()); //affiche une exception en cas de collision
             }

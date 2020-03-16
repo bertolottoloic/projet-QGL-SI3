@@ -89,45 +89,51 @@ public class EngineSettings {
         changeWind();
     }
 
-    public void addWind(Wind wind) {
+    public void setWind(Wind wind) {
         this.wind = wind;
     }
 
-    public void addEntities(Entity entity) {
+    public void setEntities(Entity entity) {
         this.entities.add(entity);
     }
 
-    public void addSailors(Sailor sailor) {
+    public void setSailors(Sailor sailor) {
         this.sailors.add(sailor);
     }
 
-    public void addDeck(Deck deck) {
+    public void setDeck(Deck deck) {
         this.deck = deck;
     }
 
-    public void addShip(Ship ship) {
+    public void setShip(Ship ship) {
         this.ship = ship;
     }
 
-    public void addRightSailors(ArrayList<Sailor> sailors) {
+    public void setRightSailors(ArrayList<Sailor> sailors) {
         this.rightSailors = sailors;
     }
 
-    public void addLeftSailors(ArrayList<Sailor> sailors) {
+    public void setLeftSailors(ArrayList<Sailor> sailors) {
         this.leftSailors = sailors;
     }
 
-    public void addRotation(double rotation) {
+    public void setRotation(double rotation) {
         this.rotation = rotation;
     }
 
-    public void addOarList(ArrayList<Oar> oars) {
+    public void setOarList(ArrayList<Oar> oars) {
         this.oarArrayList = oars;
     }
 
-    public void addVisibleEntities(ArrayList<VisibleEntitie> visibles) {
+    public void setVisibleEntities(ArrayList<VisibleEntitie> visibles) {
         this.visibleEntities = visibles;
     }
+
+    public void setSailors(ArrayList<Sailor> sailors) {
+        this.sailors = sailors;
+    }
+
+
 
     /**
      * ################################################ SETTINGS ################################################
@@ -199,6 +205,10 @@ public class EngineSettings {
 
     }
 
+
+    public void setShip() {
+        this.ship = new Ship("ship", 100, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape);
+    }
 
     public void setWind() {
         this.winds.add(new Wind(0, 150));
@@ -332,224 +342,12 @@ public class EngineSettings {
         this.shape = new Rectangle(5, 11, 0);
     }
 
-
-    /**
-     * ################################################ ENGINE ################################################
-     */
-    public String thisToJson() {
-        try {
-            oM.configure(SerializationFeature.INDENT_OUTPUT, true);
-            return oM.writeValueAsString(new EngineSettingsInit(goal, ship, sailors));
-        } catch (IOException e) {
-            System.err.println(e);
-            return "{}";
-        }
+    public void setNbSailUsed(int nbSailUsed) {
+        this.nbSailUsed = nbSailUsed;
     }
 
-    public String thisToJson2() {
-        try {
-            oM.configure(SerializationFeature.INDENT_OUTPUT, true);
-            return oM.writeValueAsString(new EngineSettingsNextRound(ship, visibleEntities, wind));
-
-        } catch (IOException e) {
-            System.err.println(e);
-            return "{}";
-        }
-    }
-
-    public void updateEngine(List<Action> actions) throws Exception {
-        rightSailors = new ArrayList<>();
-        leftSailors = new ArrayList<>();
-        rotation = 0;
-        changeWind();
-        Position lastPosition = ship.getPosition();
-
-        giveVisibleEntities();
-
-        for (Action action : actions) {
-            if (action.getType() == ActionType.MOVING) {
-                engineMoving((Moving) action);
-            }
-            if (action.getType() == ActionType.OAR) {
-                engineOar((ToOar) action);
-            }
-            if (action.getType() == ActionType.TURN) {
-                engineTurn((Turn) action);
-            }
-            if (action.getType() == ActionType.LIFT_SAIL) {
-                engineLiftSail((LiftSail) action);
-            }
-            if (action.getType() == ActionType.LOWER_SAIL) {
-                engineLowerSail((LowerSail) action);
-            }
-        }
-        try {
-            for (int i = 0; i < n; i++) {
-                calcul();
-            }
-
-        } catch (Exception e) {
-            ship.setPosition(lastPosition);
-            throw new Exception("Collision Détectée ! Déplacement annulé !");
-        }
-
-    }
-
-
-    public void engineTurn(Turn turn) {
-        for (Sailor sailor : sailors) {
-            if (rudder != null &&
-                    turn.getSailorId() == sailor.getId() && rudder.getX() == sailor.getX() && rudder.getY() == sailor.getY()) {
-                rotation = turn.getRotation();
-            }
-        }
-    }
-
-    public void engineOar(ToOar toOar) {
-        for (Sailor sailor : sailors) {
-            if (toOar.getSailorId() == sailor.getId()) {
-                engineOarLeftRight(sailor);
-            }
-        }
-    }
-
-    public void engineOarLeftRight(Sailor sailor) {
-        for (Oar oar : oarArrayList) {
-            if (sailor.getX() == oar.getX() && sailor.getY() == oar.getY()) {
-                if (deck.isLeft(oar)) {
-                    leftSailors.add(sailor);
-                } else {
-                    rightSailors.add(sailor);
-                }
-            }
-        }
-    }
-
-    public void engineMoving(Moving toMove) {
-        if (!(toMove.getYDistance() == 0 && toMove.getXDistance() == 0) && toMove.getXDistance() + toMove.getYDistance() <= 5) {
-            for (Sailor sailor : sailors) {
-                if (sailor.getId() == toMove.getSailorId()) {
-                    sailor.setX(sailor.getX() + toMove.getXDistance());
-                    sailor.setY(sailor.getY() + toMove.getYDistance());
-                }
-            }
-        }
-    }
-
-    public void engineLiftSail(LiftSail liftSail) {
-        for (Sailor sailor : sailors) {
-            if (liftSail.getSailorId() == sailor.getId()) {
-                engineLiftSailAction(sailor);
-            }
-        }
-    }
-
-    public void engineLiftSailAction(Sailor sailor) {
-        for (Sail sail : sailArrayList) {
-            if (sail.getX() == sailor.getX() && sail.getY() == sailor.getY() && !sail.isOpenned()) {
-                sail.setOpenned(true);
-                nbSailUsed++;
-            }
-        }
-    }
-
-    public void engineLowerSail(LowerSail lowerSail) {
-        for (Sailor sailor : sailors) {
-            if (lowerSail.getSailorId() == sailor.getId()) {
-                engineLowerSailAction(sailor);
-            }
-        }
-    }
-
-    public void engineLowerSailAction(Sailor sailor) {
-        for (Sail sail : sailArrayList) {
-            if (sail.getX() == sailor.getX() && sail.getY() == sailor.getY() && sail.isOpenned()) {
-                sail.setOpenned(false);
-                nbSailUsed--;
-            }
-        }
-    }
-
-    public double calculWind() {
-        double value = 0;
-        if (!sailArrayList.isEmpty()) {
-            value = ((double) nbSailUsed / sailArrayList.size()) * wind.getStrength() *
-                    Math.cos(Math.abs(wind.getOrientation()) - Math.abs(ship.getPosition().getOrientation()));
-        }
-        return value / n;
-    }
-
-
-    public void calcul() throws Exception {
-        double vitesse = ((double) 165 / n) * (leftSailors.size() + rightSailors.size()) / oarArrayList.size();
-        vitesse += calculWind();
-
-        double x = vitesse * Math.cos(ship.getPosition().getOrientation()) + ship.getPosition().getX();
-        double y = vitesse * Math.sin(ship.getPosition().getOrientation()) + ship.getPosition().getY();
-
-        Stream stream = getCurrentOn();
-        if (stream != null) {
-
-            x += ((double) stream.getStrength() / n) * Math.cos(Math.abs(ship.getPosition().getOrientation() - (stream.getPosition().getOrientation() + ((Rectangle) stream.getShape()).getOrientation())));
-            y += ((double) stream.getStrength() / n) * Math.sin(Math.abs(ship.getPosition().getOrientation() - (stream.getPosition().getOrientation() + ((Rectangle) stream.getShape()).getOrientation())));
-
-        }
-
-        Position newPosition = new Position(x, y, angleCalcul());
-
-        boolean res = checkCollision(newPosition);
-
-        if (res)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
-            throw new Exception();
-        else {
-            ship.setPosition(newPosition);
-        }
-        //System.out.println(ship.getPosition());
-        checkCheckpoints();
-    }
-
-    /**
-     * Méthode vérifiant les collisions avec tous les récifs présents
-     *
-     * @param newPosition
-     * @return
-     */
-    public boolean checkCollision(Position newPosition) {
-        boolean res = false;
-        for (Reef reef : reefs) {
-            Collision collision = new Collision(reef.getShape(), reef.getPosition(), newPosition);
-            if (collision.collide()) {
-                res = true;
-            }
-        }
-        return res;
-    }
-
-
-    public double angleCalcul() {
-        double currentOrientation = ship.getPosition().getOrientation();
-        double gap = Math.PI / (oarArrayList.size());
-        int balanced = rightSailors.size() - leftSailors.size();
-        currentOrientation += (balanced * gap / n);
-        currentOrientation += rotation / n;
-        if (currentOrientation < -Math.PI) {
-            currentOrientation = 2 * Math.PI + currentOrientation;
-        }
-        if (currentOrientation > Math.PI) {
-            currentOrientation = -2 * Math.PI + currentOrientation;
-        }
-        return currentOrientation;
-    }
-
-    public void setShip() {
-        this.ship = new Ship("ship", 100, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape);
-    }
-
-    public void checkCheckpoints() {
-        if (ship.isInCheckpoint(checkpoints.get(0)) && checkpoints.size() > 1) {
-            //System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
-            checkpoints.remove(0);
-        }
+    public void setRudder(Rudder rudder) {
+        this.rudder = rudder;
     }
 
     public void changeWind() {
@@ -584,15 +382,6 @@ public class EngineSettings {
         }
     }
 
-
-    public void giveVisibleEntities() {
-        for (VisibleEntitie visible : visibleEntities) {
-            Collision collision = new Collision(visible.getShape(), visible.getPosition(), ship.getPosition());
-            if (collision.distanceTo() <= 1000) {
-                visibles.add(visible);
-            }
-        }
-    }
 
 
     /**
@@ -657,7 +446,7 @@ public class EngineSettings {
     /**
      * @return the visibleEntities
      */
-    public List<VisibleEntitie> getVisibleEntities() {
+    public ArrayList<VisibleEntitie> getVisibleEntities() {
         return visibleEntities;
     }
 
@@ -671,6 +460,18 @@ public class EngineSettings {
 
     public Wind getWind() {
         return wind;
+    }
+
+    public ObjectMapper getoM() {
+        return oM;
+    }
+
+    public ArrayList<Reef> getReefs() {
+        return reefs;
+    }
+
+    public Random getRandom() {
+        return random;
     }
 
     public ArrayList<Sailor> getLeftSailors() {
@@ -726,63 +527,7 @@ public class EngineSettings {
         return null;
     }
 
-    /**
-     * ############################################## EngineSettingsNextRound ##########################################
-     */
 
-    private class EngineSettingsNextRound {
-        private Ship ship;
-        private ArrayList<VisibleEntitie> visibleEntities;
-        private Wind wind;
 
-        EngineSettingsNextRound(Ship s, ArrayList<VisibleEntitie> vE, Wind w) {
-            this.ship = s;
-            this.visibleEntities = vE;
-            this.wind = w;
-        }
-
-        public Ship getShip() {
-            return ship;
-        }
-
-        public ArrayList<VisibleEntitie> getVisibleEntities() {
-            return visibleEntities;
-        }
-
-        public Wind getWind() {
-            return wind;
-        }
-    }
-
-    private class EngineSettingsInit {
-        private Goal goal;
-        private int shipCount;
-        private Ship ship;
-        private List<Sailor> sailors;
-
-        EngineSettingsInit(Goal goal, Ship s, List<Sailor> sailors) {
-            this.goal = goal;
-            this.shipCount = 1;
-            this.ship = s;
-            this.sailors = sailors;
-        }
-
-        public Goal getGoal() {
-            return goal;
-        }
-
-        public int getShipCount() {
-            return shipCount;
-        }
-
-        public Ship getShip() {
-            return ship;
-        }
-
-        public List<Sailor> getSailors() {
-            return sailors;
-        }
-
-    }
 
 }
