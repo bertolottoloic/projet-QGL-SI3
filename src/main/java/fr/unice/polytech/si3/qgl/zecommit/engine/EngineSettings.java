@@ -71,6 +71,18 @@ public class EngineSettings {
         this.leftSailors = new ArrayList<>();
     }
 
+    public void resetSettings(){
+        setCheckpoints(new ArrayList<>());
+        setGoal(new Regatta(new ArrayList<>()));
+        setEntities(new ArrayList<>());
+        setSailors(new ArrayList<>());
+        setDeck(new Deck(0,0));
+        setShape(new Rectangle(0,0,0));
+        setShip(new Ship("ship", 100, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape));
+        setVisibleEntities(new ArrayList<>());
+        setWind(new Wind(0,0));
+    }
+
     public void initiateSettings() {
         setCheckpoints();
         setGoal();
@@ -88,14 +100,6 @@ public class EngineSettings {
 
     public void setWind(Wind wind) {
         this.wind = wind;
-    }
-
-    public void setEntities(Entity entity) {
-        this.entities.add(entity);
-    }
-
-    public void setSailors(Sailor sailor) {
-        this.sailors.add(sailor);
     }
 
     public void setDeck(Deck deck) {
@@ -128,6 +132,22 @@ public class EngineSettings {
 
     public void setSailors(ArrayList<Sailor> sailors) {
         this.sailors = sailors;
+    }
+
+    public void setCheckpoints(ArrayList<Checkpoint> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+
+    public void setEntities(ArrayList<Entity> entities) {
+        this.entities = entities;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
     }
 
 
@@ -513,6 +533,8 @@ public class EngineSettings {
     public int getShipCount() {
         return shipCount;
     }
+
+
 
     public Stream getCurrentOn() {
         for (VisibleEntitie entity : visibleEntities) {
