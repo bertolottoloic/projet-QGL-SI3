@@ -42,6 +42,11 @@ public class Regatta extends Goal {
         }
     }
 
+    @JsonIgnore
+    public void addFirstCheckpoint(Checkpoint checkpoint){
+        checkpoints.add(0, checkpoint);
+    }
+
 
 
     //------------------------------SETTER-------------------------//

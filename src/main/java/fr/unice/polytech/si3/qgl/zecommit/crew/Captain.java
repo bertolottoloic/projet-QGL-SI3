@@ -13,6 +13,8 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import javafx.geometry.Pos;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -32,7 +34,6 @@ public class Captain implements CaptainInterface {
     private int chosenAngle;
     private double orientationToGoal;
     private int chosenAngleAlteration;
-    private List<Position> latestPositions;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -41,7 +42,6 @@ public class Captain implements CaptainInterface {
         this.wind = game.getWind();
         this.visibleEntities = game.getVisibleEntities();
         this.needToSlowDown = false;
-        this.latestPositions = new ArrayList<>();
     }
 
     @Override
@@ -87,6 +87,24 @@ public class Captain implements CaptainInterface {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {
             goal.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
+            List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+            if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
+                Logs.add("Obstacle détécté sur votre trajet");
+                List<Position> positionList = Calculs.findIntersectionsCercle(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+
+                List<Position> root1 = new ArrayList<>();
+                root1.add(positionList.get(0));
+                if (Calculs.checkCollision(getReefs(), root1)) {
+                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(1), new Circle(200)));
+                    //On crée un CP intermédiaire loin du récif
+                } else {
+                    List<Position> root2 = new ArrayList<>();
+                    root2.add(positionList.get(1));
+                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(0), new Circle(200)));
+
+
+                }
+            }
         }
         needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
@@ -106,7 +124,7 @@ public class Captain implements CaptainInterface {
             if (needToSlowDown && chosenAngleAlteration > 0)
                 angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
             if (needToSlowDown && chosenAngleAlteration < 0)
-                angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
+                angle = (orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
 
             return new SimpleEntry<>(res.get().getSailorOn(), angle);
         }
@@ -197,15 +215,14 @@ public class Captain implements CaptainInterface {
     }
 
     private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
-        Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize,ship, visibleEntities,  chosenAngle, wind, upSail());
+        Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
-            Logs.add("angle : " + orientationToGoal);
 
             needToSlowDown = true;
             chosenAngleAlteration += chosenAngle;
             Reef reef = predictions.getFirstReef();
-            if (reef!=null) {
+            if (reef != null) {
                 if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
                     orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef);
                     chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
@@ -214,33 +231,10 @@ public class Captain implements CaptainInterface {
                     orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) + predictions.getAngleToEndOfReef(reef);
                     chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
                 }
-
-
-                predictions = new Predictions(leftSailorsSize, rightSailorsSize,ship, visibleEntities,  chosenAngle, wind, upSail());
-                if (predictions.checkCollision()) {
-                    Reef reef2 = predictions.getSortedReef().get(1);
-                    Logs.add("encore collision !!!!!!!dtxcfygvuhibuoiyguftydrtesdryftugyihuoiyutfyrdtxfg");
-                    if (reef2 != null) {
-                        if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef2)) {
-                            orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef2) - predictions.getAngleToEndOfReef(reef2);
-                            chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
-                        }
-                        if (road.orientationToGoal() > predictions.getAngleToCenterOfReef(reef2)) {
-                            orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef2) + predictions.getAngleToEndOfReef(reef2);
-                            chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
-                        }
-
-                    }
-                }
-
-                Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveaux cap : " + chosenAngle);
-                Logs.add("\nnouvel angle : " + orientationToGoal);
-
-                chosenAngleAlteration -= chosenAngle;
-
             }
 
-
+            Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveaux cap : " + chosenAngle);
+            chosenAngleAlteration -= chosenAngle;
         }
     }
 
@@ -271,7 +265,6 @@ public class Captain implements CaptainInterface {
                 if (collision.collide())
                     res = true;
             }
-        System.out.println(res);
         return res;
     }
 
@@ -298,6 +291,14 @@ public class Captain implements CaptainInterface {
         return orientationTable;
     }
 
+    public List<Reef> getReefs() {
+        List<Reef> reefs = new ArrayList<>();
+        for (VisibleEntitie visibleEntitie : visibleEntities)
+            if (visibleEntitie.getType().equals(VisibleEntityType.reef))
+                reefs.add((Reef) visibleEntitie);
+        return reefs;
+    }
+
     /**
      * @param ship the ship to set
      */
@@ -313,7 +314,4 @@ public class Captain implements CaptainInterface {
         this.visibleEntities = visibleEntities;
     }
 
-    public void setLatestPositions(List<Position> latestPositions) {
-        this.latestPositions = latestPositions;
-    }
 }

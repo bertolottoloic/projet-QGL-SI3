@@ -274,6 +274,7 @@ public class EngineSettings {
         this.checkpoints.add(new Checkpoint(new Position(360.0,320.0,0), new Circle(150)));
 
 
+
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
 
