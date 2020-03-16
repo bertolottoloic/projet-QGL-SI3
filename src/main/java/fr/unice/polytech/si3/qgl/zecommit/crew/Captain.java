@@ -215,7 +215,7 @@ public class Captain implements CaptainInterface {
 
     private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
-        if (predictions.checkCollision() && false) {
+        if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
 
             needToSlowDown = true;

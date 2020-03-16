@@ -1,8 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.shape;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import java.util.Objects;
 
