@@ -138,7 +138,7 @@ public class Window extends JFrame{
                             x[i]+=cst;
                         }
                         for (int i=0; i<vertices.size();i++) {
-                            y[i]=(int)(-vertices.get(i).getY()/scale);
+                            y[i]=(int)(vertices.get(i).getY()/scale);
                             y[i]+=cst;
                         }
                         shp=new Polygon(x,y,vertices.size());
