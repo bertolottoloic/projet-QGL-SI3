@@ -24,10 +24,13 @@ import static org.mockito.Mockito.when;
 class EngineSettingsTest {
     String json1;
     EngineSettings engineSettings;
+    EngineCalcul engineCalcul;
 
     @BeforeEach
     void setUp() {
         engineSettings = new EngineSettings();
+        engineCalcul = new EngineCalcul(engineSettings);
+
         json1 = "{\n" +
                 "  \"goal\" : {\n" +
                 "    \"mode\" : \"REGATTA\",\n" +
@@ -87,16 +90,16 @@ class EngineSettingsTest {
                 "}";
     }
 
-/*
+
     @Test
     void engineTurnTestFalse() {
-        engineSettings.addSailors(new Sailor(1, 2, 3, "name"));
-        engineSettings.addEntities(new Rudder(3, 3));
+        engineSettings.getSailors().add(new Sailor(1, 2, 3, "name"));
+        engineSettings.getEntities().add(new Rudder(3, 3));
         engineSettings.sortEntities();
         Turn turn = mock(Turn.class);
         when(turn.getSailorId()).thenReturn(1);
         when(turn.getRotation()).thenReturn(1.3);
-        engineSettings.engineTurn(turn);
+        engineCalcul.engineTurn(turn);
         assertFalse(engineSettings.getRotation() == 1.3);
         assertTrue(engineSettings.getRotation() == 0);
     }
@@ -104,11 +107,11 @@ class EngineSettingsTest {
     @Test
     void engineOarLeftRightTest() {
         Sailor sailorTest = new Sailor(3, 7, 3, "name");
-        engineSettings.addDeck(new Deck(5, 10));
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addEntities(new Oar(7, 3));
+        engineSettings.setDeck(new Deck(5, 10));
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.getEntities().add(new Oar(7, 3));
         engineSettings.sortEntities();
-        engineSettings.engineOarLeftRight(sailorTest);
+        engineCalcul.engineOarLeftRight(sailorTest);
         assertEquals(1, engineSettings.getRightSailors().size());
         assertEquals(0, engineSettings.getLeftSailors().size());
     }
@@ -116,11 +119,11 @@ class EngineSettingsTest {
     @Test
     void engineOarLeftRightTest2() {
         Sailor sailorTest = new Sailor(3, 7, 1, "name");
-        engineSettings.addDeck(new Deck(5, 10));
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addEntities(new Oar(7, 1));
+        engineSettings.setDeck(new Deck(5, 10));
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.getEntities().add(new Oar(7, 1));
         engineSettings.sortEntities();
-        engineSettings.engineOarLeftRight(sailorTest);
+        engineCalcul.engineOarLeftRight(sailorTest);
         assertEquals(0, engineSettings.getRightSailors().size());
         assertEquals(1, engineSettings.getLeftSailors().size());
     }
@@ -128,41 +131,41 @@ class EngineSettingsTest {
     @Test
     void engineLiftSailActionTest() {
         Sailor sailorTest = new Sailor(3, 0, 1, "name");
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addEntities(new Sail(0, 1, false));
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.getEntities().add(new Sail(0, 1, false));
         engineSettings.sortEntities();
-        engineSettings.engineLiftSailAction(sailorTest);
+        engineCalcul.engineLiftSailAction(sailorTest);
         assertEquals(1, engineSettings.getNbSailUsed());
     }
 
     @Test
     void engineLiftSailActionTest2() {
         Sailor sailorTest = new Sailor(3, 0, 1, "name");
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addEntities(new Sail(1, 1, false));
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.getEntities().add(new Sail(1, 1, false));
         engineSettings.sortEntities();
-        engineSettings.engineLiftSailAction(sailorTest);
+        engineCalcul.engineLiftSailAction(sailorTest);
         assertEquals(0, engineSettings.getNbSailUsed());
     }
 
     @Test
     void engineLowerSailActionTest() {
         Sailor sailorTest = new Sailor(3, 0, 1, "name");
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addEntities(new Sail(0, 1, false));
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.getEntities().add(new Sail(0, 1, false));
         engineSettings.sortEntities();
-        engineSettings.engineLiftSailAction(sailorTest);
-        engineSettings.engineLowerSailAction(sailorTest);
+        engineCalcul.engineLiftSailAction(sailorTest);
+        engineCalcul.engineLowerSailAction(sailorTest);
         assertEquals(0, engineSettings.getNbSailUsed());
     }
 
     @Test
     void engineLowerSailActionTest2() {
         Sailor sailorTest = new Sailor(3, 0, 1, "name");
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addEntities(new Sail(0, 1, false));
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.getEntities().add(new Sail(0, 1, false));
         engineSettings.sortEntities();
-        engineSettings.engineLowerSailAction(sailorTest);
+        engineCalcul.engineLowerSailAction(sailorTest);
         assertEquals(0, engineSettings.getNbSailUsed());
     }
 
@@ -173,13 +176,13 @@ class EngineSettingsTest {
         Position posTest = mock(Position.class);
         when(shiptest.getPosition()).thenReturn(posTest);
         when(shiptest.getPosition().getOrientation()).thenReturn(0.0);
-        engineSettings.addShip(shiptest);
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addWind(new Wind(0, 100));
-        engineSettings.addEntities(new Sail(0, 1, false));
+        engineSettings.setShip(shiptest);
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.setWind(new Wind(0, 100));
+        engineSettings.getEntities().add(new Sail(0, 1, false));
         engineSettings.sortEntities();
-        engineSettings.engineLiftSailAction(sailorTest);
-        assertEquals(100 / engineSettings.getN(), engineSettings.calculWind());
+        engineCalcul.engineLiftSailAction(sailorTest);
+        assertEquals(100 / engineSettings.getN(), engineCalcul.calculWind());
     }
 
     @Test
@@ -189,13 +192,13 @@ class EngineSettingsTest {
         Position posTest = mock(Position.class);
         when(shiptest.getPosition()).thenReturn(posTest);
         when(shiptest.getPosition().getOrientation()).thenReturn(0.0);
-        engineSettings.addShip(shiptest);
-        engineSettings.addSailors(sailorTest);
-        engineSettings.addWind(new Wind(-Math.PI, 100));
-        engineSettings.addEntities(new Sail(0, 1, false));
+        engineSettings.setShip(shiptest);
+        engineSettings.getSailors().add(sailorTest);
+        engineSettings.setWind(new Wind(-Math.PI, 100));
+        engineSettings.getEntities().add(new Sail(0, 1, false));
         engineSettings.sortEntities();
-        engineSettings.engineLiftSailAction(sailorTest);
-        assertEquals(-100 / engineSettings.getN(), engineSettings.calculWind());
+        engineCalcul.engineLiftSailAction(sailorTest);
+        assertEquals(-100 / engineSettings.getN(), engineCalcul.calculWind());
     }
 
 
@@ -206,18 +209,18 @@ class EngineSettingsTest {
         Position posTest = mock(Position.class);
         when(shiptest.getPosition()).thenReturn(posTest);
         when(shiptest.getPosition().getOrientation()).thenReturn(orientation);
-        engineSettings.addShip(shiptest);
+        engineSettings.setShip(shiptest);
         ArrayList<Sailor> leftListMock = mock(ArrayList.class);
         when(leftListMock.size()).thenReturn(0);
         ArrayList<Sailor> rightListMock = mock(ArrayList.class);
         when(rightListMock.size()).thenReturn(3);
         ArrayList<Oar> oarListMock = mock(ArrayList.class);
         when(oarListMock.size()).thenReturn(6);
-        engineSettings.addOarList(oarListMock);
-        engineSettings.addLeftSailors(leftListMock);
-        engineSettings.addRightSailors(rightListMock);
-        engineSettings.addRotation(0);
-        assertEquals(orientation + (orientation / engineSettings.getN()), engineSettings.angleCalcul());
+        engineSettings.setOarList(oarListMock);
+        engineSettings.setLeftSailors(leftListMock);
+        engineSettings.setRightSailors(rightListMock);
+        engineSettings.setRotation(0);
+        assertEquals(orientation + (orientation / engineSettings.getN()), engineCalcul.angleCalcul());
     }
 
     @Test
@@ -227,18 +230,18 @@ class EngineSettingsTest {
         Position posTest = mock(Position.class);
         when(shiptest.getPosition()).thenReturn(posTest);
         when(shiptest.getPosition().getOrientation()).thenReturn(orientation);
-        engineSettings.addShip(shiptest);
+        engineSettings.setShip(shiptest);
         ArrayList<Sailor> leftListMock = mock(ArrayList.class);
         when(leftListMock.size()).thenReturn(3);
         ArrayList<Sailor> rightListMock = mock(ArrayList.class);
         when(rightListMock.size()).thenReturn(3);
         ArrayList<Oar> oarListMock = mock(ArrayList.class);
         when(oarListMock.size()).thenReturn(6);
-        engineSettings.addOarList(oarListMock);
-        engineSettings.addLeftSailors(leftListMock);
-        engineSettings.addRightSailors(rightListMock);
-        engineSettings.addRotation(0.1);
-        assertEquals(-orientation + (0.1 / engineSettings.getN()), engineSettings.angleCalcul());
+        engineSettings.setOarList(oarListMock);
+        engineSettings.setLeftSailors(leftListMock);
+        engineSettings.setRightSailors(rightListMock);
+        engineSettings.setRotation(0.1);
+        assertEquals(-orientation + (0.1 / engineSettings.getN()), engineCalcul.angleCalcul());
     }
 
     @Test
@@ -246,11 +249,11 @@ class EngineSettingsTest {
         Ship shiptest = mock(Ship.class);
         Position pos = new Position(0, 0, 0);
         when(shiptest.getPosition()).thenReturn(pos);
-        engineSettings.addShip(shiptest);
+        engineSettings.setShip(shiptest);
         ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
         visibleEntities.add(new Stream(new Position(1000, 0, 0), new Rectangle(10, 10, 0), 100));
-        engineSettings.addVisibleEntities(visibleEntities);
-        engineSettings.giveVisibleEntities();
+        engineSettings.setVisibleEntities(visibleEntities);
+        engineCalcul.giveVisibleEntities();
         assertEquals(1, engineSettings.getVisibles().size());
     }
 
@@ -259,11 +262,11 @@ class EngineSettingsTest {
         Ship shiptest = mock(Ship.class);
         Position pos = new Position(0, 0, 0);
         when(shiptest.getPosition()).thenReturn(pos);
-        engineSettings.addShip(shiptest);
+        engineSettings.setShip(shiptest);
         ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
         visibleEntities.add(new Stream(new Position(700, 700, 0), new Rectangle(10, 10, 0), 100));
-        engineSettings.addVisibleEntities(visibleEntities);
-        engineSettings.giveVisibleEntities();
+        engineSettings.setVisibleEntities(visibleEntities);
+        engineCalcul.giveVisibleEntities();
         assertEquals(1, engineSettings.getVisibles().size());
     }
 
@@ -272,13 +275,13 @@ class EngineSettingsTest {
         Ship shiptest = mock(Ship.class);
         Position pos = new Position(0, 0, 0);
         when(shiptest.getPosition()).thenReturn(pos);
-        engineSettings.addShip(shiptest);
+        engineSettings.setShip(shiptest);
         ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
         visibleEntities.add(new Stream(new Position(800, 800, 0), new Rectangle(10, 10, 0), 100));
-        engineSettings.addVisibleEntities(visibleEntities);
-        engineSettings.giveVisibleEntities();
+        engineSettings.setVisibleEntities(visibleEntities);
+        engineCalcul.giveVisibleEntities();
         assertEquals(0, engineSettings.getVisibles().size());
     }
 
- */
+
 }
