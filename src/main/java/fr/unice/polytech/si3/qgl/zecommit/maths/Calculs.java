@@ -3,8 +3,6 @@ package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.List;
