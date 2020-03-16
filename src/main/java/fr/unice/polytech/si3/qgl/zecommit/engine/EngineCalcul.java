@@ -3,13 +3,16 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
-
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
-import fr.unice.polytech.si3.qgl.zecommit.other.*;
-import fr.unice.polytech.si3.qgl.zecommit.shape.*;
+import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
+import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntityType;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.io.IOException;
 import java.util.ArrayList;

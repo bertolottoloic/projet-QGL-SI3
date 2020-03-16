@@ -112,7 +112,7 @@ public class Predictions {
         if(reef.getShape().getShapeRadius() < ship.distanceTo(reef.getPosition()))
             return Math.asin(reef.getShape().getShapeRadius() / ship.distanceTo(reef.getPosition()));
         else {
-            return (orientationTable.getAngleTable().size()-1 )/2;
+            return (orientationTable.getAngleTable().size()-1 )/(double)2;
         }
 
     }

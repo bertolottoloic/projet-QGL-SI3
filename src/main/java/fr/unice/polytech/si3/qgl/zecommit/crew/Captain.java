@@ -99,9 +99,9 @@ public class Captain implements CaptainInterface {
                 } else {
                     List<Position> root2 = new ArrayList<>();
                     root2.add(positionList.get(1));
-                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(0), new Circle(200)));
-
-
+                    if (Calculs.checkCollision(getReefs(), root2)) {
+                        goal.addFirstCheckpoint(new Checkpoint(positionList.get(0), new Circle(200)));
+                    }
                 }
             }
         }
@@ -187,14 +187,6 @@ public class Captain implements CaptainInterface {
         int nbSailorsRight = rightSailors.size();
         int nbSailorsLeft = leftSailors.size();
 
-
-
-        if (needToSlowDown && !isNear && !isInStream()) {
-            Compo compo = orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
-            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getSlowDownCompo(chosenAngle),
-                    nbSailorsRight, nbSailorsLeft));
-        }
 
         if (!isNear && !isInStream()) {// si le bateau est loin du checkpoint
             Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);

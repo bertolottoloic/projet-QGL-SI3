@@ -2,8 +2,6 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
@@ -15,7 +13,6 @@ import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public class Engine {
 
 
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws CollisionException {
 
         ArrayList<Position> positions = new ArrayList<>();
 
@@ -40,7 +39,8 @@ public class Engine {
             try {
                 engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
             } catch (Exception e) {
-                System.err.println(e.getMessage()); //affiche une exception en cas de collision
+                System.err.println(e.getMessage());//affiche une exception en cas de collision
+                throw new CollisionException();
             }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);

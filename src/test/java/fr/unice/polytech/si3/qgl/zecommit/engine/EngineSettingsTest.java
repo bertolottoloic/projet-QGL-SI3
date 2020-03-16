@@ -1,25 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
-import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
-import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
-import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
-import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
-import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class EngineSettingsTest {
     String json1;
