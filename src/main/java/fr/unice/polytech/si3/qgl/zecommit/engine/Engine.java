@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @auteur Clement P
  */
 public class Engine {
+    public static boolean showWindow = true;
 
 
     public static void main(String[] args) throws CollisionException {
@@ -47,7 +48,8 @@ public class Engine {
             System.out.println(position + "\nFIN DU ROUND\n");
         }
 
-        Window fenetre = new Window(positions, engineSettings.getAllCheckpoints(), engineSettings.getVisibleEntities());
+        if(showWindow)
+            new Window(positions, engineSettings.getAllCheckpoints(), engineSettings.getVisibleEntities());
 
         System.out.println("##################################################################################################");
         System.out.println("############################################## Logs ##############################################");

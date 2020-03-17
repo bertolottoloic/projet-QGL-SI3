@@ -20,16 +20,16 @@ public class Window extends JFrame{
     public int h;
     public double scale = 20;
 
-    public Window(ArrayList<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles){
+    public Window(ArrayList<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles) {
 
-        this.setSize(700,700);
-        this.setPreferredSize(new Dimension(700,700));
+        this.setSize(700, 700);
+        this.setPreferredSize(new Dimension(700, 700));
         this.setTitle("ZE COMMIT");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension size = getSize();
-        this.w= size.width;
+        this.w = size.width;
         this.h = size.height;
-        this.add(new TestingPanelGraphics(points,checkpoints,visibles), BorderLayout.CENTER);
+        this.add(new TestingPanelGraphics(points, checkpoints, visibles), BorderLayout.CENTER);
         this.setVisible(true);
 
 
