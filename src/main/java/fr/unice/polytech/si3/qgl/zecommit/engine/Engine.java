@@ -2,6 +2,9 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek6;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
 
 import java.util.ArrayList;
 
@@ -12,13 +15,13 @@ import java.util.ArrayList;
  */
 public class Engine {
     public static boolean showWindow = true;
+    public static EngineSettings engineSettings = new EngineSettingsWeek7();
 
 
     public static void main(String[] args) throws CollisionException {
 
         ArrayList<Position> positions = new ArrayList<>();
 
-        EngineSettings engineSettings = new EngineSettings();
         engineSettings.initiateSettings();
         EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
         String json = engineCalcul.thisToJson();
@@ -41,7 +44,7 @@ public class Engine {
                 engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
             } catch (Exception e) {
                 System.err.println(e.getMessage());//affiche une exception en cas de collision
-                throw new CollisionException();
+                throw new CollisionException();// a commenter pour ne pas interrompre le code
             }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);

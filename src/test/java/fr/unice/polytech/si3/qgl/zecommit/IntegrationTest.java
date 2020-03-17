@@ -1,6 +1,9 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
 import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek6;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
 import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -17,6 +20,17 @@ public class IntegrationTest {
     public void week7Test(){
         String str[] = {" "};
         Engine.showWindow = false;
+        Engine.engineSettings = new EngineSettingsWeek7();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
+
+    @Category(IntegrationTest.class)
+    @Test
+    @Disabled
+    public void week6Test(){
+        String str[] = {" "};
+        Engine.showWindow = false;
+        Engine.engineSettings = new EngineSettingsWeek6();
         assertDoesNotThrow(() -> Engine.main(str));
     }
 }

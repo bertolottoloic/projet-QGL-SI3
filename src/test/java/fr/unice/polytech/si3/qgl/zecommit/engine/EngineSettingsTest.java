@@ -5,6 +5,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
@@ -25,12 +26,12 @@ import static org.mockito.Mockito.when;
 
 class EngineSettingsTest {
     String json1;
-    EngineSettings engineSettings;
+    EngineSettingsWeek7 engineSettings;
     EngineCalcul engineCalcul;
 
     @BeforeEach
     void setUp() {
-        engineSettings = new EngineSettings();
+        engineSettings = new EngineSettingsWeek7();
         engineCalcul = new EngineCalcul(engineSettings);
 
         json1 = "{\n" +
