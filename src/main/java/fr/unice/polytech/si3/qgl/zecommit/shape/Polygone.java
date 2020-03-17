@@ -38,6 +38,7 @@ public class Polygone extends Shape {
         return new Point(vertices[index].getX()+position.getX(), vertices[index].getY()+position.getY());
     }
 
+    @JsonIgnore
     public int[] getVerticesIntX(){
         int[] x= new int[this.vertices.length];
         for (int i=0; i<this.vertices.length;i++) {
@@ -46,6 +47,7 @@ public class Polygone extends Shape {
         }
         return x;
     }
+    @JsonIgnore
     public int[] getVerticesIntY(){
         int[] y= new int[this.vertices.length];
         for (int i=0; i<this.vertices.length;i++) {

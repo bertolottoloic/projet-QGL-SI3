@@ -6,7 +6,6 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
@@ -72,6 +71,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
         this.leftSailors = new ArrayList<>();
     }
 
+    @Override
     public void resetSettings(){
         setCheckpoints(new ArrayList<>());
         setGoal(new Regatta(new ArrayList<>()));
@@ -84,6 +84,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
         setWind(new Wind(0,0));
     }
 
+    @Override
     public void initiateSettings() {
         setCheckpoints();
         setGoal();
@@ -99,54 +100,67 @@ public class EngineSettingsWeek7 implements EngineSettings {
         changeWind();
     }
 
+    @Override
     public void setWind(Wind wind) {
         this.wind = wind;
     }
 
+    @Override
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
 
+    @Override
     public void setShip(Ship ship) {
         this.ship = ship;
     }
 
+    @Override
     public void setRightSailors(ArrayList<Sailor> sailors) {
         this.rightSailors = sailors;
     }
 
+    @Override
     public void setLeftSailors(ArrayList<Sailor> sailors) {
         this.leftSailors = sailors;
     }
 
+    @Override
     public void setRotation(double rotation) {
         this.rotation = rotation;
     }
 
+    @Override
     public void setOarList(ArrayList<Oar> oars) {
         this.oarArrayList = oars;
     }
 
+    @Override
     public void setVisibleEntities(ArrayList<VisibleEntitie> visibles) {
         this.visibleEntities = visibles;
     }
 
+    @Override
     public void setSailors(ArrayList<Sailor> sailors) {
         this.sailors = sailors;
     }
 
+    @Override
     public void setCheckpoints(ArrayList<Checkpoint> checkpoints) {
         this.checkpoints = checkpoints;
     }
 
+    @Override
     public void setGoal(Goal goal) {
         this.goal = goal;
     }
 
+    @Override
     public void setEntities(ArrayList<Entity> entities) {
         this.entities = entities;
     }
 
+    @Override
     public void setShape(Shape shape) {
         this.shape = shape;
     }
@@ -157,7 +171,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
      * ################################################ SETTINGS ################################################
      */
 
-
+    @Override
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
 
@@ -206,16 +220,18 @@ public class EngineSettingsWeek7 implements EngineSettings {
 
     }
 
-
+    @Override
     public void setShip() {
         this.ship = new Ship("ship", 100, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape);
     }
 
+    @Override
     public void setWind() {
         this.winds.add(new Wind(0, 150));
 
     }
 
+    @Override
     public void setSailors() {
         this.sailors = new ArrayList<>();
 
@@ -229,10 +245,12 @@ public class EngineSettingsWeek7 implements EngineSettings {
 
     }
 
+    @Override
     public void setGoal() {
         this.goal = new Regatta(new ArrayList<>(checkpoints));
     }
 
+    @Override
     public void setCheckpoints() {
 
         this.checkpoints = new ArrayList<>();
@@ -250,11 +268,13 @@ public class EngineSettingsWeek7 implements EngineSettings {
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
 
+    @Override
     public void setDeck() {
         this.deck = new Deck(3, 4);
         this.deck.setSailors(sailors);
     }
 
+    @Override
     public void setEntities() {
 
         this.entities = new ArrayList<>();
@@ -268,22 +288,27 @@ public class EngineSettingsWeek7 implements EngineSettings {
 
     }
 
+    @Override
     public void setShape() {
         this.shape = new Rectangle(5, 11, 0);
     }
 
+    @Override
     public void setNbSailUsed(int nbSailUsed) {
         this.nbSailUsed = nbSailUsed;
     }
 
+    @Override
     public void setRudder(Rudder rudder) {
         this.rudder = rudder;
     }
 
+    @Override
     public void changeWind() {
         wind = winds.get(random.nextInt(winds.size()));
     }
 
+    @Override
     public void sortEntities() {
         for (Entity entity : entities) {
             if (entity.getType().equals(EntityType.oar)) {
@@ -299,6 +324,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
     }
 
 
+    @Override
     public void sortVisibleEntities() {
         for (VisibleEntitie entity : visibleEntities) {
             if (entity.getType().equals(VisibleEntityType.stream)) {
@@ -318,10 +344,12 @@ public class EngineSettingsWeek7 implements EngineSettings {
      * ################################################ GETTERS ################################################
      */
 
+    @Override
     public Goal getGoal() {
         return this.goal;
     }
 
+    @Override
     @JsonIgnore
     public int getN() {
         return n;
@@ -330,6 +358,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the checkpoints
      */
+    @Override
     @JsonIgnore
     public List<Checkpoint> getCheckpoints() {
         return checkpoints;
@@ -338,6 +367,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the ship
      */
+    @Override
     public Ship getShip() {
         return ship;
     }
@@ -345,6 +375,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the deck
      */
+    @Override
     @JsonIgnore
     public Deck getDeck() {
         return deck;
@@ -353,6 +384,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the entities
      */
+    @Override
     @JsonIgnore
     public List<Entity> getEntities() {
         return entities;
@@ -361,6 +393,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the shape
      */
+    @Override
     @JsonIgnore
     public Shape getShape() {
         return shape;
@@ -369,6 +402,7 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the sailors
      */
+    @Override
     public List<Sailor> getSailors() {
         return sailors;
     }
@@ -376,66 +410,82 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the visibleEntities
      */
+    @Override
     public ArrayList<VisibleEntitie> getVisibleEntities() {
         return visibleEntities;
     }
 
+    @Override
     public double getRotation() {
         return rotation;
     }
 
+    @Override
     public Rudder getRudder() {
         return rudder;
     }
 
+    @Override
     public Wind getWind() {
         return wind;
     }
 
+    @Override
     public ObjectMapper getoM() {
         return oM;
     }
 
+    @Override
     public ArrayList<Reef> getReefs() {
         return reefs;
     }
 
+    @Override
     public Random getRandom() {
         return random;
     }
 
+    @Override
     public ArrayList<Sailor> getLeftSailors() {
         return leftSailors;
     }
 
+    @Override
     public ArrayList<Sailor> getRightSailors() {
         return rightSailors;
     }
 
+    @Override
     public ArrayList<Oar> getOarArrayList() {
         return oarArrayList;
     }
 
+    @Override
     public ArrayList<Sail> getSailArrayList() {
         return sailArrayList;
     }
 
+    @Override
     public ArrayList<Stream> getStreams() {
         return streams;
     }
 
+    @Override
     public ArrayList<VisibleEntitie> getVisibles() {
         return visibles;
     }
 
+    @Override
     public ArrayList<Wind> getWinds() {
         return winds;
     }
 
+    @Override
     public int getNbSailUsed() {
         return nbSailUsed;
     }
 
+    @Override
     public ArrayList<Checkpoint> getAllCheckpoints() {
         return allCheckpoints;
     }
@@ -443,12 +493,13 @@ public class EngineSettingsWeek7 implements EngineSettings {
     /**
      * @return the shipCount
      */
+    @Override
     public int getShipCount() {
         return shipCount;
     }
 
 
-
+    @Override
     public Stream getCurrentOn() {
         for (VisibleEntitie entity : visibleEntities) {
             Collision collision = new Collision(entity.getShape(), entity.getPosition(), ship.getPosition());
@@ -458,8 +509,5 @@ public class EngineSettingsWeek7 implements EngineSettings {
         }
         return null;
     }
-
-
-
 
 }

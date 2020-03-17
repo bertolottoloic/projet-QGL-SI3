@@ -4,14 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 import fr.unice.polytech.si3.qgl.zecommit.action.Action;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Captain;
 import fr.unice.polytech.si3.qgl.zecommit.crew.CaptainMate;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
+import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.parser.InitGame;
 import fr.unice.polytech.si3.qgl.zecommit.parser.NextRound;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Output;
 import fr.unice.polytech.si3.qgl.zecommit.parser.Parser;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +87,7 @@ public class Cockpit implements ICockpit {
 		Logs.add(" nbOar :" + game.getShip().getDeckOars().size());
 		if(game.getGoal().isRegatta())
 		Logs.add(((Regatta)game.getGoal()).getCheckpoints() +"\n");
+		((Regatta)game.getGoal()).addFirstCheckpoint(new Checkpoint(new Position(initGame.getShip().getXPosition(), initGame.getShip().getYPosition(), initGame.getShip().getPosition().getOrientation()), new Circle(50)));
 	}
 
 	/**

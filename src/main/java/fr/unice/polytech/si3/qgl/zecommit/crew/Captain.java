@@ -86,30 +86,33 @@ public class Captain implements CaptainInterface {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {
             goal.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
-            List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-            if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
-                Logs.add("Obstacle détécté sur votre trajet");
-                List<Position> positionList = Calculs.findIntersectionsCercle(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-
-                List<Position> root1 = new ArrayList<>();
-                root1.add(positionList.get(0));
-                if (Calculs.checkCollision(getReefs(), root1)) {
-                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(1), new Circle(200)));
-                    //On crée un CP intermédiaire loin du récif
-                } else {
-                    List<Position> root2 = new ArrayList<>();
-                    root2.add(positionList.get(1));
-                    if (Calculs.checkCollision(getReefs(), root2)) {
-                        goal.addFirstCheckpoint(new Checkpoint(positionList.get(0), new Circle(200)));
-                    }
-                }
-            }
         }
         needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         orientationToGoal = road.getOrientation();
         chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder());
         return decisionOrientation(road);
+    }
+
+    public void createIntermediateCheckpoint(){
+        List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+        if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
+            Logs.add("Obstacle détécté sur votre trajet");
+            List<Position> positionList = Calculs.findIntersectionsCercle(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+
+            List<Position> root1 = new ArrayList<>();
+            root1.add(positionList.get(0));
+            if (Calculs.checkCollision(getReefs(), root1)) {
+                goal.addFirstCheckpoint(new Checkpoint(positionList.get(1), new Circle(200)));
+                //On crée un CP intermédiaire loin du récif
+            } else {
+                List<Position> root2 = new ArrayList<>();
+                root2.add(positionList.get(1));
+                if (Calculs.checkCollision(getReefs(), root2)) {
+                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(0), new Circle(200)));
+                }
+            }
+        }
     }
 
     @Override
@@ -207,7 +210,7 @@ public class Captain implements CaptainInterface {
 
     private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
-        if (predictions.checkCollision()) {
+        if (predictions.checkCollision() && false) {
             Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
 
             needToSlowDown = true;

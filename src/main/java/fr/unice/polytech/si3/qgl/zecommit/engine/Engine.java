@@ -3,8 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek6;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Engine {
     public static boolean showWindow = true;
-    public static EngineSettings engineSettings = new EngineSettingsWeek7();
+    public static EngineSettings engineSettings = new EngineSettingsWeek7();//A modifier pour changer la simulation
 
 
     public static void main(String[] args) throws CollisionException {
@@ -36,7 +35,7 @@ public class Engine {
             System.out.println("ROUND :" + currentStep);
             currentStep++;
             String json2 = engineCalcul.thisToJson2();
-            System.out.println(json2);
+            //System.out.println(json2);
             output = cockpit.nextRound(json2);
             System.out.println(output);
 
