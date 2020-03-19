@@ -222,8 +222,6 @@ public class EngineSettingsWeek8 implements EngineSettings {
         Position position22 = new Position(  5408.333333333333, 1266.6666666666667, 0.0);
         Polygone polygon23 = new Polygone(0, new Point[]{new Point( -91.66666666666609, -329.1666666666669), new Point( -141.66666666666606 ,-4.166666666666964), new Point( -141.66666666666606, 320.833333333333), new Point( 208.33333333333394, 245.833333333333), new Point( 108.33333333333394, -4.16666666666697), new Point( 58.33333333333393, -229.166666666667)});
         Position position23 = new Position(  8491.666666666666, 5429.166666666667, 0.0);
-        Polygone polygon24 = new Polygone(0, new Point[]{new Point( 1500.0, -200.0), new Point( 1500.0, 200.0), new Point( -1500.0 ,199.99999999999972), new Point( -1500.0, -199.99999999999972)});
-        Position position24 = new Position(  5350.0 ,5200.0, -2.4);
         Polygone polygon25 = new Polygone(0, new Point[]{new Point( 150.0, 50.00000000000001), new Point( -150.0, -75.00000000000003), new Point( 1.5308084989341915E-15, 25.0)});
         Position position25 = new Position(  3650.0, 4025.0 ,0.0);
         Polygone polygon26 = new Polygone(0, new Point[]{new Point( -521.4285714285716, -328.5714285714284), new Point( -1296.4285714285716, 321.4285714285715), new Point( -1096.4285714285716, 571.4285714285716), new Point( 3.5714285714284295, 571.4285714285716), new Point( 1153.5714285714284, 371.4285714285716 ), new Point(1053.5714285714284, -528.5714285714286), new Point( 703.5714285714284, -978.5714285714283)});
@@ -244,14 +242,15 @@ public class EngineSettingsWeek8 implements EngineSettings {
         this.visibleEntities.add(new Reef(position5, polygon5));
         this.visibleEntities.add(new Reef(position6, polygon6));
         this.visibleEntities.add(new Reef(position7, polygon7));
+
         this.visibleEntities.add(new Reef(position8, polygon8));
-        this.visibleEntities.add(new Reef(position9, polygon9));
         this.visibleEntities.add(new Reef(position9, polygon9));
         this.visibleEntities.add(new Reef(position10, polygon10));
         this.visibleEntities.add(new Reef(position11, polygon11));
         this.visibleEntities.add(new Reef(position12, polygon12));
         this.visibleEntities.add(new Reef(position13, polygon13));
         this.visibleEntities.add(new Reef(position14, polygon14));
+
         this.visibleEntities.add(new Reef(position15, polygon15));
         this.visibleEntities.add(new Reef(position16, polygon16));
         this.visibleEntities.add(new Reef(position17, polygon17));
@@ -261,18 +260,18 @@ public class EngineSettingsWeek8 implements EngineSettings {
         this.visibleEntities.add(new Reef(position21, polygon21));
         this.visibleEntities.add(new Reef(position22, polygon22));
         this.visibleEntities.add(new Reef(position23, polygon23));
-        //this.visibleEntities.add(new Reef(position24, polygon24));
         this.visibleEntities.add(new Reef(position25, polygon25));
         this.visibleEntities.add(new Reef(position26, polygon26));
         this.visibleEntities.add(new Reef(position27, polygon27));
         this.visibleEntities.add(new Reef(position28, polygon28));
 
 
-        //STREAM
 
-        Polygone polygon29 = new Polygone(0, new Point[]{new Point(1500.0, -200.0), new Point(1500.0, 200.0), new Point(-1500.0, 199.99999999999972), new Point(-1500.0, -199.99999999999972)});
-        Position position29 = new Position(5350.0, 5200.0, -2.4);
-        //this.visibleEntities.add(new Stream(position29, polygon29, 150));
+        //STREAM
+        Rectangle rect24 = new Rectangle(3000, 400,0);
+        Position position24 = new Position(  5350.0 ,5200.0, -2.4);
+
+        this.visibleEntities.add(new Stream(position24, rect24, 150));
 
 
 

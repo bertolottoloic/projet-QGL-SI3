@@ -11,7 +11,10 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Window extends JFrame{
@@ -19,7 +22,7 @@ public class Window extends JFrame{
     public int w;
     public int h;
     public static int adjust;
-    public double scale = 20;
+    public double scale = 30;
 
     public Window(List<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles) {
 
@@ -55,7 +58,7 @@ public class Window extends JFrame{
             private List<Checkpoint> checkPoints;
             private List<Stream> streams;
             private List<Reef> reefs;
-            final double cst= (double)w/2 + 200;
+            final double cst= (double)w/2;
 
             public DrawPoints(List<Position> points,List<Checkpoint> checkpoints,List<VisibleEntitie> visibleEntities){
                 this.points = new ArrayList<>(points);
@@ -84,7 +87,7 @@ public class Window extends JFrame{
                 java.awt.Shape shp=null;
                 switch (chkp.getShape().getType()){
                     case "circle":
-                        shp=new Ellipse2D.Double((chkp.getPosition().getX()/scale)-(chkp.getCircleRadius()/scale)+cst,(-(chkp.getPosition().getY()/scale)-(chkp.getCircleRadius()/scale)+cst),(chkp.getCircleRadius()*2/scale),(chkp.getCircleRadius()*2/scale));
+                        shp=new Ellipse2D.Double((chkp.getPosition().getX()/scale)-(chkp.getCircleRadius()/scale)+cst,((chkp.getPosition().getY()/scale)-(chkp.getCircleRadius()/scale)+cst),(chkp.getCircleRadius()*2/scale),(chkp.getCircleRadius()*2/scale));
                         break;
                     case "rectangle":
                         List<Point> vertices=Collision.determineRectanglePoints((Rectangle) chkp.getShape(),chkp.getPosition());
@@ -96,7 +99,7 @@ public class Window extends JFrame{
                             x[i]+=cst;
                         }
                         for (int i=0; i<vertices.size();i++) {
-                            y[i]=(int)(-vertices.get(i).getY()/scale);
+                            y[i]=(int)(vertices.get(i).getY()/scale);
                             y[i]+=cst;
                         }
                         shp=new Polygon(x,y,vertices.size());
@@ -111,9 +114,9 @@ public class Window extends JFrame{
                             x[i]+=cst+chkp.getPosition().getX()/scale;
                         }
                         for (int i=0; i<y.length;i++) {
-                            y[i]=(int)(-y[i]/scale);
+                            y[i]=(int)(y[i]/scale);
 
-                            y[i]+=cst-chkp.getPosition().getY()/scale;
+                            y[i]+=cst+chkp.getPosition().getY()/scale;
                         }
                         shp=new Polygon(x,y,((Polygone)chkp.getShape()).getVertices().length);
                         break;
@@ -127,10 +130,10 @@ public class Window extends JFrame{
                 java.awt.Shape shp=null;
                 switch (ent.getShape().getType()){
                     case "circle":
-                        shp=new Ellipse2D.Double((ent.getPosition().getX()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,-(ent.getPosition().getY()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,((Circle)ent.getShape()).getRadius()*2/(scale),((Circle)ent.getShape()).getRadius()*2/(scale));
+                        shp=new Ellipse2D.Double((ent.getPosition().getX()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,(ent.getPosition().getY()/scale)-(((Circle)ent.getShape()).getRadius()/(scale))+cst,((Circle)ent.getShape()).getRadius()*2/(scale),((Circle)ent.getShape()).getRadius()*2/(scale));
                         break;
                     case "rectangle":
-                        List<Point> vertices=Collision.determineRectanglePoints((Rectangle) ent.getShape(),new Position(ent.getPosition().getX(),-ent.getPosition().getY(),ent.getPosition().getOrientation()));
+                        List<Point> vertices=Collision.determineRectanglePoints((Rectangle) ent.getShape(),new Position(ent.getPosition().getX(),ent.getPosition().getY(),ent.getPosition().getOrientation()));
                         x=new int[vertices.size()];
                         y=new int[vertices.size()];
 
@@ -147,15 +150,13 @@ public class Window extends JFrame{
                     case "polygon":
                         x=((Polygone)ent.getShape()).getVerticesIntX();
                         y=((Polygone)ent.getShape()).getVerticesIntY();
-
                         for (int i=0; i<x.length;i++) {
                             x[i]=(int)(x[i]/scale);
-                            x[i]+=cst+ent.getPosition().getX()/scale;
+                            x[i]+=cst+(ent.getPosition().getX()/scale);
                         }
                         for (int i=0; i<y.length;i++) {
-                            y[i]=(int)(-y[i]/scale);
-
-                            y[i]+=cst-ent.getPosition().getY()/scale;
+                            y[i]=(int)(+y[i]/scale);
+                            y[i]+=cst+(ent.getPosition().getY()/scale);
                         }
                         shp=new Polygon(x,y,((Polygone)ent.getShape()).getVertices().length);
                         break;
@@ -171,7 +172,7 @@ public class Window extends JFrame{
                 graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 graph2.setColor(Color.BLACK);
                 for (Position point: points) {
-                    graph2.drawLine((int)Math.floor((point.getX()/scale)+cst),(int)Math.floor((-point.getY()/scale)+cst),(int)(Math.floor((point.getX()/scale)+cst)),(int)Math.floor((-point.getY()/scale)+cst));
+                    graph2.drawLine((int)Math.floor((point.getX()/scale)+cst),(int)Math.floor((point.getY()/scale)+cst),(int)(Math.floor((point.getX()/scale)+cst)),(int)Math.floor((point.getY()/scale)+cst));
 
                 }
                 graph2.setColor(Color.ORANGE);

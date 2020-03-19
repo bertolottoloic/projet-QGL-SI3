@@ -125,7 +125,7 @@ public class Calculs {
         double yCenter = (y1 + y2) / 2;
         Position center = new Position(xCenter, yCenter, 0);
 
-        double rayon = distanceTo(position1, center);
+        double rayon = center.distanceTo(position1);
         double r1 = Math.sqrt(rayon * rayon + rayon * rayon);
 
         double xc1 = position1.getX(); // abscisse du centre du premier cercle
@@ -167,12 +167,6 @@ public class Calculs {
         res.add(new Position(xia, yia, 0));
         res.add(new Position(xib, yib, 0));
         return res; // coordonnées des deux points d'intersection (nb : seront identiques si les cercles ne se touchent qu'en un seul point)
-    }
-
-
-
-    public static double distanceTo(Position position1, Position position2) {
-        return Math.sqrt(Math.pow(position2.getX() - position1.getX(),2) + Math.pow(position2.getY() - position1.getY(),2));
     }
 
 }

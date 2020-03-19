@@ -184,7 +184,7 @@ public class Collision {
      * @return
      */
     public double distanceTo() {
-        return Math.sqrt(Math.pow(shapePosition.getX() - shipPosition.getX(),2) + Math.pow(shapePosition.getY() - shipPosition.getY(),2));
+        return shapePosition.distanceTo(shipPosition);
     }
 
 
