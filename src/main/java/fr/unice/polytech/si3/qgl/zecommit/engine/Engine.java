@@ -43,7 +43,7 @@ public class Engine {
             String json2 = engineCalcul.thisToJson2();
             //System.out.println(json2);
             output = cockpit.nextRound(json2);
-            sailorsDeckVizu.add(engineCalcul.settings.getSailors());
+            sailorsDeckVizu.add(engineSettings.getSailors());
             System.out.println(output);
 
             try {
@@ -59,6 +59,7 @@ public class Engine {
 
         if(showWindow)
             new Window(positions, engineSettings.getAllCheckpoints(), engineSettings.getVisibleEntities());
+
 
         if(showDeck)
             new DeckVizu();

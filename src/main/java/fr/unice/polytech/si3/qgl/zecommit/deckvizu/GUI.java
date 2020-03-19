@@ -18,8 +18,7 @@ public class GUI extends JFrame {
     int row = 8;
     String[][] tab;
 
-    List<List<Sailor>> sailorsDeckVizu = Engine.sailorsDeckVizu;
-    int sailorsDeckVizuSize = sailorsDeckVizu.size();
+    List<List<Sailor>> sailorsDeck;
 
     public GUI() {
         this.setTitle("BoatDeck");
@@ -36,12 +35,13 @@ public class GUI extends JFrame {
         Click click = new Click();
         this.addMouseListener(click);
 
-        List<Sailor> sailorsAtTurn= sailorsDeckVizu.get(0);
-        System.out.println(sailorsAtTurn);
+        sailorsDeck = Engine.sailorsDeckVizu;
+        List<Sailor> sailorsAtTurn= sailorsDeck.get(1);
+
         for (Sailor sailor: sailorsAtTurn) {
             int x = sailor.getX();
             int y = sailor.getY();
-            //tab[x][y] = "ID :" + sailor.getId();
+            tab[2][2] = "ID :" + sailor.getId();
         }
 
         tab = new String[column][row];
