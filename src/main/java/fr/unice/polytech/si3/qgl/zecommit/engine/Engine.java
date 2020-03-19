@@ -37,7 +37,7 @@ public class Engine {
 
         int currentStep = 0;
         String output = "";
-        while (!output.equals("[]") && currentStep < 500) {
+        while (!output.equals("[]") && currentStep < 300) {
             System.out.println("ROUND :" + currentStep);
             currentStep++;
             String json2 = engineCalcul.thisToJson2();
