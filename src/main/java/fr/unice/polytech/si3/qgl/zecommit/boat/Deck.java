@@ -140,6 +140,10 @@ public class Deck{
         return (oar.getY()<width/2);
     }
 
+    public boolean isRight(Oar oar){
+        return (oar.getY()>= ((width / 2) + (width % 2)));
+    }
+
     public boolean isLeft(Sailor sailor){
         return (sailor.getY()<width/2);
     }
@@ -153,13 +157,13 @@ public class Deck{
     }
 
     public List<Sailor> rightSailors(){
-        return getUsedOars().stream().filter(oar -> !isLeft(oar))
-        .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        return getUsedOars().stream().filter(this::isRight)
+        .map(Oar::getSailorOn).collect(Collectors.toList());
     }
 
     public List<Sailor> leftSailors(){
-        return getUsedOars().stream().filter(oar -> isLeft(oar))
-        .map(oar -> oar.getSailorOn()).collect(Collectors.toList());
+        return getUsedOars().stream().filter(this::isLeft)
+        .map(Oar::getSailorOn).collect(Collectors.toList());
     }
 
     public void updateSails(List<Entity> entities){
@@ -169,7 +173,7 @@ public class Deck{
                 mySails.add((Sail)entity);
         }
         this.sails.forEach(sail -> {
-            Sail same = sails.stream().filter(s-> s.equals(sail)).findAny().get();
+            Sail same = sails.stream().filter(sail::equals).findAny().get();
             sail.setOpenned(same.isOpenned());
         });
     }
@@ -181,10 +185,10 @@ public class Deck{
         Optional<Oar> currentOar;
         while(!tmpOars.isEmpty()){
             if(left){
-                currentOar = tmpOars.stream().filter( oar -> isLeft(oar)).min(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
+                currentOar = tmpOars.stream().filter(this::isLeft).min(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
                 left = false;
             } else {
-                currentOar = tmpOars.stream().filter( oar -> !isLeft(oar)).min(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
+                currentOar = tmpOars.stream().filter(this::isRight).min(Comparator.comparingInt(a -> a.distanceToNearestSailor(sailors)));
                 left = true;
             }
             if(currentOar.isPresent()){
