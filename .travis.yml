@@ -1,4 +1,3 @@
 language: java
-script: ./mvnw clean install
 notifications:
   email: nathan.meulle@gmail.com
