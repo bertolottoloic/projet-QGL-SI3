@@ -18,14 +18,14 @@ import java.util.List;
 public class Engine {
     public static boolean showWindow = true;
     public static boolean showDeck = true;
-    public static ArrayList sailorsDeckVizu;
+    public static List<List<Sailor>> sailorsDeckVizu;
 
     public static EngineSettings engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 
-        ArrayList<Position> positions = new ArrayList<>();
-        sailorsDeckVizu = new ArrayList();
+        List<Position> positions = new ArrayList<>();
+        sailorsDeckVizu = new ArrayList<>();
 
         engineSettings.initiateSettings();
         EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
