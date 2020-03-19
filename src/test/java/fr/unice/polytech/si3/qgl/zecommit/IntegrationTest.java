@@ -18,6 +18,7 @@ public class IntegrationTest {
     public void week6Test(){
         String str[] = {" "};
         Engine.showWindow = false;
+        Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek6();
         assertDoesNotThrow(() -> Engine.main(str));
     }
@@ -27,6 +28,7 @@ public class IntegrationTest {
     public void week7Test(){
         String str[] = {" "};
         Engine.showWindow = false;
+        Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek7();
         assertDoesNotThrow(() -> Engine.main(str));
     }
@@ -37,6 +39,7 @@ public class IntegrationTest {
     public void week8Test(){
         String str[] = {" "};
         Engine.showWindow = false;
+        Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek8();
         assertDoesNotThrow(() -> Engine.main(str));
     }

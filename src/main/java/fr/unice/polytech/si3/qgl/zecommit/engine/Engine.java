@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Engine {
     public static boolean showWindow = true;
-    public static boolean showDeck = true;
+    public static boolean showDeck = false;
     public static List<List<Sailor>> sailorsDeckVizu;
 
     public static EngineSettings engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
