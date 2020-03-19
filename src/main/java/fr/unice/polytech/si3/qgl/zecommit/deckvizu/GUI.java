@@ -14,8 +14,8 @@ public class GUI extends JFrame {
 
     int spacing = 5;
     int size = 80;
-    int column = 8;
-    int row = 8;
+    int column = 3;
+    int row = 4;
     String[][] tab;
 
     List<List<Sailor>> sailorsDeck;
@@ -36,19 +36,21 @@ public class GUI extends JFrame {
         this.addMouseListener(click);
 
         sailorsDeck = Engine.sailorsDeckVizu;
-        List<Sailor> sailorsAtTurn= sailorsDeck.get(1);
-
-        for (Sailor sailor: sailorsAtTurn) {
-            int x = sailor.getX();
-            int y = sailor.getY();
-            tab[2][2] = "ID :" + sailor.getId();
-        }
+        List<Sailor> sailorsAtTurn= sailorsDeck.get(0);
 
         tab = new String[column][row];
         for (int i = 0; i < column; i++) {
             for (int j = 0; j < row; j++) {
                 tab[i][j] = "";
+
             }
+        }
+
+
+        for (Sailor sailor: sailorsAtTurn) {
+            int x = sailor.getX();
+            int y = sailor.getY();
+            tab[y][x] = "ID :" + sailor.getId();
         }
 
     }
@@ -62,9 +64,15 @@ public class GUI extends JFrame {
             g.setColor(Color.gray);
             for (int i = 0; i < column; i++) {
                 for (int j = 0; j < row; j++) {
+                    g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                    g.setColor(Color.LIGHT_GRAY);
+                    g.drawString(tab[i][j], spacing + i * size + (size/3), spacing + j * size + (size/2));
+
+                    /*
                     if (tab[i][j].equals("")) {
-                        g.setColor(Color.GRAY);
                         g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                        g.setColor(Color.GRAY);
+                        g.drawString(tab[i][j], spacing + i * size + (size/3), spacing + j * size + (size/2));
                     }
                     else {
                         g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
@@ -73,6 +81,7 @@ public class GUI extends JFrame {
                         g.drawString(tab[i][j], spacing + i * size + (size/3), spacing + j * size + (size/2));
                     }
 
+                     */
                 }
             }
         }
