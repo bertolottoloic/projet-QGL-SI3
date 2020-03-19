@@ -4,12 +4,12 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
 
 import javax.swing.*;
-import java.awt.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.*;
 import java.awt.*;
+import java.util.List;
 
 public class GUI extends JFrame {
 
@@ -19,7 +19,7 @@ public class GUI extends JFrame {
     int row = 8;
     String[][] tab;
 
-    ArrayList sailorsDeckVizu = Engine.sailorsDeckVizu;
+    List<List<Sailor>> sailorsDeckVizu = Engine.sailorsDeckVizu;
     int sailorsDeckVizuSize = sailorsDeckVizu.size();
 
     public GUI() {

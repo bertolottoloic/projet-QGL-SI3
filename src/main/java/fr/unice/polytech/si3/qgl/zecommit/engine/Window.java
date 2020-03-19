@@ -21,7 +21,7 @@ public class Window extends JFrame{
     public static int adjust;
     public double scale = 20;
 
-    public Window(ArrayList<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles) {
+    public Window(List<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles) {
 
         this.setSize(700, 700);
         this.setPreferredSize(new Dimension(700, 700));
@@ -38,7 +38,7 @@ public class Window extends JFrame{
 
     public class TestingPanelGraphics extends JPanel {
 
-        public TestingPanelGraphics(ArrayList<Position> points, List<Checkpoint> checkpoints, List<VisibleEntitie> visibleEntities){
+        public TestingPanelGraphics(List<Position> points, List<Checkpoint> checkpoints, List<VisibleEntitie> visibleEntities){
             setLayout(new BorderLayout());
             this.setPreferredSize(new Dimension(700,700));
             this.add(new DrawPoints(points,checkpoints,visibleEntities), BorderLayout.CENTER);
@@ -57,7 +57,7 @@ public class Window extends JFrame{
             private List<Reef> reefs;
             final double cst= (double)w/2 + 200;
 
-            public DrawPoints(ArrayList<Position> points,List<Checkpoint> checkpoints,List<VisibleEntitie> visibleEntities){
+            public DrawPoints(List<Position> points,List<Checkpoint> checkpoints,List<VisibleEntitie> visibleEntities){
                 this.points = new ArrayList<>(points);
                 this.checkPoints=new ArrayList<>(checkpoints);
                 this.streams=new ArrayList<>();
