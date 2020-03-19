@@ -55,7 +55,7 @@ public class Sailor {
 
     public int distanceToNearestEntity(List<Entity> e){
         Stream<Entity> en = e.stream();
-        Optional<Entity> min = en.min(Comparator.comparingInt(a->distanceToEntity(a)));
+        Optional<Entity> min = en.min(Comparator.comparingInt(this::distanceToEntity));
         if(min.isPresent())
             return distanceToEntity(min.get());
         return 0;

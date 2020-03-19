@@ -65,7 +65,7 @@ public class Captain implements CaptainInterface {
         }
         if (!sailors.isEmpty() && !sails.isEmpty()) {
             for (Sailor sailor : sailors) {
-                Optional<Sail> sail = sails.stream().min(Comparator.comparingInt(a -> sailor.distanceToEntity(a)));
+                Optional<Sail> sail = sails.stream().min(Comparator.comparingInt(sailor::distanceToEntity));
                 if (sail.isPresent() && !sail.get().hasSailorOn()) {
                     sailor.setOnEntity(sail.get());
                     sails.remove(sail.get());
@@ -137,7 +137,7 @@ public class Captain implements CaptainInterface {
     @Override
     public List<Sailor> doLiftSail() {
         if (upSail()) {
-            return ship.getDeckSails().stream().filter(sail -> !sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(sail -> sail.getSailorOn()).collect(Collectors.toList());
+            return ship.getDeckSails().stream().filter(sail -> !sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(Sail::getSailorOn).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
@@ -145,7 +145,7 @@ public class Captain implements CaptainInterface {
     @Override
     public List<Sailor> doLowerSail() {
         if (!upSail()) {
-            return ship.getDeckSails().stream().filter(sail -> sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(sail -> sail.getSailorOn()).collect(Collectors.toList());
+            return ship.getDeckSails().stream().filter(sail -> sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(Sail::getSailorOn).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
