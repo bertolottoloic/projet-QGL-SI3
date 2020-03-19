@@ -121,10 +121,12 @@ public class Predictions {
      * Renvoie l'angle entre l'orientation du bateau et le centre du récif
      * @return
      */
-    public double getAngleToCenterOfReef(Reef reef) { //TODO supprimer les .get().get()
+    public double getAngleToCenterOfReef(Reef reef) {
         double angle = ship.getPosition().getOrientation();
-        double x = (reef.getPosition().getX() - ship.getPosition().getX());
-        double y = (reef.getPosition().getY() - ship.getPosition().getY());
+        Position shipPosition = ship.getPosition();
+        Position reefPosition = reef.getPosition();
+        double x = (reefPosition.getX() - shipPosition.getX());
+        double y = (reefPosition.getY() - shipPosition.getY());
         if (x == 0 && y == 0) {
             return 0;
 
@@ -137,24 +139,25 @@ public class Predictions {
         } else {
             angle = shortestAngle(Math.atan(y / x));
         }
-        return shortestAngle(adjustAngle(angle, ship.getPosition(), reef.getPosition()));
+        return shortestAngle(adjustAngle(angle, shipPosition, reefPosition));
 
     }
 
 
-    public double adjustAngle(double angle, Position startPosition, Position finishPosition) { //TODO supprimer ..get()
+    public double adjustAngle(double angle, Position startPosition, Position finishPosition) {
+        Position shipPosition = ship.getPosition();
         if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() <= startPosition.getY()) {
             angle -= Math.PI;
-            angle -= ship.getPosition().getOrientation();
+            angle -= shipPosition.getOrientation();
         }
         if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() > startPosition.getY()) {
-            angle += Math.PI - ship.getPosition().getOrientation();
+            angle += Math.PI - shipPosition.getOrientation();
         }
         if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() < startPosition.getY()) {
-            angle -= ship.getPosition().getOrientation();
+            angle -= shipPosition.getOrientation();
         }
         if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() >= startPosition.getY()) {
-            angle -= ship.getPosition().getOrientation();
+            angle -= shipPosition.getOrientation();
         }
         return angle;
     }
