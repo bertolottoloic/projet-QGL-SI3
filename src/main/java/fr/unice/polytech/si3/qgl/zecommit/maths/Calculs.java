@@ -5,12 +5,17 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * @author Nathan
  */
 public class Calculs {
+
+    private Calculs(){
+        //constructeur vide
+    }
 
 
     /**
@@ -156,7 +161,7 @@ public class Calculs {
         }
 
         if (Double.isNaN(xia) || Double.isNaN(yia) || Double.isNaN(xib) || Double.isNaN(yib))
-            return null; // si les cercles ne se touchent pas ou bien sont identiques
+            return Collections.emptyList(); // si les cercles ne se touchent pas ou bien sont identiques
 
         List<Position> res = new ArrayList<>();
         res.add(new Position(xia, yia, 0));

@@ -85,9 +85,10 @@ public class Cockpit implements ICockpit {
 		game.setShipCount(initGame.getShipCount());
 		Logs.add("nbSailors :" + game.getSailors().size());
 		Logs.add(" nbOar :" + game.getShip().getDeckOars().size());
-		if(game.getGoal().isRegatta())
-		Logs.add(((Regatta)game.getGoal()).getCheckpoints() +"\n");
-		((Regatta)game.getGoal()).addFirstCheckpoint(new Checkpoint(new Position(initGame.getShip().getXPosition(), initGame.getShip().getYPosition(), initGame.getShip().getPosition().getOrientation()), new Circle(50)));
+		if (game.getGoal().isRegatta()) {
+			Logs.add(((Regatta) game.getGoal()).getCheckpoints() + "\n");
+			((Regatta) game.getGoal()).addFirstCheckpoint(new Checkpoint(new Position(initGame.getShip().getXPosition(), initGame.getShip().getYPosition(), initGame.getShip().getPosition().getOrientation()), new Circle(50)));
+		}
 	}
 
 	/**

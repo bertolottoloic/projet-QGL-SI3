@@ -210,26 +210,8 @@ public class Captain implements CaptainInterface {
 
     private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
-        if (predictions.checkCollision() && false) {
-            Logs.add("Votre Capitaine a detecté un iceberg et tente de l'éviter");
-
-            needToSlowDown = true;
-            chosenAngleAlteration += chosenAngle;
-            Reef reef = predictions.getFirstReef();
-            if (reef != null) {
-                if (road.orientationToGoal() <= predictions.getAngleToCenterOfReef(reef)) {
-                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) - predictions.getAngleToEndOfReef(reef, orientationTable);
-                    chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
-                }
-                if (road.orientationToGoal() > predictions.getAngleToCenterOfReef(reef)) {
-                    orientationToGoal = ship.getPosition().getOrientation() + predictions.getAngleToCenterOfReef(reef) + predictions.getAngleToEndOfReef(reef, orientationTable);
-                    chosenAngle = predictions.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder(), orientationToGoal);
-                }
-            }
-
-
-            Logs.add("ancien cap : " + chosenAngleAlteration + ", nouveaux cap : " + chosenAngle);
-            chosenAngleAlteration -= chosenAngle;
+        if (predictions.checkCollision()) {
+            Logs.add("Votre Capitaine a detecté un iceberg...");
         }
     }
 

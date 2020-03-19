@@ -55,7 +55,7 @@ public class Window extends JFrame{
             private List<Checkpoint> checkPoints;
             private List<Stream> streams;
             private List<Reef> reefs;
-            final double cst= (double)w/2 +20;
+            final double cst= (double)w/2 + 200;
 
             public DrawPoints(ArrayList<Position> points,List<Checkpoint> checkpoints,List<VisibleEntitie> visibleEntities){
                 this.points = new ArrayList<>(points);

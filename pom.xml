@@ -16,8 +16,9 @@
 		<mockito.core.version>3.2.0</mockito.core.version>
 		<jackson.databind.version>2.10.1</jackson.databind.version>
 		<sonar.exclusions>
-			**/engine/*.java
-		</sonar.exclusions>  
+			**/engine/*.java,
+			**/settings/*.java
+		</sonar.exclusions> 
 	</properties>
 
 	<build>

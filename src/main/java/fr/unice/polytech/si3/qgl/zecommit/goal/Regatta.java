@@ -17,9 +17,17 @@ public class Regatta extends Goal {
         setRegatta(true);
     }
 
+    @JsonIgnore
     public void validateCommonCheckpoint(){
         checkpoints.remove(0);
     }
+
+    @JsonIgnore
+    public double getCheckpointRadius(){
+        return checkpoints.get(0).getCircleRadius();
+    }
+
+
 
     //------------------------------GETTER-------------------------//
 
