@@ -86,6 +86,7 @@ public class Captain implements CaptainInterface {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {
             goal.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
+            createIntermediateCheckpoint();
         }
         needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
@@ -95,9 +96,6 @@ public class Captain implements CaptainInterface {
     }
 
     public void createIntermediateCheckpoint(){
-        if (goal.getFirstCheckpoint().isFake()) {
-            goal.deleteFirstCheckpoint();
-        }
         List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
             Logs.add("Obstacle détécté sur votre trajet");

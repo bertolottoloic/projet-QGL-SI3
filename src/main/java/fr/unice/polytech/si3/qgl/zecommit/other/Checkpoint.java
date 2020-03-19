@@ -10,7 +10,6 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
-import javax.swing.text.StyledEditorKit;
 
 /**
  * Classe indiquant la position et forme d'un checkpoint

@@ -79,7 +79,7 @@ public class CaptainMate {
         }
         if(captain.pursueGame()){
             moveSailorsToTheirEntity(captain.doMoveSailors());
-            captain.createIntermediateCheckpoint();
+            //captain.createIntermediateCheckpoint();
             activateOars(captain.doActivateOars());
             toTurn(captain.doTurn());
             toLiftSail(captain.doLiftSail());

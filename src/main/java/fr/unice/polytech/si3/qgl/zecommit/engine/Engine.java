@@ -3,9 +3,9 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import java.util.List;
  * @auteur Clement P
  */
 public class Engine {
-    public static boolean showWindow = false;
-    public static boolean showDeck = true;
+    public static boolean showWindow = true;
+    public static boolean showDeck = false;
     public static List<List<Sailor>> sailorsDeckVizu;
 
     public static EngineSettings engineSettings = new EngineSettingsWeek7();//A modifier pour changer la simulation
