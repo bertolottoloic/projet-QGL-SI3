@@ -1,6 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.testVizu;
-
-import java.util.ArrayList;
+package fr.unice.polytech.si3.qgl.zecommit.deckvizu;
 
 public class DeckVizu implements Runnable {
 

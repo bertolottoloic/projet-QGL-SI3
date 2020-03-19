@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.testVizu;
+package fr.unice.polytech.si3.qgl.zecommit.deckvizu;
 
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.*;
 import java.awt.*;
 import java.util.List;
 
@@ -37,15 +36,20 @@ public class GUI extends JFrame {
         Click click = new Click();
         this.addMouseListener(click);
 
+        List<Sailor> sailorsAtTurn= sailorsDeckVizu.get(0);
+        System.out.println(sailorsAtTurn);
+        for (Sailor sailor: sailorsAtTurn) {
+            int x = sailor.getX();
+            int y = sailor.getY();
+            //tab[x][y] = "ID :" + sailor.getId();
+        }
+
         tab = new String[column][row];
         for (int i = 0; i < column; i++) {
             for (int j = 0; j < row; j++) {
                 tab[i][j] = "";
             }
         }
-
-        tab[1][1] = "ID : 1";
-        tab[2][2] = "ID : 2";
 
     }
 

@@ -5,7 +5,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
-import fr.unice.polytech.si3.qgl.zecommit.testVizu.DeckVizu;
+import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,11 @@ import java.util.List;
  * @auteur Clement P
  */
 public class Engine {
-    public static boolean showWindow = true;
-    public static boolean showDeck = false;
+    public static boolean showWindow = false;
+    public static boolean showDeck = true;
     public static List<List<Sailor>> sailorsDeckVizu;
 
-    public static EngineSettings engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
+    public static EngineSettings engineSettings = new EngineSettingsWeek7();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 
