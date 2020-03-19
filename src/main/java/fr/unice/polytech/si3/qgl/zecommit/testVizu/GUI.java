@@ -43,7 +43,7 @@ public class GUI extends JFrame {
                 tab[i][j] = "";
             }
         }
-        
+
         tab[1][1] = "ID : 1";
         tab[2][2] = "ID : 2";
 
