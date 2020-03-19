@@ -1,11 +1,15 @@
 package fr.unice.polytech.si3.qgl.zecommit.testVizu;
 
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
+
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.*;
 import java.awt.*;
+import java.util.List;
 
 public class GUI extends JFrame {
 
@@ -14,6 +18,9 @@ public class GUI extends JFrame {
     int column = 8;
     int row = 8;
     String[][] tab;
+
+    List<List<Sailor>> sailorsDeckVizu = Engine.sailorsDeckVizu;
+    int sailorsDeckVizuSize = sailorsDeckVizu.size();
 
     public GUI() {
         this.setTitle("BoatDeck");
@@ -41,6 +48,8 @@ public class GUI extends JFrame {
         tab[2][2] = "ID : 2";
 
     }
+
+
 
     public class Board extends JPanel {
         public void paintComponent(Graphics g) {
@@ -74,8 +83,7 @@ public class GUI extends JFrame {
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            System.out.println("move");
-
+            
         }
     }
 
@@ -83,7 +91,7 @@ public class GUI extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("Click");
+
         }
 
         @Override

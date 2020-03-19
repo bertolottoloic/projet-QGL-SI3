@@ -10,6 +10,8 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
+import javax.swing.text.StyledEditorKit;
+
 /**
  * Classe indiquant la position et forme d'un checkpoint
  * @author Nathan
@@ -18,10 +20,13 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 public class Checkpoint {
     Position position;
     Shape shape;
+    @JsonIgnore
+    Boolean fake;
 
     public Checkpoint(Position position,Shape shape){
         this.position = position;
         this.shape = shape;
+        this.fake = false;
     }
 
     @Override
@@ -69,6 +74,9 @@ public class Checkpoint {
         return shape;
     }
 
+    @JsonIgnore
+    public Boolean isFake() { return fake;}
+
 
 
     //------------------------------SETTER-------------------------//
@@ -80,5 +88,10 @@ public class Checkpoint {
 
     public void setShape(Shape shape) {
         this.shape = shape;
+    }
+
+    @JsonIgnore
+    public void setFake(Boolean isFake) {
+        this.fake = isFake;
     }
 }

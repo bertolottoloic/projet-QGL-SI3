@@ -2,10 +2,13 @@ package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
+import fr.unice.polytech.si3.qgl.zecommit.testVizu.DeckVizu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -14,12 +17,15 @@ import java.util.ArrayList;
  */
 public class Engine {
     public static boolean showWindow = true;
-    public static EngineSettings engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
+    public static boolean showDeck = false;
+    public static List<List<Sailor>> sailorsDeckVizu;
 
+    public static EngineSettings engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 
-        ArrayList<Position> positions = new ArrayList<>();
+        List<Position> positions = new ArrayList<>();
+        sailorsDeckVizu = new ArrayList<>();
 
         engineSettings.initiateSettings();
         EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
@@ -37,6 +43,7 @@ public class Engine {
             String json2 = engineCalcul.thisToJson2();
             //System.out.println(json2);
             output = cockpit.nextRound(json2);
+            sailorsDeckVizu.add(engineCalcul.settings.getSailors());
             System.out.println(output);
 
             try {
@@ -52,6 +59,10 @@ public class Engine {
 
         if(showWindow)
             new Window(positions, engineSettings.getAllCheckpoints(), engineSettings.getVisibleEntities());
+
+        if(showDeck)
+            new DeckVizu();
+
 
         System.out.println("##################################################################################################");
         System.out.println("############################################## Logs ##############################################");

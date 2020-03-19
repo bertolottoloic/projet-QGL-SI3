@@ -95,6 +95,9 @@ public class Captain implements CaptainInterface {
     }
 
     public void createIntermediateCheckpoint(){
+        if (goal.getFirstCheckpoint().isFake()) {
+            goal.deleteFirstCheckpoint();
+        }
         List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
             Logs.add("Obstacle détécté sur votre trajet");
@@ -103,13 +106,17 @@ public class Captain implements CaptainInterface {
             List<Position> root1 = new ArrayList<>();
             root1.add(positionList.get(0));
             if (Calculs.checkCollision(getReefs(), root1)) {
-                goal.addFirstCheckpoint(new Checkpoint(positionList.get(1), new Circle(200)));
+                Checkpoint fakeCP = new Checkpoint(positionList.get(1), new Circle(200));
+                fakeCP.setFake(true);
+                goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire loin du récif
             } else {
                 List<Position> root2 = new ArrayList<>();
                 root2.add(positionList.get(1));
                 if (Calculs.checkCollision(getReefs(), root2)) {
-                    goal.addFirstCheckpoint(new Checkpoint(positionList.get(0), new Circle(200)));
+                    Checkpoint fakeCP = new Checkpoint(positionList.get(0), new Circle(200));
+                    fakeCP.setFake(true);
+                    goal.addFirstCheckpoint(fakeCP);
                 }
             }
         }

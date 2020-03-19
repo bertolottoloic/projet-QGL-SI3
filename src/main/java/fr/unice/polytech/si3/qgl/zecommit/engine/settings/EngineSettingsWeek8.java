@@ -261,7 +261,7 @@ public class EngineSettingsWeek8 implements EngineSettings {
         this.visibleEntities.add(new Reef(position21, polygon21));
         this.visibleEntities.add(new Reef(position22, polygon22));
         this.visibleEntities.add(new Reef(position23, polygon23));
-        this.visibleEntities.add(new Reef(position24, polygon24));
+        //this.visibleEntities.add(new Reef(position24, polygon24));
         this.visibleEntities.add(new Reef(position25, polygon25));
         this.visibleEntities.add(new Reef(position26, polygon26));
         this.visibleEntities.add(new Reef(position27, polygon27));
@@ -272,7 +272,7 @@ public class EngineSettingsWeek8 implements EngineSettings {
 
         Polygone polygon29 = new Polygone(0, new Point[]{new Point(1500.0, -200.0), new Point(1500.0, 200.0), new Point(-1500.0, 199.99999999999972), new Point(-1500.0, -199.99999999999972)});
         Position position29 = new Position(5350.0, 5200.0, -2.4);
-        this.visibleEntities.add(new Stream(position29, polygon29, 150));
+        //this.visibleEntities.add(new Stream(position29, polygon29, 150));
 
 
 
