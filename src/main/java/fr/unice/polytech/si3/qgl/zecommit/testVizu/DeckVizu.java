@@ -1,11 +1,14 @@
 package fr.unice.polytech.si3.qgl.zecommit.testVizu;
 
-public class Main implements Runnable {
+import java.util.ArrayList;
+
+public class DeckVizu implements Runnable {
+
 
     GUI gui = new GUI();
 
     public static void main(String[] args) {
-        new Thread(new Main()).start();
+        new Thread(new DeckVizu()).start();
     }
     @Override
     public void run() {

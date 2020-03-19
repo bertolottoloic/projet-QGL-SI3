@@ -1,6 +1,10 @@
 package fr.unice.polytech.si3.qgl.zecommit.testVizu;
 
+import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
+
 import javax.swing.*;
+import java.awt.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -14,6 +18,9 @@ public class GUI extends JFrame {
     int column = 8;
     int row = 8;
     String[][] tab;
+
+    ArrayList sailorsDeckVizu = Engine.sailorsDeckVizu;
+    int sailorsDeckVizuSize = sailorsDeckVizu.size();
 
     public GUI() {
         this.setTitle("BoatDeck");
@@ -36,11 +43,13 @@ public class GUI extends JFrame {
                 tab[i][j] = "";
             }
         }
-
+        
         tab[1][1] = "ID : 1";
         tab[2][2] = "ID : 2";
 
     }
+
+
 
     public class Board extends JPanel {
         public void paintComponent(Graphics g) {
