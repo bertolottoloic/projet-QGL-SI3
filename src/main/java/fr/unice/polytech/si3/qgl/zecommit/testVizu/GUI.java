@@ -83,8 +83,7 @@ public class GUI extends JFrame {
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            System.out.println("move");
-
+            
         }
     }
 
@@ -92,7 +91,7 @@ public class GUI extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("Click");
+
         }
 
         @Override
