@@ -1,10 +1,6 @@
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
-import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Calculs;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -88,7 +84,7 @@ public class CalculsTest {
         expected.add(new Position(6, -1, 0));
         expected.add(new Position(3, 6, 0));
 
-        List<Position> actual = Calculs.findIntersectionsCercle(new Position(1,1,0), new Position(8,4,0));
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1,1,0), new Position(8,4,0), true);
 
         assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
         assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );
@@ -108,7 +104,7 @@ public class CalculsTest {
         expected.add(new Position(4.5, -2.5, 0));
         expected.add(new Position(4.5, 4.5, 0));
 
-        List<Position> actual = Calculs.findIntersectionsCercle(new Position(1,1,0), new Position(8,1,0));
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1,1,0), new Position(8,1,0), true);
 
         assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
         assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );
@@ -127,7 +123,7 @@ public class CalculsTest {
         expected.add(new Position(7, -6, 0));
         expected.add(new Position(7, 0, 0));
 
-        List<Position> actual = Calculs.findIntersectionsCercle(new Position(4,-3,0), new Position(10,-3,0));
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4,-3,0), new Position(10,-3,0), true);
 
         assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
         assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );
@@ -146,7 +142,7 @@ public class CalculsTest {
         expected.add(new Position(6, -1, 0));
         expected.add(new Position(2, -1, 0));
 
-        List<Position> actual = Calculs.findIntersectionsCercle(new Position(4,-3,0), new Position(4,1,0));
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4,-3,0), new Position(4,1,0), true);
 
         assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
         assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );

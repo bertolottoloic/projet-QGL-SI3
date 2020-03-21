@@ -86,7 +86,6 @@ public class Captain implements CaptainInterface {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {
             goal.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
-            createIntermediateCheckpoint();
         }
         needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
@@ -96,26 +95,40 @@ public class Captain implements CaptainInterface {
     }
 
     public void createIntermediateCheckpoint(){
+        if (goal.getFirstCheckpoint().isFake()) {
+            goal.deleteFirstCheckpoint();
+        }
         List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
-            Logs.add("Obstacle détécté sur votre trajet");
-            List<Position> positionList = Calculs.findIntersectionsCercle(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+        if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers le CP
+            Logs.add("Obstacle détecté sur votre trajet");
+            List<Position> fakeCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), true);
+            List<Position> fakeCloserCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), false);
 
-            List<Position> root1 = new ArrayList<>();
-            root1.add(positionList.get(0));
-            if (Calculs.checkCollision(getReefs(), root1)) {
-                Checkpoint fakeCP = new Checkpoint(positionList.get(1), new Circle(200));
+
+            if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(100));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                //On crée un CP intermédiaire loin du récif
-            } else {
-                List<Position> root2 = new ArrayList<>();
-                root2.add(positionList.get(1));
-                if (Calculs.checkCollision(getReefs(), root2)) {
-                    Checkpoint fakeCP = new Checkpoint(positionList.get(0), new Circle(200));
-                    fakeCP.setFake(true);
-                    goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif
+            }
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(100));
+                fakeCP.setFake(true);
+                goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
+
+            }
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(0)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(0), new Circle(100));
+                fakeCP.setFake(true);
+                goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
                 }
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(1)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(1), new Circle(100));
+                fakeCP.setFake(true);
+                goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
             }
         }
     }
@@ -128,11 +141,6 @@ public class Captain implements CaptainInterface {
                 - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size(), ship.getDeck().canUseRudder()));
 
         if (res.isPresent() && ship.getDeck().canUseRudder()) {
-            if (needToSlowDown && chosenAngleAlteration > 0)
-                angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
-            if (needToSlowDown && chosenAngleAlteration < 0)
-                angle = (orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
-
             return new SimpleEntry<>(res.get().getSailorOn(), angle);
         }
 

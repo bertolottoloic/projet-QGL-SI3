@@ -5,7 +5,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
 
 import java.util.ArrayList;
 import java.util.List;

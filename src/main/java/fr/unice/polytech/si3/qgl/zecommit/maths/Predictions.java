@@ -79,36 +79,8 @@ public class Predictions {
     }
 
 
-    /**
-     * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
-     */
-    public int findClosestPossibleAngle(int oarsNb, boolean canUseRuddder, double orientation) {
-        double angle;
-        angle = orientation;
 
-        double step = Math.PI / (2 * oarsNb);
-        int res = 0;
-        for (int k = 0; k < 2 * oarsNb; k++) {
-
-            if (k * step - Math.PI / 2 <= angle && angle <= (k + 1) * step - Math.PI / 2)
-
-                res = k;
-        }
-        if (orientation > Math.PI / 2 && orientation <= Math.PI)
-            return oarsNb;
-        if (orientation < -Math.PI / 2 && orientation > -Math.PI)
-            return 0;
-
-        if (res == 0)
-            return 0;
-        if (res == 2 * oarsNb - 1)
-            return oarsNb;
-        else
-            return (res + 1) / 2;
-    }
-
-
-    public double getAngleToEndOfReef(Reef reef, OrientationTable orientationTable) { //TODO supprimer ..get()
+    public double getAngleToEndOfReef(Reef reef, OrientationTable orientationTable) {
         if(reef.getShape().getShapeRadius() < ship.distanceTo(reef.getPosition()))
             return Math.asin(reef.getShape().getShapeRadius() / ship.distanceTo(reef.getPosition()));
         else {
@@ -139,29 +111,9 @@ public class Predictions {
         } else {
             angle = Calculs.shortestAngle(Math.atan(y / x));
         }
-        return Calculs.shortestAngle(adjustAngle(angle, shipPosition, reefPosition));
+        return Calculs.shortestAngle(Calculs.adjustAngle(angle, shipPosition, reefPosition, shipPosition.getOrientation()));
 
     }
-
-
-    public double adjustAngle(double angle, Position startPosition, Position finishPosition) {
-        Position shipPosition = ship.getPosition();
-        if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() <= startPosition.getY()) {
-            angle -= Math.PI;
-            angle -= shipPosition.getOrientation();
-        }
-        if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() > startPosition.getY()) {
-            angle += Math.PI - shipPosition.getOrientation();
-        }
-        if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() < startPosition.getY()) {
-            angle -= shipPosition.getOrientation();
-        }
-        if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() >= startPosition.getY()) {
-            angle -= shipPosition.getOrientation();
-        }
-        return angle;
-    }
-
 
 
     public List<Reef> getReefs() {
@@ -179,7 +131,7 @@ public class Predictions {
      */
     public Position predictFinalPosition(Position position, int i) {
 
-        double vitesse = ((double) 165 / i)* (double) (leftSailorsSize + rightSailorsSize) / oarsNb;
+        double vitesse = ((double) 165 / i) * (double) (leftSailorsSize + rightSailorsSize) / oarsNb;
         vitesse += calculWind(position);
 
         double x = vitesse * Math.cos(position.getOrientation()) + position.getX();
@@ -187,8 +139,8 @@ public class Predictions {
 
         Stream stream = getCurrentOn(position);
         if (stream != null) {
-            x += ((double) stream.getStrength() / i) * Math.cos(Math.abs(position.getOrientation() - (stream.getPosition().getOrientation() + stream.getShape().getShapeOrientation())));
-            y += ((double) stream.getStrength() / i) * Math.sin(Math.abs(position.getOrientation() - (stream.getPosition().getOrientation() + stream.getShape().getShapeOrientation())));
+            x += (stream.getStrength() / i) * Math.cos(Math.abs(position.getOrientation() - (stream.getPosition().getOrientation() + stream.getShape().getShapeOrientation())));
+            y += (stream.getStrength() / i) * Math.sin(Math.abs(position.getOrientation() - (stream.getPosition().getOrientation() + stream.getShape().getShapeOrientation())));
 
         }
 

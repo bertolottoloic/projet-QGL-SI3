@@ -50,27 +50,9 @@ public class Road {
         } else {
             angle = Calculs.shortestAngle(Math.atan(y / x));
         }
-        return Calculs.shortestAngle(adjustAngle((angle)));
+        return Calculs.shortestAngle(Calculs.adjustAngle((angle), startPosition, finishPosition, shipOrientation));
+
     }
-
-
-    public double adjustAngle(double angle) {
-        if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() <= startPosition.getY()) {
-            angle -= Math.PI;
-            angle -= shipOrientation;
-        }
-        if (finishPosition.getX() < startPosition.getX() && finishPosition.getY() > startPosition.getY()) {
-            angle += Math.PI - shipOrientation;
-        }
-        if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() < startPosition.getY()) {
-            angle -= shipOrientation;
-        }
-        if (finishPosition.getX() >= startPosition.getX() && finishPosition.getY() >= startPosition.getY()) {
-            angle -= shipOrientation;
-        }
-        return angle;
-    }
-
 
 
     /**
