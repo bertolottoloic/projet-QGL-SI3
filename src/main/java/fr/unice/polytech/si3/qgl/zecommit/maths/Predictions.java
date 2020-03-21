@@ -137,9 +137,9 @@ public class Predictions {
             if (y < 0)
                 angle = -Math.PI / 2;
         } else {
-            angle = shortestAngle(Math.atan(y / x));
+            angle = Calculs.shortestAngle(Math.atan(y / x));
         }
-        return shortestAngle(adjustAngle(angle, shipPosition, reefPosition));
+        return Calculs.shortestAngle(adjustAngle(angle, shipPosition, reefPosition));
 
     }
 
@@ -162,13 +162,6 @@ public class Predictions {
         return angle;
     }
 
-    public double shortestAngle(double angle) {
-        if (angle > Math.PI)
-            return angle - (2 * Math.PI);
-        if (angle < -Math.PI)
-            return angle + (2 * Math.PI);
-        return angle;
-    }
 
 
     public List<Reef> getReefs() {

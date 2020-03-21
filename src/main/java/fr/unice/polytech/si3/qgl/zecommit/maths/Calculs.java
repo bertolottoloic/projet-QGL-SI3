@@ -17,6 +17,20 @@ public class Calculs {
         //constructeur vide
     }
 
+    /**
+     * Permet d'obtenir un angle le plus petit possible, évite de faire un virage trop grand
+     *
+     * @param angle
+     * @return
+     */
+    public static double shortestAngle(double angle) {
+        if (angle > Math.PI)
+            return angle - (2 * Math.PI);
+        if (angle < -Math.PI)
+            return angle + (2 * Math.PI);
+        return angle;
+    }
+
 
     /**
      * Subdivise le trajet en une liste de Positions
@@ -40,13 +54,11 @@ public class Calculs {
         if (xStart < xFinish && yStart < yFinish) {
             for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
-                resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart > xFinish && yStart < yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
                 resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
@@ -54,13 +66,11 @@ public class Calculs {
         if (xStart > xFinish && yStart > yFinish) {
             for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
-                resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
 
         if (xStart < xFinish && yStart > yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
                 resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
@@ -68,12 +78,10 @@ public class Calculs {
         if (xStart == xFinish && yStart > yFinish) {
             for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
-                resPositions.add(new Position(xStart, yStart - (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
         if (xStart == xFinish && yStart < yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
                 resPositions.add(new Position(xStart, yStart + (double) 1 / step * k * yDiff, position.getOrientation()));
             }
         }
@@ -81,12 +89,10 @@ public class Calculs {
         if (xStart > xFinish && yStart == yFinish) {
             for (int k = 1; k < step; k++) {
                 resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart, position.getOrientation()));
-                resPositions.add(new Position(xStart - (double) 1 / step * k * xDiff, yStart, position.getOrientation()));
             }
         }
         if (xStart < xFinish && yStart == yFinish) {
             for (int k = 1; k < step; k++) {
-                resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart, position.getOrientation()));
                 resPositions.add(new Position(xStart + (double) 1 / step * k * xDiff, yStart, position.getOrientation()));
             }
         }
@@ -115,6 +121,28 @@ public class Calculs {
         return res;
     }
 
+
+    /**
+     * Méthode permettant de determiner deux positions de CP potentiels
+     * On a deux points A et B (bateau et CP)
+     * On trouve C, milieu de [AB]
+     * On trouve les points D et E équidistants de A et B en trouvant les intersections entre
+     * le cercle de centre A de rayon AE (AE= sqrt(2 * AC**2)) et le cercle de centre B et rayon BE=AE
+     *
+     *                           x E
+     *          x               /
+     *         A              /
+     *                      /
+     *                    x
+     *                   / C
+     *                 /
+     *               /              x
+     *           D x                B
+     *
+     * @param position1
+     * @param position2
+     * @return
+     */
     public static List<Position> findIntersectionsCercle(Position position1, Position position2) {
         double x1 = position1.getX();
         double y1 = position1.getY();
@@ -139,13 +167,13 @@ public class Calculs {
         double yia = 0;
         double yib = 0;
 
-        if (yc1 == yc2) { // si les deux cercles sont sur la même abscisse, on utilise Pythagore...
+        if (yc1 == yc2) { // si les deux cercles sont sur la même ordonnée, on utilise Pythagore...
 
             double a = Math.abs(xc1 - xc2);
-            xia = (Math.pow(rc2, 2) - Math.pow(a, 2) - Math.pow(rc1, 2)) / (-2 * a);
-            xib = (Math.pow(rc2, 2) - Math.pow(a, 2) - Math.pow(rc1, 2)) / (-2 * a);
-            yia = Math.sqrt(Math.pow(rc2, 2) - Math.pow(a - xia, 2));
-            yib = -yia;
+            xia = (Math.pow(rc2, 2) - Math.pow(a, 2) - Math.pow(rc1, 2)) / (-2 * a) + xc1;
+            xib = (Math.pow(rc2, 2) - Math.pow(a, 2) - Math.pow(rc1, 2)) / (-2 * a) + xc1;
+            yia = -Math.sqrt(Math.pow(rc2, 2) - Math.pow(a - xia + xc1, 2)) + yc1;
+            yib = -yia + 2 * yc1;
         } else // ...sinon, cas général
         {
             double a = (-Math.pow(xc1, 2) - Math.pow(yc1, 2) + Math.pow(xc2, 2) + Math.pow(yc2, 2) + Math.pow(rc1, 2) - Math.pow(rc2, 2)) / (2 * (yc2 - yc1));

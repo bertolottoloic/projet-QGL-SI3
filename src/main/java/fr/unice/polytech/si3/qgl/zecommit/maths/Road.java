@@ -48,9 +48,9 @@ public class Road {
             if (y < 0)
                 angle = -Math.PI / 2;
         } else {
-            angle = shortestAngle(Math.atan(y / x));
+            angle = Calculs.shortestAngle(Math.atan(y / x));
         }
-        return shortestAngle(adjustAngle((angle)));
+        return Calculs.shortestAngle(adjustAngle((angle)));
     }
 
 
@@ -72,21 +72,6 @@ public class Road {
     }
 
 
-    /**
-     * Permet de virer d'un angle le plus petit possible, évite de faire un virage trop grand
-     *
-     * @param angle
-     * @return
-     */
-    public double shortestAngle(double angle) {
-        if (angle > Math.PI)
-            return angle - (2 * Math.PI);
-        if (angle < -Math.PI)
-            return angle + (2 * Math.PI);
-        return angle;
-
-
-    }
 
     /**
      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
