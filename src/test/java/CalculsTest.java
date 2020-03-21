@@ -57,24 +57,27 @@ public class CalculsTest {
 
     @Test
     public void subdiviseRouteSizeTest(){
-        assertEquals(201, Calculs.subdiviseRoute(new Position(0,0,0), new Position(200,0,0)).size());
-        assertEquals(201, Calculs.subdiviseRoute(new Position(0,0,0), new Position(0,200,0)).size());
-        assertEquals(201, Calculs.subdiviseRoute(new Position(0,0,0), new Position(200,200,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(200,0,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(0,200,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(200,200,0)).size());
 
-        assertEquals(201, Calculs.subdiviseRoute(new Position(0,0,0), new Position(-200,0,0)).size());
-        assertEquals(201, Calculs.subdiviseRoute(new Position(0,0,0), new Position(0,-200,0)).size());
-        assertEquals(201, Calculs.subdiviseRoute(new Position(0,0,0), new Position(-200,-200,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(-200,0,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(0,-200,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(-200,-200,0)).size());
 
-        assertEquals(201, Calculs.subdiviseRoute(new Position(200,0,0), new Position(0,200,0)).size());
-        assertEquals(201, Calculs.subdiviseRoute(new Position(0,2000,0), new Position(200,0,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(200,0,0), new Position(0,200,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0,2000,0), new Position(200,0,0)).size());
     }
     @Test
     public void subdiviseRouteTest(){
         List<Position> res = new ArrayList<>();
-        for(int k = 0; k<201; k++){
+        for(int k = 0; k<501; k++){
             res.add(new Position(k, 0, 0));
         }
-        assertEquals(res.get(5), Calculs.subdiviseRoute(new Position(0,0,0), new Position(200,0,0)).get(5));
+        for(int i =0 ; i<500; i++) {
+            assertEquals(res.get(i).getX(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getX(), EPSILON);
+            assertEquals(res.get(i).getY(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getY(), EPSILON);
+        }
     }
 
 
