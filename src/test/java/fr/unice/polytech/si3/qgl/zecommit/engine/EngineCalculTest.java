@@ -24,7 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-class EngineSettingsTest {
+class EngineCalculTest {
     String json1;
     EngineSettingsWeek7 engineSettings;
     EngineCalcul engineCalcul;

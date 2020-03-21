@@ -168,6 +168,4 @@ public interface EngineSettings {
      */
      int getShipCount();
 
-     Stream getCurrentOn();
-
 }

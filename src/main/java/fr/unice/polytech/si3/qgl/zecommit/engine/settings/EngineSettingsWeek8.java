@@ -553,18 +553,6 @@ public class EngineSettingsWeek8 implements EngineSettings {
         return shipCount;
     }
 
-
-    @Override
-    public Stream getCurrentOn() {
-        for (VisibleEntitie entity : visibleEntities) {
-            Collision collision = new Collision(entity.getShape(), entity.getPosition(), ship.getPosition());
-            if (entity.getType() == VisibleEntityType.stream && collision.collide()) {
-                return (Stream) entity;
-            }
-        }
-        return null;
-    }
-
 }
 
 
