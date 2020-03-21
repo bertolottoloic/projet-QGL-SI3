@@ -193,7 +193,6 @@ public class Captain implements CaptainInterface {
     }
 
     private List<Sailor> decisionOrientation(Road road) {
-        chosenAngleAlteration = 0;
         needToSlowDown = false;
 
         boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
@@ -225,6 +224,18 @@ public class Captain implements CaptainInterface {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg...");
+            needToSlowDown = true;
+
+            Position nextPosition = predictions.predictFinalPosition(ship.getPosition(), 1);
+            List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), nextPosition);
+            if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers la prochaine position
+                Logs.add("On frôle le récif capitaine !");
+                if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())>0)
+                    chosenAngle+=1;//TODO vérifier OutOfRange
+                if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())<0)
+                    chosenAngle-=1;
+
+            }
         }
     }
 
@@ -236,7 +247,7 @@ public class Captain implements CaptainInterface {
     public boolean upSail() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         List<Sail> activeSails = ship.getDeckSails().stream().filter(sail -> sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).collect(Collectors.toList());
-        return (!needToSlowDown && wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
+        return (wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
                 && road.distanceToGoal() > (165 + wind.getStrength() * activeSails.size());
     }

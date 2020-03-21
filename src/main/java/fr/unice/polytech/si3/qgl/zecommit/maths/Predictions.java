@@ -78,17 +78,6 @@ public class Predictions {
         return res;
     }
 
-
-
-    public double getAngleToEndOfReef(Reef reef, OrientationTable orientationTable) {
-        if(reef.getShape().getShapeRadius() < ship.distanceTo(reef.getPosition()))
-            return Math.asin(reef.getShape().getShapeRadius() / ship.distanceTo(reef.getPosition()));
-        else {
-            return (orientationTable.getAngleTable().size()-1 )/(double)2;
-        }
-
-    }
-
     /**
      * Renvoie l'angle entre l'orientation du bateau et le centre du récif
      * @return

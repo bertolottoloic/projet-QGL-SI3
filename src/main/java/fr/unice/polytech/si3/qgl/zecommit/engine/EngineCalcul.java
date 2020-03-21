@@ -189,8 +189,8 @@ public class EngineCalcul {
         Stream stream = getCurrentOn();
         if (stream != null) {
 
-            x += ((double) stream.getStrength() / settings.getN()) * Math.cos(Math.abs(settings.getShip().getPosition().getOrientation() - (stream.getPosition().getOrientation() + ((Rectangle) stream.getShape()).getOrientation())));
-            y += ((double) stream.getStrength() / settings.getN()) * Math.sin(Math.abs(settings.getShip().getPosition().getOrientation() - (stream.getPosition().getOrientation() + ((Rectangle) stream.getShape()).getOrientation())));
+            x += (stream.getStrength() / settings.getN()) * Math.cos(Math.abs(settings.getShip().getPosition().getOrientation() - (stream.getPosition().getOrientation() + ((Rectangle) stream.getShape()).getOrientation())));
+            y += (stream.getStrength() / settings.getN()) * Math.sin(Math.abs(settings.getShip().getPosition().getOrientation() - (stream.getPosition().getOrientation() + ((Rectangle) stream.getShape()).getOrientation())));
 
         }
 

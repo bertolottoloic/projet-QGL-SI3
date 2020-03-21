@@ -1,3 +1,4 @@
+package fr.unice.polytech.si3.qgl.zecommit;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Calculs;

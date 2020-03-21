@@ -45,7 +45,6 @@ public class IntegrationTest {
 
     @Category(IntegrationTest.class)
     @Test
-    @Disabled
     public void week8Test(){
         String str[] = {" "};
         Engine.showWindow = false;
