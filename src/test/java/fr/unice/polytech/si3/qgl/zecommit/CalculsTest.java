@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculsTest {
 
-    private static final double EPSILON = 1e-8;
+    private static final double DELTA = 1e-8;
 
 
     /**
@@ -76,8 +76,8 @@ public class CalculsTest {
             res.add(new Position(k, 0, 0));
         }
         for(int i =0 ; i<500; i++) {
-            assertEquals(res.get(i).getX(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getX(), EPSILON);
-            assertEquals(res.get(i).getY(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getY(), EPSILON);
+            assertEquals(res.get(i).getX(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getX(), DELTA);
+            assertEquals(res.get(i).getY(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getY(), DELTA);
         }
     }
 
@@ -90,11 +90,11 @@ public class CalculsTest {
 
         List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1,1,0), new Position(8,4,0), true);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );
+        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), EPSILON );
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), EPSILON );
+        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
 
     }
 
@@ -110,11 +110,11 @@ public class CalculsTest {
 
         List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1,1,0), new Position(8,1,0), true);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );
+        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), EPSILON );
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), EPSILON );
+        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
 
     }
 
@@ -129,11 +129,11 @@ public class CalculsTest {
 
         List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4,-3,0), new Position(10,-3,0), true);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );
+        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), EPSILON );
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), EPSILON );
+        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
 
     }
 
@@ -148,11 +148,11 @@ public class CalculsTest {
 
         List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4,-3,0), new Position(4,1,0), true);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), EPSILON );
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), EPSILON );
+        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), EPSILON );
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), EPSILON );
+        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
 
     }
 

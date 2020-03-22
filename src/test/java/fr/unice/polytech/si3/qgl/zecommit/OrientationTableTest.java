@@ -17,8 +17,6 @@ class OrientationTableTest {
         orientationTable = new OrientationTable(4);
 
 
-
-
     }
 
     /**

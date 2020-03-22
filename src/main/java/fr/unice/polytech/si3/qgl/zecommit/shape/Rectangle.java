@@ -62,11 +62,6 @@ public class Rectangle extends Shape {
         return height;//longueur
     }
 
-    @JsonIgnore
-    public double getlength() {
-        return height;
-    }
-
     public double getWidth() {
         return width;
     } //largeur
@@ -88,10 +83,6 @@ public class Rectangle extends Shape {
     }
 
     public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public void setlength(double height) {
         this.height = height;
     }
 

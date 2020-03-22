@@ -46,9 +46,8 @@ public class Predictions {
     public boolean checkCollision() {
         boolean res = false;
         List<Reef> reefs = getReefs();
-        List<Position> intermediatePositions = new ArrayList<Position>();
+        List<Position> intermediatePositions = new ArrayList<>();
         Logs.add(ship.getPosition() + "\n");
-        Logs.add("");
 
         intermediatePositions.add(ship.getPosition());
 

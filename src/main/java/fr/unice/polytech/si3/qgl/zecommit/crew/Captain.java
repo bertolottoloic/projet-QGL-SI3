@@ -29,10 +29,7 @@ public class Captain implements CaptainInterface {
     private OrientationTable orientationTable;
     private Wind wind;
     private List<VisibleEntitie> visibleEntities;
-    private boolean needToSlowDown;
     private int chosenAngle;
-    private double orientationToGoal;
-    private int chosenAngleAlteration;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -40,7 +37,6 @@ public class Captain implements CaptainInterface {
         this.orientationTable = new OrientationTable(ship.getDeck().getOars().size());
         this.wind = game.getWind();
         this.visibleEntities = game.getVisibleEntities();
-        this.needToSlowDown = false;
     }
 
     @Override
@@ -87,9 +83,8 @@ public class Captain implements CaptainInterface {
             goal.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
         }
-        needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        orientationToGoal = road.getOrientation();
+        double orientationToGoal = road.getOrientation();
         chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder());
         return decisionOrientation(road);
     }
@@ -192,8 +187,7 @@ public class Captain implements CaptainInterface {
         return usedSailors;
     }
 
-    private List<Sailor> decisionOrientation(Road road) {
-        needToSlowDown = false;
+    public List<Sailor> decisionOrientation(Road road) {
 
         boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
         List<Sailor> rightSailors = ship.getDeck().rightSailors();
@@ -224,7 +218,6 @@ public class Captain implements CaptainInterface {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg...");
-            needToSlowDown = true;
 
             Position nextPosition = predictions.predictFinalPosition(ship.getPosition(), 1);
             List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), nextPosition);
