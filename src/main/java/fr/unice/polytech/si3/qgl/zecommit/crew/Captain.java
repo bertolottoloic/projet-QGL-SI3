@@ -84,7 +84,6 @@ public class Captain implements CaptainInterface {
             Logs.add("Checkpoint done");
         }
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        double orientationToGoal = road.getOrientation();
         chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder());
         return decisionOrientation(road);
     }
@@ -199,14 +198,14 @@ public class Captain implements CaptainInterface {
 
         if (!isNear && !isInStream()) {// si le bateau est loin du checkpoint
             Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
-            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
+            recalculateChosenAngle(compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
 
 
         } else {
             Compo compo = orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0), nbSailorsRight, nbSailorsLeft);
-            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
+            recalculateChosenAngle(compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
 
@@ -214,7 +213,7 @@ public class Captain implements CaptainInterface {
 
     }
 
-    private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
+    private void recalculateChosenAngle(int leftSailorsSize, int rightSailorsSize) {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg...");
@@ -224,7 +223,7 @@ public class Captain implements CaptainInterface {
             if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers la prochaine position
                 Logs.add("On frôle le récif capitaine !");
                 if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())>0)
-                    chosenAngle+=1;//TODO vérifier OutOfRange
+                    chosenAngle+=1;
                 if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())<0)
                     chosenAngle-=1;
 
