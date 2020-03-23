@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CollisionTest {
 
+    private static final double DELTA = 1e-2;
+
 
     @Test
     public void isInTriangleTest() {
@@ -173,20 +175,18 @@ public class CollisionTest {
         Rectangle rectangle = new Rectangle(3, 4, Math.PI / 2);
         Position position = new Position(2.5, 4, 0);
 
-        Collision collision = new Collision(new Circle(0), new Position(0, 0, 0), new Position(0, 0, 0));
 
+        assertEquals(RES1.getX(), Collision.determineRectanglePoints(rectangle, position).get(0).getX(), DELTA);
+        assertEquals(RES1.getY(), Collision.determineRectanglePoints(rectangle, position).get(0).getY(), DELTA);
 
-        assertEquals(RES1.getX(), Math.round(collision.determineRectanglePoints(rectangle, position).get(0).getX()));
-        assertEquals(RES1.getY(), Math.round(collision.determineRectanglePoints(rectangle, position).get(0).getY()));
+        assertEquals(RES2.getX(), Collision.determineRectanglePoints(rectangle, position).get(1).getX(), DELTA);
+        assertEquals(RES2.getY(), Collision.determineRectanglePoints(rectangle, position).get(1).getY(), DELTA);
 
-        assertEquals(RES2.getX(), Math.round(collision.determineRectanglePoints(rectangle, position).get(1).getX()));
-        assertEquals(RES2.getY(), Math.round(collision.determineRectanglePoints(rectangle, position).get(1).getY()));
+        assertEquals(RES3.getX(), Collision.determineRectanglePoints(rectangle, position).get(2).getX(), DELTA);
+        assertEquals(RES3.getY(), Collision.determineRectanglePoints(rectangle, position).get(2).getY(), DELTA);
 
-        assertEquals(RES3.getX(), Math.round(collision.determineRectanglePoints(rectangle, position).get(2).getX()));
-        assertEquals(RES3.getY(), Math.round(collision.determineRectanglePoints(rectangle, position).get(2).getY()));
-
-        assertEquals(RES4.getX(), Math.round(collision.determineRectanglePoints(rectangle, position).get(3).getX()));
-        assertEquals(RES4.getY(), Math.round(collision.determineRectanglePoints(rectangle, position).get(3).getY()));
+        assertEquals(RES4.getX(), Collision.determineRectanglePoints(rectangle, position).get(3).getX(), DELTA);
+        assertEquals(RES4.getY(), Collision.determineRectanglePoints(rectangle, position).get(3).getY(), DELTA);
 
     }
 
@@ -204,20 +204,18 @@ public class CollisionTest {
         Rectangle rectangle = new Rectangle(2, 7.75, Math.PI);
         Position position = new Position(-7.38, -6.5, 0);
 
-        Collision collision = new Collision(new Circle(0), new Position(0, 0, 0), new Position(0, 0, 0));
 
+        assertEquals(RES1.getX(), Collision.determineRectanglePoints(rectangle, position).get(0).getX(), DELTA);
+        assertEquals(RES1.getY(), Collision.determineRectanglePoints(rectangle, position).get(0).getY(), DELTA);
 
-        assertEquals(Math.round(RES1.getX()), Math.round(collision.determineRectanglePoints(rectangle, position).get(0).getX()));
-        assertEquals(Math.round(RES1.getY()), Math.round(collision.determineRectanglePoints(rectangle, position).get(0).getY()));
+        assertEquals(RES2.getX(), Collision.determineRectanglePoints(rectangle, position).get(1).getX(), DELTA);
+        assertEquals(RES2.getY(), Collision.determineRectanglePoints(rectangle, position).get(1).getY(), DELTA);
 
-        assertEquals(Math.round(RES2.getX()), Math.round(collision.determineRectanglePoints(rectangle, position).get(1).getX()));
-        assertEquals(Math.round(RES2.getY()), Math.round(collision.determineRectanglePoints(rectangle, position).get(1).getY()));
+        assertEquals(RES3.getX(), Collision.determineRectanglePoints(rectangle, position).get(2).getX(), DELTA);
+        assertEquals(RES3.getY(), Collision.determineRectanglePoints(rectangle, position).get(2).getY(), DELTA);
 
-        assertEquals(Math.round(RES3.getX()), Math.round(collision.determineRectanglePoints(rectangle, position).get(2).getX()));
-        assertEquals(Math.round(RES3.getY()), Math.round(collision.determineRectanglePoints(rectangle, position).get(2).getY()));
-
-        assertEquals(Math.round(RES4.getX()), Math.round(collision.determineRectanglePoints(rectangle, position).get(3).getX()));
-        assertEquals(Math.round(RES4.getY()), Math.round(collision.determineRectanglePoints(rectangle, position).get(3).getY()));
+        assertEquals(RES4.getX(), Collision.determineRectanglePoints(rectangle, position).get(3).getX(), DELTA);
+        assertEquals(RES4.getY(), Collision.determineRectanglePoints(rectangle, position).get(3).getY(), DELTA);
 
     }
 

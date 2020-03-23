@@ -15,6 +15,16 @@ public class IntegrationTest {
 
     @Category(IntegrationTest.class)
     @Test
+    public void week5Test(){
+        String str[] = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek5();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
+
+    @Category(IntegrationTest.class)
+    @Test
     public void week6Test(){
         String str[] = {" "};
         Engine.showWindow = false;
@@ -35,7 +45,6 @@ public class IntegrationTest {
 
     @Category(IntegrationTest.class)
     @Test
-    @Disabled
     public void week8Test(){
         String str[] = {" "};
         Engine.showWindow = false;

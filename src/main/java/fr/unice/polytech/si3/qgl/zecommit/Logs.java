@@ -9,9 +9,7 @@ import java.util.List;
  * @author Nathan
  */
 public class Logs {
-    Logs() {
-        //Constructeur vide
-    }
+    Logs() {/*Constructeur vide*/ }
 
     protected static final List<String> myLogs = new ArrayList<>();
 

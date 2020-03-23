@@ -150,20 +150,25 @@ public class OrientationTable {
     }
 
     public Compo getCompo(int indexAngle, int indexCompo) {
+        if(compoTable.isEmpty() || compoTable.get(indexAngle).isEmpty())
+            return new Compo(0,0);
+        if(indexAngle == -1)
+            indexAngle = 0;
+        if(indexAngle == compoTable.size())
+            indexAngle--;
         return compoTable.get(indexAngle).get(indexCompo);
     }
 
     public Compo getLastCompo(int indexAngle) {
         if(compoTable.isEmpty() || compoTable.get(indexAngle).isEmpty())
             return new Compo(0,0);
+        if(indexAngle == -1)
+            indexAngle = 0;
+        if(indexAngle == compoTable.size())
+            indexAngle--;
         return compoTable.get(indexAngle).get(compoTable.get(indexAngle).size()-1);
     }
 
-    public Compo getSlowDownCompo(int indexAngle) {
-        if(compoTable.isEmpty() || compoTable.get(indexAngle).isEmpty())
-            return new Compo(0,0);
-        return compoTable.get(indexAngle).get((compoTable.get(indexAngle).size()-1));
-    }
 
     public Compo getGoodCompo(Compo compo, int nbSailorsRightShip, int nbSailorsLeftShip ){
 

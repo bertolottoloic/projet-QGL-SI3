@@ -29,10 +29,7 @@ public class Captain implements CaptainInterface {
     private OrientationTable orientationTable;
     private Wind wind;
     private List<VisibleEntitie> visibleEntities;
-    private boolean needToSlowDown;
     private int chosenAngle;
-    private double orientationToGoal;
-    private int chosenAngleAlteration;
 
     public Captain(Game game) {
         this.ship = game.getShip();
@@ -40,7 +37,6 @@ public class Captain implements CaptainInterface {
         this.orientationTable = new OrientationTable(ship.getDeck().getOars().size());
         this.wind = game.getWind();
         this.visibleEntities = game.getVisibleEntities();
-        this.needToSlowDown = false;
     }
 
     @Override
@@ -86,36 +82,47 @@ public class Captain implements CaptainInterface {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {
             goal.validateCommonCheckpoint();
             Logs.add("Checkpoint done");
-            createIntermediateCheckpoint();
         }
-        needToSlowDown = false;
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        orientationToGoal = road.getOrientation();
         chosenAngle = road.findClosestPossibleAngle(ship.getDeckOars().size(), ship.getDeck().canUseRudder());
         return decisionOrientation(road);
     }
 
     public void createIntermediateCheckpoint(){
+        if (goal.getFirstCheckpoint().isFake()) {
+            goal.deleteFirstCheckpoint();
+        }
         List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récit est sur notre itinéraire en ligne droite vers le CP
-            Logs.add("Obstacle détécté sur votre trajet");
-            List<Position> positionList = Calculs.findIntersectionsCercle(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
+        if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers le CP
+            Logs.add("Obstacle détecté sur votre trajet");
+            List<Position> fakeCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), true);
+            List<Position> fakeCloserCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), false);
 
-            List<Position> root1 = new ArrayList<>();
-            root1.add(positionList.get(0));
-            if (Calculs.checkCollision(getReefs(), root1)) {
-                Checkpoint fakeCP = new Checkpoint(positionList.get(1), new Circle(200));
+
+            if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(100));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                //On crée un CP intermédiaire loin du récif
-            } else {
-                List<Position> root2 = new ArrayList<>();
-                root2.add(positionList.get(1));
-                if (Calculs.checkCollision(getReefs(), root2)) {
-                    Checkpoint fakeCP = new Checkpoint(positionList.get(0), new Circle(200));
-                    fakeCP.setFake(true);
-                    goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif
+            }
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(100));
+                fakeCP.setFake(true);
+                goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
+
+            }
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(0)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(0), new Circle(100));
+                fakeCP.setFake(true);
+                goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
                 }
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(1)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(1), new Circle(100));
+                fakeCP.setFake(true);
+                goal.addFirstCheckpoint(fakeCP);
+                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
             }
         }
     }
@@ -128,11 +135,6 @@ public class Captain implements CaptainInterface {
                 - orientationTable.getAngleTable().get(road.findClosestPossibleAngle(ship.getDeck().getOars().size(), ship.getDeck().canUseRudder()));
 
         if (res.isPresent() && ship.getDeck().canUseRudder()) {
-            if (needToSlowDown && chosenAngleAlteration > 0)
-                angle = -(orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
-            if (needToSlowDown && chosenAngleAlteration < 0)
-                angle = (orientationTable.getAngleTable().get(0)-orientationTable.getAngleTable().get(1));
-
             return new SimpleEntry<>(res.get().getSailorOn(), angle);
         }
 
@@ -184,9 +186,7 @@ public class Captain implements CaptainInterface {
         return usedSailors;
     }
 
-    private List<Sailor> decisionOrientation(Road road) {
-        chosenAngleAlteration = 0;
-        needToSlowDown = false;
+    public List<Sailor> decisionOrientation(Road road) {
 
         boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
         List<Sailor> rightSailors = ship.getDeck().rightSailors();
@@ -198,14 +198,14 @@ public class Captain implements CaptainInterface {
 
         if (!isNear && !isInStream()) {// si le bateau est loin du checkpoint
             Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
-            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
+            recalculateChosenAngle(compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
 
 
         } else {
             Compo compo = orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0), nbSailorsRight, nbSailorsLeft);
-            recalculateChosenAngle(road,compo.getSailorsLeft() , compo.getSailorsRight());
+            recalculateChosenAngle(compo.getSailorsLeft() , compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
 
@@ -213,10 +213,21 @@ public class Captain implements CaptainInterface {
 
     }
 
-    private void recalculateChosenAngle(Road road, int leftSailorsSize, int rightSailorsSize) {
+    private void recalculateChosenAngle(int leftSailorsSize, int rightSailorsSize) {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
         if (predictions.checkCollision()) {
             Logs.add("Votre Capitaine a detecté un iceberg...");
+
+            Position nextPosition = predictions.predictFinalPosition(ship.getPosition(), 1);
+            List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), nextPosition);
+            if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers la prochaine position
+                Logs.add("On frôle le récif capitaine !");
+                if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())>0)
+                    chosenAngle+=1;
+                if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())<0)
+                    chosenAngle-=1;
+
+            }
         }
     }
 
@@ -228,7 +239,7 @@ public class Captain implements CaptainInterface {
     public boolean upSail() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         List<Sail> activeSails = ship.getDeckSails().stream().filter(sail -> sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).collect(Collectors.toList());
-        return (!needToSlowDown && wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
+        return (wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
                 && road.distanceToGoal() > (165 + wind.getStrength() * activeSails.size());
     }

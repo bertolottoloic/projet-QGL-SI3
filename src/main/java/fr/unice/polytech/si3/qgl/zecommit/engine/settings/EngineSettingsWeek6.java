@@ -9,7 +9,6 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
@@ -175,7 +174,6 @@ public class EngineSettingsWeek6 implements EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
 
-        //this.visibleEntities.add(new Stream(new Position(1000, 1000, -Math.PI / 4), new Rectangle(100, 1400, 0), 50));
         this.visibleEntities.add(new Reef(new Position(1500, 500, 0.78539816339), new Rectangle(1250.0, 1300, 0)));
 
         this.visibleEntities.add(new Reef(new Position(500, 1500, 0.78539816339), new Rectangle(1250.0, 1300.0, 0.0)));
@@ -191,8 +189,7 @@ public class EngineSettingsWeek6 implements EngineSettings {
     @Override
     public void setWind() {
         this.winds.add(new Wind(0, 150));
-        // this.winds.add(new Wind(12, 38));
-        //this.winds.add(new Wind(7, 89));
+
     }
 
     @Override
@@ -479,17 +476,6 @@ public class EngineSettingsWeek6 implements EngineSettings {
         return shipCount;
     }
 
-
-    @Override
-    public Stream getCurrentOn() {
-        for (VisibleEntitie entity : visibleEntities) {
-            Collision collision = new Collision(entity.getShape(), entity.getPosition(), ship.getPosition());
-            if (entity.getType() == VisibleEntityType.stream && collision.collide()) {
-                return (Stream) entity;
-            }
-        }
-        return null;
-    }
 
 
 }
