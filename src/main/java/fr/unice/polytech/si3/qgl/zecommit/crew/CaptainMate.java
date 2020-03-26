@@ -71,6 +71,12 @@ public class CaptainMate {
         }
     }
 
+    public void toUseWatch(Sailor sailor){
+        if(sailor!=null){
+            actions.add(new UseWatch(sailor.getId()));
+        }
+    }
+
     public List<Action> actions(){
         refreshData();
         if(this.initGame){
@@ -84,6 +90,7 @@ public class CaptainMate {
             toTurn(captain.doTurn());
             toLiftSail(captain.doLiftSail());
             toLowerSail(captain.doLowerSail());
+            toUseWatch(captain.doUseWatch());
         }
         return this.actions;
 

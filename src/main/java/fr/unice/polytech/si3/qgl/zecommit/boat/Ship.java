@@ -9,6 +9,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Watch;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Road;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
@@ -243,6 +244,11 @@ public class Ship {
     @JsonIgnore
     public Optional<Rudder> getDeckRudder() {
         return this.deck.getRudder();
+    }
+
+    @JsonIgnore
+    public Optional<Watch> getDeckWatch() {
+        return this.deck.getWatch();
     }
 
 

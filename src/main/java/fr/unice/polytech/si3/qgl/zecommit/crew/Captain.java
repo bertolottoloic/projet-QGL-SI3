@@ -9,6 +9,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Watch;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.*;
@@ -67,6 +68,11 @@ public class Captain implements CaptainInterface {
                     sails.remove(sail.get());
                 }
             }
+        }
+        Optional<Sailor> leftSailor = sailors.stream().filter(Sailor::hasEntity).findAny();
+        Optional<Watch> watch = ship.getDeckWatch();
+        if(leftSailor.isPresent() && watch.isPresent() && !watch.get().hasSailorOn()){
+            leftSailor.get().setOnEntity(watch.get());
         }
     }
 
@@ -155,6 +161,15 @@ public class Captain implements CaptainInterface {
             return ship.getDeckSails().stream().filter(sail -> sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(Sail::getSailorOn).collect(Collectors.toList());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public Sailor doUseWatch() {
+        Optional<Watch> watch = ship.getDeckWatch();
+        if(watch.isPresent() && watch.get().hasSailorOn() && watch.get().getSailorOn().isOnEntity()){
+            return watch.get().getSailorOn();
+        }
+        return null;
     }
 
     @Override
