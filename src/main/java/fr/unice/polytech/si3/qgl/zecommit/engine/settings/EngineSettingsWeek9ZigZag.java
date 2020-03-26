@@ -114,6 +114,11 @@ public class EngineSettingsWeek9ZigZag implements EngineSettings {
     }
 
     @Override
+    public void setWatch(Watch watch) {
+
+    }
+
+    @Override
     public void setRightSailors(ArrayList<Sailor> sailors) {
         this.rightSailors = sailors;
     }
@@ -301,6 +306,11 @@ public class EngineSettingsWeek9ZigZag implements EngineSettings {
         }
     }
 
+    @Override
+    public void setVisibleDistance(int distance) {
+
+    }
+
 
     /**
      * ################################################ GETTERS ################################################
@@ -350,6 +360,11 @@ public class EngineSettingsWeek9ZigZag implements EngineSettings {
     @JsonIgnore
     public List<Entity> getEntities() {
         return entities;
+    }
+
+    @Override
+    public Watch getWatch() {
+        return null;
     }
 
     /**
@@ -458,6 +473,11 @@ public class EngineSettingsWeek9ZigZag implements EngineSettings {
     @Override
     public int getShipCount() {
         return shipCount;
+    }
+
+    @Override
+    public int getVisibleDistance() {
+        return 0;
     }
 
 }
