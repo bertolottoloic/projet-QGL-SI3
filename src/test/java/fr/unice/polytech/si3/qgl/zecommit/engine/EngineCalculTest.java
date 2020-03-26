@@ -292,6 +292,7 @@ class EngineCalculTest {
         ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
         visibleEntities.add(new Stream(new Position(0, 0, 0), new Rectangle(10, 10, 0), 100));
         engineSettings.setVisibleEntities(visibleEntities);
+        engineSettings.getVisibleEntities();
         assertTrue(engineCalcul.getCurrentOn()!=null);
 
     }
