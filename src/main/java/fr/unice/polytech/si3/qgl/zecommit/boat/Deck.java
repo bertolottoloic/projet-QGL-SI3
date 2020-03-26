@@ -24,6 +24,8 @@ public class Deck{
     @JsonIgnore
     private Optional<Rudder> rudder;
     @JsonIgnore
+    private Optional<Watch> watch;
+    @JsonIgnore
     private List<Sail> sails;
     @JsonIgnore
     private List<Sailor> sailors;
