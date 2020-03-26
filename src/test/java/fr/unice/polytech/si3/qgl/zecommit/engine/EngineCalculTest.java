@@ -14,6 +14,7 @@ import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -286,4 +287,12 @@ class EngineCalculTest {
         assertEquals(0, engineSettings.getVisibles().size());
     }
 
+    @Disabled
+    void getCurrentOnTest(){
+        ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(0, 0, 0), new Rectangle(10, 10, 0), 100));
+        engineSettings.setVisibleEntities(visibleEntities);
+        assertTrue(engineCalcul.getCurrentOn()!=null);
+
+    }
 }

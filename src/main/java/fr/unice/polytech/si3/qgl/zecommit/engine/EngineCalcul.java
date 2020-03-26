@@ -287,10 +287,12 @@ public class EngineCalcul {
 
 
     public Stream getCurrentOn() {
-        for (VisibleEntitie entity : settings.getVisibleEntities()) {
-            Collision collision = new Collision(entity.getShape(), entity.getPosition(), settings.getShip().getPosition());
-            if (entity.getType() == VisibleEntityType.stream && collision.collide()) {
-                return (Stream) entity;
+        if(settings.getVisibleEntities().size()>0) {
+            for (VisibleEntitie entity : settings.getVisibleEntities()) {
+                Collision collision = new Collision(entity.getShape(), entity.getPosition(), settings.getShip().getPosition());
+                if (entity.getType() == VisibleEntityType.stream && collision.collide()) {
+                    return (Stream) entity;
+                }
             }
         }
         return null;
