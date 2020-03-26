@@ -9,10 +9,13 @@ import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
 import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
 import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -284,6 +287,27 @@ class EngineCalculTest {
         engineSettings.setVisibleEntities(visibleEntities);
         engineCalcul.giveVisibleEntities();
         assertEquals(0, engineSettings.getVisibles().size());
+    }
+
+    @Test
+    void checkCollisionTest(){
+        Position pos1 = new Position(0,0,0);
+        Reef reef1= new Reef(pos1, new Circle(10) );
+        engineSettings.getReefs().add(reef1);
+        assertTrue(engineCalcul.checkCollision(pos1));
+
+        engineSettings.getReefs().remove(reef1);
+
+        Reef reef2= new Reef(new Position(5,5,0), new Circle(10) );
+        engineSettings.getReefs().add(reef2);
+        assertTrue(engineCalcul.checkCollision(pos1));
+
+        engineSettings.getReefs().remove(reef2);
+
+        Reef reef3= new Reef(new Position(8,8,0), new Circle(10) );
+        engineSettings.getReefs().add(reef3);
+        assertFalse(engineCalcul.checkCollision(pos1));
+
     }
 
 
