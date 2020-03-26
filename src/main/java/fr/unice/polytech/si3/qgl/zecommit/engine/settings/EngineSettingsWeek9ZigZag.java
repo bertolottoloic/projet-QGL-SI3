@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EngineSettingsWeek9Snack implements EngineSettings {
+public class EngineSettingsWeek9ZigZag implements EngineSettings {
     private Goal goal;
     private ArrayList<Checkpoint> allCheckpoints;
     private ArrayList<Checkpoint> checkpoints;
@@ -33,14 +33,12 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     private ArrayList<Sailor> rightSailors;
     @JsonIgnore
     static final int n = 100;
-    private int visibleDistance =1000;
     private int shipCount = 1;
     private double rotation = 0;
     private int nbSailUsed = 0;
     private ArrayList<Oar> oarArrayList;
     private ArrayList<Sail> sailArrayList;
     private Rudder rudder;
-    private Watch watch;
     private Wind wind;
     @JsonIgnore
     private ArrayList<Wind> winds;
@@ -56,7 +54,7 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     ArrayList<VisibleEntitie> visibles;
 
     @JsonIgnore
-    public EngineSettingsWeek9Snack() {
+    public EngineSettingsWeek9ZigZag() {
         this.entities = new ArrayList<>();
         this.sailors = new ArrayList<>();
         this.oarArrayList = new ArrayList<>();
@@ -116,11 +114,6 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     }
 
     @Override
-    public void setWatch(Watch watch){
-        this.watch=watch;
-    }
-
-    @Override
     public void setRightSailors(ArrayList<Sailor> sailors) {
         this.rightSailors = sailors;
     }
@@ -148,11 +141,6 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     @Override
     public void setSailors(ArrayList<Sailor> sailors) {
         this.sailors = sailors;
-    }
-
-    @Override
-    public void setVisibleDistance(int distance){
-        this.visibleDistance=distance;
     }
 
     @Override
@@ -184,41 +172,18 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
 
-        Polygone polygon = new Polygone(0, new Point[]{new Point(-155.0, -225.00000000000003), new Point( -230.0, -50.000000000000014), new Point( -5.0000000000000275, 150.0), new Point( 245.0, 175.0), new Point( 145.0, -50.00000000000001)});
-        Position position = new Position(5405.0, 7125.0, 0.0);
-
-        Circle circle1 = new Circle(90.18);
-        Position position1 = new Position(67.75, 298.82,0);
-        Circle circle2 = new Circle(116.49);
-        Position position2 = new Position(93.3, 414.95,0);
-        Circle circle3 = new Circle(78.82);
-        Position position3 = new Position(209.42, 519.46,0);
-        Circle circle4 = new Circle(84.18);
-        Position position4 = new Position(332.51, 143.22,0);
-        Circle circle5 = new Circle(62.48);
-        Position position5 = new Position(332.51, 203.6,0);
-        Circle circle6 = new Circle(45);
-        Position position6 = new Position(332.51, 287.21,0);
-        Circle circle7 = new Circle(79.44);
-        Position position7 = new Position(330.9, 554.3,0);
-        Circle circle8 = new Circle(45);
-        Position position8 = new Position(443.99, 507.85,0);
-        Circle circle9 = new Circle(45.09);
-        Position position9 = new Position(478.83, 431.2,0);
+        Circle circle1 = new Circle(100);
+        Position position1 = new Position(1300, 0,0);
+        Circle circle2 = new Circle(80);
+        Position position2 = new Position(1560, 0,0);
+        Circle circle3 = new Circle(40);
+        Position position3 = new Position(480, 0,0);
 
 
-        this.visibleEntities.add(new Reef(position, polygon));
+
         this.visibleEntities.add(new Reef(position1, circle1));
         this.visibleEntities.add(new Reef(position2, circle2));
-        this.visibleEntities.add(new Reef(position3, circle3));
-        this.visibleEntities.add(new Reef(position4, circle4));
-        this.visibleEntities.add(new Reef(position5, circle5));
-        this.visibleEntities.add(new Reef(position6, circle6));
-        this.visibleEntities.add(new Reef(position7, circle7));
-        this.visibleEntities.add(new Reef(position8, circle8));
-        this.visibleEntities.add(new Reef(position9, circle9));
-
-
+        //this.visibleEntities.add(new Reef(position3, circle3));
 
 
     }
@@ -258,10 +223,10 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
 
         this.checkpoints = new ArrayList<>();
 
-        this.checkpoints.add(new Checkpoint(new Position(200, 200, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(295.35, 410.3, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(460.25, 217.54, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(601.92, 433.53, 0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1440, 0, 0), new Circle(35)));
+        this.checkpoints.add(new Checkpoint(new Position(1680, 0, 0), new Circle(35)));
+        //this.checkpoints.add(new Checkpoint(new Position(41, 410.3, 0), new Circle(50)));
+
 
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
@@ -317,9 +282,6 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
             }
             if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
-            }
-            if (entity.getType().equals(EntityType.watch)) {
-                this.watch=(Watch) entity;
             }
         }
     }
@@ -405,16 +367,6 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     @Override
     public List<Sailor> getSailors() {
         return sailors;
-    }
-
-    @Override
-    public int getVisibleDistance() {
-        return 0;
-    }
-
-    @Override
-    public Watch getWatch() {
-        return null;
     }
 
     /**
