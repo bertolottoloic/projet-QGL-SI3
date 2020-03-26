@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EngineSettingsWeek9Snack implements EngineSettings {
+public class EngineSettingsWeek9Snake implements EngineSettings {
     private Goal goal;
     private ArrayList<Checkpoint> allCheckpoints;
     private ArrayList<Checkpoint> checkpoints;
@@ -56,7 +56,7 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     ArrayList<VisibleEntitie> visibles;
 
     @JsonIgnore
-    public EngineSettingsWeek9Snack() {
+    public EngineSettingsWeek9Snake() {
         this.entities = new ArrayList<>();
         this.sailors = new ArrayList<>();
         this.oarArrayList = new ArrayList<>();
