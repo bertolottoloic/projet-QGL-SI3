@@ -286,5 +286,4 @@ class EngineCalculTest {
         assertEquals(0, engineSettings.getVisibles().size());
     }
 
-
 }

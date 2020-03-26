@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Watch;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,6 +46,9 @@ public class EngineNextRound {
             if(textType.equals("LOWER_SAIL")) {
                 lowerSail(id);
             }
+            if(textType.equals("USE_WATCH")){
+                watchParser(id);
+            }
         }
 
 
@@ -63,6 +67,11 @@ public class EngineNextRound {
     public void lowerSail(String id){
         LowerSail lowerSail= new LowerSail(Integer.parseInt(id));
         actionArrayList.add(lowerSail);
+    }
+
+    public void watchParser(String id){
+        UseWatch useWatch = new UseWatch(Integer.parseInt(id));
+        actionArrayList.add(useWatch);
     }
 
     public void movingParser(String id,JsonNode current){
