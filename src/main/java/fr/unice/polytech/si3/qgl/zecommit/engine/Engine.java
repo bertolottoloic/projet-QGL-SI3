@@ -20,7 +20,7 @@ public class Engine {
     public static boolean showDeck = false;
     public static List<List<Sailor>> sailorsDeckVizu;
 
-    public static EngineSettings engineSettings = new EngineSettingsWeek9Snack();//A modifier pour changer la simulation
+    public static EngineSettings engineSettings = new EngineSettingsWeek7();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 

@@ -329,6 +329,10 @@ public class EngineSettingsWeek7 implements EngineSettings {
             if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
             }
+            if (entity.getType().equals(EntityType.watch)) {
+                this.watch=(Watch) entity;
+            }
+
         }
     }
 
