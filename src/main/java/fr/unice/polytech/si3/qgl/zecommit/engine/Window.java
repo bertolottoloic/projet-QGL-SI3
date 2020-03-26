@@ -22,7 +22,7 @@ public class Window extends JFrame{
     public int w;
     public int h;
     public static int adjust;
-    public double scale = 30;
+    public double scale = 5;
 
     public Window(List<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles) {
 
