@@ -60,6 +60,7 @@ public class EngineCalcul {
         settings.setRightSailors(new ArrayList<>());
         settings.setLeftSailors(new ArrayList<>());
         settings.setRotation(0);
+        settings.setVisibleDistance(1000);
         changeWind();
         Position lastPosition = settings.getShip().getPosition();
 
@@ -80,6 +81,9 @@ public class EngineCalcul {
             }
             if (action.getType() == ActionType.LOWER_SAIL) {
                 engineLowerSail((LowerSail) action);
+            }
+            if (action.getType() == ActionType.USE_WATCH) {
+                engineUseWatch((UseWatch) action);
             }
         }
         try {
@@ -143,6 +147,14 @@ public class EngineCalcul {
         }
     }
 
+    public void engineUseWatch(UseWatch useWatch){
+        for (Sailor sailor : settings.getSailors()) {
+            if (useWatch.getSailorId() == sailor.getId()) {
+                engineUseWatchAction(sailor);
+            }
+        }
+    }
+
     public void engineLiftSailAction(Sailor sailor) {
         for (Sail sail : settings.getSailArrayList()) {
             if (sail.getX() == sailor.getX() && sail.getY() == sailor.getY() && !sail.isOpenned()) {
@@ -168,6 +180,13 @@ public class EngineCalcul {
             }
         }
     }
+
+    public void engineUseWatchAction(Sailor sailor) {
+            if (settings.getWatch().getX() == sailor.getX() && settings.getWatch().getY() == sailor.getY()) {
+                settings.setVisibleDistance(5000);
+            }
+    }
+
 
     public double calculWind() {
         double value = 0;
@@ -258,9 +277,10 @@ public class EngineCalcul {
     public void giveVisibleEntities() {
         for (VisibleEntitie visible : settings.getVisibleEntities()) {
             Collision collision = new Collision(visible.getShape(), visible.getPosition(), settings.getShip().getPosition());
-            if (collision.distanceTo() <= 1000) {
+            if (collision.distanceTo() <= settings.getVisibleDistance()) {
                 settings.getVisibles().add(visible);
             }
+
         }
     }
 

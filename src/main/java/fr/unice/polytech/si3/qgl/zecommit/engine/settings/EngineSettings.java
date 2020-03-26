@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
@@ -28,6 +25,8 @@ public interface EngineSettings {
      void setDeck(Deck deck);
 
      void setShip(Ship ship);
+
+     void setWatch(Watch watch);
 
      void setRightSailors(ArrayList<Sailor> sailors);
 
@@ -84,6 +83,8 @@ public interface EngineSettings {
 
      void sortVisibleEntities();
 
+     void setVisibleDistance(int distance);
+
 
     /**
      * ################################################ GETTERS ################################################
@@ -116,6 +117,12 @@ public interface EngineSettings {
      */
     @JsonIgnore
      List<Entity> getEntities();
+
+    /**
+     * @return the watch
+     */
+    @JsonIgnore
+    Watch getWatch();
 
     /**
      * @return the shape
@@ -167,5 +174,7 @@ public interface EngineSettings {
      * @return the shipCount
      */
      int getShipCount();
+
+     int getVisibleDistance();
 
 }
