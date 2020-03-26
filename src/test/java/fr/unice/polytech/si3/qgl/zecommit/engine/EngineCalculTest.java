@@ -287,13 +287,18 @@ class EngineCalculTest {
         assertEquals(0, engineSettings.getVisibles().size());
     }
 
-    @Disabled
+    @Test
     void getCurrentOnTest(){
+        Ship shiptest = mock(Ship.class);
+        Position pos = new Position(0, 0, 0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.setShip(shiptest);
         ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
         visibleEntities.add(new Stream(new Position(0, 0, 0), new Rectangle(10, 10, 0), 100));
         engineSettings.setVisibleEntities(visibleEntities);
-        engineSettings.getVisibleEntities();
         assertTrue(engineCalcul.getCurrentOn()!=null);
-
+        visibleEntities = new ArrayList<>();
+        engineSettings.setVisibleEntities(visibleEntities);
+        assertTrue(engineCalcul.getCurrentOn()==null);
     }
 }
