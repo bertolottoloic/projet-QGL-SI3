@@ -188,7 +188,7 @@ public class Captain implements CaptainInterface {
 
     public List<Sailor> decisionOrientation(Road road) {
 
-        boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
+        boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());//TODO à corriger ou pas ? : prend ici tous les CP et non juste les vrais...
         List<Sailor> rightSailors = ship.getDeck().rightSailors();
         List<Sailor> leftSailors = ship.getDeck().leftSailors();
 
@@ -196,18 +196,25 @@ public class Captain implements CaptainInterface {
         int nbSailorsLeft = leftSailors.size();
 
 
-        if (!isNear && !isInStream()) {// si le bateau est loin du checkpoint
+        if (!isNear && false) {// si le bateau est loin du checkpoint //TODO revoir ce point là : en enlevant false le bateau ne ralentit pas assez au niveau du canal du panama
             Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
-            recalculateChosenAngle(compo.getSailorsLeft() , compo.getSailorsRight());
+            recalculateChosenAngle(compo.getSailorsLeft(), compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
 
 
         } else {
-            Compo compo = orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0), nbSailorsRight, nbSailorsLeft);
-            recalculateChosenAngle(compo.getSailorsLeft() , compo.getSailorsRight());
-            return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
-                    nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
+            if (isInCounterStream()) {
+                Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
+                recalculateChosenAngle(compo.getSailorsLeft(), compo.getSailorsRight());
+                return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
+                        nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
+            } else {
+                Compo compo = orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0), nbSailorsRight, nbSailorsLeft);
+                recalculateChosenAngle(compo.getSailorsLeft(), compo.getSailorsRight());
+                return activateSailors(orientationTable.getGoodCompo(orientationTable.getCompo(chosenAngle, 0),
+                        nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus lentement
+            }
 
         }
 
@@ -222,10 +229,6 @@ public class Captain implements CaptainInterface {
             List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), nextPosition);
             if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers la prochaine position
                 Logs.add("On frôle le récif capitaine !");
-                if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())>0)
-                    chosenAngle+=1;
-                if(predictions.getAngleToCenterOfReef(predictions.getFirstReef())<0)
-                    chosenAngle-=1;
 
             }
         }
@@ -239,7 +242,8 @@ public class Captain implements CaptainInterface {
     public boolean upSail() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         List<Sail> activeSails = ship.getDeckSails().stream().filter(sail -> sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).collect(Collectors.toList());
-        return (wind != null && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
+        return (wind != null
+                && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) >= 0
                 && Math.abs(ship.getPosition().getOrientation() - wind.getOrientation()) < Math.PI / 2)
                 && road.distanceToGoal() > (165 + wind.getStrength() * activeSails.size());
     }
@@ -256,6 +260,25 @@ public class Captain implements CaptainInterface {
                 Stream stream = (Stream) visibleEntitie;
                 Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
                 if (collision.collide())
+                    res = true;
+            }
+        return res;
+    }
+
+    /**
+     * Méthode indiquant quand le bateau est à contre courant
+     *
+     * @return
+     */
+    public boolean isInCounterStream() {
+        boolean res = false;
+        for (VisibleEntitie visibleEntitie : visibleEntities)
+            if (visibleEntitie.getType().equals(VisibleEntityType.stream)) {
+                Stream stream = (Stream) visibleEntitie;
+                Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
+                if (collision.collide()
+                        && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) < 0
+                        && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) >= Math.PI / 4)
                     res = true;
             }
         return res;
