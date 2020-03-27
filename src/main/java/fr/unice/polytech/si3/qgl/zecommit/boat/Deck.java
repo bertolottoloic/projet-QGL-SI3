@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.boat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.action.Moving;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
@@ -38,6 +39,7 @@ public class Deck{
         this.sails = new ArrayList<>();
         this.sailors = new ArrayList<>();
         this.rudder = Optional.empty();
+        this.watch = Optional.empty();
     }
 
 
@@ -63,6 +65,9 @@ public class Deck{
             }
             if (entity.getType().equals(EntityType.rudder)) {
                 this.rudder=Optional.of((Rudder)entity);
+            }
+            if (entity.getType().equals(EntityType.watch)) {
+                this.watch = Optional.of((Watch)entity);
             }
             if (entity.getType().equals(EntityType.sail)) {
                 this.sails.add((Sail) entity);
@@ -220,6 +225,14 @@ public class Deck{
     }
 
     @JsonIgnore
+    /**
+     * @return the watch
+     */
+    public Optional<Watch> getWatch() {
+        return watch;
+    }
+
+    @JsonIgnore
     public List<Sailor> getSailors() {
         return sailors;
     }
@@ -255,6 +268,13 @@ public class Deck{
 
     public void setRudder(Rudder rudder) {
         this.rudder = Optional.of(rudder);
+    }
+
+    /**
+     * @param watch the watch to set
+     */
+    public void setWatch(Optional<Watch> watch) {
+        this.watch = watch;
     }
 
     public void setSails(List<Sail> sails) {

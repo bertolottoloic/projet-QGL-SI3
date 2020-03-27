@@ -36,6 +36,7 @@ public class EngineSettingsWeek5 implements EngineSettings {
     private ArrayList<Sailor> leftSailors;
     private ArrayList<Sailor> rightSailors;
     @JsonIgnore
+    private int visibleDistance =1000;
     static final int n = 100;
     private int shipCount = 1;
     private double rotation = 0;
@@ -43,6 +44,7 @@ public class EngineSettingsWeek5 implements EngineSettings {
     private ArrayList<Oar> oarArrayList;
     private ArrayList<Sail> sailArrayList;
     private Rudder rudder;
+    private Watch watch;
     private Wind wind;
     @JsonIgnore
     private ArrayList<Wind> winds;
@@ -242,6 +244,10 @@ public class EngineSettingsWeek5 implements EngineSettings {
         this.deck = new Deck(5, 11);
         this.deck.setSailors(sailors);
     }
+    @Override
+    public void setWatch(Watch watch){
+        this.watch=watch;
+    }
 
     @Override
     public void setEntities() {
@@ -287,6 +293,11 @@ public class EngineSettingsWeek5 implements EngineSettings {
     }
 
     @Override
+    public void setVisibleDistance(int distance){
+        this.visibleDistance=distance;
+    }
+
+    @Override
     public void changeWind() {
         wind = winds.get(random.nextInt(winds.size()));
     }
@@ -302,6 +313,9 @@ public class EngineSettingsWeek5 implements EngineSettings {
             }
             if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
+            }
+            if (entity.getType().equals(EntityType.watch)) {
+                this.watch=(Watch) entity;
             }
         }
     }
@@ -381,6 +395,8 @@ public class EngineSettingsWeek5 implements EngineSettings {
         return shape;
     }
 
+    @Override
+    public Watch getWatch(){return watch;}
     /**
      * @return the sailors
      */
@@ -478,6 +494,11 @@ public class EngineSettingsWeek5 implements EngineSettings {
     @Override
     public int getShipCount() {
         return shipCount;
+    }
+
+    @Override
+    public int getVisibleDistance(){
+        return visibleDistance;
     }
 
 }

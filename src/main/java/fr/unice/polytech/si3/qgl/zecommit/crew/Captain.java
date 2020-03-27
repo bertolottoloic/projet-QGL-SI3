@@ -9,6 +9,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Watch;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.*;
@@ -68,6 +69,11 @@ public class Captain implements CaptainInterface {
                 }
             }
         }
+        Optional<Sailor> leftSailor = sailors.stream().filter(Sailor::hasEntity).findAny();
+        Optional<Watch> watch = ship.getDeckWatch();
+        if(leftSailor.isPresent() && watch.isPresent() && !watch.get().hasSailorOn()){
+            leftSailor.get().setOnEntity(watch.get());
+        }
     }
 
     @Override
@@ -97,16 +103,16 @@ public class Captain implements CaptainInterface {
             Logs.add("Obstacle détecté sur votre trajet");
             List<Position> fakeCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), true);
             List<Position> fakeCloserCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), false);
-
+            Checkpoint fakeCPInLine = Calculs.findFakeCheckpointInLine(ship);
 
             if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(100));
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(30));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif
             }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(100));
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(30));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
@@ -123,6 +129,11 @@ public class Captain implements CaptainInterface {
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
+            }
+            //TODO Ajout pour checkpoint orientation beateau
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCPInLine.getPosition()))) {
+                System.out.println("check in line !");
+                goal.addFirstCheckpoint(fakeCPInLine);
             }
         }
     }
@@ -155,6 +166,15 @@ public class Captain implements CaptainInterface {
             return ship.getDeckSails().stream().filter(sail -> sail.isOpenned() && sail.hasSailorOn() && sail.getSailorOn().isOnEntity()).map(Sail::getSailorOn).collect(Collectors.toList());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public Sailor doUseWatch() {
+        Optional<Watch> watch = ship.getDeckWatch();
+        if(watch.isPresent() && watch.get().hasSailorOn() && watch.get().getSailorOn().isOnEntity()){
+            return watch.get().getSailorOn();
+        }
+        return null;
     }
 
     @Override
@@ -196,7 +216,7 @@ public class Captain implements CaptainInterface {
         int nbSailorsLeft = leftSailors.size();
 
 
-        if (!isNear && false) {// si le bateau est loin du checkpoint //TODO revoir ce point là : en enlevant false le bateau ne ralentit pas assez au niveau du canal du panama
+        if (!isNear) {// si le bateau est loin du checkpoint //TODO revoir ce point là : le bateau ne ralentit pas assez au niveau du canal du panama
             Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
             recalculateChosenAngle(compo.getSailorsLeft(), compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
