@@ -9,7 +9,6 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
@@ -33,7 +32,7 @@ public class EngineSettingsWeek9Snake implements EngineSettings {
     private ArrayList<Sailor> rightSailors;
     @JsonIgnore
     static final int n = 100;
-    private int visibleDistance =1000;
+    private int visibleDistance = 1000;
     private int shipCount = 1;
     private double rotation = 0;
     private int nbSailUsed = 0;
@@ -116,8 +115,8 @@ public class EngineSettingsWeek9Snake implements EngineSettings {
     }
 
     @Override
-    public void setWatch(Watch watch){
-        this.watch=watch;
+    public void setWatch(Watch watch) {
+        this.watch = watch;
     }
 
     @Override
@@ -151,8 +150,8 @@ public class EngineSettingsWeek9Snake implements EngineSettings {
     }
 
     @Override
-    public void setVisibleDistance(int distance){
-        this.visibleDistance=distance;
+    public void setVisibleDistance(int distance) {
+        this.visibleDistance = distance;
     }
 
     @Override
@@ -184,30 +183,28 @@ public class EngineSettingsWeek9Snake implements EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
 
-        Polygone polygon = new Polygone(0, new Point[]{new Point(-155.0, -225.00000000000003), new Point( -230.0, -50.000000000000014), new Point( -5.0000000000000275, 150.0), new Point( 245.0, 175.0), new Point( 145.0, -50.00000000000001)});
-        Position position = new Position(5405.0, 7125.0, 0.0);
+
 
         Circle circle1 = new Circle(90.18);
-        Position position1 = new Position(67.75, 298.82,0);
+        Position position1 = new Position(67.75, 298.82, 0);
         Circle circle2 = new Circle(116.49);
-        Position position2 = new Position(93.3, 414.95,0);
+        Position position2 = new Position(93.3, 414.95, 0);
         Circle circle3 = new Circle(78.82);
-        Position position3 = new Position(209.42, 519.46,0);
+        Position position3 = new Position(209.42, 519.46, 0);
         Circle circle4 = new Circle(84.18);
-        Position position4 = new Position(332.51, 143.22,0);
+        Position position4 = new Position(332.51, 143.22, 0);
         Circle circle5 = new Circle(62.48);
-        Position position5 = new Position(332.51, 203.6,0);
+        Position position5 = new Position(332.51, 203.6, 0);
         Circle circle6 = new Circle(45);
-        Position position6 = new Position(332.51, 287.21,0);
+        Position position6 = new Position(332.51, 287.21, 0);
         Circle circle7 = new Circle(79.44);
-        Position position7 = new Position(330.9, 554.3,0);
+        Position position7 = new Position(330.9, 554.3, 0);
         Circle circle8 = new Circle(45);
-        Position position8 = new Position(443.99, 507.85,0);
+        Position position8 = new Position(443.99, 507.85, 0);
         Circle circle9 = new Circle(45.09);
-        Position position9 = new Position(478.83, 431.2,0);
+        Position position9 = new Position(478.83, 431.2, 0);
 
 
-        this.visibleEntities.add(new Reef(position, polygon));
         this.visibleEntities.add(new Reef(position1, circle1));
         this.visibleEntities.add(new Reef(position2, circle2));
         this.visibleEntities.add(new Reef(position3, circle3));
@@ -217,8 +214,6 @@ public class EngineSettingsWeek9Snake implements EngineSettings {
         this.visibleEntities.add(new Reef(position7, circle7));
         this.visibleEntities.add(new Reef(position8, circle8));
         this.visibleEntities.add(new Reef(position9, circle9));
-
-
 
 
     }
@@ -319,7 +314,7 @@ public class EngineSettingsWeek9Snake implements EngineSettings {
                 this.sailArrayList.add((Sail) entity);
             }
             if (entity.getType().equals(EntityType.watch)) {
-                this.watch=(Watch) entity;
+                this.watch = (Watch) entity;
             }
         }
     }

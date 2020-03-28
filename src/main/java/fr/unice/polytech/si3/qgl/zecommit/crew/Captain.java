@@ -71,7 +71,7 @@ public class Captain implements CaptainInterface {
         }
         Optional<Sailor> leftSailor = sailors.stream().filter(Sailor::hasEntity).findAny();
         Optional<Watch> watch = ship.getDeckWatch();
-        if(leftSailor.isPresent() && watch.isPresent() && !watch.get().hasSailorOn()){
+        if(leftSailor.isPresent() && watch.isPresent() && !watch.get().hasSailorOn()) {
             leftSailor.get().setOnEntity(watch.get());
         }
     }
