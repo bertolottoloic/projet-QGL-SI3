@@ -409,12 +409,12 @@ public class EngineSettingsWeek9Snake implements EngineSettings {
 
     @Override
     public int getVisibleDistance() {
-        return 0;
+        return this.visibleDistance;
     }
 
     @Override
     public Watch getWatch() {
-        return null;
+        return this.watch;
     }
 
     /**
