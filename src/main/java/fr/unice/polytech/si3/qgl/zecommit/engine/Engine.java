@@ -21,7 +21,7 @@ public class Engine {
     public static List<List<Sailor>> sailorsDeckVizu;
 
 
-    public static EngineSettings engineSettings = new EngineSettingsWeek9ZigZag();//A modifier pour changer la simulation
+    public static EngineSettings engineSettings = new EngineSettingsWeek9Snake();//A modifier pour changer la simulation
 
 
     public static void main(String[] args) throws CollisionException {
