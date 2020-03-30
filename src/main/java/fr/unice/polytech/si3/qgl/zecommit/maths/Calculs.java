@@ -153,15 +153,15 @@ public class Calculs {
      * On trouve les points D et E équidistants de A et B en trouvant les intersections entre
      * le cercle de centre A de rayon AE (AE= sqrt(2 * AC**2)) et le cercle de centre B et rayon BE=AE
      * <p>
-     * x E
-     * x               /
+     *                  x E
+     *  x              /
      * A              /
-     * /
-     * x
-     * / C
-     * /
-     * /              x
-     * D x                B
+     *               /
+     *              x
+     *             / C
+     *            /
+     *           /              x
+     *        D x                B
      *
      * @param position1
      * @param position2

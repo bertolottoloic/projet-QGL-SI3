@@ -69,6 +69,10 @@ public class Captain implements CaptainInterface {
                 }
             }
         }
+        attributeWatchToSailors(sailors);
+    }
+
+    public void attributeWatchToSailors(List<Sailor> sailors) {
         Optional<Sailor> leftSailor = sailors.stream().filter(Sailor::hasEntity).findAny();
         Optional<Watch> watch = ship.getDeckWatch();
         if(leftSailor.isPresent() && watch.isPresent() && !watch.get().hasSailorOn()) {
@@ -130,11 +134,14 @@ public class Captain implements CaptainInterface {
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
             }
+            /*
             //TODO Ajout pour checkpoint orientation beateau
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCPInLine.getPosition()))) {
                 System.out.println("check in line !");
                 goal.addFirstCheckpoint(fakeCPInLine);
             }
+
+             */
         }
     }
 
