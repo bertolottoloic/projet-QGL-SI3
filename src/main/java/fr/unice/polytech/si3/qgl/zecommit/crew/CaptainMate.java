@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.crew;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.EntityType;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 
 import java.util.AbstractMap.SimpleEntry;
@@ -21,7 +22,7 @@ public class CaptainMate {
 
 
     public void moveSailorsToTheirEntity(List<Sailor> sailors) {
-        if (!captain.doMoveSailors().isEmpty()) {
+        if (!sailors.isEmpty()) {
             for (Sailor sailor : sailors) {
                 if (sailor.hasEntity() && !sailor.isOnEntity()) {
                     actions.add(captain.getDeck().moveSailor(sailor, sailor.getEntity().getX() - sailor.getX(),
@@ -35,18 +36,23 @@ public class CaptainMate {
 
     public void activateOars(List<Sailor> sailors) {
         if(!sailors.isEmpty())
-            sailors.forEach(sailor -> actions.add(new ToOar(sailor.getId())));
+            sailors.forEach(sailor -> {
+                if(sailor.getEntity()!=null && sailor.getEntity().getType()==EntityType.oar && sailor.isOnEntity())
+                    actions.add(new ToOar(sailor.getId()));
+            });
 
     }
 
     public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
-        if(sailorAndAngle!=null && sailorAndAngle.getValue()!=0.0){
+        if(sailorAndAngle!=null && sailorAndAngle.getValue()!=null && sailorAndAngle.getValue()!=0.0){
             double angle = sailorAndAngle.getValue();
             if(angle>0) 
                 angle = Math.min(Math.PI/4, angle);
             else
                 angle = Math.max(-Math.PI/4, angle);
-            actions.add(new Turn(sailorAndAngle.getKey().getId(), angle));
+            Sailor sailor = sailorAndAngle.getKey();
+            if(sailorAndAngle.getKey()!=null && sailor.getEntity()!=null && sailor.getEntity().getType()==EntityType.rudder && sailor.isOnEntity())
+                actions.add(new Turn(sailorAndAngle.getKey().getId(), angle));
         }
 
     }
@@ -54,9 +60,11 @@ public class CaptainMate {
     public void toLiftSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
+                if(sailor.getEntity()!=null && sailor.getEntity().getType()==EntityType.sail && sailor.isOnEntity()){
                     actions.add(new LiftSail(sailor.getId()));
                     Sail sail = (Sail)sailor.getEntity();
                     sail.setOpenned(true);
+                }
             });
         }
     }
@@ -64,15 +72,17 @@ public class CaptainMate {
     public void toLowerSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
-                actions.add(new LowerSail(sailor.getId()));
-                Sail sail = (Sail)sailor.getEntity();
-                sail.setOpenned(false);
+                if(sailor.getEntity()!=null && sailor.getEntity().getType()==EntityType.sail && sailor.isOnEntity()){
+                    actions.add(new LowerSail(sailor.getId()));
+                    Sail sail = (Sail)sailor.getEntity();
+                    sail.setOpenned(false);
+                }
             });
         }
     }
 
     public void toUseWatch(Sailor sailor){
-        if(sailor!=null){
+        if(sailor!=null && sailor.getEntity()!=null && sailor.getEntity().getType()==EntityType.watch && sailor.isOnEntity()){
             actions.add(new UseWatch(sailor.getId()));
         }
     }
