@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EngineSettingsWeek9Snack implements EngineSettings {
+public class EngineSettingsWeek9ZigZag implements EngineSettings {
     private Goal goal;
     private ArrayList<Checkpoint> allCheckpoints;
     private ArrayList<Checkpoint> checkpoints;
@@ -36,9 +36,11 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     private int shipCount = 1;
     private double rotation = 0;
     private int nbSailUsed = 0;
+    private int visibleDistance =1000;
     private ArrayList<Oar> oarArrayList;
     private ArrayList<Sail> sailArrayList;
     private Rudder rudder;
+    private Watch watch;
     private Wind wind;
     @JsonIgnore
     private ArrayList<Wind> winds;
@@ -54,7 +56,7 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     ArrayList<VisibleEntitie> visibles;
 
     @JsonIgnore
-    public EngineSettingsWeek9Snack() {
+    public EngineSettingsWeek9ZigZag() {
         this.entities = new ArrayList<>();
         this.sailors = new ArrayList<>();
         this.oarArrayList = new ArrayList<>();
@@ -111,6 +113,11 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     @Override
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    @Override
+    public void setWatch(Watch watch) {
+        this.watch=watch;
     }
 
     @Override
@@ -172,17 +179,18 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
 
-        Polygone polygon = new Polygone(0, new Point[]{new Point(-155.0, -225.00000000000003), new Point( -230.0, -50.000000000000014), new Point( -5.0000000000000275, 150.0), new Point( 245.0, 175.0), new Point( 145.0, -50.00000000000001)});
-        Position position = new Position(5405.0, 7125.0, 0.0);
+        Circle circle1 = new Circle(100);
+        Position position1 = new Position(1300, 0,0);
+        Circle circle2 = new Circle(80);
+        Position position2 = new Position(1560, 0,0);
+        Circle circle3 = new Circle(40);
+        Position position3 = new Position(480, 0,0);
 
-        Circle circle1 = new Circle(20.0);
-        Position position1 = new Position(111.76, 182.81,0);
 
 
-        this.visibleEntities.add(new Reef(position, polygon));
         this.visibleEntities.add(new Reef(position1, circle1));
-
-
+        this.visibleEntities.add(new Reef(position2, circle2));
+        //this.visibleEntities.add(new Reef(position3, circle3));
 
 
     }
@@ -222,10 +230,10 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
 
         this.checkpoints = new ArrayList<>();
 
-        this.checkpoints.add(new Checkpoint(new Position(200, 200, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(295.35, 410.3, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(460.25, 217.54, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(601.92, 433.53, 0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(1440, 0, 0), new Circle(35)));
+        this.checkpoints.add(new Checkpoint(new Position(1680, 0, 0), new Circle(35)));
+        //this.checkpoints.add(new Checkpoint(new Position(41, 410.3, 0), new Circle(50)));
+
 
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
@@ -282,6 +290,9 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
             if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
             }
+            if (entity.getType().equals(EntityType.watch)) {
+                this.watch=new Watch(entity.getX(),entity.getY());
+            }
         }
     }
 
@@ -298,6 +309,11 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
                 this.reefs.add((Reef) entity);
             }
         }
+    }
+
+    @Override
+    public void setVisibleDistance(int distance) {
+        this.visibleDistance=distance;
     }
 
 
@@ -349,6 +365,11 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
     @JsonIgnore
     public List<Entity> getEntities() {
         return entities;
+    }
+
+    @Override
+    public Watch getWatch() {
+        return watch;
     }
 
     /**
@@ -459,6 +480,9 @@ public class EngineSettingsWeek9Snack implements EngineSettings {
         return shipCount;
     }
 
+    @Override
+    public int getVisibleDistance() {
+        return visibleDistance;
+    }
+
 }
-
-

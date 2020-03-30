@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
+import java.util.Objects;
+
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 
 public class Turn extends Action{
@@ -16,6 +18,22 @@ public class Turn extends Action{
             this.rotation=0;
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==this) return true;
+        if(obj instanceof Turn){
+            Turn act = (Turn) obj;
+            return this.sailorId==act.sailorId && this.rotation==act.rotation;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sailorId,rotation);
+    }
+
 
     public double getRotation(){
         return this.rotation;

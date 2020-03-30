@@ -46,6 +46,7 @@ public abstract class Shape {
             return ((Polygone)this).getRadius();
     }
 
+    @JsonIgnore
     public double getShapeOrientation(){
         if(isCircle && !isRectangle)
             return 0;

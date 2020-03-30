@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.action;
 
+import java.util.Objects;
+
 /**
  * @author Loic Bertolotto
  */
@@ -12,6 +14,21 @@ public abstract class Action{
         this.type = type;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==this) return true;
+        if(obj instanceof Action){
+            Action act = (Action) obj;
+            return (this.type.equals(act.type) && this.sailorId==act.sailorId);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sailorId);
+    }
+
     //------------------------------GETTER-------------------------//
 
     public int getSailorId(){
@@ -21,6 +38,8 @@ public abstract class Action{
     public ActionType getType(){
         return this.type;
     }
+
+    
 
 
 

@@ -17,6 +17,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -310,5 +311,18 @@ class EngineCalculTest {
 
     }
 
-
+    @Test
+    void getCurrentOnTest(){
+        Ship shiptest = mock(Ship.class);
+        Position pos = new Position(0, 0, 0);
+        when(shiptest.getPosition()).thenReturn(pos);
+        engineSettings.setShip(shiptest);
+        ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
+        visibleEntities.add(new Stream(new Position(0, 0, 0), new Rectangle(10, 10, 0), 100));
+        engineSettings.setVisibleEntities(visibleEntities);
+        assertTrue(engineCalcul.getCurrentOn()!=null);
+        visibleEntities = new ArrayList<>();
+        engineSettings.setVisibleEntities(visibleEntities);
+        assertTrue(engineCalcul.getCurrentOn()==null);
+    }
 }

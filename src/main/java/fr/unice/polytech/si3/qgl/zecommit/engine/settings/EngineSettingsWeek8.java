@@ -33,6 +33,7 @@ public class EngineSettingsWeek8 implements EngineSettings {
     private ArrayList<Sailor> rightSailors;
     @JsonIgnore
     static final int n = 100;
+    private int visibleDistance =1000;
     private int shipCount = 1;
     private double rotation = 0;
     private int nbSailUsed = 0;
@@ -40,6 +41,7 @@ public class EngineSettingsWeek8 implements EngineSettings {
     private ArrayList<Sail> sailArrayList;
     private Rudder rudder;
     private Wind wind;
+    private Watch watch;
     @JsonIgnore
     private ArrayList<Wind> winds;
     @JsonIgnore
@@ -290,6 +292,10 @@ public class EngineSettingsWeek8 implements EngineSettings {
     }
 
     @Override
+    public void setVisibleDistance(int distance){
+        this.visibleDistance=distance;
+    }
+    @Override
     public void setSailors() {
         this.sailors = new ArrayList<>();
 
@@ -360,6 +366,11 @@ public class EngineSettingsWeek8 implements EngineSettings {
     }
 
     @Override
+    public void setWatch(Watch watch){
+        this.watch=watch;
+    }
+
+    @Override
     public void changeWind() {
         wind = winds.get(random.nextInt(winds.size()));
     }
@@ -375,6 +386,9 @@ public class EngineSettingsWeek8 implements EngineSettings {
             }
             if (entity.getType().equals(EntityType.sail)) {
                 this.sailArrayList.add((Sail) entity);
+            }
+            if (entity.getType().equals(EntityType.watch)) {
+                this.watch=(Watch) entity;
             }
         }
     }
@@ -425,6 +439,11 @@ public class EngineSettingsWeek8 implements EngineSettings {
     @Override
     public Ship getShip() {
         return ship;
+    }
+
+    @Override
+    public Watch getWatch(){
+        return watch;
     }
 
     /**
@@ -553,6 +572,10 @@ public class EngineSettingsWeek8 implements EngineSettings {
         return shipCount;
     }
 
+    @Override
+    public int getVisibleDistance(){
+        return visibleDistance;
+    }
 }
 
 

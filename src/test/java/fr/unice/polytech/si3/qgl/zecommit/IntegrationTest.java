@@ -45,11 +45,22 @@ public class IntegrationTest {
 
     @Category(IntegrationTest.class)
     @Test
+    @Disabled
     public void week8Test(){
         String str[] = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek8();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
+
+    @Category(IntegrationTest.class)
+    @Test
+    public void week9SnakeTest(){
+        String str[] = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek9Snake();
         assertDoesNotThrow(() -> Engine.main(str));
     }
 }

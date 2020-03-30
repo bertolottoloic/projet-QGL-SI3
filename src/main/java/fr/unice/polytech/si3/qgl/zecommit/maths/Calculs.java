@@ -2,7 +2,10 @@ package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
+import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -121,6 +124,27 @@ public class Calculs {
         return res;
     }
 
+    /**
+     * Méthode qui determine un checkpoint dans l'orientation du bateau dans le cas ou les autres fakeCP ne suffisent pas
+     * @param ship
+     * @return
+     */
+    public static Checkpoint findFakeCheckpointInLine(Ship ship) {
+        Position shipPosition = ship.getPosition();
+
+        double shipOrientation = shipPosition.getOrientation();
+
+        double coefDistance = 50;
+
+        double xCP = Math.cos(shipOrientation) * coefDistance;
+        double yCP = Math.sin(shipOrientation) * coefDistance;
+
+        Checkpoint fakeCP = new Checkpoint(new Position(xCP, yCP, 0), new Circle(100));
+        fakeCP.setFake(true);
+
+        return fakeCP;
+    }
+
 
     /**
      * Méthode permettant de determiner deux positions de CP potentiels
@@ -129,15 +153,15 @@ public class Calculs {
      * On trouve les points D et E équidistants de A et B en trouvant les intersections entre
      * le cercle de centre A de rayon AE (AE= sqrt(2 * AC**2)) et le cercle de centre B et rayon BE=AE
      * <p>
-     * x E
-     * x               /
+     *                  x E
+     *  x              /
      * A              /
-     * /
-     * x
-     * / C
-     * /
-     * /              x
-     * D x                B
+     *               /
+     *              x
+     *             / C
+     *            /
+     *           /              x
+     *        D x                B
      *
      * @param position1
      * @param position2
