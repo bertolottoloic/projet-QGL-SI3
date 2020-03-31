@@ -3,50 +3,169 @@ package fr.unice.polytech.si3.qgl.zecommit.engine.settings;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
+import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
+import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public interface EngineSettings {
+public abstract class EngineSettings implements EngineSettingsInterface{
+    protected Goal goal;
+    protected ArrayList<Checkpoint> allCheckpoints;
+    protected ArrayList<Checkpoint> checkpoints;
+    protected Ship ship;
+    protected Deck deck;
+    protected ArrayList<Entity> entities;
+    protected Shape shape;
+    protected ArrayList<Sailor> sailors;
+    protected ArrayList<VisibleEntitie> visibleEntities;
+    protected ObjectMapper oM;
 
-    void resetSettings();
+    ///////////////////////////
 
-     void initiateSettings();
+    protected ArrayList<Sailor> leftSailors;
+    protected ArrayList<Sailor> rightSailors;
+    @JsonIgnore
+    protected int visibleDistance =1000;
+    static final int n = 100;
+    protected int shipCount = 1;
+    protected double rotation = 0;
+    protected int nbSailUsed = 0;
+    protected ArrayList<Oar> oarArrayList;
+    protected ArrayList<Sail> sailArrayList;
+    protected Rudder rudder;
+    protected Watch watch;
+    protected Wind wind;
+    @JsonIgnore
+    protected ArrayList<Wind> winds;
+    @JsonIgnore
+    protected Random random = new Random();
 
-     void setWind(Wind wind);
 
-     void setDeck(Deck deck);
+    @JsonIgnore
+    ArrayList<Stream> streams;
+    @JsonIgnore
+    ArrayList<Reef> reefs;
+    @JsonIgnore
+    ArrayList<VisibleEntitie> visibles;
 
-     void setShip(Ship ship);
+    @JsonIgnore
+    public EngineSettings() {
+        this.entities = new ArrayList<>();
+        this.sailors = new ArrayList<>();
+        this.oarArrayList = new ArrayList<>();
+        this.sailArrayList = new ArrayList<>();
+        this.winds = new ArrayList<>();
+        this.streams = new ArrayList<>();
+        this.reefs = new ArrayList<>();
+        this.visibles = new ArrayList<>();
+        this.oM = new ObjectMapper();
 
-     void setWatch(Watch watch);
+        this.rightSailors = new ArrayList<>();
+        this.leftSailors = new ArrayList<>();
+    }
 
-     void setRightSailors(ArrayList<Sailor> sailors);
+    public void resetSettings() {
+        setCheckpoints(new ArrayList<>());
+        setGoal(new Regatta(new ArrayList<>()));
+        setEntities(new ArrayList<>());
+        setSailors(new ArrayList<>());
+        setDeck(new Deck(0, 0));
+        setShape(new Rectangle(0, 0, 0));
+        setShip(new Ship("ship", 100, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape));
+        setVisibleEntities(new ArrayList<>());
+        setWind(new Wind(0, 0));
+    }
 
-     void setLeftSailors(ArrayList<Sailor> sailors);
 
-     void setRotation(double rotation);
+    public void initiateSettings() {
+        setCheckpoints();
+        setGoal();
+        setEntities();
+        setSailors();
+        setDeck();
+        setShape();
+        setShip();
+        setVisibleEntities();
+        sortVisibleEntities();
+        sortEntities();
+        setWind();
+        changeWind();
+    }
 
-     void setOarList(ArrayList<Oar> oars);
 
-     void setVisibleEntities(ArrayList<VisibleEntitie> visibles);
+    public void setWind(Wind wind) {
+        this.wind = wind;
+    }
 
-     void setSailors(ArrayList<Sailor> sailors);
 
-     void setCheckpoints(ArrayList<Checkpoint> checkpoints);
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
 
-     void setGoal(Goal goal);
 
-     void setEntities(ArrayList<Entity> entities);
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
 
-     void setShape(Shape shape);
+
+    public void setRightSailors(ArrayList<Sailor> sailors) {
+        this.rightSailors = sailors;
+    }
+
+
+    public void setLeftSailors(ArrayList<Sailor> sailors) {
+        this.leftSailors = sailors;
+    }
+
+
+    public void setRotation(double rotation) {
+        this.rotation = rotation;
+    }
+
+
+    public void setOarList(ArrayList<Oar> oars) {
+        this.oarArrayList = oars;
+    }
+
+
+    public void setVisibleEntities(ArrayList<VisibleEntitie> visibles) {
+        this.visibleEntities = visibles;
+    }
+
+
+    public void setSailors(ArrayList<Sailor> sailors) {
+        this.sailors = sailors;
+    }
+
+
+    public void setCheckpoints(ArrayList<Checkpoint> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+
+
+    public void setEntities(ArrayList<Entity> entities) {
+        this.entities = entities;
+    }
+
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
 
 
     /**
@@ -54,127 +173,271 @@ public interface EngineSettings {
      */
 
 
-     void setVisibleEntities();
+
+    public void setVisibleEntities() {
+    }
 
 
-     void setShip();
 
-     void setWind();
+    public void setShip() {
+    }
 
-     void setSailors();
 
-     void setGoal();
+    public void setWind() {
+        this.winds.add(new Wind(0, 3.36));
 
-     void setCheckpoints();
+    }
 
-     void setDeck();
 
-     void setEntities();
+    public void setSailors() {
 
-     void setShape();
+    }
 
-     void setNbSailUsed(int nbSailUsed);
 
-     void setRudder(Rudder rudder);
+    public void setGoal() {
+    }
 
-     void changeWind();
 
-     void sortEntities();
+    public void setCheckpoints() {
 
-     void sortVisibleEntities();
+    }
 
-     void setVisibleDistance(int distance);
+
+    public void setDeck() {
+
+    }
+
+    public void setWatch(Watch watch){
+        this.watch=watch;
+    }
+
+
+    public void setEntities() {
+
+
+    }
+
+
+    public void setShape() {
+    }
+
+
+    public void setNbSailUsed(int nbSailUsed) {
+        this.nbSailUsed = nbSailUsed;
+    }
+
+
+    public void setRudder(Rudder rudder) {
+        this.rudder = rudder;
+    }
+
+
+    public void setVisibleDistance(int distance){
+        this.visibleDistance=distance;
+    }
+
+
+    public void changeWind() {
+        wind = winds.get(random.nextInt(winds.size()));
+    }
+
+
+    public void sortEntities() {
+        for (Entity entity : entities) {
+            if (entity.getType().equals(EntityType.oar)) {
+                this.oarArrayList.add((Oar) entity);
+            }
+            if (entity.getType().equals(EntityType.rudder)) {
+                this.rudder = new Rudder(entity.getX(), entity.getY());
+            }
+            if (entity.getType().equals(EntityType.sail)) {
+                this.sailArrayList.add((Sail) entity);
+            }
+            if (entity.getType().equals(EntityType.watch)) {
+                this.watch=(Watch) entity;
+            }
+        }
+    }
+
+
+
+    public void sortVisibleEntities() {
+        for (VisibleEntitie entity : visibleEntities) {
+            if (entity.getType().equals(VisibleEntityType.stream)) {
+                this.streams.add((Stream) entity);
+            }
+            if (entity.getType().equals(VisibleEntityType.ship)) {
+            }
+            if (entity.getType().equals(VisibleEntityType.reef)) {
+                this.reefs.add((Reef) entity);
+            }
+        }
+    }
 
 
     /**
      * ################################################ GETTERS ################################################
      */
 
-     Goal getGoal();
+
+    public Goal getGoal() {
+        return this.goal;
+    }
 
     @JsonIgnore
-     int getN();
+
+    public int getN() {
+        return n;
+    }
 
     /**
      * @return the checkpoints
      */
     @JsonIgnore
-     List<Checkpoint> getCheckpoints();
+
+    public List<Checkpoint> getCheckpoints() {
+        return checkpoints;
+    }
 
     /**
      * @return the ship
      */
-     Ship getShip();
+
+    public Ship getShip() {
+        return ship;
+    }
 
     /**
      * @return the deck
      */
     @JsonIgnore
-     Deck getDeck();
+
+    public Deck getDeck() {
+        return deck;
+    }
 
     /**
      * @return the entities
      */
     @JsonIgnore
-     List<Entity> getEntities();
 
-    /**
-     * @return the watch
-     */
-    @JsonIgnore
-    Watch getWatch();
+    public List<Entity> getEntities() {
+        return entities;
+    }
 
     /**
      * @return the shape
      */
     @JsonIgnore
-     Shape getShape();
 
+    public Shape getShape() {
+        return shape;
+    }
+
+
+    public Watch getWatch(){return watch;}
     /**
      * @return the sailors
      */
-     List<Sailor> getSailors();
+
+    public List<Sailor> getSailors() {
+        return sailors;
+    }
 
     /**
      * @return the visibleEntities
      */
-     ArrayList<VisibleEntitie> getVisibleEntities();
 
-     double getRotation();
+    public ArrayList<VisibleEntitie> getVisibleEntities() {
+        return visibleEntities;
+    }
 
-     Rudder getRudder();
 
-     Wind getWind();
+    public double getRotation() {
+        return rotation;
+    }
 
-     ObjectMapper getoM();
 
-     ArrayList<Reef> getReefs();
+    public Rudder getRudder() {
+        return rudder;
+    }
 
-     Random getRandom();
 
-     ArrayList<Sailor> getLeftSailors();
+    public Wind getWind() {
+        return wind;
+    }
 
-     ArrayList<Sailor> getRightSailors();
 
-     ArrayList<Oar> getOarArrayList();
+    public ObjectMapper getoM() {
+        return oM;
+    }
 
-     ArrayList<Sail> getSailArrayList();
 
-     ArrayList<Stream> getStreams();
+    public ArrayList<Reef> getReefs() {
+        return reefs;
+    }
 
-     ArrayList<VisibleEntitie> getVisibles();
 
-     ArrayList<Wind> getWinds();
+    public Random getRandom() {
+        return random;
+    }
 
-     int getNbSailUsed();
 
-     ArrayList<Checkpoint> getAllCheckpoints();
+    public ArrayList<Sailor> getLeftSailors() {
+        return leftSailors;
+    }
+
+
+    public ArrayList<Sailor> getRightSailors() {
+        return rightSailors;
+    }
+
+
+    public ArrayList<Oar> getOarArrayList() {
+        return oarArrayList;
+    }
+
+
+    public ArrayList<Sail> getSailArrayList() {
+        return sailArrayList;
+    }
+
+
+    public ArrayList<Stream> getStreams() {
+        return streams;
+    }
+
+
+    public ArrayList<VisibleEntitie> getVisibles() {
+        return visibles;
+    }
+
+
+    public ArrayList<Wind> getWinds() {
+        return winds;
+    }
+
+
+    public int getNbSailUsed() {
+        return nbSailUsed;
+    }
+
+
+    public ArrayList<Checkpoint> getAllCheckpoints() {
+        return allCheckpoints;
+    }
 
     /**
      * @return the shipCount
      */
-     int getShipCount();
 
-     int getVisibleDistance();
+    public int getShipCount() {
+        return shipCount;
+    }
+
+
+    public int getVisibleDistance(){
+        return visibleDistance;
+    }
 
 }

@@ -4,7 +4,7 @@ import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettings;
+import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsInterface;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Engine {
     public static List<List<Sailor>> sailorsDeckVizu;
 
 
-    public static EngineSettings engineSettings = new EngineSettingsWeek9();//A modifier pour changer la simulation
+    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek9();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 
@@ -51,7 +51,7 @@ public class Engine {
                 engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
             } catch (Exception e) {
                 System.err.println(e.getMessage());//affiche une exception en cas de collision
-                //throw new CollisionException();// a commenter pour ne pas interrompre le code
+                throw new CollisionException();// a commenter pour ne pas interrompre le code
             }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);
