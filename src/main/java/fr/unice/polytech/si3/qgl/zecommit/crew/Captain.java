@@ -107,41 +107,32 @@ public class Captain implements CaptainInterface {
             Logs.add("Obstacle détecté sur votre trajet");
             List<Position> fakeCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), true);
             List<Position> fakeCloserCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), false);
-            Checkpoint fakeCPInLine = Calculs.findFakeCheckpointInLine(ship);
 
             if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(30));
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif
             }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(30));
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
 
             }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(0), new Circle(100));
+                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(0), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
                 }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(1), new Circle(100));
+                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(1), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
             }
-            /*
-            //TODO Ajout pour checkpoint orientation beateau
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCPInLine.getPosition()))) {
-                System.out.println("check in line !");
-                goal.addFirstCheckpoint(fakeCPInLine);
-            }
-
-             */
         }
     }
 
