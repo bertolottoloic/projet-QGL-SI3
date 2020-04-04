@@ -91,12 +91,12 @@ public class GUI extends JFrame {
 
         @Override
         public void mouseDragged(MouseEvent e) {
-
+            //vide
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            
+            //vide
         }
     }
 
@@ -104,27 +104,27 @@ public class GUI extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-
+            //vide
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-
+            //vide
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
+            //vide
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-
+            //vide
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-
+            //vide
         }
     }
 

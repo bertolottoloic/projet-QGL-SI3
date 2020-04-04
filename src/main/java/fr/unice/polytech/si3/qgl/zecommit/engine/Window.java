@@ -11,10 +11,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class Window extends JFrame{

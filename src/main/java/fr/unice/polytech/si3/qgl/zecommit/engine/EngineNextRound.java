@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Watch;
 
 import java.util.ArrayList;
 import java.util.Iterator;
