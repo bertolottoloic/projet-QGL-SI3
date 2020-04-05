@@ -63,4 +63,13 @@ public class IntegrationTest {
         Engine.engineSettings = new EngineSettingsWeek9Snake();
         assertDoesNotThrow(() -> Engine.main(str));
     }
+    @Category(IntegrationTest.class)
+    @Test
+    public void week10Test(){
+        String str[] = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek10();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
 }

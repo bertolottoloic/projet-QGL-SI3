@@ -142,10 +142,10 @@ public class Calculs {
      *
      * @param position1
      * @param position2
-     * @param largestRadius true si l'on place les CP très loin
+     * @param strategy true si l'on place les CP très loin
      * @return
      */
-    public static List<Position> findFakeCheckpointPositions(Position position1, Position position2, boolean largestRadius) {
+    public static List<Position> findFakeCheckpointPositions(Position position1, Position position2, int strategy) {
         double x1 = position1.getX();
         double y1 = position1.getY();
         double x2 = position2.getX();
@@ -157,10 +157,10 @@ public class Calculs {
 
         double rayon = center.distanceTo(position1);
         double r1;
-        if(largestRadius)
-            r1 = Math.sqrt(rayon * rayon + rayon * rayon);
-        else
+        if(strategy==2)
             r1 = Math.sqrt(rayon * rayon + rayon/2 * rayon/2);
+        else
+            r1 = Math.sqrt(rayon * rayon + rayon * rayon);
 
         double xc1 = position1.getX(); // abscisse du centre du premier cercle
         double yc1 = position1.getY(); // ordonnée du centre du premier cercle
@@ -168,6 +168,8 @@ public class Calculs {
         double xc2 = position2.getX(); // abscisse du centre du second cercle
         double yc2 = position2.getY(); // ordonnée du centre du second cercle
         double rc2 = r1; // rayon du second cercle
+        if(strategy==3)
+            rc2=2*r1;
         double xia = 0;
         double xib = 0;
         double yia = 0;

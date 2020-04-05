@@ -57,25 +57,26 @@ public class CalculsTest {
 
 
     @Test
-    public void subdiviseRouteSizeTest(){
-        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(200,0,0)).size());
-        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(0,200,0)).size());
-        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(200,200,0)).size());
+    public void subdiviseRouteSizeTest() {
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(200, 0, 0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(0, 200, 0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(200, 200, 0)).size());
 
-        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(-200,0,0)).size());
-        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(0,-200,0)).size());
-        assertEquals(501, Calculs.subdiviseRoute(new Position(0,0,0), new Position(-200,-200,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(-200, 0, 0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(0, -200, 0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(-200, -200, 0)).size());
 
-        assertEquals(501, Calculs.subdiviseRoute(new Position(200,0,0), new Position(0,200,0)).size());
-        assertEquals(501, Calculs.subdiviseRoute(new Position(0,2000,0), new Position(200,0,0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(200, 0, 0), new Position(0, 200, 0)).size());
+        assertEquals(501, Calculs.subdiviseRoute(new Position(0, 2000, 0), new Position(200, 0, 0)).size());
     }
+
     @Test
-    public void subdiviseRouteTest(){
+    public void subdiviseRouteTest() {
         List<Position> res = new ArrayList<>();
-        for(int k = 0; k<501; k++){
+        for (int k = 0; k < 501; k++) {
             res.add(new Position(k, 0, 0));
         }
-        for(int i =0 ; i<500; i++) {
+        for (int i = 0; i < 500; i++) {
             assertEquals(res.get(i).getX(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getX(), DELTA);
             assertEquals(res.get(i).getY(), Calculs.subdiviseRoute(new Position(0, 0, 0), new Position(500, 0, 0)).get(i).getY(), DELTA);
         }
@@ -88,13 +89,13 @@ public class CalculsTest {
         expected.add(new Position(6, -1, 0));
         expected.add(new Position(3, 6, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1,1,0), new Position(8,4,0), true);
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1, 1, 0), new Position(8, 4, 0), 1);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
+        assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
+        assertEquals(expected.get(1).getX(), actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(), actual.get(1).getY(), DELTA);
 
     }
 
@@ -108,13 +109,13 @@ public class CalculsTest {
         expected.add(new Position(4.5, -2.5, 0));
         expected.add(new Position(4.5, 4.5, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1,1,0), new Position(8,1,0), true);
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1, 1, 0), new Position(8, 1, 0), 1);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
+        assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
+        assertEquals(expected.get(1).getX(), actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(), actual.get(1).getY(), DELTA);
 
     }
 
@@ -127,13 +128,13 @@ public class CalculsTest {
         expected.add(new Position(7, -6, 0));
         expected.add(new Position(7, 0, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4,-3,0), new Position(10,-3,0), true);
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4, -3, 0), new Position(10, -3, 0), 1);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
+        assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
+        assertEquals(expected.get(1).getX(), actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(), actual.get(1).getY(), DELTA);
 
     }
 
@@ -146,13 +147,13 @@ public class CalculsTest {
         expected.add(new Position(6, -1, 0));
         expected.add(new Position(2, -1, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4,-3,0), new Position(4,1,0), true);
+        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4, -3, 0), new Position(4, 1, 0), 1);
 
-        assertEquals(expected.get(0).getX(),actual.get(0).getX(), DELTA);
-        assertEquals(expected.get(0).getY(),actual.get(0).getY(), DELTA);
+        assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
+        assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);
 
-        assertEquals(expected.get(1).getX(),actual.get(1).getX(), DELTA);
-        assertEquals(expected.get(1).getY(),actual.get(1).getY(), DELTA);
+        assertEquals(expected.get(1).getX(), actual.get(1).getX(), DELTA);
+        assertEquals(expected.get(1).getY(), actual.get(1).getY(), DELTA);
 
     }
 

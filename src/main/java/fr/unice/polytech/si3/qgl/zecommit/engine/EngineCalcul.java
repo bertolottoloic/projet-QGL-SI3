@@ -217,7 +217,7 @@ public class EngineCalcul {
 
         boolean res = checkCollision(newPosition);
 
-        if (res)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
+        if (false)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
             throw new Exception();
         else {
             settings.getShip().setPosition(newPosition);

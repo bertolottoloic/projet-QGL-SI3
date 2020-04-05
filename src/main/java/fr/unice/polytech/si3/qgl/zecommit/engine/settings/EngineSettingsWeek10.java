@@ -20,7 +20,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class EngineSettingsWeek10 extends EngineSettings{
+public class EngineSettingsWeek10 extends EngineSettings {
 
     /**
      * ################################################ SETTINGS ################################################
@@ -30,34 +30,33 @@ public class EngineSettingsWeek10 extends EngineSettings{
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
 
-        Position position1 = new Position(3193.2773109243703,2466.98679471789,0);
+        Position position1 = new Position(3193.2773109243703, 2466.98679471789, 0);
         Circle shape1 = new Circle(250);
 
-        Position position2 = new Position(3976.590636254508,2965.1860744297705,0);
-        Polygone shape2 = new Polygone(0, new Point[]{new Point( 200, -200), new Point( -300, -300), new Point( 300, 300)});
+        Position position2 = new Position(3976.590636254508, 2965.1860744297705, 0);
+        Polygone shape2 = new Polygone(0.7853981633974483, new Point[]{new Point(200, -200), new Point(-300, 300), new Point(300, 300)});
 
-        Position position3 = new Position(4261.7046818727495,1788.7154861944798,0.7330382858376184);
+        Position position3 = new Position(4261.7046818727495, 1788.7154861944798, 0.7330382858376184);
         Rectangle shape3 = new Rectangle(500, 150, 0);
 
-        Position position4 = new Position(5048.0192076830845,2530.0120048019226,0.8377580409572781);
-        Polygone shape4 = new Polygone(0, new Point[]{new Point( 350, 0), new Point( 250, 250), new Point( -100, 150), new Point( -150,-150),new Point(250, -200)});
+        Position position4 = new Position(5048.0192076830845, 2530.0120048019226, 0.8377580409572781);
+        Polygone shape4 = new Polygone(0, new Point[]{new Point(350, 0), new Point(250, 250), new Point(-100, 150), new Point(-150, -150), new Point(250, -200)});
 
-        Position position5 = new Position(4243.6974789916,4063.625450180072,0.6283185307179586);
+        Position position5 = new Position(4243.6974789916, 4063.625450180072, 0.6283185307179586);
         Rectangle shape5 = new Rectangle(400, 500, 0);
 
-        Position position6 = new Position(4669.867947178872,3109.2436974789935,0);
+        Position position6 = new Position(4669.867947178872, 3109.2436974789935, 0);
         Circle shape6 = new Circle(100);
 
-        Position position7 = new Position(3481.392557022809,3229.2917166866755,0.6457718232379019);
-        Polygone shape7 = new Polygone(0, new Point[]{new Point( 150, 150), new Point( -150, 50), new Point( 0, -200)});
+        Position position7 = new Position(3481.392557022809, 3229.2917166866755, 0.6457718232379019);
+        Polygone shape7 = new Polygone(0, new Point[]{new Point(150, 150), new Point(-150, 50), new Point(0, -200)});
 
-        Position position8 = new Position(4171.668667466992,2286.914765906367,1.5009831567151233);
+        Position position8 = new Position(4171.668667466992, 2286.914765906367, 1.5009831567151233);
         Rectangle shape8 = new Rectangle(200, 1000, 0);
 
 
-        Position position9 = new Position(3769.50780312125,3091.2364945978416,3.4033920413889422);
+        Position position9 = new Position(3769.50780312125, 3091.2364945978416, 3.4033920413889422);
         Rectangle shape9 = new Rectangle(200, 1000, 0);
-
 
 
         this.visibleEntities.add(new Reef(position1, shape1));
@@ -167,7 +166,7 @@ public class EngineSettingsWeek10 extends EngineSettings{
 
     @Override
     public void setShape() {
-        this.shape = new Rectangle(12, 5, 0);
+        this.shape = new Polygone(0, new Point[]{new Point(6, -2.5), new Point(-6, 2.5), new Point(-6, 2.5), new Point(-6, -2.5)});
     }
 
 
