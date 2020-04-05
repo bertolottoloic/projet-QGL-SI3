@@ -80,7 +80,7 @@ public class EngineSettingsWeek10 extends EngineSettings{
 
     @Override
     public void setWind() {
-        this.winds.add(new Wind(0, 0));
+        this.winds.add(new Wind(0, 150));
 
     }
 
@@ -132,7 +132,7 @@ public class EngineSettingsWeek10 extends EngineSettings{
 
     @Override
     public void setDeck() {
-        this.deck = new Deck(12, 5);
+        this.deck = new Deck(5, 12);
         this.deck.setSailors(sailors);
     }
 
@@ -154,7 +154,6 @@ public class EngineSettingsWeek10 extends EngineSettings{
         this.entities.add(new Oar(8, 4));
         this.entities.add(new Oar(7, 4));
         this.entities.add(new Oar(6, 4));
-        this.entities.add(new Oar(5, 4));
         this.entities.add(new Oar(5, 4));
         this.entities.add(new Oar(4, 4));
         this.entities.add(new Oar(3, 4));
