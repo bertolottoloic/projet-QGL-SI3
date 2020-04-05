@@ -46,7 +46,7 @@ public class CaptainMate {
     public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
         if(sailorAndAngle!=null && sailorAndAngle.getValue()!=null && sailorAndAngle.getValue()!=0.0){
             double angle = sailorAndAngle.getValue();
-            if(angle>0) 
+            if(angle>0)
                 angle = Math.min(Math.PI/4, angle);
             else
                 angle = Math.max(-Math.PI/4, angle);

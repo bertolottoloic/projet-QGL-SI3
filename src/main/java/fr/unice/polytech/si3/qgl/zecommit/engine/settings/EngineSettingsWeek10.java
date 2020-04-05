@@ -88,26 +88,26 @@ public class EngineSettingsWeek10 extends EngineSettings{
     public void setSailors() {
         this.sailors = new ArrayList<>();
 
+
         this.sailors.add(new Sailor(0, 0, 0, "jean"));
         this.sailors.add(new Sailor(1, 0, 1, "paul"));
         this.sailors.add(new Sailor(2, 0, 2, "jacques"));
-        this.sailors.add(new Sailor(3, 1, 0, "pierre"));
-        this.sailors.add(new Sailor(4, 1, 1, "Vincent"));
-        this.sailors.add(new Sailor(5, 1, 2, "Joris"));
-        this.sailors.add(new Sailor(6, 2, 0, "jean"));
-        this.sailors.add(new Sailor(6, 2, 0, "jean"));
-        this.sailors.add(new Sailor(7, 2, 0, "jean"));
-        this.sailors.add(new Sailor(8, 2, 0, "jean"));
-        this.sailors.add(new Sailor(9, 2, 0, "jean"));
+        this.sailors.add(new Sailor(3, 0, 3, "pierre"));
+        this.sailors.add(new Sailor(4, 0, 4, "Vincent"));
+        this.sailors.add(new Sailor(5, 1, 0, "Joris"));
+        this.sailors.add(new Sailor(6, 1, 1, "jean"));
+        this.sailors.add(new Sailor(7, 1, 2, "jean"));
+        this.sailors.add(new Sailor(8, 1, 3, "jean"));
+        this.sailors.add(new Sailor(9, 1, 4, "jean"));
         this.sailors.add(new Sailor(10, 2, 0, "jean"));
-        this.sailors.add(new Sailor(11, 2, 0, "jean"));
-        this.sailors.add(new Sailor(12, 2, 0, "jean"));
-        this.sailors.add(new Sailor(13, 2, 0, "jean"));
-        this.sailors.add(new Sailor(14, 2, 0, "jean"));
-        this.sailors.add(new Sailor(15, 2, 0, "jean"));
-        this.sailors.add(new Sailor(16, 2, 0, "jean"));
-        this.sailors.add(new Sailor(17, 2, 0, "jean"));
-        this.sailors.add(new Sailor(19, 2, 0, "jean"));
+        this.sailors.add(new Sailor(11, 2, 1, "jean"));
+        this.sailors.add(new Sailor(12, 2, 2, "jean"));
+        this.sailors.add(new Sailor(13, 2, 3, "jean"));
+        this.sailors.add(new Sailor(14, 2, 4, "jean"));
+        this.sailors.add(new Sailor(15, 3, 0, "jean"));
+        this.sailors.add(new Sailor(16, 3, 1, "jean"));
+        this.sailors.add(new Sailor(17, 3, 2, "jean"));
+        this.sailors.add(new Sailor(18, 3, 3, "jean"));
 
     }
 
@@ -139,6 +139,7 @@ public class EngineSettingsWeek10 extends EngineSettings{
     @Override
     public void setEntities() {
 
+
         this.entities = new ArrayList<>();
         this.entities.add(new Oar(9, 0));
         this.entities.add(new Oar(8, 0));
@@ -159,8 +160,9 @@ public class EngineSettingsWeek10 extends EngineSettings{
         this.entities.add(new Oar(3, 4));
         this.entities.add(new Oar(2, 4));
 
-        this.entities.add(new Rudder(3, 1));
-        this.entities.add(new Sail(11, 2, false));
+        this.entities.add(new Rudder(11, 2));
+        this.entities.add(new Watch(0, 2));
+        this.entities.add(new Sail(7, 2, false));
 
     }
 
