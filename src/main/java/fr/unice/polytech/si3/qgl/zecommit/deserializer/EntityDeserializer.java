@@ -34,6 +34,8 @@ public class EntityDeserializer extends JsonDeserializer {
 
             case "watch" :
                 return new Watch(nodeEntities.get("x").asInt(), nodeEntities.get("y").asInt());
+            case "canon":
+                return new Canon(nodeEntities.get("x").asInt(), nodeEntities.get("y").asInt(), nodeEntities.get("loaded").asBoolean(), nodeEntities.get("angle").asDouble());
 
             default :
                 return null;
