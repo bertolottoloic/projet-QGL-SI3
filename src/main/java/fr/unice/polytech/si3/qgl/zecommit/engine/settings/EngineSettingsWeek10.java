@@ -33,14 +33,14 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Position position1 = new Position(3193.2773109243703, 2466.98679471789, 0);
         Circle shape1 = new Circle(250);
 
-        Position position2 = new Position(3976.590636254508, 2965.1860744297705, 0.7853981633974483);
-        Polygone shape2 = new Polygone(0, new Point[]{new Point(200, -200), new Point(-300, 300), new Point(300, 300)});
+        Position position2 = new Position(3976.590636254508, 2965.1860744297705, 0);
+        Polygone shape2 = new Polygone(0.7853981633974483, new Point[]{new Point(200, -200), new Point(-300, 300), new Point(300, 300)});
 
         Position position3 = new Position(4261.7046818727495, 1788.7154861944798, 0.7330382858376184);
         Rectangle shape3 = new Rectangle(500, 150, 0);
 
-        Position position4 = new Position(5048.0192076830845, 2530.0120048019226, 0.8377580409572781);
-        Polygone shape4 = new Polygone(0, new Point[]{new Point(350, 0), new Point(250, 250), new Point(-100, 150), new Point(-150, -150), new Point(250, -200)});
+        Position position4 = new Position(5048.0192076830845, 2530.0120048019226, 0);
+        Polygone shape4 = new Polygone(0.8377580409572781, new Point[]{new Point(350, 0), new Point(250, 250), new Point(-100, 150), new Point(-150, -150), new Point(250, -200)});
 
         Position position5 = new Position(4243.6974789916, 4063.625450180072, 0.6283185307179586);
         Rectangle shape5 = new Rectangle(400, 500, 0);
@@ -48,8 +48,8 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Position position6 = new Position(4669.867947178872, 3109.2436974789935, 0);
         Circle shape6 = new Circle(100);
 
-        Position position7 = new Position(3481.392557022809, 3229.2917166866755, 0.6457718232379019);
-        Polygone shape7 = new Polygone(0, new Point[]{new Point(150, 150), new Point(-150, 50), new Point(0, -200)});
+        Position position7 = new Position(3481.392557022809, 3229.2917166866755, 0);
+        Polygone shape7 = new Polygone(0.6457718232379019, new Point[]{new Point(150, 150), new Point(-150, 50), new Point(0, -200)});
 
         Position position8 = new Position(4171.668667466992, 2286.914765906367, 1.5009831567151233);
         Rectangle shape8 = new Rectangle(200, 1000, 0);
