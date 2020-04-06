@@ -120,11 +120,20 @@ public class EngineSettingsWeek10 extends EngineSettings {
 
         this.checkpoints = new ArrayList<>();
 
+        this.checkpoints.add(new Checkpoint(new Position(2292.9171668667423, 2238.8955582232875, 0), new Circle(100)));
+        this.checkpoints.add(new Checkpoint(new Position(5024.009603841534, 1620.6482593037217, 0), new Circle(100)));
+        this.checkpoints.add(new Checkpoint(new Position(3661.4645858343365, 3841.536614645855, 0), new Circle(100)));
+
+
+
+                /*
         this.checkpoints.add(new Checkpoint(new Position(5288.115246098437, 1650.6602641056418, 0), new Circle(100)));
         this.checkpoints.add(new Checkpoint(new Position(4273.709483793517, 3475.390156062426, 0), new Circle(100)));
         this.checkpoints.add(new Checkpoint(new Position(2983.193277310925, 1686.6746698679472, 0), new Circle(100)));
         this.checkpoints.add(new Checkpoint(new Position(3475.3901560624263, 3973.589435774311, 0), new Circle(100)));
         this.checkpoints.add(new Checkpoint(new Position(2052.8211284513804, 2262.9051620648256, 0), new Circle(100)));
+
+                 */
 
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
