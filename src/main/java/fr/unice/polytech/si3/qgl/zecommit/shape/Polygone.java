@@ -34,9 +34,9 @@ public class Polygone extends Shape {
         return vertices[index];
     }
 
+    @JsonIgnore
     public Point getRelativeVertice(int index, Position position){
-        return new Point(vertices[index].getX()+position.getX(), vertices[index].getY()+position.getY());
-        //        return getRelativeVerticeList(position)[index];
+        return getRelativeVerticeList(position)[index];
     }
 
     @JsonIgnore
@@ -49,15 +49,15 @@ public class Polygone extends Shape {
         Point bary = calculateCentroid();
         double xp = bary.getX();
         double yp = bary.getY();
-        double radian = position.getOrientation() + getShapeOrientation();
+        double radian = getShapeOrientation();
         double xRotate;
         double yRotate;
         for(i=0;i<n;i++) {
             t=vertices[i].getX()-xp;
             v=vertices[i].getY()-yp;
-            xRotate=(int)(xp+t*Math.cos(radian)-v*Math.sin(radian));
-            yRotate=(int)(yp+v*Math.cos(radian)+t*Math.sin(radian));
-            rotateVertices[i]=new Point(xRotate, yRotate);
+            xRotate=(xp+t*Math.cos(radian)-v*Math.sin(radian));
+            yRotate=(yp+v*Math.cos(radian)+t*Math.sin(radian));
+            rotateVertices[i]=new Point(xRotate + position.getX(), yRotate + position.getY());
         }
         return  rotateVertices;
     }
@@ -111,12 +111,17 @@ public class Polygone extends Shape {
         }
         return max/2;
     }
+
+    /**
+     * méthode déterminant le barycentre d'un polygone
+     * @return
+     */
     @JsonIgnore
     public Point calculateCentroid() {
         double x = 0;
         double y = 0;
         int pointCount = vertices.length;
-        for (int i = 0;i < pointCount - 1;i++){
+        for (int i = 0;i < pointCount;i++){
             Point point = vertices[i];
             x += point.getX();
             y += point.getY();

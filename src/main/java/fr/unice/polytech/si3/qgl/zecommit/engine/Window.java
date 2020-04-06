@@ -103,17 +103,16 @@ public class Window extends JFrame{
                         //shp=new java.awt.Rectangle.Double((chkp.getPosition().getX()/scale)+cst-(((Rectangle)chkp.getShape()).getWidth()/(2*scale)), (chkp.getPosition().getY()/scale)+cst-(((Rectangle)chkp.getShape()).getHeight()/(2*scale)), (((Rectangle)chkp.getShape()).getWidth()/scale),(((Rectangle)chkp.getShape()).getHeight()/scale));
                         break;
                     case "polygon":
-                        x=((Polygone)chkp.getShape()).getVerticesIntX();
-                        y=((Polygone)chkp.getShape()).getVerticesIntY();
+                        x=((Polygone)chkp.getShape()).getVerticesIntX(chkp.getPosition());
+                        y=((Polygone)chkp.getShape()).getVerticesIntY(chkp.getPosition());
 
                         for (int i=0; i<x.length;i++) {
                             x[i]=(int)(x[i]/scale);
-                            x[i]+=cst+chkp.getPosition().getX()/scale;
+                            x[i]+=cst;
                         }
                         for (int i=0; i<y.length;i++) {
                             y[i]=(int)(y[i]/scale);
-
-                            y[i]+=cst+chkp.getPosition().getY()/scale;
+                            y[i]+=cst;
                         }
                         shp=new Polygon(x,y,((Polygone)chkp.getShape()).getVertices().length);
                         break;
@@ -145,15 +144,15 @@ public class Window extends JFrame{
                         shp=new Polygon(x,y,vertices.size());
                         break;
                     case "polygon":
-                        x=((Polygone)ent.getShape()).getVerticesIntX();
-                        y=((Polygone)ent.getShape()).getVerticesIntY();
+                        x=((Polygone)ent.getShape()).getVerticesIntX(ent.getPosition());
+                        y=((Polygone)ent.getShape()).getVerticesIntY(ent.getPosition());
                         for (int i=0; i<x.length;i++) {
                             x[i]=(int)(x[i]/scale);
-                            x[i]+=cst+(ent.getPosition().getX()/scale);
+                            x[i]+=cst;
                         }
                         for (int i=0; i<y.length;i++) {
                             y[i]=(int)(+y[i]/scale);
-                            y[i]+=cst+(ent.getPosition().getY()/scale);
+                            y[i]+=cst;
                         }
                         shp=new Polygon(x,y,((Polygone)ent.getShape()).getVertices().length);
                         break;

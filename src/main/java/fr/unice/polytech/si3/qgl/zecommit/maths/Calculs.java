@@ -196,8 +196,12 @@ public class Calculs {
             yib = a - ((-f - Math.sqrt(delta)) / (2 * e)) * d;
         }
 
-        if (Double.isNaN(xia) || Double.isNaN(yia) || Double.isNaN(xib) || Double.isNaN(yib))
-            return Collections.emptyList(); // si les cercles ne se touchent pas ou bien sont identiques
+        if (Double.isNaN(xia) || Double.isNaN(yia) || Double.isNaN(xib) || Double.isNaN(yib)) {
+            List<Position> res = new ArrayList<>();
+            res.add(new Position(position1.getX()+100, position1.getY()+100, 0));
+            res.add(new Position(position1.getX()+100, position1.getY()+100, 0));
+            return res; // si les cercles ne se touchent pas ou bien sont identiques
+        }
 
         List<Position> res = new ArrayList<>();
         res.add(new Position(xia, yia, 0));

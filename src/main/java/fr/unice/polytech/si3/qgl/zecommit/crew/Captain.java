@@ -109,7 +109,6 @@ public class Captain implements CaptainInterface {
             List<Position> fakeCloserCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 2);
             List<Position> fakeCheckpointPositions2 = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 3);
 
-            Logs.add(fakeCheckpointPositions+"");
             if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
                 Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(50));
                 fakeCP.setFake(true);
