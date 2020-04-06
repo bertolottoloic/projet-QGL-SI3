@@ -33,8 +33,8 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Position position1 = new Position(3193.2773109243703, 2466.98679471789, 0);
         Circle shape1 = new Circle(250);
 
-        Position position2 = new Position(3976.590636254508, 2965.1860744297705, 0);
-        Polygone shape2 = new Polygone(0.7853981633974483, new Point[]{new Point(200, -200), new Point(-300, 300), new Point(300, 300)});
+        Position position2 = new Position(3976.590636254508, 2965.1860744297705, 0.7853981633974483);
+        Polygone shape2 = new Polygone(0, new Point[]{new Point(200, -200), new Point(-300, 300), new Point(300, 300)});
 
         Position position3 = new Position(4261.7046818727495, 1788.7154861944798, 0.7330382858376184);
         Rectangle shape3 = new Rectangle(500, 150, 0);
@@ -58,7 +58,7 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Position position9 = new Position(3769.50780312125, 3091.2364945978416, 3.4033920413889422);
         Rectangle shape9 = new Rectangle(200, 1000, 0);
 
-
+        //this.visibleEntities.add(new Reef(new Position(4247.955995447244, 3159.5502824076702, 0), new Circle(20)));
         this.visibleEntities.add(new Reef(position1, shape1));
         this.visibleEntities.add(new Reef(position2, shape2));
         this.visibleEntities.add(new Reef(position3, shape3));

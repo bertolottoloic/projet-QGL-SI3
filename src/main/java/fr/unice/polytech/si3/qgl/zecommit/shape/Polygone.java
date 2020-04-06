@@ -36,7 +36,32 @@ public class Polygone extends Shape {
 
     public Point getRelativeVertice(int index, Position position){
         return new Point(vertices[index].getX()+position.getX(), vertices[index].getY()+position.getY());
+        //        return getRelativeVerticeList(position)[index];
     }
+
+    @JsonIgnore
+    public Point[] getRelativeVerticeList(Position position){
+        int i;
+        double t;
+        double v;
+        int n = vertices.length;
+        Point[] rotateVertices = new Point[n];
+        Point bary = calculateCentroid();
+        double xp = bary.getX();
+        double yp = bary.getY();
+        double radian = position.getOrientation() + getShapeOrientation();
+        double xRotate;
+        double yRotate;
+        for(i=0;i<n;i++) {
+            t=vertices[i].getX()-xp;
+            v=vertices[i].getY()-yp;
+            xRotate=(int)(xp+t*Math.cos(radian)-v*Math.sin(radian));
+            yRotate=(int)(yp+v*Math.cos(radian)+t*Math.sin(radian));
+            rotateVertices[i]=new Point(xRotate, yRotate);
+        }
+        return  rotateVertices;
+    }
+
 
     @JsonIgnore
     public int[] getVerticesIntX(){
@@ -57,6 +82,24 @@ public class Polygone extends Shape {
     }
 
     @JsonIgnore
+    public int[] getVerticesIntX(Position position){
+        int[] x= new int[this.vertices.length];
+        for (int i=0; i<this.vertices.length;i++) {
+            x[i]=(int)getRelativeVertice(i, position).getX();
+
+        }
+        return x;
+    }
+    @JsonIgnore
+    public int[] getVerticesIntY(Position position){
+        int[] y= new int[this.vertices.length];
+        for (int i=0; i<this.vertices.length;i++) {
+            y[i]=(int)getRelativeVertice(i, position).getY();
+        }
+        return y;
+    }
+
+    @JsonIgnore
     public double getRadius() {
         double max = 0;
         int nbVertices = vertices.length;
@@ -67,5 +110,21 @@ public class Polygone extends Shape {
                 max = distance;
         }
         return max/2;
+    }
+    @JsonIgnore
+    public Point calculateCentroid() {
+        double x = 0;
+        double y = 0;
+        int pointCount = vertices.length;
+        for (int i = 0;i < pointCount - 1;i++){
+            Point point = vertices[i];
+            x += point.getX();
+            y += point.getY();
+        }
+
+        x = x/pointCount;
+        y = y/pointCount;
+
+        return new Point(x, y);
     }
 }

@@ -51,7 +51,7 @@ public class Engine {
                 engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
             } catch (Exception e) {
                 System.err.println(e.getMessage());//affiche une exception en cas de collision
-                throw new CollisionException();// a commenter pour ne pas interrompre le code
+                //throw new CollisionException();// a commenter pour ne pas interrompre le code
             }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);
