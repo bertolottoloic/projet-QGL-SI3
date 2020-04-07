@@ -58,7 +58,7 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Position position9 = new Position(3769.50780312125, 3091.2364945978416, 3.4033920413889422);
         Rectangle shape9 = new Rectangle(200, 1000, 0);
 
-        //this.visibleEntities.add(new Reef(new Position(4247.955995447244, 3159.5502824076702, 0), new Circle(20)));
+        this.visibleEntities.add(new Reef(new Position(3936.700852451278, 3010.618517737803, 0), new Circle(20)));
         this.visibleEntities.add(new Reef(position1, shape1));
         this.visibleEntities.add(new Reef(position2, shape2));
         this.visibleEntities.add(new Reef(position3, shape3));

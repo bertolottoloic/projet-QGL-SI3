@@ -229,8 +229,8 @@ public class EngineCalcul {
     /**
      * Méthode vérifiant les collisions avec tous les récifs présents
      *
-     * @param newPosition
-     * @return
+     * @param newPosition la prochaine position
+     * @return boolean : true en cas de collision
      */
     public boolean checkCollision(Position newPosition) {
         boolean res = false;

@@ -3,21 +3,21 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 
-public interface CaptainInterface{
+public interface CaptainInterface {
     void attributeEntitiesToSailors();
 
-    public List<Sailor> doMoveSailors();
+    List<Sailor> doMoveSailors();
 
-    public List<Sailor> doActivateOars();
+    List<Sailor> doActivateOars();
 
-    public SimpleEntry<Sailor,Double> doTurn();
+    SimpleEntry<Sailor, Double> doTurn();
 
-    public List<Sailor> doLiftSail();
+    List<Sailor> doLiftSail();
 
-    public List<Sailor> doLowerSail();
+    List<Sailor> doLowerSail();
 
-    public Sailor doUseWatch();
+    Sailor doUseWatch();
 
-    public boolean pursueGame();
+    boolean pursueGame();
 
 }

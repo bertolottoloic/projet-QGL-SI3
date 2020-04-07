@@ -79,7 +79,7 @@ public class Predictions {
 
     /**
      * Renvoie l'angle entre l'orientation du bateau et le centre du récif
-     * @return
+     * @return double l'angle
      */
     public double getAngleToCenterOfReef(Reef reef) {
         double angle = ship.getPosition().getOrientation();

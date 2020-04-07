@@ -23,8 +23,8 @@ public class OrientationTable {
 
     /**
      * Génére les orientations possibles en fonction du nombre de rames renseignées
-     * @param oarsNb
-     * @return
+     * @param oarsNb int le nombre de rame
+     * @return arrayList de doubles correspondants aux angles possibles
      */
     ArrayList<Double> generateAngleTable(int oarsNb) {
         ArrayList<Double> myAngleTable = new ArrayList<>();
@@ -66,7 +66,7 @@ public class OrientationTable {
     }
 
     ArrayList<ArrayList<Compo>> generateCompo(int oarsNb) {
-        ArrayList myCompoTable = new ArrayList();
+        ArrayList<ArrayList<Compo>> myCompoTable = new ArrayList<>();
 
         int oars;
 
@@ -96,12 +96,12 @@ public class OrientationTable {
 
     /**
      * Fonction utilitaire pour generateFormation liste des compos pour un certain angle negatif
-     * @param i
-     * @param oars
-     * @return
+     * @param i int
+     * @param oars un nombre de rame
+     * @return la liste des compo
      */
     ArrayList<Compo> compoSpeBeforeZ(int i, int oars) {
-        ArrayList tempoTable = new ArrayList();
+        ArrayList<Compo> tempoTable = new ArrayList<>();
         int ecart = (oars/2)-i;
 
         for (int k = 0; k+ecart <= (oars/2); k++) {
@@ -113,12 +113,12 @@ public class OrientationTable {
 
     /**
      * Fonction utilitaire pour generateFormation liste des compos pour un certain angle positif
-     * @param i
-     * @param oars
-     * @return
+     * @param i int
+     * @param oars nombre de rame
+     * @return la liste des compo
      */
     ArrayList<Compo> compoSpeAfterZ(int i, int oars) {
-        ArrayList<Compo> tempoTable = new ArrayList();
+        ArrayList<Compo> tempoTable = new ArrayList<>();
         int ecart = (oars/2)-i;
 
         for (int k = 0; k+ecart <= (oars/2); k++) {
@@ -130,11 +130,11 @@ public class OrientationTable {
 
     /**
      * Fonction utilitaire pour generateFormation liste des compos pour aller tout droit
-     * @param oars
-     * @return
+     * @param oars nombre de rqme
+     * @return une liste de compo
      */
     ArrayList<Compo>  compoSpeForZ(int oars) {
-        ArrayList tempoTable = new ArrayList();
+        ArrayList<Compo> tempoTable = new ArrayList<>();
         for (int i = 1; i <= (oars/2); i++) {
             tempoTable.add(new Compo(i,i));
         }

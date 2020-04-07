@@ -15,9 +15,7 @@ import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -107,8 +105,8 @@ class EngineCalculTest {
         when(turn.getSailorId()).thenReturn(1);
         when(turn.getRotation()).thenReturn(1.3);
         engineCalcul.engineTurn(turn);
-        assertFalse(engineSettings.getRotation() == 1.3);
-        assertTrue(engineSettings.getRotation() == 0);
+        assertNotEquals(1.3, engineSettings.getRotation(), 0.0);
+        assertEquals(0, engineSettings.getRotation());
     }
 
     @Test
@@ -320,9 +318,9 @@ class EngineCalculTest {
         ArrayList<VisibleEntitie> visibleEntities = new ArrayList<>();
         visibleEntities.add(new Stream(new Position(0, 0, 0), new Rectangle(10, 10, 0), 100));
         engineSettings.setVisibleEntities(visibleEntities);
-        assertTrue(engineCalcul.getCurrentOn()!=null);
+        assertNotNull(engineCalcul.getCurrentOn());
         visibleEntities = new ArrayList<>();
         engineSettings.setVisibleEntities(visibleEntities);
-        assertTrue(engineCalcul.getCurrentOn()==null);
+        assertNull(engineCalcul.getCurrentOn());
     }
 }

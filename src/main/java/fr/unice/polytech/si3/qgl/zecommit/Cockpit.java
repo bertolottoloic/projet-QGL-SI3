@@ -27,7 +27,7 @@ public class Cockpit implements ICockpit {
 
 	/**
 	 * Construit Game Captain et CaptainMate
-	 * @param jsonInitGame
+	 * @param jsonInitGame le json d'entrée
 	 */
 	public void initGame(String jsonInitGame) {
 		try {
@@ -76,7 +76,7 @@ public class Cockpit implements ICockpit {
 
 	/**
 	 * Création et initialisation de l'objet Game
-	 * @param initGame
+	 * @param initGame l'initgame créé
 	 */
 	public void setGameInfo(InitGame initGame) {
 		game.setGoal(initGame.getGoal());
@@ -102,7 +102,7 @@ public class Cockpit implements ICockpit {
 
 	/**
 	 * Met à jour l'objet Game
-	 * @param nextRound
+	 * @param nextRound le nextRound créé
 	 */
 	public void updateGame(NextRound nextRound) {
 		Deck deck = game.getShip().getDeck();

@@ -33,7 +33,6 @@ public class CaptainMateTest {
     List<Oar> oars;
     List<Sail> sails;
     SimpleEntry<Sailor,Double> sailorAndAngle;
-    Optional<Watch> watch;
     Captain captain;
     CaptainMate captainMate;
     List<Action> actions;
@@ -54,7 +53,7 @@ public class CaptainMateTest {
         actions = new ArrayList<>();
     }
 
-    
+
     @Test
     void toActivateOarsTest(){
         Oar o1 = new Oar(0, 0);
@@ -63,14 +62,14 @@ public class CaptainMateTest {
         Sailor sailor2 = new Sailor(1,1,0,"Mauvais");
         sailor1.setOnEntity(o1);
         sailor2.setOnEntity(o2);
-        sailors = Arrays.asList(new Sailor[]{sailor1,sailor2});
+        sailors = Arrays.asList(sailor1,sailor2);
         actions.add(new ToOar(sailor1.getId()));
         when(captain.doActivateOars()).thenReturn(sailors);
         assertEquals(actions, captainMate.actions());
         actions.removeAll(actions);
         when(captain.doActivateOars()).thenReturn(new ArrayList<>());
         assertEquals(actions, captainMate.actions());
-        sailors = Arrays.asList(new Sailor[]{sailor2});
+        sailors = Arrays.asList(sailor2);
         when(captain.doActivateOars()).thenReturn(sailors);
         assertEquals(actions, captainMate.actions());
     }
@@ -79,31 +78,31 @@ public class CaptainMateTest {
     void toTurnTest(){
         when(captain.doTurn()).thenReturn(null);
         assertEquals(actions, captainMate.actions());
-        sailorAndAngle = new SimpleEntry<Sailor,Double>(sailor, 0.0);
+        sailorAndAngle = new SimpleEntry<>(sailor, 0.0);
         when(captain.doTurn()).thenReturn(sailorAndAngle);
         assertEquals(actions, captainMate.actions());
         sailor = new Sailor(1, 0, 0, "mauvais");
-        sailorAndAngle = new SimpleEntry<Sailor,Double>(sailor, null);       
+        sailorAndAngle = new SimpleEntry<>(sailor, null);
         assertEquals(actions, captainMate.actions());
         Rudder rudder = new Rudder(1,1);
         sailor.setOnEntity(rudder);
-        sailorAndAngle = new SimpleEntry<Sailor,Double>(sailor, 0.5); 
+        sailorAndAngle = new SimpleEntry<>(sailor, 0.5);
         assertEquals(actions, captainMate.actions());
         sailor.move(1, 1);
         actions.add(new Turn(sailor.getId(), 0.5));
         when(captain.doTurn()).thenReturn(sailorAndAngle);
         assertEquals(actions, captainMate.actions());
-        sailorAndAngle = new SimpleEntry<Sailor,Double>(sailor, 2.0);
+        sailorAndAngle = new SimpleEntry<>(sailor, 2.0);
         when(captain.doTurn()).thenReturn(sailorAndAngle);
         actions.clear();
         actions.add(new Turn(sailor.getId(), Math.PI/4));
         assertEquals(actions, captainMate.actions());
-        sailorAndAngle = new SimpleEntry<Sailor,Double>(sailor, -0.5); 
+        sailorAndAngle = new SimpleEntry<>(sailor, -0.5);
         when(captain.doTurn()).thenReturn(sailorAndAngle);
         actions.clear();
         actions.add(new Turn(sailor.getId(), -0.5));
         assertEquals(actions, captainMate.actions());
-        sailorAndAngle = new SimpleEntry<Sailor,Double>(sailor, -2.0);
+        sailorAndAngle = new SimpleEntry<>(sailor, -2.0);
         when(captain.doTurn()).thenReturn(sailorAndAngle);
         actions.clear();
         actions.add(new Turn(sailor.getId(), -Math.PI/4));
@@ -114,7 +113,7 @@ public class CaptainMateTest {
     void toLiftSailTest(){
         assertEquals(new ArrayList<>(), captainMate.actions());
         sailor = new Sailor(1,0,0,"Boris");
-        when(captain.doLiftSail()).thenReturn(Arrays.asList(new Sailor[]{sailor}));
+        when(captain.doLiftSail()).thenReturn(Arrays.asList(sailor));
         assertEquals(new ArrayList<>(), captainMate.actions());
         Sail sail = new Sail(1,0,false);
         sailor.setOnEntity(sail);
@@ -128,7 +127,7 @@ public class CaptainMateTest {
     void toLowerSailTest(){
         assertEquals(new ArrayList<>(), captainMate.actions());
         sailor = new Sailor(1,0,0,"Boris");
-        when(captain.doLowerSail()).thenReturn(Arrays.asList(new Sailor[]{sailor}));
+        when(captain.doLowerSail()).thenReturn(Arrays.asList(sailor));
         assertEquals(new ArrayList<>(), captainMate.actions());
         Sail sail = new Sail(1,0,true);
         sailor.setOnEntity(sail);
@@ -168,7 +167,7 @@ public class CaptainMateTest {
         sailor2.setOnEntity(o2);
         sailor3.setOnEntity(o3);
         sailor4.setOnEntity(o4);
-        sailors = Arrays.asList(new Sailor[]{sailor,sailor1,sailor2,sailor3,sailor4});
+        sailors = Arrays.asList(sailor,sailor1,sailor2,sailor3,sailor4);
         Moving m1 = new Moving(1, 0, 2);
         Moving m2 = new Moving(2, 1, -3);
         Moving m3 = new Moving(3, -1, 0);

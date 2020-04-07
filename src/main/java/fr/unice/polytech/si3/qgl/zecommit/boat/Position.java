@@ -1,6 +1,6 @@
-/**
- * Definie la position du bateau sur une carte
- * @auteur Clement P
+/*
+  Definie la position du bateau sur une carte
+  @auteur Clement P
  */
 
 package fr.unice.polytech.si3.qgl.zecommit.boat;

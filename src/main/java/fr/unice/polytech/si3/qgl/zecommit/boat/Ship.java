@@ -39,7 +39,7 @@ public class Ship {
     private List<Oar> oars = new ArrayList<>();
 
 
-    /**
+    /*
      *
      *                    v  ~.      v
      *           v           /|
@@ -48,13 +48,6 @@ public class Ship {
      *                   \--------/
      * ~~~~~~~~~~~~~~~~~~~`~~~~~~'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *
-     * @param type
-     * @param life
-     * @param position
-     * @param name
-     * @param deck
-     * @param entities
-     * @param shape
      */
     public Ship(String type, int life,Position position,String name, Deck deck, List<Entity> entities,Shape shape){
         this.type = type;
@@ -71,7 +64,7 @@ public class Ship {
     /**
      * Méthode permettant de savoir si un bateau est arrivé dans le checkpoint
      * cette méthode considère un bateau dans la zone si son centre (et non le bateau entier) est à l'intérieur du checkpoint
-     * @param checkpoint
+     * @param checkpoint le CP considéré
      * @return boolean
      */
     @JsonIgnore
@@ -91,8 +84,8 @@ public class Ship {
 
     /**
      * Methode qui calcule la distance d'une position par rapport au bateau
-     * @param position
-     * @return
+     * @param position la position à atteindre
+     * @return double, la distance
      */
     public double distanceTo(Position position) {
         return this.position.distanceTo(position);
@@ -161,7 +154,7 @@ public class Ship {
 
     /**
      * Retourne la position x du bateau
-     * @return
+     * @return l'abcsisse de la position
      */
     @JsonIgnore
     public double getXPosition() {
@@ -170,7 +163,7 @@ public class Ship {
 
     /**
      * Retourne la position y du bateau
-     * @return
+     * @return l'ordonnée de la position
      */
     @JsonIgnore
     public double getYPosition() {
@@ -210,7 +203,7 @@ public class Ship {
 
     /**
      * retourne les marins du deck
-     * @return
+     * @return la liste de marins
      */
     @JsonIgnore
     public List<Sailor> getDeckSailors() {
@@ -220,7 +213,7 @@ public class Ship {
 
     /**
      * retourne les rames du deck
-     * @return
+     * @return la liste des rames
      */
     @JsonIgnore
     public List<Oar> getDeckOars() {
@@ -229,7 +222,7 @@ public class Ship {
 
     /**
      * retourne les voiles du deck
-     * @return
+     * @return la liste des voiles
      */
     @JsonIgnore
     public List<Sail> getDeckSails() {
@@ -238,7 +231,7 @@ public class Ship {
 
     /**
      * retourne le gouvernail du deck
-     * @return
+     * @return le gouvernail
      */
     @JsonIgnore
     public Optional<Rudder> getDeckRudder() {

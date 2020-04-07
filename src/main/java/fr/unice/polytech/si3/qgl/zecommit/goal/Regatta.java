@@ -37,7 +37,7 @@ public class Regatta extends Goal {
 
     /**
      * Donne le premier checkpoint de la list de cp, renvoie null si plus de cp
-     * @return
+     * @return le premier CP
      */
     @JsonIgnore
     public Checkpoint getFirstCheckpoint() {

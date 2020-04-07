@@ -87,7 +87,7 @@ public class GUI extends JFrame {
         }
     }
 
-    public class Move implements MouseMotionListener {
+    public static class Move implements MouseMotionListener {
 
         @Override
         public void mouseDragged(MouseEvent e) {
@@ -100,7 +100,7 @@ public class GUI extends JFrame {
         }
     }
 
-    public class Click implements MouseListener {
+    public static class Click implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {

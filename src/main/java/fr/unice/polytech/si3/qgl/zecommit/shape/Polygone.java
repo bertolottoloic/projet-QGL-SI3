@@ -114,7 +114,7 @@ public class Polygone extends Shape {
 
     /**
      * méthode déterminant le barycentre d'un polygone
-     * @return
+     * @return Point : le barycentre du polygone
      */
     @JsonIgnore
     public Point calculateCentroid() {

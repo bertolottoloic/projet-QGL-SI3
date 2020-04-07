@@ -102,7 +102,7 @@ public class DeckTest {
     public void moveSailorTest2(){
         Deck deck = new Deck(4, 23);
         Moving moving = deck.moveSailor(new Sailor(1,3,3,"marin"), 0, 0);
-        assertEquals(null , moving);
+        assertNull(moving);
 
     }
 
@@ -110,7 +110,7 @@ public class DeckTest {
     @Test
     public void sailorsAreOnTheirEntityTest(){
         Deck deck = new Deck(4, 23);
-        List<Sailor> sailors = new ArrayList();
+        List<Sailor> sailors = new ArrayList<>();
         sailors.add(new Sailor(1,3,3,"marin"));
         deck.setSailors(sailors);
 
@@ -122,7 +122,7 @@ public class DeckTest {
     @Test
     public void sailorsAreOnTheirEntityTest2(){
         Deck deck = new Deck(4, 23);
-        List<Sailor> sailors = new ArrayList();
+        List<Sailor> sailors = new ArrayList<>();
         Sailor sailor = new Sailor(1,3,3,"marin");
         sailor.setOnEntity(oar1);
 
@@ -136,7 +136,7 @@ public class DeckTest {
     @Test
     public void sailorsAreOnTheirEntityTest3(){
         Deck deck = new Deck(4, 23);
-        List<Sailor> sailors = new ArrayList();
+        List<Sailor> sailors = new ArrayList<>();
         Sailor sailor = new Sailor(1,7,0,"marin");
         sailor.setOnEntity(oar1);
 

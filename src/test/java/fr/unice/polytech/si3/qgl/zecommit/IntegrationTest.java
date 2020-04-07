@@ -16,7 +16,7 @@ public class IntegrationTest {
     @Category(IntegrationTest.class)
     @Test
     public void week5Test(){
-        String str[] = {" "};
+        String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek5();
@@ -26,7 +26,7 @@ public class IntegrationTest {
     @Category(IntegrationTest.class)
     @Test
     public void week6Test(){
-        String str[] = {" "};
+        String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek6();
@@ -36,7 +36,7 @@ public class IntegrationTest {
     @Category(IntegrationTest.class)
     @Test
     public void week7Test(){
-        String str[] = {" "};
+        String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek7();
@@ -47,7 +47,7 @@ public class IntegrationTest {
     @Test
     @Disabled
     public void week8Test(){
-        String str[] = {" "};
+        String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek8();
@@ -57,7 +57,7 @@ public class IntegrationTest {
     @Category(IntegrationTest.class)
     @Test
     public void week9SnakeTest(){
-        String str[] = {" "};
+        String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek9Snake();
@@ -66,7 +66,7 @@ public class IntegrationTest {
     @Category(IntegrationTest.class)
     @Test
     public void week10Test(){
-        String str[] = {" "};
+        String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
         Engine.engineSettings = new EngineSettingsWeek10();

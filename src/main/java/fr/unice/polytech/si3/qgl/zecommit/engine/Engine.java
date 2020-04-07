@@ -4,7 +4,6 @@ import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsInterface;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.List;
 
 /**
  * Classe simulant l'appel du projet
- * @auteur Clement P
+ * @autor Clement P
  */
 public class Engine {
     public static boolean showWindow = true;

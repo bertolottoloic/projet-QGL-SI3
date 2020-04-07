@@ -81,8 +81,8 @@ public class Collision {
      *   |___|
      *  D     C
      *
-     * @param rectangle
-     * @return
+     * @param rectangle le rectangle associé au CP
+     * @return boolean : true si le bateau est dans le CP
      */
     public boolean isInRectangle(Rectangle rectangle){
         Point shipCenter = new Point(shipPosition.getX(), shipPosition.getY());
@@ -99,8 +99,8 @@ public class Collision {
 
     /**
      * Une méthode permettant de déterminer les 4 sommets du rectangle
-     * @param rectangle
-     * @return
+     * @param rectangle le rectangle
+     * @return  la list des sommets
      */
     public static List<Point> determineRectanglePoints(Rectangle rectangle, Position position ){
         ArrayList<Point> res = new ArrayList<>();
@@ -129,11 +129,11 @@ public class Collision {
 
     /**
      * Determine si le point M est dans le triangle ABC
-     * @param a
-     * @param b
-     * @param c
-     * @param m
-     * @return
+     * @param a point du triangle
+     * @param b point du triangle
+     * @param c point du triangle
+     * @param m point que l'on teste
+     * @return boolean : true si m est dans le triangle
      */
     public boolean isInTriangle(Point a, Point b, Point c, Point m) {
         double t;
@@ -164,13 +164,14 @@ public class Collision {
 
     /**
      * Méthode pour savoir si un point est dans un triangle dans le cas particulier où d=0
-     * @param b
-     * @param c
-     * @param m
-     * @param e
-     * @param g
-     * @param i
-     * @return
+     * Cela correspond au triangle dont une arrête est parallèle à l'axe de abscisses ou ordonnées
+     * @param b point du triangle
+     * @param c point du triangle
+     * @param m point que l'on teste
+     * @param e la valeur calculée précédement
+     * @param g la valeur calculée précédement
+     * @param i la valeur calculée précédement
+     * @return boolean, true si m est dans le triangle
      */
     public boolean isInTriangleParticularCase(Point b, Point c, Point m, double e, double g, double i) {
         return Math.abs(Math.atan(i/(c.getX()-m.getX()))) < Math.abs(Math.atan(g/e))
@@ -181,7 +182,7 @@ public class Collision {
 
     /**
      * Methode qui calcule la distance d'une position par rapport au bateau
-     * @return
+     * @return double : la distance
      */
     public double distanceTo() {
         return shapePosition.distanceTo(shipPosition);

@@ -11,7 +11,6 @@ import fr.unice.polytech.si3.qgl.zecommit.other.VisibleEntitie;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +19,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Nathan
@@ -28,8 +26,6 @@ import static org.mockito.Mockito.when;
 public class PredictionsTest {
 
     private Ship ship;
-    private Deck deck;
-    private List<Entity> entities;
     private List<VisibleEntitie> visibleEntities;
     private Predictions predictions;
 
@@ -37,8 +33,8 @@ public class PredictionsTest {
 
     @BeforeEach
     void setup(){
-        deck = mock(Deck.class);
-        entities = new ArrayList<>();
+        Deck deck = mock(Deck.class);
+        List<Entity> entities = new ArrayList<>();
 
         ship = new Ship("boat" , 100, new Position(0,0,0), "zeBoat", deck, entities, new Rectangle(5,7, 0));
 

@@ -44,8 +44,8 @@ public class CollisionTest {
 
 
     @Test
-    /**
-     * Cas limite : sur l'arrete du triangle
+    /*
+      Cas limite : sur l'arrete du triangle
      */
     public void isInTriangleTest2() {
         Point A = new Point(2, 3);
@@ -59,8 +59,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : sur un sommet du triangle
+    /*
+      Cas limite : sur un sommet du triangle
      */
     public void isInTriangleTest3() {
         Point A = new Point(2, 3);
@@ -74,8 +74,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas avec des négatifs
+    /*
+      Cas avec des négatifs
      */
     public void isInTriangleTest4() {
         Point A = new Point(-1, -1);
@@ -89,8 +89,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : division par 0
+    /*
+      Cas limite : division par 0
      */
     public void isInTriangleTest5() {
         Point A = new Point(1, 1);
@@ -104,8 +104,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : division par 0
+    /*
+      Cas limite : division par 0
      */
     public void isInTriangleTest6() {
         Point A = new Point(-1, 1);
@@ -119,8 +119,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : division par 0
+    /*
+      Cas limite : division par 0
      */
     public void isInTriangleTest7() {
         Point A = new Point(5, 3);
@@ -134,8 +134,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : division par 0
+    /*
+      Cas limite : division par 0
      */
     public void isInTriangleTest8() {
         Point A = new Point(5, 3);
@@ -149,8 +149,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : division par 0
+    /*
+      Cas limite : division par 0
      */
     public void isInTriangleTest9() {
         Point A = new Point(5, 3);
@@ -191,8 +191,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * cas négatifs
+    /*
+      cas négatifs
      */
     public void determineRectanglePointsTest2() {
         Point RES1 = new Point(-11.25, -7.5);
@@ -249,8 +249,8 @@ public class CollisionTest {
 
 
     @Test
-    /**
-     * Cas limite : sur l'arrete du rectangle
+    /*
+      Cas limite : sur l'arrete du rectangle
      */
     public void isInRectangleTest2() {
         Rectangle rectangle = new Rectangle(2, 4, 0);
@@ -263,8 +263,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : sur un sommet du rectangle
+    /*
+      Cas limite : sur un sommet du rectangle
      */
     public void isInRectangleTest3() {
         Rectangle rectangle = new Rectangle(2, 4, 0);
@@ -317,8 +317,8 @@ public class CollisionTest {
 
 
     @Test
-    /**
-     * Cas limite : sur l'arrete du rectangle
+    /*
+      Cas limite : sur l'arrete du rectangle
      */
     public void isInRectangleTest6() {
         Rectangle rectangle = new Rectangle(2.84, 5.66, 0.79);
@@ -331,8 +331,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas limite : sur un sommet du rectangle
+    /*
+      Cas limite : sur un sommet du rectangle
      */
     public void isInRectangleTest7() {
         Rectangle rectangle = new Rectangle(2.84, 5.66, 0.79);
@@ -345,8 +345,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas négatif
+    /*
+      Cas négatif
      */
     public void isInRectangleTest8() {
         Rectangle rectangle = new Rectangle(2.84, 5.66, -0.79);
@@ -359,8 +359,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * Cas carré
+    /*
+      Cas carré
      */
     public void isInRectangleTest9() {
         Rectangle rectangle = new Rectangle(Math.sqrt(8), Math.sqrt(8), 0);
@@ -373,8 +373,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * cas pentagone
+    /*
+      cas pentagone
      */
     public void isInPolygoneTest1() {
         Point[] points = new Point[5];
@@ -394,8 +394,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * cas hexagone
+    /*
+      cas hexagone
      */
     public void isInPolygoneTest2() {
         Point[] points = new Point[6];
@@ -416,8 +416,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * cas hexagone : cas sur un sommet
+    /*
+      cas hexagone : cas sur un sommet
      */
     public void isInPolygoneTest3() {
         Point[] points = new Point[6];
@@ -438,8 +438,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * cas hexagone : cas sur une arrête
+    /*
+      cas hexagone : cas sur une arrête
      */
     public void isInPolygoneTest4() {
         Point[] points = new Point[6];
@@ -460,8 +460,8 @@ public class CollisionTest {
     }
 
     @Test
-    /**
-     * cas hexagone
+    /*
+      cas hexagone
      */
     public void isNotInPolygoneTest5() {
         Point[] points = new Point[6];

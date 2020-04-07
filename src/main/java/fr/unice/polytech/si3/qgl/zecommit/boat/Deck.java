@@ -87,9 +87,9 @@ public class Deck{
     /**
      * Déplace le sailor de la distance demandée. Si la distance dépasse 5 l'action
      * est annulée, ceci est pris en charge dans le constructeur de Moving
-     * 
-     * @param xdistance
-     * @param ydistance
+     *
+     * @param xdistance le déplacement selon les x
+     * @param ydistance le déplacement selon les y
      */
     @JsonIgnore
     public Moving moveSailor(Sailor sailor, int xdistance, int ydistance) {
@@ -225,8 +225,8 @@ public class Deck{
     }
 
     @JsonIgnore
-    /**
-     * @return the watch
+    /*
+      @return the watch
      */
     public Optional<Watch> getWatch() {
         return watch;

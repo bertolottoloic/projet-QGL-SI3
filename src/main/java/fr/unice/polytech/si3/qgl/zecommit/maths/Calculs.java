@@ -21,8 +21,8 @@ public class Calculs {
     /**
      * Permet d'obtenir un angle le plus petit possible, évite de faire un virage trop grand
      *
-     * @param angle
-     * @return
+     * @param angle l'angle en paramètre
+     * @return l'angle compris entre -PI;PI
      */
     public static double shortestAngle(double angle) {
         if (angle > Math.PI)
@@ -36,7 +36,6 @@ public class Calculs {
     /**
      * Subdivise le trajet en une liste de Positions
      *
-     * @param position      du bateau
      * @param position      du bateau
      * @param finalPosition la position prévue
      * @return liste de positions
@@ -140,10 +139,10 @@ public class Calculs {
      *           /              x
      *        D x                B
      *
-     * @param position1
-     * @param position2
+     * @param position1 celle du bateau
+     * @param position2 celle du CP
      * @param strategy true si l'on place les CP très loin
-     * @return
+     * @return la list de positions des CP intermédiaires
      */
     public static List<Position> findFakeCheckpointPositions(Position position1, Position position2, int strategy) {
         double x1 = position1.getX();

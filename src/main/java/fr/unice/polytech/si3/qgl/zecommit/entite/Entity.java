@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.entite;
 
-/**
- * Classe mère décrivant les objets présents sur le bateau
+/*
+  Classe mère décrivant les objets présents sur le bateau
  */
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

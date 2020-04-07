@@ -32,7 +32,7 @@ public class Road {
      * Retourne l'angle entre l'orientation du bateau et l'objectif.
      * Si le bateau est parfaitement orienté avec l'objectif, on regarde s'il point vers l'objectif ou s'en éloigne
      *
-     * @return
+     * @return double, l'orientation visée
      */
     public double orientationToGoal() {
         double angle = shipOrientation;
@@ -87,7 +87,7 @@ public class Road {
     /**
      * demi tour gauche ?
      *
-     * @return
+     * @return boolean, true s'il faut faire demi tour à gauche
      */
     public boolean turnAroundLeft() {
         return (orientationToGoal() > Math.PI / 2 && orientationToGoal() <= Math.PI);
@@ -97,7 +97,7 @@ public class Road {
     /**
      * demi tour droite ?
      *
-     * @return
+     * @return boolean, true s'il faut faire demi tour à droite
      */
     public boolean turnAroundRight() {
         return (orientationToGoal() < -Math.PI / 2 && orientationToGoal() > -Math.PI);

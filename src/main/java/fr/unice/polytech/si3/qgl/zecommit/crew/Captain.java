@@ -201,7 +201,7 @@ public class Captain implements CaptainInterface {
     /**
      * Effectue l'ordre d'activation des marins aux rames et au gouvernail
      *
-     * @param compo
+     * @param compo la compo choisie
      */
     public List<Sailor> activateSailors(Compo compo) {
         ArrayList<Sailor> usedSailors = new ArrayList<>();
@@ -223,7 +223,7 @@ public class Captain implements CaptainInterface {
 
     public List<Sailor> decisionOrientation(Road road) {
 
-        boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());//TODO à corriger ou pas ? : prend ici tous les CP et non juste les vrais...
+        boolean isNear = road.distanceToGoal() < (165 - goal.getFirstCheckpoint().getCircleRadius());
         List<Sailor> rightSailors = ship.getDeck().rightSailors();
         List<Sailor> leftSailors = ship.getDeck().leftSailors();
 
@@ -231,7 +231,7 @@ public class Captain implements CaptainInterface {
         int nbSailorsLeft = leftSailors.size();
 
 
-        if (!isNear) {// si le bateau est loin du checkpoint //TODO revoir ce point là : le bateau ne ralentit pas assez au niveau du canal du panama
+        if (!isNear) {// si le bateau est loin du checkpoint
             Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
             recalculateChosenAngle(compo.getSailorsLeft(), compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
@@ -272,7 +272,7 @@ public class Captain implements CaptainInterface {
     /**
      * Méthode indiquant quand activer la voile
      *
-     * @return
+     * @return boolean true pour ouvrir la voile
      */
     public boolean upSail() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
@@ -286,7 +286,7 @@ public class Captain implements CaptainInterface {
     /**
      * Méthode indiquant quand le bateau est dans un courant
      *
-     * @return
+     * @return boolean true si on est dans un courant
      */
     public boolean isInStream() {
         boolean res = false;
@@ -303,7 +303,7 @@ public class Captain implements CaptainInterface {
     /**
      * Méthode indiquant quand le bateau est à contre courant
      *
-     * @return
+     * @return boolean true si on est a contre courant
      */
     public boolean isInCounterStream() {
         boolean res = false;
