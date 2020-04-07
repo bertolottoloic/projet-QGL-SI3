@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 
+/**
+ *  Classe représentant l'action : tourner avec le gouvernail
+ */
 public class Turn extends Action{
 
     private double rotation;

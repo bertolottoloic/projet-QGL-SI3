@@ -9,6 +9,9 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 
 import java.io.IOException;
 
+/**
+ * Classe de deserialisation du vent
+ */
 public class WindDeserializer extends StdDeserializer {
     public WindDeserializer(Class vc) {
         super(vc);

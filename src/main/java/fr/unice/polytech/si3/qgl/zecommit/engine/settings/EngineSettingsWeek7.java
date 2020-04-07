@@ -12,10 +12,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 import java.util.ArrayList;
 
 
-
+/**
+ * EngineSettiing du week7 : tour de ré
+ */
 public class EngineSettingsWeek7 extends EngineSettings{
 
-    /**
+    /*
      * ################################################ SETTINGS ################################################
      */
 

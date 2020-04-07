@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
 /**
+ * Erreur de collision
  * @author Nathan
  */
 public class CollisionException extends Exception {

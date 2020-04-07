@@ -10,6 +10,7 @@ import java.util.Objects;
 
 
 /**
+ * Classe mère des visibleEntities
  * @author Nathan
  */
 @JsonDeserialize(using = VisibleEntitiesDeserializer.class)

@@ -8,6 +8,9 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 
 import java.util.List;
 
+/**
+ * parser du nextRound
+ */
 @JsonDeserialize(using = NextRoundDeserializer.class)
 public class NextRound {
     private Ship ship;

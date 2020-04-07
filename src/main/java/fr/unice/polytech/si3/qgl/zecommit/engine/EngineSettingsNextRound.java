@@ -6,6 +6,9 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 
 import java.util.ArrayList;
 
+/**
+ * Partie du moteur qui initie le nextRound
+ */
 public class EngineSettingsNextRound {
     private Ship ship;
     private ArrayList<VisibleEntitie> visibleEntities;

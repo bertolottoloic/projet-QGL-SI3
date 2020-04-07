@@ -9,7 +9,9 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.*;
 
 import java.io.IOException;
 
-
+/**
+ * Classe de deserialisation des entités
+ */
 public class EntityDeserializer extends JsonDeserializer {
 
 

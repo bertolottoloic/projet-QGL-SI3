@@ -6,6 +6,9 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 
 import java.util.List;
 
+/**
+ * Partie du moteur qui initie les paramètres
+ */
 class EngineSettingsInit {
     private Goal goal;
     private int shipCount;

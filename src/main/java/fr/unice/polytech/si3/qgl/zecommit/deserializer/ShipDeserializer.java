@@ -16,7 +16,9 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * Classe de deserialisation du bateau
+ */
 @JsonDeserialize(using = ShipDeserializer.class)
 public class ShipDeserializer extends JsonDeserializer {
 

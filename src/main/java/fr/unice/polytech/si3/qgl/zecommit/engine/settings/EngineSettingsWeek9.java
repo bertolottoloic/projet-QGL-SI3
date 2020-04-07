@@ -12,10 +12,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
 import java.util.ArrayList;
 
-
+/**
+ * EngineSettiing du week9 : ZeSnake
+ */
 public class EngineSettingsWeek9 extends EngineSettings {
 
-    /**
+    /*
      * ################################################ SETTINGS ################################################
      */
 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Classe détéctant les collisions
  * @author Nathan
  */
 public class Collision {
@@ -100,6 +101,7 @@ public class Collision {
     /**
      * Une méthode permettant de déterminer les 4 sommets du rectangle
      * @param rectangle le rectangle
+     * @param position la position du rectangle
      * @return  la list des sommets
      */
     public static List<Point> determineRectanglePoints(Rectangle rectangle, Position position ){

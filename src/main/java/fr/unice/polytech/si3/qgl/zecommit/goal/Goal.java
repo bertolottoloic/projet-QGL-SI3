@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.GoalDeserializer;
 
+/**
+ * Classe correspondant au mode de jeu
+ */
 @JsonDeserialize(using = GoalDeserializer.class)
 public abstract class Goal {
 

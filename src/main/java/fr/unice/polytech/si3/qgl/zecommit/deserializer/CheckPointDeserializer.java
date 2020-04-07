@@ -13,6 +13,9 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
 
+/**
+ * Classe de deserialisation d'un Checkpoint
+ */
 public class CheckPointDeserializer extends StdDeserializer<Checkpoint> {
 
     protected CheckPointDeserializer(Class<?> vc) {

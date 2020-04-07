@@ -15,6 +15,9 @@ import fr.unice.polytech.si3.qgl.zecommit.parser.InitGame;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Classe de deserialisation de l'initGame
+ */
 public class InitGameDeserializer extends StdDeserializer<InitGame> {
     protected InitGameDeserializer(Class vc) {
         super(vc);

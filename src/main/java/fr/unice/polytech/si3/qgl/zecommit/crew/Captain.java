@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Classe désignant le capitaine du navire
+ */
 public class Captain implements CaptainInterface {
 
     private Ship ship;
@@ -202,6 +205,7 @@ public class Captain implements CaptainInterface {
      * Effectue l'ordre d'activation des marins aux rames et au gouvernail
      *
      * @param compo la compo choisie
+     * @return la liste des marins
      */
     public List<Sailor> activateSailors(Compo compo) {
         ArrayList<Sailor> usedSailors = new ArrayList<>();

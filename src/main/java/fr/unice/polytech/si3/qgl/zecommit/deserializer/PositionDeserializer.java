@@ -10,6 +10,9 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import java.io.IOException;
 
+/**
+ * Classe de deserialisation des Positions
+ */
 public class PositionDeserializer extends JsonDeserializer {
 
     @Override

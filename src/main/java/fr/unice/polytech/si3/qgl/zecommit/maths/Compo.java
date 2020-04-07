@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.maths;
 
+/**
+ * Classe qui crée les compo de marins pour tourner
+ */
 public class Compo {
     private int sailorsRight;
     private int sailorsLeft;

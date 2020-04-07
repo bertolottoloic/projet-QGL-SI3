@@ -11,10 +11,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
 import java.util.ArrayList;
 
-
+/**
+ * EngineSettiing ZigZag
+ */
 public class EngineSettingsWeek9ZigZag extends EngineSettings {
 
-    /**
+    /*
      * ################################################ SETTINGS ################################################
      */
 

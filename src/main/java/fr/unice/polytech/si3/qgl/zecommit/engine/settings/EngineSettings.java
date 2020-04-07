@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Classe mère des engineSettings
+ */
 public abstract class EngineSettings implements EngineSettingsInterface{
     protected Goal goal;
     protected ArrayList<Checkpoint> allCheckpoints;

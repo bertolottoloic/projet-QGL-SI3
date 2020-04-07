@@ -8,6 +8,9 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 
 import java.util.List;
 
+/**
+ * parser de l'initgame
+ */
 @JsonDeserialize(using = InitGameDeserializer.class)
 public class InitGame  {
     private Goal goal;

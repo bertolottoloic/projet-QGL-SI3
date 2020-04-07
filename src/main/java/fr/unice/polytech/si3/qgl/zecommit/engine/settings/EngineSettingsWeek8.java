@@ -12,10 +12,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
 import java.util.ArrayList;
 
-
+/**
+ * EngineSettiing du week8 : vent des globes
+ */
 public class EngineSettingsWeek8 extends EngineSettings {
 
-    /**
+    /*
      * ################################################ SETTINGS ################################################
      */
 

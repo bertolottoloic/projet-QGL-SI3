@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
+ * PArtie du moteur qui gère les nextRound
  * @author clement
  */
 public class EngineNextRound {

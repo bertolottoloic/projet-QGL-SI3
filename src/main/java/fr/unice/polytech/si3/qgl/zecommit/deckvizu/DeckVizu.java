@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.zecommit.deckvizu;
 
+/**
+ * Classe de visualisation du deck
+ */
 public class DeckVizu implements Runnable {
 
 

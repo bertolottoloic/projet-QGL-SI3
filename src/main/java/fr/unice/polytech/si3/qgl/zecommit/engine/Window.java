@@ -14,6 +14,9 @@ import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fenetre pour la visualisation
+ */
 public class Window extends JFrame{
 
     public int w;

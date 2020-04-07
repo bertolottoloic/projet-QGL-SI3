@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.action;
 import java.util.Objects;
 
 /**
+ * Classe mère désignant les actions
  * @author Loic Bertolotto
  */
 public abstract class Action{

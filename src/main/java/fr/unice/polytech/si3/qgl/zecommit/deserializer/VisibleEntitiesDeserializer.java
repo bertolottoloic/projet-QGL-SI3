@@ -13,7 +13,9 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Stream;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
 import java.io.IOException;
-
+/**
+ * Classe de deserialisation des visibleEntities
+ */
 public class VisibleEntitiesDeserializer extends StdDeserializer {
     protected VisibleEntitiesDeserializer(Class vc) {
         super(vc);

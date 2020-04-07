@@ -3,6 +3,9 @@ package fr.unice.polytech.si3.qgl.zecommit.shape;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
+/**
+ * Classe définissant les polygones
+ */
 public class Polygone extends Shape {
 
     protected double orientation;

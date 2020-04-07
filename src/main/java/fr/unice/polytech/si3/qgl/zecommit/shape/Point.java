@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+/**
+ * Classe correspondant à un point
+ */
 public class Point {
     @JsonProperty("x")
     private double x;

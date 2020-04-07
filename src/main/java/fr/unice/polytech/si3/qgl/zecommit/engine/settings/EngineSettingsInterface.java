@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Interface des engineSettings
+ */
 public interface EngineSettingsInterface {
 
     void resetSettings();
@@ -86,7 +89,7 @@ public interface EngineSettingsInterface {
      void setVisibleDistance(int distance);
 
 
-    /**
+    /*
      * ################################################ GETTERS ################################################
      */
 

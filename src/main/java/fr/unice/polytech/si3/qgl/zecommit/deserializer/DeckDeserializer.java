@@ -9,7 +9,9 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 
 import java.io.IOException;
 
-
+/**
+ * Classe de deserialisation du deck
+ */
 public class DeckDeserializer extends JsonDeserializer {
 
     @Override

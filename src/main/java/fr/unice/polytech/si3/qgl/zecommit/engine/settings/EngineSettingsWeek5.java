@@ -12,10 +12,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.util.ArrayList;
 
-
+/**
+ * EngineSettiing du week5
+ */
 public class EngineSettingsWeek5 extends EngineSettings {
 
-    /**
+    /*
      * ################################################ SETTINGS ################################################
      */
 

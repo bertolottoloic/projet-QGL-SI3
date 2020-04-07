@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import fr.unice.polytech.si3.qgl.zecommit.Logs;
 
+/**
+ *  Classe représentant l'action : deplacer un marin
+ */
 public class Moving extends Action{
 
     private int xdistance;

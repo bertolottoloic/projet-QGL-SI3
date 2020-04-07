@@ -13,7 +13,9 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 
 import java.io.IOException;
 
-
+/**
+ * Classe de deserialisation des formes
+ */
 @JsonDeserialize(using = ShapeDeserializer.class)
 public class ShapeDeserializer extends JsonDeserializer {
 

@@ -2,7 +2,9 @@ package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
-
+/**
+ * Classe qui détermine la trajectoire à prendre
+ */
 public class Road {
 
     private Position startPosition;
@@ -57,6 +59,9 @@ public class Road {
 
     /**
      * Méthode renvoyant la tranche dans laquelle se situe l'angle souhaité
+     * @param oarsNb le nombre de marins
+     * @param canUseRuddder boolean true si gouvernail présent et utilisable
+     * @return un int correspondant au cap
      */
     public int findClosestPossibleAngle(int oarsNb, boolean canUseRuddder) {
         double angle;

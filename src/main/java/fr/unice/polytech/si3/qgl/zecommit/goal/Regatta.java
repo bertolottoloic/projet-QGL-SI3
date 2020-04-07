@@ -7,6 +7,9 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
 
 import java.util.List;
 
+/**
+ * Classe correspondant au mode de jeu regatta
+ */
 public class Regatta extends Goal {
 
     private List<Checkpoint> checkpoints;

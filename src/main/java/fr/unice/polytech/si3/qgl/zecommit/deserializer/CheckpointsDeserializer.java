@@ -13,7 +13,11 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoints;
 import java.io.IOException;
 import java.util.List;
 
-public class CheckpointsDeserializer extends StdDeserializer<Checkpoints> {
+public
+/**
+ * Classe de deserialisation des Checkpoints
+ */
+class CheckpointsDeserializer extends StdDeserializer<Checkpoints> {
 
 
     protected CheckpointsDeserializer(Class<?> vc) {

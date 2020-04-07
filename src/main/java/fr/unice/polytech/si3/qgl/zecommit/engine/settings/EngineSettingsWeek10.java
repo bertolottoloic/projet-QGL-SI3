@@ -19,10 +19,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.util.ArrayList;
-
+/**
+ * EngineSettiing du week10 : Archipel
+ */
 public class EngineSettingsWeek10 extends EngineSettings {
 
-    /**
+    /*
      * ################################################ SETTINGS ################################################
      */
 

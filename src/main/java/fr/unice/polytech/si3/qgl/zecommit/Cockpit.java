@@ -19,7 +19,9 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Classe appelée pour lancer le projet
+ */
 public class Cockpit implements ICockpit {
 	Game game;
 	CaptainMate captainMate;

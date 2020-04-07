@@ -8,6 +8,9 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe correspondant au second
+ */
 public class CaptainMate {
 
     private Captain captain;

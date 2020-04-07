@@ -10,6 +10,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
+/**
+ * Classe pour la visualisation du deck
+ */
 public class GUI extends JFrame {
 
     int spacing = 5;

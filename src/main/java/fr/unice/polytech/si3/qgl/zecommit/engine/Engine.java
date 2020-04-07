@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Classe simulant l'appel du projet
- * @autor Clement P
+ * @author Clement P
  */
 public class Engine {
     public static boolean showWindow = true;

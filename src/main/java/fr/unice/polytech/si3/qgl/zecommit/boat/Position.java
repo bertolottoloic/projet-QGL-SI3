@@ -1,7 +1,4 @@
-/*
-  Definie la position du bateau sur une carte
-  @auteur Clement P
- */
+
 
 package fr.unice.polytech.si3.qgl.zecommit.boat;
 
@@ -9,7 +6,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.unice.polytech.si3.qgl.zecommit.deserializer.PositionDeserializer;
 
 import java.util.Objects;
-
+/**
+  Definie la position du bateau sur une carte
+  @author Clement P
+ */
 @JsonDeserialize(using = PositionDeserializer.class)
 public class Position {
 

@@ -3,6 +3,9 @@ package fr.unice.polytech.si3.qgl.zecommit.crew;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 
+/**
+ * Interface du Captain
+ */
 public interface CaptainInterface {
     void attributeEntitiesToSailors();
 

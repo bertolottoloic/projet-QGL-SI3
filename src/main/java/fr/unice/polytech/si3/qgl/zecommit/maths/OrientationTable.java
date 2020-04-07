@@ -6,6 +6,7 @@ import java.util.List;
 
 
 /**
+ * Classe qui génère les angles possibles pour tourner
  * @author Vincent
  */
 

@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * Partie du moteur en charge des calculs
+ */
 public class EngineCalcul {
 
     Random random = new Random();
@@ -32,7 +34,7 @@ public class EngineCalcul {
     }
 
 
-    /**
+    /*
      * ################################################ ENGINE ################################################
      */
     public String thisToJson() {

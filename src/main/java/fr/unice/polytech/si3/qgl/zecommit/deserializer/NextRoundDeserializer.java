@@ -15,6 +15,9 @@ import fr.unice.polytech.si3.qgl.zecommit.parser.NextRound;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Classe de deserialisation des NextRound
+ */
 public class NextRoundDeserializer extends StdDeserializer<NextRound> {
     protected NextRoundDeserializer(Class<?> vc) {
         super(vc);

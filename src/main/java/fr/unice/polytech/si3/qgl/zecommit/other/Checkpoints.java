@@ -5,6 +5,9 @@ import fr.unice.polytech.si3.qgl.zecommit.deserializer.CheckpointsDeserializer;
 
 import java.util.List;
 
+/**
+ * Classe correspondant à la liste des checkpoints
+ */
 @JsonDeserialize(using = CheckpointsDeserializer.class)
 public class Checkpoints {
 

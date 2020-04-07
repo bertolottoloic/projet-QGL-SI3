@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * parser de l'output
  * @author Loic Bertolotto
  */
 

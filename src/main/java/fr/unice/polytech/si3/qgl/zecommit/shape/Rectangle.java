@@ -9,8 +9,6 @@ import java.util.Objects;
  * Forme definissant un rectangle
  * @author  Clement P
  */
-
-
 public class Rectangle extends Shape {
     private double width; //largeur
     private double height; // longueur

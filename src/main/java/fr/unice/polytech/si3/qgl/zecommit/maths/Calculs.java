@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Classe effectuant les calculs
  * @author Nathan
  */
 public class Calculs {
@@ -103,8 +104,9 @@ public class Calculs {
 
     /**
      * Méthode vérifiant les collisions avec tous les récifs présents
-     *
-     * @return true en cas de collision
+     * @param reefs les récifs
+     * @param route une liste de positions correspondant au chemin emprunté
+     * @return boolean, true en cas de collision
      */
     public static boolean checkCollision(List<Reef> reefs, List<Position> route) {
         boolean res = false;

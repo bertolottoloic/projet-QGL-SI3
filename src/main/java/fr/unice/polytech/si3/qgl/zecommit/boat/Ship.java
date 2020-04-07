@@ -23,6 +23,7 @@ import java.util.Optional;
 
 
 /**
+ * Classe représentant le bateau
  * @author Loic Bertolotto
  */
 @JsonDeserialize(using = ShipDeserializer.class)

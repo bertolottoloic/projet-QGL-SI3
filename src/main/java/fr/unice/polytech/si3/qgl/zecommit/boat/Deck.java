@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 
 /**
+ * Classe correspondant au deck du bateau
  * @author Loic Bertolotto
  */
 @JsonDeserialize(using = DeckDeserializer.class)
@@ -88,8 +89,10 @@ public class Deck{
      * Déplace le sailor de la distance demandée. Si la distance dépasse 5 l'action
      * est annulée, ceci est pris en charge dans le constructeur de Moving
      *
+     * @param sailor le marin à déplacer
      * @param xdistance le déplacement selon les x
      * @param ydistance le déplacement selon les y
+     * @return l'action moving
      */
     @JsonIgnore
     public Moving moveSailor(Sailor sailor, int xdistance, int ydistance) {

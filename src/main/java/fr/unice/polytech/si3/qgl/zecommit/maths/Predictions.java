@@ -79,6 +79,7 @@ public class Predictions {
 
     /**
      * Renvoie l'angle entre l'orientation du bateau et le centre du récif
+     * @param reef le récif
      * @return double l'angle
      */
     public double getAngleToCenterOfReef(Reef reef) {
@@ -114,7 +115,8 @@ public class Predictions {
 
     /**
      * Méthode donnant la prochaine position du bateau
-     *
+     * @param position la position actuelle
+     * @param i la subdivision du calcul par le moteur
      * @return la nouvelle position
      */
     public Position predictFinalPosition(Position position, int i) {
@@ -138,7 +140,7 @@ public class Predictions {
 
     /**
      * Méthode calculant la prochaine orientation du bateau
-     *
+     * @param i la subdivison du calcul par le moteur
      * @return la nouvelle orientation
      */
     public double angleCalcul(int i) {

@@ -1,8 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.entite;
 
-/*
-  Classe mère décrivant les objets présents sur le bateau
- */
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -13,7 +11,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
+/**
+  Classe mère décrivant les objets présents sur le bateau
+ */
 @JsonDeserialize(using = EntityDeserializer.class)
 public abstract class Entity {
     private EntityType type;

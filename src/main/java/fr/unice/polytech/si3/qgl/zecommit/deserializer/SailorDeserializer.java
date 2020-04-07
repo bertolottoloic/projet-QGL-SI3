@@ -9,6 +9,9 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 
 import java.io.IOException;
 
+/**
+ * Classe de deserialisation des marins
+ */
 public class SailorDeserializer extends StdDeserializer {
     public SailorDeserializer(Class vc) {
         super(vc);

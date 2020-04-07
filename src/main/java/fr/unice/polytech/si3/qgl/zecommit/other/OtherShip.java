@@ -3,6 +3,9 @@ package fr.unice.polytech.si3.qgl.zecommit.other;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
+/**
+ * Classe correspondant à un autre bateau
+ */
 public class OtherShip extends VisibleEntitie {
 
     private int life;

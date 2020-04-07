@@ -9,6 +9,9 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 
 import java.util.List;
 
+/**
+ * Classe contenant les informations de la partie
+ */
 public class Game {
     private Goal goal;
     private Ship ship;

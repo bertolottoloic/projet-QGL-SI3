@@ -13,6 +13,9 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 
 import java.io.IOException;
 
+/**
+ * Classe de deserialisation du goal
+ */
 public class GoalDeserializer extends StdDeserializer<Goal> {
 
 

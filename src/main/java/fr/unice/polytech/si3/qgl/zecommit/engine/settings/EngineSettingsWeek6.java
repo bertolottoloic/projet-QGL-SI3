@@ -12,10 +12,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import java.util.ArrayList;
 
-
+/**
+ * EngineSettiing du week6 : passage entre les deux carrés
+ */
 public class EngineSettingsWeek6 extends EngineSettings{
 
-    /**
+    /*
      * ################################################ SETTINGS ################################################
      */
 
