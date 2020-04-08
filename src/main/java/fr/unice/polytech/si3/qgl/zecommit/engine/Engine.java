@@ -20,7 +20,7 @@ public class Engine {
     public static List<List<Sailor>> sailorsDeckVizu;
 
 
-    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek10();//A modifier pour changer la simulation
+    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek11();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 
@@ -50,7 +50,7 @@ public class Engine {
                 engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
             } catch (Exception e) {
                 System.err.println(e.getMessage());//affiche une exception en cas de collision
-                throw new CollisionException();// a commenter pour ne pas interrompre le code
+                //throw new CollisionException();// a commenter pour ne pas interrompre le code
             }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);

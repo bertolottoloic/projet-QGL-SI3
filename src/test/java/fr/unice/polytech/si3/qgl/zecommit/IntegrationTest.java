@@ -69,7 +69,7 @@ public class IntegrationTest {
         String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
-        Engine.engineSettings = new EngineSettingsWeek10();
+        Engine.engineSettings = new EngineSettingsWeek11();
         assertDoesNotThrow(() -> Engine.main(str));
     }
 }

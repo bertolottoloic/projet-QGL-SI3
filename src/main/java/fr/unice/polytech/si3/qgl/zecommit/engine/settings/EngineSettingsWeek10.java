@@ -19,6 +19,7 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 
 import java.util.ArrayList;
+
 /**
  * EngineSettiing du week10 : Archipel
  */
@@ -60,7 +61,7 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Position position9 = new Position(3769.50780312125, 3091.2364945978416, 3.4033920413889422);
         Rectangle shape9 = new Rectangle(200, 1000, 0);
 
-        this.visibleEntities.add(new Reef(new Position(3936.700852451278, 3010.618517737803, 0), new Circle(20)));
+        this.visibleEntities.add(new Reef(new Position(3940.412689635522, 2657.782488611049, 0), new Circle(20)));
         this.visibleEntities.add(new Reef(position1, shape1));
         this.visibleEntities.add(new Reef(position2, shape2));
         this.visibleEntities.add(new Reef(position3, shape3));
@@ -76,12 +77,12 @@ public class EngineSettingsWeek10 extends EngineSettings {
 
     @Override
     public void setShip() {
-        this.ship = new Ship("ship", 3000, new Position(1092.4369747899182, 1776.710684273709, 1.5707963267948966), "ZECOMMIT", deck, entities, shape);
+        this.ship = new Ship("ship", 900, new Position(1092.4369747899182, 1776.710684273709, 1.5707963267948966), "ZECOMMIT", deck, entities, shape);
     }
 
     @Override
     public void setWind() {
-        this.winds.add(new Wind(0, 150));
+        this.winds.add(new Wind(0, 65));
 
     }
 
@@ -137,12 +138,13 @@ public class EngineSettingsWeek10 extends EngineSettings {
 
                  */
 
+
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
 
     @Override
     public void setDeck() {
-        this.deck = new Deck(5, 12);
+        this.deck = new Deck(3, 6);
         this.deck.setSailors(sailors);
     }
 
@@ -151,27 +153,23 @@ public class EngineSettingsWeek10 extends EngineSettings {
 
 
         this.entities = new ArrayList<>();
-        this.entities.add(new Oar(9, 0));
-        this.entities.add(new Oar(8, 0));
-        this.entities.add(new Oar(7, 0));
-        this.entities.add(new Oar(6, 0));
+
+
         this.entities.add(new Oar(5, 0));
+        this.entities.add(new Oar(5, 2));
         this.entities.add(new Oar(4, 0));
         this.entities.add(new Oar(3, 0));
         this.entities.add(new Oar(2, 0));
+        this.entities.add(new Oar(1, 0));
+        this.entities.add(new Oar(4, 2));
+        this.entities.add(new Oar(3, 2));
+        this.entities.add(new Oar(2, 2));
+        this.entities.add(new Oar(1, 2));
 
-        this.entities.add(new Oar(9, 4));
-        this.entities.add(new Oar(8, 4));
-        this.entities.add(new Oar(7, 4));
-        this.entities.add(new Oar(6, 4));
-        this.entities.add(new Oar(5, 4));
-        this.entities.add(new Oar(4, 4));
-        this.entities.add(new Oar(3, 4));
-        this.entities.add(new Oar(2, 4));
 
-        this.entities.add(new Rudder(11, 2));
-        this.entities.add(new Watch(0, 2));
-        this.entities.add(new Sail(7, 2, false));
+        this.entities.add(new Rudder(5, 1));
+        this.entities.add(new Watch(0, 1));
+        this.entities.add(new Sail(3, 1, false));
 
     }
 
