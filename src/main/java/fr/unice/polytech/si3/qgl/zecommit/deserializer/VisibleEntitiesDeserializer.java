@@ -33,19 +33,22 @@ public class VisibleEntitiesDeserializer extends StdDeserializer {
 
         String type = node.get("type").asText();
 
+        Position position;
+        Shape shape;
+
         switch (type) {
             case "stream":
-                Position position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
-                Shape shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
+                position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
                 return new Stream(position, shape, node.get("strength").asDouble());
             case "ship":
-                Position shipPosition = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
-                Shape shipShape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
-                return new OtherShip(node.get("type").toPrettyString(), shipPosition,shipShape, node.get("life").asInt());
+                position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
+                return new OtherShip(node.get("type").toPrettyString(), position,shape, node.get("life").asInt());
             case "reef":
-                Position reefPosition = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
-                Shape reefShape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
-                return new Reef(reefPosition, reefShape);
+                position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
+                return new Reef(position, shape);
 
             default:
                 return null;

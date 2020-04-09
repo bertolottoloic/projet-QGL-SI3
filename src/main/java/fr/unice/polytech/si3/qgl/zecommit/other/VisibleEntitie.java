@@ -15,9 +15,9 @@ import java.util.Objects;
  */
 @JsonDeserialize(using = VisibleEntitiesDeserializer.class)
 public abstract class VisibleEntitie {
-    private VisibleEntityType type;
-    private Position position;
-    private Shape shape;
+    protected VisibleEntityType type;
+    protected Position position;
+    protected Shape shape;
 
     public VisibleEntitie (VisibleEntityType type, Position position,Shape shape){
         this.type=type;
