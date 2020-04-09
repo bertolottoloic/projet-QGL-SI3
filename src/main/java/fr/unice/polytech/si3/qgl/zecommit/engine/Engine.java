@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.zecommit.engine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
@@ -15,17 +16,17 @@ import java.util.List;
  * @author Clement P
  */
 public class Engine {
-    public static boolean showWindow = true;
-    public static boolean showDeck = false;
-    public static List<List<Sailor>> sailorsDeckVizu;
+    public static boolean showWindow = false;
+    public static boolean showDeck = true;
+    public static List<List<Sailor>> DECKVIZU;
 
 
-    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek11();//A modifier pour changer la simulation
+    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 
         List<Position> positions = new ArrayList<>();
-        sailorsDeckVizu = new ArrayList<>();
+        DECKVIZU = new ArrayList<>();
 
         engineSettings.initiateSettings();
         EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
@@ -37,13 +38,13 @@ public class Engine {
 
         int currentStep = 0;
         String output = "";
-        while (!output.equals("[]") && currentStep < 300) {
+        while (!output.equals("[]") && currentStep < 10) {
             System.out.println("ROUND :" + currentStep);
             currentStep++;
             String json2 = engineCalcul.thisToJson2();
             //System.out.println(json2);
             output = cockpit.nextRound(json2);
-            sailorsDeckVizu.add(engineSettings.getSailors());
+            DECKVIZU.add(engineSettings.getSailors());
             System.out.println(output);
 
             try {
@@ -66,7 +67,7 @@ public class Engine {
 
         String dieses = "##################################################################################################";
         System.out.println(dieses + "############################################## Logs ##############################################" + dieses);
-        System.out.println(cockpit.getLogs());
+        //System.out.println(cockpit.getLogs());
         System.out.println(dieses + "########################################## Fin des Logs ##########################################" + dieses);
 
     }

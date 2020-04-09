@@ -21,7 +21,9 @@ public class GUI extends JFrame {
     int row = 4;
     String[][] tab;
 
-    List<List<Sailor>> sailorsDeck;
+    List<List<Sailor>> sailorsDeck = Engine.DECKVIZU;
+    Color colorOar = Color.BLUE;
+    Color colorRudder = Color.RED;
 
     public GUI() {
         this.setTitle("BoatDeck");
@@ -38,8 +40,8 @@ public class GUI extends JFrame {
         Click click = new Click();
         this.addMouseListener(click);
 
-        sailorsDeck = Engine.sailorsDeckVizu;
-        List<Sailor> sailorsAtTurn= sailorsDeck.get(0);
+
+        List<Sailor> sailorsAtTurn= sailorsDeck.get(1);
 
         tab = new String[column][row];
         for (int i = 0; i < column; i++) {
@@ -56,6 +58,13 @@ public class GUI extends JFrame {
             tab[y][x] = "ID :" + sailor.getId();
         }
 
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab[i].length; j++) {
+                System.out.println("i:"+i+"j:"+j+ "tab : " + tab[i][j]);
+            }
+
+        }
+
     }
 
 
@@ -64,27 +73,26 @@ public class GUI extends JFrame {
         public void paintComponent(Graphics g) {
             g.setColor(Color.DARK_GRAY);
             g.fillRect(0,0,1280,720);
-            g.setColor(Color.gray);
             for (int i = 0; i < column; i++) {
                 for (int j = 0; j < row; j++) {
-                    g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
-                    g.setColor(Color.LIGHT_GRAY);
-                    g.drawString(tab[i][j], spacing + i * size + (size/3), spacing + j * size + (size/2));
-
-                    /*
-                    if (tab[i][j].equals("")) {
+                    System.out.println("tab cré" + "i:"+i+"j:"+j+ "tab : " + tab[i][j]);
+                    if (!tab[i][j].equals("")) {
+                        g.setColor(Color.BLUE);
                         g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
-                        g.setColor(Color.GRAY);
-                        g.drawString(tab[i][j], spacing + i * size + (size/3), spacing + j * size + (size/2));
-                    }
-                    else {
-                        g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
-                        g.setColor(Color.LIGHT_GRAY);
+                        g.setColor(Color.MAGENTA);
                         g.setFont(new Font("Serial", Font.PLAIN, 12));
                         g.drawString(tab[i][j], spacing + i * size + (size/3), spacing + j * size + (size/2));
+
                     }
 
-                     */
+                    else {
+                        g.setColor(Color.LIGHT_GRAY);
+                        g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                    }
+
+
+
+
                 }
             }
         }

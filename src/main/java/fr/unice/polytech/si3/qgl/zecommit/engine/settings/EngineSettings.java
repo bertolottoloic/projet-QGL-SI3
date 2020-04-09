@@ -52,7 +52,6 @@ public abstract class EngineSettings implements EngineSettingsInterface{
     @JsonIgnore
     protected Random random = new Random();
 
-
     @JsonIgnore
     ArrayList<Stream> streams;
     @JsonIgnore
