@@ -1,8 +1,10 @@
 package fr.unice.polytech.si3.qgl.zecommit.deckvizu;
 
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.Engine;
+
 
 import javax.swing.*;
 import java.awt.*;

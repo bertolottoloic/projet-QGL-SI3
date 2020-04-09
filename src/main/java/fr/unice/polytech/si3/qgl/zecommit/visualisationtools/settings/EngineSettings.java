@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.engine.settings;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
