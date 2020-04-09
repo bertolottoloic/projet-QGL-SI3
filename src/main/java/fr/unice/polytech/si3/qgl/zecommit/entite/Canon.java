@@ -18,6 +18,22 @@ public class Canon extends Entity {
         this.angle=angle;
     }
 
+    /**
+     * @return the angle
+     */
+    public double getAngle() {
+        return angle;
+    }
+
+    /**
+     * @return loaded
+     */
+    public boolean getLoaded() {
+        return loaded;
+    }
+
+    
+
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
     }

@@ -53,7 +53,8 @@ public class Captain implements CaptainInterface {
         if (sailors.size() > 4 && rudder.isPresent()) {
             sailors.remove(sailors.size() - 1).setOnEntity(rudder.get());
         }
-        for (int i = 0; i < oars.size(); i++) {
+        int i = 0;
+        while(i < oars.size()) {
             Oar oar = (Oar) oars.get(i);
             Optional<Sailor> closestSailor = sailors.stream().min(Comparator.comparingInt(a -> a.distanceToEntity(oar)));
             if (closestSailor.isPresent() && !closestSailor.get().hasEntity()) {
@@ -62,6 +63,7 @@ public class Captain implements CaptainInterface {
                 sailors.remove(closestSailor.get());
                 i--;
             }
+            i++;
         }
         if (!sailors.isEmpty() && !sails.isEmpty()) {
             for (Sailor sailor : sailors) {
