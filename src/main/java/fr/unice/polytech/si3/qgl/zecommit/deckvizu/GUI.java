@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.zecommit.deckvizu;
 
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,15 +16,23 @@ import java.util.List;
  */
 public class GUI extends JFrame {
 
+    int round = 0;
     int spacing = 5;
     int size = 80;
-    int column = 3;
-    int row = 4;
-    String[][] tab;
+    int row = Engine.engineSettings.getDeck().getWidth();
+    int column = Engine.engineSettings.getDeck().getLength();
+    String[][] tabSailors;
 
-    List<List<Sailor>> sailorsDeck = Engine.DECKVIZU;
+    List<List<Sailor>> sailorsDeck = Engine.SAILORS_VIZU;
+    List<Entity> entitiesDeck = Engine.ENTITIES_VIZU;
+
+
+
+
     Color colorOar = Color.BLUE;
     Color colorRudder = Color.RED;
+    Color colorSail = Color.YELLOW;
+    Color colorWatch = Color.cyan;
 
     public GUI() {
         this.setTitle("BoatDeck");
@@ -40,27 +49,39 @@ public class GUI extends JFrame {
         Click click = new Click();
         this.addMouseListener(click);
 
+        List<Sailor> sailorsAtTurn= sailorsDeck.get(round);
 
-        List<Sailor> sailorsAtTurn= sailorsDeck.get(1);
-
-        tab = new String[column][row];
+        tabSailors = new String[column][row];
         for (int i = 0; i < column; i++) {
             for (int j = 0; j < row; j++) {
-                tab[i][j] = "";
-
+                tabSailors[i][j] = "";
             }
         }
 
+        System.out.println("Sailor DEck : " + sailorsDeck);
+        System.out.println("Sailors At Turn : " + sailorsAtTurn);
 
         for (Sailor sailor: sailorsAtTurn) {
             int x = sailor.getX();
             int y = sailor.getY();
-            tab[y][x] = "ID :" + sailor.getId();
+            if (sailor.getId() < 10) {
+                tabSailors[x][y] = "ID :0" + sailor.getId();
+            }
+            else {
+                tabSailors[x][y] = "ID :" + sailor.getId();
+            }
         }
 
-        for (int i = 0; i < tab.length; i++) {
-            for (int j = 0; j < tab[i].length; j++) {
-                System.out.println("i:"+i+"j:"+j+ "tab : " + tab[i][j]);
+        for (Entity entity: entitiesDeck) {
+            int x = entity.getX();
+            int y = entity.getY();
+            tabSailors[x][y] += " E :" + entity.getType();
+        }
+
+        for (int i = 0; i < tabSailors.length; i++) {
+            for (int j = 0; j < tabSailors[i].length; j++) {
+                System.out.println("TAB sailors => i:"+i+"j:"+j+ "tab : " + tabSailors[i][j]);
+
             }
 
         }
@@ -75,23 +96,52 @@ public class GUI extends JFrame {
             g.fillRect(0,0,1280,720);
             for (int i = 0; i < column; i++) {
                 for (int j = 0; j < row; j++) {
-                    System.out.println("tab cré" + "i:"+i+"j:"+j+ "tab : " + tab[i][j]);
-                    if (!tab[i][j].equals("")) {
-                        g.setColor(Color.BLUE);
-                        g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
-                        g.setColor(Color.MAGENTA);
-                        g.setFont(new Font("Serial", Font.PLAIN, 12));
-                        g.drawString(tab[i][j], spacing + i * size + (size/3), spacing + j * size + (size/2));
 
-                    }
-
-                    else {
+                    if (tabSailors[i][j].equals("")) {
                         g.setColor(Color.LIGHT_GRAY);
                         g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
                     }
+                    else if (tabSailors[i][j].length() == 8) {
+                        g.setColor(colorSail);
+                        g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                    }
+                    else if (tabSailors[i][j].length() == 7) {
+                        g.setColor(colorOar);
+                        g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                    }
+                    else if (tabSailors[i][j].length() == 10) {
+                        g.setColor(colorRudder);
+                        g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                    }
+                    else if (tabSailors[i][j].length() == 9) {
+                        g.setColor(colorWatch);
+                        g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                    }
 
+                    else {
+                        if (tabSailors[i][j].substring(0,2).equals("ID")) {
+                            if (tabSailors[i][j].length() == 13) {
+                                g.setColor(colorOar);
+                            }
+                            else if (tabSailors[i][j].length() == 16) {
+                                g.setColor(colorRudder);
+                            }
+                            else if (tabSailors[i][j].length() == 14) {
+                                g.setColor(colorSail);
+                            }
+                            else if (tabSailors[i][j].length() == 15) {
+                                g.setColor(colorWatch);
+                            }
+                            else {
+                                g.setColor(Color.LIGHT_GRAY);
+                            }
+                            g.fillRect(spacing + i * size, spacing + j * size, size - spacing, size - spacing);
+                            g.setColor(Color.BLACK);
+                            g.setFont(new Font("Serial", Font.PLAIN, 14));
+                            g.drawString(tabSailors[i][j].substring(0,6), spacing + i * size + (size/3), spacing + j * size + (size/2));
+                        }
 
-
+                    }
 
                 }
             }

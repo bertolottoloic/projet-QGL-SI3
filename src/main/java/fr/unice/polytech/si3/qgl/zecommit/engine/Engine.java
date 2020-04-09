@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,17 +19,21 @@ import java.util.List;
 public class Engine {
     public static boolean showWindow = false;
     public static boolean showDeck = true;
-    public static List<List<Sailor>> DECKVIZU;
+    public static List<List<Sailor>> SAILORS_VIZU;
+    public static List<Entity> ENTITIES_VIZU;
 
 
-    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
+    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek11();//A modifier pour changer la simulation
 
     public static void main(String[] args) throws CollisionException {
 
         List<Position> positions = new ArrayList<>();
-        DECKVIZU = new ArrayList<>();
+        SAILORS_VIZU = new ArrayList<>();
 
         engineSettings.initiateSettings();
+
+        ENTITIES_VIZU = engineSettings.getEntities();
+
         EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
         String json = engineCalcul.thisToJson();
         System.out.println(json);
@@ -41,10 +46,10 @@ public class Engine {
         while (!output.equals("[]") && currentStep < 10) {
             System.out.println("ROUND :" + currentStep);
             currentStep++;
+            SAILORS_VIZU.add(engineSettings.getSailors());
             String json2 = engineCalcul.thisToJson2();
             //System.out.println(json2);
             output = cockpit.nextRound(json2);
-            DECKVIZU.add(engineSettings.getSailors());
             System.out.println(output);
 
             try {
