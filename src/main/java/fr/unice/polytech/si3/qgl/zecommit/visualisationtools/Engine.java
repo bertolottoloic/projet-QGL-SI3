@@ -1,11 +1,11 @@
-package fr.unice.polytech.si3.qgl.zecommit.engine;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class Engine {
 
 
     public static EngineSettingsInterface engineSettings = new EngineSettingsWeek8();//A modifier pour changer la simulation
+
 
     public static void main(String[] args) throws CollisionException {
 

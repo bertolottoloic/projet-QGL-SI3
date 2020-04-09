@@ -1,11 +1,11 @@
-package fr.unice.polytech.si3.qgl.zecommit.engine;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools;
 
 import fr.unice.polytech.si3.qgl.zecommit.action.Turn;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.EngineSettingsWeek7;
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.EngineSettingsWeek7;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;

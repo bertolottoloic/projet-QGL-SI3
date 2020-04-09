@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.engine.settings;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings;
 
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
