@@ -1,16 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.visualisationtools;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
-<<<<<<< HEAD:src/main/java/fr/unice/polytech/si3/qgl/zecommit/engine/Engine.java
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
-import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
-=======
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.*;
->>>>>>> a7a36b8e591fe48b84e573efedadf430eb6673f8:src/main/java/fr/unice/polytech/si3/qgl/zecommit/visualisationtools/Engine.java
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +16,13 @@ import java.util.List;
  * @author Clement P
  */
 public class Engine {
-    public static boolean showWindow = false;
-    public static boolean showDeck = true;
+    public static boolean showWindow = true;
+    public static boolean showDeck = false;
     public static List<List<Sailor>> SAILORS_VIZU;
     public static List<Entity> ENTITIES_VIZU;
 
 
-    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek10();//A modifier pour changer la simulation
+    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek11();//A modifier pour changer la simulation
 
 
     public static void main(String[] args) throws CollisionException {
@@ -48,7 +43,7 @@ public class Engine {
 
         int currentStep = 0;
         String output = "";
-        while (!output.equals("[]") && currentStep < 10) {
+        while (!output.equals("[]") && currentStep < 300) {
             System.out.println("ROUND :" + currentStep);
             currentStep++;
             SAILORS_VIZU.add(engineSettings.getSailors());
