@@ -107,9 +107,11 @@ public class Predictions {
 
     public List<Reef> getReefs() {
         List<Reef> reefs = new ArrayList<>();
-        for (VisibleEntitie visibleEntitie : visibleEntities)
-            if (visibleEntitie.getType().equals(VisibleEntityType.reef))
-                reefs.add((Reef) visibleEntitie);
+        if(visibleEntities!=null) {
+            for (VisibleEntitie visibleEntitie : visibleEntities)
+                if (visibleEntitie.getType().equals(VisibleEntityType.reef))
+                    reefs.add((Reef) visibleEntitie);
+        }
         return reefs;
     }
 
@@ -161,19 +163,23 @@ public class Predictions {
 
     public double calculWind(Position position) {
         double value = 0;
-        if (!sailArrayList.isEmpty()) {
-            value = ((double) nbSailUsed / sailArrayList.size()) * wind.getStrength() *
-                    Math.cos(Math.abs(wind.getOrientation()) - Math.abs(position.getOrientation()));
+        if(wind!=null) {
+            if (!sailArrayList.isEmpty()) {
+                value = ((double) nbSailUsed / sailArrayList.size()) * wind.getStrength() *
+                        Math.cos(Math.abs(wind.getOrientation()) - Math.abs(position.getOrientation()));
+            }
         }
         return value;
     }
 
 
     public Stream getCurrentOn(Position position) {
-        for (VisibleEntitie entity : visibleEntities) {
-            Collision collision = new Collision(entity.getShape(), entity.getPosition(), position);
-            if (entity.getType() == VisibleEntityType.stream && collision.collide()) {
-                return (Stream) entity;
+        if(visibleEntities!=null) {
+            for (VisibleEntitie entity : visibleEntities) {
+                Collision collision = new Collision(entity.getShape(), entity.getPosition(), position);
+                if (entity.getType() == VisibleEntityType.stream && collision.collide()) {
+                    return (Stream) entity;
+                }
             }
         }
         return null;

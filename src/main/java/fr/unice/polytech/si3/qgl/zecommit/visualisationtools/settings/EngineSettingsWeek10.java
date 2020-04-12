@@ -103,12 +103,6 @@ public class EngineSettingsWeek10 extends EngineSettings {
         this.sailors.add(new Sailor(10, 2, 0, "jean"));
         this.sailors.add(new Sailor(11, 2, 1, "jean"));
         this.sailors.add(new Sailor(12, 2, 2, "jean"));
-        this.sailors.add(new Sailor(13, 2, 3, "jean"));
-        this.sailors.add(new Sailor(14, 2, 4, "jean"));
-        this.sailors.add(new Sailor(15, 3, 0, "jean"));
-        this.sailors.add(new Sailor(16, 3, 1, "jean"));
-        this.sailors.add(new Sailor(17, 3, 2, "jean"));
-        this.sailors.add(new Sailor(18, 3, 3, "jean"));
 
     }
 

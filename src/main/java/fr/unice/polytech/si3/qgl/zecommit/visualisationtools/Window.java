@@ -69,14 +69,16 @@ public class Window extends JFrame{
             }
 
             public void sortVisibleEntities(List <VisibleEntitie> visibleEntities) {
-                for (VisibleEntitie entity : visibleEntities) {
-                    if (entity.getType().equals(VisibleEntityType.stream)) {
-                        this.streams.add((Stream) entity);
-                    }
-                    if (entity.getType().equals(VisibleEntityType.ship)) {
-                    }
-                    if (entity.getType().equals(VisibleEntityType.reef)) {
-                        this.reefs.add((Reef) entity);
+                if (visibleEntities != null) {
+                    for (VisibleEntitie entity : visibleEntities) {
+                        if (entity.getType().equals(VisibleEntityType.stream)) {
+                            this.streams.add((Stream) entity);
+                        }
+                        if (entity.getType().equals(VisibleEntityType.ship)) {
+                        }
+                        if (entity.getType().equals(VisibleEntityType.reef)) {
+                            this.reefs.add((Reef) entity);
+                        }
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.visualisationtools;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools.exception;
 
 /**
  * Erreur de collision

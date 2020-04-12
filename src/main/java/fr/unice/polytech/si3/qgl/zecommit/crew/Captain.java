@@ -236,13 +236,11 @@ public class Captain implements CaptainInterface {
         int nbSailorsRight = rightSailors.size();
         int nbSailorsLeft = leftSailors.size();
 
-
         if (!isNear) {// si le bateau est loin du checkpoint
             Compo compo = orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle), nbSailorsRight, nbSailorsLeft);
             recalculateChosenAngle(compo.getSailorsLeft(), compo.getSailorsRight());
             return activateSailors(orientationTable.getGoodCompo(orientationTable.getLastCompo(chosenAngle),
                     nbSailorsRight, nbSailorsLeft));// on choisit la compo permettant d'aller le plus vite
-
 
         } else {
             if (isInCounterStream()) {
@@ -313,15 +311,18 @@ public class Captain implements CaptainInterface {
      */
     public boolean isInCounterStream() {
         boolean res = false;
-        for (VisibleEntitie visibleEntitie : visibleEntities)
-            if (visibleEntitie.getType().equals(VisibleEntityType.stream)) {
-                Stream stream = (Stream) visibleEntitie;
-                Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
-                if (collision.collide()
-                        && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) < 0
-                        && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) >= Math.PI / 4)
-                    res = true;
-            }
+        if(visibleEntities!=null) {
+            for (VisibleEntitie visibleEntitie : visibleEntities)
+                if (visibleEntitie.getType().equals(VisibleEntityType.stream)) {
+                    Stream stream = (Stream) visibleEntitie;
+                    Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
+                    System.out.println(ship.getShape().getShapeOrientation());
+                    if (collision.collide()
+                            && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) < 0
+                            && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) >= Math.PI / 4)
+                        res = true;
+                }
+        }
         return res;
     }
 
@@ -350,9 +351,11 @@ public class Captain implements CaptainInterface {
 
     public List<Reef> getReefs() {
         List<Reef> reefs = new ArrayList<>();
-        for (VisibleEntitie visibleEntitie : visibleEntities)
-            if (visibleEntitie.getType().equals(VisibleEntityType.reef))
-                reefs.add((Reef) visibleEntitie);
+        if(visibleEntities!=null) {
+            for (VisibleEntitie visibleEntitie : visibleEntities)
+                if (visibleEntitie.getType().equals(VisibleEntityType.reef))
+                    reefs.add((Reef) visibleEntitie);
+        }
         return reefs;
     }
 

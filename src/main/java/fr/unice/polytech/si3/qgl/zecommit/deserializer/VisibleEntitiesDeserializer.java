@@ -35,18 +35,19 @@ public class VisibleEntitiesDeserializer extends StdDeserializer {
 
         Position position;
         Shape shape;
+        String positionStr = "position";
 
         switch (type) {
             case "stream":
-                position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                position = objectMapper.readValue(node.get(positionStr).toPrettyString(), Position.class);
                 shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
                 return new Stream(position, shape, node.get("strength").asDouble());
             case "ship":
-                position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                position = objectMapper.readValue(node.get(positionStr).toPrettyString(), Position.class);
                 shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
                 return new OtherShip(node.get("type").toPrettyString(), position,shape, node.get("life").asInt());
             case "reef":
-                position = objectMapper.readValue(node.get("position").toPrettyString(), Position.class);
+                position = objectMapper.readValue(node.get(positionStr).toPrettyString(), Position.class);
                 shape = objectMapper.readValue(node.get("shape").toPrettyString(), Shape.class);
                 return new Reef(position, shape);
 

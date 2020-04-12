@@ -84,7 +84,7 @@ public abstract class EngineSettings implements EngineSettingsInterface{
         setShape(new Rectangle(0, 0, 0));
         setShip(new Ship("ship", 100, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape));
         setVisibleEntities(new ArrayList<>());
-        setWind(new Wind(0, 0));
+        //setWind(new Wind(0, 0));
     }
 
 
@@ -97,10 +97,10 @@ public abstract class EngineSettings implements EngineSettingsInterface{
         setShape();
         setShip();
         setVisibleEntities();
-        sortVisibleEntities();
+        if(visibleEntities!=null)
+            sortVisibleEntities();
         sortEntities();
         setWind();
-        changeWind();
     }
 
 
@@ -185,7 +185,6 @@ public abstract class EngineSettings implements EngineSettingsInterface{
 
 
     public void setWind() {
-        this.winds.add(new Wind(0, 3.36));
 
     }
 
@@ -237,10 +236,6 @@ public abstract class EngineSettings implements EngineSettingsInterface{
         this.visibleDistance=distance;
     }
 
-
-    public void changeWind() {
-        wind = winds.get(random.nextInt(winds.size()));
-    }
 
 
     public void sortEntities() {

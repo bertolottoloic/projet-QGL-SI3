@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit.entite;
 
 
+import java.util.Objects;
 
 /**
  * Entite definissant l'objet Canon sur le bateau
@@ -32,7 +33,7 @@ public class Canon extends Entity {
         return loaded;
     }
 
-    
+
 
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
@@ -40,5 +41,20 @@ public class Canon extends Entity {
 
     public void setAngle(double angle) {
         this.angle = angle;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Canon canon = (Canon) o;
+        return loaded == canon.loaded &&
+                Double.compare(canon.angle, angle) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), loaded, angle);
     }
 }

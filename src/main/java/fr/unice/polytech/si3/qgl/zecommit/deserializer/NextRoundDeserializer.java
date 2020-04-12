@@ -13,6 +13,7 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.parser.NextRound;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +35,12 @@ public class NextRoundDeserializer extends StdDeserializer<NextRound> {
         JsonNode node = codec.readTree(jsonParser);
 
         Ship ship = objectMapper.readValue(node.get("ship").toPrettyString(), Ship.class);
-        List<VisibleEntitie> visibleEntities = objectMapper.readValue(node.get("visibleEntities").toPrettyString(), new TypeReference<>() {});
 
+        List<VisibleEntitie> visibleEntities = new ArrayList<>();
+        if (node.has("visibleEntities")) {
+            visibleEntities = objectMapper.readValue(node.get("visibleEntities").toPrettyString(), new TypeReference<>() {
+            });
+        }
 
         if (node.has("wind")) {
             Wind wind = objectMapper.readValue(node.get("wind").toPrettyString(), Wind.class);

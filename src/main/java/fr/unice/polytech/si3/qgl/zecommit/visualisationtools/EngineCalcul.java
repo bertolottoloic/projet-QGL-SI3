@@ -18,14 +18,12 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Partie du moteur en charge des calculs
  */
 public class EngineCalcul {
 
-    Random random = new Random();
     EngineSettingsInterface settings;
 
     @JsonIgnore
@@ -63,7 +61,6 @@ public class EngineCalcul {
         settings.setLeftSailors(new ArrayList<>());
         settings.setRotation(0);
         settings.setVisibleDistance(1000);
-        changeWind();
         Position lastPosition = settings.getShip().getPosition();
 
         giveVisibleEntities();
@@ -192,9 +189,11 @@ public class EngineCalcul {
 
     public double calculWind() {
         double value = 0;
-        if (!settings.getSailArrayList().isEmpty()) {
-            value = ((double) settings.getNbSailUsed() / settings.getSailArrayList().size()) * settings.getWind().getStrength() *
-                    Math.cos(Math.abs(settings.getWind().getOrientation()) - Math.abs(settings.getShip().getPosition().getOrientation()));
+        if(settings.getWind()!=null) {
+            if (!settings.getSailArrayList().isEmpty()) {
+                value = ((double) settings.getNbSailUsed() / settings.getSailArrayList().size()) * settings.getWind().getStrength() *
+                        Math.cos(Math.abs(settings.getWind().getOrientation()) - Math.abs(settings.getShip().getPosition().getOrientation()));
+            }
         }
         return value / settings.getN();
     }
@@ -236,10 +235,12 @@ public class EngineCalcul {
      */
     public boolean checkCollision(Position newPosition) {
         boolean res = false;
-        for (Reef reef : settings.getReefs()) {
-            Collision collision = new Collision(reef.getShape(), reef.getPosition(), newPosition);
-            if (collision.collide()) {
-                res = true;
+        if(settings.getReefs().size()>0) {
+            for (Reef reef : settings.getReefs()) {
+                Collision collision = new Collision(reef.getShape(), reef.getPosition(), newPosition);
+                if (collision.collide()) {
+                    res = true;
+                }
             }
         }
         return res;
@@ -269,27 +270,26 @@ public class EngineCalcul {
         }
     }
 
-    public void changeWind() {
-        settings.setWind(settings.getWinds().get(random.nextInt(settings.getWinds().size())));
-    }
 
 
 
 
     public void giveVisibleEntities() {
-        for (VisibleEntitie visible : settings.getVisibleEntities()) {
-            Collision collision = new Collision(visible.getShape(), visible.getPosition(), settings.getShip().getPosition());
-            if (collision.distanceTo() <= settings.getVisibleDistance()) {
-                settings.getVisibles().add(visible);
-            }
+        if(settings.getVisibleEntities()!=null) {
+            for (VisibleEntitie visible : settings.getVisibleEntities()) {
+                Collision collision = new Collision(visible.getShape(), visible.getPosition(), settings.getShip().getPosition());
+                if (collision.distanceTo() <= settings.getVisibleDistance()) {
+                    settings.getVisibles().add(visible);
+                }
 
+            }
         }
     }
 
 
 
     public Stream getCurrentOn() {
-        if(settings.getVisibleEntities().size()>0) {
+        if(settings.getVisibleEntities()!=null) {
             for (VisibleEntitie entity : settings.getVisibleEntities()) {
                 Collision collision = new Collision(entity.getShape(), entity.getPosition(), settings.getShip().getPosition());
                 if (entity.getType() == VisibleEntityType.stream && collision.collide()) {

@@ -80,8 +80,6 @@ public interface EngineSettingsInterface {
 
      void setRudder(Rudder rudder);
 
-     void changeWind();
-
      void sortEntities();
 
      void sortVisibleEntities();

@@ -1,55 +1,29 @@
 package fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings;
 
-
 import fr.unice.polytech.si3.qgl.zecommit.boat.Deck;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.entite.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Rudder;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
-import fr.unice.polytech.si3.qgl.zecommit.other.*;
+import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
+
 import java.util.ArrayList;
 
-/**
- * EngineSettiing du week6 : passage entre les deux carrés
- */
-public class EngineSettingsWeek6 extends EngineSettings{
-
-    /*
-     * ################################################ SETTINGS ################################################
-     */
-
-
-    @Override
-    public void setVisibleEntities() {
-        this.visibleEntities = new ArrayList<>();
-
-        this.visibleEntities.add(new Reef(new Position(1500, 500, 0.78539816339), new Rectangle(1250.0, 1300, 0)));
-
-        this.visibleEntities.add(new Reef(new Position(500, 1500, 0.78539816339), new Rectangle(1250.0, 1300.0, 0.0)));
-
-        this.visibleEntities.add(new Stream(new Position(1000,1000,0.78539816339), new Rectangle(100,1400, 0), 50));
-
-    }
-
-
+public class EngineSettingsWeek4 extends EngineSettings {
     @Override
     public void setShip() {
-        this.ship = new Ship("ship", 100, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape);
-    }
-
-    @Override
-    public void setWind() {
-        this.winds.add(new Wind(0.75, 50));
-
+        this.ship = new Ship("ship", 2200, new Position(0, 0, 0), "ZECOMMIT", deck, entities, shape);
     }
 
     @Override
     public void setSailors() {
         this.sailors = new ArrayList<>();
-
         this.sailors.add(new Sailor(0, 0, 0, "jean"));
         this.sailors.add(new Sailor(1, 0, 1, "paul"));
         this.sailors.add(new Sailor(2,0,2,"jacques"));
@@ -70,7 +44,6 @@ public class EngineSettingsWeek6 extends EngineSettings{
         this.sailors.add(new Sailor(17,3,2,"Joris"));
         this.sailors.add(new Sailor(18,3,3,"Joris"));
         this.sailors.add(new Sailor(19,3,4,"Joris"));
-
     }
 
     @Override
@@ -80,25 +53,25 @@ public class EngineSettingsWeek6 extends EngineSettings{
 
     @Override
     public void setCheckpoints() {
-
         this.checkpoints = new ArrayList<>();
-        this.checkpoints.add(new Checkpoint(new Position(500, 500, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(1000, 1000, 0), new Circle(50)));
-        this.checkpoints.add(new Checkpoint(new Position(1500, 1500, 0), new Circle(60)));
-
+        this.checkpoints.add(new Checkpoint(new Position(1600, 350, 0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(345, 1550, 0), new Circle(50)));
+        this.checkpoints.add(new Checkpoint(new Position(0, 0, 0), new Circle(70)));
         this.allCheckpoints = new ArrayList<>(checkpoints);
     }
 
     @Override
     public void setDeck() {
-        this.deck = new Deck(3, 4);
+        this.deck = new Deck(5, 11);
         this.deck.setSailors(sailors);
     }
 
     @Override
     public void setEntities() {
-
         this.entities = new ArrayList<>();
+
+        this.entities.add(new Oar(1,0));
+        this.entities.add(new Oar(2,0));
         this.entities.add(new Oar(3,0));
         this.entities.add(new Oar(4,0));
         this.entities.add(new Oar(5,0));
@@ -115,19 +88,20 @@ public class EngineSettingsWeek6 extends EngineSettings{
         this.entities.add(new Oar(7,4));
         this.entities.add(new Oar(8,4));
         this.entities.add(new Oar(9,4));
-        this.entities.add(new Rudder(10,4));
-
-        this.entities.add(new Sail(5,2,false));
+        this.entities.add(new Rudder(5,2));
+        this.entities.add(new Sail(5,2, false));
 
     }
-
 
     @Override
     public void setShape() {
-        this.shape = new Rectangle(5, 11, 0);
+        this.shape = new Rectangle(4, 2, 0);
+    }
+
+    @Override
+    public void setWind(){
+        this.wind = new Wind(0,50);
     }
 
 
-
 }
-

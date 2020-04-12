@@ -15,6 +15,43 @@ public class IntegrationTest {
 
     @Category(IntegrationTest.class)
     @Test
+    public void week1Test(){
+        String[] str = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek1();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
+    @Category(IntegrationTest.class)
+    @Test
+    public void week2Test(){
+        String[] str = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek2();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
+    @Category(IntegrationTest.class)
+    @Test
+    public void week3Test(){
+        String[] str = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek3();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
+    @Category(IntegrationTest.class)
+    @Test
+    public void week4Test(){
+        String[] str = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek4();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
+
+    @Category(IntegrationTest.class)
+    @Test
     public void week5Test(){
         String[] str = {" "};
         Engine.showWindow = false;
@@ -45,7 +82,7 @@ public class IntegrationTest {
 
     @Category(IntegrationTest.class)
     @Test
-    @Disabled
+    @Disabled //Normal : tour du monde, course non officielle
     public void week8Test(){
         String[] str = {" "};
         Engine.showWindow = false;
@@ -56,11 +93,12 @@ public class IntegrationTest {
 
     @Category(IntegrationTest.class)
     @Test
-    public void week9SnakeTest(){
+    @Disabled // en cours de correction
+    public void week9Test(){
         String[] str = {" "};
         Engine.showWindow = false;
         Engine.showDeck = false;
-        Engine.engineSettings = new EngineSettingsWeek9Snake();
+        Engine.engineSettings = new EngineSettingsWeek9();
         assertDoesNotThrow(() -> Engine.main(str));
     }
     @Category(IntegrationTest.class)
