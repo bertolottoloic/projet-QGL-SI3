@@ -49,18 +49,18 @@ public class Polygone extends Shape {
         double v;
         int n = vertices.length;
         Point[] rotateVertices = new Point[n];
-        Point bary = calculateCentroid();
-        double xp = bary.getX();
-        double yp = bary.getY();
+        Point centre = new Point(position.getX(), position.getY());
+        double xp = centre.getX();
+        double yp = centre.getY();
         double radian = getShapeOrientation();
         double xRotate;
         double yRotate;
         for(i=0;i<n;i++) {
-            t=vertices[i].getX()-xp;
-            v=vertices[i].getY()-yp;
+            t=vertices[i].getX();
+            v=vertices[i].getY();
             xRotate=(xp+t*Math.cos(radian)-v*Math.sin(radian));
             yRotate=(yp+v*Math.cos(radian)+t*Math.sin(radian));
-            rotateVertices[i]=new Point(xRotate + position.getX(), yRotate + position.getY());
+            rotateVertices[i]=new Point(xRotate, yRotate);
         }
         return  rotateVertices;
     }

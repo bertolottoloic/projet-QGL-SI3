@@ -49,7 +49,7 @@ public class PolygoneTest {
     public void getRelativeVerticeListTest2() {
         Position position = new Position(0, 0, 0);
         Polygone polygone = new Polygone(Math.PI / 4, new Point[]{new Point(-2, 2), new Point(3, -3), new Point(3, 3)});
-        assertEquals(0.86, polygone.getRelativeVerticeList(position)[2].getX(), DELTA);
-        assertEquals(3.5, polygone.getRelativeVerticeList(position)[2].getY(), DELTA);
+        assertEquals(0, polygone.getRelativeVerticeList(position)[2].getX(), DELTA);
+        assertEquals(4.24, polygone.getRelativeVerticeList(position)[2].getY(), DELTA);
     }
 }

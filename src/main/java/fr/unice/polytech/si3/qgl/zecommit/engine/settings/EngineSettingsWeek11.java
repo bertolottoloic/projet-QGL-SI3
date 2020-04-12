@@ -54,7 +54,10 @@ public class EngineSettingsWeek11 extends EngineSettings {
         Rectangle shapeStream2 =  new Rectangle(750, 6500, 0);
 
         Position positionStream3 = new Position(-331.60322952710067, 741.0611303344853, 5.183627878423159);
-        Rectangle shapeStream3 =  new Rectangle(1000, 6000, 0);
+        Rectangle shapeStream3 =  new Rectangle(1300, 6000, 0);
+
+        Position positionStream4 = new Position(3621.6839677047265, -1251.4417531718555, 4.537856055185257);
+        Rectangle shapeStream4 =  new Rectangle(50, 160, 0);
 
         this.visibleEntities.add(new Reef(position1, shape1));
         this.visibleEntities.add(new Reef(position2, shape2));
@@ -65,6 +68,7 @@ public class EngineSettingsWeek11 extends EngineSettings {
         this.visibleEntities.add(new Stream(positionStream, shapeStream, 50));
         this.visibleEntities.add(new Stream(positionStream2, shapeStream2, 30));
         this.visibleEntities.add(new Stream(positionStream3, shapeStream3, 80));
+        this.visibleEntities.add(new Stream(positionStream4, shapeStream4, 10));
 
 
     }
@@ -72,16 +76,16 @@ public class EngineSettingsWeek11 extends EngineSettings {
     @Override
     public void setShip() {
 
-        //Position depart = new Position(3460.207612456746, -765.5709342560549, 4.799655442984406);
+        Position depart = new Position(3460.207612456746, -765.5709342560549, 4.799655442984406);
         //Position depart = new Position(3875.432525951556, -803.0565167243366, 3.9444441095071845);
-        Position depart = new Position(3657.187139561704, -785.7554786620523, 4.729842272904633);
+        //Position depart = new Position(3657.187139561704, -785.7554786620523, 4.729842272904633);
 
         this.ship = new Ship("ship", 3000, depart , "ZECOMMIT", deck, entities, shape);
     }
 
     @Override
     public void setWind() {
-        this.winds.add(new Wind(0, 0));
+        this.winds.add(new Wind(0, 65));
 
     }
 
@@ -118,8 +122,8 @@ public class EngineSettingsWeek11 extends EngineSettings {
         this.checkpoints = new ArrayList<>();
 
         this.checkpoints.add(new Checkpoint(new Position(3556.2644175317155, -1430.219146482121, 0), new Circle(100)));
-        this.checkpoints.add(new Checkpoint(new Position(2290.4051326412828, 6279.555940023068, 0), new Circle(100)));
-        this.checkpoints.add(new Checkpoint(new Position(5208.513552479799, -1990.3402537485556, 0), new Circle(100)));
+        this.checkpoints.add(new Checkpoint(new Position(2290.4051326412828, 6279.555940023068, 0), new Circle(500)));
+        this.checkpoints.add(new Checkpoint(new Position(5208.513552479799, -1990.3402537485556, 0), new Circle(350)));
         this.checkpoints.add(new Checkpoint(new Position(3590.866493656281, -1063.2929642445185, 0), new Circle(100)));
 
 

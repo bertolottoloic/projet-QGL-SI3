@@ -14,19 +14,13 @@ public class Rectangle extends Shape {
     private double height; // longueur
     private double orientation;
 
-    public Rectangle(double width,double height, double orientation){
+    public Rectangle(double width,double height, double orientation) {
         super(ShapeType.rectangle.toString());
         setCircle(false);
         setRectangle(true);
-        if(width<height) {
-            this.width = width;
-            this.height = height;
-        }
-        else { // si longueur et largeur ont été inversées dans le constructeur
-            this.width = height;
-            this.height = width;
-        }
-        this.orientation=orientation;
+        this.width = width;
+        this.height = height;
+        this.orientation = orientation;
     }
 
 

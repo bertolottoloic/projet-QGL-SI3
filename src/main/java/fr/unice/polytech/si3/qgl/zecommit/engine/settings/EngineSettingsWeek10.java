@@ -36,32 +36,32 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Position position1 = new Position(3193.2773109243703, 2466.98679471789, 0);
         Circle shape1 = new Circle(250);
 
-        Position position2 = new Position(3976.590636254508, 2965.1860744297705, 0);
-        Polygone shape2 = new Polygone(0.7853981633974483, new Point[]{new Point(200, -200), new Point(-300, 300), new Point(300, 300)});
+        Position position2 = new Position(4133.168823084799, 3071.6997910275236, 0);
+        Polygone shape2 = new Polygone(5.358160803622591, new Point[]{new Point(200, -350), new Point(300, 150), new Point(-300, 150)});
 
-        Position position3 = new Position(4261.7046818727495, 1788.7154861944798, 0.7330382858376184);
-        Rectangle shape3 = new Rectangle(500, 150, 0);
+        Position position3 = new Position(4261.7046818727495, 1788.7154861944798, 5.410520681182422);
+        Rectangle shape3 = new Rectangle(150, 500, 0);
 
-        Position position4 = new Position(5048.0192076830845, 2530.0120048019226, 0);
+        Position position4 = new Position(4987.995198079245, 2644.0576230492193, 0);
         Polygone shape4 = new Polygone(0.8377580409572781, new Point[]{new Point(350, 0), new Point(250, 250), new Point(-100, 150), new Point(-150, -150), new Point(250, -200)});
 
-        Position position5 = new Position(4243.6974789916, 4063.625450180072, 0.6283185307179586);
+        Position position5 = new Position(4375.750300120048, 3955.5822328931586, 2.5132741228718345);
         Rectangle shape5 = new Rectangle(400, 500, 0);
 
-        Position position6 = new Position(4669.867947178872, 3109.2436974789935, 0);
+        Position position6 = new Position(4669.867947178872, 3193.2773109243712, 0);
         Circle shape6 = new Circle(100);
 
         Position position7 = new Position(3481.392557022809, 3229.2917166866755, 0);
         Polygone shape7 = new Polygone(0.6457718232379019, new Point[]{new Point(150, 150), new Point(-150, 50), new Point(0, -200)});
 
-        Position position8 = new Position(4171.668667466992, 2286.914765906367, 1.5009831567151233);
+        Position position8 = new Position(4171.668667466992, 2286.914765906367, 0);
         Rectangle shape8 = new Rectangle(200, 1000, 0);
 
 
-        Position position9 = new Position(3769.50780312125, 3091.2364945978416, 3.4033920413889422);
+        Position position9 = new Position(3805.5222088835535, 3151.2605042016826, 4.39822971502571);
         Rectangle shape9 = new Rectangle(200, 1000, 0);
 
-        this.visibleEntities.add(new Reef(new Position(3940.412689635522, 2657.782488611049, 0), new Circle(20)));
+        this.visibleEntities.add(new Reef(new Position(3936.700852451278, 3010.618517737803, 0), new Circle(20)));
         this.visibleEntities.add(new Reef(position1, shape1));
         this.visibleEntities.add(new Reef(position2, shape2));
         this.visibleEntities.add(new Reef(position3, shape3));
@@ -82,7 +82,7 @@ public class EngineSettingsWeek10 extends EngineSettings {
 
     @Override
     public void setWind() {
-        this.winds.add(new Wind(0, 65));
+        this.winds.add(new Wind(0, 0));
 
     }
 

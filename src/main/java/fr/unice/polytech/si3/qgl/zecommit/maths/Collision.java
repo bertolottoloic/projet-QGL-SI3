@@ -43,16 +43,6 @@ public class Collision {
         return (!shape1.isCircle() && !shape1.isRectangle() && isInpolygone((Polygone) shape1));
     }
 
-    /**
-     * Méthode détectant les collisions avec les récifs
-     * Meme méthode que la précedente mais engloble chaque récif (de forme rectangulaire ou autre) dans un cercle
-     * Permet d'avoir une marge de sureté pour éviter les récifs
-     * @return true si la collision se produit
-     */
-    public boolean collideWithReef() {
-        return distanceTo() <= shape1.getShapeRadius();
-
-    }
 
     public boolean isInpolygone(Polygone polygone){
         Point shipCenter = new Point(shipPosition.getX(), shipPosition.getY());
