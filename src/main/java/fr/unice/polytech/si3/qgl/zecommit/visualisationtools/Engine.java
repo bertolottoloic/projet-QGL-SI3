@@ -1,10 +1,16 @@
-package fr.unice.polytech.si3.qgl.zecommit.engine;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
+<<<<<<< HEAD:src/main/java/fr/unice/polytech/si3/qgl/zecommit/engine/Engine.java
 import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
+import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
+=======
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.*;
+>>>>>>> a7a36b8e591fe48b84e573efedadf430eb6673f8:src/main/java/fr/unice/polytech/si3/qgl/zecommit/visualisationtools/Engine.java
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +21,24 @@ import java.util.List;
  * @author Clement P
  */
 public class Engine {
-    public static boolean showWindow = true;
-    public static boolean showDeck = false;
-    public static List<List<Sailor>> sailorsDeckVizu;
+    public static boolean showWindow = false;
+    public static boolean showDeck = true;
+    public static List<List<Sailor>> SAILORS_VIZU;
+    public static List<Entity> ENTITIES_VIZU;
 
 
     public static EngineSettingsInterface engineSettings = new EngineSettingsWeek10();//A modifier pour changer la simulation
 
+
     public static void main(String[] args) throws CollisionException {
 
         List<Position> positions = new ArrayList<>();
-        sailorsDeckVizu = new ArrayList<>();
+        SAILORS_VIZU = new ArrayList<>();
 
         engineSettings.initiateSettings();
+
+        ENTITIES_VIZU = engineSettings.getEntities();
+
         EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
         String json = engineCalcul.thisToJson();
         System.out.println(json);
@@ -37,13 +48,13 @@ public class Engine {
 
         int currentStep = 0;
         String output = "";
-        while (!output.equals("[]") && currentStep < 300) {
+        while (!output.equals("[]") && currentStep < 10) {
             System.out.println("ROUND :" + currentStep);
             currentStep++;
+            SAILORS_VIZU.add(engineSettings.getSailors());
             String json2 = engineCalcul.thisToJson2();
             //System.out.println(json2);
             output = cockpit.nextRound(json2);
-            sailorsDeckVizu.add(engineSettings.getSailors());
             System.out.println(output);
 
             try {
@@ -66,7 +77,7 @@ public class Engine {
 
         String dieses = "##################################################################################################";
         System.out.println(dieses + "############################################## Logs ##############################################" + dieses);
-        System.out.println(cockpit.getLogs());
+        //System.out.println(cockpit.getLogs());
         System.out.println(dieses + "########################################## Fin des Logs ##########################################" + dieses);
 
     }

@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.engine.settings;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,7 +51,6 @@ public abstract class EngineSettings implements EngineSettingsInterface{
     protected ArrayList<Wind> winds;
     @JsonIgnore
     protected Random random = new Random();
-
 
     @JsonIgnore
     ArrayList<Stream> streams;

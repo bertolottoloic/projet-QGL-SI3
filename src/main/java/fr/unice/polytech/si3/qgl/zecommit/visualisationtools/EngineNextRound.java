@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.engine;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;

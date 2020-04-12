@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.zecommit;
 
-import fr.unice.polytech.si3.qgl.zecommit.engine.Engine;
-import fr.unice.polytech.si3.qgl.zecommit.engine.settings.*;
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.Engine;
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.*;
 import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
