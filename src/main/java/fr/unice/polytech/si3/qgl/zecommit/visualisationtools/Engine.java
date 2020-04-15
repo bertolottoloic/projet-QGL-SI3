@@ -3,7 +3,7 @@ package fr.unice.polytech.si3.qgl.zecommit.visualisationtools;
 import fr.unice.polytech.si3.qgl.zecommit.Cockpit;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
-import fr.unice.polytech.si3.qgl.zecommit.deckvizu.DeckVizu;
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.deckvizu.DeckVizu;
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.exception.CollisionException;
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.exception.UnfinishedException;
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.*;

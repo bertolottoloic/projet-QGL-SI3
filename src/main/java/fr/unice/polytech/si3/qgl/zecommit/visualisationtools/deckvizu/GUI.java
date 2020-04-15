@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.deckvizu;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools.deckvizu;
 
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
@@ -83,9 +83,7 @@ public class GUI extends JFrame {
         for (int i = 0; i < tabSailors.length; i++) {
             for (int j = 0; j < tabSailors[i].length; j++) {
                 System.out.println("TAB sailors => i:"+i+"j:"+j+ "tab : " + tabSailors[i][j]);
-
             }
-
         }
 
     }
@@ -142,9 +140,7 @@ public class GUI extends JFrame {
                             g.setFont(new Font("Serial", Font.PLAIN, 14));
                             g.drawString(tabSailors[i][j].substring(0,6), spacing + i * size + (size/3), spacing + j * size + (size/2));
                         }
-
                     }
-
                 }
             }
         }

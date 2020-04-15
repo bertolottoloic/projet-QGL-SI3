@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.zecommit.deckvizu;
+package fr.unice.polytech.si3.qgl.zecommit.visualisationtools.deckvizu;
 
 /**
  * Classe de visualisation du deck
