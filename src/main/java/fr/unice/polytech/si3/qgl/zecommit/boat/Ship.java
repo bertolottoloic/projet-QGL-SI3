@@ -36,8 +36,7 @@ public class Ship {
     private Deck deck;
     private List<Entity> entities;
     private Shape shape;
-    @JsonIgnore
-    private List<Oar> oars = new ArrayList<>();
+
 
 
     /*
@@ -171,36 +170,6 @@ public class Ship {
         return this.getPosition().getY();
     }
 
-
-    /**
-     *
-     * @return la liste des rames à gauche du bateau.
-     */
-    @JsonIgnore
-    public List<Oar> getLeftOars(){
-        ArrayList<Oar> oarsList = new ArrayList<>();
-        this.oars.forEach(oar->
-        {
-            if(deck.isLeft(oar))
-                oarsList.add(oar);
-        });
-        return oarsList;
-    }
-
-    /**
-     *
-     * @return la liste des rames à droite du bateau.
-     */
-    @JsonIgnore
-    public List<Oar> getRightOars(){
-        ArrayList<Oar> oarsList = new ArrayList<>();
-        this.oars.forEach(oar->
-        {
-            if(!deck.isLeft(oar))
-                oarsList.add(oar);
-        });
-        return oarsList;
-    }
 
     /**
      * retourne les marins du deck

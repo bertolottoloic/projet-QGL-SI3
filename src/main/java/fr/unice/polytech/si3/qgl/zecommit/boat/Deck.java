@@ -154,17 +154,6 @@ public class Deck{
         return (oar.getY()>= ((width / 2) + (width % 2)));
     }
 
-    public boolean isLeft(Sailor sailor){
-        return (sailor.getY()<width/2);
-    }
-
-    public boolean isRight(Sailor sailor){
-        return (sailor.getY() >= ((width / 2) + (width % 2)));
-    }
-
-    public boolean hasSail(){
-        return !sails.isEmpty();
-    }
 
     public List<Sailor> rightSailors(){
         return getUsedOars().stream().filter(this::isRight)

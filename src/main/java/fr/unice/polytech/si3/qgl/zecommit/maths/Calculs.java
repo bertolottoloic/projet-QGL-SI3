@@ -171,10 +171,10 @@ public class Calculs {
         double rc2 = r1; // rayon du second cercle
         if(strategy==3)
             rc2=2*r1;
-        double xia = 0;
-        double xib = 0;
-        double yia = 0;
-        double yib = 0;
+        double xia;
+        double xib;
+        double yia;
+        double yib;
 
         if (yc1 == yc2) { // si les deux cercles sont sur la même ordonnée, on utilise Pythagore...
 

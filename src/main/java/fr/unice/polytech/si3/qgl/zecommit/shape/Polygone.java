@@ -33,9 +33,6 @@ public class Polygone extends Shape {
         return vertices;
     }
 
-    public Point getVertice(int index){
-        return vertices[index];
-    }
 
     @JsonIgnore
     public Point getRelativeVertice(int index, Position position){
@@ -65,24 +62,6 @@ public class Polygone extends Shape {
         return  rotateVertices;
     }
 
-
-    @JsonIgnore
-    public int[] getVerticesIntX(){
-        int[] x= new int[this.vertices.length];
-        for (int i=0; i<this.vertices.length;i++) {
-            x[i]=(int)vertices[i].getX();
-
-        }
-        return x;
-    }
-    @JsonIgnore
-    public int[] getVerticesIntY(){
-        int[] y= new int[this.vertices.length];
-        for (int i=0; i<this.vertices.length;i++) {
-            y[i]=(int)vertices[i].getY();
-        }
-        return y;
-    }
 
     @JsonIgnore
     public int[] getVerticesIntX(Position position){
