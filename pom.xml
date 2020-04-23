@@ -143,7 +143,7 @@
 											<argument>--illegal-access=permit</argument>
 											<argument>-classpath</argument>
 											<classpath/>
-											<argument>fr.unice.polytech.si3.qgl.zecommit.MyBenchmark</argument>
+											<argument>fr.unice.polytech.si3.qgl.zecommit.visualisationtools.MyBenchmark</argument>
 										</arguments>
 									</configuration>
 								</execution>
