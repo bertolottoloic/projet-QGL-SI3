@@ -19,7 +19,8 @@
 			**/visualisationtools/*.java,
 			**/settings/*.java,
 			**deckvizu/*.java
-		</sonar.exclusions> 
+		</sonar.exclusions>
+		<jmh.version>1.22</jmh.version>
 	</properties>
 
 	<build>
@@ -106,6 +107,48 @@
       							</targetTests>
    							</configuration>
 						</plugin>
+
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>exec-maven-plugin</artifactId>
+							<version>1.6.0</version>
+							<executions>
+								<execution>
+									<id>run</id>
+									<goals>
+										<goal>java</goal>
+									</goals>
+									<configuration>
+										<mainClass>fr.unice.polytech.si3.zecommit.visualisationtools.Engine</mainClass> <!-- CHANGE ME -->
+										<arguments>
+											<argument>--illegal-access=permit</argument>
+										</arguments>
+										<!-- <systemProperties>
+                                            <systemProperty>
+                                                <key>myproperty</key>
+                                                <value>myvalue</value>
+                                            </systemProperty>
+                                        </systemProperties>
+                                        -->
+									</configuration>
+								</execution>
+								<execution>
+									<id>bench</id>
+									<goals>
+										<goal>exec</goal>
+									</goals>
+									<configuration>
+										<executable>java</executable>
+										<arguments>
+											<argument>--illegal-access=permit</argument>
+											<argument>-classpath</argument>
+											<classpath/>
+											<argument>fr.unice.polytech.si3.qgl.zecommit.MyBenchmark</argument>
+										</arguments>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
 					</plugins>
 				</build>
 		</profile>
@@ -144,6 +187,18 @@
 			<artifactId>mockito-core</artifactId>
 			<version>${mockito.core.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- Benchmarking -->
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-core</artifactId>
+			<version>${jmh.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-generator-annprocess</artifactId>
+			<version>${jmh.version}</version>
 		</dependency>
 	</dependencies>
 

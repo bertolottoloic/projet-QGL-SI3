@@ -27,7 +27,7 @@ public class EngineCalcul {
     EngineSettingsInterface settings;
 
     @JsonIgnore
-    EngineCalcul(EngineSettingsInterface engineSettings) {
+    public EngineCalcul(EngineSettingsInterface engineSettings) {
         this.settings= engineSettings;
     }
 
