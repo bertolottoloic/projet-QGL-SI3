@@ -5,9 +5,8 @@ import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Ship;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
+import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.shape.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +44,7 @@ class ShipTest {
      */
     @Test
     void distanceToNegatifTest() {
-        
+
         Position position = new Position(-2,-5,0);
 
         assertEquals(ship.distanceTo(position), Math.sqrt(29));
@@ -140,6 +139,30 @@ class ShipTest {
 
         assertFalse(ship.isInCheckpoint(checkpointCibleOut));
 
+    }
+
+    @Test
+    void distanceToForReefTest(){
+        Position position = new Position(5,5,0);
+        Polygone shape = new Polygone(0, new Point[]{new Point(-2, -1), new Point(1, 1), new Point(1, -3)});
+        Reef reefPolygone = new Reef(position, shape);
+        assertEquals(5, ship.distanceToforReef(reefPolygone));
+    }
+
+    @Test
+    void distanceToForReefTest2(){
+        Position position = new Position(5,5,0);
+        Circle shape = new Circle(5);
+        Reef reef = new Reef(position, shape);
+        assertEquals(2.071, ship.distanceToforReef(reef), 1e-3);
+    }
+
+    @Test
+    void distanceToForReefTest3(){
+        Position position = new Position(5,5,0);
+        Rectangle shape = new Rectangle(4, 2, 0);
+        Reef reef = new Reef(position, shape);
+        assertEquals(4.835, ship.distanceToforReef(reef), 1e-3);
     }
 
 

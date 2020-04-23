@@ -43,7 +43,7 @@ public class EngineSettingsWeek10 extends EngineSettings {
         Rectangle shape3 = new Rectangle(150, 500, 0);
 
         Position position4 = new Position(4987.995198079245, 2644.0576230492193, 0);
-        Polygone shape4 = new Polygone(0.8377580409572781, new Point[]{new Point(350, 0), new Point(250, 250), new Point(-100, 150), new Point(-150, -150), new Point(250, -200)});
+        Polygone shape4 = new Polygone(0, new Point[]{new Point(350, 0), new Point(250, 250), new Point(-100, 150), new Point(-150, -150), new Point(250, -200)});
 
         Position position5 = new Position(4375.750300120048, 3955.5822328931586, 2.5132741228718345);
         Rectangle shape5 = new Rectangle(400, 500, 0);
@@ -60,6 +60,17 @@ public class EngineSettingsWeek10 extends EngineSettings {
 
         Position position9 = new Position(3805.5222088835535, 3151.2605042016826, 4.39822971502571);
         Rectangle shape9 = new Rectangle(200, 1000, 0);
+
+       /* this.visibleEntities.add(new Reef(new Position(4787.9655830888405, 2113.3604670048157,0), new Circle(10)));
+        this.visibleEntities.add(new Reef(new Position(4670.44557868102, 2226.446487187177,0), new Circle(10)));
+        this.visibleEntities.add(new Reef(new Position(4538.84258332067, 2311.1385718378983,0), new Circle(10)));
+        this.visibleEntities.add(new Reef(new Position(4491.455365691989, 2404.4605042766902,0), new Circle(10)));
+        this.visibleEntities.add(new Reef(new Position(4481.809904794973, 2569.1782686732695,0), new Circle(10)));
+        this.visibleEntities.add(new Reef(new Position(4425.46476260358, 2662.4701207517437,0), new Circle(10)));
+        this.visibleEntities.add(new Reef(new Position(4283.381929688104, 2746.3596722005063,2.5731283195072643), new Circle(10)));
+        this.visibleEntities.add(new Reef(new Position(4196.175615460134, 2799.8311814272865,0), new Circle(10)));
+
+        */
 
         this.visibleEntities.add(new Reef(position1, shape1));
         this.visibleEntities.add(new Reef(position2, shape2));

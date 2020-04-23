@@ -8,7 +8,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.AbstractMap.SimpleEntry;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,8 +29,6 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Watch;
 public class CaptainMateTest {
     List<Sailor> sailors;
     Sailor sailor;
-    List<Oar> oars;
-    List<Sail> sails;
     SimpleEntry<Sailor,Double> sailorAndAngle;
     Captain captain;
     CaptainMate captainMate;

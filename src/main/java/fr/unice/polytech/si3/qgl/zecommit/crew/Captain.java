@@ -92,6 +92,10 @@ public class Captain implements CaptainInterface {
         return new ArrayList<>();
     }
 
+    /**
+     * Calcul l'angle pour atteindre le prochain CP et choisit la compo de marins qui rament
+     * @return la liste des marins qui doivent ramer
+     */
     @Override
     public List<Sailor> doActivateOars() {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {
@@ -103,6 +107,9 @@ public class Captain implements CaptainInterface {
         return decisionOrientation(road);
     }
 
+    /**
+     * Le capitaine choisit les points de déviation en plaçant des CP intermédiaires
+     */
     public void createIntermediateCheckpoint(){
         if (goal.getFirstCheckpoint().isFake()) {
             goal.deleteFirstCheckpoint();
@@ -118,14 +125,12 @@ public class Captain implements CaptainInterface {
                 Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                Logs.add("1");
                 //On crée un CP intermédiaire moyennement proche du récif
             }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
                 Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                Logs.add("2");
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
 
             }
@@ -133,27 +138,23 @@ public class Captain implements CaptainInterface {
                 Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(0), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                Logs.add("3");
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
                 }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(1)))) {
                 Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(1), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                Logs.add("4");
                 //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
             }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions2.get(1)))) {
                 Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions2.get(1), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                Logs.add("5");
             }
             else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions2.get(0)))) {
                 Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions2.get(0), new Circle(50));
                 fakeCP.setFake(true);
                 goal.addFirstCheckpoint(fakeCP);
-                Logs.add("6");
             }
         }
     }
@@ -287,22 +288,7 @@ public class Captain implements CaptainInterface {
                 && road.distanceToGoal() > (165 + wind.getStrength() * activeSails.size());
     }
 
-    /**
-     * Méthode indiquant quand le bateau est dans un courant
-     *
-     * @return boolean true si on est dans un courant
-     */
-    public boolean isInStream() {
-        boolean res = false;
-        for (VisibleEntitie visibleEntitie : visibleEntities)
-            if (visibleEntitie.getType().equals(VisibleEntityType.stream)) {
-                Stream stream = (Stream) visibleEntitie;
-                Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
-                if (collision.collide())
-                    res = true;
-            }
-        return res;
-    }
+
 
     /**
      * Méthode indiquant quand le bateau est à contre courant
@@ -316,7 +302,6 @@ public class Captain implements CaptainInterface {
                 if (visibleEntitie.getType().equals(VisibleEntityType.stream)) {
                     Stream stream = (Stream) visibleEntitie;
                     Collision collision = new Collision(stream.getShape(), stream.getPosition(), ship.getPosition());
-                    System.out.println(ship.getShape().getShapeOrientation());
                     if (collision.collide()
                             && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) < 0
                             && Math.abs(ship.getPosition().getOrientation() + ship.getShape().getShapeOrientation() - stream.getShape().getShapeOrientation()) >= Math.PI / 4)

@@ -61,9 +61,6 @@ public class Sailor {
         return 0;
     }
 
-    public void reinitializeEntity(){
-        this.entity = null;
-    }
 
     //--------------------GETTER -------------------------//
 

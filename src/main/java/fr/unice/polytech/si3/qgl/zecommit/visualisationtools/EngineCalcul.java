@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.unice.polytech.si3.qgl.zecommit.action.*;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.exception.CollisionException;
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.EngineSettingsInterface;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Sail;
@@ -199,7 +200,7 @@ public class EngineCalcul {
     }
 
 
-    public void calcul() throws Exception {
+    public void calcul() throws CollisionException {
         double vitesse = ((double) 165 / settings.getN()) * (settings.getLeftSailors().size() + settings.getRightSailors().size()) / settings.getOarArrayList().size();
         vitesse += calculWind();
 
@@ -219,7 +220,7 @@ public class EngineCalcul {
         boolean res = checkCollision(newPosition);
 
         if (res)//s'il y a une collision avec l'un des récifs, le déplacement n'a pas lieu
-            throw new Exception();
+            throw new CollisionException();
         else {
             settings.getShip().setPosition(newPosition);
         }

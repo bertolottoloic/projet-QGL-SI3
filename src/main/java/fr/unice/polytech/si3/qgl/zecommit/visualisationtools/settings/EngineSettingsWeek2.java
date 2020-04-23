@@ -7,6 +7,7 @@ import fr.unice.polytech.si3.qgl.zecommit.crew.Sailor;
 import fr.unice.polytech.si3.qgl.zecommit.entite.Oar;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.other.Checkpoint;
+import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
 import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Rectangle;
@@ -47,6 +48,12 @@ public class EngineSettingsWeek2 extends EngineSettings {
         this.deck.setSailors(sailors);
     }
 
+    @Override
+    public void setVisibleEntities() {
+        this.visibleEntities = new ArrayList<>();
+        this.visibleEntities.add(new Reef(new Position(200,1050, 0), new Circle(50)));
+
+    }
     @Override
     public void setEntities() {
         this.entities = new ArrayList<>();
