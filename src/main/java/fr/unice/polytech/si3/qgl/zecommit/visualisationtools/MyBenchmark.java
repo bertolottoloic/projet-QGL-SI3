@@ -30,8 +30,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MyBenchmark {
 
-    public static boolean showWindow = true;
-    public static boolean showDeck = false;
     public static List<List<Sailor>> SAILORS_VIZU;
     public static List<Entity> ENTITIES_VIZU;
 
@@ -70,7 +68,6 @@ public class MyBenchmark {
 
         EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
         String json = engineCalcul.thisToJson();
-        System.out.println(json);
         EngineNextRound engineNextRound = new EngineNextRound();
         Cockpit cockpit = new Cockpit();
         cockpit.initGame(json);
@@ -79,13 +76,10 @@ public class MyBenchmark {
         int maxStep = 300;
         String output = "";
         while (!output.equals("[]") && currentStep < maxStep) {
-            System.out.println("ROUND :" + currentStep);
             currentStep++;
             SAILORS_VIZU.add(engineSettings.getSailors());
             String json2 = engineCalcul.thisToJson2();
-            //System.out.println(json2);
             output = cockpit.nextRound(json2);
-            System.out.println(output);
 
             try {
                 engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
@@ -95,24 +89,9 @@ public class MyBenchmark {
             }
             Position position = engineSettings.getShip().getPosition();
             positions.add(position);
-            System.out.println(position + "\nFIN DU ROUND\n");
             if(currentStep==maxStep) {
-                if(showWindow)
-                    new Window(positions, engineSettings.getAllCheckpoints(), engineSettings.getVisibleEntities());
                 throw new UnfinishedException();
             }
         }
-
-        if(showWindow)
-            new Window(positions, engineSettings.getAllCheckpoints(), engineSettings.getVisibleEntities());
-
-
-        if(showDeck)
-            new DeckVizu();
-
-        String dieses = "##################################################################################################";
-        System.out.println(dieses + "############################################## Logs ##############################################" + dieses);
-        System.out.println(cockpit.getLogs());
-        System.out.println(dieses + "########################################## Fin des Logs ##########################################" + dieses);
     }
 }

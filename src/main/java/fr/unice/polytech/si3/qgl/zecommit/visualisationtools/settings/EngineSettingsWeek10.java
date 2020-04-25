@@ -67,10 +67,10 @@ public class EngineSettingsWeek10 extends EngineSettings {
         this.visibleEntities.add(new Reef(new Position(4491.455365691989, 2404.4605042766902,0), new Circle(10)));
         this.visibleEntities.add(new Reef(new Position(4481.809904794973, 2569.1782686732695,0), new Circle(10)));
         this.visibleEntities.add(new Reef(new Position(4425.46476260358, 2662.4701207517437,0), new Circle(10)));
-        this.visibleEntities.add(new Reef(new Position(4283.381929688104, 2746.3596722005063,2.5731283195072643), new Circle(10)));
         this.visibleEntities.add(new Reef(new Position(4196.175615460134, 2799.8311814272865,0), new Circle(10)));
 
         */
+        //this.visibleEntities.add(new Reef(new Position(4283.381929688104, 2746.3596722005063,0), new Circle(10)));
 
         this.visibleEntities.add(new Reef(position1, shape1));
         this.visibleEntities.add(new Reef(position2, shape2));

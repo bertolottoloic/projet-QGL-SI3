@@ -17,7 +17,6 @@ import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Shape;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

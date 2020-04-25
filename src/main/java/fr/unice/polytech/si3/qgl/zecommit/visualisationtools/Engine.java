@@ -24,7 +24,7 @@ public class Engine {
     public static List<Entity> ENTITIES_VIZU;
 
 
-    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek11();//A modifier pour changer la simulation
+    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek12();//A modifier pour changer la simulation
 
 
     public static void main(String[] args) throws CollisionException, UnfinishedException {

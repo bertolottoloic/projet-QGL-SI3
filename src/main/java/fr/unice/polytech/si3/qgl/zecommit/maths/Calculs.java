@@ -171,6 +171,11 @@ public class Calculs {
         double rc2 = r1; // rayon du second cercle
         if(strategy==3)
             rc2=2*r1;
+        if(strategy==4){
+            rc2=0.4*r1;
+            xc1 = center.getX();
+            yc2 = center.getY();
+        }
         double xia;
         double xib;
         double yia;
