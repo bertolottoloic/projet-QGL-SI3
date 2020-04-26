@@ -7,8 +7,7 @@ import fr.unice.polytech.si3.qgl.zecommit.entite.Entity;
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.deckvizu.DeckVizu;
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.exception.CollisionException;
 import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.exception.UnfinishedException;
-import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.EngineSettingsInterface;
-import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.EngineSettingsWeek11;
+import fr.unice.polytech.si3.qgl.zecommit.visualisationtools.settings.*;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.profile.StackProfiler;
 import org.openjdk.jmh.results.format.ResultFormatType;
@@ -33,8 +32,10 @@ public class MyBenchmark {
     public static List<List<Sailor>> SAILORS_VIZU;
     public static List<Entity> ENTITIES_VIZU;
 
-
-    public static EngineSettingsInterface engineSettings = new EngineSettingsWeek11();//A modifier pour changer la simulation
+    public static EngineSettingsInterface engineSettings09 = new EngineSettingsWeek9();
+    public static EngineSettingsInterface engineSettings10 = new EngineSettingsWeek10();
+    public static EngineSettingsInterface engineSettings11 = new EngineSettingsWeek11();
+    public static EngineSettingsInterface engineSettings12 = new EngineSettingsWeek12();//A modifier pour changer la simulation
 
     private Engine engine;
 
@@ -56,17 +57,21 @@ public class MyBenchmark {
     }
 
 
-
+    /**
+     * WEEK09
+     * @throws UnfinishedException
+     * @throws CollisionException
+     */
     @Benchmark
-    public void engineTestTime() throws UnfinishedException, CollisionException {
+    public void engineTestTimeWeek09() throws UnfinishedException, CollisionException {
         List<Position> positions = new ArrayList<>();
         SAILORS_VIZU = new ArrayList<>();
 
-        engineSettings.initiateSettings();
+        engineSettings09.initiateSettings();
 
-        ENTITIES_VIZU = engineSettings.getEntities();
+        ENTITIES_VIZU = engineSettings09.getEntities();
 
-        EngineCalcul engineCalcul =  new EngineCalcul(engineSettings);
+        EngineCalcul engineCalcul =  new EngineCalcul(engineSettings09);
         String json = engineCalcul.thisToJson();
         EngineNextRound engineNextRound = new EngineNextRound();
         Cockpit cockpit = new Cockpit();
@@ -77,7 +82,7 @@ public class MyBenchmark {
         String output = "";
         while (!output.equals("[]") && currentStep < maxStep) {
             currentStep++;
-            SAILORS_VIZU.add(engineSettings.getSailors());
+            SAILORS_VIZU.add(engineSettings09.getSailors());
             String json2 = engineCalcul.thisToJson2();
             output = cockpit.nextRound(json2);
 
@@ -87,7 +92,136 @@ public class MyBenchmark {
                 System.err.println(e.getMessage());//affiche une exception en cas de collision
                 throw new CollisionException();// a commenter pour ne pas interrompre le code
             }
-            Position position = engineSettings.getShip().getPosition();
+            Position position = engineSettings09.getShip().getPosition();
+            positions.add(position);
+            if(currentStep==maxStep) {
+                throw new UnfinishedException();
+            }
+        }
+    }
+
+    /**
+     * WEEK10
+     * @throws UnfinishedException
+     * @throws CollisionException
+     */
+    @Benchmark
+    public void engineTestTimeWeek10() throws UnfinishedException, CollisionException {
+        List<Position> positions = new ArrayList<>();
+        SAILORS_VIZU = new ArrayList<>();
+
+        engineSettings10.initiateSettings();
+
+        ENTITIES_VIZU = engineSettings10.getEntities();
+
+        EngineCalcul engineCalcul =  new EngineCalcul(engineSettings10);
+        String json = engineCalcul.thisToJson();
+        EngineNextRound engineNextRound = new EngineNextRound();
+        Cockpit cockpit = new Cockpit();
+        cockpit.initGame(json);
+
+        int currentStep = 0;
+        int maxStep = 300;
+        String output = "";
+        while (!output.equals("[]") && currentStep < maxStep) {
+            currentStep++;
+            SAILORS_VIZU.add(engineSettings10.getSailors());
+            String json2 = engineCalcul.thisToJson2();
+            output = cockpit.nextRound(json2);
+
+            try {
+                engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
+            } catch (Exception e) {
+                System.err.println(e.getMessage());//affiche une exception en cas de collision
+                throw new CollisionException();// a commenter pour ne pas interrompre le code
+            }
+            Position position = engineSettings10.getShip().getPosition();
+            positions.add(position);
+            if(currentStep==maxStep) {
+                throw new UnfinishedException();
+            }
+        }
+    }
+
+    /**
+     * WEEK10
+     * @throws UnfinishedException
+     * @throws CollisionException
+     */
+    @Benchmark
+    public void engineTestTimeWeek11() throws UnfinishedException, CollisionException {
+        List<Position> positions = new ArrayList<>();
+        SAILORS_VIZU = new ArrayList<>();
+
+        engineSettings10.initiateSettings();
+
+        ENTITIES_VIZU = engineSettings11.getEntities();
+
+        EngineCalcul engineCalcul =  new EngineCalcul(engineSettings11);
+        String json = engineCalcul.thisToJson();
+        EngineNextRound engineNextRound = new EngineNextRound();
+        Cockpit cockpit = new Cockpit();
+        cockpit.initGame(json);
+
+        int currentStep = 0;
+        int maxStep = 300;
+        String output = "";
+        while (!output.equals("[]") && currentStep < maxStep) {
+            currentStep++;
+            SAILORS_VIZU.add(engineSettings11.getSailors());
+            String json2 = engineCalcul.thisToJson2();
+            output = cockpit.nextRound(json2);
+
+            try {
+                engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
+            } catch (Exception e) {
+                System.err.println(e.getMessage());//affiche une exception en cas de collision
+                throw new CollisionException();// a commenter pour ne pas interrompre le code
+            }
+            Position position = engineSettings11.getShip().getPosition();
+            positions.add(position);
+            if(currentStep==maxStep) {
+                throw new UnfinishedException();
+            }
+        }
+    }
+
+    /**
+     * WEEK10
+     * @throws UnfinishedException
+     * @throws CollisionException
+     */
+    @Benchmark
+    public void engineTestTimeWeek12() throws UnfinishedException, CollisionException {
+        List<Position> positions = new ArrayList<>();
+        SAILORS_VIZU = new ArrayList<>();
+
+        engineSettings10.initiateSettings();
+
+        ENTITIES_VIZU = engineSettings12.getEntities();
+
+        EngineCalcul engineCalcul =  new EngineCalcul(engineSettings12);
+        String json = engineCalcul.thisToJson();
+        EngineNextRound engineNextRound = new EngineNextRound();
+        Cockpit cockpit = new Cockpit();
+        cockpit.initGame(json);
+
+        int currentStep = 0;
+        int maxStep = 300;
+        String output = "";
+        while (!output.equals("[]") && currentStep < maxStep) {
+            currentStep++;
+            SAILORS_VIZU.add(engineSettings12.getSailors());
+            String json2 = engineCalcul.thisToJson2();
+            output = cockpit.nextRound(json2);
+
+            try {
+                engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
+            } catch (Exception e) {
+                System.err.println(e.getMessage());//affiche une exception en cas de collision
+                throw new CollisionException();// a commenter pour ne pas interrompre le code
+            }
+            Position position = engineSettings12.getShip().getPosition();
             positions.add(position);
             if(currentStep==maxStep) {
                 throw new UnfinishedException();
