@@ -16,11 +16,8 @@ import fr.unice.polytech.si3.qgl.zecommit.maths.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 
+import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -122,15 +119,15 @@ public class Captain implements CaptainInterface {
             List<Position> fakeCheckpointPositions2 = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 3);
             List<Position> fakeCheckpointPositions3 = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 4);
 
-            if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(50));
+            if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(50));
                 fakeCP.setFake(true);
                 Logs.add("**1**");
                 goal.addFirstCheckpoint(fakeCP);
                 //On crée un CP intermédiaire moyennement proche du récif
             }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(50));
+            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
+                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(50));
                 fakeCP.setFake(true);
                 Logs.add("**2**");
                 goal.addFirstCheckpoint(fakeCP);
