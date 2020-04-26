@@ -114,4 +114,8 @@ public class Polygone extends Shape {
 
         return new Point(x, y);
     }
+
+    public void setOrientation(double orientation) {
+        this.orientation = orientation;
+    }
 }

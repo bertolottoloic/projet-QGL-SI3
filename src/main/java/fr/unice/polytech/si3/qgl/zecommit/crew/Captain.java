@@ -122,7 +122,6 @@ public class Captain implements CaptainInterface {
             List<Position> fakeCheckpointPositions2 = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 3);
             List<Position> fakeCheckpointPositions3 = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 4);
 
-
             if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
                 Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(50));
                 fakeCP.setFake(true);
@@ -289,7 +288,7 @@ public class Captain implements CaptainInterface {
             List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), nextPosition);
             if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers la prochaine position
                 //Logs.add("On frôle le récif capitaine !");
-                
+
 
             }
         }

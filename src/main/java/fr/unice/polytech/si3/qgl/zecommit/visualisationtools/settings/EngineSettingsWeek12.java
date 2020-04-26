@@ -32,8 +32,8 @@ public class EngineSettingsWeek12 extends EngineSettings {
     public void setVisibleEntities() {
         this.visibleEntities = new ArrayList<>();
 
-        Position position10 = new Position(11544.980443285524, -6132.812500000002, -0.5934119456780721);
-        Polygone shape10 = new Polygone(0, new Point[]{new Point(2500, -3000), new Point(2500, 3000), new Point(-2500, 3000), new Point(-2500, -3000), new Point(-2500, -3000)});
+        Position position10 = new Position(11544.980443285524, -6132.812500000002, 0);
+        Polygone shape10 = new Polygone(0.5934119456780721, new Point[]{new Point(2500, -3000), new Point(2500, 3000), new Point(-2500, 3000), new Point(-2500, -3000), new Point(-2500, -3000)});
 
         Position position11 = new Position(4263.363754889176, 3027.343749999999, 0);
         Polygone shape11 = new Polygone(0, new Point[]{new Point(186, 236), new Point(132, 670), new Point(-5, 689), new Point(-115, 560), new Point(-114, -632), new Point(-35, -724), new Point(40, -710), new Point(145, -450)});
@@ -59,6 +59,9 @@ public class EngineSettingsWeek12 extends EngineSettings {
         Position position3 = new Position(9517.601043024764, -6.217248937900877e-13, 5.916666164260777);
         Rectangle shape3 = new Rectangle(150, 500, 0);
 
+
+        //this.visibleEntities.add(new Reef(new Position(12487.123113118287 , -535.5330132438439, 0), new Circle(10)));
+        //this.visibleEntities.add(new Reef(new Position(6907.726952070782 , 2202.3949924105227 , 0), new Circle(10)));
 
         this.visibleEntities.add(new Reef(position0, shape0));
         this.visibleEntities.add(new Reef(position1, shape1));
@@ -168,7 +171,7 @@ public class EngineSettingsWeek12 extends EngineSettings {
 
     @Override
     public void setShape() {
-        this.shape = new Polygone(0, new Point[]{new Point(6, -2.5), new Point(-6, 2.5), new Point(-6, 2.5), new Point(-6, -2.5)});
+        this.shape = new Rectangle(3,6,0);
     }
 
 

@@ -2,6 +2,10 @@ package fr.unice.polytech.si3.qgl.zecommit;
 
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 import fr.unice.polytech.si3.qgl.zecommit.maths.Calculs;
+import fr.unice.polytech.si3.qgl.zecommit.maths.Collision;
+import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Point;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -155,6 +159,24 @@ public class CalculsTest {
         assertEquals(expected.get(1).getX(), actual.get(1).getX(), DELTA);
         assertEquals(expected.get(1).getY(), actual.get(1).getY(), DELTA);
 
+    }
+
+    /**
+     * test bug week12
+     */
+    @Test
+    public void collideTest4() {
+        Position position10 = new Position(11544.980443285524, -6132.812500000002, -0.5934119456780721);
+        Polygone shape10 = new Polygone(0, new Point[]{new Point(2500, -3000), new Point(2500, 3000), new Point(-2500, 3000), new Point(-2500, -3000), new Point(-2500, -3000)});
+
+        Position M = new Position(9400.26075619297, 227.8645833333388, 3.141592653589793);
+
+        List<Reef> reefs = new ArrayList<>();
+        reefs.add(new Reef(position10, shape10));
+        List<Position> positions = new ArrayList<>();
+        positions.add(M);
+
+        assertFalse(Calculs.checkCollision(reefs, positions));
     }
 
 }

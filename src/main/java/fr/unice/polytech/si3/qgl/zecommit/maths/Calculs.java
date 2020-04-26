@@ -1,9 +1,11 @@
 package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 
+import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
+import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,6 +115,9 @@ public class Calculs {
 
         for (Reef reef : reefs) {
             for (Position nextPosition : route) {
+                if(!reef.getShape().isRectangle() && !reef.getShape().isCircle() && reef.getPosition().getOrientation()!=0){
+                    ((Polygone)reef.getShape()).setOrientation(reef.getPosition().getOrientation()+reef.getShape().getShapeOrientation());
+                }
 
                 Collision collision = new Collision(reef.getShape(), reef.getPosition(), nextPosition);
                 if (collision.collide()) {
@@ -172,9 +177,10 @@ public class Calculs {
         if(strategy==3)
             rc2=2*r1;
         if(strategy==4){
-            rc2=0.4*r1;
-            xc1 = center.getX();
-            yc2 = center.getY();
+            rc1=0.3*r1;
+            rc2 = rayon;
+            xc2 = xCenter;
+            yc2 = yCenter;
         }
         double xia;
         double xib;

@@ -65,6 +65,7 @@ public class Engine {
             positions.add(position);
             System.out.println(position + "\nFIN DU ROUND\n");
             if(currentStep==maxStep) {
+                System.out.println(cockpit.getLogs());
                 if(showWindow)
                     new Window(positions, engineSettings.getAllCheckpoints(), engineSettings.getVisibleEntities());
                 throw new UnfinishedException();

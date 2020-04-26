@@ -77,7 +77,6 @@ public class EngineSettingsWeek7 extends EngineSettings{
     @Override
     public void setWind() {
         this.winds.add(new Wind(0, 150));
-
     }
 
     @Override
