@@ -114,63 +114,20 @@ public class Captain implements CaptainInterface {
         List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
         if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers le CP
             Logs.add("Obstacle détecté sur votre trajet");
-            List<Position> fakeCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 1);
-            List<Position> fakeCloserCheckpointPositions = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 2);
-            List<Position> fakeCheckpointPositions2 = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 3);
-            List<Position> fakeCheckpointPositions3 = Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 4);
+            List<Position> fakeCheckpointPositions = new ArrayList<>();
+            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 2, fakeCheckpointPositions);
+            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 1, fakeCheckpointPositions);
+            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 3, fakeCheckpointPositions);
+            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 4, fakeCheckpointPositions);
 
-            if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(1), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**1**");
-                goal.addFirstCheckpoint(fakeCP);
-                //On crée un CP intermédiaire moyennement proche du récif
-            }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCloserCheckpointPositions.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCloserCheckpointPositions.get(0), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**2**");
-                goal.addFirstCheckpoint(fakeCP);
-                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
-
-            }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(0), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**3**");
-                goal.addFirstCheckpoint(fakeCP);
-                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
+            for(Position position : fakeCheckpointPositions){
+                if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), position))) {
+                    Checkpoint fakeCP = new Checkpoint(position, new Circle(50));
+                    fakeCP.setFake(true);
+                    goal.addFirstCheckpoint(fakeCP);
+                    break;
+                    //On crée un CP intermédiaire proche du récif
                 }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions.get(1), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**4**");
-                goal.addFirstCheckpoint(fakeCP);
-                //On crée un CP intermédiaire moyennement proche du récif de l'autre coté
-            }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions2.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions2.get(1), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**5**");
-                goal.addFirstCheckpoint(fakeCP);
-            }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions2.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions2.get(0), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**6**");
-                goal.addFirstCheckpoint(fakeCP);
-            }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions3.get(1)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions3.get(1), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**7**");
-                goal.addFirstCheckpoint(fakeCP);
-            }
-            else if(!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), fakeCheckpointPositions3.get(0)))) {
-                Checkpoint fakeCP = new Checkpoint(fakeCheckpointPositions3.get(0), new Circle(50));
-                fakeCP.setFake(true);
-                Logs.add("**8**");
-                goal.addFirstCheckpoint(fakeCP);
             }
         }
     }
@@ -279,12 +236,12 @@ public class Captain implements CaptainInterface {
     private void recalculateChosenAngle(int leftSailorsSize, int rightSailorsSize) {
         Predictions predictions = new Predictions(leftSailorsSize, rightSailorsSize, ship, visibleEntities, chosenAngle, wind, upSail());
         if (predictions.checkCollision()) {
-            //Logs.add("Votre Capitaine a detecté un iceberg...");
+            Logs.add("Votre Capitaine a detecté un iceberg...");
 
             Position nextPosition = predictions.predictFinalPosition(ship.getPosition(), 1);
             List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), nextPosition);
             if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers la prochaine position
-                //Logs.add("On frôle le récif capitaine !");
+                Logs.add("On frôle le récif capitaine !");
 
 
             }

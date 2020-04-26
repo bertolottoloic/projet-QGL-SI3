@@ -119,4 +119,13 @@ public class IntegrationTest {
         Engine.engineSettings = new EngineSettingsWeek11();
         assertDoesNotThrow(() -> Engine.main(str));
     }
+    @Category(IntegrationTest.class)
+    @Test
+    public void week12Test(){
+        String[] str = {" "};
+        Engine.showWindow = false;
+        Engine.showDeck = false;
+        Engine.engineSettings = new EngineSettingsWeek12();
+        assertDoesNotThrow(() -> Engine.main(str));
+    }
 }

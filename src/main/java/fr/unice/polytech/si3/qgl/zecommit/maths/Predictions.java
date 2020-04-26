@@ -163,11 +163,9 @@ public class Predictions {
 
     public double calculWind(Position position) {
         double value = 0;
-        if(wind!=null) {
-            if (!sailArrayList.isEmpty()) {
+        if(wind!=null && !sailArrayList.isEmpty()) {
                 value = ((double) nbSailUsed / sailArrayList.size()) * wind.getStrength() *
                         Math.cos(Math.abs(wind.getOrientation()) - Math.abs(position.getOrientation()));
-            }
         }
         return value;
     }

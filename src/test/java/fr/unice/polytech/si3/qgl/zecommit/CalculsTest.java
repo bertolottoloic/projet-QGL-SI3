@@ -90,10 +90,12 @@ public class CalculsTest {
     @Test
     public void findIntersectionsCercleTest() {
         List<Position> expected = new ArrayList<>();
-        expected.add(new Position(6, -1, 0));
         expected.add(new Position(3, 6, 0));
+        expected.add(new Position(6, -1, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1, 1, 0), new Position(8, 4, 0), 1);
+        List<Position> actual = new ArrayList<>();
+        Calculs.findFakeCheckpointPositions(new Position(1, 1, 0), new Position(8, 4, 0), 1, actual);
+
 
         assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
         assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);
@@ -110,10 +112,11 @@ public class CalculsTest {
     @Test
     public void findIntersectionsCercleTest2() {
         List<Position> expected = new ArrayList<>();
-        expected.add(new Position(4.5, -2.5, 0));
         expected.add(new Position(4.5, 4.5, 0));
+        expected.add(new Position(4.5, -2.5, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(1, 1, 0), new Position(8, 1, 0), 1);
+        List<Position> actual = new ArrayList<>();
+        Calculs.findFakeCheckpointPositions(new Position(1, 1, 0), new Position(8, 1, 0), 1, actual);
 
         assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
         assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);
@@ -129,10 +132,11 @@ public class CalculsTest {
     @Test
     public void findIntersectionsCercleTest3() {
         List<Position> expected = new ArrayList<>();
-        expected.add(new Position(7, -6, 0));
         expected.add(new Position(7, 0, 0));
+        expected.add(new Position(7, -6, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4, -3, 0), new Position(10, -3, 0), 1);
+        List<Position> actual = new ArrayList<>();
+        Calculs.findFakeCheckpointPositions(new Position(4, -3, 0), new Position(10, -3, 0), 1, actual);
 
         assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
         assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);
@@ -148,10 +152,11 @@ public class CalculsTest {
     @Test
     public void findIntersectionsCercleTest4() {
         List<Position> expected = new ArrayList<>();
-        expected.add(new Position(6, -1, 0));
         expected.add(new Position(2, -1, 0));
+        expected.add(new Position(6, -1, 0));
 
-        List<Position> actual = Calculs.findFakeCheckpointPositions(new Position(4, -3, 0), new Position(4, 1, 0), 1);
+        List<Position> actual = new ArrayList<>();
+        Calculs.findFakeCheckpointPositions(new Position(4, -3, 0), new Position(4, 1, 0), 1, actual);
 
         assertEquals(expected.get(0).getX(), actual.get(0).getX(), DELTA);
         assertEquals(expected.get(0).getY(), actual.get(0).getY(), DELTA);

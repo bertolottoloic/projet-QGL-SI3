@@ -1,14 +1,12 @@
 package fr.unice.polytech.si3.qgl.zecommit.maths;
 
 
-import fr.unice.polytech.si3.qgl.zecommit.Logs;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 import fr.unice.polytech.si3.qgl.zecommit.other.Reef;
 import fr.unice.polytech.si3.qgl.zecommit.shape.Polygone;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -151,7 +149,7 @@ public class Calculs {
      * @param strategy true si l'on place les CP très loin
      * @return la list de positions des CP intermédiaires
      */
-    public static List<Position> findFakeCheckpointPositions(Position position1, Position position2, int strategy) {
+    public static void findFakeCheckpointPositions(Position position1, Position position2, int strategy, List<Position> res) {
         double x1 = position1.getX();
         double y1 = position1.getY();
         double x2 = position2.getX();
@@ -208,13 +206,12 @@ public class Calculs {
             yib = a - ((-f - Math.sqrt(delta)) / (2 * e)) * d;
         }
 
-        if (Double.isNaN(xia) || Double.isNaN(yia) || Double.isNaN(xib) || Double.isNaN(yib))
-            return Collections.emptyList(); // si les cercles ne se touchent pas ou bien sont identiques
-
-        List<Position> res = new ArrayList<>();
-        res.add(new Position(xia, yia, 0));
-        res.add(new Position(xib, yib, 0));
-        return res; // coordonnées des deux points d'intersection (nb : seront identiques si les cercles ne se touchent qu'en un seul point)
+        // si les cercles ne se touchent pas ou bien sont identiques on n'ajoute rien
+        // coordonnées des deux points d'intersection (nb : seront identiques si les cercles ne se touchent qu'en un seul point)
+        if (!Double.isNaN(xib) && !Double.isNaN(yib))
+            res.add(new Position(xib, yib, 0));
+        if (!Double.isNaN(xia) && !Double.isNaN(yia))
+            res.add(new Position(xia, yia, 0));
     }
 
 

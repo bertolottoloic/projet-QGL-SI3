@@ -58,49 +58,6 @@ public class MyBenchmark {
 
 
     /**
-     * WEEK09
-     * @throws UnfinishedException
-     * @throws CollisionException
-     */
-    @Benchmark
-    public void engineTestTimeWeek09() throws UnfinishedException, CollisionException {
-        List<Position> positions = new ArrayList<>();
-        SAILORS_VIZU = new ArrayList<>();
-
-        engineSettings09.initiateSettings();
-
-        ENTITIES_VIZU = engineSettings09.getEntities();
-
-        EngineCalcul engineCalcul =  new EngineCalcul(engineSettings09);
-        String json = engineCalcul.thisToJson();
-        EngineNextRound engineNextRound = new EngineNextRound();
-        Cockpit cockpit = new Cockpit();
-        cockpit.initGame(json);
-
-        int currentStep = 0;
-        int maxStep = 300;
-        String output = "";
-        while (!output.equals("[]") && currentStep < maxStep) {
-            currentStep++;
-            SAILORS_VIZU.add(engineSettings09.getSailors());
-            String json2 = engineCalcul.thisToJson2();
-            output = cockpit.nextRound(json2);
-
-            try {
-                engineCalcul.updateEngine(engineNextRound.getEngineNextRound(output));
-            } catch (Exception e) {
-                System.err.println(e.getMessage());//affiche une exception en cas de collision
-                throw new CollisionException();// a commenter pour ne pas interrompre le code
-            }
-            Position position = engineSettings09.getShip().getPosition();
-            positions.add(position);
-            if(currentStep==maxStep) {
-                throw new UnfinishedException();
-            }
-        }
-    }
-
-    /**
      * WEEK10
      * @throws UnfinishedException
      * @throws CollisionException
@@ -144,7 +101,7 @@ public class MyBenchmark {
     }
 
     /**
-     * WEEK10
+     * WEEK11
      * @throws UnfinishedException
      * @throws CollisionException
      */
@@ -153,7 +110,7 @@ public class MyBenchmark {
         List<Position> positions = new ArrayList<>();
         SAILORS_VIZU = new ArrayList<>();
 
-        engineSettings10.initiateSettings();
+        engineSettings11.initiateSettings();
 
         ENTITIES_VIZU = engineSettings11.getEntities();
 
@@ -187,7 +144,7 @@ public class MyBenchmark {
     }
 
     /**
-     * WEEK10
+     * WEEK12
      * @throws UnfinishedException
      * @throws CollisionException
      */
@@ -196,7 +153,7 @@ public class MyBenchmark {
         List<Position> positions = new ArrayList<>();
         SAILORS_VIZU = new ArrayList<>();
 
-        engineSettings10.initiateSettings();
+        engineSettings12.initiateSettings();
 
         ENTITIES_VIZU = engineSettings12.getEntities();
 
