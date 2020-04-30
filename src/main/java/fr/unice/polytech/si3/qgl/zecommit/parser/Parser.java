@@ -12,6 +12,12 @@ public class Parser {
         //constructeur vide
     }
 
+    /**
+     * Parse le json d'initialisation (string) en objet
+     * @param jsonString
+     * @return
+     * @throws JsonProcessingException
+     */
     public static InitGame parseInitGame(String jsonString) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -19,7 +25,12 @@ public class Parser {
         return mapper.readValue(jsonString, InitGame.class);
     }
 
-
+    /**
+     * Parse le json de chaque Round en objet
+     * @param jsonString
+     * @return
+     * @throws JsonProcessingException
+     */
     public static NextRound parseNextRound(String jsonString) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
