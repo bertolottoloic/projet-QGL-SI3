@@ -14,7 +14,6 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import fr.unice.polytech.si3.qgl.zecommit.goal.Regatta;
 import fr.unice.polytech.si3.qgl.zecommit.maths.*;
 import fr.unice.polytech.si3.qgl.zecommit.other.*;
-import fr.unice.polytech.si3.qgl.zecommit.shape.Circle;
 
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
