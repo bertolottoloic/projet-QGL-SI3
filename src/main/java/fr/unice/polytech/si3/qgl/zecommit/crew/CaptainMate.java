@@ -23,7 +23,10 @@ public class CaptainMate {
         this.initGame = true;
     }
 
-
+    /**
+     * Déplace les marins aux entités associés
+     * @param sailors
+     */
     public void moveSailorsToTheirEntity(List<Sailor> sailors) {
         if (!sailors.isEmpty()) {
             for (Sailor sailor : sailors) {
@@ -37,6 +40,10 @@ public class CaptainMate {
         }
     }
 
+    /**
+     * Active les rames associés aux marins de sailors
+     * @param sailors
+     */
     public void activateOars(List<Sailor> sailors) {
         if(!sailors.isEmpty())
             sailors.forEach(sailor -> {
@@ -46,6 +53,10 @@ public class CaptainMate {
 
     }
 
+    /**
+     * Active le gouvernail avec l'angle associé
+     * @param sailorAndAngle
+     */
     public void toTurn(SimpleEntry<Sailor,Double> sailorAndAngle) {
         if(sailorAndAngle!=null && sailorAndAngle.getValue()!=null && sailorAndAngle.getValue()!=0.0){
             double angle = sailorAndAngle.getValue();
@@ -60,6 +71,10 @@ public class CaptainMate {
 
     }
 
+    /**
+     * Monte les voiles associées aux marins de sailors
+     * @param sailors
+     */
     public void toLiftSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
@@ -72,6 +87,10 @@ public class CaptainMate {
         }
     }
 
+    /**
+     * Baisse les voiles associées aux marins de sailors 
+     * @param sailors
+     */
     public void toLowerSail(List<Sailor> sailors) {
         if(!sailors.isEmpty()){
             sailors.forEach(sailor -> {
@@ -84,12 +103,20 @@ public class CaptainMate {
         }
     }
 
+    /**
+     * Utilise la vigie
+     * @param sailor
+     */
     public void toUseWatch(Sailor sailor){
         if(sailor!=null && sailor.getEntity()!=null && sailor.getEntity().getType()==EntityType.watch && sailor.isOnEntity()){
             actions.add(new UseWatch(sailor.getId()));
         }
     }
 
+    /**
+     * Génère la liste d'actions réalisées
+     * @return la liste d'actions
+     */
     public List<Action> actions(){
         refreshData();
         if(this.initGame){

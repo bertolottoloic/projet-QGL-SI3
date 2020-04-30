@@ -89,10 +89,6 @@ public class Captain implements CaptainInterface {
         return new ArrayList<>();
     }
 
-    /**
-     * Calcul l'angle pour atteindre le prochain CP et choisit la compo de marins qui rament
-     * @return la liste des marins qui doivent ramer
-     */
     @Override
     public List<Sailor> doActivateOars() {
         if (ship.isInCheckpoint(goal.getFirstCheckpoint()) && goal.getCheckpoints().size() > 1) {

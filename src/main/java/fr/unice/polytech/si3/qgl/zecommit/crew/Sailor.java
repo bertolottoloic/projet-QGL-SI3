@@ -43,16 +43,26 @@ public class Sailor {
         return Math.abs(x-e.getX()) + Math.abs(y-e.getY());
     }
 
+    /**
+     * @return true si le marin est sur son entité, false sinon
+     */
     @JsonIgnore
     public boolean isOnEntity(){
         return hasEntity() && this.x==this.entity.getX() && this.y==this.entity.getY();
     }
 
+    /**
+     * @return true si le marin est associé à une entité, false sinon
+     */
     @JsonIgnore
     public boolean hasEntity(){
         return this.entity!=null;
     }
 
+    /**
+     * @param e liste d'entités
+     * @return la distance avec l'entité la plus proche du marin
+     */
     public int distanceToNearestEntity(List<Entity> e){
         Stream<Entity> en = e.stream();
         Optional<Entity> min = en.min(Comparator.comparingInt(this::distanceToEntity));
