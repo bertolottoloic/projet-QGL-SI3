@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Classe correspondant à un point
+ * Classe correspondant à la définition d'un point
  */
 public class Point {
     @JsonProperty("x")
@@ -18,7 +18,11 @@ public class Point {
         this.y=y;
     }
 
-
+    /**
+     * Calcul de la distance entre deux points
+     * @param a
+     * @return une distance
+     */
     public double distanceTo(Point a) {
         return Math.sqrt(Math.pow(a.getX() - this.getX(), 2) + Math.pow(a.getY() - this.getY(), 2));
     }

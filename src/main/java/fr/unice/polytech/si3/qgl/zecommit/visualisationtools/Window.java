@@ -15,13 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Fenetre pour la visualisation
+ * Fenetre pour la visualisation de la simulation
+ * @author clement
  */
 public class Window extends JFrame{
 
     public int w;
     public int h;
-    public static int adjust;
+
+    // A MODIFIER POUR AJUSTER
     public double scale = 25;
 
     public Window(List<Position> points, List<Checkpoint> checkpoints,List<VisibleEntitie> visibles) {

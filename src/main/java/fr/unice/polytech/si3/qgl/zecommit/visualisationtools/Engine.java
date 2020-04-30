@@ -23,10 +23,17 @@ public class Engine {
     public static List<List<Sailor>> SAILORS_VIZU;
     public static List<Entity> ENTITIES_VIZU;
 
-
+    /**
+     * Course à lancer
+     */
     public static EngineSettingsInterface engineSettings = new EngineSettingsWeek12();//A modifier pour changer la simulation
 
-
+    /**
+     * Lance la simulation de la course engineSettings
+     * @param args
+     * @throws CollisionException si le bateau rentre en collision
+     * @throws UnfinishedException pour d'autres erreurs
+     */
     public static void main(String[] args) throws CollisionException, UnfinishedException {
 
         List<Position> positions = new ArrayList<>();
