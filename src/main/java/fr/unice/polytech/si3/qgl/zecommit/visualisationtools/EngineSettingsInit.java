@@ -7,7 +7,8 @@ import fr.unice.polytech.si3.qgl.zecommit.goal.Goal;
 import java.util.List;
 
 /**
- * Partie du moteur qui initie les paramètres
+ * Structure du Json d'entrée fourni à l'initialisation de la simulation
+ * @author Clement
  */
 class EngineSettingsInit {
     private Goal goal;

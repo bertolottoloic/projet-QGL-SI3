@@ -7,7 +7,7 @@ import fr.unice.polytech.si3.qgl.zecommit.other.Wind;
 import java.util.ArrayList;
 
 /**
- * Partie du moteur qui initie le nextRound
+ * Structure du Json d'entrée fourni à chaque Round de la simulation
  */
 public class EngineSettingsNextRound {
     private Ship ship;

@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 2)
 @Measurement(iterations = 5)
 
+
 public class MyBenchmark {
 
     public static List<List<Sailor>> SAILORS_VIZU;

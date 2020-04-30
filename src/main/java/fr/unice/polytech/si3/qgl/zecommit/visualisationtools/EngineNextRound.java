@@ -17,6 +17,13 @@ import java.util.Iterator;
 public class EngineNextRound {
     ArrayList<Action> actionArrayList;
 
+    /**
+     * Parse le Json d'entrée pour le convertir en une liste
+     * d'Action traitable par la simulation
+     * @param jsonOutput
+     * @return une Liste d'Action
+     * @throws JsonProcessingException
+     */
     public ArrayList<Action> getEngineNextRound(String jsonOutput)throws JsonProcessingException {
         this.actionArrayList=new ArrayList<>();
 
@@ -55,25 +62,48 @@ public class EngineNextRound {
         return actionArrayList;
     }
 
+    /**
+     * Crée l'action de Ramer
+     * @param id
+     */
     public void oarParser(String id){
         ToOar toOar= new ToOar(Integer.parseInt(id));
         actionArrayList.add(toOar);
     }
 
+    /**
+     * Crée l'action de soulever la voile
+     * @param id
+     */
     public void liftSail(String id){
         LiftSail liftSail= new LiftSail(Integer.parseInt(id));
         actionArrayList.add(liftSail);
     }
+
+    /**
+     * Crée l'action d'affaler la voile
+     * @param id
+     */
     public void lowerSail(String id){
         LowerSail lowerSail= new LowerSail(Integer.parseInt(id));
         actionArrayList.add(lowerSail);
     }
 
+    /**
+     * Crée l'action d'utilisation de la vigie
+     * @param id
+     */
     public void watchParser(String id){
         UseWatch useWatch = new UseWatch(Integer.parseInt(id));
         actionArrayList.add(useWatch);
     }
 
+
+    /**
+     * Crée l'action de déplacement d'un marin sur le bateau
+     * @param id
+     * @param current
+     */
     public void movingParser(String id,JsonNode current){
         JsonNode xdistanceNode = current.path("xdistance");
         JsonNode ydistanceNode = current.path("ydistance");
@@ -83,6 +113,11 @@ public class EngineNextRound {
         actionArrayList.add(moving);
     }
 
+    /**
+     * Crée l'action d'utilisation du gouvernail sur le bateau
+     * @param id
+     * @param current
+     */
     public void turnParser(String id, JsonNode current){
         JsonNode rotationNode = current.path("rotation");
         double rotation= Double.parseDouble(rotationNode.asText());
@@ -90,10 +125,6 @@ public class EngineNextRound {
         actionArrayList.add(turn);
     }
 
-
-
-
-    // ----------------- GETTER --------------------------------------
 
 
 }

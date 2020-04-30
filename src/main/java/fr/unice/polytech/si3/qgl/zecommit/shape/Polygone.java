@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.unice.polytech.si3.qgl.zecommit.boat.Position;
 
 /**
- * Classe définissant les polygones
+ * Classe définissant un polygone
+ * @author clement
+ * @author Nathan
  */
 public class Polygone extends Shape {
 

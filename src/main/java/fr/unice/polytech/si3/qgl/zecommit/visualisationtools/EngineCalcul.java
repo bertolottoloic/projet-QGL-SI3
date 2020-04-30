@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Partie du moteur en charge des calculs
+ * @author Clement P
  */
 public class EngineCalcul {
 
@@ -36,6 +37,11 @@ public class EngineCalcul {
     /*
      * ################################################ ENGINE ################################################
      */
+
+    /**
+     * Crée un json d'entrée d'initialisation pour la simulation avec les paramètres de settings
+     * @return Un Json sous forme de string
+     */
     public String thisToJson() {
         try {
             settings.getoM().configure(SerializationFeature.INDENT_OUTPUT, true);
@@ -46,6 +52,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Crée un json d'entrée pour chaque Round pour la simulation avec les paramètres de settings
+     * @return Un Json sous forme de string
+     */
     public String thisToJson2() {
         try {
             settings.getoM().configure(SerializationFeature.INDENT_OUTPUT, true);
@@ -57,6 +67,12 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Traite les actions réalisées par le bateau via une
+     * liste d'Action puis réalise les calculs
+     * @param actions
+     * @throws Exception
+     */
     public void updateEngine(List<Action> actions) throws Exception {
         settings.setRightSailors(new ArrayList<>());
         settings.setLeftSailors(new ArrayList<>());
@@ -98,7 +114,10 @@ public class EngineCalcul {
 
     }
 
-
+    /**
+     * traite l'utilisation du gouvernail par un marin
+     * @param turn
+     */
     public void engineTurn(Turn turn) {
         for (Sailor sailor : settings.getSailors()) {
             if (settings.getRudder() != null &&
@@ -108,6 +127,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * traite l'utilisation de la rame par un marin
+     * @param toOar
+     */
     public void engineOar(ToOar toOar) {
         for (Sailor sailor : settings.getSailors()) {
             if (toOar.getSailorId() == sailor.getId()) {
@@ -116,6 +139,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Sépare les marins situés sur les rames gauches et droites
+     * @param sailor
+     */
     public void engineOarLeftRight(Sailor sailor) {
         for (Oar oar : settings.getOarArrayList()) {
             if (sailor.getX() == oar.getX() && sailor.getY() == oar.getY()) {
@@ -128,6 +155,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Traite l'action de déplacement d'un marin
+     * @param toMove
+     */
     public void engineMoving(Moving toMove) {
         if (!(toMove.getYDistance() == 0 && toMove.getXDistance() == 0) && toMove.getXDistance() + toMove.getYDistance() <= 5) {
             for (Sailor sailor : settings.getSailors()) {
@@ -139,6 +170,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Traite l'utilisation de la voile par un marin
+     * @param liftSail
+     */
     public void engineLiftSail(LiftSail liftSail) {
         for (Sailor sailor : settings.getSailors()) {
             if (liftSail.getSailorId() == sailor.getId()) {
@@ -147,6 +182,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Traite l'utilisation de la vigie par un marin
+     * @param useWatch
+     */
     public void engineUseWatch(UseWatch useWatch){
         for (Sailor sailor : settings.getSailors()) {
             if (useWatch.getSailorId() == sailor.getId()) {
@@ -155,6 +194,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Change l'état de la voile lorsqu'elle est utilisée par un marin
+     * @param sailor
+     */
     public void engineLiftSailAction(Sailor sailor) {
         for (Sail sail : settings.getSailArrayList()) {
             if (sail.getX() == sailor.getX() && sail.getY() == sailor.getY() && !sail.isOpenned()) {
@@ -164,6 +207,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Traite l'utilisation de la voile par un marin
+     * @param lowerSail
+     */
     public void engineLowerSail(LowerSail lowerSail) {
         for (Sailor sailor : settings.getSailors()) {
             if (lowerSail.getSailorId() == sailor.getId()) {
@@ -172,6 +219,10 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Change l'état de la voile lorsqu'elle est utilisée par un marin
+     * @param sailor
+     */
     public void engineLowerSailAction(Sailor sailor) {
         for (Sail sail : settings.getSailArrayList()) {
             if (sail.getX() == sailor.getX() && sail.getY() == sailor.getY() && sail.isOpenned()) {
@@ -181,13 +232,20 @@ public class EngineCalcul {
         }
     }
 
+    /**
+     * Donne les informations de vision si un marin est positionné sur la vigie
+     * @param sailor
+     */
     public void engineUseWatchAction(Sailor sailor) {
             if (settings.getWatch().getX() == sailor.getX() && settings.getWatch().getY() == sailor.getY()) {
                 settings.setVisibleDistance(5000);
             }
     }
 
-
+    /**
+     * Réalise les caluls de distances du bateau soumi  à la force du vent
+     * @return
+     */
     public double calculWind() {
         double value = 0;
         if(settings.getWind()!=null) {
@@ -199,7 +257,10 @@ public class EngineCalcul {
         return value / settings.getN();
     }
 
-
+    /**
+     * Traite la vitesse, l'orientation et la position du bateau pour le faire avancer
+     * @throws CollisionException
+     */
     public void calcul() throws CollisionException {
         double vitesse = ((double) 165 / settings.getN()) * (settings.getLeftSailors().size() + settings.getRightSailors().size()) / settings.getOarArrayList().size();
         vitesse += calculWind();
@@ -247,7 +308,10 @@ public class EngineCalcul {
         return res;
     }
 
-
+    /**
+     * Calcule l'angle du bateau à une "step" donée
+     * @return l'angle du bateau
+     */
     public double angleCalcul() {
         double currentOrientation = settings.getShip().getPosition().getOrientation();
         double gap = Math.PI / (settings.getOarArrayList().size());
@@ -263,7 +327,9 @@ public class EngineCalcul {
         return currentOrientation;
     }
 
-
+    /**
+     * Verifie si le bateau est dans un checkpoint
+     */
     public void checkCheckpoints() {
         if (settings.getShip().isInCheckpoint(settings.getCheckpoints().get(0)) && settings.getCheckpoints().size() > 1) {
             //System.out.println("Checkpoint valide :"+checkpoints.get(0).getPosition());
@@ -272,9 +338,9 @@ public class EngineCalcul {
     }
 
 
-
-
-
+    /**
+     * Donne les entitées visibles au bateau
+     */
     public void giveVisibleEntities() {
         if(settings.getVisibleEntities()!=null) {
             for (VisibleEntitie visible : settings.getVisibleEntities()) {
@@ -288,7 +354,10 @@ public class EngineCalcul {
     }
 
 
-
+    /**
+     * Indique si le bateau se trouve sur un courant
+     * @return un courant
+     */
     public Stream getCurrentOn() {
         if(settings.getVisibleEntities()!=null) {
             for (VisibleEntitie entity : settings.getVisibleEntities()) {
