@@ -45,7 +45,6 @@ public class CaptainMateTest {
         when(captain.doTurn()).thenReturn(null);
         when(captain.doUseWatch()).thenReturn(null);
         when(captain.pursueGame()).thenReturn(true);
-        doNothing().when(captain).createIntermediateCheckpoint();
         captainMate = new CaptainMate(captain);
         actions = new ArrayList<>();
     }

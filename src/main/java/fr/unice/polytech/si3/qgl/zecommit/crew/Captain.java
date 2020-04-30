@@ -104,34 +104,6 @@ public class Captain implements CaptainInterface {
         return decisionOrientation(road);
     }
 
-    /**
-     * Le capitaine choisit les points de déviation en plaçant des CP intermédiaires
-     */
-    public void createIntermediateCheckpoint(){
-        if (goal.getFirstCheckpoint().isFake()) {
-            goal.deleteFirstCheckpoint();
-        }
-        List<Position> route = Calculs.subdiviseRoute(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
-        if (Calculs.checkCollision(getReefs(), route)) {//on regarde si un récif est sur notre itinéraire en ligne droite vers le CP
-            Logs.add("Obstacle détecté sur votre trajet");
-            List<Position> fakeCheckpointPositions = new ArrayList<>();
-            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 2, fakeCheckpointPositions);
-            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 1, fakeCheckpointPositions);
-            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 3, fakeCheckpointPositions);
-            Calculs.findFakeCheckpointPositions(ship.getPosition(), goal.getFirstCheckpoint().getPosition(), 4, fakeCheckpointPositions);
-
-            for(Position position : fakeCheckpointPositions){
-                if (!Calculs.checkCollision(getReefs(), Calculs.subdiviseRoute(ship.getPosition(), position))) {
-                    Checkpoint fakeCP = new Checkpoint(position, new Circle(50));
-                    fakeCP.setFake(true);
-                    goal.addFirstCheckpoint(fakeCP);
-                    break;
-                    //On crée un CP intermédiaire proche du récif
-                }
-            }
-        }
-    }
-
     @Override
     public SimpleEntry<Sailor, Double> doTurn() {
         Road road = new Road(ship.getPosition(), goal.getFirstCheckpoint().getPosition());
@@ -173,6 +145,7 @@ public class Captain implements CaptainInterface {
 
     @Override
     public boolean pursueGame() {
+        goal.createIntermediateCheckpoint(ship, getReefs());
         return !(ship.isInCheckpoint(goal.getCheckpoints().get(goal.getCheckpoints().size() - 1))
                 && goal.getCheckpoints().size() == 1);
     }
